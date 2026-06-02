@@ -1,0 +1,17 @@
+{
+  "name": "rooster-arena",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test:smoke": "node tests/rooster-smoke.mjs",
+    "test:mechanics": "node tests/mechanics-runner.mjs",
+    "test:balance": "node tests/balance-runner.mjs"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0",
+    "vite": "^5.4.19"
+  }
+}
