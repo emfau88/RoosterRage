@@ -1,105 +1,98 @@
 import Phaser from 'phaser';
+import { UPGRADE_DEFINITIONS } from '../data/upgradeDefinitions.js';
+
+const SPECTACLE_CATEGORIES = ['active', 'orbit', 'area', 'summon'];
 
 export class UpgradeSystem {
-  constructor() {
-    this.upgrades = [
-      {
-        id: 'heal',
-        name: 'Heal',
-        description: 'Regeneriert sofort 25 HP.',
-        apply: (player) => player.heal(25)
-      },
-      {
-        id: 'double-shot',
-        name: 'Double Shot',
-        description: 'Schiesst 2 Eier gleichzeitig.',
-        apply: (player) => {
-          player.shotCount = Math.max(player.shotCount, 2);
-        }
-      },
-      {
-        id: 'triple-shot',
-        name: 'Triple Shot',
-        description: 'Schiesst 3 Eier gleichzeitig.',
-        apply: (player) => {
-          player.shotCount = Math.max(player.shotCount, 3);
-        }
-      },
-      {
-        id: 'fire-eggs',
-        name: 'Fire Eggs',
-        description: 'Eier verursachen mehr Schaden und brennen rot.',
-        apply: (player) => {
-          player.fireEggs = true;
-          player.projectileDamage += 12;
-        }
-      },
-      {
-        id: 'faster-eggs',
-        name: 'Faster Eggs',
-        description: 'Die Schussrate wird deutlich erhoeht.',
-        apply: (player) => {
-          player.fireRate = Math.max(320, Math.round(player.fireRate * 0.78));
-        }
-      },
-      {
-        id: 'max-hp',
-        name: 'Max HP',
-        description: 'Maximale und aktuelle HP steigen um 25.',
-        apply: (player) => player.addMaxHp(25)
-      },
-      {
-        id: 'move-speed',
-        name: 'Move Speed',
-        description: 'Der Hahn bewegt sich schneller.',
-        apply: (player) => {
-          player.speed += 28;
-        }
-      },
-      {
-        id: 'armor',
-        name: 'Armor',
-        description: 'Reduziert eingehenden Schaden dauerhaft.',
-        apply: (player) => {
-          player.armor += 3;
-        }
-      },
-      {
-        id: 'regen',
-        name: 'Regen',
-        description: 'Regeneriert langsam HP.',
-        apply: (player) => {
-          player.regenPerSecond += 1.4;
-        }
-      },
-      {
-        id: 'xp-magnet',
-        name: 'XP Magnet',
-        description: 'XP-Orbs werden aus groesserer Distanz angezogen.',
-        apply: (player) => {
-          player.xpMagnetRadius += 55;
-        }
-      },
-      {
-        id: 'piercing-eggs',
-        name: 'Piercing Eggs',
-        description: 'Eier durchschlagen einen weiteren Gegner.',
-        apply: (player) => {
-          player.projectilePierce += 1;
-        }
-      },
-      {
-        id: 'bigger-eggs',
-        name: 'Bigger Eggs',
-        description: 'Eier treffen mit groesserer Hitbox.',
-        apply: (player) => {
-          player.projectileSizeBonus += 5;
-        }
-      }
-    ];
+  constructor(upgrades = UPGRADE_DEFINITIONS) {
+    this.upgrades = upgrades.map((upgrade) => ({ ...upgrade }));
   }
 
-  getChoices(count = 3) {
-    return Phaser.Utils.Array.Shuffle([...this.upgrades]).slice(0, count);
+  getChoices(count = 3, player) {
+    const available = this.upgrades.filter((upgrade) => this.isAvailable(upgrade, player));
+    const choices = [];
+    const spectacle = this.pickWeighted(
+      available.filter((upgrade) => SPECTACLE_CATEGORIES.includes(upgrade.category)),
+      player
+    );
+    if (spectacle) {
+      choices.push(spectacle);
+    }
+
+    ['weapon', 'passive'].forEach((category) => {
+      const picked = this.pickWeighted(
+        available.filter((upgrade) => upgrade.category === category && !choices.includes(upgrade)),
+        player
+      );
+      if (picked) {
+        choices.push(picked);
+      }
+    });
+
+    while (choices.length < count && choices.length < available.length) {
+      const picked = this.pickWeighted(available.filter((upgrade) => !choices.includes(upgrade)), player);
+      if (!picked) {
+        break;
+      }
+      choices.push(picked);
+    }
+
+    return Phaser.Utils.Array.Shuffle(choices).slice(0, count);
+  }
+
+  isAvailable(upgrade, player) {
+    if (!player) {
+      return true;
+    }
+    if (upgrade.minLevel && player.level < upgrade.minLevel) {
+      return false;
+    }
+    if (!upgrade.consumable && upgrade.maxRank && player.getUpgradeRank(upgrade.id) >= upgrade.maxRank) {
+      return false;
+    }
+    if (upgrade.requires?.some((id) => player.getUpgradeRank(id) <= 0)) {
+      return false;
+    }
+    if (upgrade.excludes?.some((id) => player.getUpgradeRank(id) > 0)) {
+      return false;
+    }
+    return true;
+  }
+
+  pickWeighted(upgrades, player) {
+    if (!upgrades.length) {
+      return null;
+    }
+
+    const weighted = upgrades.map((upgrade) => ({
+      upgrade,
+      weight: this.getDynamicWeight(upgrade, player)
+    }));
+    const total = weighted.reduce((sum, item) => sum + item.weight, 0);
+    let roll = Math.random() * total;
+    for (const item of weighted) {
+      roll -= item.weight;
+      if (roll <= 0) {
+        return item.upgrade;
+      }
+    }
+    return weighted[weighted.length - 1].upgrade;
+  }
+
+  getDynamicWeight(upgrade, player) {
+    let weight = upgrade.weight ?? 1;
+    if (!player) {
+      return weight;
+    }
+    if (upgrade.id === 'heal' && player.hp >= player.maxHp * 0.85) {
+      weight *= 0.25;
+    }
+    if (SPECTACLE_CATEGORIES.includes(upgrade.category)) {
+      weight *= player.level <= 5 ? 2.15 : 1.15;
+    }
+    if (upgrade.rarity === 'rare') {
+      weight *= 0.8;
+    }
+    return Math.max(0.1, weight);
   }
 }

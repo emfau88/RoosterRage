@@ -6,24 +6,25 @@ export class Projectile {
     this.damage = damage;
     this.target = target;
     this.targetOffset = targetOffset;
+    this.laneOffset = options.laneOffset ?? targetOffset;
     this.baseAngle = angle;
     this.currentAngle = angle;
     this.homing = options.homing ?? true;
     this.maxTurnRate = options.maxTurnRate ?? 0.045;
-    this.life = 1600;
-    this.speed = 520;
-    this.pierceRemaining = scene.player?.projectilePierce ?? 0;
+    this.life = options.life ?? 1600;
+    this.speed = options.speed ?? 520;
+    this.pierceRemaining = options.pierce ?? (scene.player?.projectilePierce ?? 0);
     this.hitEnemies = new Set();
-    this.hitRadius = 24 + (scene.player?.projectileSizeBonus ?? 0);
+    this.hitRadius = (options.hitRadius ?? 24) + (scene.player?.projectileSizeBonus ?? 0);
     this.destroyed = false;
 
-    this.sprite = scene.physics.add.sprite(x, y, isFireEgg ? 'fire-egg' : 'egg');
-    this.sprite.setCircle(9 + (scene.player?.projectileSizeBonus ?? 0) * 0.45);
+    this.sprite = scene.physics.add.sprite(x, y, options.texture ?? (isFireEgg ? 'fire-egg' : 'egg'));
+    this.sprite.setCircle(options.bodyRadius ?? (9 + (scene.player?.projectileSizeBonus ?? 0) * 0.45));
     this.sprite.setRotation(angle);
-    this.sprite.setScale((isFireEgg ? 1.18 : 1) + (scene.player?.projectileSizeBonus ?? 0) * 0.018);
+    this.sprite.setScale((options.scale ?? (isFireEgg ? 1.18 : 1)) + (scene.player?.projectileSizeBonus ?? 0) * 0.018);
     this.sprite.setDepth(5);
     this.sprite.entity = this;
-    this.trail = scene.add.circle(x, y, isFireEgg ? 10 : 8, isFireEgg ? 0xff6a28 : 0xfffbef, 0.18);
+    this.trail = scene.add.circle(x, y, options.trailRadius ?? (isFireEgg ? 10 : 8), options.trailColor ?? (isFireEgg ? 0xff6a28 : 0xfffbef), options.trailAlpha ?? 0.18);
     this.trail.setDepth(3);
     this.setVelocity(angle);
   }

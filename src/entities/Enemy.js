@@ -11,12 +11,14 @@ export class Enemy {
     this.xpValue = config.xp;
     this.type = config.type ?? 'unknown';
     this.ability = config.ability ?? null;
+    this.heavyProjectile = config.heavyProjectile ?? null;
     this.elite = config.elite ?? false;
     this.boss = config.boss ?? false;
     this.explodeOnDeath = config.explodeOnDeath ?? false;
     this.explosionRadius = config.explosionRadius ?? 0;
     this.explosionDamage = config.explosionDamage ?? 0;
     this.nextAbilityAt = 0;
+    this.nextHeavyAttackAt = scene.time.now + (config.heavyAttackDelay ?? 1700);
     this.warning = null;
     this.warningPulse = 0;
     this.phaseTwoTriggered = false;
@@ -32,6 +34,9 @@ export class Enemy {
       this.sprite.setTint(0xfff2a6);
     }
     this.sprite.entity = this;
+    if (config.animation) {
+      this.sprite.play(config.animation);
+    }
 
     this.hpBarBack = scene.add.rectangle(x - this.hpBarWidth / 2, y - this.hpBarYOffset, this.hpBarWidth, 4, 0x220f13, 0.9).setOrigin(0, 0.5).setDepth(7);
     this.hpBarFill = scene.add.rectangle(x - this.hpBarWidth / 2, y - this.hpBarYOffset, this.hpBarWidth, 4, 0xff4f5f, 1).setOrigin(0, 0.5).setDepth(8);
@@ -73,6 +78,11 @@ export class Enemy {
         if (this.ability?.kind === 'fan') {
           this.ability = { ...this.ability, count: 7, spread: 1.45, cooldown: 2100 };
         }
+      }
+      if (this.heavyProjectile && this.scene.time.now >= this.nextHeavyAttackAt) {
+        const angle = Phaser.Math.Angle.Between(this.sprite.x, this.sprite.y, player.sprite.x, player.sprite.y);
+        this.scene.spawnBossFireball(this.sprite.x, this.sprite.y, angle, this.heavyProjectile);
+        this.nextHeavyAttackAt = this.scene.time.now + (this.heavyProjectile.cooldown ?? 4300);
       }
     }
     if (!this.ability || this.scene.time.now < this.nextAbilityAt) {

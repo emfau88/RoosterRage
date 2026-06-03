@@ -4,22 +4,20 @@ import { Enemy } from '../entities/Enemy.js';
 import { EnemyProjectile } from '../entities/EnemyProjectile.js';
 import { Projectile } from '../entities/Projectile.js';
 import { XPOrb } from '../entities/XPOrb.js';
+import { ActiveAbilitySystem } from '../systems/ActiveAbilitySystem.js';
+import {
+  addArena,
+  createGameAnimations,
+  createGeneratedTextures,
+  playSceneFx,
+  preloadGameAssets
+} from '../systems/AssetSetup.js';
+import { AudioSystem } from '../systems/AudioSystem.js';
 import { UpgradeSystem } from '../systems/UpgradeSystem.js';
 import { Telemetry } from '../systems/Telemetry.js';
+import { installTestApi, removeTestApi } from '../systems/TestApi.js';
 import { WaveSystem } from '../systems/WaveSystem.js';
 import { HUD } from '../ui/HUD.js';
-import roosterWalkSheetUrl from '../assets/rooster-walk-sheet.png';
-import enemySlimeUrl from '../assets/enemy-slime.png';
-import enemyRunnerUrl from '../assets/enemy-runner.png';
-import enemyBruteUrl from '../assets/enemy-brute.png';
-import enemySpitterUrl from '../assets/enemies/enemy-spitter.png';
-import enemyFanSpitterUrl from '../assets/enemies/enemy-fan-spitter.png';
-import enemyBomberUrl from '../assets/enemies/enemy-bomber.png';
-import enemyEliteRunnerUrl from '../assets/enemies/enemy-elite-runner.png';
-import enemyEliteBruteUrl from '../assets/enemies/enemy-elite-brute.png';
-import enemyEliteSpitterUrl from '../assets/enemies/enemy-elite-spitter.png';
-import enemyBossUrl from '../assets/enemies/enemy-boss.png';
-import arenaGroundUrl from '../assets/map/arena-ground.png';
 
 const ARENA_WIDTH = 1400;
 const ARENA_HEIGHT = 900;
@@ -30,39 +28,40 @@ export class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet('rooster-walk', roosterWalkSheetUrl, {
-      frameWidth: 256,
-      frameHeight: 256
-    });
-    this.load.image('enemy-slime', enemySlimeUrl);
-    this.load.image('enemy-runner', enemyRunnerUrl);
-    this.load.image('enemy-brute', enemyBruteUrl);
-    this.load.image('enemy-spitter', enemySpitterUrl);
-    this.load.image('enemy-fan-spitter', enemyFanSpitterUrl);
-    this.load.image('enemy-bomber', enemyBomberUrl);
-    this.load.image('enemy-elite-runner', enemyEliteRunnerUrl);
-    this.load.image('enemy-elite-brute', enemyEliteBruteUrl);
-    this.load.image('enemy-elite-spitter', enemyEliteSpitterUrl);
-    this.load.image('enemy-boss', enemyBossUrl);
-    this.load.image('arena-ground', arenaGroundUrl);
+    preloadGameAssets(this);
   }
 
   create() {
-    this.createTextures();
-    this.createAnimations();
+    createGeneratedTextures(this);
+    createGameAnimations(this);
     this.physics.world.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
     this.cameras.main.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
 
-    this.addArena();
+    addArena(this, ARENA_WIDTH, ARENA_HEIGHT);
 
     this.enemies = [];
     this.projectiles = [];
     this.enemyProjectiles = [];
+    this.molotovProjectiles = [];
+    this.rocketProjectiles = [];
+    this.lightningBolts = [];
+    this.orbitEggs = [];
+    this.supportChickens = [];
+    this.hazardZones = [];
+    this.voidZones = [];
     this.xpOrbs = [];
+    this.activeAbilities = new ActiveAbilitySystem(this);
+    this.goldenEgg = this.activeAbilities.goldenEgg;
+    this.molotovEgg = this.activeAbilities.molotovEgg;
+    this.lightningComb = this.activeAbilities.lightningComb;
+    this.voidNest = this.activeAbilities.voidNest;
+    this.rocketEgg = this.activeAbilities.rocketEgg;
+    this.laserComb = this.activeAbilities.laserComb;
     this.gameEnded = false;
     this.isChoosingUpgrade = false;
     this.elapsed = 0;
     this.telemetry = new Telemetry();
+    this.audio = new AudioSystem(this);
     this.bot = {
       enabled: false,
       strategy: 'offense',
@@ -76,6 +75,7 @@ export class GameScene extends Phaser.Scene {
       kills: 0,
       xpCollected: 0,
       levelUps: 0,
+      specialShots: 0,
       lastShotAt: 0,
       lastHitAt: 0,
       lastError: null
@@ -100,7 +100,7 @@ export class GameScene extends Phaser.Scene {
 
     this.setupTouchInput();
     this.setupPhysics();
-    this.installTestApi();
+    installTestApi(this);
     this.waveSystem.start();
   }
 
@@ -121,9 +121,24 @@ export class GameScene extends Phaser.Scene {
       this.enemies.forEach((enemy) => enemy.update(this.player));
       this.projectiles.forEach((projectile) => projectile.update(delta));
       this.enemyProjectiles.forEach((projectile) => projectile.update(delta));
+      this.molotovProjectiles.forEach((projectile) => projectile.update(delta));
+      this.rocketProjectiles.forEach((projectile) => projectile.update(delta));
+      this.lightningBolts.forEach((bolt) => bolt.update(delta));
+      this.orbitEggs.forEach((egg) => egg.update(delta));
+      this.supportChickens.forEach((chicken) => chicken.update(delta));
+      this.hazardZones.forEach((zone) => zone.update(delta));
+      this.voidZones.forEach((zone) => zone.update(delta));
+      this.activeAbilities.update(time);
       this.checkProjectileHits();
       this.projectiles = this.projectiles.filter((projectile) => projectile.sprite.active);
       this.enemyProjectiles = this.enemyProjectiles.filter((projectile) => projectile.sprite.active);
+      this.molotovProjectiles = this.molotovProjectiles.filter((projectile) => projectile.active);
+      this.rocketProjectiles = this.rocketProjectiles.filter((projectile) => projectile.active);
+      this.lightningBolts = this.lightningBolts.filter((bolt) => bolt.active);
+      this.orbitEggs = this.orbitEggs.filter((egg) => egg.sprite.active);
+      this.supportChickens = this.supportChickens.filter((chicken) => chicken.sprite.active);
+      this.hazardZones = this.hazardZones.filter((zone) => zone.active);
+      this.voidZones = this.voidZones.filter((zone) => zone.active);
       this.xpOrbs.forEach((orb) => orb.update(this.player));
       this.waveSystem.update(time, this.enemies.length);
       this.autoShoot(time);
@@ -140,71 +155,8 @@ export class GameScene extends Phaser.Scene {
     }
   }
 
-  createTextures() {
-    const egg = this.make.graphics({ x: 0, y: 0, add: false });
-    egg.fillStyle(0xfffbef, 1);
-    egg.fillEllipse(10, 10, 18, 13);
-    egg.generateTexture('egg', 20, 20);
-    egg.clear();
-    egg.fillStyle(0xff5b25, 1);
-    egg.fillEllipse(10, 10, 19, 14);
-    egg.fillStyle(0xffd05c, 1);
-    egg.fillEllipse(12, 8, 8, 5);
-    egg.generateTexture('fire-egg', 20, 20);
-    egg.destroy();
-
-    const xp = this.make.graphics({ x: 0, y: 0, add: false });
-    xp.fillStyle(0x4bb7ff, 1);
-    xp.fillCircle(9, 9, 7);
-    xp.fillStyle(0xffd14a, 1);
-    xp.fillCircle(7, 6, 3);
-    xp.generateTexture('xp-orb', 18, 18);
-    xp.destroy();
-
-    const shot = this.make.graphics({ x: 0, y: 0, add: false });
-    shot.fillStyle(0xa7ff64, 1);
-    shot.fillCircle(9, 9, 7);
-    shot.fillStyle(0xffffff, 0.65);
-    shot.fillCircle(6, 5, 3);
-    shot.generateTexture('enemy-shot', 18, 18);
-    shot.destroy();
-  }
-
-  createAnimations() {
-    const directions = [
-      ['rooster-walk-south', 0],
-      ['rooster-walk-west', 4],
-      ['rooster-walk-east', 8],
-      ['rooster-walk-north', 12]
-    ];
-    directions.forEach(([key, start]) => {
-      if (this.anims.exists(key)) {
-        return;
-      }
-      this.anims.create({
-        key,
-        frames: this.anims.generateFrameNumbers('rooster-walk', { start, end: start + 3 }),
-        frameRate: 8,
-        repeat: -1
-      });
-    });
-  }
-
-  addArena() {
-    this.add.image(ARENA_WIDTH / 2, ARENA_HEIGHT / 2, 'arena-ground')
-      .setDisplaySize(ARENA_WIDTH, ARENA_HEIGHT)
-      .setDepth(0);
-    const grid = this.add.graphics();
-    grid.lineStyle(1, 0x3d4b3f, 0.08);
-    for (let x = 0; x <= ARENA_WIDTH; x += 80) {
-      grid.lineBetween(x, 0, x, ARENA_HEIGHT);
-    }
-    for (let y = 0; y <= ARENA_HEIGHT; y += 80) {
-      grid.lineBetween(0, y, ARENA_WIDTH, y);
-    }
-    this.add.rectangle(ARENA_WIDTH / 2, ARENA_HEIGHT / 2, ARENA_WIDTH - 8, ARENA_HEIGHT - 8)
-      .setStrokeStyle(8, 0x4d3821, 0.65)
-      .setDepth(2);
+  playFx(key, x, y, options = {}) {
+    return playSceneFx(this, key, x, y, options);
   }
 
   setupPhysics() {
@@ -225,6 +177,7 @@ export class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player.sprite, this.enemyGroup, (_playerSprite, enemySprite) => {
       const enemy = enemySprite.entity;
       if (enemy && this.player.damage(enemy.damage, this.time.now)) {
+        this.audio.play('player-hit');
         this.telemetry.addDamageTaken(enemy.damage, this.time.now, this.waveSystem.currentWave);
         this.cameras.main.shake(90, 0.004);
       }
@@ -236,6 +189,7 @@ export class GameScene extends Phaser.Scene {
         return;
       }
       if (this.player.damage(projectile.damage, this.time.now)) {
+        this.audio.play('player-hit');
         this.telemetry.addDamageTaken(projectile.damage, this.time.now, this.waveSystem.currentWave);
         this.cameras.main.shake(70, 0.003);
       }
@@ -248,10 +202,12 @@ export class GameScene extends Phaser.Scene {
         return;
       }
       const leveled = this.player.addXp(orb.value);
+      this.audio.play('xp-pickup');
       this.debugStats.xpCollected += orb.value;
       this.telemetry.addXp(orb.value, this.time.now, this.waveSystem.currentWave);
       this.removeOrb(orb);
       if (leveled) {
+        this.audio.play('level-up');
         this.debugStats.levelUps += 1;
         this.telemetry.addLevelUp(this.time.now, this.waveSystem.currentWave, this.player.level);
         this.startLevelUp();
@@ -362,11 +318,25 @@ export class GameScene extends Phaser.Scene {
     );
     this.player.aimAt(baseAngle);
     const pattern = this.getShotPattern();
-    pattern.forEach((shot) => {
-      this.spawnProjectile(baseAngle + shot.angleOffset, target, shot.laneOffset);
-      this.showShotFeedback(baseAngle, shot.laneOffset);
+    const targets = this.getShotTargets(pattern.length, target);
+    pattern.forEach((shot, index) => {
+      const shotTarget = targets[index] ?? target;
+      const angle = Phaser.Math.Angle.Between(
+        this.player.sprite.x,
+        this.player.sprite.y,
+        shotTarget.sprite.x,
+        shotTarget.sprite.y
+      );
+      this.spawnProjectile(angle, shotTarget, shot.laneOffset, {
+        homing: true,
+        maxTurnRate: shot.maxTurnRate ?? 0.08,
+        targetOffset: 0,
+        laneOffset: shot.laneOffset
+      });
+      this.showShotFeedback(angle, shot.laneOffset);
     });
     this.lastShotAt = time;
+    this.audio.play('egg-shot');
     this.debugStats.shots += pattern.length;
     this.debugStats.lastShotAt = time;
     this.telemetry.addShot(pattern.length, time, this.waveSystem.currentWave);
@@ -375,18 +345,33 @@ export class GameScene extends Phaser.Scene {
   getShotPattern() {
     if (this.player.shotCount >= 3) {
       return [
-        { angleOffset: -0.42, laneOffset: -24 },
-        { angleOffset: 0, laneOffset: 0 },
-        { angleOffset: 0.42, laneOffset: 24 }
+        { laneOffset: -24, maxTurnRate: 0.095 },
+        { laneOffset: 0, maxTurnRate: 0.09 },
+        { laneOffset: 24, maxTurnRate: 0.095 }
       ];
     }
     if (this.player.shotCount === 2) {
       return [
-        { angleOffset: -0.34, laneOffset: -18 },
-        { angleOffset: 0.34, laneOffset: 18 }
+        { laneOffset: -18, maxTurnRate: 0.095 },
+        { laneOffset: 18, maxTurnRate: 0.095 }
       ];
     }
     return [{ angleOffset: 0, laneOffset: 0 }];
+  }
+
+  getShotTargets(count, fallbackTarget) {
+    const sorted = [...this.enemies]
+      .filter((enemy) => enemy.sprite.active)
+      .sort((a, b) => Phaser.Math.Distance.Squared(this.player.sprite.x, this.player.sprite.y, a.sprite.x, a.sprite.y)
+        - Phaser.Math.Distance.Squared(this.player.sprite.x, this.player.sprite.y, b.sprite.x, b.sprite.y));
+    if (!sorted.length) {
+      return Array(count).fill(fallbackTarget);
+    }
+    const targets = [];
+    for (let i = 0; i < count; i += 1) {
+      targets.push(sorted[i] ?? fallbackTarget);
+    }
+    return targets;
   }
 
   findNearestEnemy() {
@@ -399,6 +384,22 @@ export class GameScene extends Phaser.Scene {
         enemy.sprite.x,
         enemy.sprite.y
       );
+      if (distance < nearestDistance) {
+        nearest = enemy;
+        nearestDistance = distance;
+      }
+    });
+    return nearest;
+  }
+
+  findNearestEnemyFrom(x, y) {
+    let nearest = null;
+    let nearestDistance = Infinity;
+    this.enemies.forEach((enemy) => {
+      if (!enemy.sprite.active) {
+        return;
+      }
+      const distance = Phaser.Math.Distance.Squared(x, y, enemy.sprite.x, enemy.sprite.y);
       if (distance < nearestDistance) {
         nearest = enemy;
         nearestDistance = distance;
@@ -425,7 +426,7 @@ export class GameScene extends Phaser.Scene {
     return nearest;
   }
 
-  spawnProjectile(angle, target, laneOffset = 0) {
+  spawnProjectile(angle, target, laneOffset = 0, options = {}) {
     const muzzle = this.player.getMuzzlePosition(42);
     const sideX = -Math.sin(this.player.aimAngle) * laneOffset;
     const sideY = Math.cos(this.player.aimAngle) * laneOffset;
@@ -437,18 +438,116 @@ export class GameScene extends Phaser.Scene {
       this.player.projectileDamage,
       this.player.fireEggs,
       target,
-      laneOffset,
-      { homing: laneOffset === 0 }
+      options.targetOffset ?? laneOffset,
+      options
     );
     this.projectiles.push(projectile);
     this.projectileGroup.add(projectile.sprite);
     projectile.setVelocity(angle);
   }
 
+  spawnSpecialProjectile(angle, target, options = {}) {
+    const muzzle = this.player.getMuzzlePosition(options.muzzleDistance ?? 48);
+    return this.spawnSpecialProjectileFrom(muzzle.x, muzzle.y, angle, target, options);
+  }
+
+  spawnSpecialProjectileFrom(x, y, angle, target, options = {}) {
+    const projectile = new Projectile(
+      this,
+      x,
+      y,
+      angle,
+      options.damage ?? this.player.projectileDamage,
+      options.isFireEgg ?? false,
+      target,
+      0,
+      options
+    );
+    this.projectiles.push(projectile);
+    this.projectileGroup.add(projectile.sprite);
+    projectile.setVelocity(angle);
+    this.showShotFeedback(angle, 0);
+    this.audio.play(options.sfx ?? 'egg-shot', { volume: options.sfxVolume });
+    this.debugStats.specialShots += 1;
+    this.telemetry.addShot(1, this.time.now, this.waveSystem.currentWave);
+    return projectile;
+  }
+
+  updateActiveAbilities(time) {
+    this.activeAbilities.update(time);
+  }
+
+  createRocketExplosion(x, y, damage, radius) {
+    this.activeAbilities.createRocketExplosion(x, y, damage, radius);
+  }
+
+  createMolotovImpact(x, y) {
+    this.activeAbilities.createMolotovImpact(x, y);
+  }
+
+  setOrbitEggRank(rank) {
+    this.activeAbilities.setOrbitEggRank(rank);
+  }
+
+  setSupportChickenRank(rank) {
+    this.activeAbilities.setSupportChickenRank(rank);
+  }
+
+  unlockGoldenEgg(rank) {
+    this.activeAbilities.unlockGoldenEgg(rank);
+  }
+
+  unlockMolotovEgg(rank) {
+    this.activeAbilities.unlockMolotovEgg(rank);
+  }
+
+  unlockLightningComb(rank) {
+    this.activeAbilities.unlockLightningComb(rank);
+  }
+
+  unlockVoidNest(rank) {
+    this.activeAbilities.unlockVoidNest(rank);
+  }
+
+  unlockRocketEgg(rank) {
+    this.activeAbilities.unlockRocketEgg(rank);
+  }
+
+  unlockLaserComb(rank) {
+    this.activeAbilities.unlockLaserComb(rank);
+  }
   spawnEnemyProjectile(x, y, angle, config) {
-    const projectile = new EnemyProjectile(this, x, y, angle, config);
+    const muzzleDistance = config.muzzleDistance ?? 30;
+    const projectile = new EnemyProjectile(
+      this,
+      x + Math.cos(angle) * muzzleDistance,
+      y + Math.sin(angle) * muzzleDistance,
+      angle,
+      config
+    );
     this.enemyProjectiles.push(projectile);
     this.enemyProjectileGroup.add(projectile.sprite);
+  }
+
+  spawnBossFireball(x, y, angle, config = {}) {
+    const fireballConfig = {
+      texture: 'boss-fireball',
+      radius: 19,
+      speed: 238,
+      damage: 22,
+      life: 4200,
+      color: 0xff6a28,
+      trailColor: 0xff3322,
+      trailAlpha: 0.44,
+      scale: 1.55,
+      depth: 8,
+      muzzleDistance: 82,
+      pulse: true,
+      tint: false,
+      ...config
+    };
+    this.showEnemyMuzzleFlash(x, y, angle, fireballConfig, 3);
+    this.spawnEnemyProjectile(x, y, angle, fireballConfig);
   }
 
   showEnemyMuzzleFlash(x, y, angle, config = {}, burstCount = 1) {
@@ -496,17 +595,25 @@ export class GameScene extends Phaser.Scene {
     const hitX = enemy.sprite.x;
     const hitY = enemy.sprite.y;
     projectile.hitEnemies.add(enemy.id);
-    this.showHitFeedback(hitX, hitY, projectile.damage);
-    this.debugStats.hits += 1;
-    this.debugStats.lastHitAt = this.time.now;
-    this.telemetry.addHit(this.time.now, this.waveSystem.currentWave);
-    if (enemy.takeDamage(projectile.damage)) {
-      this.killEnemy(enemy);
-    }
+    this.damageEnemy(enemy, projectile.damage, hitX, hitY);
     if (projectile.pierceRemaining > 0) {
       projectile.pierceRemaining -= 1;
     } else {
       projectile.destroy();
+    }
+  }
+
+  damageEnemy(enemy, damage, x = enemy.sprite.x, y = enemy.sprite.y) {
+    if (!enemy.sprite.active) {
+      return;
+    }
+    this.showHitFeedback(x, y, damage);
+    this.audio.play('enemy-hit');
+    this.debugStats.hits += 1;
+    this.debugStats.lastHitAt = this.time.now;
+    this.telemetry.addHit(this.time.now, this.waveSystem.currentWave);
+    if (enemy.takeDamage(damage)) {
+      this.killEnemy(enemy);
     }
   }
 
@@ -594,6 +701,8 @@ export class GameScene extends Phaser.Scene {
     }
     if (enemy.explodeOnDeath) {
       this.explodeEnemy(enemy);
+    } else {
+      this.audio.play(enemy.type === 'boss' ? 'rocket-explosion' : 'enemy-pop');
     }
     this.spawnXp(enemy.sprite.x, enemy.sprite.y, enemy.xpValue);
     this.debugStats.kills += 1;
@@ -607,6 +716,7 @@ export class GameScene extends Phaser.Scene {
     const x = enemy.sprite.x;
     const y = enemy.sprite.y;
     const core = this.add.circle(x, y, 22, 0xfff08a, 0.55).setDepth(10);
+    this.audio.play('rocket-explosion');
     const ring = this.add.circle(x, y, radius, 0xff6a28, 0.24).setStrokeStyle(4, 0xffd35c, 0.9).setDepth(9);
     this.tweens.add({
       targets: core,
@@ -648,7 +758,7 @@ export class GameScene extends Phaser.Scene {
   startLevelUp() {
     this.isChoosingUpgrade = true;
     this.upgradeStartedAt = this.time.now;
-    this.pendingUpgradeChoices = this.upgradeSystem.getChoices(3);
+    this.pendingUpgradeChoices = this.upgradeSystem.getChoices(3, this.player);
     this.bot.upgradeReadyAt = this.time.now + 350;
     this.physics.pause();
     this.telemetry.addUpgradeOffer(this.time.now, this.waveSystem.currentWave, this.pendingUpgradeChoices);
@@ -657,7 +767,7 @@ export class GameScene extends Phaser.Scene {
 
   chooseUpgrade(upgrade) {
     const pauseMs = this.upgradeStartedAt ? this.time.now - this.upgradeStartedAt : 0;
-    this.player.applyUpgrade(upgrade);
+    this.player.applyUpgrade(upgrade, this);
     this.telemetry.addUpgradeChoice(this.time.now, this.waveSystem.currentWave, upgrade, pauseMs);
     this.hud.hideOverlay();
     this.physics.resume();
@@ -703,156 +813,6 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
-  installTestApi() {
-    window.__ROOSTER_TEST__ = {
-      getState: () => ({
-        frames: this.debugStats.frames,
-        elapsed: this.elapsed,
-        playerHp: this.player.hp,
-        enemies: this.enemies.length,
-        projectiles: this.projectiles.length,
-        enemyProjectiles: this.enemyProjectiles.length,
-        xpOrbs: this.xpOrbs.length,
-        wave: this.waveSystem.currentWave,
-        shots: this.debugStats.shots,
-        hits: this.debugStats.hits,
-        kills: this.debugStats.kills,
-        xpCollected: this.debugStats.xpCollected,
-        levelUps: this.debugStats.levelUps,
-        choosingUpgrade: this.isChoosingUpgrade,
-        gameEnded: this.gameEnded,
-        lastShotAt: this.debugStats.lastShotAt,
-        lastHitAt: this.debugStats.lastHitAt,
-        lastError: this.debugStats.lastError,
-        telemetry: this.telemetry.getSummary(this.time.now),
-        player: {
-          x: this.player.sprite.x,
-          y: this.player.sprite.y,
-          rotation: this.player.sprite.rotation
-        }
-      }),
-      getPlayerStats: () => ({
-        hp: this.player.hp,
-        maxHp: this.player.maxHp,
-        speed: this.player.speed,
-        fireRate: this.player.fireRate,
-        projectileDamage: this.player.projectileDamage,
-        shotCount: this.player.shotCount,
-        fireEggs: this.player.fireEggs,
-        armor: this.player.armor,
-        regenPerSecond: this.player.regenPerSecond,
-        xpMagnetRadius: this.player.xpMagnetRadius,
-        projectilePierce: this.player.projectilePierce,
-        projectileSizeBonus: this.player.projectileSizeBonus
-      }),
-      getProjectileSnapshot: () => this.projectiles.map((projectile) => ({
-        x: projectile.sprite.x,
-        y: projectile.sprite.y,
-        vx: projectile.sprite.body?.velocity.x ?? 0,
-        vy: projectile.sprite.body?.velocity.y ?? 0,
-        homing: projectile.homing,
-        targetOffset: projectile.targetOffset,
-        active: projectile.sprite.active
-      })),
-      applyUpgradeById: (id) => {
-        const upgrade = this.upgradeSystem.upgrades.find((item) => item.id === id);
-        if (!upgrade) {
-          return false;
-        }
-        this.player.applyUpgrade(upgrade);
-        this.updateHud();
-        return true;
-      },
-      setPlayerHp: (hp) => {
-        this.player.hp = Phaser.Math.Clamp(hp, 0, this.player.maxHp);
-        this.player.updateHealthBar();
-        return this.player.hp;
-      },
-      damagePlayer: (amount) => {
-        this.player.invulnerableUntil = 0;
-        this.player.damage(amount, this.time.now);
-        return this.player.hp;
-      },
-      clearEnemies: () => {
-        this.enemies.forEach((enemy) => enemy.destroy());
-        this.enemies = [];
-        return true;
-      },
-      clearProjectiles: () => {
-        this.projectiles.forEach((projectile) => projectile.destroy());
-        this.projectiles = [];
-        this.clearEnemyProjectiles();
-        return true;
-      },
-      spawnEnemyType: (type, x = this.player.sprite.x + 180, y = this.player.sprite.y, overrides = {}) => {
-        const makers = {
-          slime: () => this.waveSystem.makeSlime(),
-          runner: () => this.waveSystem.makeRunner(),
-          brute: () => this.waveSystem.makeBrute(),
-          spitter: () => this.waveSystem.makeSpitter(),
-          'fan-spitter': () => this.waveSystem.makeFanSpitter(),
-          bomber: () => this.waveSystem.makeBomber(),
-          boss: () => this.waveSystem.makeBoss()
-        };
-        const config = { ...(makers[type]?.() ?? this.waveSystem.makeSlime()), ...overrides };
-        const enemy = new Enemy(this, x, y, config);
-        this.enemies.push(enemy);
-        this.enemyGroup.add(enemy.sprite);
-        return enemy.id;
-      },
-      damageEnemyById: (id, amount) => {
-        const enemy = this.enemies.find((item) => item.id === id);
-        if (!enemy) {
-          return false;
-        }
-        if (enemy.takeDamage(amount)) {
-          this.killEnemy(enemy);
-        }
-        return true;
-      },
-      forceSpawnEnemy: (x = this.player.sprite.x + 170, y = this.player.sprite.y) => {
-        this.spawnEnemy({
-          type: 'test-slime',
-          hp: 40,
-          speed: 0,
-          damage: 0,
-          xp: 10,
-          texture: 'enemy-slime',
-          scale: 0.24,
-          radius: 28,
-          bodyOffsetX: 100,
-          bodyOffsetY: 118,
-          hpBarWidth: 42,
-          hpBarYOffset: 32
-        });
-        const enemy = this.enemies[this.enemies.length - 1];
-        enemy.sprite.setPosition(x, y);
-        return this.enemies.length;
-      },
-      movePlayer: (x, y) => {
-        this.player.sprite.setPosition(x, y);
-        this.player.updateHealthBar();
-      },
-      setShotCount: (count) => {
-        this.player.shotCount = Phaser.Math.Clamp(count, 1, 3);
-        return this.player.shotCount;
-      },
-      enableBot: (strategy = 'offense') => {
-        this.bot.enabled = true;
-        this.bot.strategy = strategy;
-        return { enabled: this.bot.enabled, strategy: this.bot.strategy };
-      },
-      getTelemetry: () => this.telemetry.getSummary(this.time.now),
-      resumeIfUpgradeOpen: () => {
-        if (!this.isChoosingUpgrade) {
-          return false;
-        }
-        this.chooseUpgrade(this.pendingUpgradeChoices?.[0] ?? this.upgradeSystem.getChoices(1)[0]);
-        return true;
-      }
-    };
-  }
-
   gameOver() {
     this.gameEnded = true;
     this.physics.pause();
@@ -890,9 +850,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   shutdown() {
-    if (window.__ROOSTER_TEST__?.getState) {
-      delete window.__ROOSTER_TEST__;
-    }
+    removeTestApi();
     this.hud?.destroy();
   }
 }

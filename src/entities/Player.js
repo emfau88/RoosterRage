@@ -21,10 +21,12 @@ export class Player {
     this.lastRegenAt = 0;
     this.aimAngle = 0;
     this.upgrades = [];
+    this.upgradeRanks = new Map();
     this.invulnerableUntil = 0;
+    this.baseScale = 0.25;
 
     this.sprite = scene.physics.add.sprite(x, y, 'rooster-walk', 0);
-    this.sprite.setScale(0.28);
+    this.sprite.setScale(this.baseScale);
     this.sprite.setCircle(58, 70, 86);
     this.sprite.setDepth(6);
     this.sprite.setCollideWorldBounds(true);
@@ -47,6 +49,7 @@ export class Player {
     this.sprite.setVelocity(velocity.x * this.speed, velocity.y * this.speed);
     this.regenerate();
     this.updateAnimation(velocity);
+    this.updateVisualPose(velocity);
     this.updateHealthBar();
   }
 
@@ -113,9 +116,20 @@ export class Player {
     return false;
   }
 
-  applyUpgrade(upgrade) {
-    this.upgrades.push(upgrade.name);
-    upgrade.apply(this);
+  getUpgradeRank(id) {
+    return this.upgradeRanks.get(id) ?? 0;
+  }
+
+  applyUpgrade(upgrade, scene) {
+    const nextRank = this.getUpgradeRank(upgrade.id) + 1;
+    if (!upgrade.consumable) {
+      this.upgradeRanks.set(upgrade.id, nextRank);
+    }
+    const label = upgrade.maxRank && upgrade.maxRank > 1
+      ? `${upgrade.name} ${nextRank}`
+      : upgrade.name;
+    this.upgrades.push(label);
+    upgrade.apply(this, scene, nextRank);
   }
 
   updateAnimation(velocity) {
@@ -137,6 +151,38 @@ export class Player {
       this.lastMoveDirection = velocity.y < 0 ? 'north' : 'south';
     }
     this.sprite.play(`rooster-walk-${this.lastMoveDirection}`, true);
+  }
+
+  updateVisualPose(velocity) {
+    const moving = velocity.lengthSq() >= 0.01;
+    const now = this.scene.time.now;
+    if (!moving) {
+      const idle = Math.sin(now * 0.0042);
+      this.sprite.setScale(
+        this.baseScale * (1 + idle * 0.018),
+        this.baseScale * (1 - idle * 0.014)
+      );
+      this.sprite.setAngle(Math.sin(now * 0.0026) * 1.4);
+      return;
+    }
+
+    const step = Math.sin(now * 0.018);
+    const lift = Math.abs(step);
+    if (this.lastMoveDirection === 'east' || this.lastMoveDirection === 'west') {
+      const directionSign = this.lastMoveDirection === 'east' ? 1 : -1;
+      this.sprite.setScale(
+        this.baseScale * (1 + lift * 0.045),
+        this.baseScale * (1 - lift * 0.035)
+      );
+      this.sprite.setAngle(directionSign * step * 4.5);
+      return;
+    }
+
+    this.sprite.setScale(
+      this.baseScale * (1 + lift * 0.025),
+      this.baseScale * (1 - lift * 0.025)
+    );
+    this.sprite.setAngle(step * 2);
   }
 
   updateHealthBar() {

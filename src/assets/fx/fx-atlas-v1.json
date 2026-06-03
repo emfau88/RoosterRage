@@ -1,0 +1,14 @@
+{
+  "image": "fx-atlas-v1-sheet.png",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 4,
+  "rows": 5,
+  "animations": {
+    "molotov-fire": [0, 1, 2, 3],
+    "rocket-explosion": [4, 5, 6, 7],
+    "lightning-impact": [8, 9, 10, 11],
+    "void-portal": [12, 13, 14, 15],
+    "laser-impact": [16, 17, 18, 19]
+  }
+}
