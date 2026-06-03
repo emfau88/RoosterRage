@@ -94,7 +94,8 @@ export class GameScene extends Phaser.Scene {
     this.waveSystem = new WaveSystem(this);
     this.hud = new HUD(
       (upgrade) => this.chooseUpgrade(upgrade),
-      () => this.scene.restart()
+      () => this.scene.restart(),
+      () => this.toggleFullscreen()
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.hud?.destroy());
 
@@ -239,6 +240,15 @@ export class GameScene extends Phaser.Scene {
         this.hud.setJoystick(this.pointerVector);
       }
     });
+  }
+
+  toggleFullscreen() {
+    const root = document.documentElement;
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.();
+      return;
+    }
+    root.requestFullscreen?.({ navigationUI: 'hide' })?.catch(() => {});
   }
 
   updatePointerVector(pointer) {

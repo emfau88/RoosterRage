@@ -27,9 +27,10 @@ const ICON_IDS_BY_NAME = {
 };
 
 export class HUD {
-  constructor(onUpgradeSelected, onRestart) {
+  constructor(onUpgradeSelected, onRestart, onFullscreen) {
     this.onUpgradeSelected = onUpgradeSelected;
     this.onRestart = onRestart;
+    this.onFullscreen = onFullscreen;
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     this.root = document.createElement('div');
     this.root.className = 'hud';
@@ -40,8 +41,14 @@ export class HUD {
       <div class="hud__item" data-time><span data-icon="timer"></span><span data-value>00:00</span></div>
       <div class="hud__bar"><span data-icon="xp"></span><div class="hud__bar-track"><div class="hud__bar-fill" data-xp></div></div></div>
       <div class="hud__upgrades" data-upgrades></div>
+      <div class="hud__controls">
+        <button class="hud__icon-button" type="button" data-fullscreen title="Fullscreen" aria-label="Fullscreen">
+          <span class="fullscreen-glyph" aria-hidden="true"></span>
+        </button>
+      </div>
     `;
     this.root.querySelectorAll('[data-icon]').forEach((icon) => this.setIcon(icon, icon.dataset.icon));
+    this.root.querySelector('[data-fullscreen]').addEventListener('click', () => this.onFullscreen?.());
 
     this.overlay = document.createElement('div');
     this.overlay.className = 'overlay';
