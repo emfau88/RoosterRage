@@ -37,6 +37,11 @@ export class Enemy {
     if (config.animation) {
       this.sprite.play(config.animation);
     }
+    if (this.explodeOnDeath) {
+      this.warning = scene.add.circle(x, y, this.explosionRadius || 42, 0xff7a33, 0.08)
+        .setStrokeStyle(3, 0xffb347, 0.7)
+        .setDepth(3);
+    }
 
     this.hpBarBack = scene.add.rectangle(x - this.hpBarWidth / 2, y - this.hpBarYOffset, this.hpBarWidth, 4, 0x220f13, 0.9).setOrigin(0, 0.5).setDepth(7);
     this.hpBarFill = scene.add.rectangle(x - this.hpBarWidth / 2, y - this.hpBarYOffset, this.hpBarWidth, 4, 0xff4f5f, 1).setOrigin(0, 0.5).setDepth(8);
@@ -58,12 +63,15 @@ export class Enemy {
   }
 
   updateWarningVisual() {
-    if (!this.explodeOnDeath) {
+    if (!this.warning) {
       return;
     }
     this.warningPulse += 0.08;
     const pulse = 0.5 + Math.sin(this.warningPulse) * 0.5;
-    this.sprite.setAlpha(0.78 + pulse * 0.22);
+    this.sprite.setAlpha(1);
+    this.warning.setPosition(this.sprite.x, this.sprite.y);
+    this.warning.setScale(0.92 + pulse * 0.12);
+    this.warning.setAlpha(0.3 + pulse * 0.45);
   }
 
   updateAbility(player) {
@@ -114,18 +122,12 @@ export class Enemy {
     this.hp -= amount;
     const healthRatio = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
     this.hpBarFill.scaleX = healthRatio;
-    this.sprite.setAlpha(0.55 + healthRatio * 0.45);
+    this.sprite.setAlpha(1);
     this.sprite.setTintFill(0xffffff);
-    this.scene.tweens.add({
-      targets: this.sprite,
-      alpha: 0.45,
-      yoyo: true,
-      duration: 65,
-      onComplete: () => {
-        if (this.sprite.active) {
-          this.sprite.clearTint();
-          this.sprite.setAlpha(0.55 + healthRatio * 0.45);
-        }
+    this.scene.time.delayedCall(65, () => {
+      if (this.sprite.active) {
+        this.sprite.clearTint();
+        this.sprite.setAlpha(1);
       }
     });
     return this.hp <= 0;

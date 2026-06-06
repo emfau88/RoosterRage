@@ -21,6 +21,9 @@ import { HUD } from '../ui/HUD.js';
 
 const ARENA_WIDTH = 1400;
 const ARENA_HEIGHT = 900;
+const ARENA_RENDER_PADDING_Y = 100;
+const PORTRAIT_MOBILE_MAX_WIDTH = 600;
+const PORTRAIT_MOBILE_ZOOM = 0.85;
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -35,9 +38,14 @@ export class GameScene extends Phaser.Scene {
     createGeneratedTextures(this);
     createGameAnimations(this);
     this.physics.world.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
-    this.cameras.main.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
+    this.cameras.main.setBounds(
+      0,
+      -ARENA_RENDER_PADDING_Y,
+      ARENA_WIDTH,
+      ARENA_HEIGHT + ARENA_RENDER_PADDING_Y * 2
+    );
 
-    addArena(this, ARENA_WIDTH, ARENA_HEIGHT);
+    addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y);
 
     this.enemies = [];
     this.projectiles = [];
@@ -87,6 +95,8 @@ export class GameScene extends Phaser.Scene {
 
     this.player = new Player(this, ARENA_WIDTH / 2, ARENA_HEIGHT / 2);
     this.cameras.main.startFollow(this.player.sprite, true, 0.12, 0.12);
+    this.applyResponsiveCameraZoom(this.scale.gameSize);
+    this.scale.on(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.keys = this.input.keyboard.addKeys('W,A,S,D');
@@ -97,7 +107,10 @@ export class GameScene extends Phaser.Scene {
       () => this.scene.restart(),
       () => this.toggleFullscreen()
     );
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.hud?.destroy());
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.scale.off(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
+      this.hud?.destroy();
+    });
 
     this.setupTouchInput();
     this.setupPhysics();
@@ -249,6 +262,20 @@ export class GameScene extends Phaser.Scene {
       return;
     }
     root.requestFullscreen?.({ navigationUI: 'hide' })?.catch(() => {});
+  }
+
+  applyResponsiveCameraZoom(gameSize) {
+    const width = gameSize?.width ?? this.scale.width;
+    const height = gameSize?.height ?? this.scale.height;
+    const isPortraitMobile = width <= PORTRAIT_MOBILE_MAX_WIDTH && height > width;
+    if (!isPortraitMobile) {
+      this.cameras.main.setZoom(1);
+      return;
+    }
+
+    const renderHeight = ARENA_HEIGHT + ARENA_RENDER_PADDING_Y * 2;
+    const minimumCoverZoom = Math.max(width / ARENA_WIDTH, height / renderHeight);
+    this.cameras.main.setZoom(Math.max(PORTRAIT_MOBILE_ZOOM, minimumCoverZoom));
   }
 
   updatePointerVector(pointer) {

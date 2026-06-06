@@ -12,7 +12,7 @@ export class SupportChicken {
     this.damage = 12 + rank * 5;
 
     this.sprite = scene.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'support-chick');
-    this.sprite.setScale(0.2);
+    this.sprite.setScale(0.14);
     this.sprite.setDepth(8);
   }
 

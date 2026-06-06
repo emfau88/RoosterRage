@@ -270,19 +270,20 @@ export function playSceneFx(scene, key, x, y, options = {}) {
   return sprite;
 }
 
-export function addArena(scene, width, height) {
+export function addArena(scene, width, height, renderPaddingY = 0) {
+  const renderHeight = height + renderPaddingY * 2;
   scene.add.image(width / 2, height / 2, 'arena-ground')
-    .setDisplaySize(width, height)
+    .setDisplaySize(width, renderHeight)
     .setDepth(0);
   const grid = scene.add.graphics();
   grid.lineStyle(1, 0x3d4b3f, 0.08);
   for (let x = 0; x <= width; x += 80) {
-    grid.lineBetween(x, 0, x, height);
+    grid.lineBetween(x, -renderPaddingY, x, height + renderPaddingY);
   }
-  for (let y = 0; y <= height; y += 80) {
+  for (let y = -renderPaddingY; y <= height + renderPaddingY; y += 80) {
     grid.lineBetween(0, y, width, y);
   }
-  scene.add.rectangle(width / 2, height / 2, width - 8, height - 8)
+  scene.add.rectangle(width / 2, height / 2, width - 8, renderHeight - 8)
     .setStrokeStyle(8, 0x4d3821, 0.65)
     .setDepth(2);
 }
