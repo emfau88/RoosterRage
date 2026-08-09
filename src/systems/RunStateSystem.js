@@ -14,6 +14,7 @@ export class RunStateSystem {
     this.rewardQueue = [];
     this.currentSelection = null;
     this.upgradeStartedAt = 0;
+    this.rerollsRemaining = 1;
   }
 
   startRoosterSelection(definitions) {
@@ -89,8 +90,36 @@ export class RunStateSystem {
     scene.hud.showUpgradeChoices(this.pendingUpgradeChoices, {
       type: this.currentSelection.type,
       kind: this.currentSelection.kind,
-      remaining: this.pendingLevelUps + this.rewardQueue.length
+      remaining: this.pendingLevelUps + this.rewardQueue.length,
+      canReroll: this.rerollsRemaining > 0
     });
+  }
+
+  rerollUpgradeChoices() {
+    if (!this.choosingUpgrade || this.rerollsRemaining <= 0 || !this.currentSelection) {
+      return false;
+    }
+    const { scene } = this;
+    this.rerollsRemaining -= 1;
+    this.pendingUpgradeChoices = this.currentSelection.type === 'chest'
+      ? scene.upgradeSystem.getRewardChoices(
+        this.currentSelection.kind === 'boss' ? 4 : 3,
+        scene.player,
+        this.currentSelection.kind
+      )
+      : scene.upgradeSystem.getChoices(3, scene.player);
+    scene.telemetry.record('upgradeRerolled', scene.time.now, {
+      wave: scene.waveSystem.currentWave,
+      selectionType: this.currentSelection.type,
+      choices: this.pendingUpgradeChoices.map((choice) => choice.id)
+    });
+    scene.hud.showUpgradeChoices(this.pendingUpgradeChoices, {
+      type: this.currentSelection.type,
+      kind: this.currentSelection.kind,
+      remaining: this.pendingLevelUps + this.rewardQueue.length,
+      canReroll: false
+    });
+    return true;
   }
 
   chooseUpgrade(upgrade) {

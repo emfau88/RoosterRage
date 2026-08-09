@@ -29,8 +29,8 @@ export class ActiveAbilitySystem {
     this.timedAbilities.forEach((ability) => ability.update(time));
   }
 
-  createRocketExplosion(x, y, damage, radius) {
-    this.rocketEgg.createExplosion(x, y, damage, radius);
+  createRocketExplosion(x, y, damage, radius, evolved = false) {
+    this.rocketEgg.createExplosion(x, y, damage, radius, evolved);
   }
 
   createMolotovImpact(x, y) {
@@ -67,5 +67,21 @@ export class ActiveAbilitySystem {
 
   unlockLaserComb(rank) {
     this.laserComb.unlock(rank);
+  }
+
+  evolve(baseId, evolutionId) {
+    const timed = {
+      'golden-egg': this.goldenEgg,
+      'molotov-egg': this.molotovEgg,
+      'lightning-comb': this.lightningComb,
+      'void-nest': this.voidNest,
+      'rocket-egg': this.rocketEgg,
+      'laser-comb': this.laserComb
+    }[baseId];
+    if (timed) {
+      timed.evolve(evolutionId);
+      return true;
+    }
+    return this.companions.evolve(baseId, evolutionId);
   }
 }

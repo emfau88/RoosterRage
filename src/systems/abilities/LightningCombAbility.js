@@ -18,9 +18,15 @@ export class LightningCombAbility extends TimedAbility {
       return;
     }
     this.lastSynergyActive = this.scene.orbitEggs.length > 0;
-    const targetCount = 2 + this.rank + (this.lastSynergyActive ? 1 : 0);
+    const targetCount = this.evolved ? 10 : 2 + this.rank + (this.lastSynergyActive ? 1 : 0);
     const targets = sorted.slice(0, Math.min(sorted.length, targetCount));
-    this.scene.lightningBolts.push(new LightningBolt(this.scene, targets, this.rank, this.lastSynergyActive));
+    this.scene.lightningBolts.push(new LightningBolt(
+      this.scene,
+      targets,
+      this.rank,
+      this.lastSynergyActive,
+      this.evolved
+    ));
     this.scene.audio.play('lightning');
     targets.forEach((enemy) => {
       this.scene.playFx('fx-lightning-impact', enemy.sprite.x, enemy.sprite.y + 10, {
@@ -29,7 +35,7 @@ export class LightningCombAbility extends TimedAbility {
       });
     });
     this.scene.debugStats.specialShots += 1;
-    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave, 'lightning-comb');
-    this.nextAt = time + Math.max(2600, 5200 - this.rank * 650);
+    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave, this.evolved ? 'evo-thunder-roost' : 'lightning-comb');
+    this.nextAt = time + (this.evolved ? 2800 : Math.max(2600, 5200 - this.rank * 650));
   }
 }

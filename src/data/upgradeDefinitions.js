@@ -17,6 +17,7 @@ export const UPGRADE_DEFINITIONS = [
     category: 'weapon',
     rarity: 'common',
     maxRank: 1,
+    slotKey: 'multi-shot',
     weight: 9,
     excludes: ['triple-shot'],
     apply: (player) => {
@@ -30,6 +31,7 @@ export const UPGRADE_DEFINITIONS = [
     category: 'weapon',
     rarity: 'rare',
     maxRank: 1,
+    slotKey: 'multi-shot',
     minLevel: 3,
     requires: ['double-shot'],
     weight: 7,
@@ -342,5 +344,109 @@ export const UPGRADE_DEFINITIONS = [
     apply: (player) => {
       player.secondWindCharges += 1;
     }
+  },
+  {
+    id: 'evo-solar-scramble',
+    name: 'Solar Scramble',
+    description: 'Golden Egg wird zu einer Dreifach-Salve aus brennenden Sonnen-Eiern.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['fire-eggs'],
+    requiresMaxRank: ['golden-egg'],
+    evolution: { base: 'golden-egg', passive: 'fire-eggs' },
+    apply: (_player, scene) => scene.evolveAbility('golden-egg', 'evo-solar-scramble')
+  },
+  {
+    id: 'evo-thunder-roost',
+    name: 'Thunder Roost',
+    description: 'Lightning Comb entlaedt einen farblich klaren Sturm ueber bis zu zehn Ziele.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['critical-yolk'],
+    requiresMaxRank: ['lightning-comb'],
+    evolution: { base: 'lightning-comb', passive: 'critical-yolk' },
+    apply: (_player, scene) => scene.evolveAbility('lightning-comb', 'evo-thunder-roost')
+  },
+  {
+    id: 'evo-shell-halo',
+    name: 'Shell Halo',
+    description: 'Vier geladene Orbit-Eier springen nach Kontakt auf ein zweites Ziel.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['armor'],
+    requiresMaxRank: ['orbit-eggs'],
+    evolution: { base: 'orbit-eggs', passive: 'armor' },
+    apply: (_player, scene) => scene.evolveAbility('orbit-eggs', 'evo-shell-halo')
+  },
+  {
+    id: 'evo-broodstorm',
+    name: 'Broodstorm Battery',
+    description: 'Rocket Egg startet drei versetzte Raketen mit groesseren Explosionen.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['bigger-eggs'],
+    requiresMaxRank: ['rocket-egg'],
+    evolution: { base: 'rocket-egg', passive: 'bigger-eggs' },
+    apply: (_player, scene) => scene.evolveAbility('rocket-egg', 'evo-broodstorm')
+  },
+  {
+    id: 'evo-singularity-nest',
+    name: 'Singularity Nest',
+    description: 'Void Nest oeffnet zwei langlebige Singularitaeten mit massivem Sog.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['xp-magnet'],
+    requiresMaxRank: ['void-nest'],
+    evolution: { base: 'void-nest', passive: 'xp-magnet' },
+    apply: (_player, scene) => scene.evolveAbility('void-nest', 'evo-singularity-nest')
+  },
+  {
+    id: 'evo-phoenix-pan',
+    name: 'Phoenix Pan',
+    description: 'Molotov Egg wirft zwei Feuerpfannen und hinterlaesst groessere Brandfelder.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['regen'],
+    requiresMaxRank: ['molotov-egg'],
+    evolution: { base: 'molotov-egg', passive: 'regen' },
+    apply: (_player, scene) => scene.evolveAbility('molotov-egg', 'evo-phoenix-pan')
+  },
+  {
+    id: 'evo-dawn-laser',
+    name: 'Dawn Prism',
+    description: 'Laser Comb spaltet sich in drei breite, verschiedenfarbige Strahlen.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['swift-shells'],
+    requiresMaxRank: ['laser-comb'],
+    evolution: { base: 'laser-comb', passive: 'swift-shells' },
+    apply: (_player, scene) => scene.evolveAbility('laser-comb', 'evo-dawn-laser')
+  },
+  {
+    id: 'evo-chick-squadron',
+    name: 'Chick Squadron',
+    description: 'Vier Support Chicks feuern schnelle Eier und verlangsamen getroffene Gegner.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    requires: ['faster-eggs'],
+    requiresMaxRank: ['support-chick'],
+    evolution: { base: 'support-chick', passive: 'faster-eggs' },
+    apply: (_player, scene) => scene.evolveAbility('support-chick', 'evo-chick-squadron')
   }
 ];

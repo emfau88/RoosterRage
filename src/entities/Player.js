@@ -169,6 +169,7 @@ export class Player {
       : upgrade.name;
     this.upgrades.push(label);
     upgrade.apply(this, scene, nextRank);
+    scene.loadout?.onUpgradeApplied(upgrade, this);
   }
 
   updateAnimation(velocity) {

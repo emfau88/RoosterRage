@@ -1,18 +1,19 @@
 import Phaser from 'phaser';
 
 export class VoidZone {
-  constructor(scene, x, y, rank) {
+  constructor(scene, x, y, rank, evolved = false) {
     this.scene = scene;
     this.x = x;
     this.y = y;
     this.rank = rank;
+    this.evolved = evolved;
     this.synergyActive = scene.molotovEgg.rank > 0;
-    this.radius = 92 + rank * 18;
-    this.damage = 7 + rank * 4;
-    this.pull = (34 + rank * 14) * (this.synergyActive ? 1.25 : 1);
-    this.tickMs = 360;
+    this.radius = (evolved ? 132 : 92) + rank * 18;
+    this.damage = (evolved ? 12 : 7) + rank * 4;
+    this.pull = ((evolved ? 62 : 34) + rank * 14) * (this.synergyActive ? 1.25 : 1);
+    this.tickMs = evolved ? 290 : 360;
     this.nextTickAt = 0;
-    this.life = 2300 + rank * 420;
+    this.life = (evolved ? 3900 : 2300) + rank * 420;
     this.maxLife = this.life;
     this.age = 0;
     this.active = true;
@@ -66,7 +67,9 @@ export class VoidZone {
       this.nextTickAt = this.scene.time.now + this.tickMs;
       this.scene.enemies.forEach((enemy) => {
         if (enemy.sprite.active && Phaser.Math.Distance.Between(this.x, this.y, enemy.sprite.x, enemy.sprite.y) <= this.radius) {
-          this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, { source: 'void-nest' });
+          this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, {
+            source: this.evolved ? 'evo-singularity-nest' : 'void-nest'
+          });
         }
       });
     }

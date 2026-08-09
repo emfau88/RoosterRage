@@ -19,6 +19,7 @@ export class RoosterClassSystem {
 
     this.selected = definition;
     this.applyStats(definition);
+    this.scene.loadout.initializeStartWeapon(definition);
     this.createVisualIdentity(definition);
     this.scene.telemetry.summary.roosterId = definition.id;
     this.scene.telemetry.record('roosterSelected', this.scene.time.now, { roosterId: definition.id });

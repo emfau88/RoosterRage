@@ -30,9 +30,12 @@ export class VoidNestAbility extends TimedAbility {
       alpha: 0.88
     });
     this.scene.audio.play('void-open');
-    const zone = new VoidZone(this.scene, target.x, target.y, this.rank);
-    this.lastSynergyActive = zone.synergyActive;
-    this.scene.voidZones.push(zone);
-    this.nextAt = time + Math.max(3800, 7600 - this.rank * 800);
+    const offsets = this.evolved ? [-78, 78] : [0];
+    offsets.forEach((offset) => {
+      const zone = new VoidZone(this.scene, target.x + offset, target.y, this.rank, this.evolved);
+      this.lastSynergyActive = zone.synergyActive;
+      this.scene.voidZones.push(zone);
+    });
+    this.nextAt = time + (this.evolved ? 4700 : Math.max(3800, 7600 - this.rank * 800));
   }
 }

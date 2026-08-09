@@ -35,15 +35,27 @@ const ICON_ALIASES_BY_ID = {
   'critical-yolk': 'fire-eggs',
   'ricochet-eggs': 'piercing-eggs',
   'shell-shock': 'bigger-eggs',
-  'second-wind': 'heal'
+  'second-wind': 'heal',
+  'evo-solar-scramble': 'golden-egg',
+  'evo-thunder-roost': 'lightning-comb',
+  'evo-shell-halo': 'orbit-eggs',
+  'evo-broodstorm': 'rocket-egg',
+  'evo-singularity-nest': 'void-nest',
+  'evo-phoenix-pan': 'molotov-egg',
+  'evo-dawn-laser': 'laser-comb',
+  'evo-chick-squadron': 'support-chick',
+  'primary-ace': 'active-upgrade',
+  'primary-artillery': 'rocket-egg',
+  'primary-storm': 'lightning-comb'
 };
 
 export class HUD {
-  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected) {
+  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected, onReroll) {
     this.onUpgradeSelected = onUpgradeSelected;
     this.onRestart = onRestart;
     this.onFullscreen = onFullscreen;
     this.onRoosterSelected = onRoosterSelected;
+    this.onReroll = onReroll;
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     this.root = document.createElement('div');
     this.root.className = 'hud';
@@ -53,7 +65,10 @@ export class HUD {
       <div class="hud__item" data-wave><span data-icon="wave"></span><span data-value>Wave 1/10</span></div>
       <div class="hud__item" data-time><span data-icon="timer"></span><span data-value>00:00</span></div>
       <div class="hud__bar"><span data-icon="xp"></span><div class="hud__bar-track"><div class="hud__bar-fill" data-xp></div></div></div>
-      <div class="hud__upgrades" data-upgrades></div>
+      <div class="hud__loadout">
+        <div class="hud__upgrades" data-active-loadout></div>
+        <div class="hud__upgrades hud__upgrades--passive" data-passive-loadout></div>
+      </div>
       <div class="hud__controls">
         <button class="hud__icon-button" type="button" data-fullscreen title="Fullscreen" aria-label="Fullscreen">
           <span class="fullscreen-glyph" aria-hidden="true"></span>
@@ -88,7 +103,7 @@ export class HUD {
     this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10`;
     this.root.querySelector('[data-time] [data-value]').textContent = this.formatTime(state.elapsed);
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
-    this.renderActiveUpgrades(state.upgrades);
+    this.renderLoadout(state.loadout);
   }
 
   showUpgradeChoices(choices, context = {}) {
@@ -107,6 +122,7 @@ export class HUD {
         <h2>${title}</h2>
         <p>${subtitle}</p>
         <div class="upgrade-list"></div>
+        ${context.canReroll ? '<button class="reroll-button" type="button">Reroll (1)</button>' : ''}
       </div>
     `;
     const list = this.overlay.querySelector('.upgrade-list');
@@ -138,6 +154,7 @@ export class HUD {
       button.addEventListener('click', () => this.onUpgradeSelected(choice), { once: true });
       list.append(button);
     });
+    this.overlay.querySelector('.reroll-button')?.addEventListener('click', () => this.onReroll?.(), { once: true });
   }
 
   showRoosterSelection(definitions) {
@@ -217,7 +234,10 @@ export class HUD {
   }
 
   renderActiveUpgrades(upgrades) {
-    const container = this.root.querySelector('[data-upgrades]');
+    const container = this.root.querySelector('[data-active-loadout]');
+    if (!container) {
+      return;
+    }
     container.innerHTML = '';
     container.classList.toggle('is-empty', upgrades.length === 0);
     if (!upgrades.length) {
@@ -230,6 +250,47 @@ export class HUD {
       this.setIcon(icon, this.iconIdFromLabel(label) ?? 'active-upgrade');
       container.append(icon);
     });
+  }
+
+  renderLoadout(loadout) {
+    if (!loadout) {
+      this.renderActiveUpgrades([]);
+      return;
+    }
+    this.renderLoadoutRow(
+      this.root.querySelector('[data-active-loadout]'),
+      loadout.active,
+      loadout.activeSlots,
+      'active'
+    );
+    this.renderLoadoutRow(
+      this.root.querySelector('[data-passive-loadout]'),
+      loadout.passive,
+      loadout.passiveSlots,
+      'passive'
+    );
+  }
+
+  renderLoadoutRow(container, entries, capacity, kind) {
+    container.innerHTML = '';
+    container.classList.toggle('is-empty', capacity === 0);
+    for (let index = 0; index < capacity; index += 1) {
+      const entry = entries[index];
+      const icon = document.createElement('span');
+      icon.className = `hud__upgrade-icon hud__upgrade-icon--${kind}`;
+      if (!entry) {
+        icon.classList.add('is-open');
+        icon.title = `Freier ${kind === 'active' ? 'Active' : 'Passive'}-Slot`;
+      } else {
+        icon.title = `${entry.name} ${entry.rank === 'EVO' ? 'EVO' : `Rang ${entry.rank}`}`;
+        icon.classList.toggle('is-evolved', entry.evolved);
+        this.setIcon(icon, entry.evolutionId ?? entry.sourceId);
+        const rank = document.createElement('small');
+        rank.textContent = entry.rank === 'EVO' ? 'E' : entry.rank;
+        icon.append(rank);
+      }
+      container.append(icon);
+    }
   }
 
   iconIdFromLabel(label) {

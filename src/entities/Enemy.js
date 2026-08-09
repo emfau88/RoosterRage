@@ -27,6 +27,7 @@ export class Enemy {
     this.maxHp = config.hp;
     this.hp = config.hp;
     this.speed = config.speed;
+    this.baseSpeed = config.speed;
     this.damage = config.damage;
     this.xpValue = config.xp;
     this.type = config.type ?? 'unknown';
@@ -143,6 +144,18 @@ export class Enemy {
   applyKnockback(angle, force, duration = 130) {
     this.knockbackVelocity.setToPolar(angle, force);
     this.knockbackUntil = Math.max(this.knockbackUntil, this.scene.time.now + duration);
+  }
+
+  applySlow(ratio, duration) {
+    const activationId = this.activationId;
+    this.speed = Math.min(this.speed, this.baseSpeed * ratio);
+    this.sprite.setTint(0x8deaff);
+    this.scene.time.delayedCall(duration, () => {
+      if (this.sprite.active && this.activationId === activationId) {
+        this.speed = this.baseSpeed;
+        this.sprite.clearTint();
+      }
+    });
   }
 
   destroy() {

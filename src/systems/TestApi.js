@@ -59,6 +59,28 @@ export function installTestApi(scene) {
         rotation: scene.player.sprite.rotation
       }
     }),
+    getLoadout: () => ({
+      ...scene.loadout.getSnapshot(),
+      rerollsRemaining: scene.runState.rerollsRemaining
+    }),
+    getAbilityState: () => ({
+      goldenEgg: { rank: scene.goldenEgg.rank, evolved: scene.goldenEgg.evolved },
+      molotovEgg: { rank: scene.molotovEgg.rank, evolved: scene.molotovEgg.evolved },
+      lightningComb: { rank: scene.lightningComb.rank, evolved: scene.lightningComb.evolved },
+      voidNest: { rank: scene.voidNest.rank, evolved: scene.voidNest.evolved },
+      rocketEgg: { rank: scene.rocketEgg.rank, evolved: scene.rocketEgg.evolved },
+      laserComb: { rank: scene.laserComb.rank, evolved: scene.laserComb.evolved },
+      orbitEggs: {
+        rank: scene.activeAbilities.companions.orbitRank,
+        evolved: Boolean(scene.activeAbilities.companions.orbitEvolutionId),
+        count: scene.orbitEggs.length
+      },
+      supportChick: {
+        rank: scene.activeAbilities.companions.supportRank,
+        evolved: Boolean(scene.activeAbilities.companions.supportEvolutionId),
+        count: scene.supportChickens.length
+      }
+    }),
     getPlayerStats: () => ({
       hp: scene.player.hp,
       roosterId: scene.player.roosterId,
@@ -145,6 +167,7 @@ export function installTestApi(scene) {
       laneOffset: projectile.laneOffset,
       speed: projectile.speed,
       texture: projectile.sprite.texture?.key,
+      source: projectile.source,
       splashRadius: projectile.splashRadius,
       chainRemaining: projectile.chainRemaining,
       active: projectile.sprite.active
@@ -238,6 +261,7 @@ export function installTestApi(scene) {
       scene.runState.startChestReward(kind);
       return window.__ROOSTER_TEST__.getProgressionState();
     },
+    rerollUpgradeChoices: () => scene.rerollUpgradeChoices(),
     setPlayerCombatModifiers: (modifiers = {}) => {
       Object.entries(modifiers).forEach(([key, value]) => {
         if (key in scene.player && Number.isFinite(value)) {

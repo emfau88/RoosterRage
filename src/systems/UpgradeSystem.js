@@ -8,7 +8,8 @@ const CATEGORY_LABELS = {
   orbit: 'Orbit',
   summon: 'Summon',
   passive: 'Passive',
-  utility: 'Utility'
+  utility: 'Utility',
+  evolution: 'EVO'
 };
 
 export class UpgradeSystem {
@@ -20,9 +21,18 @@ export class UpgradeSystem {
   getChoices(count = 3, player) {
     const available = this.upgrades.filter((upgrade) => this.isAvailable(upgrade, player));
     const choices = [];
+    const evolution = this.pickWeighted(
+      available.filter((upgrade) => upgrade.evolution),
+      player
+    );
+    if (evolution) {
+      choices.push(evolution);
+    }
     if (this.shouldGuaranteeSpectacle(player)) {
       const spectacle = this.pickWeighted(
-        available.filter((upgrade) => SPECTACLE_CATEGORIES.includes(upgrade.category)),
+        available.filter((upgrade) => (
+          SPECTACLE_CATEGORIES.includes(upgrade.category) && !choices.includes(upgrade)
+        )),
         player
       );
       if (spectacle) {
@@ -53,10 +63,7 @@ export class UpgradeSystem {
 
   getRewardChoices(count = 3, player, kind = 'elite') {
     const available = this.upgrades.filter((upgrade) => this.isAvailable(upgrade, player));
-    const evolutionReady = available.filter((upgrade) => (
-      upgrade.evolution
-      && upgrade.requires?.every((id) => player.getUpgradeRank(id) > 0)
-    ));
+    const evolutionReady = available.filter((upgrade) => upgrade.evolution);
     const rankUps = available.filter((upgrade) => (
       !upgrade.consumable
       && player.getUpgradeRank(upgrade.id) > 0
@@ -110,10 +117,26 @@ export class UpgradeSystem {
     if (upgrade.excludes?.some((id) => player.getUpgradeRank(id) > 0)) {
       return false;
     }
+    if (upgrade.requiresMaxRank?.some((id) => {
+      const required = this.upgrades.find((candidate) => candidate.id === id);
+      return !required?.maxRank || player.getUpgradeRank(id) < required.maxRank;
+    })) {
+      return false;
+    }
+    if (upgrade.evolution && this.sceneEvolutionOwned(player, upgrade.id)) {
+      return false;
+    }
     if (upgrade.condition && !upgrade.condition(player)) {
       return false;
     }
+    if (!player.scene?.loadout?.canAcquire(upgrade, player)) {
+      return false;
+    }
     return true;
+  }
+
+  sceneEvolutionOwned(player, id) {
+    return player.scene?.loadout?.evolutions?.has(id) || player.getUpgradeRank(id) > 0;
   }
 
   shouldGuaranteeSpectacle(player) {
@@ -127,7 +150,9 @@ export class UpgradeSystem {
   }
 
   presentUpgrade(upgrade, player) {
-    const nextRank = upgrade.consumable ? null : (player?.getUpgradeRank(upgrade.id) ?? 0) + 1;
+    const nextRank = upgrade.consumable || upgrade.evolution
+      ? null
+      : (player?.getUpgradeRank(upgrade.id) ?? 0) + 1;
     const rankDescription = nextRank ? upgrade.rankDescriptions?.[nextRank - 1] : null;
     const synergyActive = Boolean(
       player
@@ -138,8 +163,8 @@ export class UpgradeSystem {
       ...upgrade,
       description: rankDescription ?? upgrade.description,
       nextRank,
-      rankLabel: upgrade.consumable
-        ? 'Sofort'
+      rankLabel: upgrade.consumable || upgrade.evolution
+        ? upgrade.evolution ? 'EVO' : 'Sofort'
         : `Rang ${nextRank}/${upgrade.maxRank}`,
       categoryLabel: CATEGORY_LABELS[upgrade.category] ?? upgrade.category,
       synergyActive,

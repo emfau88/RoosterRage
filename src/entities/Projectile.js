@@ -29,6 +29,8 @@ export class Projectile {
     this.ricochetRemaining = options.ricochet ?? 0;
     this.canCrit = options.canCrit ?? false;
     this.knockbackRank = options.knockbackRank ?? 0;
+    this.slowRatio = options.slowRatio ?? 1;
+    this.slowMs = options.slowMs ?? 0;
     this.splashRadius = options.splashRadius ?? 0;
     this.splashDamageRatio = options.splashDamageRatio ?? 0;
     this.chainRemaining = options.chainCount ?? 0;

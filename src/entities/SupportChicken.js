@@ -1,19 +1,21 @@
 import Phaser from 'phaser';
 
 export class SupportChicken {
-  constructor(scene, index, count, rank) {
+  constructor(scene, index, count, rank, evolved = false) {
     this.scene = scene;
     this.index = index;
     this.count = count;
     this.rank = rank;
+    this.evolved = evolved;
     this.angle = (Math.PI * 2 * index) / count;
     this.nextShotAt = scene.time.now + 350 + index * 220;
-    this.fireRate = Math.max(760, 1450 - rank * 180);
-    this.damage = 12 + rank * 5;
+    this.fireRate = evolved ? 620 : Math.max(760, 1450 - rank * 180);
+    this.damage = (evolved ? 18 : 12) + rank * 5;
 
     this.sprite = scene.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'support-chick');
     this.sprite.setScale(0.14);
     this.sprite.setDepth(8);
+    if (evolved) this.sprite.setTint(0xfff3b0);
   }
 
   update(delta) {
@@ -45,7 +47,9 @@ export class SupportChicken {
       hitRadius: 22,
       trailRadius: 7,
       trailAlpha: 0.16,
-      source: 'support-chick'
+      source: this.evolved ? 'evo-chick-squadron' : 'support-chick',
+      slowRatio: this.evolved ? 0.72 : 1,
+      slowMs: this.evolved ? 900 : 0
     });
     this.nextShotAt = this.scene.time.now + this.fireRate;
   }

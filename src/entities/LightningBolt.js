@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 
 export class LightningBolt {
-  constructor(scene, targets, rank, synergyActive = false) {
+  constructor(scene, targets, rank, synergyActive = false, evolved = false) {
     this.scene = scene;
     this.rank = rank;
     this.synergyActive = synergyActive;
+    this.evolved = evolved;
     this.age = 0;
     this.life = 180;
     this.active = true;
@@ -22,19 +23,20 @@ export class LightningBolt {
     targets.forEach((enemy, index) => {
       const falloff = Math.max(0.55, 1 - index * 0.18);
       const synergyMultiplier = synergyActive ? 1.2 : 1;
+      const evolutionMultiplier = evolved ? 1.3 : 1;
       scene.damageEnemy(
         enemy,
-        Math.round((24 + rank * 10) * falloff * synergyMultiplier),
+        Math.round((24 + rank * 10) * falloff * synergyMultiplier * evolutionMultiplier),
         enemy.sprite.x,
         enemy.sprite.y,
-        { source: 'lightning-comb' }
+        { source: evolved ? 'evo-thunder-roost' : 'lightning-comb' }
       );
     });
   }
 
   createSegment(from, to) {
     const line = this.scene.add.graphics().setDepth(11);
-    line.lineStyle(5, 0xeefcff, 0.88);
+    line.lineStyle(this.evolved ? 8 : 5, this.evolved ? 0xfff3b0 : 0xeefcff, 0.88);
     line.beginPath();
     line.moveTo(from.x, from.y);
     const steps = 4;
@@ -46,7 +48,7 @@ export class LightningBolt {
     }
     line.lineTo(to.x, to.y);
     line.strokePath();
-    line.lineStyle(2, 0x5ad7ff, 0.96);
+    line.lineStyle(this.evolved ? 3 : 2, this.evolved ? 0x9b5cff : 0x5ad7ff, 0.96);
     line.strokePath();
     this.segments.push(line);
   }

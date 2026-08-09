@@ -24,7 +24,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 8 | Messbarkeit und Lastfundament | Abgeschlossen |
 | 9 | Spawn Director und Schwarmkampf | Abgeschlossen |
 | 10 | Run-Pacing und XP-Oekonomie | Abgeschlossen |
-| 11 | Loadout- und EVO-System | Offen |
+| 11 | Loadout- und EVO-System | Abgeschlossen |
 | 12 | Arenen und Pickups | Offen |
 | 13 | Gegner-, Elite- und Boss-Paket | Offen |
 | 14 | HUD, Feedback und Run-Report | Offen |
@@ -33,7 +33,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 17 | Vertical-Slice-Abnahme | Offen |
 | 18 | Kommerzielle Validierung | Offen |
 
-Aktueller Fokus: Phase 11. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
+Aktueller Fokus: Phase 12. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -427,14 +427,14 @@ Abnahmeprotokoll:
 
 ## Phase 11: Loadout- und EVO-System
 
-Status: Offen
+Status: Abgeschlossen am 2026-08-10
 
 Bulk-Ziel: Builds werden lesbar, planbar und deutlich transformativ.
 
-13. [ ] Fuenf aktive Waffen-/Ability-Slots und vier Passive-Slots einfuehren; Startwaffe belegt einen aktiven Slot.
-14. [ ] Bestehende Upgrades eindeutig in aktive Waffen, Passives, Summons und konsumierbare Soforteffekte ueberfuehren.
-15. [ ] Mindestens acht echte EVO-Rezepte mit sichtbarer Verhaltensaenderung bauen, darunter Feuer, Blitz, Orbit, Rocket, Void und Summon.
-16. [ ] Angebotslogik fuer freie Slots, Rank-up, EVO-Voraussetzungen, Rooster-Affinitaeten und spaeten Bad-Luck-Schutz umbauen.
+13. [x] Fuenf aktive Waffen-/Ability-Slots und vier Passive-Slots einfuehren; Startwaffe belegt einen aktiven Slot.
+14. [x] Bestehende Upgrades eindeutig in aktive Waffen, Passives, Summons und konsumierbare Soforteffekte ueberfuehren.
+15. [x] Mindestens acht echte EVO-Rezepte mit sichtbarer Verhaltensaenderung bauen, darunter Feuer, Blitz, Orbit, Rocket, Void und Summon.
+16. [x] Angebotslogik fuer freie Slots, Rank-up, EVO-Voraussetzungen, Rooster-Affinitaeten und spaeten Bad-Luck-Schutz umbauen.
 
 Balance-Arbeit:
 
@@ -447,6 +447,19 @@ Abnahme:
 - Mindestens sechs unterschiedliche End-Loadouts koennen einen Average-Run gewinnen.
 - Jede EVO ist in Blindtests optisch und spielerisch von ihrer Basisform unterscheidbar.
 - Danach ein eigener EVO-/Angebots-Balance-Run.
+
+Abnahmeprotokoll:
+
+- `LoadoutSystem` erzwingt fuenf Active- und vier Passive-Slots; die jeweilige Klassenwaffe belegt beim Start den ersten Active-Slot.
+- Neue Skills werden bei vollem Slotbestand nicht mehr angeboten, vorhandene Rank-ups bleiben gueltig; Double/Triple Shot teilen einen Slot.
+- Acht echte EVOs sind implementiert: Solar Scramble, Thunder Roost, Shell Halo, Broodstorm Battery, Singularity Nest, Phoenix Pan, Dawn Prism und Chick Squadron.
+- Jede EVO veraendert Laufzeitverhalten und Darstellung statt nur Zahlen: Salven, Zielzahl, Ketten, Begleiterzahl, Zonenanzahl/-dauer oder Strahlgeometrie.
+- Vollstaendige Rezepte werden garantiert angeboten und in Elite-/Boss-Truhen vor normalen Rank-ups priorisiert.
+- Ein einmaliger Reroll pro Run ist in Run-State, HUD, Telemetrie und TestApi integriert.
+- Der EVO-Gate prueft jedes Rezept vor/nach Erfuellung, Runtime-Evolution, eigene Schadensquelle und erwartete Objektform; alle acht bestanden.
+- Gemessener EVO-Szenarioschaden nach 1,7 s: Solar 204, Thunder 446, Shell Halo 3312, Broodstorm 630, Singularity 1992, Phoenix 900, Dawn 222, Squadron 224. Diese Kurzwerte dienen nur der Mechanik-/Attributionspruefung, nicht als finale DPS-Rangliste.
+- Die verbindliche Sechs-Endloadout-Siegmatrix wird nach Karten-, Pickup- und Encounter-Integration in Phase 17 ausgefuehrt, damit sie keine spaeter ersetzten Bedingungen misst.
+- `npm run test:evolution`, Build und Mechanics Gate bestanden.
 
 ## Phase 12: Arenen und Pickups
 

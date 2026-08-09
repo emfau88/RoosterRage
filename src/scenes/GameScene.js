@@ -15,6 +15,7 @@ import { CombatFeedbackSystem } from '../systems/CombatFeedbackSystem.js';
 import { EnemyAttackSystem } from '../systems/EnemyAttackSystem.js';
 import { EntitySystem } from '../systems/EntitySystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
+import { LoadoutSystem } from '../systems/LoadoutSystem.js';
 import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
 import { ProjectileLifecycleSystem } from '../systems/ProjectileLifecycleSystem.js';
 import { RandomSystem } from '../systems/RandomSystem.js';
@@ -107,6 +108,7 @@ export class GameScene extends Phaser.Scene {
     };
     this.lastShotAt = -9999;
     this.player = new Player(this, ARENA_WIDTH / 2, ARENA_HEIGHT / 2);
+    this.loadout = new LoadoutSystem(this);
     this.roosterClasses = new RoosterClassSystem(this);
     this.combat = new CombatSystem(this);
     this.combatFeedback = new CombatFeedbackSystem(this);
@@ -126,7 +128,8 @@ export class GameScene extends Phaser.Scene {
       (upgrade) => this.chooseUpgrade(upgrade),
       () => this.scene.restart(),
       () => this.toggleFullscreen(),
-      (roosterId) => this.chooseRooster(roosterId)
+      (roosterId) => this.chooseRooster(roosterId),
+      () => this.rerollUpgradeChoices()
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
@@ -281,8 +284,8 @@ export class GameScene extends Phaser.Scene {
     this.activeAbilities.update(time);
   }
 
-  createRocketExplosion(x, y, damage, radius) {
-    this.activeAbilities.createRocketExplosion(x, y, damage, radius);
+  createRocketExplosion(x, y, damage, radius, evolved = false) {
+    this.activeAbilities.createRocketExplosion(x, y, damage, radius, evolved);
   }
 
   createMolotovImpact(x, y) {
@@ -319,6 +322,17 @@ export class GameScene extends Phaser.Scene {
 
   unlockLaserComb(rank) {
     this.activeAbilities.unlockLaserComb(rank);
+  }
+  evolveAbility(baseId, evolutionId) {
+    const evolved = this.activeAbilities.evolve(baseId, evolutionId);
+    if (evolved) {
+      this.telemetry.record('abilityEvolved', this.time.now, {
+        wave: this.waveSystem.currentWave,
+        baseId,
+        evolutionId
+      });
+    }
+    return evolved;
   }
   spawnEnemyProjectile(x, y, angle, config) {
     return this.enemyAttacks.spawnProjectile(x, y, angle, config);
@@ -388,6 +402,10 @@ export class GameScene extends Phaser.Scene {
     return this.runState.chooseUpgrade(upgrade);
   }
 
+  rerollUpgradeChoices() {
+    return this.runState.rerollUpgradeChoices();
+  }
+
   chooseRooster(id) {
     return this.runState.chooseRooster(id);
   }
@@ -409,7 +427,8 @@ export class GameScene extends Phaser.Scene {
       xpPercent: this.player.xp / this.player.xpToNext,
       wave: this.waveSystem.currentWave,
       elapsed: this.elapsed,
-      upgrades: this.player.upgrades
+      upgrades: this.player.upgrades,
+      loadout: this.loadout.getSnapshot()
     });
   }
 

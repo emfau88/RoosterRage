@@ -1,15 +1,16 @@
 import Phaser from 'phaser';
 
 export class HazardZone {
-  constructor(scene, x, y, rank) {
+  constructor(scene, x, y, rank, evolved = false) {
     this.scene = scene;
     this.x = x;
     this.y = y;
     this.rank = rank;
-    this.radius = 74 + rank * 16;
-    this.damage = 8 + rank * 4;
-    this.tickMs = 420;
-    this.life = 2050;
+    this.evolved = evolved;
+    this.radius = (evolved ? 112 : 74) + rank * 16;
+    this.damage = (evolved ? 13 : 8) + rank * 4;
+    this.tickMs = evolved ? 320 : 420;
+    this.life = evolved ? 3800 : 2050;
     this.maxLife = this.life;
     this.nextTickAt = 0;
     this.age = 0;
@@ -57,7 +58,9 @@ export class HazardZone {
         }
         const distance = Phaser.Math.Distance.Between(this.x, this.y, enemy.sprite.x, enemy.sprite.y);
         if (distance <= this.radius) {
-          this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, { source: 'molotov-egg' });
+          this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, {
+            source: this.evolved ? 'evo-phoenix-pan' : 'molotov-egg'
+          });
         }
       });
     }

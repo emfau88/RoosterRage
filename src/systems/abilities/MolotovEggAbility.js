@@ -15,16 +15,19 @@ export class MolotovEggAbility extends TimedAbility {
       return;
     }
     const start = this.scene.player.getMuzzlePosition(28);
-    this.scene.molotovProjectiles.push(new MolotovEggProjectile(
-      this.scene,
-      start.x,
-      start.y,
-      target.x,
-      target.y,
-      this.rank
-    ));
+    const offsets = this.evolved ? [-62, 62] : [0];
+    offsets.forEach((offset) => {
+      this.scene.molotovProjectiles.push(new MolotovEggProjectile(
+        this.scene,
+        start.x,
+        start.y,
+        target.x + offset,
+        target.y,
+        this.rank
+      ));
+    });
     this.scene.audio.play('egg-shot', { volume: 0.14, cooldown: 160 });
-    this.nextAt = time + Math.max(3200, 6400 - this.rank * 700);
+    this.nextAt = time + (this.evolved ? 3900 : Math.max(3200, 6400 - this.rank * 700));
   }
 
   createImpact(x, y) {
@@ -52,6 +55,6 @@ export class MolotovEggAbility extends TimedAbility {
       duration: 260,
       onComplete: () => ring.destroy()
     });
-    this.scene.hazardZones.push(new HazardZone(this.scene, x, y, this.rank));
+    this.scene.hazardZones.push(new HazardZone(this.scene, x, y, this.rank, this.evolved));
   }
 }

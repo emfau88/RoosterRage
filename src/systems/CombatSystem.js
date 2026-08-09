@@ -225,6 +225,9 @@ export class CombatSystem {
     if (projectile.knockbackRank > 0 && enemy.sprite.active) {
       enemy.applyKnockback(projectile.currentAngle, 80 + projectile.knockbackRank * 30);
     }
+    if (projectile.slowMs > 0 && enemy.sprite.active) {
+      enemy.applySlow(projectile.slowRatio, projectile.slowMs);
+    }
     if (projectile.pierceRemaining > 0) {
       projectile.pierceRemaining -= 1;
     } else if (projectile.ricochetRemaining > 0 && this.redirectRicochet(projectile, enemy)) {

@@ -1,13 +1,14 @@
 import Phaser from 'phaser';
 
 export class RocketProjectile {
-  constructor(scene, x, y, target, rank) {
+  constructor(scene, x, y, target, rank, evolved = false) {
     this.scene = scene;
     this.target = target;
     this.rank = rank;
+    this.evolved = evolved;
     this.synergyActive = scene.player.fireEggs;
-    this.damage = Math.round((34 + rank * 14) * (this.synergyActive ? 1.25 : 1));
-    this.radius = 62 + rank * 12;
+    this.damage = Math.round(((evolved ? 28 : 34) + rank * 14) * (this.synergyActive ? 1.25 : 1));
+    this.radius = (evolved ? 78 : 62) + rank * 12;
     this.speed = 250 + rank * 28;
     this.turnRate = 0.055 + rank * 0.008;
     this.life = 2800;
@@ -19,6 +20,7 @@ export class RocketProjectile {
     this.sprite.setCircle(11);
     this.sprite.setRotation(this.angle);
     this.sprite.setDepth(7);
+    if (evolved) this.sprite.setTint(0xffd35c);
     this.trail = scene.add.circle(x, y, 13, 0xff7a24, 0.28).setDepth(4);
   }
 
@@ -43,7 +45,7 @@ export class RocketProjectile {
       enemy.sprite.y
     ) < 32);
     if (hit) {
-      this.scene.createRocketExplosion(this.sprite.x, this.sprite.y, this.damage, this.radius);
+      this.scene.createRocketExplosion(this.sprite.x, this.sprite.y, this.damage, this.radius, this.evolved);
       this.destroy();
       return;
     }
