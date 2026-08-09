@@ -14,6 +14,7 @@ import { CollisionSystem } from '../systems/CollisionSystem.js';
 import { CombatSystem } from '../systems/CombatSystem.js';
 import { CombatFeedbackSystem } from '../systems/CombatFeedbackSystem.js';
 import { EnemyAttackSystem } from '../systems/EnemyAttackSystem.js';
+import { EffectSettingsSystem } from '../systems/EffectSettingsSystem.js';
 import { EntitySystem } from '../systems/EntitySystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
 import { PickupSystem } from '../systems/PickupSystem.js';
@@ -90,6 +91,7 @@ export class GameScene extends Phaser.Scene {
     this.laserComb = this.activeAbilities.laserComb;
     this.elapsed = 0;
     this.telemetry = new Telemetry({ seed: this.rng.seed, profile: requestedProfile });
+    this.effects = new EffectSettingsSystem();
     this.audio = new AudioSystem(this);
     this.bot = {
       enabled: false,
@@ -135,7 +137,8 @@ export class GameScene extends Phaser.Scene {
       () => this.scene.restart(),
       () => this.toggleFullscreen(),
       (roosterId) => this.chooseRooster(roosterId),
-      () => this.rerollUpgradeChoices()
+      () => this.rerollUpgradeChoices(),
+      () => this.openEffectSettings()
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
@@ -147,7 +150,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-    if (this.gameEnded || this.isChoosingRooster) {
+    if (this.gameEnded || this.isChoosingRooster || this.isSettingsOpen) {
       return;
     }
 
@@ -203,6 +206,25 @@ export class GameScene extends Phaser.Scene {
 
   get pendingUpgradeChoices() {
     return this.runState?.pendingUpgradeChoices ?? null;
+  }
+
+  openEffectSettings() {
+    if (this.isChoosingRooster || this.gameEnded || this.isChoosingUpgrade) return false;
+    this.isSettingsOpen = true;
+    this.physics.pause();
+    this.hud.showEffectSettings(
+      this.effects.getState(),
+      (key) => {
+        this.effects.toggle(key);
+        return this.effects.getState();
+      },
+      () => {
+        this.isSettingsOpen = false;
+        this.hud.hideOverlay();
+        this.physics.resume();
+      }
+    );
+    return true;
   }
 
   playFx(key, x, y, options = {}) {
@@ -440,8 +462,11 @@ export class GameScene extends Phaser.Scene {
       xpPercent: this.player.xp / this.player.xpToNext,
       wave: this.waveSystem.currentWave,
       elapsed: this.elapsed,
+      kills: this.debugStats.kills,
       upgrades: this.player.upgrades,
       loadout: this.loadout.getSnapshot(),
+      waveProgress: this.waveSystem.getProgressState(),
+      effects: this.effects.getState(),
       boss: boss ? {
         name: boss.displayName,
         hp: boss.hp,

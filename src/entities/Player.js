@@ -110,7 +110,9 @@ export class Player {
       duration: 480,
       onComplete: () => ring.destroy()
     });
-    this.scene.cameras.main.flash(140, 255, 226, 115, false);
+    if (this.scene.effects.enabled('screenFlash')) {
+      this.scene.cameras.main.flash(140, 255, 226, 115, false);
+    }
     this.scene.audio?.play('level-up', { volume: 0.26, cooldown: 250 });
   }
 

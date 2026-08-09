@@ -103,7 +103,19 @@ export class LoadoutSystem {
   }
 
   getSnapshot() {
-    const clone = (entry) => ({ ...entry });
+    const cooldowns = this.scene.activeAbilities?.getCooldownStates(this.scene.time.now) ?? {};
+    const primaryCooldown = {
+      ratio: Math.max(0, Math.min(1, (
+        (this.scene.lastShotAt + this.scene.player.fireRate - this.scene.time.now)
+        / Math.max(1, this.scene.player.fireRate)
+      ))),
+      remainingMs: Math.max(0, this.scene.lastShotAt + this.scene.player.fireRate - this.scene.time.now),
+      durationMs: this.scene.player.fireRate
+    };
+    const clone = (entry) => ({
+      ...entry,
+      cooldown: entry.startWeapon ? primaryCooldown : (cooldowns[entry.sourceId] ?? null)
+    });
     return {
       activeSlots: this.activeSlots,
       passiveSlots: this.passiveSlots,

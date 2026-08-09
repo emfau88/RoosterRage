@@ -77,7 +77,9 @@ export class PickupSystem {
         const damage = enemy.boss ? Math.max(1, Math.round(enemy.maxHp * 0.05)) : enemy.maxHp;
         scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, { source: 'pickup:bomb' });
       });
-      scene.cameras.main.flash(120, 255, 202, 88, false);
+      if (scene.effects.enabled('screenFlash')) {
+        scene.cameras.main.flash(120, 255, 202, 88, false);
+      }
     } else if (kind === 'magnet') {
       this.magnetUntil = Math.max(this.magnetUntil, scene.time.now + 8000);
     } else if (kind === 'elite-chest') {

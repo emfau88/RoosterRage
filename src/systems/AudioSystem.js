@@ -1,3 +1,9 @@
+import { AUDIO_PRIORITIES } from '../data/presentationStandards.js';
+
+const AUDIO_TIER_BY_KEY = Object.fromEntries(
+  Object.entries(AUDIO_PRIORITIES).flatMap(([tier, keys]) => keys.map((key) => [key, tier]))
+);
+
 const SFX_CONFIG = {
   'egg-shot': { volume: 0.23, cooldown: 70, maxVoices: 3, rateJitter: 0.035 },
   'enemy-hit': { volume: 0.16, cooldown: 45, maxVoices: 4, rateJitter: 0.05 },
@@ -41,8 +47,9 @@ export class AudioSystem {
     if (voices >= maxVoices) {
       return;
     }
-    const priority = options.priority ?? config.priority ?? false;
-    const globalLimit = this.maxGlobalVoices + (priority ? 2 : 0);
+    const tier = options.tier ?? AUDIO_TIER_BY_KEY[key] ?? 'impact';
+    const priority = options.priority ?? config.priority ?? ['critical', 'reward'].includes(tier);
+    const globalLimit = this.maxGlobalVoices + (priority ? 2 : tier === 'ability' ? 1 : 0);
     if (this.activeSounds.size >= globalLimit) {
       return;
     }
@@ -88,7 +95,10 @@ export class AudioSystem {
     return {
       enabled: this.enabled,
       activeVoices: this.activeSounds.size,
-      maxGlobalVoices: this.maxGlobalVoices
+      maxGlobalVoices: this.maxGlobalVoices,
+      priorities: Object.fromEntries(
+        Object.entries(AUDIO_PRIORITIES).map(([tier, keys]) => [tier, [...keys]])
+      )
     };
   }
 }

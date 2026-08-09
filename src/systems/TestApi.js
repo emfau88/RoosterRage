@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
+import { AUDIO_PRIORITIES, VISUAL_LANGUAGE } from '../data/presentationStandards.js';
 
 export function shouldInstallTestApi() {
   return import.meta.env.DEV;
@@ -165,6 +166,10 @@ export function installTestApi(scene) {
     getWaveCatalog: () => scene.waveSystem.getWaveCatalog(),
     getEnemyRoleMatrix: () => scene.waveSystem.getEnemyRoleMatrix(),
     getEncounterStandards: () => ({ ...ENCOUNTER_STANDARDS }),
+    getPresentationStandards: () => ({
+      colors: structuredClone(VISUAL_LANGUAGE),
+      audio: structuredClone(AUDIO_PRIORITIES)
+    }),
     getEncounterEvents: () => scene.telemetry.getEventSequence([
       'enemyTelegraphShown',
       'enemyAbilityFired',
@@ -539,6 +544,12 @@ export function installTestApi(scene) {
     },
     restart: () => scene.scene.restart(),
     getTelemetry: () => scene.telemetry.getSummary(scene.time.now),
+    getRunReport: () => scene.runState.getRunReport(),
+    getEffectSettings: () => scene.effects.getState(),
+    toggleEffectSetting: (key) => {
+      scene.effects.toggle(key);
+      return scene.effects.getState();
+    },
     resumeIfUpgradeOpen: () => {
       if (!scene.isChoosingUpgrade) {
         return false;

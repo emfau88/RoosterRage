@@ -45,6 +45,8 @@ export class Telemetry {
       effectiveDamage: 0,
       overkillDamage: 0,
       damageBySource: {},
+      shotsBySource: {},
+      hitsBySource: {},
       effectiveDamageBySource: {},
       overkillBySource: {},
       killsBySource: {},
@@ -199,11 +201,13 @@ export class Telemetry {
 
   addShot(count, time, wave, source = 'base-egg') {
     this.summary.shots += count;
+    increment(this.summary.shotsBySource, source, count);
     this.record('projectileFired', time, { count, wave, source });
   }
 
   addHit(time, wave, source = 'base-egg') {
     this.summary.hits += 1;
+    increment(this.summary.hitsBySource, source);
     this.record('projectileHit', time, { wave, source });
   }
 
@@ -376,6 +380,44 @@ export class Telemetry {
     };
   }
 
+  getCombatSourceReport() {
+    const keys = new Set([
+      ...Object.keys(this.summary.damageBySource),
+      ...Object.keys(this.summary.shotsBySource),
+      ...Object.keys(this.summary.hitsBySource),
+      ...Object.keys(this.summary.killsBySource)
+    ]);
+    const totalEffective = Math.max(1, this.summary.effectiveDamage);
+    return [...keys].map((source) => {
+      const sourceEvents = this.events.filter((event) => (
+        event.source === source
+        && ['projectileFired', 'projectileHit', 'damageDealt', 'enemyKilled'].includes(event.type)
+      ));
+      const firstAt = sourceEvents[0]?.time ?? null;
+      const lastAt = sourceEvents[sourceEvents.length - 1]?.time ?? firstAt;
+      const shots = this.summary.shotsBySource[source] ?? 0;
+      const hits = this.summary.hitsBySource[source] ?? 0;
+      const damage = this.summary.damageBySource[source] ?? 0;
+      const effectiveDamage = this.summary.effectiveDamageBySource[source] ?? 0;
+      const overkill = this.summary.overkillBySource[source] ?? 0;
+      return {
+        source,
+        shots,
+        hits,
+        hitRate: shots > 0 ? Math.min(1, hits / shots) : null,
+        damage,
+        effectiveDamage,
+        damageShare: effectiveDamage / totalEffective,
+        overkill,
+        overkillRatio: damage > 0 ? overkill / damage : 0,
+        kills: this.summary.killsBySource[source] ?? 0,
+        firstAt,
+        lastAt,
+        usageMs: firstAt === null ? 0 : Math.max(0, lastAt - firstAt)
+      };
+    }).sort((a, b) => b.effectiveDamage - a.effectiveDamage || b.kills - a.kills);
+  }
+
   getEventSequence(types = []) {
     const accepted = new Set(types);
     return this.events
@@ -392,6 +434,8 @@ export class Telemetry {
     return {
       ...this.summary,
       damageBySource: cloneObjectStats(this.summary.damageBySource),
+      shotsBySource: cloneObjectStats(this.summary.shotsBySource),
+      hitsBySource: cloneObjectStats(this.summary.hitsBySource),
       effectiveDamageBySource: cloneObjectStats(this.summary.effectiveDamageBySource),
       overkillBySource: cloneObjectStats(this.summary.overkillBySource),
       killsBySource: cloneObjectStats(this.summary.killsBySource),
@@ -402,6 +446,7 @@ export class Telemetry {
       frameTimes: this.getFrameStats(),
       ttkByEnemyType: this.getTtkStats(),
       progression: this.getProgressionStats(now),
+      combatSources: this.getCombatSourceReport(),
       elapsedMs: (this.summary.endedAt ?? now) - this.summary.startedAt,
       waves: waveStats,
       eventCount: this.events.length

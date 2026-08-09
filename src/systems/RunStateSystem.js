@@ -207,6 +207,25 @@ export class RunStateSystem {
     this.gameEnded = true;
     this.scene.physics.pause();
     this.scene.telemetry.finish(this.scene.time.now, outcome);
-    this.scene.hud.showEndScreen(title, message, this.scene.telemetry.getSummary(this.scene.time.now));
+    this.scene.hud.showEndScreen(title, message, this.getRunReport());
+  }
+
+  getRunReport() {
+    const { scene } = this;
+    const telemetry = scene.telemetry.getSummary(scene.time.now);
+    const loadout = scene.loadout.getSnapshot();
+    return {
+      ...telemetry,
+      rooster: {
+        id: scene.player.roosterId,
+        name: scene.roosterClasses.selected?.name ?? scene.player.roosterName
+      },
+      arena: { id: scene.arena.id, name: scene.arena.definition.name },
+      build: {
+        active: loadout.active,
+        passive: loadout.passive,
+        evolutions: loadout.evolutions
+      }
+    };
   }
 }

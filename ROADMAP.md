@@ -2,12 +2,12 @@
 
 ## Zielbild
 
-Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
+Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp entwickelt.
 
 - Klarer Hook: verrueckte Rooster-Klassen, charakteristische Ei-Waffen und spektakulaere Build-Synergien.
 - Commercial Vertical Slice: 3 spielbare Rooster, 10 abwechslungsreiche Wellen, 1 Boss und etwa 25 belastbare Upgrades.
 - Die heutigen 10 Wellen bilden zunaechst einen kurzen, vollstaendig spielbaren Run. Eine spaetere Vollversion braucht laengere Runs oder mehrere 10-Wellen-Akte.
-- Mobile bleibt vollstaendig spielbar, bestimmt aber vorerst nicht Monetarisierung oder Produktdesign.
+- Mobile Portrait und Landscape bestimmen Bedienung, Lesbarkeit und Performance-Budgets; Desktop bleibt vollstaendig unterstuetzt.
 
 ## Statusuebersicht
 
@@ -25,15 +25,15 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 9 | Spawn Director und Schwarmkampf | Abgeschlossen |
 | 10 | Run-Pacing und XP-Oekonomie | Abgeschlossen |
 | 11 | Loadout- und EVO-System | Abgeschlossen |
-| 12 | Arenen und Pickups | Offen |
-| 13 | Gegner-, Elite- und Boss-Paket | Offen |
-| 14 | HUD, Feedback und Run-Report | Offen |
+| 12 | Arenen und Pickups | Abgeschlossen |
+| 13 | Gegner-, Elite- und Boss-Paket | Abgeschlossen |
+| 14 | HUD, Feedback und Run-Report | Abgeschlossen |
 | 15 | Rooster-Tiefe und Build-Content | Offen |
 | 16 | Meta und Challenges | Offen |
 | 17 | Vertical-Slice-Abnahme | Offen |
 | 18 | Kommerzielle Validierung | Offen |
 
-Aktueller Fokus: Phase 14. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
+Aktueller Fokus: Phase 15. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -527,14 +527,14 @@ Abnahmeprotokoll 10.08.2026:
 
 ## Phase 14: HUD, Feedback und Run-Report
 
-Status: Offen
+Status: Abgeschlossen am 10.08.2026
 
 Bulk-Ziel: Wichtige Informationen sind mit einem Blick erfassbar und Builds werden auswertbar.
 
-25. [ ] HUD neu priorisieren: XP und Timer oben, Wave-/Bossfortschritt zentral, Killzahl kompakt, HP primaer am Rooster.
-26. [ ] Aktive Loadout-Leiste mit Icon, Rang, EVO-Zustand und Cooldown-Ring ergaenzen; Passives in einer kleineren zweiten Reihe.
-27. [ ] Spieler-, Gegner-, Gefahren- und Pickup-Farbsprache sowie Audio-Prioritaeten verbindlich dokumentieren und umsetzen.
-28. [ ] Run-Report mit Schaden/Kills je Quelle, Todesursache, Build, EVOs, Zeit, Peak-Dichte und Rooster anzeigen.
+25. [x] HUD neu priorisieren: XP und Timer oben, Wave-/Bossfortschritt zentral, Killzahl kompakt, HP primaer am Rooster.
+26. [x] Aktive Loadout-Leiste mit Icon, Rang, EVO-Zustand und Cooldown-Ring ergaenzen; Passives in einer kleineren zweiten Reihe.
+27. [x] Spieler-, Gegner-, Gefahren- und Pickup-Farbsprache sowie Audio-Prioritaeten verbindlich dokumentieren und umsetzen.
+28. [x] Run-Report mit Schaden/Kills je Quelle, Todesursache, Build, EVOs, Zeit, Peak-Dichte und Rooster anzeigen.
 
 Balance-Arbeit:
 
@@ -546,6 +546,16 @@ Abnahme:
 
 - HUD funktioniert auf Desktop, Mobile Portrait und Landscape ohne Ueberdeckung.
 - Ein Spieler kann nach dem Run begruenden, welche Waffe stark oder schwach war.
+
+Abnahmeprotokoll 10.08.2026:
+
+- Das HUD zeigt XP zuerst, danach Timer, Wave-Fortschritt, Kills und Level. HP bleibt als primaere Anzeige am Rooster; der Bossfortschritt besitzt eine eigene mobile Leiste.
+- Fuenf Active- und vier kleinere Passive-Slots zeigen Icon, Rang und EVO-Zustand. Zeitbasierte aktive Waffen liefern einen echten Cooldown-Fortschritt statt einer dekorativen Animation.
+- Eine verbindliche Farbsprache fuer Spieler, Gegner, Gefahren, Pickups und Evolutionen sowie fuenf Audio-Prioritaetsklassen liegen als Runtime-Daten vor.
+- Der Run-Report verwendet dieselben Telemetriedaten wie die Tests und zeigt pro Quelle effektiven Schaden, Anteil, Trefferquote, Kills, Overkill und Nutzungszeit sowie Todesursache, Build, EVOs, Laufzeit und Peak-Dichte.
+- Damage Numbers, Screen Shake, Screen Flash und Vibration sind einzeln schaltbar und werden lokal gespeichert.
+- Der Browser-Gate misst HUD-Hoehen von 150 px auf Desktop, 115 px in Mobile Portrait und 66 px in Mobile Landscape. Der Report passt vollstaendig in 390 x 844; Produktions-, Smoke-, Mechanics- und Foundation-Gates bestanden.
+- Das Ziel von mindestens 5 Prozent Beitrag je voll ausgebauter aktiver Waffe wird mit den finalen Endloadouts im Phase-17-Balance-Gate bewertet.
 
 ## Phase 15: Rooster-Tiefe und Build-Content
 

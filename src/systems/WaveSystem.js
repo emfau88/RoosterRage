@@ -20,6 +20,22 @@ export class WaveSystem {
     return this.waves.length;
   }
 
+  getProgressState() {
+    const wave = this.waves[this.currentWave - 1];
+    const total = wave?.count ?? 0;
+    const spawned = Math.min(total, this.director.spawnedCount ?? this.spawned ?? 0);
+    const defeated = Math.max(0, spawned - this.scene.enemies.length);
+    return {
+      current: this.currentWave,
+      totalWaves: this.totalWaves,
+      spawned,
+      total,
+      alive: this.scene.enemies.length,
+      defeated,
+      percent: total > 0 ? Math.min(1, defeated / total) : 0
+    };
+  }
+
   hydrateWave(wave) {
     return {
       ...wave,

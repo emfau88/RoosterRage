@@ -84,4 +84,17 @@ export class ActiveAbilitySystem {
     }
     return this.companions.evolve(baseId, evolutionId);
   }
+
+  getCooldownStates(time = this.goldenEgg.scene.time.now) {
+    return {
+      'golden-egg': this.goldenEgg.getCooldownState(time),
+      'molotov-egg': this.molotovEgg.getCooldownState(time),
+      'lightning-comb': this.lightningComb.getCooldownState(time),
+      'void-nest': this.voidNest.getCooldownState(time),
+      'rocket-egg': this.rocketEgg.getCooldownState(time),
+      'laser-comb': this.laserComb.getCooldownState(time),
+      'orbit-eggs': { ratio: 0, remainingMs: 0, durationMs: 0 },
+      'support-chick': { ratio: 0, remainingMs: 0, durationMs: 0 }
+    };
+  }
 }

@@ -17,7 +17,7 @@ export class CombatFeedbackSystem {
     ).setDepth(9);
     const now = this.scene.time.now;
     const lastTextAt = enemy ? this.lastDamageTextAt.get(enemy) ?? -Infinity : -Infinity;
-    const showText = now - lastTextAt >= 170;
+    const showText = this.scene.effects.enabled('damageNumbers') && now - lastTextAt >= 170;
     if (enemy && showText) {
       this.lastDamageTextAt.set(enemy, now);
     }
@@ -143,11 +143,19 @@ export class CombatFeedbackSystem {
       duration: projectile?.heavy ? 260 : 170,
       onComplete: () => impact.destroy()
     });
-    this.scene.cameras.main.flash(projectile?.heavy ? 110 : 70, 130, 18, 30, false);
+    if (this.scene.effects.enabled('screenFlash')) {
+      this.scene.cameras.main.flash(projectile?.heavy ? 110 : 70, 130, 18, 30, false);
+    }
+    if (this.scene.effects.enabled('vibration')) {
+      globalThis.navigator?.vibrate?.(projectile?.heavy ? 45 : 24);
+    }
     this.shake(projectile?.heavy ? 110 : 80, projectile?.heavy ? 0.005 : 0.0035);
   }
 
   shake(duration, intensity, cooldown = 90) {
+    if (!this.scene.effects.enabled('screenShake')) {
+      return;
+    }
     const now = this.scene.time.now;
     if (now - this.lastShakeAt < cooldown) {
       return;

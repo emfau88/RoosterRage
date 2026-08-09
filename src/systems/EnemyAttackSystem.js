@@ -165,7 +165,7 @@ export class EnemyAttackSystem {
       duration: 520,
       onComplete: () => ring.destroy()
     });
-    this.scene.cameras.main.shake(140, 0.003);
+    this.scene.combatFeedback.shake(140, 0.003);
     this.scene.telemetry.record('bossPhaseStarted', this.scene.time.now, {
       wave: this.scene.waveSystem.currentWave,
       phase: enemy.bossPhaseIndex + 2,
