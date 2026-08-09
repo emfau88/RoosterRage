@@ -42,6 +42,10 @@ async function run() {
     }
 
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    await page.keyboard.down('d');
+    await page.waitForTimeout(300);
+    await page.keyboard.up('d');
+    const afterKeyboardMove = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.waitForTimeout(2500);
     const afterBoot = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
 
@@ -75,6 +79,11 @@ async function run() {
       initial,
       afterBoot
     });
+    assert(
+      afterKeyboardMove.player.x > initial.player.x + 20,
+      'Desktop keyboard input did not move the player.',
+      { initial: initial.player, afterKeyboardMove: afterKeyboardMove.player }
+    );
     assert(afterBoot.enemies > 0, 'Wave system did not spawn enemies.', afterBoot);
     assert(afterCombat.frames > beforeCombat.frames + 60, 'Game loop appears frozen during combat.', {
       beforeCombat,
@@ -112,7 +121,14 @@ async function run() {
     await mobilePage.goto(url, { waitUntil: 'domcontentloaded' });
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const mobileState = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
+    await mobilePage.mouse.move(70, 700);
+    await mobilePage.mouse.down();
+    await mobilePage.mouse.move(125, 700, { steps: 5 });
+    await mobilePage.waitForTimeout(350);
+    await mobilePage.mouse.up();
+    const mobileAfterTouch = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     const mobileCanvas = await mobilePage.locator('canvas').boundingBox();
+    const mobileHud = await mobilePage.locator('.hud').boundingBox();
     const joystickDisplay = await mobilePage.locator('.joystick').evaluate(
       (element) => getComputedStyle(element).display
     );
@@ -121,7 +137,40 @@ async function run() {
     assert(!mobileState.lastError && mobileState.frames > 30, 'Mobile game loop did not start cleanly.', mobileState);
     assert(mobileCanvas?.width >= 380 && mobileCanvas?.height >= 830, 'Mobile canvas does not fill the viewport.', mobileCanvas);
     assert(joystickDisplay !== 'none', 'Mobile joystick is not visible.', { joystickDisplay });
+    assert(mobileState.cameraZoom <= 0.9, 'Portrait camera is not zoomed out enough.', mobileState);
+    assert(mobileHud?.height <= 125, 'Portrait HUD obscures too much of the arena.', mobileHud);
+    assert(
+      mobileAfterTouch.player.x > mobileState.player.x + 20,
+      'Mobile touch-drag input did not move the player.',
+      { before: mobileState.player, after: mobileAfterTouch.player }
+    );
     await mobilePage.close();
+
+    const landscapeContext = await browser.newContext({
+      viewport: { width: 844, height: 390 },
+      hasTouch: true,
+      isMobile: true
+    });
+    const landscapePage = await landscapeContext.newPage();
+    const landscapeErrors = [];
+    landscapePage.on('pageerror', (error) => landscapeErrors.push(error.stack ?? error.message));
+    await landscapePage.goto(url, { waitUntil: 'domcontentloaded' });
+    await landscapePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
+    const landscapeState = await landscapePage.evaluate(() => window.__ROOSTER_TEST__.getState());
+    const landscapeCanvas = await landscapePage.locator('canvas').boundingBox();
+    const landscapeHud = await landscapePage.locator('.hud').boundingBox();
+    const landscapeJoystick = await landscapePage.locator('.joystick').evaluate(
+      (element) => getComputedStyle(element).display
+    );
+    await landscapePage.locator('[data-fullscreen]').click();
+    await landscapePage.waitForTimeout(100);
+    await landscapePage.screenshot({ path: path.join(artifactDir, 'rooster-smoke-mobile-landscape.png') });
+    assert(landscapeErrors.length === 0, 'Landscape browser reported page errors.', landscapeErrors);
+    assert(landscapeCanvas?.width >= 830 && landscapeCanvas?.height >= 380, 'Landscape canvas does not fill the viewport.', landscapeCanvas);
+    assert(landscapeHud?.height <= 90, 'Landscape HUD obscures too much of the arena.', landscapeHud);
+    assert(landscapeJoystick !== 'none', 'Landscape joystick is not visible.', { landscapeJoystick });
+    assert(landscapeState.cameraZoom === 1, 'Landscape camera should use the default zoom.', landscapeState);
+    await landscapeContext.close();
 
     const failureContext = await browser.newContext({ viewport: { width: 640, height: 360 } });
     const failurePage = await failureContext.newPage();
@@ -156,7 +205,7 @@ async function run() {
     await failureContext.close();
 
     console.log('Rooster smoke test passed.');
-    console.log(JSON.stringify({ initial, afterBoot, beforeCombat, afterCombat, afterRestart, afterRestartAdvance, mobileState, failedLoadState }, null, 2));
+    console.log(JSON.stringify({ initial, afterKeyboardMove, afterBoot, beforeCombat, afterCombat, afterRestart, afterRestartAdvance, mobileState, mobileAfterTouch, landscapeState, failedLoadState }, null, 2));
   } finally {
     await stopTestServer(server);
     await browser.close();

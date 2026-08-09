@@ -11,25 +11,49 @@ export class EnemyAttackSystem {
     if (enemy.boss) {
       this.updateBoss(enemy, player);
     }
-    if (!enemy.ability || this.scene.time.now < enemy.nextAbilityAt) {
+    if (
+      !enemy.ability
+      || enemy.abilityCharging
+      || enemy.heavyCharging
+      || this.scene.time.now < enemy.nextAbilityAt
+    ) {
       return;
     }
 
-    const angle = Phaser.Math.Angle.Between(
-      enemy.sprite.x,
-      enemy.sprite.y,
-      player.sprite.x,
-      player.sprite.y
-    );
-    if (enemy.ability.kind === 'shoot') {
-      this.showMuzzleFlash(enemy.sprite.x, enemy.sprite.y, angle, enemy.ability);
-      this.spawnProjectile(enemy.sprite.x, enemy.sprite.y, angle, enemy.ability);
-    } else if (enemy.ability.kind === 'fan') {
-      this.fireFan(enemy, angle);
-    } else if (enemy.ability.kind === 'summon') {
-      this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, enemy.ability.count ?? 2);
-    }
-    enemy.nextAbilityAt = this.scene.time.now + enemy.ability.cooldown;
+    this.beginAbility(enemy, player);
+  }
+
+  beginAbility(enemy, player) {
+    const ability = enemy.ability;
+    const telegraphMs = ability.telegraphMs ?? (ability.kind === 'fan' ? 230 : 180);
+    enemy.abilityCharging = true;
+    enemy.nextAbilityAt = this.scene.time.now + ability.cooldown;
+    this.scene.combatFeedback.showEnemyTelegraph(enemy, player, ability, {
+      duration: telegraphMs,
+      count: ability.kind === 'fan' ? ability.count ?? 3 : 1,
+      spread: ability.kind === 'fan' ? ability.spread ?? 0.55 : 0
+    });
+    this.scene.time.delayedCall(telegraphMs, () => {
+      enemy.abilityCharging = false;
+      if (!enemy.sprite.active || !player.sprite.active) {
+        return;
+      }
+
+      const angle = Phaser.Math.Angle.Between(
+        enemy.sprite.x,
+        enemy.sprite.y,
+        player.sprite.x,
+        player.sprite.y
+      );
+      if (ability.kind === 'shoot') {
+        this.showMuzzleFlash(enemy.sprite.x, enemy.sprite.y, angle, ability);
+        this.spawnProjectile(enemy.sprite.x, enemy.sprite.y, angle, ability);
+      } else if (ability.kind === 'fan') {
+        this.fireFan(enemy, angle);
+      } else if (ability.kind === 'summon') {
+        this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, ability.count ?? 2);
+      }
+    });
   }
 
   updateBoss(enemy, player) {
@@ -44,15 +68,32 @@ export class EnemyAttackSystem {
         enemy.ability = { ...enemy.ability, count: 7, spread: 1.45, cooldown: 2100 };
       }
     }
-    if (enemy.heavyProjectile && this.scene.time.now >= enemy.nextHeavyAttackAt) {
-      const angle = Phaser.Math.Angle.Between(
-        enemy.sprite.x,
-        enemy.sprite.y,
-        player.sprite.x,
-        player.sprite.y
-      );
-      this.spawnBossFireball(enemy.sprite.x, enemy.sprite.y, angle, enemy.heavyProjectile);
+    if (
+      enemy.heavyProjectile
+      && !enemy.heavyCharging
+      && !enemy.abilityCharging
+      && this.scene.time.now >= enemy.nextHeavyAttackAt
+    ) {
+      const telegraphMs = enemy.heavyProjectile.telegraphMs ?? 420;
+      enemy.heavyCharging = true;
       enemy.nextHeavyAttackAt = this.scene.time.now + (enemy.heavyProjectile.cooldown ?? 4300);
+      this.scene.combatFeedback.showEnemyTelegraph(enemy, player, enemy.heavyProjectile, {
+        duration: telegraphMs,
+        heavy: true
+      });
+      this.scene.time.delayedCall(telegraphMs, () => {
+        enemy.heavyCharging = false;
+        if (!enemy.sprite.active || !player.sprite.active) {
+          return;
+        }
+        const angle = Phaser.Math.Angle.Between(
+          enemy.sprite.x,
+          enemy.sprite.y,
+          player.sprite.x,
+          player.sprite.y
+        );
+        this.spawnBossFireball(enemy.sprite.x, enemy.sprite.y, angle, enemy.heavyProjectile);
+      });
     }
   }
 
@@ -99,6 +140,8 @@ export class EnemyAttackSystem {
       depth: 8,
       muzzleDistance: 82,
       pulse: true,
+      heavy: true,
+      warningColor: 0xff3048,
       tint: false,
       ...config
     };
@@ -146,8 +189,8 @@ export class EnemyAttackSystem {
     const y = enemy.sprite.y;
     const core = this.scene.add.circle(x, y, 22, 0xfff08a, 0.55).setDepth(10);
     this.scene.audio.play('rocket-explosion');
-    const ring = this.scene.add.circle(x, y, radius, 0xff6a28, 0.24)
-      .setStrokeStyle(4, 0xffd35c, 0.9)
+    const ring = this.scene.add.circle(x, y, radius, 0xff3048, 0.2)
+      .setStrokeStyle(4, 0xffd8dc, 0.92)
       .setDepth(9);
     this.scene.tweens.add({
       targets: core,
@@ -165,6 +208,12 @@ export class EnemyAttackSystem {
     });
     if (Phaser.Math.Distance.Between(x, y, this.scene.player.sprite.x, this.scene.player.sprite.y) <= radius) {
       if (this.scene.player.damage(damage, this.scene.time.now)) {
+        this.scene.combatFeedback.showPlayerDamage(
+          this.scene.player.sprite.x,
+          this.scene.player.sprite.y,
+          damage,
+          { color: 0xff3048, heavy: true }
+        );
         this.scene.telemetry.addDamageTaken(
           damage,
           this.scene.time.now,

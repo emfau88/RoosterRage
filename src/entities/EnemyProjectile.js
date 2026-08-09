@@ -7,6 +7,8 @@ export class EnemyProjectile {
     this.trailColor = config.trailColor ?? this.color;
     this.trailAlpha = config.trailAlpha ?? 0.28;
     this.pulse = config.pulse ?? false;
+    this.heavy = config.heavy ?? false;
+    this.warningColor = config.warningColor ?? 0xff4058;
     this.baseScale = config.scale ?? 1;
     this.angle = angle;
     this.speed = config.speed ?? 220;
@@ -23,6 +25,9 @@ export class EnemyProjectile {
     this.sprite.setDepth(config.depth ?? 5);
     this.sprite.entity = this;
     this.trail = scene.add.circle(x, y, ((config.radius ?? 7) + 6) * this.baseScale, this.trailColor, this.trailAlpha).setDepth((config.depth ?? 5) - 1);
+    this.dangerRing = scene.add.circle(x, y, ((config.radius ?? 7) + (this.heavy ? 9 : 5)) * this.baseScale, 0x000000, 0)
+      .setStrokeStyle(this.heavy ? 4 : 2, this.warningColor, 0.96)
+      .setDepth((config.depth ?? 5) + 1);
     this.setVelocity();
   }
 
@@ -40,6 +45,8 @@ export class EnemyProjectile {
     this.setVelocity();
     this.trail.setPosition(this.sprite.x, this.sprite.y);
     this.trail.setAlpha(Math.max(0.08, this.life / 2600) * this.trailAlpha);
+    this.dangerRing.setPosition(this.sprite.x, this.sprite.y);
+    this.dangerRing.setScale(1 + Math.sin(this.age * 0.014) * (this.heavy ? 0.13 : 0.08));
     if (this.life <= 0) {
       this.destroy();
     }
@@ -59,6 +66,9 @@ export class EnemyProjectile {
     this.destroyed = true;
     if (this.trail.active) {
       this.trail.destroy();
+    }
+    if (this.dangerRing.active) {
+      this.dangerRing.destroy();
     }
     if (this.sprite.active) {
       this.sprite.destroy();

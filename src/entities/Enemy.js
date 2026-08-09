@@ -18,6 +18,8 @@ export class Enemy {
     this.explosionRadius = config.explosionRadius ?? 0;
     this.explosionDamage = config.explosionDamage ?? 0;
     this.nextAbilityAt = 0;
+    this.abilityCharging = false;
+    this.heavyCharging = false;
     this.nextHeavyAttackAt = scene.time.now + (config.heavyAttackDelay ?? 1700);
     this.warning = null;
     this.warningPulse = 0;

@@ -17,7 +17,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 1 | Combat-Architektur | Abgeschlossen |
 | 2 | Weitere Modularisierung | Abgeschlossen |
 | 3 | Asset- und Performance-Pipeline | Abgeschlossen |
-| 4 | Spielgefuehl und Lesbarkeit | Offen |
+| 4 | Spielgefuehl und Lesbarkeit | Abgeschlossen |
 | 5 | Upgrade-System als Kernprodukt | Offen |
 | 6 | Drei Rooster-Klassen | Offen |
 | 7 | Wellen 1-10 kuratieren | Offen |
@@ -132,16 +132,30 @@ Abnahmeprotokoll:
 
 ## Phase 4: Spielgefuehl und Lesbarkeit
 
-Status: Offen
+Status: Abgeschlossen am 2026-08-09
 
-- Bewegung, Kollisionen und Trefferreaktionen pruefen.
-- Eigene, gegnerische und Flaechenangriffe eindeutig unterscheiden.
-- Spitter-, Fan- und Boss-Projektile besser lesbar machen.
-- Trefferblitze, Knockback, Sounds und Screen Shake dosieren.
-- Mobile Joystick, Portrait-Zoom und Fullscreen auf echten Viewports testen.
-- HUD priorisieren und Audio-Limits fuer haeufige Effekte definieren.
+- [x] Bewegung, Kollisionen und Trefferreaktionen pruefen.
+- [x] Eigene, gegnerische und Flaechenangriffe eindeutig unterscheiden.
+- [x] Spitter-, Fan- und Boss-Projektile besser lesbar machen.
+- [x] Trefferblitze, Knockback, Sounds und Screen Shake dosieren.
+- [x] Mobile Joystick, Portrait-Zoom und Fullscreen auf echten Viewports testen.
+- [x] HUD priorisieren und Audio-Limits fuer haeufige Effekte definieren.
 
 Abnahme: Neue Spieler verstehen ohne Erklaerung, was sie trifft und was ihre Upgrades bewirken.
+
+Abnahmeprotokoll:
+
+- Spitter-, Fan- und Boss-Angriffe zeigen vor dem Abschuss klar erkennbare Telegraphen von 180, 230 beziehungsweise 420 Millisekunden.
+- Gegnerprojektile besitzen eine rote Gefahrenkontur; der schwere Boss-Feuerball ist zusaetzlich als schwerer Angriff markiert.
+- Schadenszahlen werden pro Gegner gedrosselt, Trefferfunken bleiben sichtbar und Spielerschaden nutzt dosierten Flash und Screen Shake.
+- Das Audio-System begrenzt gleichzeitige Stimmen global auf sieben und erlaubt nur fuer priorisierte Ereignisse kurzzeitig zwei weitere Stimmen.
+- Das HUD blendet eine leere Upgrade-Zeile aus, priorisiert kritische HP und bleibt im niedrigen Landscape-Viewport kompakt.
+- Desktop-Tastatur, Mobile-Touch-Drag, Portrait-Zoom, Landscape-Layout, Joystick und Fullscreen-Ausloeser werden automatisiert geprueft.
+- `npm run build`: bestanden.
+- `npm run test:mechanics`: bestanden, einschliesslich Telegraph- und Audio-Budget-Pruefungen.
+- `npm run test:smoke`: bestanden, einschliesslich echter Keyboard- und Pointer-Eingabe.
+- Portrait-, Landscape-, Fan- und Boss-Screenshots wurden visuell geprueft.
+- Kein Balance-Run ausgefuehrt; dieser ist erst nach dem naechsten abgeschlossenen Gameplay-Paket sinnvoll.
 
 ## Phase 5: Upgrade-System als Kernprodukt
 

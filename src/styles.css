@@ -43,6 +43,16 @@ canvas {
   line-height: 1.2;
 }
 
+.hud__item[data-hp].is-warning {
+  border-color: rgba(255, 211, 92, 0.72);
+  background: rgba(54, 40, 12, 0.82);
+}
+
+.hud__item[data-hp].is-danger {
+  border-color: rgba(255, 79, 95, 0.9);
+  background: rgba(62, 14, 22, 0.88);
+}
+
 .ui-icon {
   display: inline-block;
   flex: 0 0 auto;
@@ -59,7 +69,6 @@ canvas {
   display: flex;
   align-items: center;
   gap: 7px;
-  height: 12px;
   height: 18px;
   padding: 2px 7px 2px 4px;
   overflow: hidden;
@@ -97,6 +106,10 @@ canvas {
   min-height: 28px;
   font-size: 12px;
   opacity: 0.9;
+}
+
+.hud__upgrades.is-empty {
+  display: none;
 }
 
 .hud__upgrade-icon {
@@ -375,5 +388,54 @@ canvas {
   .hud__icon-button {
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (max-height: 480px) {
+  .hud {
+    max-width: 620px;
+    gap: 4px;
+    padding: calc(5px + env(safe-area-inset-top)) calc(54px + env(safe-area-inset-right)) 5px calc(5px + env(safe-area-inset-left));
+  }
+
+  .hud__item {
+    min-height: 24px;
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+
+  .hud__item .ui-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hud__bar {
+    height: 14px;
+  }
+
+  .hud__bar .ui-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hud__upgrades {
+    min-height: 20px;
+  }
+
+  .hud__upgrade-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .joystick {
+    width: 96px;
+    height: 96px;
+  }
+
+  .joystick__nub {
+    left: 30px;
+    top: 30px;
+    width: 36px;
+    height: 36px;
   }
 }

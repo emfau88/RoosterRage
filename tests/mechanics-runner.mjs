@@ -138,7 +138,11 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.movePlayer(700, 450);
       window.__ROOSTER_TEST__.spawnEnemyType('spitter', 900, 450, { speed: 0, damage: 0, hp: 999 });
     });
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(70);
+    const spitterTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    assert(spitterTelegraph.enemyTelegraphs >= 1, 'Spitter did not telegraph its shot.', spitterTelegraph);
+    assert(spitterTelegraph.enemyProjectiles === 0, 'Spitter fired before its telegraph completed.', spitterTelegraph);
+    await page.waitForTimeout(180);
     const afterSpitter = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(afterSpitter.enemyProjectiles >= 1, 'Spitter did not fire a projectile.', afterSpitter);
 
@@ -147,9 +151,15 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.clearProjectiles();
       window.__ROOSTER_TEST__.spawnEnemyType('fan-spitter', 900, 450, { speed: 0, damage: 0, hp: 999 });
     });
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(70);
+    const fanTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    assert(fanTelegraph.enemyTelegraphs >= 1, 'Fan Spitter did not telegraph its burst.', fanTelegraph);
+    assert(fanTelegraph.enemyProjectiles === 0, 'Fan Spitter fired before its telegraph completed.', fanTelegraph);
+    await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-telegraph.png') });
+    await page.waitForTimeout(230);
     const afterFan = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(afterFan.enemyProjectiles >= 3, 'Fan Spitter did not fire a fan burst.', afterFan);
+    await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-projectiles.png') });
 
     await page.evaluate(() => {
       window.__ROOSTER_TEST__.clearEnemies();
@@ -167,16 +177,37 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.clearEnemies();
       window.__ROOSTER_TEST__.clearProjectiles();
       window.__ROOSTER_TEST__.movePlayer(700, 450);
-      window.__ROOSTER_TEST__.spawnEnemyType('boss', 940, 450, { speed: 0, damage: 0, hp: 9999, heavyAttackDelay: 120 });
+      window.__ROOSTER_TEST__.spawnEnemyType('boss', 940, 450, {
+        speed: 0,
+        damage: 0,
+        hp: 9999,
+        ability: null,
+        heavyAttackDelay: 120
+      });
     });
-    await page.waitForTimeout(260);
+    await page.waitForTimeout(160);
+    const bossTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    assert(bossTelegraph.enemyTelegraphs >= 1, 'Boss did not telegraph its heavy fireball.', bossTelegraph);
+    assert(bossTelegraph.enemyProjectiles === 0, 'Boss fireball launched before its telegraph completed.', bossTelegraph);
+    await page.screenshot({ path: path.join(artifactDir, 'boss-fireball-telegraph.png') });
+    await page.waitForTimeout(470);
     const bossProjectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemyProjectileSnapshot());
     const bossFireball = bossProjectiles.find((projectile) => projectile.texture === 'boss-fireball');
     assert(bossFireball, 'Boss did not create a visible fireball projectile.', bossProjectiles);
     assert(bossFireball.vx < -100, 'Boss fireball does not appear to fly toward the player.', bossFireball);
     assert(bossFireball.x < 940, 'Boss fireball should spawn outside the boss and move left toward the player.', bossFireball);
     assert(errors.length === 0, 'Browser reported errors during enemy ability test.', errors);
-    return { name: 'enemy abilities', status: 'passed', afterSpitter, afterFan, afterBomber, bossFireball };
+    return {
+      name: 'enemy abilities',
+      status: 'passed',
+      spitterTelegraph,
+      afterSpitter,
+      fanTelegraph,
+      afterFan,
+      afterBomber,
+      bossTelegraph,
+      bossFireball
+    };
   } finally {
     await page.close();
   }
@@ -215,6 +246,11 @@ async function testActiveUpgradeAbilities(browser) {
     assert(state.specialShots >= 4, 'Golden/Lightning/Rocket/Laser abilities did not fire special attacks.', state);
     assert(state.hazardZones >= 1, 'Molotov Egg did not create a hazard zone.', state);
     assert(state.voidZones >= 1, 'Void Nest did not create a pull/damage zone.', state);
+    assert(
+      state.audio.activeVoices <= state.audio.maxGlobalVoices + 2,
+      'Global audio voice budget was exceeded.',
+      state.audio
+    );
     return { name: 'active upgrade abilities', status: 'passed', inFlight, state };
   } finally {
     await page.close();

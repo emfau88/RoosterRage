@@ -320,8 +320,8 @@ export class GameScene extends Phaser.Scene {
     return this.combat.damageEnemy(enemy, damage, x, y);
   }
 
-  showHitFeedback(x, y, damage) {
-    return this.combatFeedback.showHit(x, y, damage);
+  showHitFeedback(x, y, damage, enemy = null) {
+    return this.combatFeedback.showHit(x, y, damage, enemy);
   }
 
   showShotFeedback(angle, laneOffset = 0) {

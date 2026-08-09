@@ -23,7 +23,7 @@ export class CollisionSystem {
       if (enemy && scene.player.damage(enemy.damage, scene.time.now)) {
         scene.audio.play('player-hit');
         scene.telemetry.addDamageTaken(enemy.damage, scene.time.now, scene.waveSystem.currentWave);
-        scene.cameras.main.shake(90, 0.004);
+        scene.combatFeedback.showPlayerDamage(scene.player.sprite.x, scene.player.sprite.y, enemy.damage);
       }
     });
 
@@ -35,7 +35,12 @@ export class CollisionSystem {
       if (scene.player.damage(projectile.damage, scene.time.now)) {
         scene.audio.play('player-hit');
         scene.telemetry.addDamageTaken(projectile.damage, scene.time.now, scene.waveSystem.currentWave);
-        scene.cameras.main.shake(70, 0.003);
+        scene.combatFeedback.showPlayerDamage(
+          projectile.sprite.x,
+          projectile.sprite.y,
+          projectile.damage,
+          projectile
+        );
       }
       projectile.destroy();
     });

@@ -193,7 +193,7 @@ export class CombatSystem {
     if (!enemy.sprite.active) {
       return;
     }
-    scene.showHitFeedback(x, y, damage);
+    scene.showHitFeedback(x, y, damage, enemy);
     scene.audio.play('enemy-hit');
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;

@@ -62,7 +62,11 @@ export class HUD {
   }
 
   update(state) {
-    this.root.querySelector('[data-hp] [data-value]').textContent = `HP ${Math.ceil(state.hp)}/${state.maxHp}`;
+    const hpItem = this.root.querySelector('[data-hp]');
+    const hpRatio = state.hp / state.maxHp;
+    hpItem.querySelector('[data-value]').textContent = `HP ${Math.ceil(state.hp)}/${state.maxHp}`;
+    hpItem.classList.toggle('is-warning', hpRatio <= 0.55 && hpRatio > 0.25);
+    hpItem.classList.toggle('is-danger', hpRatio <= 0.25);
     this.root.querySelector('[data-level] [data-value]').textContent = `Level ${state.level}`;
     this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10`;
     this.root.querySelector('[data-time] [data-value]').textContent = this.formatTime(state.elapsed);
@@ -133,15 +137,11 @@ export class HUD {
   renderActiveUpgrades(upgrades) {
     const container = this.root.querySelector('[data-upgrades]');
     container.innerHTML = '';
+    container.classList.toggle('is-empty', upgrades.length === 0);
     if (!upgrades.length) {
-      const empty = document.createElement('span');
-      empty.className = 'hud__upgrades-empty';
-      empty.innerHTML = '<span data-empty-icon></span><span>Upgrades: -</span>';
-      this.setIcon(empty.querySelector('[data-empty-icon]'), 'active-upgrade');
-      container.append(empty);
       return;
     }
-    upgrades.slice(-10).forEach((label) => {
+    upgrades.slice(-8).forEach((label) => {
       const icon = document.createElement('span');
       icon.className = 'hud__upgrade-icon';
       icon.title = label;
