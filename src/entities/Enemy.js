@@ -75,47 +75,7 @@ export class Enemy {
   }
 
   updateAbility(player) {
-    if (this.boss) {
-      const hpRatio = this.hp / this.maxHp;
-      if (!this.phaseTwoTriggered && hpRatio <= 0.6) {
-        this.phaseTwoTriggered = true;
-        this.scene.spawnAddsNear(this.sprite.x, this.sprite.y, 4);
-      }
-      if (!this.phaseThreeTriggered && hpRatio <= 0.3) {
-        this.phaseThreeTriggered = true;
-        if (this.ability?.kind === 'fan') {
-          this.ability = { ...this.ability, count: 7, spread: 1.45, cooldown: 2100 };
-        }
-      }
-      if (this.heavyProjectile && this.scene.time.now >= this.nextHeavyAttackAt) {
-        const angle = Phaser.Math.Angle.Between(this.sprite.x, this.sprite.y, player.sprite.x, player.sprite.y);
-        this.scene.spawnBossFireball(this.sprite.x, this.sprite.y, angle, this.heavyProjectile);
-        this.nextHeavyAttackAt = this.scene.time.now + (this.heavyProjectile.cooldown ?? 4300);
-      }
-    }
-    if (!this.ability || this.scene.time.now < this.nextAbilityAt) {
-      return;
-    }
-    const angle = Phaser.Math.Angle.Between(this.sprite.x, this.sprite.y, player.sprite.x, player.sprite.y);
-    if (this.ability.kind === 'shoot') {
-      this.scene.showEnemyMuzzleFlash(this.sprite.x, this.sprite.y, angle, this.ability);
-      this.scene.spawnEnemyProjectile(this.sprite.x, this.sprite.y, angle, this.ability);
-      this.nextAbilityAt = this.scene.time.now + this.ability.cooldown;
-    }
-    if (this.ability.kind === 'fan') {
-      const spread = this.ability.spread ?? 0.55;
-      const count = this.ability.count ?? 3;
-      this.scene.showEnemyMuzzleFlash(this.sprite.x, this.sprite.y, angle, this.ability, count);
-      for (let i = 0; i < count; i += 1) {
-        const t = count === 1 ? 0 : i / (count - 1);
-        this.scene.spawnEnemyProjectile(this.sprite.x, this.sprite.y, angle - spread / 2 + spread * t, this.ability);
-      }
-      this.nextAbilityAt = this.scene.time.now + this.ability.cooldown;
-    }
-    if (this.ability.kind === 'summon') {
-      this.scene.spawnAddsNear(this.sprite.x, this.sprite.y, this.ability.count ?? 2);
-      this.nextAbilityAt = this.scene.time.now + this.ability.cooldown;
-    }
+    this.scene.enemyAttacks.updateEnemy(this, player);
   }
 
   takeDamage(amount) {

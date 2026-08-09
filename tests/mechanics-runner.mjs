@@ -1,77 +1,20 @@
-import { createRequire } from 'node:module';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {
+  ensureTestServer,
+  loadPlaywright,
+  projectRoot,
+  stopTestServer
+} from './helpers/test-runtime.mjs';
 
-const url = 'http://127.0.0.1:5173/';
-const projectRoot = path.resolve(import.meta.dirname, '..');
 const artifactDir = path.join(projectRoot, 'test-results');
-
-function loadPlaywright() {
-  const appData = process.env.APPDATA;
-  if (!appData) {
-    throw new Error('APPDATA is not set; cannot locate global Playwright install.');
-  }
-  const playwrightPackage = path.join(appData, 'npm', 'node_modules', 'playwright', 'package.json');
-  const require = createRequire(playwrightPackage);
-  return require('playwright');
-}
-
-async function isServerReady() {
-  try {
-    const response = await fetch(url);
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
-async function waitForServer() {
-  for (let i = 0; i < 40; i += 1) {
-    if (await isServerReady()) {
-      return true;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 250));
-  }
-  return false;
-}
-
-async function ensureServer() {
-  if (await isServerReady()) {
-    return null;
-  }
-
-  const { createServer } = await import('vite');
-  const server = await createServer({
-    root: projectRoot,
-    logLevel: 'silent',
-    server: {
-      host: '127.0.0.1',
-      port: 5173,
-      strictPort: true
-    }
-  });
-  await server.listen();
-
-  if (!(await waitForServer())) {
-    await server.close();
-    throw new Error('Dev server did not become ready.');
-  }
-
-  return server;
-}
+let gameUrl;
 
 function assert(condition, message, details) {
   if (!condition) {
     const suffix = details ? `\n${JSON.stringify(details, null, 2)}` : '';
     throw new Error(`${message}${suffix}`);
   }
-}
-
-async function stopServer(server) {
-  if (!server) {
-    return;
-  }
-  await server.close();
 }
 
 async function openGame(browser, label) {
@@ -83,7 +26,7 @@ async function openGame(browser, label) {
       errors.push(message.text());
     }
   });
-  await page.goto(url, { waitUntil: 'domcontentloaded' });
+  await page.goto(gameUrl, { waitUntil: 'domcontentloaded' });
   try {
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState, null, { timeout: 5000 });
   } catch (error) {
@@ -280,7 +223,8 @@ async function testActiveUpgradeAbilities(browser) {
 
 async function run() {
   await fs.mkdir(artifactDir, { recursive: true });
-  const server = await ensureServer();
+  const { server, url } = await ensureTestServer();
+  gameUrl = url;
   const { chromium } = loadPlaywright();
   const browser = await chromium.launch();
   try {
@@ -297,7 +241,7 @@ async function run() {
     console.log('Rooster mechanics test passed.');
     console.log(JSON.stringify(report, null, 2));
   } finally {
-    await stopServer(server);
+    await stopTestServer(server);
     await browser.close();
   }
 }

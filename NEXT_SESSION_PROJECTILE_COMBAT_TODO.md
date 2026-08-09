@@ -1,5 +1,7 @@
 # Next Session TODO: Projectile / Combat Refactor
 
+Status: Abgeschlossen am 2026-08-09. Die Umsetzung liegt in `src/systems/CombatSystem.js`; Details und Abnahme stehen in `ROADMAP.md`.
+
 ## Ziel
 
 `GameScene` weiter entlasten, ohne Gameplay-Balance oder Verhalten zu verändern. Spieler-Combat, Auto-Schuss, Trefferlogik und Projektil-Spawning sollen kontrolliert in ein eigenes System ausgelagert werden.

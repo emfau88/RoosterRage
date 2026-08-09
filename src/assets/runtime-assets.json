@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "format": "webp",
+  "quality": 88,
+  "assets": [
+    {
+      "source": "art-source/characters/rooster-walk-v2.png",
+      "sourceSha256": "98295a9771a95cdb7fb27230c8c1b7eded02375b860d4d2b5fa5faf3995add31",
+      "runtime": "src/assets/characters/rooster-walk-v2.webp",
+      "runtimeSha256": "166c8b85029a9b293606b08b0e90dd7de47ba0a29b6afe79ea77c98cc1c10e0a",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 203772
+    },
+    {
+      "source": "art-source/companions/support-chick-orb.png",
+      "sourceSha256": "55c751f9428ebc14dbde45c78b2eca7a8c6aa8ee4f66da0d3fe3b370cd0cc5fb",
+      "runtime": "src/assets/companions/support-chick-orb.webp",
+      "runtimeSha256": "af6853eb75965c27f1ad5d03b79d621781bbe9c77284ca1f6929e31e080215db",
+      "width": 256,
+      "height": 256,
+      "bytes": 24068
+    },
+    {
+      "source": "art-source/enemy-slime.png",
+      "sourceSha256": "5d9ee3a54981876dce5c9ad05148d8661604d335d3081073251db021a512fa21",
+      "runtime": "src/assets/enemy-slime.webp",
+      "runtimeSha256": "b0cffe0aa532a12edcbc697671ef50c26752aea2a6b7888b42f7631dbd9d519d",
+      "width": 256,
+      "height": 256,
+      "bytes": 7062
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-slime-wobble.png",
+      "sourceSha256": "06f737cd7bd452d0f724635b7f0991ace46f0f7be7a7e9ad644d8920ab4958b5",
+      "runtime": "src/assets/enemies/animations/enemy-slime-wobble.webp",
+      "runtimeSha256": "a095cc61253eac6998c6291c259395b601e9daea09ab16a44bcba7f503696535",
+      "width": 768,
+      "height": 256,
+      "bytes": 21126
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-runner-walk.png",
+      "sourceSha256": "d3bd26a116bfdb48b178f3f2030dd4203b6fb742f9a022af037609b1e0734acc",
+      "runtime": "src/assets/enemies/animations/enemy-runner-walk.webp",
+      "runtimeSha256": "6039400a89ab8f986f967d165c2876206cf63945477754cbf1ba220c6ac64b26",
+      "width": 768,
+      "height": 256,
+      "bytes": 19950
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-brute-stomp.png",
+      "sourceSha256": "cd1e7f2244fbc54e8a4b7bff7ef7f0500caaeb152856e41835f907d59158df11",
+      "runtime": "src/assets/enemies/animations/enemy-brute-stomp.webp",
+      "runtimeSha256": "ffa0a73cf95f22921bb119cc913f1c4100168c80fb9cbc81385bed41eb2bac70",
+      "width": 768,
+      "height": 256,
+      "bytes": 37192
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-spitter-pulse.png",
+      "sourceSha256": "368d53b50d0225da3325e6c9f802b5cf83518709f6a3909d5c658ce9ef6bf0d4",
+      "runtime": "src/assets/enemies/animations/enemy-spitter-pulse.webp",
+      "runtimeSha256": "16f76a8b9e6a53f64bf47d209660005ef20cf30ec280690abc480caa4e6c29d7",
+      "width": 768,
+      "height": 256,
+      "bytes": 69606
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-fan-spitter-recoil.png",
+      "sourceSha256": "ebef8775ddfee1e9d450ef8760acbd82bc37dff11fb3b3bd9eff1726df9e9944",
+      "runtime": "src/assets/enemies/animations/enemy-fan-spitter-recoil.webp",
+      "runtimeSha256": "d6cb8c8932838018fd3c34a44ab234d1c8287451f2d1d5fe688f5d193dc9bc04",
+      "width": 768,
+      "height": 256,
+      "bytes": 42814
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-bomber-bob.png",
+      "sourceSha256": "72e3ceffdd2965edf81710397d4dd0fc8d2c4011efb0692447a71290985ca899",
+      "runtime": "src/assets/enemies/animations/enemy-bomber-bob.webp",
+      "runtimeSha256": "de7fc2b277890fce0be509552d6885ec90a9a61b730b10c86faf449b999dc3a0",
+      "width": 768,
+      "height": 256,
+      "bytes": 38766
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-elite-runner-walk.png",
+      "sourceSha256": "9dcc9d2cf00fee0a70faf6bd0aa17947636bb923d0314f292653468c3fa08b72",
+      "runtime": "src/assets/enemies/animations/enemy-elite-runner-walk.webp",
+      "runtimeSha256": "b2506c583f29422f52d9115eedf427bd731b27b05d422bfecbc8670c4ec59a76",
+      "width": 768,
+      "height": 256,
+      "bytes": 37578
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-elite-brute-stomp.png",
+      "sourceSha256": "61496dccb27e097ca366fd44b08dc1da712de593676e50447ab8475a2f040e77",
+      "runtime": "src/assets/enemies/animations/enemy-elite-brute-stomp.webp",
+      "runtimeSha256": "63667f0b1511479a854e7caded887715d7b39613f7787dcfe99d03309f047c6a",
+      "width": 768,
+      "height": 256,
+      "bytes": 47520
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-elite-spitter-pulse.png",
+      "sourceSha256": "e5e74cde79dff784ba58795742fc2aba299f1f61d3e942704f6d0c8a9e0d2b96",
+      "runtime": "src/assets/enemies/animations/enemy-elite-spitter-pulse.webp",
+      "runtimeSha256": "27d5e27560fefe22048c61c0113965c7345c8d00d7bfdc562c0fdd5ed3c9b380",
+      "width": 768,
+      "height": 256,
+      "bytes": 48572
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-boss-heavy.png",
+      "sourceSha256": "cf0f49815163f17fe33f06c19ced0a4c380ae213d815cb9578a5af2b17e7878d",
+      "runtime": "src/assets/enemies/animations/enemy-boss-heavy.webp",
+      "runtimeSha256": "f2b68342f0c32060a4efc4b8ee73d931b057e9a08f9af5174c2cd908db229301",
+      "width": 768,
+      "height": 256,
+      "bytes": 53250
+    },
+    {
+      "source": "art-source/fx/fx-atlas-v1-sheet.png",
+      "sourceSha256": "efb5f78989cc0e323b12ac9e37e57578d4335b5b8ac78f73ed7e4a27a69ca7b3",
+      "runtime": "src/assets/fx/fx-atlas-v1-sheet.webp",
+      "runtimeSha256": "d0858149d5c6183f119dcd247b0775f7be958e5c28bca17b138f155dfe2aafd4",
+      "width": 1024,
+      "height": 1280,
+      "bytes": 293708
+    },
+    {
+      "source": "art-source/map/arena-ground.png",
+      "sourceSha256": "afed83d1325346311a0c5837f6031e8d7eb4389fd536cb64d17f71642f47ba78",
+      "runtime": "src/assets/map/arena-ground.webp",
+      "runtimeSha256": "7abbecec55f49ab7b70e460f3e6651c28a05ac03d91ad2645586fda603fbf136",
+      "width": 1400,
+      "height": 900,
+      "bytes": 121490
+    },
+    {
+      "source": "art-source/ui/ui-icons-v1-sheet.png",
+      "sourceSha256": "0adab3208088f4fdb5425588f4bbb3ed03ba103633a6fed447a462b9eaab9637",
+      "runtime": "src/assets/ui/ui-icons-v1-sheet.webp",
+      "runtimeSha256": "ffa21f05279eb36ed93bbfdb2eb20c214d039d5cfa193cf331ddf31fa392eae6",
+      "width": 768,
+      "height": 768,
+      "bytes": 244488
+    }
+  ]
+}

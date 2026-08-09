@@ -1,4 +1,4 @@
-import uiIconSheetUrl from '../assets/ui/ui-icons-v1-sheet.png';
+import uiIconSheetUrl from '../assets/ui/ui-icons-v1-sheet.webp';
 import uiIconAtlas from '../assets/ui/ui-icons-v1.json';
 
 const ICON_COLUMNS = uiIconAtlas.columns;

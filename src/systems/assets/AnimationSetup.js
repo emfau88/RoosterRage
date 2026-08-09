@@ -1,0 +1,63 @@
+export function createGameAnimations(scene) {
+  const directions = [
+    ['rooster-walk-south', 0],
+    ['rooster-walk-west', 4],
+    ['rooster-walk-east', 8],
+    ['rooster-walk-north', 12]
+  ];
+  directions.forEach(([key, start]) => {
+    if (scene.anims.exists(key)) {
+      return;
+    }
+    scene.anims.create({
+      key,
+      frames: scene.anims.generateFrameNumbers('rooster-walk', { start, end: start + 3 }),
+      frameRate: 10,
+      repeat: -1
+    });
+  });
+
+  const fxAnimations = [
+    ['fx-molotov-fire', 0, 3, 9],
+    ['fx-rocket-explosion', 4, 7, 11],
+    ['fx-lightning-impact', 8, 11, 13],
+    ['fx-void-portal', 12, 15, 9],
+    ['fx-laser-impact', 16, 19, 14]
+  ];
+  fxAnimations.forEach(([key, start, end, frameRate]) => {
+    if (scene.anims.exists(key)) {
+      return;
+    }
+    scene.anims.create({
+      key,
+      frames: scene.anims.generateFrameNumbers('fx-atlas-v1', { start, end }),
+      frameRate,
+      repeat: 0
+    });
+  });
+
+  const enemyAnimations = [
+    ['enemy-slime-wobble-loop', 'enemy-slime-wobble', 0, 2, 7],
+    ['enemy-runner-walk-loop', 'enemy-runner-walk', 0, 2, 8],
+    ['enemy-brute-stomp-loop', 'enemy-brute-stomp', 0, 2, 6],
+    ['enemy-spitter-pulse-loop', 'enemy-spitter-pulse', 0, 2, 6],
+    ['enemy-fan-spitter-recoil-loop', 'enemy-fan-spitter-recoil', 0, 2, 6],
+    ['enemy-bomber-bob-loop', 'enemy-bomber-bob', 0, 2, 7],
+    ['enemy-elite-runner-walk-loop', 'enemy-elite-runner-walk', 0, 2, 8],
+    ['enemy-elite-brute-stomp-loop', 'enemy-elite-brute-stomp', 0, 2, 5],
+    ['enemy-elite-spitter-pulse-loop', 'enemy-elite-spitter-pulse', 0, 2, 6],
+    ['enemy-boss-heavy-loop', 'enemy-boss-heavy', 0, 2, 4]
+  ];
+  enemyAnimations.forEach(([key, texture, start, end, frameRate]) => {
+    if (scene.anims.exists(key)) {
+      return;
+    }
+    scene.anims.create({
+      key,
+      frames: scene.anims.generateFrameNumbers(texture, { start, end }),
+      frameRate,
+      repeat: -1,
+      yoyo: true
+    });
+  });
+}

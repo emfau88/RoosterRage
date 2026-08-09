@@ -1,3 +1,5 @@
+import { WAVE_DEFINITIONS } from '../data/waveDefinitions.js';
+
 export class WaveSystem {
   constructor(scene) {
     this.scene = scene;
@@ -8,18 +10,42 @@ export class WaveSystem {
     this.nextSpawnAt = 0;
     this.waitingForClear = false;
     this.spawnQueue = [];
-    this.waves = [
-      { count: 10, interval: 940, pool: [{ weight: 1, enemy: this.makeSlime() }] },
-      { count: 10, interval: 760, pool: [{ weight: 1, enemy: this.makeRunner(0.92) }] },
-      { count: 12, interval: 760, pool: [{ weight: 3, enemy: this.makeRunner(0.96) }, { weight: 1, enemy: this.makeBrute(0.9) }] },
-      { count: 15, interval: 700, pool: [{ weight: 5, enemy: this.makeSlime(1.02) }, { weight: 4, enemy: this.makeRunner(0.98) }, { weight: 2, enemy: this.makeBrute(0.95) }] },
-      { count: 18, interval: 760, pool: [{ weight: 4, enemy: this.makeRunner(1.08) }, { weight: 3, enemy: this.makeSlime(1.1) }, { weight: 3, enemy: this.makeSpitter(1) }] },
-      { count: 18, interval: 830, elites: [this.makeEliteRunner()], pool: [{ weight: 4, enemy: this.makeRunner(1.1) }, { weight: 3, enemy: this.makeSpitter(1.05) }, { weight: 2, enemy: this.makeBrute(1.08) }] },
-      { count: 18, interval: 830, pool: [{ weight: 4, enemy: this.makeSlime(1.16) }, { weight: 3, enemy: this.makeSpitter(1.08) }, { weight: 2, enemy: this.makeFanSpitter(1) }, { weight: 2, enemy: this.makeBrute(1.1) }] },
-      { count: 20, interval: 760, pool: [{ weight: 4, enemy: this.makeRunner(1.16) }, { weight: 3, enemy: this.makeBomber(1) }, { weight: 3, enemy: this.makeSpitter(1.1) }, { weight: 2, enemy: this.makeBrute(1.15) }] },
-      { count: 22, interval: 730, elites: [this.makeEliteBrute(), this.makeEliteSpitter()], pool: [{ weight: 4, enemy: this.makeRunner(1.18) }, { weight: 3, enemy: this.makeBomber(1.08) }, { weight: 3, enemy: this.makeFanSpitter(1.08) }, { weight: 2, enemy: this.makeBrute(1.2) }] },
-      { count: 1, interval: 9999, bossWave: true, elites: [this.makeBoss()], pool: [] }
-    ];
+    this.waves = WAVE_DEFINITIONS.map((wave) => this.hydrateWave(wave));
+  }
+
+  get totalWaves() {
+    return this.waves.length;
+  }
+
+  hydrateWave(wave) {
+    return {
+      ...wave,
+      elites: (wave.elites ?? []).map((enemy) => this.makeEnemyFromSpec(enemy)),
+      pool: wave.pool.map((entry) => ({
+        ...entry,
+        enemy: this.makeEnemyFromSpec(entry.enemy)
+      }))
+    };
+  }
+
+  makeEnemyFromSpec({ kind, multiplier = 1 }) {
+    const makers = {
+      slime: () => this.makeSlime(multiplier),
+      runner: () => this.makeRunner(multiplier),
+      brute: () => this.makeBrute(multiplier),
+      spitter: () => this.makeSpitter(multiplier),
+      'fan-spitter': () => this.makeFanSpitter(multiplier),
+      bomber: () => this.makeBomber(multiplier),
+      'elite-runner': () => this.makeEliteRunner(),
+      'elite-brute': () => this.makeEliteBrute(),
+      'elite-spitter': () => this.makeEliteSpitter(),
+      boss: () => this.makeBoss()
+    };
+    const makeEnemy = makers[kind];
+    if (!makeEnemy) {
+      throw new Error(`Unknown enemy kind in wave definition: ${kind}`);
+    }
+    return makeEnemy();
   }
 
   start() {

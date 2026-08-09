@@ -1,69 +1,19 @@
-import { createRequire } from 'node:module';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {
+  ensureTestServer,
+  loadPlaywright,
+  projectRoot,
+  stopTestServer
+} from './helpers/test-runtime.mjs';
 
-const url = 'http://127.0.0.1:5173/';
-const projectRoot = path.resolve(import.meta.dirname, '..');
 const artifactDir = path.join(projectRoot, 'test-results');
+let gameUrl;
 const strategies = (process.env.BALANCE_STRATEGIES ?? 'offense,random')
   .split(',')
   .map((strategy) => strategy.trim())
   .filter(Boolean);
 const maxRunMs = Number(process.env.BALANCE_MAX_MS ?? 180000);
-
-function loadPlaywright() {
-  const appData = process.env.APPDATA;
-  if (!appData) {
-    throw new Error('APPDATA is not set; cannot locate global Playwright install.');
-  }
-  const playwrightPackage = path.join(appData, 'npm', 'node_modules', 'playwright', 'package.json');
-  const require = createRequire(playwrightPackage);
-  return require('playwright');
-}
-
-async function isServerReady() {
-  try {
-    const response = await fetch(url);
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
-async function waitForServer() {
-  for (let i = 0; i < 40; i += 1) {
-    if (await isServerReady()) {
-      return true;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 250));
-  }
-  return false;
-}
-
-async function ensureServer() {
-  if (await isServerReady()) {
-    return null;
-  }
-
-  const { createServer } = await import('vite');
-  const server = await createServer({
-    root: projectRoot,
-    logLevel: 'silent',
-    server: {
-      host: '127.0.0.1',
-      port: 5173,
-      strictPort: true
-    }
-  });
-  await server.listen();
-
-  if (!(await waitForServer())) {
-    await server.close();
-    throw new Error('Dev server did not become ready.');
-  }
-
-  return server;
-}
 
 function scoreWave(wave) {
   const duration = wave.durationMs ?? 0;
@@ -122,13 +72,6 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
-async function stopServer(server) {
-  if (!server) {
-    return;
-  }
-  await server.close();
-}
-
 async function runOne(browser, strategy) {
   const page = await browser.newPage({ viewport: { width: 960, height: 540 } });
   const errors = [];
@@ -140,7 +83,7 @@ async function runOne(browser, strategy) {
   });
 
   try {
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
+    await page.goto(gameUrl, { waitUntil: 'domcontentloaded' });
     try {
       await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState, null, { timeout: 5000 });
     } catch (error) {
@@ -214,7 +157,8 @@ function renderTextReport(results) {
 
 async function run() {
   await fs.mkdir(artifactDir, { recursive: true });
-  const server = await ensureServer();
+  const { server, url } = await ensureTestServer();
+  gameUrl = url;
   const { chromium } = loadPlaywright();
   const browser = await chromium.launch();
 
@@ -244,7 +188,7 @@ async function run() {
       process.exitCode = 1;
     }
   } finally {
-    await stopServer(server);
+    await stopTestServer(server);
     await browser.close();
   }
 }

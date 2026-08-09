@@ -2,10 +2,7 @@ import Phaser from 'phaser';
 import { Enemy } from '../entities/Enemy.js';
 
 export function shouldInstallTestApi() {
-  if (import.meta.env.DEV) {
-    return true;
-  }
-  return new URLSearchParams(window.location.search).get('testApi') === '1';
+  return import.meta.env.DEV;
 }
 
 export function installTestApi(scene) {
@@ -193,6 +190,7 @@ export function installTestApi(scene) {
       scene.bot.strategy = strategy;
       return { enabled: scene.bot.enabled, strategy: scene.bot.strategy };
     },
+    restart: () => scene.scene.restart(),
     getTelemetry: () => scene.telemetry.getSummary(scene.time.now),
     resumeIfUpgradeOpen: () => {
       if (!scene.isChoosingUpgrade) {
