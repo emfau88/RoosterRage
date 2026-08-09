@@ -116,7 +116,13 @@ export class CombatSystem {
       scene.player.fireEggs,
       target,
       options.targetOffset ?? laneOffset,
-      options
+      {
+        ...options,
+        speed: options.speed ?? 520 + scene.player.projectileSpeedBonus,
+        ricochet: options.ricochet ?? scene.player.projectileRicochets,
+        canCrit: options.canCrit ?? true,
+        knockbackRank: options.knockbackRank ?? scene.player.projectileKnockback
+      }
     );
     scene.projectiles.push(projectile);
     scene.projectileGroup.add(projectile.sprite);
@@ -174,26 +180,71 @@ export class CombatSystem {
   }
 
   hitEnemy(projectile, enemy) {
-    if (!projectile.sprite.active || !enemy.sprite.active) {
+    if (
+      !projectile.sprite.active
+      || !enemy.sprite.active
+      || projectile.hitEnemies.has(enemy.id)
+    ) {
       return;
     }
     const hitX = enemy.sprite.x;
     const hitY = enemy.sprite.y;
     projectile.hitEnemies.add(enemy.id);
-    this.damageEnemy(enemy, projectile.damage, hitX, hitY);
+    const critical = projectile.canCrit && Math.random() < this.scene.player.critChance;
+    const damage = critical
+      ? Math.round(projectile.damage * this.scene.player.critMultiplier)
+      : projectile.damage;
+    this.damageEnemy(enemy, damage, hitX, hitY, { critical });
+    if (projectile.knockbackRank > 0 && enemy.sprite.active) {
+      enemy.applyKnockback(projectile.currentAngle, 80 + projectile.knockbackRank * 30);
+    }
     if (projectile.pierceRemaining > 0) {
       projectile.pierceRemaining -= 1;
+    } else if (projectile.ricochetRemaining > 0 && this.redirectRicochet(projectile, enemy)) {
+      projectile.ricochetRemaining -= 1;
     } else {
       projectile.destroy();
     }
   }
 
-  damageEnemy(enemy, damage, x = enemy.sprite.x, y = enemy.sprite.y) {
+  redirectRicochet(projectile, hitEnemy) {
+    const nextTarget = this.scene.enemies
+      .filter((candidate) => (
+        candidate.sprite.active
+        && candidate !== hitEnemy
+        && !projectile.hitEnemies.has(candidate.id)
+        && Phaser.Math.Distance.Between(
+          hitEnemy.sprite.x,
+          hitEnemy.sprite.y,
+          candidate.sprite.x,
+          candidate.sprite.y
+        ) <= 320
+      ))
+      .sort((a, b) => Phaser.Math.Distance.Squared(hitEnemy.sprite.x, hitEnemy.sprite.y, a.sprite.x, a.sprite.y)
+        - Phaser.Math.Distance.Squared(hitEnemy.sprite.x, hitEnemy.sprite.y, b.sprite.x, b.sprite.y))[0];
+    if (!nextTarget) {
+      return false;
+    }
+    projectile.target = nextTarget;
+    projectile.targetOffset = 0;
+    projectile.baseAngle = Phaser.Math.Angle.Between(
+      projectile.sprite.x,
+      projectile.sprite.y,
+      nextTarget.sprite.x,
+      nextTarget.sprite.y
+    );
+    projectile.currentAngle = projectile.baseAngle;
+    projectile.sprite.rotation = projectile.currentAngle;
+    projectile.setVelocity(projectile.currentAngle);
+    return true;
+  }
+
+  damageEnemy(enemy, damage, x = enemy.sprite.x, y = enemy.sprite.y, options = {}) {
     const { scene } = this;
     if (!enemy.sprite.active) {
       return;
     }
-    scene.showHitFeedback(x, y, damage, enemy);
+    scene.showHitFeedback(x, y, damage, enemy, options);
     scene.audio.play('enemy-hit');
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;

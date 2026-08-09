@@ -5,6 +5,7 @@ import { TimedAbility } from './TimedAbility.js';
 export class LightningCombAbility extends TimedAbility {
   constructor(scene) {
     super(scene, 650);
+    this.lastSynergyActive = false;
   }
 
   activate(time) {
@@ -16,8 +17,10 @@ export class LightningCombAbility extends TimedAbility {
       this.nextAt = time + 700;
       return;
     }
-    const targets = sorted.slice(0, Math.min(sorted.length, 2 + this.rank));
-    this.scene.lightningBolts.push(new LightningBolt(this.scene, targets, this.rank));
+    this.lastSynergyActive = this.scene.orbitEggs.length > 0;
+    const targetCount = 2 + this.rank + (this.lastSynergyActive ? 1 : 0);
+    const targets = sorted.slice(0, Math.min(sorted.length, targetCount));
+    this.scene.lightningBolts.push(new LightningBolt(this.scene, targets, this.rank, this.lastSynergyActive));
     this.scene.audio.play('lightning');
     targets.forEach((enemy) => {
       this.scene.playFx('fx-lightning-impact', enemy.sprite.x, enemy.sprite.y + 10, {

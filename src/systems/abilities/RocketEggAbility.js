@@ -5,6 +5,7 @@ import { TimedAbility } from './TimedAbility.js';
 export class RocketEggAbility extends TimedAbility {
   constructor(scene) {
     super(scene, 750);
+    this.lastSynergyActive = false;
   }
 
   activate(time) {
@@ -14,7 +15,9 @@ export class RocketEggAbility extends TimedAbility {
       return;
     }
     const start = this.scene.player.getMuzzlePosition(36);
-    this.scene.rocketProjectiles.push(new RocketProjectile(this.scene, start.x, start.y, target, this.rank));
+    const projectile = new RocketProjectile(this.scene, start.x, start.y, target, this.rank);
+    this.lastSynergyActive = projectile.synergyActive;
+    this.scene.rocketProjectiles.push(projectile);
     this.scene.showShotFeedback(
       Phaser.Math.Angle.Between(start.x, start.y, target.sprite.x, target.sprite.y),
       0

@@ -273,12 +273,42 @@ canvas {
   display: block;
 }
 
-.upgrade-button__copy span {
+.upgrade-button__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.upgrade-button__rank {
+  flex: 0 0 auto;
+  margin: 0;
+  color: #263a3f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.upgrade-button__meta {
+  color: #6a3e2c;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.upgrade-button__description {
   display: block;
   margin-top: 4px;
   font-size: 12px;
   font-weight: 400;
   color: #415054;
+}
+
+.upgrade-button__synergy {
+  display: block;
+  margin-top: 5px;
+  color: #7a3e00;
+  font-size: 11px;
+  font-weight: 700;
 }
 
 .upgrade-button--uncommon {

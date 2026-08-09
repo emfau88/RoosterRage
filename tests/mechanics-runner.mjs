@@ -66,7 +66,12 @@ async function testUpgrades(browser) {
       'support-chick',
       'rocket-egg',
       'void-nest',
-      'laser-comb'
+      'laser-comb',
+      'swift-shells',
+      'critical-yolk',
+      'ricochet-eggs',
+      'shell-shock',
+      'second-wind'
     ];
     for (const id of upgradeIds) {
       const applied = await page.evaluate((upgradeId) => window.__ROOSTER_TEST__.applyUpgradeById(upgradeId), id);
@@ -86,6 +91,11 @@ async function testUpgrades(browser) {
     assert(after.xpMagnetRadius > before.xpMagnetRadius, 'XP Magnet did not increase pickup radius.', { before, after });
     assert(after.projectilePierce > before.projectilePierce, 'Piercing Eggs did not increase pierce.', { before, after });
     assert(after.projectileSizeBonus > before.projectileSizeBonus, 'Bigger Eggs did not increase projectile size.', { before, after });
+    assert(after.projectileSpeedBonus === 70, 'Swift Shells did not increase basic projectile speed.', { before, after });
+    assert(after.critChance === 0.1, 'Critical Yolk did not increase critical chance.', { before, after });
+    assert(after.projectileRicochets === 1, 'Ricochet Eggs did not add a bounce.', { before, after });
+    assert(after.projectileKnockback === 1, 'Shell Shock did not add knockback.', { before, after });
+    assert(after.secondWindCharges === 1, 'Second Wind did not add a revive charge.', { before, after });
     assert(after.orbitEggs === 1, 'Orbit Eggs did not create an orbit egg.', { before, after });
     assert(after.supportChickens === 1, 'Support Chick did not create a companion.', { before, after });
     assert(after.goldenEggRank === 1, 'Golden Egg did not unlock active ability.', { before, after });
@@ -98,7 +108,83 @@ async function testUpgrades(browser) {
     const choices = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeChoices());
     assert(!choices.includes('double-shot') && !choices.includes('triple-shot'), 'Maxed shot upgrades should not be offered again.', choices);
 
-    return { name: 'upgrades', status: 'passed', before, after, choices };
+    const catalog = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeCatalog());
+    assert(catalog.length === 25, 'Upgrade catalog should contain exactly 25 upgrades.', catalog);
+    assert(catalog.every((upgrade) => upgrade.category && upgrade.rarity), 'Every upgrade needs category and rarity metadata.', catalog);
+
+    return { name: 'upgrades', status: 'passed', before, after, choices, catalogSize: catalog.length };
+  } finally {
+    await page.close();
+  }
+}
+
+async function testUpgradeOffers(browser) {
+  const { page, errors } = await openGame(browser, 'upgrade-offers');
+  try {
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
+      window.__ROOSTER_TEST__.setPlayerLevel(2);
+      window.__ROOSTER_TEST__.setPlayerHp(100);
+    });
+    const guaranteeBefore = await page.evaluate(() => window.__ROOSTER_TEST__.shouldGuaranteeSpectacle());
+    const choices = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeChoiceDetails());
+    const availableAtFullHp = await page.evaluate(() => window.__ROOSTER_TEST__.getAvailableUpgradeIds());
+    const spectacleCategories = new Set(['active', 'orbit', 'summon']);
+    assert(guaranteeBefore, 'A spectacle upgrade should be guaranteed before the player owns one.');
+    assert(choices.some((choice) => spectacleCategories.has(choice.category)), 'Early offer contains no spectacle upgrade.', choices);
+    assert(choices.every((choice) => choice.rankLabel && /Rang|Sofort/.test(choice.rankLabel)), 'Cards need rank labels.', choices);
+    assert(choices.every((choice) => /\d/.test(choice.description)), 'Cards should communicate concrete numeric effects.', choices);
+    assert(!availableAtFullHp.includes('heal'), 'Heal should not be offered at full HP.', availableAtFullHp);
+
+    await page.evaluate(() => window.__ROOSTER_TEST__.previewUpgradeOverlay());
+    await page.screenshot({ path: path.join(artifactDir, 'upgrade-cards-phase-5.png') });
+
+    const spectacle = choices.find((choice) => spectacleCategories.has(choice.category));
+    await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), spectacle.id);
+    const guaranteeAfter = await page.evaluate(() => window.__ROOSTER_TEST__.shouldGuaranteeSpectacle());
+    assert(!guaranteeAfter, 'Spectacle guarantee should stop after choosing a spectacle upgrade.');
+    assert(errors.length === 0, 'Browser reported errors during upgrade offer test.', errors);
+    return { name: 'upgrade offers', status: 'passed', choices, spectacle: spectacle.id };
+  } finally {
+    await page.close();
+  }
+}
+
+async function testNewUpgradeMechanics(browser) {
+  const { page, errors } = await openGame(browser, 'new-upgrade-mechanics');
+  try {
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
+      window.__ROOSTER_TEST__.movePlayer(700, 450);
+      window.__ROOSTER_TEST__.applyUpgradeById('swift-shells');
+      window.__ROOSTER_TEST__.applyUpgradeById('critical-yolk');
+      window.__ROOSTER_TEST__.applyUpgradeById('ricochet-eggs');
+      window.__ROOSTER_TEST__.applyUpgradeById('shell-shock');
+      window.__ROOSTER_TEST__.setPlayerCombatModifiers({ critChance: 1 });
+      window.__ROOSTER_TEST__.spawnEnemyType('slime', 840, 450, { speed: 0, damage: 0, hp: 999 });
+      window.__ROOSTER_TEST__.spawnEnemyType('slime', 960, 450, { speed: 0, damage: 0, hp: 999 });
+    });
+    await page.waitForTimeout(1450);
+    const enemies = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot())
+      .then((items) => items.filter((enemy) => enemy.maxHp === 999));
+    assert(enemies.length === 2, 'Upgrade mechanics test lost a controlled enemy.', enemies);
+    assert(enemies.every((enemy) => enemy.hp <= 959), 'Critical ricochet should deal 40 damage to both enemies.', enemies);
+    assert(enemies.some((enemy) => enemy.x > 840), 'Shell Shock did not move the first enemy away from the player.', enemies);
+
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.applyUpgradeById('second-wind');
+      window.__ROOSTER_TEST__.setPlayerHp(10);
+      window.__ROOSTER_TEST__.damagePlayer(999);
+    });
+    const revived = await page.evaluate(() => window.__ROOSTER_TEST__.getPlayerStats());
+    assert(revived.hp === 40 && revived.secondWindCharges === 0, 'Second Wind did not revive at 40% HP.', revived);
+    await page.evaluate(() => window.__ROOSTER_TEST__.damagePlayer(999));
+    const afterSecondLethalHit = await page.evaluate(() => window.__ROOSTER_TEST__.getPlayerStats());
+    assert(afterSecondLethalHit.hp === 0, 'Second Wind should only prevent one lethal hit.', afterSecondLethalHit);
+    assert(errors.length === 0, 'Browser reported errors during new upgrade mechanics test.', errors);
+    return { name: 'new upgrade mechanics', status: 'passed', enemies, revived, afterSecondLethalHit };
   } finally {
     await page.close();
   }
@@ -228,6 +314,7 @@ async function testActiveUpgradeAbilities(browser) {
       window.__ROOSTER_TEST__.applyUpgradeById('molotov-egg');
       window.__ROOSTER_TEST__.applyUpgradeById('lightning-comb');
       window.__ROOSTER_TEST__.applyUpgradeById('support-chick');
+      window.__ROOSTER_TEST__.applyUpgradeById('fire-eggs');
       window.__ROOSTER_TEST__.applyUpgradeById('rocket-egg');
       window.__ROOSTER_TEST__.applyUpgradeById('void-nest');
       window.__ROOSTER_TEST__.applyUpgradeById('laser-comb');
@@ -246,6 +333,9 @@ async function testActiveUpgradeAbilities(browser) {
     assert(state.specialShots >= 4, 'Golden/Lightning/Rocket/Laser abilities did not fire special attacks.', state);
     assert(state.hazardZones >= 1, 'Molotov Egg did not create a hazard zone.', state);
     assert(state.voidZones >= 1, 'Void Nest did not create a pull/damage zone.', state);
+    assert(state.abilitySynergies.rocketFire, 'Fire Eggs did not empower Rocket Egg.', state.abilitySynergies);
+    assert(state.abilitySynergies.orbitLightning, 'Orbit Eggs did not empower Lightning Comb.', state.abilitySynergies);
+    assert(state.abilitySynergies.molotovVoid, 'Molotov Egg did not empower Void Nest.', state.abilitySynergies);
     assert(
       state.audio.activeVoices <= state.audio.maxGlobalVoices + 2,
       'Global audio voice budget was exceeded.',
@@ -266,6 +356,8 @@ async function run() {
   try {
     const results = [];
     results.push(await testUpgrades(browser));
+    results.push(await testUpgradeOffers(browser));
+    results.push(await testNewUpgradeMechanics(browser));
     results.push(await testTripleShotTrajectory(browser));
     results.push(await testEnemyAbilities(browser));
     results.push(await testActiveUpgradeAbilities(browser));

@@ -23,7 +23,19 @@ const ICON_IDS_BY_NAME = {
   Regen: 'regen',
   'XP Magnet': 'xp-magnet',
   'Piercing Eggs': 'piercing-eggs',
-  'Bigger Eggs': 'bigger-eggs'
+  'Bigger Eggs': 'bigger-eggs',
+  'Swift Shells': 'faster-eggs',
+  'Critical Yolk': 'fire-eggs',
+  'Ricochet Eggs': 'piercing-eggs',
+  'Shell Shock': 'bigger-eggs',
+  'Second Wind': 'heal'
+};
+const ICON_ALIASES_BY_ID = {
+  'swift-shells': 'faster-eggs',
+  'critical-yolk': 'fire-eggs',
+  'ricochet-eggs': 'piercing-eggs',
+  'shell-shock': 'bigger-eggs',
+  'second-wind': 'heal'
 };
 
 export class HUD {
@@ -93,8 +105,15 @@ export class HUD {
           <span class="upgrade-button__icon" data-upgrade-icon></span>
         </span>
         <span class="upgrade-button__copy">
-          <strong>${choice.name}</strong>
-          <span>${choice.description}</span>
+          <span class="upgrade-button__heading">
+            <strong>${choice.name}</strong>
+            <span class="upgrade-button__rank">${choice.rankLabel ?? ''}</span>
+          </span>
+          <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
+          <span class="upgrade-button__description">${choice.description}</span>
+          ${choice.synergyActive
+            ? `<span class="upgrade-button__synergy">Synergie aktiv: ${choice.synergyDescription}</span>`
+            : ''}
         </span>
       `;
       this.setIcon(button.querySelector('[data-upgrade-icon]'), choice.id);
@@ -159,7 +178,8 @@ export class HUD {
     if (!element) {
       return;
     }
-    const frame = uiIconAtlas.frames[id] ?? uiIconAtlas.frames['active-upgrade'];
+    const resolvedId = ICON_ALIASES_BY_ID[id] ?? id;
+    const frame = uiIconAtlas.frames[resolvedId] ?? uiIconAtlas.frames['active-upgrade'];
     const col = frame % ICON_COLUMNS;
     const row = Math.floor(frame / ICON_COLUMNS);
     element.classList.add('ui-icon');

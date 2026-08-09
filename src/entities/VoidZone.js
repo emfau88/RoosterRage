@@ -6,9 +6,10 @@ export class VoidZone {
     this.x = x;
     this.y = y;
     this.rank = rank;
+    this.synergyActive = scene.molotovEgg.rank > 0;
     this.radius = 92 + rank * 18;
     this.damage = 7 + rank * 4;
-    this.pull = 34 + rank * 14;
+    this.pull = (34 + rank * 14) * (this.synergyActive ? 1.25 : 1);
     this.tickMs = 360;
     this.nextTickAt = 0;
     this.life = 2300 + rank * 420;

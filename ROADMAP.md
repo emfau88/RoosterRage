@@ -18,7 +18,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 2 | Weitere Modularisierung | Abgeschlossen |
 | 3 | Asset- und Performance-Pipeline | Abgeschlossen |
 | 4 | Spielgefuehl und Lesbarkeit | Abgeschlossen |
-| 5 | Upgrade-System als Kernprodukt | Offen |
+| 5 | Upgrade-System als Kernprodukt | Abgeschlossen |
 | 6 | Drei Rooster-Klassen | Offen |
 | 7 | Wellen 1-10 kuratieren | Offen |
 | 8 | Test- und Balanceprogramm | Offen |
@@ -159,18 +159,32 @@ Abnahmeprotokoll:
 
 ## Phase 5: Upgrade-System als Kernprodukt
 
-Status: Offen
+Status: Abgeschlossen am 2026-08-09
 
-- Zielbestand von etwa 25 Upgrades aufbauen.
-- Kategorien Weapon, Active, Orbit, Summon, Passive und Utility pflegen.
-- `maxRank`, `requires`, `excludes`, `weight` und Rarity vervollstaendigen.
-- Frueh im Run mindestens eine auffaellige aktive Faehigkeit anbieten.
-- Bestehende Faehigkeiten in sinnvolle Rangketten ueberfuehren.
-- Synergien wie Molotow + Void, Rakete + Fire Eggs und Orbit + Lightning definieren.
-- Tote Optionen verhindern und Karten um konkrete Zahlen ergaenzen.
-- Reroll oder Skip erst nach Auswahltests bewerten.
+- [x] Zielbestand von etwa 25 Upgrades aufbauen.
+- [x] Kategorien Weapon, Active, Orbit, Summon, Passive und Utility pflegen.
+- [x] `maxRank`, `requires`, `excludes`, `weight` und Rarity vervollstaendigen.
+- [x] Frueh im Run mindestens eine auffaellige aktive Faehigkeit anbieten.
+- [x] Bestehende Faehigkeiten in sinnvolle Rangketten ueberfuehren.
+- [x] Synergien wie Molotow + Void, Rakete + Fire Eggs und Orbit + Lightning definieren.
+- [x] Tote Optionen verhindern und Karten um konkrete Zahlen ergaenzen.
+- [x] Reroll oder Skip erst nach Auswahltests bewerten.
 
 Abnahme: Jede Auswahl veraendert Spielweise, Zielprioritaet oder sichtbare Kampfwirkung.
+
+Abnahmeprotokoll:
+
+- Der Katalog umfasst genau 25 funktionale Upgrades mit Kategorie, Rarity, Gewicht und Ranggrenzen.
+- Neu: Swift Shells, Critical Yolk, Ricochet Eggs, Shell Shock und Second Wind mit eigener Laufzeitlogik.
+- Fruehe Angebote garantieren eine Active-, Orbit- oder Summon-Option nur so lange, bis der Spieler eine solche Faehigkeit besitzt.
+- Heal wird bei vollen HP nicht angeboten; Max-Rank-, `requires`- und `excludes`-Regeln werden zentral ausgewertet.
+- Karten zeigen Kategorie, naechsten Rang, Ranggrenze und konkrete numerische Wirkung; aktive Synergien werden markiert.
+- Fire Eggs + Rocket Egg, Orbit Eggs + Lightning Comb und Molotov Egg + Void Nest veraendern Schaden, Zielzahl beziehungsweise Sogstaerke wirklich.
+- Ein bestehender Doppel-Treffer zwischen Phaser-Overlap und Distanzpruefung wurde zentral behoben; Pierce und Ricochet treffen dasselbe Ziel nicht mehrfach.
+- `npm run test:mechanics`: bestanden, inklusive Katalog-, Angebots-, Critical-, Ricochet-, Knockback-, Second-Wind- und Synergiepruefungen.
+- Upgrade-Karten wurden auf einem 960 x 540 Viewport visuell geprueft.
+- Reroll und Skip wurden bewusst nicht eingebaut; dafuer fehlt noch belastbares Auswahlfeedback aus echten Runs.
+- Kein Balance-Run ausgefuehrt; er ist nach Phase 6 oder 7 als geschlossenem Gameplay-Paket sinnvoller.
 
 ## Phase 6: Drei Rooster-Klassen
 

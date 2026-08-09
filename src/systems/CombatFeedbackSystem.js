@@ -6,8 +6,15 @@ export class CombatFeedbackSystem {
     this.activeTelegraphs = 0;
   }
 
-  showHit(x, y, damage, enemy = null) {
-    const burst = this.scene.add.circle(x, y, 15, 0xffffff, 0.72).setDepth(9);
+  showHit(x, y, damage, enemy = null, options = {}) {
+    const critical = options.critical ?? false;
+    const burst = this.scene.add.circle(
+      x,
+      y,
+      critical ? 23 : 15,
+      critical ? 0xffd35c : 0xffffff,
+      critical ? 0.9 : 0.72
+    ).setDepth(9);
     const now = this.scene.time.now;
     const lastTextAt = enemy ? this.lastDamageTextAt.get(enemy) ?? -Infinity : -Infinity;
     const showText = now - lastTextAt >= 170;
@@ -18,9 +25,9 @@ export class CombatFeedbackSystem {
     if (showText) {
       text = this.scene.add.text(x, y - 30, `-${damage}`, {
         fontFamily: 'Arial',
-        fontSize: '15px',
+        fontSize: critical ? '20px' : '15px',
         fontStyle: '700',
-        color: '#ffffff',
+        color: critical ? '#ffd35c' : '#ffffff',
         stroke: '#2b1114',
         strokeThickness: 3
       }).setOrigin(0.5).setDepth(10);

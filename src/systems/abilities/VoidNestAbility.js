@@ -5,6 +5,7 @@ import { findClusterTarget } from './abilityUtils.js';
 export class VoidNestAbility extends TimedAbility {
   constructor(scene) {
     super(scene, 900);
+    this.lastSynergyActive = false;
   }
 
   activate(time) {
@@ -29,7 +30,9 @@ export class VoidNestAbility extends TimedAbility {
       alpha: 0.88
     });
     this.scene.audio.play('void-open');
-    this.scene.voidZones.push(new VoidZone(this.scene, target.x, target.y, this.rank));
+    const zone = new VoidZone(this.scene, target.x, target.y, this.rank);
+    this.lastSynergyActive = zone.synergyActive;
+    this.scene.voidZones.push(zone);
     this.nextAt = time + Math.max(3800, 7600 - this.rank * 800);
   }
 }

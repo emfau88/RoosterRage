@@ -37,6 +37,11 @@ export function installTestApi(scene) {
       cameraZoom: scene.cameras.main.zoom,
       viewport: { width: scene.scale.width, height: scene.scale.height },
       audio: scene.audio.getState(),
+      abilitySynergies: {
+        rocketFire: scene.rocketEgg.lastSynergyActive,
+        orbitLightning: scene.lightningComb.lastSynergyActive,
+        molotovVoid: scene.voidNest.lastSynergyActive
+      },
       choosingUpgrade: scene.isChoosingUpgrade,
       gameEnded: scene.gameEnded,
       lastShotAt: scene.debugStats.lastShotAt,
@@ -62,6 +67,11 @@ export function installTestApi(scene) {
       xpMagnetRadius: scene.player.xpMagnetRadius,
       projectilePierce: scene.player.projectilePierce,
       projectileSizeBonus: scene.player.projectileSizeBonus,
+      projectileSpeedBonus: scene.player.projectileSpeedBonus,
+      projectileRicochets: scene.player.projectileRicochets,
+      projectileKnockback: scene.player.projectileKnockback,
+      critChance: scene.player.critChance,
+      secondWindCharges: scene.player.secondWindCharges,
       orbitEggs: scene.orbitEggs.length,
       supportChickens: scene.supportChickens.length,
       goldenEggRank: scene.goldenEgg.rank,
@@ -91,6 +101,16 @@ export function installTestApi(scene) {
       scale: projectile.sprite.scaleX,
       active: projectile.sprite.active
     })),
+    getEnemySnapshot: () => scene.enemies.map((enemy) => ({
+      id: enemy.id,
+      type: enemy.type,
+      hp: enemy.hp,
+      maxHp: enemy.maxHp,
+      x: enemy.sprite.x,
+      y: enemy.sprite.y,
+      knockbackUntil: enemy.knockbackUntil,
+      active: enemy.sprite.active
+    })),
     applyUpgradeById: (id) => {
       const upgrade = scene.upgradeSystem.upgrades.find((item) => item.id === id);
       if (!upgrade) {
@@ -101,6 +121,45 @@ export function installTestApi(scene) {
       return true;
     },
     getUpgradeChoices: () => scene.upgradeSystem.getChoices(3, scene.player).map((upgrade) => upgrade.id),
+    getUpgradeChoiceDetails: () => scene.upgradeSystem.getChoices(3, scene.player).map((upgrade) => ({
+      id: upgrade.id,
+      category: upgrade.category,
+      rarity: upgrade.rarity,
+      nextRank: upgrade.nextRank,
+      rankLabel: upgrade.rankLabel,
+      description: upgrade.description
+    })),
+    previewUpgradeOverlay: () => {
+      const choices = scene.upgradeSystem.getChoices(3, scene.player);
+      scene.hud.showUpgradeChoices(choices);
+      return choices.map((upgrade) => upgrade.id);
+    },
+    getUpgradeCatalog: () => scene.upgradeSystem.upgrades.map((upgrade) => ({
+      id: upgrade.id,
+      category: upgrade.category,
+      rarity: upgrade.rarity,
+      maxRank: upgrade.maxRank ?? null,
+      consumable: upgrade.consumable ?? false,
+      minLevel: upgrade.minLevel ?? 1,
+      requires: upgrade.requires ?? [],
+      excludes: upgrade.excludes ?? []
+    })),
+    getAvailableUpgradeIds: () => scene.upgradeSystem.upgrades
+      .filter((upgrade) => scene.upgradeSystem.isAvailable(upgrade, scene.player))
+      .map((upgrade) => upgrade.id),
+    shouldGuaranteeSpectacle: () => scene.upgradeSystem.shouldGuaranteeSpectacle(scene.player),
+    setPlayerLevel: (level) => {
+      scene.player.level = Math.max(1, Math.round(level));
+      return scene.player.level;
+    },
+    setPlayerCombatModifiers: (modifiers = {}) => {
+      Object.entries(modifiers).forEach(([key, value]) => {
+        if (key in scene.player && Number.isFinite(value)) {
+          scene.player[key] = value;
+        }
+      });
+      return true;
+    },
     setPlayerHp: (hp) => {
       scene.player.hp = Phaser.Math.Clamp(hp, 0, scene.player.maxHp);
       scene.player.updateHealthBar();

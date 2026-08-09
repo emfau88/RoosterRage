@@ -5,7 +5,8 @@ export class RocketProjectile {
     this.scene = scene;
     this.target = target;
     this.rank = rank;
-    this.damage = 34 + rank * 14;
+    this.synergyActive = scene.player.fireEggs;
+    this.damage = Math.round((34 + rank * 14) * (this.synergyActive ? 1.25 : 1));
     this.radius = 62 + rank * 12;
     this.speed = 250 + rank * 28;
     this.turnRate = 0.055 + rank * 0.008;

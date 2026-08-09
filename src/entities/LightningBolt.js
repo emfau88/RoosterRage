@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 
 export class LightningBolt {
-  constructor(scene, targets, rank) {
+  constructor(scene, targets, rank, synergyActive = false) {
     this.scene = scene;
     this.rank = rank;
+    this.synergyActive = synergyActive;
     this.age = 0;
     this.life = 180;
     this.active = true;
@@ -20,7 +21,8 @@ export class LightningBolt {
 
     targets.forEach((enemy, index) => {
       const falloff = Math.max(0.55, 1 - index * 0.18);
-      scene.damageEnemy(enemy, Math.round((24 + rank * 10) * falloff));
+      const synergyMultiplier = synergyActive ? 1.2 : 1;
+      scene.damageEnemy(enemy, Math.round((24 + rank * 10) * falloff * synergyMultiplier));
     });
   }
 

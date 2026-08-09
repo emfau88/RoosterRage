@@ -25,6 +25,8 @@ export class Enemy {
     this.warningPulse = 0;
     this.phaseTwoTriggered = false;
     this.phaseThreeTriggered = false;
+    this.knockbackUntil = 0;
+    this.knockbackVelocity = new Phaser.Math.Vector2();
     this.hpBarWidth = config.hpBarWidth ?? 42;
     this.hpBarYOffset = config.hpBarYOffset ?? 30;
 
@@ -50,14 +52,18 @@ export class Enemy {
   }
 
   update(player) {
-    const direction = new Phaser.Math.Vector2(
-      player.sprite.x - this.sprite.x,
-      player.sprite.y - this.sprite.y
-    );
-    if (direction.lengthSq() > 0) {
-      direction.normalize();
+    if (this.scene.time.now < this.knockbackUntil) {
+      this.sprite.setVelocity(this.knockbackVelocity.x, this.knockbackVelocity.y);
+    } else {
+      const direction = new Phaser.Math.Vector2(
+        player.sprite.x - this.sprite.x,
+        player.sprite.y - this.sprite.y
+      );
+      if (direction.lengthSq() > 0) {
+        direction.normalize();
+      }
+      this.sprite.setVelocity(direction.x * this.speed, direction.y * this.speed);
     }
-    this.sprite.setVelocity(direction.x * this.speed, direction.y * this.speed);
     this.updateAbility(player);
     this.updateWarningVisual();
     this.hpBarBack.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
@@ -93,6 +99,11 @@ export class Enemy {
       }
     });
     return this.hp <= 0;
+  }
+
+  applyKnockback(angle, force, duration = 130) {
+    this.knockbackVelocity.setToPolar(angle, force);
+    this.knockbackUntil = Math.max(this.knockbackUntil, this.scene.time.now + duration);
   }
 
   destroy() {

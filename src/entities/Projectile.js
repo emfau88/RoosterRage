@@ -14,6 +14,9 @@ export class Projectile {
     this.life = options.life ?? 1600;
     this.speed = options.speed ?? 520;
     this.pierceRemaining = options.pierce ?? (scene.player?.projectilePierce ?? 0);
+    this.ricochetRemaining = options.ricochet ?? 0;
+    this.canCrit = options.canCrit ?? false;
+    this.knockbackRank = options.knockbackRank ?? 0;
     this.hitEnemies = new Set();
     this.hitRadius = (options.hitRadius ?? 24) + (scene.player?.projectileSizeBonus ?? 0);
     this.destroyed = false;

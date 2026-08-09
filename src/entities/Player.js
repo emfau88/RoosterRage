@@ -18,6 +18,12 @@ export class Player {
     this.xpMagnetRadius = 118;
     this.projectilePierce = 0;
     this.projectileSizeBonus = 0;
+    this.projectileSpeedBonus = 0;
+    this.projectileRicochets = 0;
+    this.projectileKnockback = 0;
+    this.critChance = 0;
+    this.critMultiplier = 2;
+    this.secondWindCharges = 0;
     this.lastRegenAt = 0;
     this.aimAngle = 0;
     this.upgrades = [];
@@ -70,8 +76,15 @@ export class Player {
     }
     const finalDamage = Math.max(1, amount - this.armor);
     this.hp = Math.max(0, this.hp - finalDamage);
+    if (this.hp <= 0 && this.secondWindCharges > 0) {
+      this.secondWindCharges -= 1;
+      this.hp = Math.max(1, Math.round(this.maxHp * 0.4));
+      this.invulnerableUntil = time + 1500;
+      this.showSecondWind();
+    } else {
+      this.invulnerableUntil = time + 500;
+    }
     this.updateHealthBar();
-    this.invulnerableUntil = time + 500;
     this.scene.tweens.add({
       targets: this.sprite,
       alpha: 0.45,
@@ -80,6 +93,21 @@ export class Player {
       repeat: 2
     });
     return true;
+  }
+
+  showSecondWind() {
+    const ring = this.scene.add.circle(this.sprite.x, this.sprite.y, 36, 0x5ad7ff, 0.2)
+      .setStrokeStyle(5, 0xfff3b0, 0.95)
+      .setDepth(18);
+    this.scene.tweens.add({
+      targets: ring,
+      alpha: 0,
+      scale: 2.6,
+      duration: 480,
+      onComplete: () => ring.destroy()
+    });
+    this.scene.cameras.main.flash(140, 255, 226, 115, false);
+    this.scene.audio?.play('level-up', { volume: 0.26, cooldown: 250 });
   }
 
   regenerate() {
