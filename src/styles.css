@@ -212,6 +212,102 @@ canvas {
   color: #cbd7d0;
 }
 
+.rooster-panel {
+  width: min(920px, 100%);
+}
+
+.rooster-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rooster-card {
+  display: flex;
+  min-width: 0;
+  min-height: 238px;
+  flex-direction: column;
+  gap: 11px;
+  padding: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 7px;
+  background: #edf4e9;
+  color: #142024;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.rooster-card--ace {
+  border-color: #d6a931;
+}
+
+.rooster-card--artillery {
+  border-color: #e8662e;
+}
+
+.rooster-card--storm {
+  border-color: #41aacf;
+}
+
+.rooster-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rooster-card__icon {
+  width: 46px;
+  height: 46px;
+}
+
+.rooster-card__header strong,
+.rooster-card__header small,
+.rooster-card__primary,
+.rooster-card__passive {
+  display: block;
+}
+
+.rooster-card__header strong {
+  font-size: 17px;
+}
+
+.rooster-card__header small {
+  margin-top: 2px;
+  color: #506065;
+  font-size: 11px;
+}
+
+.rooster-card__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.rooster-card__stats span {
+  padding: 5px 3px;
+  border: 1px solid rgba(20, 32, 36, 0.18);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.58);
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.rooster-card__primary,
+.rooster-card__passive {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.rooster-card__passive {
+  margin-top: auto;
+  padding-top: 9px;
+  border-top: 1px solid rgba(20, 32, 36, 0.14);
+  color: #6a3e2c;
+  font-weight: 700;
+}
+
 .upgrade-list {
   display: grid;
   gap: 10px;
@@ -419,6 +515,31 @@ canvas {
     width: 40px;
     height: 40px;
   }
+
+  .overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: calc(12px + env(safe-area-inset-top)) 10px calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .rooster-panel {
+    padding: 14px;
+  }
+
+  .rooster-list {
+    grid-template-columns: 1fr;
+  }
+
+  .rooster-card {
+    min-height: 0;
+    gap: 8px;
+    padding: 11px;
+  }
+
+  .rooster-card__icon {
+    width: 38px;
+    height: 38px;
+  }
 }
 
 @media (max-height: 480px) {
@@ -467,5 +588,30 @@ canvas {
     top: 30px;
     width: 36px;
     height: 36px;
+  }
+
+  .overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 8px;
+  }
+
+  .rooster-panel {
+    padding: 12px;
+  }
+
+  .rooster-panel h1 {
+    margin-bottom: 4px;
+    font-size: 20px;
+  }
+
+  .rooster-panel > p {
+    margin-bottom: 9px;
+  }
+
+  .rooster-card {
+    min-height: 190px;
+    gap: 7px;
+    padding: 10px;
   }
 }

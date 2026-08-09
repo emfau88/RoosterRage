@@ -24,6 +24,10 @@ export class Player {
     this.critChance = 0;
     this.critMultiplier = 2;
     this.secondWindCharges = 0;
+    this.roosterId = null;
+    this.roosterName = '';
+    this.primaryAttack = {};
+    this.upgradeAffinities = {};
     this.lastRegenAt = 0;
     this.aimAngle = 0;
     this.upgrades = [];

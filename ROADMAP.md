@@ -19,7 +19,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 3 | Asset- und Performance-Pipeline | Abgeschlossen |
 | 4 | Spielgefuehl und Lesbarkeit | Abgeschlossen |
 | 5 | Upgrade-System als Kernprodukt | Abgeschlossen |
-| 6 | Drei Rooster-Klassen | Offen |
+| 6 | Drei Rooster-Klassen | Abgeschlossen |
 | 7 | Wellen 1-10 kuratieren | Offen |
 | 8 | Test- und Balanceprogramm | Offen |
 | 9 | Vertical-Slice-Abnahme | Offen |
@@ -188,17 +188,31 @@ Abnahmeprotokoll:
 
 ## Phase 6: Drei Rooster-Klassen
 
-Status: Offen
+Status: Abgeschlossen am 2026-08-09
 
-- Basis-Rooster: ausgewogen, zielgerichtete Eier, flexibel.
-- Artillery-Rooster: schwere Eier, Explosionen, Feuer und Raketen.
-- Storm-Rooster: schnell, Kettenblitze, Laser und Orbit-Fokus.
-- Eigene Startwerte, Primaerangriffe, passive Eigenschaft und klare Silhouette.
-- Support-Chick und weitere Begleiter als echte Summon-Builds behandeln.
-- Auswahl zunaechst vor dem Run; Freischaltungen erst nach bestaetigtem Spielspass.
-- Hennenhuette spaeter als Meta-Hub nutzen, nicht als Ersatz fuer eine klare Auswahl.
+- [x] Basis-Rooster: ausgewogen, zielgerichtete Eier, flexibel.
+- [x] Artillery-Rooster: schwere Eier, Explosionen, Feuer und Raketen.
+- [x] Storm-Rooster: schnell, Kettenblitze, Laser und Orbit-Fokus.
+- [x] Eigene Startwerte, Primaerangriffe, passive Eigenschaft und klare Silhouette.
+- [x] Support-Chick und weitere Begleiter als echte Summon-Builds behandeln.
+- [x] Auswahl zunaechst vor dem Run; Freischaltungen erst nach bestaetigtem Spielspass.
+- [x] Hennenhuette spaeter als Meta-Hub nutzen, nicht als Ersatz fuer eine klare Auswahl.
 
 Abnahme: Jeder Rooster spielt sich vom ersten Schuss an erkennbar anders.
+
+Abnahmeprotokoll:
+
+- Barnyard Ace startet mit 100 HP, zielstarkem Basis-Ei und 8% eingebauter Crit-Chance.
+- Boombardier startet mit 115 HP, langsamem 30-Schaden-Projektil und 55% Splash-Schaden in 64 Radius.
+- Stormcrest startet mit 85 HP, hoher Bewegung/Schussrate und einer 60%-Kettenentladung auf ein zweites Ziel.
+- Artillery-Angebote gewichten Feuer, Raketen und Molotov hoeher; Storm-Angebote gewichten Blitz, Laser und Orbit hoeher, ohne Builds hart zu sperren.
+- Die Auswahl erscheint vor jedem Run und nach Restart; erst danach starten Physik, Wellen und Spielzeit.
+- Eigene Groesse, Tint und Klassenmarker erzeugen im Prototyp klar unterscheidbare Silhouetten; finale individuelle Rooster-Sprites bleiben ein spaeteres Asset-Paket.
+- Auswahlkarten zeigen Rolle, HP, Geschwindigkeit, Schaden, Primaerangriff und Passive auf Desktop, Portrait und Landscape.
+- `npm run test:mechanics`: bestanden; Fokus-, Splash- und Chain-Angriffe sowie Startwerte, Marker und Affinitaeten werden geprueft.
+- `npm run test:smoke`: bestanden; Auswahl per echter UI, Restart, Touch-Drag, Portrait, Landscape und Fullscreen funktionieren.
+- Desktop-, Portrait-, Landscape- und Klassenangriffs-Screenshots wurden visuell geprueft.
+- Kein Balance-Run ausgefuehrt; nach der Wellenkuratierung in Phase 7 liefert ein gemeinsamer Klassen-/Wellen-Run wesentlich verwertbarere Ergebnisse.
 
 ## Phase 7: Wellen 1-10 kuratieren
 

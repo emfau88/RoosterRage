@@ -14,6 +14,7 @@ const strategies = (process.env.BALANCE_STRATEGIES ?? 'offense,random')
   .map((strategy) => strategy.trim())
   .filter(Boolean);
 const maxRunMs = Number(process.env.BALANCE_MAX_MS ?? 180000);
+const roosterId = process.env.BALANCE_ROOSTER ?? 'ace';
 
 function scoreWave(wave) {
   const duration = wave.durationMs ?? 0;
@@ -91,7 +92,10 @@ async function runOne(browser, strategy) {
       const bodyText = await page.locator('body').innerText().catch(() => '');
       throw new Error(`Test API did not become available for ${strategy}.\nErrors: ${JSON.stringify(errors, null, 2)}\nBody: ${bodyText}\n${error.message}`);
     }
-    await page.evaluate((selectedStrategy) => window.__ROOSTER_TEST__.enableBot(selectedStrategy), strategy);
+    await page.evaluate(({ selectedStrategy, selectedRooster }) => {
+      window.__ROOSTER_TEST__.selectRooster(selectedRooster);
+      window.__ROOSTER_TEST__.enableBot(selectedStrategy);
+    }, { selectedStrategy: strategy, selectedRooster: roosterId });
 
     const startedAt = Date.now();
     let lastState = await page.evaluate(() => window.__ROOSTER_TEST__.getState());

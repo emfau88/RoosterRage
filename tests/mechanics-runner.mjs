@@ -17,7 +17,7 @@ function assert(condition, message, details) {
   }
 }
 
-async function openGame(browser, label) {
+async function openGame(browser, label, roosterId = 'ace') {
   const page = await browser.newPage({ viewport: { width: 960, height: 540 } });
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
@@ -33,6 +33,11 @@ async function openGame(browser, label) {
     await page.screenshot({ path: path.join(artifactDir, `mechanics-${label}-boot-failure.png`) });
     throw new Error(`Test API did not become available for ${label}.\nErrors: ${JSON.stringify(errors, null, 2)}\n${error.message}`);
   }
+  const selected = await page.evaluate((id) => window.__ROOSTER_TEST__.selectRooster(id), roosterId);
+  if (!selected) {
+    throw new Error(`Could not select rooster ${roosterId} for ${label}.`);
+  }
+  await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().frames > 2);
   return { page, errors };
 }
 
@@ -92,7 +97,11 @@ async function testUpgrades(browser) {
     assert(after.projectilePierce > before.projectilePierce, 'Piercing Eggs did not increase pierce.', { before, after });
     assert(after.projectileSizeBonus > before.projectileSizeBonus, 'Bigger Eggs did not increase projectile size.', { before, after });
     assert(after.projectileSpeedBonus === 70, 'Swift Shells did not increase basic projectile speed.', { before, after });
-    assert(after.critChance === 0.1, 'Critical Yolk did not increase critical chance.', { before, after });
+    assert(
+      Math.abs(after.critChance - before.critChance - 0.1) < 0.0001,
+      'Critical Yolk did not increase critical chance by 10 percentage points.',
+      { before, after }
+    );
     assert(after.projectileRicochets === 1, 'Ricochet Eggs did not add a bounce.', { before, after });
     assert(after.projectileKnockback === 1, 'Shell Shock did not add knockback.', { before, after });
     assert(after.secondWindCharges === 1, 'Second Wind did not add a revive charge.', { before, after });
@@ -188,6 +197,54 @@ async function testNewUpgradeMechanics(browser) {
   } finally {
     await page.close();
   }
+}
+
+async function measureRoosterPrimary(browser, roosterId, waitMs) {
+  const { page, errors } = await openGame(browser, `rooster-${roosterId}`, roosterId);
+  try {
+    const catalog = await page.evaluate(() => window.__ROOSTER_TEST__.getRoosterCatalog());
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
+      window.__ROOSTER_TEST__.movePlayer(700, 450);
+      window.__ROOSTER_TEST__.spawnEnemyType('slime', 840, 450, { speed: 0, damage: 0, hp: 999 });
+      window.__ROOSTER_TEST__.spawnEnemyType('slime', 890, 450, { speed: 0, damage: 0, hp: 999 });
+      window.__ROOSTER_TEST__.spawnEnemyType('slime', 940, 450, { speed: 0, damage: 0, hp: 999 });
+      window.__ROOSTER_TEST__.resetAutoShotCooldown();
+    });
+    await page.waitForTimeout(waitMs);
+    const stats = await page.evaluate(() => window.__ROOSTER_TEST__.getPlayerStats());
+    const visual = await page.evaluate(() => window.__ROOSTER_TEST__.getRoosterVisualState());
+    const enemies = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot())
+      .then((items) => items.filter((enemy) => enemy.maxHp === 999));
+    await page.screenshot({ path: path.join(artifactDir, `rooster-${roosterId}-primary.png`) });
+    assert(errors.length === 0, `Browser reported errors for rooster ${roosterId}.`, errors);
+    assert(enemies.length === 3, `Controlled targets missing for rooster ${roosterId}.`, enemies);
+    return { roosterId, catalog, stats, visual, enemies };
+  } finally {
+    await page.close();
+  }
+}
+
+async function testRoosterClasses(browser) {
+  const ace = await measureRoosterPrimary(browser, 'ace', 1100);
+  const artillery = await measureRoosterPrimary(browser, 'artillery', 1350);
+  const storm = await measureRoosterPrimary(browser, 'storm', 900);
+  const catalog = ace.catalog;
+  assert(catalog.length === 3, 'Exactly three rooster classes should be available.', catalog);
+  assert(new Set(catalog.map((rooster) => rooster.id)).size === 3, 'Rooster IDs must be unique.', catalog);
+  assert(ace.stats.maxHp === 100 && ace.stats.critChance === 0.08, 'Ace start profile is incorrect.', ace.stats);
+  assert(artillery.stats.maxHp === 115 && artillery.stats.projectileDamage === 30, 'Artillery start profile is incorrect.', artillery.stats);
+  assert(storm.stats.maxHp === 85 && storm.stats.fireRate === 620, 'Storm start profile is incorrect.', storm.stats);
+  assert(ace.enemies.filter((enemy) => enemy.hp < 999).length === 1, 'Ace primary should focus one target.', ace.enemies);
+  assert(artillery.enemies.filter((enemy) => enemy.hp < 999).length >= 2, 'Artillery primary did not deal splash damage.', artillery.enemies);
+  assert(storm.enemies.filter((enemy) => enemy.hp < 999).length >= 2, 'Storm primary did not chain to another target.', storm.enemies);
+  assert(ace.visual.markers === 1, 'Ace visual identity marker is missing.', ace.visual);
+  assert(artillery.visual.markers === 2, 'Artillery visual identity markers are missing.', artillery.visual);
+  assert(storm.visual.markers === 3, 'Storm visual identity markers are missing.', storm.visual);
+  assert(artillery.visual.upgradeAffinities['rocket-egg'] > 1, 'Artillery rocket affinity is missing.', artillery.visual);
+  assert(storm.visual.upgradeAffinities['lightning-comb'] > 1, 'Storm lightning affinity is missing.', storm.visual);
+  return { name: 'rooster classes', status: 'passed', ace, artillery, storm };
 }
 
 async function testTripleShotTrajectory(browser) {
@@ -358,6 +415,7 @@ async function run() {
     results.push(await testUpgrades(browser));
     results.push(await testUpgradeOffers(browser));
     results.push(await testNewUpgradeMechanics(browser));
+    results.push(await testRoosterClasses(browser));
     results.push(await testTripleShotTrajectory(browser));
     results.push(await testEnemyAbilities(browser));
     results.push(await testActiveUpgradeAbilities(browser));

@@ -41,6 +41,11 @@ async function run() {
       throw new Error(`Test API did not become available.\nErrors: ${JSON.stringify(errors, null, 2)}\nBody: ${bodyText}\n${error.message}`);
     }
 
+    const roosterCards = await page.locator('.rooster-card').count();
+    await page.screenshot({ path: path.join(artifactDir, 'rooster-class-selection.png') });
+    assert(roosterCards === 3, 'Pre-run selection should show three rooster classes.', { roosterCards });
+    await page.locator('.rooster-card--ace').click();
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 2);
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.keyboard.down('d');
     await page.waitForTimeout(300);
@@ -59,6 +64,8 @@ async function run() {
     const afterCombat = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
 
     await page.evaluate(() => window.__ROOSTER_TEST__.restart());
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster);
+    await page.locator('.rooster-card--ace').click();
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 5);
     const afterRestart = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.waitForTimeout(500);
@@ -119,6 +126,10 @@ async function run() {
       }
     });
     await mobilePage.goto(url, { waitUntil: 'domcontentloaded' });
+    await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState);
+    await mobilePage.locator('.rooster-card--storm').scrollIntoViewIfNeeded();
+    await mobilePage.screenshot({ path: path.join(artifactDir, 'rooster-class-selection-mobile.png') });
+    await mobilePage.locator('.rooster-card--ace').click();
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const mobileState = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     await mobilePage.mouse.move(70, 700);
@@ -155,6 +166,9 @@ async function run() {
     const landscapeErrors = [];
     landscapePage.on('pageerror', (error) => landscapeErrors.push(error.stack ?? error.message));
     await landscapePage.goto(url, { waitUntil: 'domcontentloaded' });
+    await landscapePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState);
+    await landscapePage.screenshot({ path: path.join(artifactDir, 'rooster-class-selection-landscape.png') });
+    await landscapePage.locator('.rooster-card--ace').click();
     await landscapePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const landscapeState = await landscapePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     const landscapeCanvas = await landscapePage.locator('canvas').boundingBox();

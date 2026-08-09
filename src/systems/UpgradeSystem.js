@@ -140,6 +140,7 @@ export class UpgradeSystem {
     if (!upgrade.consumable && player.getUpgradeRank(upgrade.id) > 0) {
       weight *= 1.12;
     }
+    weight *= player.upgradeAffinities?.[upgrade.id] ?? 1;
     return Math.max(0.1, weight);
   }
 }

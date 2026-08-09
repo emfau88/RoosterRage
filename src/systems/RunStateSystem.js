@@ -11,9 +11,28 @@ export class RunStateSystem {
   constructor(scene) {
     this.scene = scene;
     this.gameEnded = false;
+    this.choosingRooster = false;
     this.choosingUpgrade = false;
     this.pendingUpgradeChoices = null;
     this.upgradeStartedAt = 0;
+  }
+
+  startRoosterSelection(definitions) {
+    this.choosingRooster = true;
+    this.scene.physics.pause();
+    this.scene.hud.showRoosterSelection(definitions);
+  }
+
+  chooseRooster(id) {
+    if (!this.choosingRooster || !this.scene.roosterClasses.select(id)) {
+      return false;
+    }
+    this.choosingRooster = false;
+    this.scene.hud.hideOverlay();
+    this.scene.physics.resume();
+    this.scene.waveSystem.start();
+    this.scene.updateHud();
+    return true;
   }
 
   startLevelUp() {

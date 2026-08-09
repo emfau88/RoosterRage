@@ -17,6 +17,7 @@ import { EntitySystem } from '../systems/EntitySystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
 import { ProjectileLifecycleSystem } from '../systems/ProjectileLifecycleSystem.js';
 import { RunStateSystem } from '../systems/RunStateSystem.js';
+import { RoosterClassSystem } from '../systems/RoosterClassSystem.js';
 import { UpgradeSystem } from '../systems/UpgradeSystem.js';
 import { Telemetry } from '../systems/Telemetry.js';
 import { installTestApi, removeTestApi } from '../systems/TestApi.js';
@@ -95,6 +96,7 @@ export class GameScene extends Phaser.Scene {
     };
     this.lastShotAt = -9999;
     this.player = new Player(this, ARENA_WIDTH / 2, ARENA_HEIGHT / 2);
+    this.roosterClasses = new RoosterClassSystem(this);
     this.combat = new CombatSystem(this);
     this.combatFeedback = new CombatFeedbackSystem(this);
     this.collisions = new CollisionSystem(this);
@@ -112,19 +114,20 @@ export class GameScene extends Phaser.Scene {
     this.hud = new HUD(
       (upgrade) => this.chooseUpgrade(upgrade),
       () => this.scene.restart(),
-      () => this.toggleFullscreen()
+      () => this.toggleFullscreen(),
+      (roosterId) => this.chooseRooster(roosterId)
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
     this.setupTouchInput();
     this.setupPhysics();
     installTestApi(this);
-    this.waveSystem.start();
+    this.runState.startRoosterSelection(this.roosterClasses.getDefinitions());
     document.body.dataset.roosterLoadState = 'ready';
   }
 
   update(time, delta) {
-    if (this.gameEnded) {
+    if (this.gameEnded || this.isChoosingRooster) {
       return;
     }
 
@@ -137,6 +140,7 @@ export class GameScene extends Phaser.Scene {
       this.debugStats.frames += 1;
       this.elapsed += delta / 1000;
       this.player.update(this.getMovementVector());
+      this.roosterClasses.update(time);
       this.enemies.forEach((enemy) => enemy.update(this.player));
       this.projectileLifecycle.update(delta);
       this.activeAbilities.update(time);
@@ -164,6 +168,10 @@ export class GameScene extends Phaser.Scene {
 
   get isChoosingUpgrade() {
     return this.runState?.choosingUpgrade ?? false;
+  }
+
+  get isChoosingRooster() {
+    return this.runState?.choosingRooster ?? false;
   }
 
   get pendingUpgradeChoices() {
@@ -364,6 +372,10 @@ export class GameScene extends Phaser.Scene {
     return this.runState.chooseUpgrade(upgrade);
   }
 
+  chooseRooster(id) {
+    return this.runState.chooseRooster(id);
+  }
+
   maybeChooseBotUpgrade(time) {
     return this.runState.maybeChooseBotUpgrade(time);
   }
@@ -377,6 +389,7 @@ export class GameScene extends Phaser.Scene {
       hp: this.player.hp,
       maxHp: this.player.maxHp,
       level: this.player.level,
+      roosterName: this.player.roosterName,
       xpPercent: this.player.xp / this.player.xpToNext,
       wave: this.waveSystem.currentWave,
       elapsed: this.elapsed,
@@ -417,6 +430,7 @@ export class GameScene extends Phaser.Scene {
   shutdown() {
     this.scale.off(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
     this.playerInput?.destroy();
+    this.roosterClasses?.destroy();
     removeTestApi();
     this.hud?.destroy();
   }

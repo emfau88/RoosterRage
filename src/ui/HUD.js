@@ -39,10 +39,11 @@ const ICON_ALIASES_BY_ID = {
 };
 
 export class HUD {
-  constructor(onUpgradeSelected, onRestart, onFullscreen) {
+  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected) {
     this.onUpgradeSelected = onUpgradeSelected;
     this.onRestart = onRestart;
     this.onFullscreen = onFullscreen;
+    this.onRoosterSelected = onRoosterSelected;
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     this.root = document.createElement('div');
     this.root.className = 'hud';
@@ -79,7 +80,8 @@ export class HUD {
     hpItem.querySelector('[data-value]').textContent = `HP ${Math.ceil(state.hp)}/${state.maxHp}`;
     hpItem.classList.toggle('is-warning', hpRatio <= 0.55 && hpRatio > 0.25);
     hpItem.classList.toggle('is-danger', hpRatio <= 0.25);
-    this.root.querySelector('[data-level] [data-value]').textContent = `Level ${state.level}`;
+    const roosterLabel = state.roosterName ? `${state.roosterName} L${state.level}` : `Level ${state.level}`;
+    this.root.querySelector('[data-level] [data-value]').textContent = roosterLabel;
     this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10`;
     this.root.querySelector('[data-time] [data-value]').textContent = this.formatTime(state.elapsed);
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
@@ -119,6 +121,42 @@ export class HUD {
       this.setIcon(button.querySelector('[data-upgrade-icon]'), choice.id);
       this.setIcon(button.querySelector('[data-rarity-icon]'), `rarity-${choice.rarity ?? 'common'}`);
       button.addEventListener('click', () => this.onUpgradeSelected(choice), { once: true });
+      list.append(button);
+    });
+  }
+
+  showRoosterSelection(definitions) {
+    this.overlay.classList.add('is-visible');
+    this.overlay.innerHTML = `
+      <div class="panel rooster-panel">
+        <h1>Rooster Arena</h1>
+        <p>Waehle deinen Rooster.</p>
+        <div class="rooster-list"></div>
+      </div>
+    `;
+    const list = this.overlay.querySelector('.rooster-list');
+    definitions.forEach((definition) => {
+      const button = document.createElement('button');
+      button.className = `rooster-card rooster-card--${definition.id}`;
+      button.type = 'button';
+      button.innerHTML = `
+        <span class="rooster-card__header">
+          <span class="rooster-card__icon" data-rooster-icon></span>
+          <span>
+            <strong>${definition.name}</strong>
+            <small>${definition.role}</small>
+          </span>
+        </span>
+        <span class="rooster-card__stats">
+          <span>HP ${definition.stats.maxHp}</span>
+          <span>SPD ${definition.stats.speed}</span>
+          <span>DMG ${definition.stats.projectileDamage}</span>
+        </span>
+        <span class="rooster-card__primary">${definition.primary.name}: ${definition.description}</span>
+        <span class="rooster-card__passive">${definition.passive}</span>
+      `;
+      this.setIcon(button.querySelector('[data-rooster-icon]'), definition.icon);
+      button.addEventListener('click', () => this.onRoosterSelected?.(definition.id), { once: true });
       list.append(button);
     });
   }

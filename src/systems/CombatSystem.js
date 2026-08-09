@@ -24,6 +24,7 @@ export class CombatSystem {
       target.sprite.y
     );
     scene.player.aimAt(baseAngle);
+    const primary = scene.player.primaryAttack ?? {};
     const pattern = this.getShotPattern();
     const targets = this.getShotTargets(pattern.length, target);
     pattern.forEach((shot, index) => {
@@ -36,9 +37,22 @@ export class CombatSystem {
       );
       this.spawnProjectile(angle, shotTarget, shot.laneOffset, {
         homing: true,
-        maxTurnRate: shot.maxTurnRate ?? 0.08,
+        maxTurnRate: primary.homingTurnRate ?? shot.maxTurnRate ?? 0.08,
         targetOffset: 0,
-        laneOffset: shot.laneOffset
+        laneOffset: shot.laneOffset,
+        texture: scene.player.fireEggs ? undefined : primary.texture,
+        speed: (primary.speed ?? 520) + scene.player.projectileSpeedBonus,
+        scale: primary.scale,
+        hitRadius: primary.hitRadius,
+        bodyRadius: primary.bodyRadius,
+        trailRadius: primary.trailRadius,
+        trailColor: scene.player.fireEggs ? 0xff6a28 : primary.trailColor,
+        trailAlpha: primary.trailAlpha,
+        splashRadius: primary.splashRadius,
+        splashDamageRatio: primary.splashDamageRatio,
+        chainCount: primary.chainCount,
+        chainRadius: primary.chainRadius,
+        chainDamageRatio: primary.chainDamageRatio
       });
       scene.showShotFeedback(angle, shot.laneOffset);
     });
@@ -195,6 +209,7 @@ export class CombatSystem {
       ? Math.round(projectile.damage * this.scene.player.critMultiplier)
       : projectile.damage;
     this.damageEnemy(enemy, damage, hitX, hitY, { critical });
+    this.applyPrimaryImpact(projectile, enemy, damage, hitX, hitY);
     if (projectile.knockbackRank > 0 && enemy.sprite.active) {
       enemy.applyKnockback(projectile.currentAngle, 80 + projectile.knockbackRank * 30);
     }
@@ -205,6 +220,62 @@ export class CombatSystem {
     } else {
       projectile.destroy();
     }
+  }
+
+  applyPrimaryImpact(projectile, hitEnemy, damage, x, y) {
+    if (projectile.splashRadius > 0 && projectile.splashDamageRatio > 0) {
+      const splashDamage = Math.max(1, Math.round(damage * projectile.splashDamageRatio));
+      const ring = this.scene.add.circle(x, y, projectile.splashRadius, 0xff6a28, 0.12)
+        .setStrokeStyle(3, 0xffd35c, 0.78)
+        .setDepth(8);
+      this.scene.tweens.add({
+        targets: ring,
+        alpha: 0,
+        scale: 1.3,
+        duration: 190,
+        onComplete: () => ring.destroy()
+      });
+      [...this.scene.enemies].forEach((candidate) => {
+        if (
+          candidate !== hitEnemy
+          && candidate.sprite.active
+          && Phaser.Math.Distance.Between(x, y, candidate.sprite.x, candidate.sprite.y) <= projectile.splashRadius
+        ) {
+          this.damageEnemy(candidate, splashDamage, candidate.sprite.x, candidate.sprite.y);
+        }
+      });
+    }
+
+    if (projectile.chainRemaining <= 0 || projectile.chainDamageRatio <= 0) {
+      return;
+    }
+    const nextTarget = this.scene.enemies
+      .filter((candidate) => (
+        candidate !== hitEnemy
+        && candidate.sprite.active
+        && !projectile.hitEnemies.has(candidate.id)
+        && Phaser.Math.Distance.Between(x, y, candidate.sprite.x, candidate.sprite.y) <= projectile.chainRadius
+      ))
+      .sort((a, b) => Phaser.Math.Distance.Squared(x, y, a.sprite.x, a.sprite.y)
+        - Phaser.Math.Distance.Squared(x, y, b.sprite.x, b.sprite.y))[0];
+    if (!nextTarget) {
+      return;
+    }
+    projectile.chainRemaining -= 1;
+    projectile.hitEnemies.add(nextTarget.id);
+    const bolt = this.scene.add.graphics().setDepth(12);
+    bolt.lineStyle(5, 0xeefcff, 0.78);
+    bolt.lineBetween(x, y, nextTarget.sprite.x, nextTarget.sprite.y);
+    bolt.lineStyle(2, 0x5ad7ff, 1);
+    bolt.lineBetween(x, y, nextTarget.sprite.x, nextTarget.sprite.y);
+    this.scene.tweens.add({
+      targets: bolt,
+      alpha: 0,
+      duration: 150,
+      onComplete: () => bolt.destroy()
+    });
+    const chainDamage = Math.max(1, Math.round(damage * projectile.chainDamageRatio));
+    this.damageEnemy(nextTarget, chainDamage, nextTarget.sprite.x, nextTarget.sprite.y);
   }
 
   redirectRicochet(projectile, hitEnemy) {

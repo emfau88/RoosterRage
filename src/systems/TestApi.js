@@ -27,6 +27,7 @@ export function installTestApi(scene) {
       voidZones: scene.voidZones.length,
       xpOrbs: scene.xpOrbs.length,
       wave: scene.waveSystem.currentWave,
+      roosterId: scene.player.roosterId,
       shots: scene.debugStats.shots,
       hits: scene.debugStats.hits,
       kills: scene.debugStats.kills,
@@ -43,6 +44,7 @@ export function installTestApi(scene) {
         molotovVoid: scene.voidNest.lastSynergyActive
       },
       choosingUpgrade: scene.isChoosingUpgrade,
+      choosingRooster: scene.isChoosingRooster,
       gameEnded: scene.gameEnded,
       lastShotAt: scene.debugStats.lastShotAt,
       lastHitAt: scene.debugStats.lastHitAt,
@@ -56,6 +58,7 @@ export function installTestApi(scene) {
     }),
     getPlayerStats: () => ({
       hp: scene.player.hp,
+      roosterId: scene.player.roosterId,
       maxHp: scene.player.maxHp,
       speed: scene.player.speed,
       fireRate: scene.player.fireRate,
@@ -82,6 +85,23 @@ export function installTestApi(scene) {
       laserCombRank: scene.laserComb.rank,
       upgradeRanks: Object.fromEntries(scene.player.upgradeRanks)
     }),
+    getRoosterCatalog: () => scene.roosterClasses.getDefinitions().map((definition) => ({
+      id: definition.id,
+      name: definition.name,
+      role: definition.role,
+      stats: { ...definition.stats },
+      primary: { ...definition.primary },
+      passive: definition.passive
+    })),
+    getRoosterVisualState: () => ({
+      id: scene.player.roosterId,
+      scale: scene.player.baseScale,
+      tint: scene.player.sprite.tintTopLeft,
+      markers: scene.roosterClasses.markers.length,
+      primary: { ...scene.player.primaryAttack },
+      upgradeAffinities: { ...scene.player.upgradeAffinities }
+    }),
+    selectRooster: (id = 'ace') => scene.chooseRooster(id),
     getProjectileSnapshot: () => scene.projectiles.map((projectile) => ({
       x: projectile.sprite.x,
       y: projectile.sprite.y,
@@ -90,6 +110,10 @@ export function installTestApi(scene) {
       homing: projectile.homing,
       targetOffset: projectile.targetOffset,
       laneOffset: projectile.laneOffset,
+      speed: projectile.speed,
+      texture: projectile.sprite.texture?.key,
+      splashRadius: projectile.splashRadius,
+      chainRemaining: projectile.chainRemaining,
       active: projectile.sprite.active
     })),
     getEnemyProjectileSnapshot: () => scene.enemyProjectiles.map((projectile) => ({
@@ -194,6 +218,10 @@ export function installTestApi(scene) {
       scene.voidZones = [];
       scene.clearEnemyProjectiles();
       return true;
+    },
+    resetAutoShotCooldown: () => {
+      scene.lastShotAt = scene.time.now;
+      return scene.lastShotAt;
     },
     spawnEnemyType: (type, x = scene.player.sprite.x + 180, y = scene.player.sprite.y, overrides = {}) => {
       const makers = {

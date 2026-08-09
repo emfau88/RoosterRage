@@ -17,6 +17,11 @@ export class Projectile {
     this.ricochetRemaining = options.ricochet ?? 0;
     this.canCrit = options.canCrit ?? false;
     this.knockbackRank = options.knockbackRank ?? 0;
+    this.splashRadius = options.splashRadius ?? 0;
+    this.splashDamageRatio = options.splashDamageRatio ?? 0;
+    this.chainRemaining = options.chainCount ?? 0;
+    this.chainRadius = options.chainRadius ?? 0;
+    this.chainDamageRatio = options.chainDamageRatio ?? 0;
     this.hitEnemies = new Set();
     this.hitRadius = (options.hitRadius ?? 24) + (scene.player?.projectileSizeBonus ?? 0);
     this.destroyed = false;
