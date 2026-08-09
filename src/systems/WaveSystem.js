@@ -1,4 +1,5 @@
 import { WAVE_DEFINITIONS } from '../data/waveDefinitions.js';
+import { ENCOUNTER_STANDARDS, ENEMY_ROLE_MATRIX } from '../data/enemyRoleDefinitions.js';
 import { SpawnDirector } from './SpawnDirector.js';
 
 export class WaveSystem {
@@ -42,6 +43,8 @@ export class WaveSystem {
       spitter: () => this.makeSpitter(multiplier),
       'fan-spitter': () => this.makeFanSpitter(multiplier),
       bomber: () => this.makeBomber(multiplier),
+      support: () => this.makeSupport(multiplier),
+      summoner: () => this.makeSummoner(multiplier),
       'elite-runner': () => this.makeEliteRunner(),
       'elite-brute': () => this.makeEliteBrute(),
       'elite-spitter': () => this.makeEliteSpitter(),
@@ -161,7 +164,8 @@ export class WaveSystem {
         ability: phase.ability ? { ...phase.ability } : undefined,
         heavyProjectile: phase.heavyProjectile ? { ...phase.heavyProjectile } : undefined,
         adds: phase.adds?.map((add) => ({ ...add })) ?? []
-      })) ?? []
+      })) ?? [],
+      aura: enemy.aura ? { ...enemy.aura } : null
     };
   }
 
@@ -170,6 +174,10 @@ export class WaveSystem {
       const queue = this.buildSpawnQueue(wave);
       const typeCounts = queue.reduce((counts, enemy) => {
         counts[enemy.type] = (counts[enemy.type] ?? 0) + 1;
+        return counts;
+      }, {});
+      const roleCounts = queue.reduce((counts, enemy) => {
+        counts[enemy.role] = (counts[enemy.role] ?? 0) + 1;
         return counts;
       }, {});
       return {
@@ -183,9 +191,11 @@ export class WaveSystem {
         bossWave: wave.bossWave ?? false,
         targetPeak: wave.targetPeak,
         mobileActiveCap: wave.mobileActiveCap,
+        primaryRoles: [...(wave.primaryRoles ?? [])],
         pressureCurve: (wave.pressureCurve ?? []).map((segment) => ({ ...segment })),
         xpCurve: { ...wave.xpCurve, segmentMultipliers: { ...wave.xpCurve?.segmentMultipliers } },
         typeCounts,
+        roleCounts,
         queue: queue.map((enemy) => enemy.type)
       };
     });
@@ -231,16 +241,119 @@ export class WaveSystem {
     return { ...this.makeRunner(0.95 * multiplier), type: 'bomber', role: 'exploder', hp: Math.round(72 * multiplier), speed: 94, damage: 10, xp: 10, texture: 'enemy-bomber-bob', animation: 'enemy-bomber-bob-loop', scale: 0.28, radius: 29, bodyOffsetX: 99, bodyOffsetY: 100, hpBarWidth: 46, hpBarYOffset: 36, explodeOnDeath: true, explosionRadius: 86, explosionDamage: 18 };
   }
 
+  makeSupport(multiplier = 1) {
+    return {
+      ...this.makeSpitter(1.25 * multiplier),
+      type: 'support',
+      role: 'support',
+      displayName: 'Brood Tender',
+      hp: Math.round(92 * multiplier),
+      speed: 52,
+      damage: 5,
+      xp: 14,
+      tint: 0x84ff9a,
+      ability: null,
+      aura: {
+        kind: 'regeneration',
+        label: 'Regenerationsaura',
+        radius: 185,
+        healPerSecond: 4,
+        color: 0x65ef8b
+      }
+    };
+  }
+
+  makeSummoner(multiplier = 1) {
+    return {
+      ...this.makeSpitter(1.5 * multiplier),
+      type: 'summoner',
+      role: 'summoner',
+      displayName: 'Nest Caller',
+      hp: Math.round(118 * multiplier),
+      speed: 45,
+      damage: 7,
+      xp: 18,
+      tint: 0xc18aff,
+      ability: {
+        kind: 'summon',
+        label: 'Brood Call',
+        cooldown: 5600,
+        count: 3,
+        telegraphMs: 520,
+        color: 0xc18aff
+      }
+    };
+  }
+
   makeEliteRunner() {
-    return { ...this.makeRunner(10), type: 'elite-runner', role: 'elite-runner', elite: true, eliteTint: false, speed: 126, damage: 13, xp: 34, texture: 'enemy-elite-runner-walk', animation: 'enemy-elite-runner-walk-loop', scale: 0.34, radius: 29, bodyOffsetX: 99, bodyOffsetY: 100, hpBarWidth: 62, hpBarYOffset: 42 };
+    return {
+      ...this.makeRunner(10),
+      type: 'elite-runner',
+      role: 'runner',
+      displayName: 'Gilded Talon',
+      elite: true,
+      eliteTint: false,
+      speed: 126,
+      damage: 13,
+      xp: 34,
+      texture: 'enemy-elite-runner-walk',
+      animation: 'enemy-elite-runner-walk-loop',
+      scale: 0.34,
+      radius: 29,
+      bodyOffsetX: 99,
+      bodyOffsetY: 100,
+      hpBarWidth: 62,
+      hpBarYOffset: 42,
+      aura: { kind: 'haste', label: 'Haste-Aura', radius: 185, multiplier: 1.2, color: 0xffd35c },
+      ability: { kind: 'dash', label: 'Talon Dash', cooldown: 3900, telegraphMs: 380, speed: 470, duration: 460, color: 0xffd35c }
+    };
   }
 
   makeEliteBrute() {
-    return { ...this.makeBrute(3.1), type: 'elite-brute', role: 'elite-tank', elite: true, eliteTint: false, speed: 66, damage: 18, xp: 42, texture: 'enemy-elite-brute-stomp', animation: 'enemy-elite-brute-stomp-loop', scale: 0.39, radius: 41, bodyOffsetX: 87, bodyOffsetY: 91, hpBarWidth: 74, hpBarYOffset: 56 };
+    return {
+      ...this.makeBrute(3.1),
+      type: 'elite-brute',
+      role: 'tank',
+      displayName: 'Iron Brooder',
+      elite: true,
+      eliteTint: false,
+      speed: 66,
+      damage: 18,
+      xp: 42,
+      texture: 'enemy-elite-brute-stomp',
+      animation: 'enemy-elite-brute-stomp-loop',
+      scale: 0.39,
+      radius: 41,
+      bodyOffsetX: 87,
+      bodyOffsetY: 91,
+      hpBarWidth: 74,
+      hpBarYOffset: 56,
+      aura: { kind: 'armor', label: 'Panzer-Aura', radius: 205, reduction: 0.22, color: 0x6bd8ff },
+      ability: { kind: 'slam', label: 'Iron Stomp', cooldown: 4400, telegraphMs: 620, heavy: true, radius: 165, damage: 21, color: 0xff6a32 }
+    };
   }
 
   makeEliteSpitter() {
-    return { ...this.makeSpitter(4.8), type: 'elite-spitter', role: 'elite-shooter', elite: true, eliteTint: false, speed: 48, xp: 40, texture: 'enemy-elite-spitter-pulse', animation: 'enemy-elite-spitter-pulse-loop', scale: 0.34, radius: 36, bodyOffsetX: 92, bodyOffsetY: 93, hpBarWidth: 68, hpBarYOffset: 48, ability: { kind: 'fan', cooldown: 2500, speed: 245, damage: 7, source: 'elite-spitter-shot', texture: 'enemy-purple-shot', radius: 11, count: 3, spread: 0.7, color: 0xffffff, trailColor: 0x9b5cff, scale: 1.2, muzzleDistance: 42 } };
+    return {
+      ...this.makeSpitter(4.8),
+      type: 'elite-spitter',
+      role: 'shooter',
+      displayName: 'Violet Matron',
+      elite: true,
+      eliteTint: false,
+      speed: 48,
+      xp: 40,
+      texture: 'enemy-elite-spitter-pulse',
+      animation: 'enemy-elite-spitter-pulse-loop',
+      scale: 0.34,
+      radius: 36,
+      bodyOffsetX: 92,
+      bodyOffsetY: 93,
+      hpBarWidth: 68,
+      hpBarYOffset: 48,
+      aura: { kind: 'regeneration', label: 'Brood-Regenaura', radius: 210, healPerSecond: 6, color: 0xc18aff },
+      ability: { kind: 'fan', label: 'Violet Volley', cooldown: 2700, telegraphMs: 420, speed: 245, damage: 7, source: 'elite-spitter-shot', texture: 'enemy-purple-shot', radius: 11, count: 5, spread: 0.92, color: 0xffffff, trailColor: 0x9b5cff, scale: 1.2, muzzleDistance: 42 }
+    };
   }
 
   makeBoss() {
@@ -248,9 +361,11 @@ export class WaveSystem {
       ...this.makeBrute(1),
       type: 'boss',
       role: 'boss',
-      hp: 12500,
+      displayName: 'THE BROOD KING',
+      hp: 11800,
       boss: true,
       elite: true,
+      entryProtectionMs: ENCOUNTER_STANDARDS.bossEntryProtectionMs,
       eliteTint: false,
       speed: 58,
       damage: 24,
@@ -268,11 +383,15 @@ export class WaveSystem {
       heavyProjectile: { cooldown: 3900, speed: 238, damage: 24, radius: 19, life: 4600, color: 0xff6824, trailColor: 0xff2a20, trailAlpha: 0.44, scale: 1.55, muzzleDistance: 82, depth: 8, pulse: true, tint: false },
       bossPhases: [
         {
+          name: 'Phase 2: Royal Fury',
+          subtitle: 'Schnellere Faechersalven und der erste Add-Ring.',
           threshold: 0.65,
           speedMultiplier: 1.08,
           adds: [{ kind: 'slime', count: 12, multiplier: 1 }]
         },
         {
+          name: 'Phase 3: Last Hatch',
+          subtitle: 'Siebenfacher Faecher, schnellere Feuerbaelle und gemischte Adds.',
           threshold: 0.32,
           speedMultiplier: 1.12,
           ability: { count: 7, spread: 1.45, cooldown: 1700 },
@@ -285,5 +404,9 @@ export class WaveSystem {
         }
       ]
     };
+  }
+
+  getEnemyRoleMatrix() {
+    return ENEMY_ROLE_MATRIX.map((role) => ({ ...role }));
   }
 }

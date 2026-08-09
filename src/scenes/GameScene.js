@@ -161,6 +161,7 @@ export class GameScene extends Phaser.Scene {
       this.elapsed += delta / 1000;
       this.player.update(this.getMovementVector());
       this.roosterClasses.update(time);
+      this.enemyAttacks.updateAuras(delta);
       this.enemies.forEach((enemy) => enemy.update(this.player));
       this.projectileLifecycle.update(delta);
       this.activeAbilities.update(time);
@@ -430,6 +431,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   updateHud() {
+    const boss = this.enemies.find((enemy) => enemy.boss && enemy.sprite.active);
     this.hud.update({
       hp: this.player.hp,
       maxHp: this.player.maxHp,
@@ -439,7 +441,14 @@ export class GameScene extends Phaser.Scene {
       wave: this.waveSystem.currentWave,
       elapsed: this.elapsed,
       upgrades: this.player.upgrades,
-      loadout: this.loadout.getSnapshot()
+      loadout: this.loadout.getSnapshot(),
+      boss: boss ? {
+        name: boss.displayName,
+        hp: boss.hp,
+        maxHp: boss.maxHp,
+        phase: boss.bossPhaseIndex + 1,
+        protected: this.time.now < boss.invulnerableUntil
+      } : null
     });
   }
 

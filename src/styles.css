@@ -97,6 +97,46 @@ canvas {
   transition: width 120ms linear;
 }
 
+.hud__boss {
+  grid-column: 1 / -1;
+  display: none;
+  width: min(560px, calc(100vw - 28px));
+  margin: 0 auto;
+  padding: 6px 9px 8px;
+  border: 1px solid rgba(255, 92, 72, 0.7);
+  border-radius: 8px;
+  background: rgba(36, 10, 14, 0.88);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.34);
+}
+
+.hud__boss.is-visible {
+  display: block;
+}
+
+.hud__boss-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+  color: #fff0c5;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.hud__boss-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #250b10;
+}
+
+.hud__boss-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff334f, #ff9b3d);
+  transition: width 100ms linear;
+}
+
 .hud__loadout {
   grid-column: 1 / -1;
   display: grid;
@@ -216,6 +256,31 @@ canvas {
 .wave-banner.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+.wave-banner strong,
+.wave-banner small {
+  display: block;
+}
+
+.wave-banner small {
+  max-width: 380px;
+  margin-top: 3px;
+  color: #dce8df;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.wave-banner--elite {
+  border-color: rgba(255, 206, 88, 0.9);
+  background: rgba(48, 29, 8, 0.94);
+}
+
+.wave-banner--boss {
+  border-color: rgba(255, 78, 78, 0.94);
+  background: rgba(55, 8, 17, 0.95);
+  color: #ffe0c2;
 }
 
 .fullscreen-glyph {
@@ -639,6 +704,14 @@ canvas {
     top: calc(112px + env(safe-area-inset-top));
     padding: 7px 12px;
     font-size: 15px;
+  }
+
+  .hud__boss {
+    padding: 4px 7px 6px;
+  }
+
+  .hud__boss-heading {
+    font-size: 9px;
   }
 
   .overlay {

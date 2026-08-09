@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
 
 export function shouldInstallTestApi() {
   return import.meta.env.DEV;
@@ -162,6 +163,17 @@ export function installTestApi(scene) {
       passive: definition.passive
     })),
     getWaveCatalog: () => scene.waveSystem.getWaveCatalog(),
+    getEnemyRoleMatrix: () => scene.waveSystem.getEnemyRoleMatrix(),
+    getEncounterStandards: () => ({ ...ENCOUNTER_STANDARDS }),
+    getEncounterEvents: () => scene.telemetry.getEventSequence([
+      'enemyTelegraphShown',
+      'enemyAbilityFired',
+      'enemyProjectileSuppressed',
+      'bossEntered',
+      'bossPhaseStarted',
+      'deathExplosionTelegraphed',
+      'pickupSpawned'
+    ]),
     getDeterminismSnapshot: () => ({
       seed: scene.rng.seed,
       profile: scene.bot.strategy,
@@ -211,11 +223,17 @@ export function installTestApi(scene) {
       id: enemy.id,
       type: enemy.type,
       role: enemy.role,
+      name: enemy.displayName,
       hp: enemy.hp,
       maxHp: enemy.maxHp,
       x: enemy.sprite.x,
       y: enemy.sprite.y,
       bossPhaseIndex: enemy.bossPhaseIndex,
+      aura: enemy.aura ? { ...enemy.aura } : null,
+      damageReduction: enemy.damageReduction,
+      auraSpeedMultiplier: enemy.auraSpeedMultiplier,
+      dashUntil: enemy.dashUntil,
+      invulnerableUntil: enemy.invulnerableUntil,
       ability: enemy.ability ? { ...enemy.ability } : null,
       heavyProjectile: enemy.heavyProjectile ? { ...enemy.heavyProjectile } : null,
       knockbackUntil: enemy.knockbackUntil,
@@ -343,6 +361,8 @@ export function installTestApi(scene) {
         spitter: () => scene.waveSystem.makeSpitter(),
         'fan-spitter': () => scene.waveSystem.makeFanSpitter(),
         bomber: () => scene.waveSystem.makeBomber(),
+        support: () => scene.waveSystem.makeSupport(),
+        summoner: () => scene.waveSystem.makeSummoner(),
         'elite-runner': () => scene.waveSystem.makeEliteRunner(),
         'elite-brute': () => scene.waveSystem.makeEliteBrute(),
         'elite-spitter': () => scene.waveSystem.makeEliteSpitter(),

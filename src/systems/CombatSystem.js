@@ -332,19 +332,33 @@ export class CombatSystem {
   damageEnemy(enemy, damage, x = enemy.sprite.x, y = enemy.sprite.y, options = {}) {
     const { scene } = this;
     if (!enemy.sprite.active) {
-      return;
+      return false;
     }
-    scene.showHitFeedback(x, y, damage, enemy, options);
+    if (scene.time.now < (enemy.invulnerableUntil ?? 0)) {
+      const shield = scene.add.circle(x, y, 30, 0x65d7ff, 0.08)
+        .setStrokeStyle(3, 0xcaf5ff, 0.75)
+        .setDepth(10);
+      scene.tweens.add({
+        targets: shield,
+        alpha: 0,
+        scale: 1.35,
+        duration: 150,
+        onComplete: () => shield.destroy()
+      });
+      return false;
+    }
+    const appliedDamage = enemy.mitigateDamage?.(damage) ?? damage;
+    scene.showHitFeedback(x, y, appliedDamage, enemy, options);
     scene.audio.play('enemy-hit');
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;
     const source = options.source ?? 'base-egg';
     const hpBefore = Math.max(0, enemy.hp);
-    const effective = Math.min(hpBefore, damage);
-    const overkill = Math.max(0, damage - hpBefore);
+    const effective = Math.min(hpBefore, appliedDamage);
+    const overkill = Math.max(0, appliedDamage - hpBefore);
     scene.telemetry.addHit(scene.time.now, scene.waveSystem.currentWave, source);
     scene.telemetry.addDamageDealt({
-      amount: damage,
+      amount: appliedDamage,
       effective,
       overkill,
       source,
@@ -353,8 +367,10 @@ export class CombatSystem {
       time: scene.time.now,
       wave: scene.waveSystem.currentWave
     });
-    if (enemy.takeDamage(damage)) {
+    if (enemy.takeDamage(appliedDamage)) {
       scene.killEnemy(enemy, source);
+      return true;
     }
+    return false;
   }
 }

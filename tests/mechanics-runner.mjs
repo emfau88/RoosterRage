@@ -285,12 +285,12 @@ async function testWaveCuration(browser) {
       { slime: 30 },
       { slime: 26, runner: 12 },
       { slime: 24, runner: 17, brute: 4, 'elite-runner': 1 },
-      { slime: 26, runner: 14, spitter: 10, brute: 5 },
-      { slime: 26, runner: 16, spitter: 12, brute: 7, 'fan-spitter': 4 },
-      { slime: 28, runner: 20, spitter: 12, 'fan-spitter': 8, brute: 7, 'elite-runner': 1 },
-      { slime: 32, runner: 20, bomber: 12, 'fan-spitter': 10, spitter: 7, brute: 4 },
-      { slime: 34, runner: 22, bomber: 14, spitter: 10, 'fan-spitter': 8, brute: 7, 'elite-spitter': 1 },
-      { slime: 40, runner: 24, bomber: 14, 'fan-spitter': 12, brute: 10, spitter: 10, 'elite-brute': 1, 'elite-spitter': 1 },
+      { slime: 31, runner: 14, spitter: 10 },
+      { slime: 35, runner: 16, 'fan-spitter': 10, brute: 4 },
+      { slime: 28, runner: 24, 'fan-spitter': 14, brute: 9, 'elite-runner': 1 },
+      { slime: 40, bomber: 20, 'fan-spitter': 16, support: 5, summoner: 4 },
+      { slime: 45, runner: 24, spitter: 15, support: 6, summoner: 5, 'elite-spitter': 1 },
+      { slime: 59, brute: 20, 'fan-spitter': 18, support: 6, summoner: 8, 'elite-brute': 1 },
       { boss: 1 }
     ];
     assert(catalog.length === 10, 'Wave catalog should contain exactly ten waves.', catalog);
@@ -328,6 +328,7 @@ async function testWaveCuration(browser) {
         speed: 0,
         damage: 0,
         hp: 10000,
+        entryProtectionMs: 0,
         heavyAttackDelay: 999999
       });
       window.__ROOSTER_TEST__.damageEnemyById(bossId, 3600);
@@ -376,7 +377,7 @@ async function testEnemyAbilities(browser) {
     const spitterTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(spitterTelegraph.enemyTelegraphs >= 1, 'Spitter did not telegraph its shot.', spitterTelegraph);
     assert(spitterTelegraph.enemyProjectiles === 0, 'Spitter fired before its telegraph completed.', spitterTelegraph);
-    await page.waitForTimeout(180);
+    await page.waitForTimeout(260);
     const afterSpitter = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(afterSpitter.enemyProjectiles >= 1, 'Spitter did not fire a projectile.', afterSpitter);
 
@@ -390,7 +391,7 @@ async function testEnemyAbilities(browser) {
     assert(fanTelegraph.enemyTelegraphs >= 1, 'Fan Spitter did not telegraph its burst.', fanTelegraph);
     assert(fanTelegraph.enemyProjectiles === 0, 'Fan Spitter fired before its telegraph completed.', fanTelegraph);
     await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-telegraph.png') });
-    await page.waitForTimeout(230);
+    await page.waitForTimeout(280);
     const afterFan = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(afterFan.enemyProjectiles >= 3, 'Fan Spitter did not fire a fan burst.', afterFan);
     await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-projectiles.png') });
@@ -403,7 +404,7 @@ async function testEnemyAbilities(browser) {
       const id = window.__ROOSTER_TEST__.spawnEnemyType('bomber', 725, 450, { speed: 0, damage: 0, hp: 20 });
       window.__ROOSTER_TEST__.damageEnemyById(id, 999);
     });
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(560);
     const afterBomber = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(afterBomber.playerHp < 100, 'Bomber explosion did not damage nearby player.', afterBomber);
 
@@ -415,6 +416,7 @@ async function testEnemyAbilities(browser) {
         speed: 0,
         damage: 0,
         hp: 9999,
+        entryProtectionMs: 0,
         ability: null,
         heavyAttackDelay: 120
       });

@@ -75,6 +75,42 @@ export class EntitySystem {
       this.scene.time.now,
       this.scene.waveSystem.currentWave
     );
+    if (enemy.elite) {
+      const subtitle = enemy.boss
+        ? 'Drei Phasen. Lies die Faechersalven und den schweren Feuerball.'
+        : `${enemy.aura?.label ?? 'Elite-Aura'} · ${enemy.ability?.label ?? 'Spezialangriff'}`;
+      this.scene.hud?.showEncounterBanner(
+        enemy.displayName,
+        subtitle,
+        enemy.boss ? 'boss' : 'elite'
+      );
+    }
+    if (enemy.boss && enemy.invulnerableUntil > this.scene.time.now) {
+      const finalScale = enemy.sprite.scaleX;
+      enemy.sprite.setScale(finalScale * 0.55).setAlpha(0.35);
+      const shield = this.scene.add.circle(x, y, 82, 0x65d7ff, 0.08)
+        .setStrokeStyle(6, 0xcaf5ff, 0.82)
+        .setDepth(9);
+      this.scene.tweens.add({
+        targets: enemy.sprite,
+        alpha: 1,
+        scaleX: finalScale,
+        scaleY: finalScale,
+        duration: Math.max(200, enemy.invulnerableUntil - this.scene.time.now)
+      });
+      this.scene.tweens.add({
+        targets: shield,
+        alpha: 0,
+        scale: 1.45,
+        duration: Math.max(200, enemy.invulnerableUntil - this.scene.time.now),
+        onComplete: () => shield.destroy()
+      });
+      this.scene.telemetry.record('bossEntered', this.scene.time.now, {
+        wave: this.scene.waveSystem.currentWave,
+        name: enemy.displayName,
+        protectionMs: enemy.invulnerableUntil - this.scene.time.now
+      });
+    }
     return enemy;
   }
 

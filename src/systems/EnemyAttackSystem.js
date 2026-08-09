@@ -1,12 +1,44 @@
 import Phaser from 'phaser';
 import { EnemyProjectile } from '../entities/EnemyProjectile.js';
+import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
 
 export class EnemyAttackSystem {
   constructor(scene) {
     this.scene = scene;
   }
 
+  updateAuras(delta) {
+    const enemies = this.scene.enemies.filter((enemy) => enemy.sprite.active);
+    enemies.forEach((enemy) => {
+      enemy.auraSpeedMultiplier = 1;
+      enemy.damageReduction = 0;
+    });
+    enemies.filter((enemy) => enemy.aura).forEach((source) => {
+      enemies.forEach((target) => {
+        if (Phaser.Math.Distance.Between(
+          source.sprite.x,
+          source.sprite.y,
+          target.sprite.x,
+          target.sprite.y
+        ) > source.aura.radius) {
+          return;
+        }
+        if (source.aura.kind === 'haste') {
+          target.auraSpeedMultiplier = Math.max(target.auraSpeedMultiplier, source.aura.multiplier ?? 1.18);
+        } else if (source.aura.kind === 'armor') {
+          target.damageReduction = Math.max(target.damageReduction, source.aura.reduction ?? 0.22);
+        } else if (source.aura.kind === 'regeneration') {
+          const heal = (source.aura.healPerSecond ?? 3) * delta / 1000;
+          target.hp = Math.min(target.maxHp, target.hp + heal);
+        }
+      });
+    });
+  }
+
   updateEnemy(enemy, player) {
+    if (this.scene.time.now < (enemy.invulnerableUntil ?? 0)) {
+      return;
+    }
     if (enemy.boss) {
       this.updateBoss(enemy, player);
     }
@@ -24,13 +56,20 @@ export class EnemyAttackSystem {
 
   beginAbility(enemy, player) {
     const ability = enemy.ability;
-    const telegraphMs = ability.telegraphMs ?? (ability.kind === 'fan' ? 230 : 180);
+    const heavy = ability.heavy ?? ability.kind === 'slam';
+    const minimumTelegraph = heavy
+      ? ENCOUNTER_STANDARDS.heavyTelegraphMs
+      : ENCOUNTER_STANDARDS.normalTelegraphMs;
+    const telegraphMs = Math.max(minimumTelegraph, ability.telegraphMs ?? minimumTelegraph);
     enemy.abilityCharging = true;
     enemy.nextAbilityAt = this.scene.time.now + ability.cooldown;
     this.scene.combatFeedback.showEnemyTelegraph(enemy, player, ability, {
       duration: telegraphMs,
       count: ability.kind === 'fan' ? ability.count ?? 3 : 1,
-      spread: ability.kind === 'fan' ? ability.spread ?? 0.55 : 0
+      spread: ability.kind === 'fan' ? ability.spread ?? 0.55 : 0,
+      heavy,
+      radial: ability.kind === 'slam',
+      radius: ability.radius
     });
     this.scene.time.delayedCall(telegraphMs, () => {
       enemy.abilityCharging = false;
@@ -51,7 +90,16 @@ export class EnemyAttackSystem {
         this.fireFan(enemy, angle);
       } else if (ability.kind === 'summon') {
         this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, ability.count ?? 2);
+      } else if (ability.kind === 'dash') {
+        enemy.beginDash(angle, ability.speed ?? 430, ability.duration ?? 480);
+      } else if (ability.kind === 'slam') {
+        this.performSlam(enemy, player, ability);
       }
+      this.scene.telemetry.record('enemyAbilityFired', this.scene.time.now, {
+        wave: this.scene.waveSystem.currentWave,
+        enemyType: enemy.type,
+        ability: ability.kind
+      });
     });
   }
 
@@ -69,7 +117,10 @@ export class EnemyAttackSystem {
       && !enemy.abilityCharging
       && this.scene.time.now >= enemy.nextHeavyAttackAt
     ) {
-      const telegraphMs = enemy.heavyProjectile.telegraphMs ?? 420;
+      const telegraphMs = Math.max(
+        ENCOUNTER_STANDARDS.heavyTelegraphMs,
+        enemy.heavyProjectile.telegraphMs ?? ENCOUNTER_STANDARDS.heavyTelegraphMs
+      );
       enemy.heavyCharging = true;
       enemy.nextHeavyAttackAt = this.scene.time.now + (enemy.heavyProjectile.cooldown ?? 4300);
       this.scene.combatFeedback.showEnemyTelegraph(enemy, player, enemy.heavyProjectile, {
@@ -117,8 +168,51 @@ export class EnemyAttackSystem {
     this.scene.cameras.main.shake(140, 0.003);
     this.scene.telemetry.record('bossPhaseStarted', this.scene.time.now, {
       wave: this.scene.waveSystem.currentWave,
-      phase: enemy.bossPhaseIndex + 1
+      phase: enemy.bossPhaseIndex + 2,
+      name: phase.name ?? `Phase ${enemy.bossPhaseIndex + 2}`
     });
+    this.scene.hud.showEncounterBanner(
+      phase.name ?? `Brood King Phase ${enemy.bossPhaseIndex + 2}`,
+      phase.subtitle ?? 'Das Angriffsmuster veraendert sich.',
+      'boss'
+    );
+  }
+
+  performSlam(enemy, player, ability) {
+    const radius = ability.radius ?? 150;
+    const ring = this.scene.add.circle(enemy.sprite.x, enemy.sprite.y, radius, 0xff5b32, 0.13)
+      .setStrokeStyle(6, 0xffd35c, 0.9)
+      .setDepth(11);
+    this.scene.tweens.add({
+      targets: ring,
+      alpha: 0,
+      scale: 1.12,
+      duration: 260,
+      onComplete: () => ring.destroy()
+    });
+    if (Phaser.Math.Distance.Between(
+      enemy.sprite.x,
+      enemy.sprite.y,
+      player.sprite.x,
+      player.sprite.y
+    ) > radius) {
+      return;
+    }
+    const hpBefore = player.hp;
+    if (player.damage(ability.damage ?? 20, this.scene.time.now)) {
+      const applied = hpBefore - player.hp;
+      this.scene.combatFeedback.showPlayerDamage(player.sprite.x, player.sprite.y, applied, {
+        color: 0xff5b32,
+        heavy: true
+      });
+      this.scene.telemetry.addDamageTaken(
+        applied,
+        this.scene.time.now,
+        this.scene.waveSystem.currentWave,
+        `slam:${enemy.type}`,
+        { lethal: player.hp <= 0 }
+      );
+    }
   }
 
   fireFan(enemy, angle) {
@@ -138,12 +232,26 @@ export class EnemyAttackSystem {
 
   spawnProjectile(x, y, angle, config) {
     const muzzleDistance = config.muzzleDistance ?? 30;
+    const spawnX = x + Math.cos(angle) * muzzleDistance;
+    const spawnY = y + Math.sin(angle) * muzzleDistance;
+    if (Phaser.Math.Distance.Between(
+      spawnX,
+      spawnY,
+      this.scene.player.sprite.x,
+      this.scene.player.sprite.y
+    ) < ENCOUNTER_STANDARDS.playerProtectionRadius) {
+      this.scene.telemetry.record('enemyProjectileSuppressed', this.scene.time.now, {
+        wave: this.scene.waveSystem.currentWave,
+        source: config.source ?? 'enemy-projectile'
+      });
+      return null;
+    }
     const projectile = this.scene.objectPools.acquire(
       'enemyProjectile',
       () => new EnemyProjectile(this.scene),
       (item) => item.reset(
-        x + Math.cos(angle) * muzzleDistance,
-        y + Math.sin(angle) * muzzleDistance,
+        spawnX,
+        spawnY,
         angle,
         config
       )
@@ -209,22 +317,29 @@ export class EnemyAttackSystem {
 
   findSafeAddSpawn(originX, originY, baseAngle, minDistance) {
     const player = this.scene.player.sprite;
-    const arenaWidth = this.scene.entities.arenaWidth;
-    const arenaHeight = this.scene.entities.arenaHeight;
+    const bounds = this.scene.arena.bounds;
     const margin = 54;
     let farthest = null;
 
     for (let attempt = 0; attempt < 12; attempt += 1) {
       const radius = 145 + (attempt % 3) * 55;
       const angle = baseAngle + attempt * (Math.PI / 6);
-      const x = Phaser.Math.Clamp(originX + Math.cos(angle) * radius, margin, arenaWidth - margin);
-      const y = Phaser.Math.Clamp(originY + Math.sin(angle) * radius, margin, arenaHeight - margin);
+      const x = Phaser.Math.Clamp(
+        originX + Math.cos(angle) * radius,
+        bounds.x + margin,
+        bounds.x + bounds.width - margin
+      );
+      const y = Phaser.Math.Clamp(
+        originY + Math.sin(angle) * radius,
+        bounds.y + margin,
+        bounds.y + bounds.height - margin
+      );
       const distance = Phaser.Math.Distance.Between(x, y, player.x, player.y);
       const candidate = { x, y, distance };
       if (!farthest || distance > farthest.distance) {
         farthest = candidate;
       }
-      if (distance >= minDistance) {
+      if (distance >= minDistance && !this.scene.arena.overlapsObstacle(x, y, 34)) {
         return candidate;
       }
     }
@@ -237,26 +352,35 @@ export class EnemyAttackSystem {
     const damage = enemy.explosionDamage ?? 18;
     const x = enemy.sprite.x;
     const y = enemy.sprite.y;
-    const core = this.scene.add.circle(x, y, 22, 0xfff08a, 0.55).setDepth(10);
-    this.scene.audio.play('rocket-explosion');
-    const ring = this.scene.add.circle(x, y, radius, 0xff3048, 0.2)
+    const source = `explosion:${enemy.type}`;
+    const ring = this.scene.add.circle(x, y, radius, 0xff3048, 0.12)
       .setStrokeStyle(4, 0xffd8dc, 0.92)
       .setDepth(9);
     this.scene.tweens.add({
-      targets: core,
-      alpha: 0,
-      scale: 3.4,
-      duration: 180,
-      onComplete: () => core.destroy()
-    });
-    this.scene.tweens.add({
       targets: ring,
-      alpha: 0,
-      scale: 1.18,
-      duration: 280,
+      alpha: { from: 0.22, to: 0.8 },
+      scale: { from: 0.45, to: 1 },
+      duration: ENCOUNTER_STANDARDS.heavyTelegraphMs,
       onComplete: () => ring.destroy()
     });
-    if (Phaser.Math.Distance.Between(x, y, this.scene.player.sprite.x, this.scene.player.sprite.y) <= radius) {
+    this.scene.telemetry.record('deathExplosionTelegraphed', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      source,
+      duration: ENCOUNTER_STANDARDS.heavyTelegraphMs
+    });
+    this.scene.time.delayedCall(ENCOUNTER_STANDARDS.heavyTelegraphMs, () => {
+      const core = this.scene.add.circle(x, y, 22, 0xfff08a, 0.55).setDepth(10);
+      this.scene.audio.play('rocket-explosion');
+      this.scene.tweens.add({
+        targets: core,
+        alpha: 0,
+        scale: 3.4,
+        duration: 180,
+        onComplete: () => core.destroy()
+      });
+      if (Phaser.Math.Distance.Between(x, y, this.scene.player.sprite.x, this.scene.player.sprite.y) > radius) {
+        return;
+      }
       const hpBefore = this.scene.player.hp;
       if (this.scene.player.damage(damage, this.scene.time.now)) {
         const appliedDamage = Math.max(0, hpBefore - this.scene.player.hp);
@@ -270,10 +394,10 @@ export class EnemyAttackSystem {
           appliedDamage,
           this.scene.time.now,
           this.scene.waveSystem.currentWave,
-          `explosion:${enemy.type}`,
+          source,
           { lethal: this.scene.player.hp <= 0 }
         );
       }
-    }
+    });
   }
 }

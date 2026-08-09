@@ -26,6 +26,7 @@ export const WAVE_DEFINITIONS = [
     activeCap: 22,
     mobileActiveCap: 18,
     spawnMinDistance: 300,
+    primaryRoles: [],
     pressureCurve: pressureCurve({ opening: 2, pressure: 3, finale: 4 }),
     xpCurve: xpCurve(3),
     composition: [{ count: 30, enemy: { kind: 'slime' } }]
@@ -40,6 +41,7 @@ export const WAVE_DEFINITIONS = [
     activeCap: 29,
     mobileActiveCap: 24,
     spawnMinDistance: 295,
+    primaryRoles: ['runner'],
     pressureCurve: pressureCurve({ opening: 2, pressure: 4, finale: 6, finalePattern: 'rusher-line' }),
     xpCurve: xpCurve(3),
     composition: [
@@ -57,6 +59,7 @@ export const WAVE_DEFINITIONS = [
     activeCap: 34,
     mobileActiveCap: 28,
     spawnMinDistance: 290,
+    primaryRoles: ['runner', 'tank'],
     pressureCurve: pressureCurve({ opening: 3, pressure: 4, finale: 5 }),
     xpCurve: xpCurve(3),
     elites: [{ kind: 'elite-runner' }],
@@ -76,13 +79,13 @@ export const WAVE_DEFINITIONS = [
     activeCap: 38,
     mobileActiveCap: 32,
     spawnMinDistance: 285,
+    primaryRoles: ['runner', 'shooter'],
     pressureCurve: pressureCurve({ opening: 3, pressure: 5, finale: 6 }),
     xpCurve: xpCurve(3),
     composition: [
-      { count: 26, enemy: { kind: 'slime' } },
+      { count: 31, enemy: { kind: 'slime' } },
       { count: 14, enemy: { kind: 'runner' } },
-      { count: 10, enemy: { kind: 'spitter' } },
-      { count: 5, enemy: { kind: 'brute' } }
+      { count: 10, enemy: { kind: 'spitter' } }
     ]
   },
   {
@@ -95,14 +98,14 @@ export const WAVE_DEFINITIONS = [
     activeCap: 45,
     mobileActiveCap: 38,
     spawnMinDistance: 280,
+    primaryRoles: ['runner', 'area-denial', 'tank'],
     pressureCurve: pressureCurve({ opening: 3, pressure: 5, finale: 7, finalePattern: 'rusher-line' }),
     xpCurve: xpCurve(3),
     composition: [
-      { count: 26, enemy: { kind: 'slime' } },
+      { count: 35, enemy: { kind: 'slime' } },
       { count: 16, enemy: { kind: 'runner' } },
-      { count: 12, enemy: { kind: 'spitter' } },
-      { count: 7, enemy: { kind: 'brute' } },
-      { count: 4, enemy: { kind: 'fan-spitter' } }
+      { count: 10, enemy: { kind: 'fan-spitter' } },
+      { count: 4, enemy: { kind: 'brute' } }
     ]
   },
   {
@@ -115,15 +118,15 @@ export const WAVE_DEFINITIONS = [
     activeCap: 52,
     mobileActiveCap: 45,
     spawnMinDistance: 275,
+    primaryRoles: ['runner', 'area-denial', 'tank'],
     pressureCurve: pressureCurve({ opening: 4, pressure: 6, finale: 8, finalePattern: 'rusher-line' }),
     xpCurve: xpCurve(3),
     elites: [{ kind: 'elite-runner' }],
     composition: [
       { count: 28, enemy: { kind: 'slime' } },
-      { count: 20, enemy: { kind: 'runner' } },
-      { count: 12, enemy: { kind: 'spitter' } },
-      { count: 8, enemy: { kind: 'fan-spitter' } },
-      { count: 7, enemy: { kind: 'brute' } }
+      { count: 24, enemy: { kind: 'runner' } },
+      { count: 14, enemy: { kind: 'fan-spitter' } },
+      { count: 9, enemy: { kind: 'brute' } }
     ]
   },
   {
@@ -136,15 +139,15 @@ export const WAVE_DEFINITIONS = [
     activeCap: 58,
     mobileActiveCap: 50,
     spawnMinDistance: 275,
+    primaryRoles: ['exploder', 'area-denial', 'summoner'],
     pressureCurve: pressureCurve({ opening: 4, pressure: 7, finale: 9, finalePattern: 'surround' }),
     xpCurve: xpCurve(4),
     composition: [
-      { count: 32, enemy: { kind: 'slime' } },
-      { count: 20, enemy: { kind: 'runner' } },
-      { count: 12, enemy: { kind: 'bomber' } },
-      { count: 10, enemy: { kind: 'fan-spitter' } },
-      { count: 7, enemy: { kind: 'spitter' } },
-      { count: 4, enemy: { kind: 'brute' } }
+      { count: 40, enemy: { kind: 'slime' } },
+      { count: 20, enemy: { kind: 'bomber' } },
+      { count: 16, enemy: { kind: 'fan-spitter' } },
+      { count: 5, enemy: { kind: 'support' } },
+      { count: 4, enemy: { kind: 'summoner' } }
     ]
   },
   {
@@ -157,16 +160,16 @@ export const WAVE_DEFINITIONS = [
     activeCap: 66,
     mobileActiveCap: 56,
     spawnMinDistance: 270,
+    primaryRoles: ['runner', 'shooter', 'summoner'],
     pressureCurve: pressureCurve({ opening: 5, pressure: 8, finale: 10, finalePattern: 'surround' }),
     xpCurve: xpCurve(4),
     elites: [{ kind: 'elite-spitter' }],
     composition: [
-      { count: 34, enemy: { kind: 'slime' } },
-      { count: 22, enemy: { kind: 'runner' } },
-      { count: 14, enemy: { kind: 'bomber' } },
-      { count: 10, enemy: { kind: 'spitter' } },
-      { count: 8, enemy: { kind: 'fan-spitter' } },
-      { count: 7, enemy: { kind: 'brute' } }
+      { count: 45, enemy: { kind: 'slime' } },
+      { count: 24, enemy: { kind: 'runner' } },
+      { count: 15, enemy: { kind: 'spitter' } },
+      { count: 6, enemy: { kind: 'support' } },
+      { count: 5, enemy: { kind: 'summoner' } }
     ]
   },
   {
@@ -179,16 +182,16 @@ export const WAVE_DEFINITIONS = [
     activeCap: 74,
     mobileActiveCap: 60,
     spawnMinDistance: 270,
+    primaryRoles: ['tank', 'area-denial', 'summoner'],
     pressureCurve: pressureCurve({ opening: 5, pressure: 9, finale: 12, finalePattern: 'rusher-line' }),
     xpCurve: xpCurve(4),
-    elites: [{ kind: 'elite-brute' }, { kind: 'elite-spitter' }],
+    elites: [{ kind: 'elite-brute' }],
     composition: [
-      { count: 40, enemy: { kind: 'slime' } },
-      { count: 24, enemy: { kind: 'runner' } },
-      { count: 14, enemy: { kind: 'bomber' } },
-      { count: 12, enemy: { kind: 'fan-spitter' } },
-      { count: 10, enemy: { kind: 'brute' } },
-      { count: 10, enemy: { kind: 'spitter' } }
+      { count: 59, enemy: { kind: 'slime' } },
+      { count: 20, enemy: { kind: 'brute' } },
+      { count: 18, enemy: { kind: 'fan-spitter' } },
+      { count: 6, enemy: { kind: 'support' } },
+      { count: 8, enemy: { kind: 'summoner' } }
     ]
   },
   {
@@ -201,6 +204,7 @@ export const WAVE_DEFINITIONS = [
     activeCap: 52,
     mobileActiveCap: 45,
     spawnMinDistance: 340,
+    primaryRoles: ['boss'],
     pressureCurve: [{ id: 'boss-entry', share: 1, durationShare: 1, batch: 1, pattern: 'scatter', pauseAfter: 0 }],
     xpCurve: xpCurve(3, 120),
     bossWave: true,

@@ -33,7 +33,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 17 | Vertical-Slice-Abnahme | Offen |
 | 18 | Kommerzielle Validierung | Offen |
 
-Aktueller Fokus: Phase 13. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
+Aktueller Fokus: Phase 14. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -494,14 +494,14 @@ Abnahmeprotokoll 10.08.2026:
 
 ## Phase 13: Gegner-, Elite- und Boss-Paket
 
-Status: Offen
+Status: Abgeschlossen am 10.08.2026
 
 Bulk-Ziel: Die Dichte wird durch Rollen und Begegnungen interessant, nicht durch reine Stat-Skalierung.
 
-21. [ ] Gegnerrollen als Matrix pflegen: Fodder, Runner, Tank, Shooter, Area Denial, Exploder, Support und Summoner.
-22. [ ] Drei Elite-Archetypen mit Aura, eigener Faehigkeit, Ankuendigung und garantierter Truhe erstellen.
-23. [ ] Boss-Finale mit Name, eigener HP-Leiste, Eintritt, drei Abschnitten, Adds, Feuerball und klarer Belohnung ausbauen.
-24. [ ] Reaktionsstandards festlegen: normale Telegraphen mindestens 300 ms, schwere Angriffe 500 ms, keine Projektile im Schutzradius erzeugen.
+21. [x] Gegnerrollen als Matrix pflegen: Fodder, Runner, Tank, Shooter, Area Denial, Exploder, Support und Summoner.
+22. [x] Drei Elite-Archetypen mit Aura, eigener Faehigkeit, Ankuendigung und garantierter Truhe erstellen.
+23. [x] Boss-Finale mit Name, eigener HP-Leiste, Eintritt, drei Abschnitten, Adds, Feuerball und klarer Belohnung ausbauen.
+24. [x] Reaktionsstandards festlegen: normale Telegraphen mindestens 300 ms, schwere Angriffe 500 ms, keine Projektile im Schutzradius erzeugen.
 
 Balance-Arbeit:
 
@@ -514,6 +514,16 @@ Abnahme:
 - Jede Elite und Bossphase ist ohne Text erklaerbar und beim zweiten Auftreten antizipierbar.
 - Kein einzelner Gegnertyp verursacht ueber alle Average-Runs mehr als 35 Prozent der Tode.
 - Danach ein Encounter-Balance-Run ueber alle Karten und Rooster.
+
+Abnahmeprotokoll 10.08.2026:
+
+- Die Rollenmatrix enthaelt Fodder, Runner, Tank, Shooter, Area Denial, Exploder, Support und Summoner. Brood Tender heilt Gegner in seiner Aura; Nest Caller erzeugt nach 520 ms sichtbarer Beschwoerung kontrollierte Adds.
+- Fruehe Wellen deklarieren hoechstens zwei, spaete Wellen hoechstens drei primaere Gefahrenrollen. Support und Summoner sind ab Wave 7 in die kuratierten Budgets integriert; Queue-Laengen bleiben exakt.
+- Gilded Talon kombiniert Haste-Aura und 380-ms-Dash, Iron Brooder Panzer-Aura und 620-ms-Slam, Violet Matron Regenerationsaura und 420-ms-Fuenferfaecher. Alle werden mit Name/Faehigkeit angekuendigt und lassen garantiert eine physische Elite-Truhe fallen.
+- THE BROOD KING besitzt eine mobile Boss-HP-Leiste, 1,3 s Eintrittsschild, drei benannte Kampfabschnitte, Add-Ringe, Faechersalven, schwere Feuerbaelle und eine Boss-Truhe. Der neu gemessene isolierte Average-TTK betraegt 65,55 s bei 31 Spawns und 16,7 ms p95.
+- Normale Telegraphen werden global auf mindestens 300 ms, schwere auf mindestens 500 ms begrenzt. Projektile innerhalb 140 Radius zum Spieler werden unterdrueckt; Bomber-Explosionen loesen erst nach einem 500-ms-Ring aus.
+- `npm run test:encounter` prueft Auren, Schadensreduktion/Heilung, Eigenfaehigkeiten, Ankuendigungen, Truhen, Schutzradius, Explosionsvorlauf, Bossphasen und 9/9 Arena-Rooster-Kombinationen im Portrait-Viewport. Mechanics, Pacing und Boss-Gate bestanden.
+- Die kurze 9er-Matrix hatte keine Laufzeitfehler. Die belastbare Verteilung realer Todesursachen und vollstaendige Runs werden im grossen Phase-17-Seed-Gate erhoben; eine Null-Todes-Stichprobe wird nicht als Prozentbeleg ausgegeben.
 
 ## Phase 14: HUD, Feedback und Run-Report
 

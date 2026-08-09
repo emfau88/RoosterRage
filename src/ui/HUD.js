@@ -65,6 +65,10 @@ export class HUD {
       <div class="hud__item" data-wave><span data-icon="wave"></span><span data-value>Wave 1/10</span></div>
       <div class="hud__item" data-time><span data-icon="timer"></span><span data-value>00:00</span></div>
       <div class="hud__bar"><span data-icon="xp"></span><div class="hud__bar-track"><div class="hud__bar-fill" data-xp></div></div></div>
+      <div class="hud__boss" data-boss>
+        <div class="hud__boss-heading"><strong data-boss-name>BROOD KING</strong><span data-boss-phase>PHASE 1/3</span></div>
+        <div class="hud__boss-track"><div class="hud__boss-fill" data-boss-fill></div></div>
+      </div>
       <div class="hud__loadout">
         <div class="hud__upgrades" data-active-loadout></div>
         <div class="hud__upgrades hud__upgrades--passive" data-passive-loadout></div>
@@ -103,6 +107,15 @@ export class HUD {
     this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10`;
     this.root.querySelector('[data-time] [data-value]').textContent = this.formatTime(state.elapsed);
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
+    const bossHud = this.root.querySelector('[data-boss]');
+    bossHud.classList.toggle('is-visible', Boolean(state.boss));
+    if (state.boss) {
+      bossHud.querySelector('[data-boss-name]').textContent = state.boss.name;
+      bossHud.querySelector('[data-boss-phase]').textContent = state.boss.protected
+        ? 'ENTRY SHIELD'
+        : `PHASE ${state.boss.phase}/3`;
+      bossHud.querySelector('[data-boss-fill]').style.width = `${Math.max(0, state.boss.hp / state.boss.maxHp) * 100}%`;
+    }
     this.renderLoadout(state.loadout);
   }
 
@@ -212,13 +225,18 @@ export class HUD {
   }
 
   showWaveBanner(wave, config) {
+    this.showEncounterBanner(`Wave ${wave}: ${config.name}`, config.intent ?? '', config.bossWave ? 'boss' : 'wave');
+  }
+
+  showEncounterBanner(title, subtitle = '', tier = 'elite') {
     window.clearTimeout(this.waveBannerTimeout);
-    this.waveBanner.textContent = `Wave ${wave}: ${config.name}`;
+    this.waveBanner.className = `wave-banner wave-banner--${tier}`;
+    this.waveBanner.innerHTML = `<strong>${title}</strong>${subtitle ? `<small>${subtitle}</small>` : ''}`;
     this.waveBanner.classList.remove('is-visible');
     requestAnimationFrame(() => this.waveBanner.classList.add('is-visible'));
     this.waveBannerTimeout = window.setTimeout(() => {
       this.waveBanner.classList.remove('is-visible');
-    }, 1500);
+    }, tier === 'boss' ? 2300 : 1700);
   }
 
   setJoystick(vector) {

@@ -109,6 +109,7 @@ async function run() {
       boss: window.__ROOSTER_TEST__.getEnemySnapshot().find((enemy) => enemy.type === 'boss')
     }));
     assert(!bossSpawn.state.gameEnded, 'Wave cleared in the same frame as its boss spawn.', bossSpawn);
+    await page.waitForTimeout(1400);
     await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 999999), bossSpawn.boss.id);
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().choosingUpgrade);
     await resolveSelections(page);

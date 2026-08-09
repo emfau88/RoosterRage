@@ -76,21 +76,29 @@ export class CombatFeedbackSystem {
     const count = options.count ?? 1;
     const spread = options.spread ?? 0;
     const heavy = options.heavy ?? false;
+    const radial = options.radial ?? false;
     const dangerColor = heavy ? 0xff3048 : 0xff5268;
     const accentColor = config.color ?? 0xffd35c;
     const angle = Math.atan2(player.sprite.y - enemy.sprite.y, player.sprite.x - enemy.sprite.x);
     const graphics = this.scene.add.graphics().setDepth(12);
-    for (let index = 0; index < count; index += 1) {
-      const progress = count === 1 ? 0.5 : index / (count - 1);
-      const shotAngle = angle - spread / 2 + spread * progress;
-      const length = heavy ? 360 : 250;
-      graphics.lineStyle(heavy ? 4 : 2, dangerColor, heavy ? 0.62 : 0.42);
-      graphics.lineBetween(
-        enemy.sprite.x,
-        enemy.sprite.y,
-        enemy.sprite.x + Math.cos(shotAngle) * length,
-        enemy.sprite.y + Math.sin(shotAngle) * length
-      );
+    if (radial) {
+      graphics.lineStyle(5, dangerColor, 0.68);
+      graphics.strokeCircle(enemy.sprite.x, enemy.sprite.y, options.radius ?? 150);
+      graphics.fillStyle(dangerColor, 0.08);
+      graphics.fillCircle(enemy.sprite.x, enemy.sprite.y, options.radius ?? 150);
+    } else {
+      for (let index = 0; index < count; index += 1) {
+        const progress = count === 1 ? 0.5 : index / (count - 1);
+        const shotAngle = angle - spread / 2 + spread * progress;
+        const length = heavy ? 360 : 250;
+        graphics.lineStyle(heavy ? 4 : 2, dangerColor, heavy ? 0.62 : 0.42);
+        graphics.lineBetween(
+          enemy.sprite.x,
+          enemy.sprite.y,
+          enemy.sprite.x + Math.cos(shotAngle) * length,
+          enemy.sprite.y + Math.sin(shotAngle) * length
+        );
+      }
     }
     const charge = this.scene.add.circle(
       enemy.sprite.x,
@@ -113,6 +121,13 @@ export class CombatFeedbackSystem {
       targets: charge,
       scale: { from: heavy ? 1.5 : 1.35, to: 0.42 },
       duration: Math.max(80, duration - 35)
+    });
+    this.scene.telemetry.record('enemyTelegraphShown', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      enemyType: enemy.type,
+      duration,
+      heavy,
+      radial
     });
   }
 
