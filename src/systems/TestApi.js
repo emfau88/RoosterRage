@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { Enemy } from '../entities/Enemy.js';
 
 export function shouldInstallTestApi() {
   return import.meta.env.DEV;
@@ -27,6 +26,7 @@ export function installTestApi(scene) {
       voidZones: scene.voidZones.length,
       xpOrbs: scene.xpOrbs.length,
       wave: scene.waveSystem.currentWave,
+      waveName: scene.waveSystem.waves[scene.waveSystem.currentWave - 1]?.name ?? null,
       roosterId: scene.player.roosterId,
       shots: scene.debugStats.shots,
       hits: scene.debugStats.hits,
@@ -50,6 +50,9 @@ export function installTestApi(scene) {
       lastHitAt: scene.debugStats.lastHitAt,
       lastError: scene.debugStats.lastError,
       telemetry: scene.telemetry.getSummary(scene.time.now),
+      pools: scene.objectPools.getStats(),
+      seed: scene.rng.seed,
+      profile: scene.bot.strategy,
       player: {
         x: scene.player.sprite.x,
         y: scene.player.sprite.y,
@@ -85,6 +88,23 @@ export function installTestApi(scene) {
       laserCombRank: scene.laserComb.rank,
       upgradeRanks: Object.fromEntries(scene.player.upgradeRanks)
     }),
+    getProgressionState: () => ({
+      level: scene.player.level,
+      xp: scene.player.xp,
+      xpToNext: scene.player.xpToNext,
+      choosingUpgrade: scene.isChoosingUpgrade,
+      pendingLevelUps: scene.runState.pendingLevelUps,
+      regularChoices: scene.runState.regularChoices,
+      queuedRewards: [...scene.runState.rewardQueue],
+      currentSelection: scene.runState.currentSelection
+        ? { ...scene.runState.currentSelection }
+        : null,
+      choices: scene.pendingUpgradeChoices?.map((upgrade) => ({
+        id: upgrade.id,
+        rewardKind: upgrade.rewardKind ?? null,
+        rewardPriority: upgrade.rewardPriority ?? null
+      })) ?? []
+    }),
     getRoosterCatalog: () => scene.roosterClasses.getDefinitions().map((definition) => ({
       id: definition.id,
       name: definition.name,
@@ -93,6 +113,19 @@ export function installTestApi(scene) {
       primary: { ...definition.primary },
       passive: definition.passive
     })),
+    getWaveCatalog: () => scene.waveSystem.getWaveCatalog(),
+    getDeterminismSnapshot: () => ({
+      seed: scene.rng.seed,
+      profile: scene.bot.strategy,
+      rng: scene.rng.getState(),
+      wave: scene.waveSystem.currentWave,
+      spawnQueue: scene.waveSystem.spawnQueue.map((enemy) => enemy.type),
+      events: scene.telemetry.getEventSequence([
+        'waveStarted', 'enemySpawned', 'upgradeOffered', 'upgradeChosen'
+      ]).map(({ type, wave, id, source, choices, upgrade }) => ({
+        type, wave, id, source, choices, upgrade
+      }))
+    }),
     getRoosterVisualState: () => ({
       id: scene.player.roosterId,
       scale: scene.player.baseScale,
@@ -128,10 +161,14 @@ export function installTestApi(scene) {
     getEnemySnapshot: () => scene.enemies.map((enemy) => ({
       id: enemy.id,
       type: enemy.type,
+      role: enemy.role,
       hp: enemy.hp,
       maxHp: enemy.maxHp,
       x: enemy.sprite.x,
       y: enemy.sprite.y,
+      bossPhaseIndex: enemy.bossPhaseIndex,
+      ability: enemy.ability ? { ...enemy.ability } : null,
+      heavyProjectile: enemy.heavyProjectile ? { ...enemy.heavyProjectile } : null,
       knockbackUntil: enemy.knockbackUntil,
       active: enemy.sprite.active
     })),
@@ -174,7 +211,32 @@ export function installTestApi(scene) {
     shouldGuaranteeSpectacle: () => scene.upgradeSystem.shouldGuaranteeSpectacle(scene.player),
     setPlayerLevel: (level) => {
       scene.player.level = Math.max(1, Math.round(level));
+      scene.player.xpToNext = scene.player.getXpRequirement(scene.player.level);
       return scene.player.level;
+    },
+    grantXp: (amount) => {
+      const granted = Math.max(0, Number(amount) || 0);
+      const startingLevel = scene.player.level;
+      const levelsGained = scene.player.addXp(granted);
+      scene.debugStats.xpCollected += granted;
+      scene.telemetry.addXp(granted, scene.time.now, scene.waveSystem.currentWave);
+      for (let index = 0; index < levelsGained; index += 1) {
+        scene.debugStats.levelUps += 1;
+        scene.telemetry.addLevelUp(
+          scene.time.now,
+          scene.waveSystem.currentWave,
+          startingLevel + index + 1
+        );
+      }
+      if (levelsGained > 0) {
+        scene.startLevelUp(levelsGained);
+      }
+      scene.updateHud();
+      return { levelsGained, ...window.__ROOSTER_TEST__.getProgressionState() };
+    },
+    startChestReward: (kind = 'elite') => {
+      scene.runState.startChestReward(kind);
+      return window.__ROOSTER_TEST__.getProgressionState();
     },
     setPlayerCombatModifiers: (modifiers = {}) => {
       Object.entries(modifiers).forEach(([key, value]) => {
@@ -231,22 +293,76 @@ export function installTestApi(scene) {
         spitter: () => scene.waveSystem.makeSpitter(),
         'fan-spitter': () => scene.waveSystem.makeFanSpitter(),
         bomber: () => scene.waveSystem.makeBomber(),
+        'elite-runner': () => scene.waveSystem.makeEliteRunner(),
+        'elite-brute': () => scene.waveSystem.makeEliteBrute(),
+        'elite-spitter': () => scene.waveSystem.makeEliteSpitter(),
         boss: () => scene.waveSystem.makeBoss()
       };
       const config = { ...(makers[type]?.() ?? scene.waveSystem.makeSlime()), ...overrides };
-      const enemy = new Enemy(scene, x, y, config);
-      scene.enemies.push(enemy);
-      scene.enemyGroup.add(enemy.sprite);
-      return enemy.id;
+      return scene.entities.spawnEnemyAt(config, x, y)?.id ?? null;
+    },
+    spawnSafeEnemyType: (type = 'slime', overrides = {}) => {
+      const config = {
+        ...scene.waveSystem.makeEnemyFromSpec({ kind: type }),
+        speed: 0,
+        damage: 0,
+        hp: 9999,
+        spawnMinDistance: 280,
+        ...overrides
+      };
+      const enemy = scene.spawnEnemy(config);
+      if (!enemy) {
+        return null;
+      }
+      return {
+        id: enemy.id,
+        x: enemy.sprite.x,
+        y: enemy.sprite.y,
+        distance: Phaser.Math.Distance.Between(
+          scene.player.sprite.x,
+          scene.player.sprite.y,
+          enemy.sprite.x,
+          enemy.sprite.y
+        )
+      };
+    },
+    pauseWaves: () => {
+      scene.waveSystem.active = false;
+      return true;
+    },
+    startWave: (waveNumber) => {
+      const index = Phaser.Math.Clamp(Math.round(waveNumber) - 1, 0, scene.waveSystem.waves.length - 1);
+      const wave = scene.waveSystem.waves[index];
+      scene.waveSystem.currentWave = index + 1;
+      scene.waveSystem.active = true;
+      scene.waveSystem.completed = false;
+      scene.waveSystem.spawned = 0;
+      scene.waveSystem.waitingForClear = false;
+      scene.waveSystem.spawnQueue = scene.waveSystem.buildSpawnQueue(wave);
+      scene.waveSystem.director.start(wave, scene.waveSystem.spawnQueue, scene.time.now);
+      scene.onWaveStarted?.(index + 1, wave);
+      return index + 1;
+    },
+    getSpawnDirectorState: () => scene.waveSystem.director.getState(),
+    getXpSnapshot: () => scene.xpOrbs.map((orb) => ({
+      value: orb.value,
+      x: orb.sprite.x,
+      y: orb.sprite.y,
+      scale: orb.sprite.scaleX,
+      active: orb.sprite.active
+    })),
+    spawnXpCluster: (count = 20, value = 3, x = 700, y = 450) => {
+      for (let index = 0; index < count; index += 1) {
+        scene.spawnXp(x + (index % 4) * 5, y + Math.floor(index / 4) * 5, value);
+      }
+      return window.__ROOSTER_TEST__.getXpSnapshot();
     },
     damageEnemyById: (id, amount) => {
       const enemy = scene.enemies.find((item) => item.id === id);
       if (!enemy) {
         return false;
       }
-      if (enemy.takeDamage(amount)) {
-        scene.killEnemy(enemy);
-      }
+      scene.damageEnemy(enemy, amount, enemy.sprite.x, enemy.sprite.y, { source: 'test-api' });
       return true;
     },
     forceSpawnEnemy: (x = scene.player.sprite.x + 170, y = scene.player.sprite.y) => {
@@ -276,10 +392,80 @@ export function installTestApi(scene) {
       scene.player.shotCount = Phaser.Math.Clamp(count, 1, 3);
       return scene.player.shotCount;
     },
-    enableBot: (strategy = 'offense') => {
+    enableBot: (strategy = 'average') => {
       scene.bot.enabled = true;
       scene.bot.strategy = strategy;
+      scene.telemetry.summary.profile = strategy;
       return { enabled: scene.bot.enabled, strategy: scene.bot.strategy };
+    },
+    getPoolStats: () => scene.objectPools.getStats(),
+    exerciseFxBudget: (count = 140) => {
+      const fx = [];
+      for (let index = 0; index < count; index += 1) {
+        const item = scene.objectPools.createFx(() => scene.add.circle(
+          40 + (index % 20) * 4,
+          40 + Math.floor(index / 20) * 4,
+          2,
+          0xffffff,
+          0.01
+        ));
+        if (item) {
+          fx.push(item);
+        }
+      }
+      const saturated = scene.objectPools.getStats().fx;
+      fx.forEach((item) => item.destroy());
+      return { saturated, released: scene.objectPools.getStats().fx };
+    },
+    spawnLoadScenario: (enemyCount = 100, projectileCount = 240) => {
+      scene.waveSystem.active = false;
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
+      const columns = 20;
+      for (let index = 0; index < enemyCount; index += 1) {
+        const x = 90 + (index % columns) * 64;
+        const y = 90 + Math.floor(index / columns) * 70;
+        scene.entities.spawnEnemyAt({
+          ...scene.waveSystem.makeSlime(0.6),
+          hp: 99999,
+          speed: 0,
+          damage: 0,
+          xpOverride: 0
+        }, x, y);
+      }
+      for (let index = 0; index < projectileCount; index += 1) {
+        const target = scene.enemies[index % Math.max(1, scene.enemies.length)];
+        if (!target) {
+          break;
+        }
+        const angle = (Math.PI * 2 * index) / Math.max(1, projectileCount);
+        const projectile = scene.spawnSpecialProjectileFrom(
+          scene.player.sprite.x,
+          scene.player.sprite.y,
+          angle,
+          target,
+          {
+            damage: 1,
+            speed: 42,
+            life: 8000,
+            homing: false,
+            canCrit: false,
+            source: 'load-test',
+            sfxVolume: 0
+          }
+        );
+        if (projectile) {
+          projectile.sprite.setPosition(
+            scene.player.sprite.x + Math.cos(angle) * (70 + (index % 8) * 18),
+            scene.player.sprite.y + Math.sin(angle) * (70 + (index % 8) * 18)
+          );
+        }
+      }
+      return {
+        enemies: scene.enemies.length,
+        projectiles: scene.projectiles.length,
+        pools: scene.objectPools.getStats()
+      };
     },
     restart: () => scene.scene.restart(),
     getTelemetry: () => scene.telemetry.getSummary(scene.time.now),

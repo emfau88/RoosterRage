@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { getPlayerProfile } from '../data/playerProfiles.js';
 
 export class PlayerInputSystem {
   constructor(scene, arenaWidth, arenaHeight) {
@@ -86,19 +87,24 @@ export class PlayerInputSystem {
       )
       : Infinity;
 
-    if (nearestEnemy && nearestDistance < 220) {
-      movement.add(playerPosition.clone()
-        .subtract(new Phaser.Math.Vector2(nearestEnemy.sprite.x, nearestEnemy.sprite.y))
+    const profile = getPlayerProfile(this.scene.bot.strategy);
+    const bossKiting = this.addBossKiting(movement, playerPosition, profile);
+    const avoidingProjectile = this.addProjectileAvoidance(movement, playerPosition, profile);
+    if (!bossKiting && nearestEnemy && nearestDistance < profile.dangerRadius) {
+      this.addEnemyAvoidance(movement, playerPosition, profile);
+    } else if (!bossKiting && nearestEnemy && profile.pressureWeight > 0) {
+      movement.add(new Phaser.Math.Vector2(nearestEnemy.sprite.x, nearestEnemy.sprite.y)
+        .subtract(playerPosition)
         .normalize()
-        .scale(1.35));
+        .scale(profile.pressureWeight));
     }
 
     const nearestOrb = this.findNearestXpOrb();
-    if (nearestOrb && nearestDistance > 145) {
+    if (!bossKiting && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
       movement.add(new Phaser.Math.Vector2(nearestOrb.sprite.x, nearestOrb.sprite.y)
         .subtract(playerPosition)
         .normalize()
-        .scale(0.9));
+        .scale(profile.pickupWeight));
     } else if (!nearestEnemy) {
       movement.add(this.scene.bot.target.clone().subtract(playerPosition).normalize());
       if (Phaser.Math.Distance.Between(
@@ -108,21 +114,121 @@ export class PlayerInputSystem {
         this.scene.bot.target.y
       ) < 80) {
         this.scene.bot.target.set(
-          Phaser.Math.Between(260, this.arenaWidth - 260),
-          Phaser.Math.Between(200, this.arenaHeight - 200)
+          this.scene.rng.int(260, this.arenaWidth - 260, 'bot-movement'),
+          this.scene.rng.int(200, this.arenaHeight - 200, 'bot-movement')
         );
       }
     }
 
     const edgePadding = 150;
-    if (playerPosition.x < edgePadding) movement.x += 0.9;
-    if (playerPosition.x > this.arenaWidth - edgePadding) movement.x -= 0.9;
-    if (playerPosition.y < edgePadding) movement.y += 0.9;
-    if (playerPosition.y > this.arenaHeight - edgePadding) movement.y -= 0.9;
+    if (playerPosition.x < edgePadding) movement.x += profile.edgeWeight;
+    if (playerPosition.x > this.arenaWidth - edgePadding) movement.x -= profile.edgeWeight;
+    if (playerPosition.y < edgePadding) movement.y += profile.edgeWeight;
+    if (playerPosition.y > this.arenaHeight - edgePadding) movement.y -= profile.edgeWeight;
     if (movement.lengthSq() > 1) {
       movement.normalize();
     }
     return movement;
+  }
+
+  addBossKiting(movement, playerPosition, profile) {
+    const boss = this.scene.enemies.find((enemy) => enemy.boss && enemy.sprite.active);
+    if (!boss) {
+      return false;
+    }
+    const bossPosition = new Phaser.Math.Vector2(boss.sprite.x, boss.sprite.y);
+    const away = playerPosition.clone().subtract(bossPosition);
+    const distance = Math.max(1, away.length());
+    away.normalize();
+    const tangent = new Phaser.Math.Vector2(-away.y, away.x)
+      .scale(this.scene.bot.orbitDirection ?? 1);
+    movement.add(tangent.scale(1.15));
+    if (distance < 265) {
+      movement.add(away.scale(1.8 * (1 - distance / 265)));
+    } else if (distance > 390) {
+      movement.subtract(away.scale(Math.min(0.45, (distance - 390) / 300)));
+    }
+    if (profile.id === 'novice') {
+      movement.scale(0.72);
+    }
+    return true;
+  }
+
+  addEnemyAvoidance(movement, playerPosition, profile) {
+    const radius = profile.dangerRadius;
+    this.scene.enemies.forEach((enemy) => {
+      if (!enemy.sprite.active) {
+        return;
+      }
+      const enemyPosition = new Phaser.Math.Vector2(enemy.sprite.x, enemy.sprite.y);
+      const distance = playerPosition.distance(enemyPosition);
+      if (distance <= 0 || distance >= radius) {
+        return;
+      }
+      const urgency = 0.3 + (1 - distance / radius) * 1.35;
+      movement.add(playerPosition.clone()
+        .subtract(enemyPosition)
+        .normalize()
+        .scale(profile.evadeWeight * urgency));
+    });
+  }
+
+  addProjectileAvoidance(movement, playerPosition, profile) {
+    const radius = profile.projectileDangerRadius ?? 0;
+    if (radius <= 0) {
+      return false;
+    }
+    let mostUrgent = null;
+    this.scene.enemyProjectiles.forEach((projectile) => {
+      if (!projectile.sprite.active) {
+        return;
+      }
+      const threatPosition = new Phaser.Math.Vector2(projectile.sprite.x, projectile.sprite.y);
+      const distance = playerPosition.distance(threatPosition);
+      const velocity = projectile.sprite.body?.velocity;
+      const speedSq = velocity ? velocity.x * velocity.x + velocity.y * velocity.y : 0;
+      if (distance <= 0 || distance >= radius || speedSq <= 0) {
+        return;
+      }
+      const toPlayer = playerPosition.clone().subtract(threatPosition);
+      const secondsToClosest = Phaser.Math.Clamp(
+        (velocity.x * toPlayer.x + velocity.y * toPlayer.y) / speedSq,
+        0,
+        1.25
+      );
+      if (secondsToClosest <= 0) {
+        return;
+      }
+      const closestPoint = threatPosition.clone().add(new Phaser.Math.Vector2(
+        velocity.x * secondsToClosest,
+        velocity.y * secondsToClosest
+      ));
+      const missDistance = playerPosition.distance(closestPoint);
+      if (missDistance > 58) {
+        return;
+      }
+      const urgency = missDistance + secondsToClosest * 72;
+      if (!mostUrgent || urgency < mostUrgent.urgency) {
+        mostUrgent = { closestPoint, velocity, distance, urgency, secondsToClosest };
+      }
+    });
+    if (!mostUrgent) {
+      return false;
+    }
+    let dodge = playerPosition.clone().subtract(mostUrgent.closestPoint);
+    if (dodge.lengthSq() < 4) {
+      dodge = new Phaser.Math.Vector2(-mostUrgent.velocity.y, mostUrgent.velocity.x);
+      const arenaCenter = new Phaser.Math.Vector2(this.arenaWidth / 2, this.arenaHeight / 2);
+      if (playerPosition.clone().add(dodge).distance(arenaCenter)
+        > playerPosition.clone().subtract(dodge).distance(arenaCenter)) {
+        dodge.negate();
+      }
+    }
+    const timeUrgency = 1 - mostUrgent.secondsToClosest / 1.25;
+    movement.add(dodge.normalize().scale(
+      (profile.projectileEvadeWeight ?? 1) * (0.6 + timeUrgency)
+    ));
+    return true;
   }
 
   findNearestXpOrb() {

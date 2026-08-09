@@ -1,9 +1,21 @@
 import Phaser from 'phaser';
 
 export class Projectile {
-  constructor(scene, x, y, angle, damage, isFireEgg, target, targetOffset = 0, options = {}) {
+  constructor(scene) {
     this.scene = scene;
+    this.destroyed = true;
+    this.hitEnemies = new Set();
+    this.sprite = scene.physics.add.sprite(0, 0, 'egg');
+    this.sprite.setActive(false).setVisible(false);
+    this.sprite.disableBody(true, true);
+    this.sprite.entity = this;
+    this.trail = scene.add.circle(0, 0, 8, 0xfffbef, 0.18).setDepth(3).setVisible(false);
+  }
+
+  reset(x, y, angle, damage, isFireEgg, target, targetOffset = 0, options = {}) {
+    const { scene } = this;
     this.damage = damage;
+    this.source = options.source ?? (isFireEgg ? 'fire-eggs' : 'base-egg');
     this.target = target;
     this.targetOffset = targetOffset;
     this.laneOffset = options.laneOffset ?? targetOffset;
@@ -22,19 +34,23 @@ export class Projectile {
     this.chainRemaining = options.chainCount ?? 0;
     this.chainRadius = options.chainRadius ?? 0;
     this.chainDamageRatio = options.chainDamageRatio ?? 0;
-    this.hitEnemies = new Set();
+    this.hitEnemies.clear();
     this.hitRadius = (options.hitRadius ?? 24) + (scene.player?.projectileSizeBonus ?? 0);
     this.destroyed = false;
 
-    this.sprite = scene.physics.add.sprite(x, y, options.texture ?? (isFireEgg ? 'fire-egg' : 'egg'));
+    this.sprite.enableBody(true, x, y, true, true);
+    this.sprite.setTexture(options.texture ?? (isFireEgg ? 'fire-egg' : 'egg'));
     this.sprite.setCircle(options.bodyRadius ?? (9 + (scene.player?.projectileSizeBonus ?? 0) * 0.45));
     this.sprite.setRotation(angle);
     this.sprite.setScale((options.scale ?? (isFireEgg ? 1.18 : 1)) + (scene.player?.projectileSizeBonus ?? 0) * 0.018);
     this.sprite.setDepth(5);
-    this.sprite.entity = this;
-    this.trail = scene.add.circle(x, y, options.trailRadius ?? (isFireEgg ? 10 : 8), options.trailColor ?? (isFireEgg ? 0xff6a28 : 0xfffbef), options.trailAlpha ?? 0.18);
-    this.trail.setDepth(3);
+    this.sprite.clearTint();
+    this.trail.setPosition(x, y);
+    this.trail.setRadius(options.trailRadius ?? (isFireEgg ? 10 : 8));
+    this.trail.setFillStyle(options.trailColor ?? (isFireEgg ? 0xff6a28 : 0xfffbef), options.trailAlpha ?? 0.18);
+    this.trail.setScale(1).setAlpha(options.trailAlpha ?? 0.18).setVisible(true).setActive(true);
     this.setVelocity(angle);
+    return this;
   }
 
   update(delta) {
@@ -74,11 +90,19 @@ export class Projectile {
       return;
     }
     this.destroyed = true;
-    if (this.trail.active) {
-      this.trail.destroy();
-    }
-    if (this.sprite.active) {
-      this.sprite.destroy();
-    }
+    this.scene.objectPools.release(this);
+  }
+
+  deactivate() {
+    this.target = null;
+    this.hitEnemies.clear();
+    this.sprite.setVelocity(0, 0);
+    this.sprite.disableBody(true, true);
+    this.trail.setActive(false).setVisible(false);
+  }
+
+  dispose() {
+    this.trail.destroy();
+    this.sprite.destroy();
   }
 }

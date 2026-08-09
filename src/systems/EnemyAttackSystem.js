@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { Enemy } from '../entities/Enemy.js';
 import { EnemyProjectile } from '../entities/EnemyProjectile.js';
 
 export class EnemyAttackSystem {
@@ -58,15 +57,11 @@ export class EnemyAttackSystem {
 
   updateBoss(enemy, player) {
     const hpRatio = enemy.hp / enemy.maxHp;
-    if (!enemy.phaseTwoTriggered && hpRatio <= 0.6) {
-      enemy.phaseTwoTriggered = true;
-      this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, 4);
-    }
-    if (!enemy.phaseThreeTriggered && hpRatio <= 0.3) {
-      enemy.phaseThreeTriggered = true;
-      if (enemy.ability?.kind === 'fan') {
-        enemy.ability = { ...enemy.ability, count: 7, spread: 1.45, cooldown: 2100 };
-      }
+    let phase = enemy.bossPhases[enemy.bossPhaseIndex];
+    while (phase && hpRatio <= phase.threshold) {
+      this.triggerBossPhase(enemy, phase);
+      enemy.bossPhaseIndex += 1;
+      phase = enemy.bossPhases[enemy.bossPhaseIndex];
     }
     if (
       enemy.heavyProjectile
@@ -97,6 +92,35 @@ export class EnemyAttackSystem {
     }
   }
 
+  triggerBossPhase(enemy, phase) {
+    enemy.speed *= phase.speedMultiplier ?? 1;
+    if (phase.ability && enemy.ability) {
+      enemy.ability = { ...enemy.ability, ...phase.ability };
+    }
+    if (phase.heavyProjectile && enemy.heavyProjectile) {
+      enemy.heavyProjectile = { ...enemy.heavyProjectile, ...phase.heavyProjectile };
+    }
+    phase.adds?.forEach((add) => {
+      this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, add.count, add);
+    });
+
+    const ring = this.scene.add.circle(enemy.sprite.x, enemy.sprite.y, 62, 0xff6a28, 0.12)
+      .setStrokeStyle(5, 0xffd35a, 0.9)
+      .setDepth(9);
+    this.scene.tweens.add({
+      targets: ring,
+      alpha: 0,
+      scale: 2.35,
+      duration: 520,
+      onComplete: () => ring.destroy()
+    });
+    this.scene.cameras.main.shake(140, 0.003);
+    this.scene.telemetry.record('bossPhaseStarted', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      phase: enemy.bossPhaseIndex + 1
+    });
+  }
+
   fireFan(enemy, angle) {
     const spread = enemy.ability.spread ?? 0.55;
     const count = enemy.ability.count ?? 3;
@@ -114,13 +138,19 @@ export class EnemyAttackSystem {
 
   spawnProjectile(x, y, angle, config) {
     const muzzleDistance = config.muzzleDistance ?? 30;
-    const projectile = new EnemyProjectile(
-      this.scene,
-      x + Math.cos(angle) * muzzleDistance,
-      y + Math.sin(angle) * muzzleDistance,
-      angle,
-      config
+    const projectile = this.scene.objectPools.acquire(
+      'enemyProjectile',
+      () => new EnemyProjectile(this.scene),
+      (item) => item.reset(
+        x + Math.cos(angle) * muzzleDistance,
+        y + Math.sin(angle) * muzzleDistance,
+        angle,
+        config
+      )
     );
+    if (!projectile) {
+      return null;
+    }
     this.scene.enemyProjectiles.push(projectile);
     this.scene.enemyProjectileGroup.add(projectile.sprite);
     return projectile;
@@ -142,6 +172,7 @@ export class EnemyAttackSystem {
       pulse: true,
       heavy: true,
       warningColor: 0xff3048,
+      source: 'boss-fireball',
       tint: false,
       ...config
     };
@@ -167,19 +198,38 @@ export class EnemyAttackSystem {
     return flash;
   }
 
-  spawnAddsNear(x, y, count) {
+  spawnAddsNear(x, y, count, spec = { kind: 'slime', multiplier: 0.8 }) {
     for (let index = 0; index < count; index += 1) {
       const angle = (Math.PI * 2 * index) / count;
-      const config = this.scene.waveSystem.makeSlime(0.8);
-      const enemy = new Enemy(
-        this.scene,
-        x + Math.cos(angle) * 80,
-        y + Math.sin(angle) * 80,
-        config
-      );
-      this.scene.enemies.push(enemy);
-      this.scene.enemyGroup.add(enemy.sprite);
+      const { x: spawnX, y: spawnY } = this.findSafeAddSpawn(x, y, angle, 210);
+      const config = this.scene.waveSystem.makeEnemyFromSpec(spec);
+      this.scene.entities.spawnEnemyAt(config, spawnX, spawnY);
     }
+  }
+
+  findSafeAddSpawn(originX, originY, baseAngle, minDistance) {
+    const player = this.scene.player.sprite;
+    const arenaWidth = this.scene.entities.arenaWidth;
+    const arenaHeight = this.scene.entities.arenaHeight;
+    const margin = 54;
+    let farthest = null;
+
+    for (let attempt = 0; attempt < 12; attempt += 1) {
+      const radius = 145 + (attempt % 3) * 55;
+      const angle = baseAngle + attempt * (Math.PI / 6);
+      const x = Phaser.Math.Clamp(originX + Math.cos(angle) * radius, margin, arenaWidth - margin);
+      const y = Phaser.Math.Clamp(originY + Math.sin(angle) * radius, margin, arenaHeight - margin);
+      const distance = Phaser.Math.Distance.Between(x, y, player.x, player.y);
+      const candidate = { x, y, distance };
+      if (!farthest || distance > farthest.distance) {
+        farthest = candidate;
+      }
+      if (distance >= minDistance) {
+        return candidate;
+      }
+    }
+
+    return this.scene.entities.findSafeEdgeSpawn(minDistance) ?? farthest;
   }
 
   explodeEnemy(enemy) {
@@ -207,17 +257,21 @@ export class EnemyAttackSystem {
       onComplete: () => ring.destroy()
     });
     if (Phaser.Math.Distance.Between(x, y, this.scene.player.sprite.x, this.scene.player.sprite.y) <= radius) {
+      const hpBefore = this.scene.player.hp;
       if (this.scene.player.damage(damage, this.scene.time.now)) {
+        const appliedDamage = Math.max(0, hpBefore - this.scene.player.hp);
         this.scene.combatFeedback.showPlayerDamage(
           this.scene.player.sprite.x,
           this.scene.player.sprite.y,
-          damage,
+          appliedDamage,
           { color: 0xff3048, heavy: true }
         );
         this.scene.telemetry.addDamageTaken(
-          damage,
+          appliedDamage,
           this.scene.time.now,
-          this.scene.waveSystem.currentWave
+          this.scene.waveSystem.currentWave,
+          `explosion:${enemy.type}`,
+          { lethal: this.scene.player.hp <= 0 }
         );
       }
     }

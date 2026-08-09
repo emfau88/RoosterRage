@@ -48,7 +48,7 @@ export class AudioSystem {
     }
 
     const rateJitter = options.rateJitter ?? config.rateJitter ?? 0;
-    const rate = (options.rate ?? 1) + (Math.random() * 2 - 1) * rateJitter;
+    const rate = (options.rate ?? 1) + (this.scene.rng.float(-1, 1, 'audio') * rateJitter);
     const volume = (options.volume ?? config.volume ?? 0.18) * this.masterVolume;
     const sound = this.scene.sound.add(key, { volume, rate });
 

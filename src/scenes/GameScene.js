@@ -15,7 +15,9 @@ import { CombatFeedbackSystem } from '../systems/CombatFeedbackSystem.js';
 import { EnemyAttackSystem } from '../systems/EnemyAttackSystem.js';
 import { EntitySystem } from '../systems/EntitySystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
+import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
 import { ProjectileLifecycleSystem } from '../systems/ProjectileLifecycleSystem.js';
+import { RandomSystem } from '../systems/RandomSystem.js';
 import { RunStateSystem } from '../systems/RunStateSystem.js';
 import { RoosterClassSystem } from '../systems/RoosterClassSystem.js';
 import { UpgradeSystem } from '../systems/UpgradeSystem.js';
@@ -66,6 +68,14 @@ export class GameScene extends Phaser.Scene {
     this.hazardZones = [];
     this.voidZones = [];
     this.xpOrbs = [];
+    const searchParams = new URLSearchParams(window.location.search);
+    const requestedSeed = searchParams.get('seed');
+    const requestedProfile = searchParams.get('profile') ?? 'manual';
+    const generatedSeed = globalThis.crypto?.getRandomValues
+      ? globalThis.crypto.getRandomValues(new Uint32Array(1))[0]
+      : Date.now();
+    this.rng = new RandomSystem(requestedSeed ?? generatedSeed);
+    this.objectPools = new ObjectPoolSystem(this);
     this.activeAbilities = new ActiveAbilitySystem(this);
     this.goldenEgg = this.activeAbilities.goldenEgg;
     this.molotovEgg = this.activeAbilities.molotovEgg;
@@ -74,12 +84,13 @@ export class GameScene extends Phaser.Scene {
     this.rocketEgg = this.activeAbilities.rocketEgg;
     this.laserComb = this.activeAbilities.laserComb;
     this.elapsed = 0;
-    this.telemetry = new Telemetry();
+    this.telemetry = new Telemetry({ seed: this.rng.seed, profile: requestedProfile });
     this.audio = new AudioSystem(this);
     this.bot = {
       enabled: false,
-      strategy: 'offense',
+      strategy: requestedProfile === 'manual' ? 'offense' : requestedProfile,
       upgradeReadyAt: 0,
+      orbitDirection: (this.rng.seed & 1) === 0 ? 1 : -1,
       target: new Phaser.Math.Vector2(ARENA_WIDTH / 2, ARENA_HEIGHT / 2)
     };
     this.debugStats = {
@@ -108,7 +119,7 @@ export class GameScene extends Phaser.Scene {
     this.applyResponsiveCameraZoom(this.scale.gameSize);
     this.scale.on(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
 
-    this.upgradeSystem = new UpgradeSystem();
+    this.upgradeSystem = new UpgradeSystem(undefined, this.rng);
     this.waveSystem = new WaveSystem(this);
     this.runState = new RunStateSystem(this);
     this.hud = new HUD(
@@ -147,6 +158,11 @@ export class GameScene extends Phaser.Scene {
       this.checkProjectileHits();
       this.projectileLifecycle.cleanup();
       this.xpOrbs.forEach((orb) => orb.update(this.player));
+      if (this.isChoosingUpgrade) {
+        this.telemetry.sample(time, this.getTelemetrySample());
+        this.updateHud();
+        return;
+      }
       this.waveSystem.update(time, this.enemies.length);
       this.autoShoot(time);
       this.telemetry.sample(time, this.getTelemetrySample());
@@ -344,8 +360,8 @@ export class GameScene extends Phaser.Scene {
     return this.enemyAttacks.spawnAddsNear(x, y, count);
   }
 
-  killEnemy(enemy) {
-    return this.entities.killEnemy(enemy);
+  killEnemy(enemy, source) {
+    return this.entities.killEnemy(enemy, source);
   }
 
   explodeEnemy(enemy) {
@@ -364,8 +380,8 @@ export class GameScene extends Phaser.Scene {
     return this.entities.removeOrb(orb);
   }
 
-  startLevelUp() {
-    return this.runState.startLevelUp();
+  startLevelUp(count) {
+    return this.runState.startLevelUp(count);
   }
 
   chooseUpgrade(upgrade) {
@@ -406,10 +422,38 @@ export class GameScene extends Phaser.Scene {
   }
 
   onWaveStarted(wave, config) {
-    this.telemetry.record('waveStarted', this.time.now, { wave, type: config.type });
+    this.hud.showWaveBanner(wave, config);
+    this.telemetry.record('waveStarted', this.time.now, {
+      wave,
+      name: config.name,
+      bossWave: config.bossWave ?? false
+    });
   }
 
   onWaveCompleted(wave) {
+    if (wave < this.waveSystem.totalWaves) {
+      const ratio = wave === this.waveSystem.totalWaves - 1 ? 0.5 : 0.06;
+      const hpBefore = this.player.hp;
+      this.player.heal(Math.max(6, Math.round(this.player.maxHp * ratio)));
+      const healed = this.player.hp - hpBefore;
+      if (healed > 0) {
+        this.telemetry.addHealing(healed, this.time.now, wave, 'wave-recovery');
+        const ring = this.add.circle(
+          this.player.sprite.x,
+          this.player.sprite.y,
+          34,
+          0x5cff74,
+          0.12
+        ).setStrokeStyle(4, 0xb9ff9c, 0.9).setDepth(17);
+        this.tweens.add({
+          targets: ring,
+          alpha: 0,
+          scale: 2.1,
+          duration: 420,
+          onComplete: () => ring.destroy()
+        });
+      }
+    }
     this.telemetry.record('waveCompleted', this.time.now, { wave });
   }
 
@@ -418,12 +462,30 @@ export class GameScene extends Phaser.Scene {
     const nearestEnemyDistance = nearestEnemy
       ? Phaser.Math.Distance.Between(this.player.sprite.x, this.player.sprite.y, nearestEnemy.sprite.x, nearestEnemy.sprite.y)
       : Infinity;
+    const poolStats = this.objectPools.getStats();
+    const objects = {
+      enemies: this.enemies.length,
+      projectiles: this.projectiles.length,
+      enemyProjectiles: this.enemyProjectiles.length,
+      xpOrbs: this.xpOrbs.length,
+      abilities: this.molotovProjectiles.length
+        + this.rocketProjectiles.length
+        + this.lightningBolts.length
+        + this.orbitEggs.length
+        + this.supportChickens.length
+        + this.hazardZones.length
+        + this.voidZones.length,
+      fx: poolStats.fx.active
+    };
+    objects.total = Object.values(objects).reduce((sum, value) => sum + value, 0);
     return {
       wave: this.waveSystem.currentWave,
       enemiesAlive: this.enemies.length,
-      projectilesAlive: this.projectiles.length,
+      projectilesAlive: this.projectiles.length + this.enemyProjectiles.length,
       hpRatio: this.player.hp / this.player.maxHp,
-      nearestEnemyDistance
+      nearestEnemyDistance,
+      objects,
+      poolStats
     };
   }
 
@@ -433,5 +495,6 @@ export class GameScene extends Phaser.Scene {
     this.roosterClasses?.destroy();
     removeTestApi();
     this.hud?.destroy();
+    this.objectPools?.destroy();
   }
 }

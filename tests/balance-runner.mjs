@@ -9,17 +9,32 @@ import {
 
 const artifactDir = path.join(projectRoot, 'test-results');
 let gameUrl;
-const strategies = (process.env.BALANCE_STRATEGIES ?? 'offense,random')
+const strategies = (process.env.BALANCE_STRATEGIES ?? 'average')
   .split(',')
   .map((strategy) => strategy.trim())
   .filter(Boolean);
-const maxRunMs = Number(process.env.BALANCE_MAX_MS ?? 180000);
+const maxRunMs = Number(process.env.BALANCE_MAX_MS ?? 570000);
 const roosterId = process.env.BALANCE_ROOSTER ?? 'ace';
+const reportPrefix = process.env.BALANCE_REPORT_PREFIX ?? 'balance';
+const seed = process.env.BALANCE_SEED ?? 'rooster-balance-v1';
+const WAVE_TARGETS = {
+  1: { durationMs: 25000, toleranceMs: 10000 },
+  2: { durationMs: 25000, toleranceMs: 10000 },
+  3: { durationMs: 35000, toleranceMs: 12000 },
+  4: { durationMs: 30000, toleranceMs: 11000 },
+  5: { durationMs: 35000, toleranceMs: 12000 },
+  6: { durationMs: 45000, toleranceMs: 15000 },
+  7: { durationMs: 35000, toleranceMs: 12000 },
+  8: { durationMs: 40000, toleranceMs: 14000 },
+  9: { durationMs: 50000, toleranceMs: 17000 },
+  10: { durationMs: 70000, toleranceMs: 22000 }
+};
 
 function scoreWave(wave) {
   const duration = wave.durationMs ?? 0;
-  const targetDuration = wave.wave === 10 ? 40000 : 21000;
-  const tolerance = wave.wave === 10 ? 18000 : 13000;
+  const target = WAVE_TARGETS[wave.wave] ?? WAVE_TARGETS[1];
+  const targetDuration = target.durationMs;
+  const tolerance = target.toleranceMs;
   const durationScore = clamp(1 - Math.abs(duration - targetDuration) / tolerance, 0, 1);
   const survivalScore = clamp((wave.minHpRatio - 0.15) / 0.45, 0, 1);
   const pressureScore = wave.damageTaken > 0 || wave.minHpRatio < 0.85 ? 1 : 0.45;
@@ -39,8 +54,9 @@ function scoreWave(wave) {
 
 function waveNotes(wave) {
   const notes = [];
-  const minDuration = wave.wave === 10 ? 30000 : 18000;
-  const maxDuration = wave.wave === 10 ? 52000 : 24000;
+  const target = WAVE_TARGETS[wave.wave] ?? WAVE_TARGETS[1];
+  const minDuration = target.durationMs - target.toleranceMs;
+  const maxDuration = target.durationMs + target.toleranceMs;
   if (wave.durationMs < minDuration) notes.push('too short');
   if (wave.durationMs > maxDuration) notes.push('too long');
   if (wave.minHpRatio > 0.9 && wave.damageTaken === 0) notes.push('too safe');
@@ -58,13 +74,26 @@ function scoreRun(summary) {
     ? waves.reduce((total, wave) => total + wave.analysis.score, 0) / waves.length
     : 0;
   const runtimeHealthy = !summary.lastError && summary.frames > 300 && summary.shots > 0 && summary.hits > 0;
-  const upgradeFlowOk = summary.upgradeChoices === 0 || summary.upgradePauseMs / summary.upgradeChoices < 1200;
+  const progression = summary.progression ?? {};
+  const recordedPauseMs = (summary.upgradePauseMs ?? 0) + (summary.chestPauseMs ?? 0);
+  const expectedSelectionMs = ((summary.upgradeChoices ?? 0) + (summary.chestChoices ?? 0)) * 4000;
+  const estimatedHumanElapsedMs = summary.elapsedMs + Math.max(0, expectedSelectionMs - recordedPauseMs);
+  const upgradeFlowOk = (summary.upgradeChoices === 0 || summary.upgradePauseMs / summary.upgradeChoices < 1200)
+    && (progression.pauseRatio ?? 0) <= 0.18;
+  const pacingOk = summary.outcome === 'victory' && (
+    estimatedHumanElapsedMs >= 420000
+    && estimatedHumanElapsedMs <= 540000
+    && summary.upgradeChoices >= 8
+    && summary.upgradeChoices <= 11
+  );
   return {
     runtimeHealthy,
     upgradeFlowOk,
+    pacingOk,
+    estimatedHumanElapsedMs,
     completedWaves,
     averageWaveScore,
-    verdict: runtimeHealthy && averageWaveScore >= 0.6 ? 'usable baseline' : 'needs attention',
+    verdict: runtimeHealthy && pacingOk && averageWaveScore >= 0.6 ? 'within target' : 'needs attention',
     waves
   };
 }
@@ -84,7 +113,10 @@ async function runOne(browser, strategy) {
   });
 
   try {
-    await page.goto(gameUrl, { waitUntil: 'domcontentloaded' });
+    const runUrl = new URL(gameUrl);
+    runUrl.searchParams.set('seed', seed);
+    runUrl.searchParams.set('profile', strategy);
+    await page.goto(runUrl.toString(), { waitUntil: 'domcontentloaded' });
     try {
       await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState, null, { timeout: 5000 });
     } catch (error) {
@@ -119,7 +151,9 @@ async function runOne(browser, strategy) {
     }
 
     const finalState = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    await page.screenshot({ path: path.join(artifactDir, `balance-${strategy}.png`) });
+    await page.screenshot({
+      path: path.join(artifactDir, `${reportPrefix}-${roosterId}-${strategy}.png`)
+    });
     const summary = finalState.telemetry;
     return {
       strategy,
@@ -140,12 +174,17 @@ function renderTextReport(results) {
     lines.push(`Verdict: ${result.analysis.verdict}`);
     lines.push(`Outcome: ${result.summary.outcome}`);
     lines.push(`Runtime healthy: ${result.analysis.runtimeHealthy ? 'yes' : 'no'}`);
+    lines.push(`Pacing target: ${result.analysis.pacingOk ? 'yes' : 'no'}`);
     lines.push(`Completed waves: ${result.analysis.completedWaves}`);
     lines.push(`Average wave score: ${result.analysis.averageWaveScore.toFixed(2)}`);
     lines.push(`Shots/Hits/Kills: ${result.summary.shots}/${result.summary.hits}/${result.summary.kills}`);
     lines.push(`Damage taken: ${result.summary.damageTaken}`);
     lines.push(`Level-ups: ${result.summary.levelUps}`);
     lines.push(`Upgrade choices: ${result.summary.upgradeChoices}`);
+    lines.push(`Real run time: ${(result.summary.elapsedMs / 1000).toFixed(1)}s`);
+    lines.push(`Estimated human time: ${(result.analysis.estimatedHumanElapsedMs / 1000).toFixed(1)}s`);
+    lines.push(`Upgrade pause ratio: ${((result.summary.progression?.pauseRatio ?? 0) * 100).toFixed(1)}%`);
+    lines.push(`First upgrade/spectacle: ${((result.summary.progression?.firstUpgradeAtMs ?? 0) / 1000).toFixed(1)}s/${((result.summary.progression?.firstSpectacleAtMs ?? 0) / 1000).toFixed(1)}s`);
     result.analysis.waves.forEach((wave) => {
       const seconds = ((wave.durationMs ?? 0) / 1000).toFixed(1);
       const notes = wave.analysis.notes.length ? ` (${wave.analysis.notes.join(', ')})` : '';
@@ -175,16 +214,22 @@ async function run() {
     const report = {
       generatedAt: new Date().toISOString(),
       target: {
-        waveDurationMs: [18000, 24000],
+        waveDurations: WAVE_TARGETS,
+        runDurationMs: [420000, 540000],
+        regularChoices: [8, 11],
+        maxPauseRatio: 0.18,
         maxIdleMs: 3000,
         preferredHpEndRatio: [0.35, 0.85],
         maxAverageUpgradePauseMs: 1200
       },
       results
     };
-    await fs.writeFile(path.join(artifactDir, 'balance-report.json'), JSON.stringify(report, null, 2));
+    await fs.writeFile(
+      path.join(artifactDir, `${reportPrefix}-${roosterId}-report.json`),
+      JSON.stringify(report, null, 2)
+    );
     const text = renderTextReport(results);
-    await fs.writeFile(path.join(artifactDir, 'balance-summary.txt'), text);
+    await fs.writeFile(path.join(artifactDir, `${reportPrefix}-${roosterId}-summary.txt`), text);
     console.log(text);
 
     const runtimeFailure = results.some((result) => result.errors.length || !result.analysis.runtimeHealthy);

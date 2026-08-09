@@ -20,11 +20,20 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 4 | Spielgefuehl und Lesbarkeit | Abgeschlossen |
 | 5 | Upgrade-System als Kernprodukt | Abgeschlossen |
 | 6 | Drei Rooster-Klassen | Abgeschlossen |
-| 7 | Wellen 1-10 kuratieren | Offen |
-| 8 | Test- und Balanceprogramm | Offen |
-| 9 | Vertical-Slice-Abnahme | Offen |
-| 10 | Meta, Retention und Umfang | Offen |
-| 11 | Kommerzielle Validierung | Offen |
+| 7 | Wellen 1-10 kuratieren | Abgeschlossen |
+| 8 | Messbarkeit und Lastfundament | Abgeschlossen |
+| 9 | Spawn Director und Schwarmkampf | Abgeschlossen |
+| 10 | Run-Pacing und XP-Oekonomie | Abgeschlossen |
+| 11 | Loadout- und EVO-System | Offen |
+| 12 | Arenen und Pickups | Offen |
+| 13 | Gegner-, Elite- und Boss-Paket | Offen |
+| 14 | HUD, Feedback und Run-Report | Offen |
+| 15 | Rooster-Tiefe und Build-Content | Offen |
+| 16 | Meta und Challenges | Offen |
+| 17 | Vertical-Slice-Abnahme | Offen |
+| 18 | Kommerzielle Validierung | Offen |
+
+Aktueller Fokus: Phase 11. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -216,73 +225,382 @@ Abnahmeprotokoll:
 
 ## Phase 7: Wellen 1-10 kuratieren
 
-Status: Offen
+Status: Abgeschlossen am 2026-08-09
 
-- Wellen 1-3 lehren Bewegung, Verfolgung und Zielprioritaet.
-- Wellen 4-6 kombinieren Fernkampf, Faecher und Bomber.
-- Wellen 7-9 nutzen Elites, gemischte Rollen und kontrollierten Arena-Druck.
-- Welle 10 bietet einen Boss mit verstaendlichen Phasen, Feuerball und Adds.
-- Pro Welle Budget, Zusammensetzung, Spawn-Rhythmus und Belastungsziel definieren.
-- Schwierigkeit durch Kombinationen statt nur HP-Skalierung erzeugen.
-- Spawn-Schutz und Mindestabstaende sicherstellen.
+- [x] Wellen 1-3 lehren Bewegung, Verfolgung und Zielprioritaet.
+- [x] Wellen 4-6 kombinieren Fernkampf, Faecher und erste Elite-Ziele.
+- [x] Wellen 7-9 nutzen Bomber, Elites, gemischte Rollen und kontrollierten Arena-Druck.
+- [x] Welle 10 bietet einen Boss mit verstaendlichen Phasen, Feuerball und unterschiedlichen Adds.
+- [x] Pro Welle Budget, exakte Zusammensetzung, Spawn-Rhythmus und Belastungsziel definieren.
+- [x] Schwierigkeit durch Kombinationen statt nur HP-Skalierung erzeugen.
+- [x] Spawn-Schutz und Mindestabstaende sicherstellen.
+- [x] Wellenwechsel mit Namen sichtbar machen.
 
 Abnahme: Normale Wellen dauern etwa 20-30 Sekunden, die Spannung steigt lesbar an und der Boss bildet einen klaren Abschluss.
 
-## Phase 8: Test- und Balanceprogramm
+Abnahmeprotokoll:
+
+- Alle zehn Wellen besitzen benannte Intentionen, Zielzeitfenster, feste Gegnerbudgets und deterministische Kompositionen.
+- Wave 1 startet nur mit Slimes; Runner, Brutes, Spitter, Fan-Spitter, Bomber und Elites werden schrittweise eingefuehrt und erst danach kombiniert.
+- Elites erscheinen in Wave 6, 8 und 9; Wave 10 besteht aus einem eigenen Boss-Finale.
+- Der Boss wechselt bei 65% und 32% HP in deklarative Phasen, wird beweglicher, verstaerkt Faecher und Feuerball und beschwoert erst Slimes, dann Runner plus Spitter.
+- Randspawns respektieren je Welle 260 bis 330 Einheiten Mindestabstand und verwenden bei beengter Geometrie den entferntesten geprueften Kandidaten.
+- Der Mechaniktest prueft Queue-Groesse und Typverteilung aller Wellen, zehn sichere Eckspawns und beide Bossphasen.
+- `npm run build`: bestanden.
+- `npm run test:mechanics`: bestanden.
+- `npm run test:smoke`: bestanden, inklusive Desktop, Restart, Mobile Portrait, Landscape und Fullscreen.
+- `npm run test:production`: bestanden; TestApi im Produktions-Build nicht vorhanden.
+- `npm run build -- --base=/RoosterRage/`: bestanden.
+- Zielzeiten und Feinbalance sind noch keine gemessenen Spielergebnisse; diese Validierung erfolgt in Phase 8.
+- Kein Balance-Run ausgefuehrt. Nach diesem abgeschlossenen Klassen-/Wellen-Paket ist ein gezielter Baseline-Run nun sinnvoll.
+
+## Benchmark und Produktentscheidung
+
+Survivor.io dient als Referenz fuer Dichte, Eskalation, Build-Evolution und mobile Lesbarkeit, nicht als Vorlage fuer seine spaetere Systemmenge oder Monetarisierung.
+
+- Offizieller Kern: Einhandsteuerung, Roguelite-Skillkombinationen und sehr grosse Gegnerhorden.
+- In-Run-Struktur: Startwaffe plus weitere aktive Skills, getrennte passive Skills, Rangketten und EVO-Kombinationen.
+- Encounter-Struktur: kontinuierlicher Zeitplan, Elites und Bossereignisse statt nur gleichmaessiger Spawns.
+- Karteninteraktion: Heilung, Bomben, XP-Magnete, Truhen und zerstoerbare Objekte.
+- Produktlektion: Der sofort verstaendliche Kern ist wertvoll; parallele Meta-Systeme, Waehrungen und wiederholte Belohnungsdialoge werden vor der Slice-Abnahme bewusst nicht kopiert.
+
+Quellen:
+
+- [Offizielle Google-Play-Beschreibung](https://play.google.com/store/apps/details?id=com.dxx.firenow)
+- [Apple: Waffen, EVOs, Pickups und Drohnen-Fusion](https://apps.apple.com/ph/iphone/story/id1641743438)
+- [Community-Dokumentation des Skill- und Slot-Systems](https://survivorio.fandom.com/wiki/Skills)
+- [Analyse von Timer, Bossankuendigungen und Karten-Pickups](https://www.pocketgamer.biz/how-innovation-and-iteration-has-transformed-survivorio/)
+
+## Verbindliche Zielwerte
+
+Diese Werte sind Start-Hypothesen. Sie werden nur anhand der definierten Gates veraendert, nicht nach einzelnen zufaelligen Test-Runs.
+
+### Run und Wellen
+
+| Welle | Zielzeit | Gesamtspawns | Ziel-Peak gleichzeitig | Dramaturgie |
+| --- | ---: | ---: | ---: | --- |
+| 1 | 25 s | 30 | 18 | Nur Fodder, Bewegung und Auto-Aim lernen |
+| 2 | 25 s | 38 | 24 | Runner-Pulse zwischen Fodder |
+| 3 | 35 s | 45 + 1 Elite | 28 | Erster Elite-Abschluss |
+| 4 | 30 s | 55 | 32 | Spitter hinter Nahkampfwand |
+| 5 | 35 s | 65 | 38 | Erster echter Crossfire-Druck |
+| 6 | 45 s | 75 + 1 Elite | 45 | Fan-Angriffe und Elite-Rush |
+| 7 | 35 s | 85 | 50 | Bomber erzwingen Bewegung |
+| 8 | 40 s | 95 + 1 Elite | 58 | Gemischte Rollen und Raumkontrolle |
+| 9 | 50 s | 110 + 2 Elites | 65 | Belastungstest vor dem Finale |
+| 10 | 70 s | Boss + 25-40 Adds | 45 | Drei lesbare Bossabschnitte |
+
+- Ziel fuer aktive Kampfzeit: etwa 6,5 Minuten.
+- Ziel fuer reale Run-Zeit inklusive Auswahl und Uebergaengen: 7-9 Minuten.
+- Upgrade-Unterbrechungen duerfen hoechstens 18 Prozent der realen Run-Zeit ausmachen.
+- Die Tabelle wird nach Phase 10 mit Messdaten angepasst; sie ist kein Versprechen, jeden Peak ungeprueft zu erzwingen.
+
+### Gegner-TTK
+
+Gemessen mit dem jeweils vorgesehenen durchschnittlichen Build der Welle:
+
+| Rolle | Ziel-TTK |
+| --- | ---: |
+| Fodder/Slime | 0,25-0,8 s |
+| Runner | 0,6-1,5 s |
+| Spitter/Fan/Bomber | 1,5-3,5 s |
+| Brute | 3-6 s |
+| Elite | 8-15 s |
+| Boss | 45-70 s |
+
+### Upgrade- und Erfolgsziele
+
+- Erstes Upgrade nach 20-30 Sekunden, danach im Mittel alle 30-45 Sekunden.
+- Ziel pro Run: 8-11 regulaere Entscheidungen plus 2-3 Elite-/Bossbelohnungen.
+- Kein Pflicht-Upgrade darf durch unguenstiges RNG einen Build dauerhaft blockieren.
+- Kein einzelnes normales Upgrade soll ueber viele Runs mehr als etwa 35 Prozent Wahlanteil erreichen.
+- Durchschnittlicher Testspieler: 55-70 Prozent Run-Abschlussrate.
+- Anfaengermodell: 30-45 Prozent; starkes Modell: 80-95 Prozent.
+- Tode sollen sich ueber Welle 6-10 verteilen und nicht an einem einzelnen unfairen Angriff konzentrieren.
+
+### Performance-Ziele
+
+- Desktop: stabile 60 FPS im Ziel-Peak.
+- Mittleres Mobile-Geraet: im Kampf durchschnittlich mindestens 50 FPS, keine laengeren Abschnitte unter 45 FPS.
+- Keine kontinuierlich wachsenden Gegner-, Projektil-, Orb-, Audio- oder FX-Listen.
+- Ein zehnminuetiger Soak-Test darf keine erkennbare Speicher- oder Objektakkumulation zeigen.
+- Bei Last zuerst kosmetische FX reduzieren; Telegraphen, Trefferzonen und Gameplay-Objekte bleiben erhalten.
+
+## Phase 8: Messbarkeit und Lastfundament
+
+Status: Abgeschlossen am 2026-08-10
+
+Bulk-Ziel: Erst messen und skalierbar machen, danach die Gegnerzahl erhoehen.
+
+1. [x] Einen zentralen, seedbaren Zufallsdienst einfuehren und Spawn-, Upgrade- und Crit-RNG darueber fuehren.
+2. [x] Telemetrie um Framezeiten, Peak-Objektzahlen, TTK, Overkill, Schaden je Quelle, Upgrade-Pausen und Todesursachen erweitern.
+3. [x] Deterministische Szenarien fuer einzelne Wellen, Bossphasen, Klassen und definierte Builds im Testprogramm abbilden.
+4. [x] Object Pools und harte Budgets fuer Gegner, eigene/gegnerische Projektile, XP-Orbs und kurzlebige FX einfuehren.
+
+Abnahmeprotokoll:
+
+- Zentraler RNG mit getrennten Kanaelen fuer Spawn, Upgrade, Crit, Bot, Audio und kosmetische FX integriert; gleiche Seeds/Profile liefern identische Ereignisfolgen in den deterministischen Szenarien.
+- Wiederverwendbare Pools und harte Budgets fuer Gegner, Basis-/Gegnerprojektile, XP-Orbs und FX integriert.
+- Lastszenario mit 100 Gegnern und ueber 200 gleichzeitig aktiven Projektilen: p95 16,8 ms, keine Drops von Gameplay-Objekten.
+- FX-Budget stoppt bei 90 aktiven Effekten, verwirft 50 nachrangige Anforderungen kontrolliert und gibt danach alle Slots frei.
+- TTK wird ab erstem wirksamen Treffer statt ab Spawn gemessen; Schaden, Overkill, Killquelle, Todesursache und Peak-Objekte sind im selben Bericht konsistent.
+- `npm run test:foundation`, Build, Smoke, Mechanics und Production Gate bestanden.
+
+Balance-Arbeit:
+
+- Einen einzigen Baseline-Run des aktuellen Stands mit allen drei Roostern ausfuehren.
+- Baseline nicht als Zielbalance behandeln, sondern als Vorher-Messung archivieren.
+- Spielerprofile `novice`, `average`, `offense` und `evasive` reproduzierbar machen.
+
+Abnahme:
+
+- Gleicher Seed und gleiches Profil erzeugen dieselbe Wave-/Upgrade-Folge.
+- Lasttest mit 100 Gegnern und hohem Projektilaufkommen verletzt die Performance-Ziele nicht.
+- Production-Build exportiert keine Debug- oder Teststeuerung.
+
+## Phase 9: Spawn Director und Schwarmkampf
+
+Status: Abgeschlossen am 2026-08-10
+
+Bulk-Ziel: Von kleinen Einzelgruppen zu kontrollierter Schwarm-Eskalation wechseln.
+
+5. [x] Einen datengetriebenen `SpawnDirector` mit Zeitsegmenten, Pulsen, Pausen, Rusher-Linien und Spezialgegner-Slots bauen.
+6. [x] Die Wellen 1-10 auf die Zielbereiche fuer Gesamtspawns und Peak-Dichte umstellen, mit mobilem Sicherheits-Cap.
+7. [x] Fodder-HP, XP, Groesse und Kollisionsverhalten so senken, dass Masse schnell stirbt; Spezialgegner nach TTK-Tabelle abstimmen.
+8. [x] Pro Welle eine konkrete Druckkurve definieren: Aufbau, Eskalation, kurze Erholung und Abschlussereignis.
+
+Balance-Arbeit:
+
+- Spawnrate und HP gemeinsam kalibrieren; niemals nur Anzahl oder HP isoliert vervielfachen.
+- XP-Orbs raeumlich zusammenfassen, ohne Gesamt-XP zu verlieren.
+- Kontaktschaden mit kurzer individueller Trefferabklingzeit begrenzen, damit ein Schwarm keinen Frame-Kill erzeugt.
+
+Abnahme:
+
+- Jede Welle erreicht ihren Dichtekorridor ohne sichtbare Spawn-Pop-ins in Spielernaehe.
+- Fodder erzeugt Massengefuehl, waehrend Spezialgegner weiterhin eindeutig erkennbar bleiben.
+- Danach ist ein gezielter Klassen-/Wave-Balance-Run sinnvoll; nicht vorher.
+
+Abnahmeprotokoll:
+
+- Alle Wellen besitzen Build-, Escalate-, Recover- und Finale-Segmente mit eigenem Budget, Batch, Formation, Cadence und Pause.
+- Zielspawns liegen bei 30, 38, 46, 55, 65, 76, 85, 96, 112 und Boss plus 30 Adds; mobile Caps liegen separat unter Desktop-Caps.
+- Fodder stirbt mit dem Basis-Ace in einem Treffer; individuelle Kontakt-Cooldowns verhindern Frame-Kills.
+- XP-Orbs werden raeumlich zusammengefasst, ohne XP zu verlieren; ein 60-XP-Cluster erzeugt hoechstens zwei Orbs.
+- Eine Race Condition, die eine Welle im Frame ihres letzten Spawns als leer wertete, ist behoben und durch Boss-Spawn-Regression abgedeckt.
+- Mechanics-, Foundation-, Smoke- und Production-Gates bestanden.
+
+## Phase 10: Run-Pacing und XP-Oekonomie
+
+Status: Abgeschlossen am 2026-08-10
+
+Bulk-Ziel: Ein 7-9-minuetiger Run mit stabiler Spannung und wenigen, wichtigen Unterbrechungen.
+
+9. [x] Wellenzeiten, Uebergaenge und Bossdauer auf die Run-Zieltabelle abstimmen.
+10. [x] Eine XP-Kurve pro Wave-Segment definieren und XP-Ertrag von Gegner-HP und Rollenwert trennen.
+11. [x] Upgrade-Kadenz auf 8-11 regulaere Entscheidungen begrenzen und Mehrfach-Level-Ups in eine kompakte Auswahlsequenz ueberfuehren.
+12. [x] Elite-/Boss-Truhen als eigene Belohnungsschiene einfuehren, die Rangfortschritt oder eine gueltige EVO priorisiert.
+
+Balance-Arbeit:
+
+- Levelzeiten, Pauseanteil, unverbrauchte XP und Zeit bis zur ersten spektakulaeren Faehigkeit messen.
+- Ziel: erste auffaellige Ability spaetestens nach 70 Sekunden, erster tragfaehiger Buildkern bis Wave 4.
+- Keine Belohnungsanimation darf den Kampf unkontrolliert weiterlaufen lassen.
+
+Abnahme:
+
+- 90 Prozent der gemessenen Runs liegen im realen Zeitfenster von 7-9 Minuten.
+- Keine Luecke zwischen zwei sinnvollen Entscheidungen ist kuerzer als 20 oder laenger als 55 Sekunden.
+- Nach dieser Phase wird die Ziel-Wellentabelle mit Messwerten aktualisiert.
+
+Abnahmeprotokoll:
+
+- XP-Schwellen und segmentierte XP-Ertraege liefern im verifizierten Average-Run neun regulaere Entscheidungen; die technische Obergrenze von elf ist regressionsgetestet.
+- Drei gleichzeitig verdiente Level werden ohne Kampf-Resume als kompakte Auswahlsequenz abgearbeitet.
+- Elite-Truhen bieten drei, Boss-Truhen vier Optionen und erzwingen mindestens einen gueltigen Rank-up-/EVO-Pfad, sofern vorhanden.
+- Average-Gate: erstes Upgrade und erste sichtbare Ability nach 21,6 s, neun regulaere Entscheidungen, sechs Truhen, 1,1 Prozent automatisierte Pausenquote.
+- Gemessene Wellen 1-9: 26,9 / 31,9 / 39,2 / 31,6 / 36,3 / 45,2 / 36,0 / 42,3 / 50,4 s.
+- Repraesentativer Dreiphasen-Boss: 68,51 s TTK, 31 Gegner inklusive Adds, Peak 38 Objekte, p95 16,7 ms und garantierte Boss-Truhe.
+- Aus Wellenmessung, Boss-Gate und vier Sekunden angenommener menschlicher Auswahlzeit ergibt sich ein Zielrun von rund 7,7 Minuten.
+- Der manuelle Haltepunkt nach Phase 10 ist auf Nutzerwunsch verschoben. Eine statistische Abschlussquote ueber viele Seeds wird nicht aus Einzelruns abgeleitet und bleibt verbindlicher Teil der Phase-17-Balance-Matrix.
+- `npm run test:pacing`, `npm run test:boss`, Build, Foundation, Mechanics, Smoke und Production Gate bestanden.
+
+## Phase 11: Loadout- und EVO-System
 
 Status: Offen
 
-- Deterministische Seeds einfuehren.
-- Spielermodelle fuer Anfaenger, durchschnittliche, offensive und ausweichstarke Spieler simulieren.
-- Schaden, Trefferquellen, XP-Tempo, Upgrade-Pausen, Gegner-Lebenszeit und Beinahe-Tode erfassen.
-- Trefferquote, Flaechenschaden, Overkill und Nutzungsanteil pro Faehigkeit pruefen.
-- Berichte pro Welle, Rooster und Build erzeugen.
-- Automatische Balance-Runs nur nach abgeschlossenen Feature-Paketen starten.
-- Simulationsergebnisse durch wenige gezielte manuelle Runs ergaenzen.
+Bulk-Ziel: Builds werden lesbar, planbar und deutlich transformativ.
 
-Abnahme: Das Testprogramm findet Regressionen und grobe Balance-Ausreisser, ohne Spielspass nur aus Zahlen abzuleiten.
+13. [ ] Fuenf aktive Waffen-/Ability-Slots und vier Passive-Slots einfuehren; Startwaffe belegt einen aktiven Slot.
+14. [ ] Bestehende Upgrades eindeutig in aktive Waffen, Passives, Summons und konsumierbare Soforteffekte ueberfuehren.
+15. [ ] Mindestens acht echte EVO-Rezepte mit sichtbarer Verhaltensaenderung bauen, darunter Feuer, Blitz, Orbit, Rocket, Void und Summon.
+16. [ ] Angebotslogik fuer freie Slots, Rank-up, EVO-Voraussetzungen, Rooster-Affinitaeten und spaeten Bad-Luck-Schutz umbauen.
 
-## Phase 9: Vertical-Slice-Abnahme
+Balance-Arbeit:
 
-Status: Offen
+- Basiswaffen muessen ohne EVO brauchbar, EVOs aber klar run-definierend sein.
+- Kein EVO darf gleichzeitig beste Boss-, Schwarm- und Defensivoption sein.
+- Reroll zunaechst einmal pro Run; Skip nur, wenn Tests echte Dead-Pick-Situationen zeigen.
 
-- Alle drei Rooster absolvieren einen vollstaendigen Run.
-- Mindestens drei tragfaehige Build-Archetypen pro Rooster.
-- Desktop sowie Mobile Portrait und Landscape pruefen.
-- Keine Console Errors oder wachsenden Objektlisten.
-- Stabile Performance bei maximaler Gegner- und Effektlast.
-- Externe Tester ohne Einfuehrung beobachten.
-- Verstaendnis, Spannung, Entscheidungsqualitaet und Wiederholungswunsch auswerten.
+Abnahme:
 
-Abnahme: Der Slice ist technisch stabil, ohne Erklaerung spielbar und erzeugt nachweisbar den Wunsch nach einem weiteren Run.
+- Mindestens sechs unterschiedliche End-Loadouts koennen einen Average-Run gewinnen.
+- Jede EVO ist in Blindtests optisch und spielerisch von ihrer Basisform unterscheidbar.
+- Danach ein eigener EVO-/Angebots-Balance-Run.
 
-## Phase 10: Meta, Retention und Umfang
+## Phase 12: Arenen und Pickups
 
 Status: Offen
 
-- Hennenhuette als Hub pruefen.
-- Rooster-Freischaltungen, Challenges, Run-Historie und Lexikon konzipieren.
-- Keine dauerhafte numerische Meta-Aufruestung verwenden, um schlechte Balance zu verdecken.
-- Entscheiden, ob zehn Wellen ein Kurz-Run bleiben oder einen Akt eines laengeren Runs bilden.
+Bulk-Ziel: Positionierung und Bewegung werden durch Kartenform und kurzfristige Ziele relevant.
 
-Abnahme: Meta-Fortschritt unterstuetzt unterschiedliche Spielweisen und liefert klare Ziele ohne den Kernkampf zu entwerten.
+17. [ ] Drei Arenatopologien liefern: offene Arena, vertikaler Korridor und kompakte quadratische Arena.
+18. [ ] Heilfutter, Arena-Bombe, temporaeren XP-Magneten und Elite-Truhe mit klarer Silhouette und Spawnregeln einfuehren.
+19. [ ] Zerstoerbare Props und wenige kollidierende Hindernisse ergaenzen, ohne Auto-Aim oder Pathing unzuverlaessig zu machen.
+20. [ ] Wave-Kompositionen und Waffenwert pro Kartentyp pruefen; keine Karte darf nur einen Pflicht-Build erlauben.
 
-## Phase 11: Kommerzielle Validierung
+Balance-Arbeit:
+
+- Pickup-Haeufigkeit wird als Budget pro Run festgelegt, nicht pro Zufallswurf unbeschraenkt gestapelt.
+- Heilung darf Fehler verzeihen, aber keinen dauerhaften Unsterblichkeitsloop erzeugen.
+- Mobile Portrait zeigt trotz Zoom alle kritischen Telegraphen rechtzeitig.
+
+Abnahme:
+
+- Jeder Kartentyp veraendert Bewegung und Waffenpraeferenz erkennbar.
+- Kein Pickup erscheint ausserhalb erreichbarer Flaechen oder unter UI/Collider-Geometrie.
+
+## Phase 13: Gegner-, Elite- und Boss-Paket
 
 Status: Offen
 
-- Store-tauglichen Namen, Key Art, Screenshots und kurzen Trailer erstellen.
-- Oeffentliche Demo mit anonymen, datenschutzkonformen Kennzahlen veroeffentlichen.
-- Start-zu-Ende-Quote, erneuten Run, bevorzugte Rooster, Abbruchwelle und Upgrade-Auswahl messen.
-- Zielgruppe und Preis anhand echter Demo-Reaktionen validieren.
-- Erst danach Content-Budget, Plattformen und Vollversionsumfang festlegen.
+Bulk-Ziel: Die Dichte wird durch Rollen und Begegnungen interessant, nicht durch reine Stat-Skalierung.
 
-Abnahme: Produktumfang und Investition stuetzen sich auf beobachtetes Nutzerverhalten statt nur auf interne Annahmen.
+21. [ ] Gegnerrollen als Matrix pflegen: Fodder, Runner, Tank, Shooter, Area Denial, Exploder, Support und Summoner.
+22. [ ] Drei Elite-Archetypen mit Aura, eigener Faehigkeit, Ankuendigung und garantierter Truhe erstellen.
+23. [ ] Boss-Finale mit Name, eigener HP-Leiste, Eintritt, drei Abschnitten, Adds, Feuerball und klarer Belohnung ausbauen.
+24. [ ] Reaktionsstandards festlegen: normale Telegraphen mindestens 300 ms, schwere Angriffe 500 ms, keine Projektile im Schutzradius erzeugen.
 
-## Arbeitsregeln
+Balance-Arbeit:
 
-- Die Statusuebersicht und Checklisten werden nach jedem abgeschlossenen Arbeitspaket aktualisiert.
-- Jede Phase endet mit Build und den fuer die Aenderung relevanten automatischen Tests.
-- Balance-Simulationen laufen nicht automatisch nach kleinen Aenderungen.
-- Ein Balance-Run ist erst nach einem abgeschlossenen Feature-Paket oder auf ausdruecklichen Wunsch sinnvoll.
-- Neue Inhalte werden nicht auf bekannte technische Regressionen aufgebaut.
+- Pro Welle hoechstens zwei primaere Gefahrenrollen plus Fodder; spaet maximal drei.
+- Fernkampfanteil, Projektilzahl und Flaechenabdeckung als separates Gefahrenbudget behandeln.
+- Todesursachen muessen einem sichtbaren Angriff zugeordnet werden koennen.
+
+Abnahme:
+
+- Jede Elite und Bossphase ist ohne Text erklaerbar und beim zweiten Auftreten antizipierbar.
+- Kein einzelner Gegnertyp verursacht ueber alle Average-Runs mehr als 35 Prozent der Tode.
+- Danach ein Encounter-Balance-Run ueber alle Karten und Rooster.
+
+## Phase 14: HUD, Feedback und Run-Report
+
+Status: Offen
+
+Bulk-Ziel: Wichtige Informationen sind mit einem Blick erfassbar und Builds werden auswertbar.
+
+25. [ ] HUD neu priorisieren: XP und Timer oben, Wave-/Bossfortschritt zentral, Killzahl kompakt, HP primaer am Rooster.
+26. [ ] Aktive Loadout-Leiste mit Icon, Rang, EVO-Zustand und Cooldown-Ring ergaenzen; Passives in einer kleineren zweiten Reihe.
+27. [ ] Spieler-, Gegner-, Gefahren- und Pickup-Farbsprache sowie Audio-Prioritaeten verbindlich dokumentieren und umsetzen.
+28. [ ] Run-Report mit Schaden/Kills je Quelle, Todesursache, Build, EVOs, Zeit, Peak-Dichte und Rooster anzeigen.
+
+Balance-Arbeit:
+
+- Damage Share, Trefferquote, Overkill und Nutzungszeit jeder Waffe im Report und in Testdaten identisch berechnen.
+- Ziel: keine voll ausgebaute aktive Waffe unter 5 Prozent Beitrag ohne klaren Utility-Nutzen.
+- Damage Numbers, Screen Shake, Flash und Vibration einzeln reduzierbar machen.
+
+Abnahme:
+
+- HUD funktioniert auf Desktop, Mobile Portrait und Landscape ohne Ueberdeckung.
+- Ein Spieler kann nach dem Run begruenden, welche Waffe stark oder schwach war.
+
+## Phase 15: Rooster-Tiefe und Build-Content
+
+Status: Offen
+
+Bulk-Ziel: Jeder Rooster besitzt mindestens drei tragfaehige, eigene Build-Archetypen.
+
+29. [ ] Ace, Boombardier und Stormcrest erhalten exklusive Startwaffen-EVOs und je zwei klassennahe Passives.
+30. [ ] Support Chick zu einem echten Summon-Pfad mit Projektil-, Debuff- und Mehrfachbegleiter-Raengen ausbauen.
+31. [ ] Pro Rooster drei Build-Archetypen definieren und mit Upgrade-Affinitaeten statt harten Sperren unterstuetzen.
+32. [ ] Fehlende finale Combat-Assets, Animationen und dosierte Sounds nur fuer bestaetigte Kernfaehigkeiten produzieren.
+
+Balance-Arbeit:
+
+- Jede Klasse muss mit mindestens drei Builds gewinnen koennen.
+- Kein Rooster darf beim Average-Profil mehr als 12 Prozentpunkte Abschlussquote von einem anderen entfernt liegen.
+- Hauptwaffe soll typischerweise 15-40 Prozent Schaden beitragen; Spezialbuilds duerfen begruendet abweichen.
+
+Abnahme:
+
+- Neun dokumentierte Archetypen bestehen definierte Wave-, Elite- und Boss-Szenarien.
+- Klassen unterscheiden sich bereits in den ersten 20 Sekunden und bleiben bis zum Run-Ende verschieden.
+
+## Phase 16: Meta und Challenges
+
+Status: Offen
+
+Bulk-Ziel: Wiederholungsgruende schaffen, ohne schwache Kernbalance durch Stat-Grind zu verdecken.
+
+33. [ ] Hennenhuette als kompakten Hub fuer Rooster-Auswahl, Freischaltungen, Challenges und Run-Historie bauen.
+34. [ ] Rooster und kosmetische Varianten ueber klare Leistungen freischalten; keine Pflicht-Wartezeiten oder Zufallskisten im Slice.
+35. [ ] Challenge-Modifikatoren und drei kuratierte Varianten aus bestehenden Karten/Wellen ableiten.
+36. [ ] Ein kleines Lexikon fuer Gegner, EVO-Rezepte und persoenliche Bestwerte ergaenzen.
+
+Balance-Arbeit:
+
+- Dauerhafte Boni bleiben horizontal oder klein; kein Meta-Level kompensiert einen unfairen Run.
+- Challenge-Modifikatoren erhalten eigene Zielwerte und veraendern nicht heimlich den normalen Modus.
+
+Abnahme:
+
+- Ein kompletter Run schaltet ein klares neues Ziel frei.
+- Der Kern-Run bleibt ohne Meta-Grind vollstaendig gewinnbar.
+
+## Phase 17: Vertical-Slice-Abnahme
+
+Status: Offen
+
+Bulk-Ziel: Den Content einfrieren und beweisen, dass der Slice stabil, verstaendlich und wiederholbar ist.
+
+37. [ ] Alle drei Rooster, neun Archetypen, drei Karten und Challenges automatisiert sowie manuell end-to-end pruefen.
+38. [ ] Desktop, Mobile Portrait und Landscape unter maximaler Gegner-/Effektlast und im zehnminuetigen Soak-Test abnehmen.
+39. [ ] Mindestens 10 externe Tester ohne Einfuehrung beobachten und Verstaendnis, Frust, Spannung und Wiederholungswunsch erfassen.
+40. [ ] Balance gegen Erfolgs-, TTK-, Pacing- und Damage-Share-Ziele korrigieren; danach Feature-Freeze fuer den Slice.
+
+Abnahme:
+
+- Keine Console Errors, Softlocks, wachsenden Objektlisten oder reproduzierbaren unfairen Treffer.
+- Mindestens 70 Prozent der Tester verstehen Upgrade, EVO, Elite-Truhe und Bossphase ohne Erklaerung.
+- Mindestens 50 Prozent starten freiwillig einen zweiten Run oder geben konkret an, einen weiteren spielen zu wollen.
+- Balancebericht dokumentiert Seed, Rooster, Build, Karte, Profil und Ergebnis.
+
+## Phase 18: Kommerzielle Validierung
+
+Status: Offen
+
+Bulk-Ziel: Erst nach belastbarer Slice-Abnahme Produktumfang und Geschaeftsmodell festlegen.
+
+41. [ ] Eine oeffentliche Web-Demo mit anonymer, datensparsamer Funnel- und Run-Telemetrie veroeffentlichen.
+42. [ ] Store-tauglichen Namen, Key Art, Screenshots, Kurzbeschreibung und 30-45-Sekunden-Trailer erstellen.
+43. [ ] Premium, Demo-plus-Premium oder faire kosmetische Erweiterungen anhand Zielgruppe und Plattform vergleichen; keine F2P-Systeme blind kopieren.
+44. [ ] Go/No-Go-Kriterien fuer Vollproduktion definieren: Starts, Run-Abschluss, zweiter Run, bevorzugte Klasse, Wunschlisten und qualitative Resonanz.
+
+Abnahme:
+
+- Produktumfang und Budget beruhen auf beobachtetem Verhalten statt interner Begeisterung.
+- Content-Produktion fuer weitere Akte beginnt erst nach einer positiven Entscheidung.
+
+## Bulk-Arbeitsweise
+
+- Eine Phase ist ein geschlossenes Umsetzungspaket und endet mit eigenem Commit und Push.
+- Innerhalb einer Phase werden Datenmodell, Gameplay, UI, Telemetrie und Tests gemeinsam fertiggestellt.
+- Die Roadmap wird nach jedem Paket mit Datum, Abnahmeprotokoll und verbliebenen Risiken aktualisiert.
+- Build, Mechanics, Smoke, Production Gate und Pages-Build muessen vor jedem Paketabschluss gruen sein.
+- Balance-Simulationen laufen nur an den in der Phase genannten Gates oder auf ausdruecklichen Wunsch.
+- Balance-Runs ersetzen keine manuellen Runs; nach den Phasen 10, 11, 13, 15 und 17 ist eine visuelle/manuelle Stichprobe Pflicht.
+- Bei einem fehlgeschlagenen Gate wird nicht mit der naechsten Phase begonnen.
+- Neue Systeme werden nicht parallel eingefuehrt, wenn sie dieselben Zielwerte beeinflussen; sonst ist die Ursache einer Balanceaenderung nicht messbar.
+- Assets werden erst finalisiert, wenn Mechanik, Groesse und Bildschirmrolle bestaetigt sind.
+- Meta, Monetarisierung und grosse Contentmengen bleiben bis zur Kernspiel-Abnahme gesperrt.

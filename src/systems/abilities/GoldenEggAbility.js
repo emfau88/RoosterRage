@@ -33,7 +33,8 @@ export class GoldenEggAbility extends TimedAbility {
       homing: true,
       maxTurnRate: 0.045,
       sfx: 'egg-shot',
-      sfxVolume: 0.16
+      sfxVolume: 0.16,
+      source: 'golden-egg'
     });
     this.nextAt = time + Math.max(2400, 5200 - this.rank * 650);
   }

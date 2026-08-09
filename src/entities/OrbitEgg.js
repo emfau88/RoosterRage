@@ -38,7 +38,7 @@ export class OrbitEgg {
       const distance = Phaser.Math.Distance.Between(x, y, enemy.sprite.x, enemy.sprite.y);
       if (distance <= 32 && now - lastHitAt >= this.hitCooldownMs) {
         this.lastHits.set(enemy.id, now);
-        this.scene.damageEnemy(enemy, this.damage);
+        this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, { source: 'orbit-eggs' });
       }
     });
   }

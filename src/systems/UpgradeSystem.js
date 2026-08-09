@@ -1,5 +1,5 @@
-import Phaser from 'phaser';
 import { UPGRADE_DEFINITIONS } from '../data/upgradeDefinitions.js';
+import { RandomSystem } from './RandomSystem.js';
 
 const SPECTACLE_CATEGORIES = ['active', 'orbit', 'area', 'summon'];
 const CATEGORY_LABELS = {
@@ -12,8 +12,9 @@ const CATEGORY_LABELS = {
 };
 
 export class UpgradeSystem {
-  constructor(upgrades = UPGRADE_DEFINITIONS) {
+  constructor(upgrades = UPGRADE_DEFINITIONS, rng = new RandomSystem()) {
     this.upgrades = upgrades.map((upgrade) => ({ ...upgrade }));
+    this.rng = rng;
   }
 
   getChoices(count = 3, player) {
@@ -45,9 +46,52 @@ export class UpgradeSystem {
       choices.push(picked);
     }
 
-    return Phaser.Utils.Array.Shuffle(choices)
+    return this.rng.shuffle(choices, 'upgrade-order')
       .slice(0, count)
       .map((upgrade) => this.presentUpgrade(upgrade, player));
+  }
+
+  getRewardChoices(count = 3, player, kind = 'elite') {
+    const available = this.upgrades.filter((upgrade) => this.isAvailable(upgrade, player));
+    const evolutionReady = available.filter((upgrade) => (
+      upgrade.evolution
+      && upgrade.requires?.every((id) => player.getUpgradeRank(id) > 0)
+    ));
+    const rankUps = available.filter((upgrade) => (
+      !upgrade.consumable
+      && player.getUpgradeRank(upgrade.id) > 0
+    ));
+    const choices = [];
+    const priorityGroups = [
+      evolutionReady,
+      rankUps,
+      available.filter((upgrade) => SPECTACLE_CATEGORIES.includes(upgrade.category))
+    ];
+    for (const group of priorityGroups) {
+      if (choices.length >= Math.min(count, kind === 'boss' ? 2 : 1)) {
+        break;
+      }
+      const picked = this.pickWeighted(group.filter((upgrade) => !choices.includes(upgrade)), player);
+      if (picked) {
+        choices.push(picked);
+      }
+    }
+    while (choices.length < count && choices.length < available.length) {
+      const candidates = available.filter((upgrade) => !choices.includes(upgrade));
+      const picked = this.pickWeighted(candidates, player);
+      if (!picked) {
+        break;
+      }
+      choices.push(picked);
+    }
+    return this.rng.shuffle(choices, `reward-${kind}`)
+      .map((upgrade) => ({
+        ...this.presentUpgrade(upgrade, player),
+        rewardKind: kind,
+        rewardPriority: evolutionReady.includes(upgrade)
+          ? 'evolution'
+          : rankUps.includes(upgrade) ? 'rank-up' : 'new'
+      }));
   }
 
   isAvailable(upgrade, player) {
@@ -113,7 +157,7 @@ export class UpgradeSystem {
       weight: this.getDynamicWeight(upgrade, player)
     }));
     const total = weighted.reduce((sum, item) => sum + item.weight, 0);
-    let roll = Math.random() * total;
+    let roll = this.rng.next('upgrade-pick') * total;
     for (const item of weighted) {
       roll -= item.weight;
       if (roll <= 0) {

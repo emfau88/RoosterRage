@@ -24,7 +24,7 @@ export class RocketEggAbility extends TimedAbility {
     );
     this.scene.audio.play('egg-shot', { volume: 0.16, cooldown: 160 });
     this.scene.debugStats.specialShots += 1;
-    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave);
+    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave, 'rocket-egg');
     this.nextAt = time + Math.max(2800, 5600 - this.rank * 620);
   }
 
@@ -54,7 +54,7 @@ export class RocketEggAbility extends TimedAbility {
     });
     this.scene.enemies.forEach((enemy) => {
       if (enemy.sprite.active && Phaser.Math.Distance.Between(x, y, enemy.sprite.x, enemy.sprite.y) <= radius) {
-        this.scene.damageEnemy(enemy, damage);
+        this.scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, { source: 'rocket-egg' });
       }
     });
   }

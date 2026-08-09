@@ -1,11 +1,14 @@
 import Phaser from 'phaser';
 
 export function playSceneFx(scene, key, x, y, options = {}) {
-  const sprite = scene.add.sprite(x, y, 'fx-atlas-v1')
+  const sprite = scene.objectPools.createFx(() => scene.add.sprite(x, y, 'fx-atlas-v1')
     .setDepth(options.depth ?? 10)
     .setScale(options.scale ?? 1)
     .setAlpha(options.alpha ?? 1)
-    .setRotation(options.rotation ?? 0);
+    .setRotation(options.rotation ?? 0), options.priority ?? false);
+  if (!sprite) {
+    return null;
+  }
   sprite.play(key);
   sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => sprite.destroy());
   return sprite;

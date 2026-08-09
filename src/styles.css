@@ -154,6 +154,32 @@ canvas {
   cursor: pointer;
 }
 
+.wave-banner {
+  position: fixed;
+  top: calc(92px + env(safe-area-inset-top));
+  left: 50%;
+  z-index: 8;
+  max-width: min(420px, calc(100vw - 24px));
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 211, 90, 0.7);
+  border-radius: 6px;
+  background: rgba(12, 20, 22, 0.9);
+  color: #fff1b8;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -8px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.wave-banner.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 .fullscreen-glyph {
   position: relative;
   width: 21px;
@@ -399,6 +425,24 @@ canvas {
   color: #415054;
 }
 
+.panel--reward {
+  border-color: rgba(255, 211, 92, 0.8);
+  box-shadow: 0 0 0 2px rgba(255, 211, 92, 0.14), 0 24px 70px rgba(0, 0, 0, 0.52);
+}
+
+.upgrade-button__reward {
+  display: inline-flex;
+  width: fit-content;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 211, 92, 0.14);
+  color: #ffe49a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .upgrade-button__synergy {
   display: block;
   margin-top: 5px;
@@ -516,6 +560,12 @@ canvas {
     height: 40px;
   }
 
+  .wave-banner {
+    top: calc(112px + env(safe-area-inset-top));
+    padding: 7px 12px;
+    font-size: 15px;
+  }
+
   .overlay {
     align-items: flex-start;
     overflow-y: auto;
@@ -576,6 +626,11 @@ canvas {
   .hud__upgrade-icon {
     width: 20px;
     height: 20px;
+  }
+
+  .wave-banner {
+    top: calc(72px + env(safe-area-inset-top));
+    font-size: 14px;
   }
 
   .joystick {

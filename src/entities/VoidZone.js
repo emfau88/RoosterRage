@@ -66,7 +66,7 @@ export class VoidZone {
       this.nextTickAt = this.scene.time.now + this.tickMs;
       this.scene.enemies.forEach((enemy) => {
         if (enemy.sprite.active && Phaser.Math.Distance.Between(this.x, this.y, enemy.sprite.x, enemy.sprite.y) <= this.radius) {
-          this.scene.damageEnemy(enemy, this.damage);
+          this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, { source: 'void-nest' });
         }
       });
     }

@@ -29,7 +29,7 @@ export class LightningCombAbility extends TimedAbility {
       });
     });
     this.scene.debugStats.specialShots += 1;
-    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave);
+    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave, 'lightning-comb');
     this.nextAt = time + Math.max(2600, 5200 - this.rank * 650);
   }
 }

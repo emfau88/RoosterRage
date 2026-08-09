@@ -71,7 +71,10 @@ export class HUD {
     this.joystick.innerHTML = '<div class="joystick__nub" data-nub></div>';
     this.nub = this.joystick.querySelector('[data-nub]');
 
-    document.body.append(this.root, this.overlay, this.joystick);
+    this.waveBanner = document.createElement('div');
+    this.waveBanner.className = 'wave-banner';
+
+    document.body.append(this.root, this.overlay, this.joystick, this.waveBanner);
   }
 
   update(state) {
@@ -88,12 +91,21 @@ export class HUD {
     this.renderActiveUpgrades(state.upgrades);
   }
 
-  showUpgradeChoices(choices) {
+  showUpgradeChoices(choices, context = {}) {
+    const chest = context.type === 'chest';
+    const title = chest
+      ? context.kind === 'boss' ? 'Boss Chest' : 'Elite Chest'
+      : 'Level Up';
+    const subtitle = chest
+      ? 'Waehle eine garantierte Build-Belohnung.'
+      : context.remaining > 0
+        ? `Waehle ein Upgrade. Danach folgen noch ${context.remaining}.`
+        : 'Waehle ein Upgrade.';
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
-      <div class="panel">
-        <h2>Level Up</h2>
-        <p>Waehle ein Upgrade.</p>
+      <div class="panel ${chest ? 'panel--reward' : ''}">
+        <h2>${title}</h2>
+        <p>${subtitle}</p>
         <div class="upgrade-list"></div>
       </div>
     `;
@@ -112,6 +124,9 @@ export class HUD {
             <span class="upgrade-button__rank">${choice.rankLabel ?? ''}</span>
           </span>
           <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
+          ${choice.rewardPriority
+            ? `<span class="upgrade-button__reward">${choice.rewardPriority === 'rank-up' ? 'Rank-Up' : choice.rewardPriority === 'evolution' ? 'EVO bereit' : 'Neue Option'}</span>`
+            : ''}
           <span class="upgrade-button__description">${choice.description}</span>
           ${choice.synergyActive
             ? `<span class="upgrade-button__synergy">Synergie aktiv: ${choice.synergyDescription}</span>`
@@ -179,6 +194,16 @@ export class HUD {
     this.overlay.innerHTML = '';
   }
 
+  showWaveBanner(wave, config) {
+    window.clearTimeout(this.waveBannerTimeout);
+    this.waveBanner.textContent = `Wave ${wave}: ${config.name}`;
+    this.waveBanner.classList.remove('is-visible');
+    requestAnimationFrame(() => this.waveBanner.classList.add('is-visible'));
+    this.waveBannerTimeout = window.setTimeout(() => {
+      this.waveBanner.classList.remove('is-visible');
+    }, 1500);
+  }
+
   setJoystick(vector) {
     const x = 34 + vector.x * 28;
     const y = 34 + vector.y * 28;
@@ -228,8 +253,10 @@ export class HUD {
   }
 
   destroy() {
+    window.clearTimeout(this.waveBannerTimeout);
     this.root.remove();
     this.overlay.remove();
     this.joystick.remove();
+    this.waveBanner.remove();
   }
 }

@@ -272,6 +272,97 @@ async function testTripleShotTrajectory(browser) {
   }
 }
 
+async function testWaveCuration(browser) {
+  const { page, errors } = await openGame(browser, 'wave-curation');
+  try {
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.pauseWaves();
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
+    });
+    const catalog = await page.evaluate(() => window.__ROOSTER_TEST__.getWaveCatalog());
+    const expectedTypes = [
+      { slime: 30 },
+      { slime: 26, runner: 12 },
+      { slime: 24, runner: 17, brute: 4, 'elite-runner': 1 },
+      { slime: 26, runner: 14, spitter: 10, brute: 5 },
+      { slime: 26, runner: 16, spitter: 12, brute: 7, 'fan-spitter': 4 },
+      { slime: 28, runner: 20, spitter: 12, 'fan-spitter': 8, brute: 7, 'elite-runner': 1 },
+      { slime: 32, runner: 20, bomber: 12, 'fan-spitter': 10, spitter: 7, brute: 4 },
+      { slime: 34, runner: 22, bomber: 14, spitter: 10, 'fan-spitter': 8, brute: 7, 'elite-spitter': 1 },
+      { slime: 40, runner: 24, bomber: 14, 'fan-spitter': 12, brute: 10, spitter: 10, 'elite-brute': 1, 'elite-spitter': 1 },
+      { boss: 1 }
+    ];
+    assert(catalog.length === 10, 'Wave catalog should contain exactly ten waves.', catalog);
+    catalog.forEach((wave, index) => {
+      assert(wave.queue.length === wave.count, `Wave ${wave.wave} queue length does not match its budget.`, wave);
+      assert(wave.targetDuration[0] >= 22 && wave.targetDuration[1] <= 76, `Wave ${wave.wave} has an invalid duration target.`, wave);
+      assert(wave.pressureCurve.length >= 1, `Wave ${wave.wave} is missing a pressure curve.`, wave);
+      assert(wave.mobileActiveCap <= wave.targetPeak, `Wave ${wave.wave} mobile cap exceeds target peak.`, wave);
+      assert(JSON.stringify(wave.typeCounts) === JSON.stringify(expectedTypes[index]), `Wave ${wave.wave} composition changed unexpectedly.`, wave);
+    });
+    assert(catalog[9].bossWave && catalog[9].queue[0] === 'boss', 'Wave 10 must be the boss finale.', catalog[9]);
+
+    const safeSpawns = await page.evaluate(() => {
+      window.__ROOSTER_TEST__.movePlayer(50, 50);
+      return Array.from({ length: 10 }, () => window.__ROOSTER_TEST__.spawnSafeEnemyType());
+    });
+    assert(safeSpawns.every((spawn) => spawn.distance >= 280), 'An edge spawn violated player protection distance.', safeSpawns);
+
+    const clusteredXp = await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      return window.__ROOSTER_TEST__.spawnXpCluster(20, 3, 1180, 720);
+    });
+    assert(clusteredXp.length <= 2, 'Nearby XP drops were not spatially consolidated.', clusteredXp);
+    assert(
+      clusteredXp.reduce((sum, orb) => sum + orb.value, 0) === 60,
+      'XP consolidation changed the total reward.',
+      clusteredXp
+    );
+
+    const bossId = await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
+      window.__ROOSTER_TEST__.movePlayer(700, 450);
+      const bossId = window.__ROOSTER_TEST__.spawnEnemyType('boss', 700, 450, {
+        speed: 0,
+        damage: 0,
+        hp: 10000,
+        heavyAttackDelay: 999999
+      });
+      window.__ROOSTER_TEST__.damageEnemyById(bossId, 3600);
+      return bossId;
+    });
+    await page.waitForTimeout(80);
+    const phaseOne = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
+    const bossAfterPhaseOne = phaseOne.find((enemy) => enemy.id === bossId);
+    assert(bossAfterPhaseOne?.bossPhaseIndex === 1, 'Boss did not enter its first health phase.', phaseOne);
+    assert(phaseOne.filter((enemy) => enemy.type === 'slime').length === 12, 'Boss phase one did not summon twelve slimes.', phaseOne);
+
+    await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 3300), bossId);
+    await page.waitForTimeout(80);
+    const phaseTwo = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
+    const bossAfterPhaseTwo = phaseTwo.find((enemy) => enemy.id === bossId);
+    assert(bossAfterPhaseTwo?.bossPhaseIndex === 2, 'Boss did not enter its final health phase.', phaseTwo);
+    assert(bossAfterPhaseTwo.ability.count === 7 && bossAfterPhaseTwo.ability.cooldown === 1700, 'Final boss fan was not upgraded.', bossAfterPhaseTwo);
+    assert(bossAfterPhaseTwo.heavyProjectile.cooldown === 3200, 'Final boss fireball cadence was not upgraded.', bossAfterPhaseTwo);
+    assert(phaseTwo.filter((enemy) => enemy.type === 'runner').length === 8, 'Final boss phase did not summon runners.', phaseTwo);
+    assert(phaseTwo.filter((enemy) => enemy.type === 'spitter').length === 5, 'Final boss phase did not summon spitters.', phaseTwo);
+    assert(phaseTwo.filter((enemy) => enemy.type === 'bomber').length === 5, 'Final boss phase did not summon bombers.', phaseTwo);
+    assert(
+      phaseTwo.filter((enemy) => enemy.id !== bossId).every((enemy) => Math.hypot(enemy.x - 700, enemy.y - 450) >= 190),
+      'A boss add spawned inside the protected player radius.',
+      phaseTwo
+    );
+    await page.evaluate(() => window.__ROOSTER_TEST__.movePlayer(400, 450));
+    await page.screenshot({ path: path.join(artifactDir, 'boss-final-phase.png') });
+    assert(errors.length === 0, 'Browser reported errors during wave curation test.', errors);
+    return { name: 'wave curation', status: 'passed', catalog, safeSpawns, phaseTwo };
+  } finally {
+    await page.close();
+  }
+}
+
 async function testEnemyAbilities(browser) {
   const { page, errors } = await openGame(browser, 'enemy-abilities');
   try {
@@ -417,6 +508,7 @@ async function run() {
     results.push(await testNewUpgradeMechanics(browser));
     results.push(await testRoosterClasses(browser));
     results.push(await testTripleShotTrajectory(browser));
+    results.push(await testWaveCuration(browser));
     results.push(await testEnemyAbilities(browser));
     results.push(await testActiveUpgradeAbilities(browser));
     const report = {

@@ -51,11 +51,11 @@ export class LaserCombAbility extends TimedAbility {
           depth: 13,
           rotation: angle + Math.PI / 2
         });
-        this.scene.damageEnemy(enemy, damage);
+        this.scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, { source: 'laser-comb' });
       }
     });
     this.scene.debugStats.specialShots += 1;
-    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave);
+    this.scene.telemetry.addShot(1, time, this.scene.waveSystem.currentWave, 'laser-comb');
     this.nextAt = time + Math.max(3000, 6400 - this.rank * 760);
   }
 }

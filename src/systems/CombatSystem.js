@@ -60,7 +60,7 @@ export class CombatSystem {
     scene.audio.play('egg-shot');
     scene.debugStats.shots += pattern.length;
     scene.debugStats.lastShotAt = time;
-    scene.telemetry.addShot(pattern.length, time, scene.waveSystem.currentWave);
+    scene.telemetry.addShot(pattern.length, time, scene.waveSystem.currentWave, 'base-egg');
   }
 
   getShotPattern() {
@@ -121,23 +121,29 @@ export class CombatSystem {
     const muzzle = scene.player.getMuzzlePosition(42);
     const sideX = -Math.sin(scene.player.aimAngle) * laneOffset;
     const sideY = Math.cos(scene.player.aimAngle) * laneOffset;
-    const projectile = new Projectile(
-      scene,
-      muzzle.x + sideX,
-      muzzle.y + sideY,
-      angle,
-      scene.player.projectileDamage,
-      scene.player.fireEggs,
-      target,
-      options.targetOffset ?? laneOffset,
-      {
+    const projectile = scene.objectPools.acquire(
+      'projectile',
+      () => new Projectile(scene),
+      (item) => item.reset(
+        muzzle.x + sideX,
+        muzzle.y + sideY,
+        angle,
+        scene.player.projectileDamage,
+        scene.player.fireEggs,
+        target,
+        options.targetOffset ?? laneOffset,
+        {
         ...options,
         speed: options.speed ?? 520 + scene.player.projectileSpeedBonus,
         ricochet: options.ricochet ?? scene.player.projectileRicochets,
         canCrit: options.canCrit ?? true,
         knockbackRank: options.knockbackRank ?? scene.player.projectileKnockback
-      }
+        }
+      )
     );
+    if (!projectile) {
+      return null;
+    }
     scene.projectiles.push(projectile);
     scene.projectileGroup.add(projectile.sprite);
     projectile.setVelocity(angle);
@@ -151,24 +157,30 @@ export class CombatSystem {
 
   spawnSpecialProjectileFrom(x, y, angle, target, options = {}) {
     const { scene } = this;
-    const projectile = new Projectile(
-      scene,
-      x,
-      y,
-      angle,
-      options.damage ?? scene.player.projectileDamage,
-      options.isFireEgg ?? false,
-      target,
-      0,
-      options
+    const projectile = scene.objectPools.acquire(
+      'projectile',
+      () => new Projectile(scene),
+      (item) => item.reset(
+        x,
+        y,
+        angle,
+        options.damage ?? scene.player.projectileDamage,
+        options.isFireEgg ?? false,
+        target,
+        0,
+        options
+      )
     );
+    if (!projectile) {
+      return null;
+    }
     scene.projectiles.push(projectile);
     scene.projectileGroup.add(projectile.sprite);
     projectile.setVelocity(angle);
     scene.showShotFeedback(angle, 0);
     scene.audio.play(options.sfx ?? 'egg-shot', { volume: options.sfxVolume });
     scene.debugStats.specialShots += 1;
-    scene.telemetry.addShot(1, scene.time.now, scene.waveSystem.currentWave);
+    scene.telemetry.addShot(1, scene.time.now, scene.waveSystem.currentWave, options.source ?? 'special-projectile');
     return projectile;
   }
 
@@ -204,11 +216,11 @@ export class CombatSystem {
     const hitX = enemy.sprite.x;
     const hitY = enemy.sprite.y;
     projectile.hitEnemies.add(enemy.id);
-    const critical = projectile.canCrit && Math.random() < this.scene.player.critChance;
+    const critical = projectile.canCrit && this.scene.rng.chance(this.scene.player.critChance, 'combat-crit');
     const damage = critical
       ? Math.round(projectile.damage * this.scene.player.critMultiplier)
       : projectile.damage;
-    this.damageEnemy(enemy, damage, hitX, hitY, { critical });
+    this.damageEnemy(enemy, damage, hitX, hitY, { critical, source: projectile.source });
     this.applyPrimaryImpact(projectile, enemy, damage, hitX, hitY);
     if (projectile.knockbackRank > 0 && enemy.sprite.active) {
       enemy.applyKnockback(projectile.currentAngle, 80 + projectile.knockbackRank * 30);
@@ -241,7 +253,9 @@ export class CombatSystem {
           && candidate.sprite.active
           && Phaser.Math.Distance.Between(x, y, candidate.sprite.x, candidate.sprite.y) <= projectile.splashRadius
         ) {
-          this.damageEnemy(candidate, splashDamage, candidate.sprite.x, candidate.sprite.y);
+          this.damageEnemy(candidate, splashDamage, candidate.sprite.x, candidate.sprite.y, {
+            source: `${projectile.source}:splash`
+          });
         }
       });
     }
@@ -275,7 +289,9 @@ export class CombatSystem {
       onComplete: () => bolt.destroy()
     });
     const chainDamage = Math.max(1, Math.round(damage * projectile.chainDamageRatio));
-    this.damageEnemy(nextTarget, chainDamage, nextTarget.sprite.x, nextTarget.sprite.y);
+    this.damageEnemy(nextTarget, chainDamage, nextTarget.sprite.x, nextTarget.sprite.y, {
+      source: `${projectile.source}:chain`
+    });
   }
 
   redirectRicochet(projectile, hitEnemy) {
@@ -319,9 +335,23 @@ export class CombatSystem {
     scene.audio.play('enemy-hit');
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;
-    scene.telemetry.addHit(scene.time.now, scene.waveSystem.currentWave);
+    const source = options.source ?? 'base-egg';
+    const hpBefore = Math.max(0, enemy.hp);
+    const effective = Math.min(hpBefore, damage);
+    const overkill = Math.max(0, damage - hpBefore);
+    scene.telemetry.addHit(scene.time.now, scene.waveSystem.currentWave, source);
+    scene.telemetry.addDamageDealt({
+      amount: damage,
+      effective,
+      overkill,
+      source,
+      enemyId: enemy.id,
+      enemyType: enemy.type,
+      time: scene.time.now,
+      wave: scene.waveSystem.currentWave
+    });
     if (enemy.takeDamage(damage)) {
-      scene.killEnemy(enemy);
+      scene.killEnemy(enemy, source);
     }
   }
 }

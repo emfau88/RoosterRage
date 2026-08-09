@@ -1,6 +1,16 @@
 export class EnemyProjectile {
-  constructor(scene, x, y, angle, config = {}) {
+  constructor(scene) {
     this.scene = scene;
+    this.destroyed = true;
+    this.sprite = scene.physics.add.sprite(0, 0, 'enemy-shot');
+    this.sprite.setActive(false).setVisible(false);
+    this.sprite.disableBody(true, true);
+    this.sprite.entity = this;
+    this.trail = scene.add.circle(0, 0, 13, 0xa7ff64, 0.28).setDepth(4).setVisible(false);
+    this.dangerRing = scene.add.circle(0, 0, 12, 0x000000, 0).setDepth(6).setVisible(false);
+  }
+
+  reset(x, y, angle, config = {}) {
     this.damage = config.damage ?? 8;
     this.life = config.life ?? 2600;
     this.color = config.color ?? 0xa7ff64;
@@ -12,10 +22,12 @@ export class EnemyProjectile {
     this.baseScale = config.scale ?? 1;
     this.angle = angle;
     this.speed = config.speed ?? 220;
+    this.source = config.source ?? 'enemy-projectile';
     this.age = 0;
     this.destroyed = false;
 
-    this.sprite = scene.physics.add.sprite(x, y, config.texture ?? 'enemy-shot');
+    this.sprite.enableBody(true, x, y, true, true);
+    this.sprite.setTexture(config.texture ?? 'enemy-shot');
     this.sprite.setCircle(config.radius ?? 7);
     this.sprite.setRotation(angle);
     if (config.tint !== false) {
@@ -23,12 +35,26 @@ export class EnemyProjectile {
     }
     this.sprite.setScale(this.baseScale);
     this.sprite.setDepth(config.depth ?? 5);
-    this.sprite.entity = this;
-    this.trail = scene.add.circle(x, y, ((config.radius ?? 7) + 6) * this.baseScale, this.trailColor, this.trailAlpha).setDepth((config.depth ?? 5) - 1);
-    this.dangerRing = scene.add.circle(x, y, ((config.radius ?? 7) + (this.heavy ? 9 : 5)) * this.baseScale, 0x000000, 0)
+    if (config.tint === false) {
+      this.sprite.clearTint();
+    }
+    this.trail.setPosition(x, y)
+      .setRadius(((config.radius ?? 7) + 6) * this.baseScale)
+      .setFillStyle(this.trailColor, this.trailAlpha)
+      .setDepth((config.depth ?? 5) - 1)
+      .setScale(1)
+      .setAlpha(this.trailAlpha)
+      .setActive(true)
+      .setVisible(true);
+    this.dangerRing.setPosition(x, y)
+      .setRadius(((config.radius ?? 7) + (this.heavy ? 9 : 5)) * this.baseScale)
       .setStrokeStyle(this.heavy ? 4 : 2, this.warningColor, 0.96)
-      .setDepth((config.depth ?? 5) + 1);
+      .setDepth((config.depth ?? 5) + 1)
+      .setScale(1)
+      .setActive(true)
+      .setVisible(true);
     this.setVelocity();
+    return this;
   }
 
   update(delta) {
@@ -64,14 +90,19 @@ export class EnemyProjectile {
       return;
     }
     this.destroyed = true;
-    if (this.trail.active) {
-      this.trail.destroy();
-    }
-    if (this.dangerRing.active) {
-      this.dangerRing.destroy();
-    }
-    if (this.sprite.active) {
-      this.sprite.destroy();
-    }
+    this.scene.objectPools.release(this);
+  }
+
+  deactivate() {
+    this.sprite.setVelocity(0, 0);
+    this.sprite.disableBody(true, true);
+    this.trail.setActive(false).setVisible(false);
+    this.dangerRing.setActive(false).setVisible(false);
+  }
+
+  dispose() {
+    this.trail.destroy();
+    this.dangerRing.destroy();
+    this.sprite.destroy();
   }
 }

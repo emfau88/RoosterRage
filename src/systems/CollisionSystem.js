@@ -20,10 +20,22 @@ export class CollisionSystem {
 
     scene.physics.add.overlap(scene.player.sprite, scene.enemyGroup, (_playerSprite, enemySprite) => {
       const enemy = enemySprite.entity;
-      if (enemy && scene.player.damage(enemy.damage, scene.time.now)) {
+      if (!enemy || scene.time.now < enemy.contactReadyAt) {
+        return;
+      }
+      enemy.contactReadyAt = scene.time.now + 650;
+      const hpBefore = scene.player.hp;
+      if (scene.player.damage(enemy.damage, scene.time.now)) {
+        const appliedDamage = Math.max(0, hpBefore - scene.player.hp);
         scene.audio.play('player-hit');
-        scene.telemetry.addDamageTaken(enemy.damage, scene.time.now, scene.waveSystem.currentWave);
-        scene.combatFeedback.showPlayerDamage(scene.player.sprite.x, scene.player.sprite.y, enemy.damage);
+        scene.telemetry.addDamageTaken(
+          appliedDamage,
+          scene.time.now,
+          scene.waveSystem.currentWave,
+          `contact:${enemy.type}`,
+          { lethal: scene.player.hp <= 0 }
+        );
+        scene.combatFeedback.showPlayerDamage(scene.player.sprite.x, scene.player.sprite.y, appliedDamage);
       }
     });
 
@@ -32,13 +44,21 @@ export class CollisionSystem {
       if (!projectile) {
         return;
       }
+      const hpBefore = scene.player.hp;
       if (scene.player.damage(projectile.damage, scene.time.now)) {
+        const appliedDamage = Math.max(0, hpBefore - scene.player.hp);
         scene.audio.play('player-hit');
-        scene.telemetry.addDamageTaken(projectile.damage, scene.time.now, scene.waveSystem.currentWave);
+        scene.telemetry.addDamageTaken(
+          appliedDamage,
+          scene.time.now,
+          scene.waveSystem.currentWave,
+          projectile.source,
+          { lethal: scene.player.hp <= 0 }
+        );
         scene.combatFeedback.showPlayerDamage(
           projectile.sprite.x,
           projectile.sprite.y,
-          projectile.damage,
+          appliedDamage,
           projectile
         );
       }
@@ -50,16 +70,22 @@ export class CollisionSystem {
       if (!orb) {
         return;
       }
-      const leveled = scene.player.addXp(orb.value);
+      const levelsGained = scene.player.addXp(orb.value);
       scene.audio.play('xp-pickup');
       scene.debugStats.xpCollected += orb.value;
       scene.telemetry.addXp(orb.value, scene.time.now, scene.waveSystem.currentWave);
       scene.removeOrb(orb);
-      if (leveled) {
+      if (levelsGained > 0) {
         scene.audio.play('level-up');
-        scene.debugStats.levelUps += 1;
-        scene.telemetry.addLevelUp(scene.time.now, scene.waveSystem.currentWave, scene.player.level);
-        scene.startLevelUp();
+        scene.debugStats.levelUps += levelsGained;
+        for (let offset = levelsGained - 1; offset >= 0; offset -= 1) {
+          scene.telemetry.addLevelUp(
+            scene.time.now,
+            scene.waveSystem.currentWave,
+            scene.player.level - offset
+          );
+        }
+        scene.startLevelUp(levelsGained);
       }
     });
   }

@@ -44,7 +44,8 @@ export class SupportChicken {
       maxTurnRate: 0.065,
       hitRadius: 22,
       trailRadius: 7,
-      trailAlpha: 0.16
+      trailAlpha: 0.16,
+      source: 'support-chick'
     });
     this.nextShotAt = this.scene.time.now + this.fireRate;
   }

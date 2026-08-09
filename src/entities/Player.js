@@ -8,7 +8,7 @@ export class Player {
     this.speed = 210;
     this.level = 1;
     this.xp = 0;
-    this.xpToNext = 52;
+    this.xpToNext = 60;
     this.fireRate = 800;
     this.projectileDamage = 20;
     this.shotCount = 1;
@@ -139,13 +139,20 @@ export class Player {
 
   addXp(amount) {
     this.xp += amount;
-    if (this.xp >= this.xpToNext) {
+    let levelsGained = 0;
+    while (this.xp >= this.xpToNext) {
       this.xp -= this.xpToNext;
       this.level += 1;
-      this.xpToNext = Math.round(this.xpToNext * 1.42 + 18);
-      return true;
+      levelsGained += 1;
+      this.xpToNext = this.getXpRequirement(this.level);
     }
-    return false;
+    return levelsGained;
+  }
+
+  getXpRequirement(level) {
+    const requirements = [35, 70, 105, 145, 190, 245, 305, 375, 455, 545, 645, 755];
+    return requirements[Math.min(requirements.length - 1, Math.max(0, level - 1))]
+      + Math.max(0, level - requirements.length) * 90;
   }
 
   getUpgradeRank(id) {

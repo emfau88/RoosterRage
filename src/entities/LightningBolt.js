@@ -22,7 +22,13 @@ export class LightningBolt {
     targets.forEach((enemy, index) => {
       const falloff = Math.max(0.55, 1 - index * 0.18);
       const synergyMultiplier = synergyActive ? 1.2 : 1;
-      scene.damageEnemy(enemy, Math.round((24 + rank * 10) * falloff * synergyMultiplier));
+      scene.damageEnemy(
+        enemy,
+        Math.round((24 + rank * 10) * falloff * synergyMultiplier),
+        enemy.sprite.x,
+        enemy.sprite.y,
+        { source: 'lightning-comb' }
+      );
     });
   }
 
@@ -34,8 +40,8 @@ export class LightningBolt {
     const steps = 4;
     for (let i = 1; i < steps; i += 1) {
       const t = i / steps;
-      const x = Phaser.Math.Linear(from.x, to.x, t) + Phaser.Math.Between(-14, 14);
-      const y = Phaser.Math.Linear(from.y, to.y, t) + Phaser.Math.Between(-14, 14);
+      const x = Phaser.Math.Linear(from.x, to.x, t) + this.scene.rng.int(-14, 14, 'fx-lightning');
+      const y = Phaser.Math.Linear(from.y, to.y, t) + this.scene.rng.int(-14, 14, 'fx-lightning');
       line.lineTo(x, y);
     }
     line.lineTo(to.x, to.y);

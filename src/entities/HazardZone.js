@@ -27,18 +27,18 @@ export class HazardZone {
     this.flames = [];
     const flameCount = 7 + rank * 3;
     for (let i = 0; i < flameCount; i += 1) {
-      const angle = (Math.PI * 2 * i) / flameCount + Phaser.Math.FloatBetween(-0.25, 0.25);
-      const distance = Phaser.Math.FloatBetween(this.radius * 0.15, this.radius * 0.78);
+      const angle = (Math.PI * 2 * i) / flameCount + scene.rng.float(-0.25, 0.25, 'fx-hazard');
+      const distance = scene.rng.float(this.radius * 0.15, this.radius * 0.78, 'fx-hazard');
       const flame = scene.add.ellipse(
         x + Math.cos(angle) * distance,
         y + Math.sin(angle) * distance,
-        Phaser.Math.Between(10, 18),
-        Phaser.Math.Between(18, 30),
+        scene.rng.int(10, 18, 'fx-hazard'),
+        scene.rng.int(18, 30, 'fx-hazard'),
         i % 2 === 0 ? 0xffd35c : 0xff6a28,
         0.52
       ).setDepth(5);
-      flame.baseScale = Phaser.Math.FloatBetween(0.8, 1.25);
-      flame.phase = Phaser.Math.FloatBetween(0, Math.PI * 2);
+      flame.baseScale = scene.rng.float(0.8, 1.25, 'fx-hazard');
+      flame.phase = scene.rng.float(0, Math.PI * 2, 'fx-hazard');
       this.flames.push(flame);
     }
   }
@@ -57,7 +57,7 @@ export class HazardZone {
         }
         const distance = Phaser.Math.Distance.Between(this.x, this.y, enemy.sprite.x, enemy.sprite.y);
         if (distance <= this.radius) {
-          this.scene.damageEnemy(enemy, this.damage);
+          this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, { source: 'molotov-egg' });
         }
       });
     }

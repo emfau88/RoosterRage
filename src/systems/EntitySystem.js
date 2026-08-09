@@ -10,27 +10,63 @@ export class EntitySystem {
   }
 
   spawnEnemy(waveConfig) {
-    const edge = Phaser.Math.Between(0, 3);
-    const margin = 36;
-    let x = Phaser.Math.Between(margin, this.arenaWidth - margin);
-    let y = Phaser.Math.Between(margin, this.arenaHeight - margin);
-    if (edge === 0) y = margin;
-    if (edge === 1) x = this.arenaWidth - margin;
-    if (edge === 2) y = this.arenaHeight - margin;
-    if (edge === 3) x = margin;
+    const point = this.findSafeEdgeSpawn(waveConfig.spawnMinDistance ?? 260);
+    return this.spawnEnemyAt(waveConfig, point.x, point.y);
+  }
 
-    const enemy = new Enemy(this.scene, x, y, waveConfig);
+  findSafeEdgeSpawn(minDistance) {
+    const margin = 36;
+    const player = this.scene.player?.sprite;
+    let farthest = null;
+
+    for (let attempt = 0; attempt < 16; attempt += 1) {
+      const edge = this.scene.rng.int(0, 3, 'enemy-spawn');
+      let x = this.scene.rng.int(margin, this.arenaWidth - margin, 'enemy-spawn');
+      let y = this.scene.rng.int(margin, this.arenaHeight - margin, 'enemy-spawn');
+      if (edge === 0) y = margin;
+      if (edge === 1) x = this.arenaWidth - margin;
+      if (edge === 2) y = this.arenaHeight - margin;
+      if (edge === 3) x = margin;
+
+      const distance = player
+        ? Phaser.Math.Distance.Between(player.x, player.y, x, y)
+        : Infinity;
+      const candidate = { x, y, distance };
+      if (!farthest || distance > farthest.distance) {
+        farthest = candidate;
+      }
+      if (distance >= minDistance) {
+        return candidate;
+      }
+    }
+
+    return farthest ?? { x: margin, y: margin, distance: Infinity };
+  }
+
+  spawnEnemyAt(waveConfig, x, y) {
+    const runtimeConfig = {
+      ...waveConfig,
+      xp: this.scene.waveSystem.getXpForSpawn(waveConfig)
+    };
+    const enemy = this.scene.objectPools.acquire(
+      'enemy',
+      () => new Enemy(this.scene),
+      (item) => item.reset(x, y, runtimeConfig)
+    );
+    if (!enemy) {
+      return null;
+    }
     this.scene.enemies.push(enemy);
     this.scene.enemyGroup.add(enemy.sprite);
-    this.scene.telemetry.summary.enemiesSpawned += 1;
-    this.scene.telemetry.record('enemySpawned', this.scene.time.now, {
-      wave: this.scene.waveSystem.currentWave,
-      type: waveConfig.type ?? 'unknown'
-    });
+    this.scene.telemetry.addEnemySpawn(
+      enemy,
+      this.scene.time.now,
+      this.scene.waveSystem.currentWave
+    );
     return enemy;
   }
 
-  killEnemy(enemy) {
+  killEnemy(enemy, source = 'base-egg') {
     this.scene.enemies = this.scene.enemies.filter((item) => item !== enemy);
     if (enemy.type === 'boss') {
       this.scene.clearEnemyProjectiles();
@@ -42,12 +78,39 @@ export class EntitySystem {
     }
     this.spawnXp(enemy.sprite.x, enemy.sprite.y, enemy.xpValue);
     this.scene.debugStats.kills += 1;
-    this.scene.telemetry.addKill(this.scene.time.now, this.scene.waveSystem.currentWave, enemy.type);
+    this.scene.telemetry.addKill(
+      this.scene.time.now,
+      this.scene.waveSystem.currentWave,
+      enemy.type,
+      enemy.id,
+      source
+    );
+    if (enemy.elite) {
+      this.scene.runState.startChestReward(enemy.boss ? 'boss' : 'elite');
+    }
     enemy.destroy();
   }
 
   spawnXp(x, y, value) {
-    const orb = new XPOrb(this.scene, x, y, value);
+    if (value <= 0) {
+      return null;
+    }
+    const nearby = this.scene.xpOrbs.find((orb) => (
+      orb.sprite.active
+      && Phaser.Math.Distance.Between(x, y, orb.sprite.x, orb.sprite.y) <= 54
+    ));
+    if (nearby) {
+      nearby.addValue(value);
+      return nearby;
+    }
+    const orb = this.scene.objectPools.acquire(
+      'xpOrb',
+      () => new XPOrb(this.scene),
+      (item) => item.reset(x, y, value)
+    );
+    if (!orb) {
+      return null;
+    }
     this.scene.xpOrbs.push(orb);
     this.scene.xpGroup.add(orb.sprite);
     return orb;

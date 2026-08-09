@@ -1,11 +1,6 @@
-import Phaser from 'phaser';
+import { getPlayerProfile } from '../data/playerProfiles.js';
 
-const BOT_UPGRADE_PRIORITIES = {
-  offense: ['faster-eggs', 'fire-eggs', 'triple-shot', 'piercing-eggs', 'bigger-eggs', 'double-shot', 'move-speed', 'max-hp', 'heal'],
-  defense: ['max-hp', 'armor', 'regen', 'heal', 'move-speed', 'faster-eggs', 'fire-eggs'],
-  random: [],
-  'bad-but-valid': ['heal', 'xp-magnet', 'double-shot', 'max-hp', 'bigger-eggs', 'triple-shot', 'fire-eggs', 'faster-eggs']
-};
+const MAX_REGULAR_CHOICES = 11;
 
 export class RunStateSystem {
   constructor(scene) {
@@ -14,6 +9,10 @@ export class RunStateSystem {
     this.choosingRooster = false;
     this.choosingUpgrade = false;
     this.pendingUpgradeChoices = null;
+    this.pendingLevelUps = 0;
+    this.regularChoices = 0;
+    this.rewardQueue = [];
+    this.currentSelection = null;
     this.upgradeStartedAt = 0;
   }
 
@@ -35,19 +34,63 @@ export class RunStateSystem {
     return true;
   }
 
-  startLevelUp() {
+  startLevelUp(count = 1) {
+    const available = Math.max(0, MAX_REGULAR_CHOICES - this.regularChoices - this.pendingLevelUps);
+    this.pendingLevelUps += Math.min(Math.max(1, count), available);
+    this.openNextSelection();
+  }
+
+  startChestReward(kind = 'elite') {
+    this.rewardQueue.push(kind);
+    this.scene.telemetry.addChestFound(this.scene.time.now, this.scene.waveSystem.currentWave, kind);
+    this.openNextSelection();
+  }
+
+  openNextSelection() {
+    if (this.gameEnded || this.choosingUpgrade) {
+      return;
+    }
     const { scene } = this;
+    const rewardKind = this.rewardQueue.shift();
+    if (rewardKind) {
+      this.currentSelection = { type: 'chest', kind: rewardKind };
+      this.pendingUpgradeChoices = scene.upgradeSystem.getRewardChoices(
+        rewardKind === 'boss' ? 4 : 3,
+        scene.player,
+        rewardKind
+      );
+    } else if (this.pendingLevelUps > 0 && this.regularChoices < MAX_REGULAR_CHOICES) {
+      this.pendingLevelUps -= 1;
+      this.currentSelection = {
+        type: 'level',
+        index: this.regularChoices + 1,
+        remaining: this.pendingLevelUps
+      };
+      this.pendingUpgradeChoices = scene.upgradeSystem.getChoices(3, scene.player);
+    } else {
+      this.pendingLevelUps = 0;
+      this.currentSelection = null;
+      this.pendingUpgradeChoices = null;
+      scene.hud.hideOverlay();
+      scene.physics.resume();
+      return;
+    }
+
     this.choosingUpgrade = true;
     this.upgradeStartedAt = scene.time.now;
-    this.pendingUpgradeChoices = scene.upgradeSystem.getChoices(3, scene.player);
-    scene.bot.upgradeReadyAt = scene.time.now + 350;
+    scene.bot.upgradeReadyAt = scene.time.now + 260;
     scene.physics.pause();
     scene.telemetry.addUpgradeOffer(
       scene.time.now,
       scene.waveSystem.currentWave,
-      this.pendingUpgradeChoices
+      this.pendingUpgradeChoices,
+      this.currentSelection.type
     );
-    scene.hud.showUpgradeChoices(this.pendingUpgradeChoices);
+    scene.hud.showUpgradeChoices(this.pendingUpgradeChoices, {
+      type: this.currentSelection.type,
+      kind: this.currentSelection.kind,
+      remaining: this.pendingLevelUps + this.rewardQueue.length
+    });
   }
 
   chooseUpgrade(upgrade) {
@@ -55,15 +98,33 @@ export class RunStateSystem {
       return false;
     }
     const { scene } = this;
+    const selection = this.currentSelection;
     const pauseMs = this.upgradeStartedAt ? scene.time.now - this.upgradeStartedAt : 0;
     scene.player.applyUpgrade(upgrade, scene);
-    scene.telemetry.addUpgradeChoice(scene.time.now, scene.waveSystem.currentWave, upgrade, pauseMs);
-    scene.hud.hideOverlay();
-    scene.physics.resume();
+    scene.telemetry.addUpgradeChoice(
+      scene.time.now,
+      scene.waveSystem.currentWave,
+      upgrade,
+      pauseMs,
+      selection?.type ?? 'level'
+    );
+    if (selection?.type === 'level') {
+      this.regularChoices += 1;
+    } else if (selection?.type === 'chest') {
+      scene.telemetry.addChestChoice(
+        scene.time.now,
+        scene.waveSystem.currentWave,
+        selection.kind,
+        upgrade,
+        pauseMs
+      );
+    }
     this.choosingUpgrade = false;
     this.pendingUpgradeChoices = null;
+    this.currentSelection = null;
     this.upgradeStartedAt = 0;
     scene.updateHud();
+    this.openNextSelection();
     return true;
   }
 
@@ -75,10 +136,22 @@ export class RunStateSystem {
   }
 
   pickBotUpgrade(choices) {
-    if (this.scene.bot.strategy === 'random') {
-      return Phaser.Utils.Array.GetRandom(choices);
+    const emergencyHeal = choices.find((choice) => choice.id === 'heal');
+    if (emergencyHeal && this.scene.player.hp / this.scene.player.maxHp <= 0.55) {
+      return emergencyHeal;
     }
-    const priorities = BOT_UPGRADE_PRIORITIES[this.scene.bot.strategy] ?? BOT_UPGRADE_PRIORITIES.offense;
+    const hasSpectacle = this.scene.upgradeSystem.upgrades.some((upgrade) => (
+      ['active', 'orbit', 'summon'].includes(upgrade.category)
+      && this.scene.player.getUpgradeRank(upgrade.id) > 0
+    ));
+    if (!hasSpectacle) {
+      const spectacle = choices.find((choice) => ['active', 'orbit', 'summon'].includes(choice.category));
+      if (spectacle) {
+        return spectacle;
+      }
+    }
+    const profile = getPlayerProfile(this.scene.bot.strategy);
+    const priorities = profile.upgradePriorities;
     const rank = (id) => {
       const index = priorities.indexOf(id);
       return index === -1 ? 999 : index;
@@ -105,6 +178,6 @@ export class RunStateSystem {
     this.gameEnded = true;
     this.scene.physics.pause();
     this.scene.telemetry.finish(this.scene.time.now, outcome);
-    this.scene.hud.showEndScreen(title, message);
+    this.scene.hud.showEndScreen(title, message, this.scene.telemetry.getSummary(this.scene.time.now));
   }
 }
