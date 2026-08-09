@@ -27,7 +27,7 @@ export class CompanionAbilitySystem {
     this.scene.supportChickens.forEach((chicken) => chicken.destroy());
     this.scene.supportChickens = [];
     const evolved = Boolean(this.supportEvolutionId);
-    const count = evolved ? 4 : Phaser.Math.Clamp(rank, 1, 2);
+    const count = evolved ? 4 : rank >= 5 ? 3 : rank >= 4 ? 2 : 1;
     for (let index = 0; index < count; index += 1) {
       this.scene.supportChickens.push(new SupportChicken(this.scene, index, count, rank, evolved));
     }

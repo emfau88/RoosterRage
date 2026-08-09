@@ -127,6 +127,8 @@ export function installTestApi(scene) {
       projectileRicochets: scene.player.projectileRicochets,
       projectileKnockback: scene.player.projectileKnockback,
       critChance: scene.player.critChance,
+      critMultiplier: scene.player.critMultiplier,
+      primaryEvolution: scene.player.primaryEvolution?.id ?? null,
       secondWindCharges: scene.player.secondWindCharges,
       orbitEggs: scene.orbitEggs.length,
       supportChickens: scene.supportChickens.length,
@@ -161,6 +163,13 @@ export function installTestApi(scene) {
       role: definition.role,
       stats: { ...definition.stats },
       primary: { ...definition.primary },
+      primaryEvolution: { ...definition.primaryEvolution },
+      classPassives: [...definition.classPassives],
+      archetypes: definition.archetypes.map((archetype) => ({
+        ...archetype,
+        upgrades: [...archetype.upgrades]
+      })),
+      upgradeAffinities: { ...definition.upgradeAffinities },
       passive: definition.passive
     })),
     getWaveCatalog: () => scene.waveSystem.getWaveCatalog(),
@@ -197,6 +206,7 @@ export function installTestApi(scene) {
       tint: scene.player.sprite.tintTopLeft,
       markers: scene.roosterClasses.markers.length,
       primary: { ...scene.player.primaryAttack },
+      primaryEvolution: scene.player.primaryEvolution ? { ...scene.player.primaryEvolution } : null,
       upgradeAffinities: { ...scene.player.upgradeAffinities }
     }),
     selectRooster: (id = 'ace') => scene.chooseRooster(id),
@@ -212,7 +222,11 @@ export function installTestApi(scene) {
       texture: projectile.sprite.texture?.key,
       source: projectile.source,
       splashRadius: projectile.splashRadius,
+      secondaryBlastRatio: projectile.secondaryBlastRatio,
       chainRemaining: projectile.chainRemaining,
+      pierceRemaining: projectile.pierceRemaining,
+      ricochetRemaining: projectile.ricochetRemaining,
+      slowRatio: projectile.slowRatio,
       active: projectile.sprite.active
     })),
     getEnemyProjectileSnapshot: () => scene.enemyProjectiles.map((projectile) => ({
@@ -274,6 +288,8 @@ export function installTestApi(scene) {
       maxRank: upgrade.maxRank ?? null,
       consumable: upgrade.consumable ?? false,
       minLevel: upgrade.minLevel ?? 1,
+      classId: upgrade.classId ?? null,
+      evolution: upgrade.evolution ? { ...upgrade.evolution } : null,
       requires: upgrade.requires ?? [],
       excludes: upgrade.excludes ?? []
     })),

@@ -136,14 +136,17 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'support-chick',
     name: 'Support Chick',
-    description: '1 Begleiter feuert alle 1,27 s fuer 17 Schaden.',
+    description: 'Ein Begleiter startet einen ausbaubaren Projektil- und Debuff-Pfad.',
     rankDescriptions: [
-      '1 Begleiter: 17 Schaden, 1,27 s Schussabstand.',
-      '2 Begleiter: je 22 Schaden, 1,09 s Schussabstand.'
+      '1 Begleiter feuert fuer 17 Schaden.',
+      'Der Begleiter feuert eine Zweier-Salve mit 1 Durchschlag.',
+      'Treffer verlangsamen Gegner fuer 0,7 s.',
+      'Ein zweiter Begleiter tritt dem Schwarm bei.',
+      'Drei Begleiter feuern schneller und verlangsamen staerker.'
     ],
     category: 'summon',
     rarity: 'rare',
-    maxRank: 2,
+    maxRank: 5,
     minLevel: 2,
     weight: 6,
     apply: (_player, scene, rank) => scene.setSupportChickenRank(rank)
@@ -346,6 +349,153 @@ export const UPGRADE_DEFINITIONS = [
     }
   },
   {
+    id: 'ace-deadeye-drill',
+    name: 'Deadeye Drill',
+    description: 'Ace erhoeht Krit-Chance und Krit-Schaden seiner Ziel-Eier.',
+    rankDescriptions: [
+      '+4% Krit-Chance und +15% Krit-Schaden.',
+      'Insgesamt +8% Krit-Chance und +30% Krit-Schaden.',
+      'Insgesamt +12% Krit-Chance und +45% Krit-Schaden; EVO-Rezept komplett.'
+    ],
+    category: 'passive',
+    rarity: 'uncommon',
+    maxRank: 3,
+    minLevel: 2,
+    weight: 7,
+    classId: 'ace',
+    condition: (player) => player.roosterId === 'ace',
+    apply: (player) => {
+      player.critChance = Math.min(0.5, player.critChance + 0.04);
+      player.critMultiplier += 0.15;
+    }
+  },
+  {
+    id: 'ace-guidance-fins',
+    name: 'Guidance Fins',
+    description: 'Ace-Eier drehen schneller ein und fliegen weiter voraus.',
+    category: 'passive',
+    rarity: 'uncommon',
+    maxRank: 3,
+    minLevel: 2,
+    weight: 6,
+    classId: 'ace',
+    condition: (player) => player.roosterId === 'ace',
+    apply: (player) => {
+      player.primaryAttack.homingTurnRate = (player.primaryAttack.homingTurnRate ?? 0.08) + 0.025;
+      player.projectileSpeedBonus += 25;
+    }
+  },
+  {
+    id: 'artillery-reinforced-breech',
+    name: 'Reinforced Breech',
+    description: 'Boombardiers Startgranate erzeugt breitere und haertere Druckwellen.',
+    category: 'passive',
+    rarity: 'uncommon',
+    maxRank: 3,
+    minLevel: 2,
+    weight: 7,
+    classId: 'artillery',
+    condition: (player) => player.roosterId === 'artillery',
+    apply: (player) => {
+      player.primaryAttack.splashRadius = (player.primaryAttack.splashRadius ?? 0) + 10;
+      player.primaryAttack.splashDamageRatio = Math.min(0.82, (player.primaryAttack.splashDamageRatio ?? 0) + 0.06);
+    }
+  },
+  {
+    id: 'artillery-blast-plating',
+    name: 'Blast Plating',
+    description: 'Boombardier erhaelt HP und Panzerung fuer den Nahbereich seiner Explosionen.',
+    category: 'passive',
+    rarity: 'uncommon',
+    maxRank: 3,
+    minLevel: 2,
+    weight: 6,
+    classId: 'artillery',
+    condition: (player) => player.roosterId === 'artillery',
+    apply: (player) => {
+      player.addMaxHp(8);
+      player.armor += 2;
+    }
+  },
+  {
+    id: 'storm-static-plumage',
+    name: 'Static Plumage',
+    description: 'Stormcrests Start-Eier springen weiter durch dichte Gruppen.',
+    category: 'passive',
+    rarity: 'uncommon',
+    maxRank: 3,
+    minLevel: 2,
+    weight: 7,
+    classId: 'storm',
+    condition: (player) => player.roosterId === 'storm',
+    apply: (player) => {
+      player.primaryAttack.chainCount = (player.primaryAttack.chainCount ?? 0) + 1;
+      player.primaryAttack.chainDamageRatio = Math.min(0.82, (player.primaryAttack.chainDamageRatio ?? 0) + 0.06);
+      player.primaryAttack.chainRadius = (player.primaryAttack.chainRadius ?? 160) + 18;
+    }
+  },
+  {
+    id: 'storm-tailwind-training',
+    name: 'Tailwind Training',
+    description: 'Stormcrest bewegt sich schneller und verkuerzt den Startwaffen-Takt.',
+    category: 'passive',
+    rarity: 'uncommon',
+    maxRank: 3,
+    minLevel: 2,
+    weight: 6,
+    classId: 'storm',
+    condition: (player) => player.roosterId === 'storm',
+    apply: (player) => {
+      player.speed += 12;
+      player.fireRate = Math.max(300, Math.round(player.fireRate * 0.93));
+    }
+  },
+  {
+    id: 'evo-sunshot-array',
+    name: 'Sunshot Array',
+    description: 'Target Egg wird zur kritischen Dreiersalve mit Durchschlag und Ricochet.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    classId: 'ace',
+    requires: ['ace-deadeye-drill'],
+    requiresMaxRank: ['ace-deadeye-drill'],
+    condition: (player) => player.roosterId === 'ace',
+    evolution: { base: 'primary-ace', passive: 'ace-deadeye-drill' },
+    apply: (_player, scene) => scene.evolveAbility('primary-ace', 'evo-sunshot-array')
+  },
+  {
+    id: 'evo-siegebreaker-shell',
+    name: 'Siegebreaker Shell',
+    description: 'Blast Shell wird panzerbrechend und loest eine zweite Druckwelle aus.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    classId: 'artillery',
+    requires: ['artillery-reinforced-breech'],
+    requiresMaxRank: ['artillery-reinforced-breech'],
+    condition: (player) => player.roosterId === 'artillery',
+    evolution: { base: 'primary-artillery', passive: 'artillery-reinforced-breech' },
+    apply: (_player, scene) => scene.evolveAbility('primary-artillery', 'evo-siegebreaker-shell')
+  },
+  {
+    id: 'evo-tempest-crown',
+    name: 'Tempest Crown',
+    description: 'Storm Egg wird zum Zwillingsschuss mit drei zusaetzlichen Kettenspruengen.',
+    category: 'evolution',
+    rarity: 'evolution',
+    maxRank: 1,
+    weight: 100,
+    classId: 'storm',
+    requires: ['storm-static-plumage'],
+    requiresMaxRank: ['storm-static-plumage'],
+    condition: (player) => player.roosterId === 'storm',
+    evolution: { base: 'primary-storm', passive: 'storm-static-plumage' },
+    apply: (_player, scene) => scene.evolveAbility('primary-storm', 'evo-tempest-crown')
+  },
+  {
     id: 'evo-solar-scramble',
     name: 'Solar Scramble',
     description: 'Golden Egg wird zu einer Dreifach-Salve aus brennenden Sonnen-Eiern.',
@@ -439,7 +589,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-chick-squadron',
     name: 'Chick Squadron',
-    description: 'Vier Support Chicks feuern schnelle Eier und verlangsamen getroffene Gegner.',
+    description: 'Vier Support Chicks feuern schnelle Doppelsalven und verlangsamen getroffene Gegner stark.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,

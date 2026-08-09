@@ -10,6 +10,8 @@ export const PLAYER_PROFILES = {
     projectileDangerRadius: 165,
     projectileEvadeWeight: 0.45,
     upgradePriorities: [
+      'evo-sunshot-array', 'evo-siegebreaker-shell', 'evo-tempest-crown',
+      'artillery-blast-plating', 'storm-tailwind-training', 'ace-guidance-fins',
       'heal', 'max-hp', 'move-speed', 'armor', 'regen', 'faster-eggs', 'fire-eggs',
       'double-shot', 'xp-magnet'
     ]
@@ -25,6 +27,9 @@ export const PLAYER_PROFILES = {
     projectileDangerRadius: 285,
     projectileEvadeWeight: 1.55,
     upgradePriorities: [
+      'evo-sunshot-array', 'evo-siegebreaker-shell', 'evo-tempest-crown',
+      'ace-deadeye-drill', 'artillery-reinforced-breech', 'storm-static-plumage',
+      'ace-guidance-fins', 'artillery-blast-plating', 'storm-tailwind-training',
       'faster-eggs', 'fire-eggs', 'golden-egg', 'orbit-eggs', 'lightning-comb',
       'support-chick', 'max-hp', 'move-speed', 'double-shot', 'armor',
       'piercing-eggs', 'regen', 'heal'
@@ -41,6 +46,8 @@ export const PLAYER_PROFILES = {
     projectileDangerRadius: 235,
     projectileEvadeWeight: 1.05,
     upgradePriorities: [
+      'evo-sunshot-array', 'evo-siegebreaker-shell', 'evo-tempest-crown',
+      'ace-deadeye-drill', 'artillery-reinforced-breech', 'storm-static-plumage',
       'faster-eggs', 'fire-eggs', 'triple-shot', 'piercing-eggs', 'bigger-eggs',
       'double-shot', 'critical-yolk', 'ricochet-eggs', 'move-speed', 'max-hp', 'heal'
     ]
@@ -56,6 +63,8 @@ export const PLAYER_PROFILES = {
     projectileDangerRadius: 350,
     projectileEvadeWeight: 1.95,
     upgradePriorities: [
+      'evo-sunshot-array', 'evo-siegebreaker-shell', 'evo-tempest-crown',
+      'artillery-blast-plating', 'storm-tailwind-training', 'ace-guidance-fins',
       'move-speed', 'armor', 'regen', 'max-hp', 'second-wind', 'xp-magnet', 'heal',
       'faster-eggs', 'fire-eggs'
     ]

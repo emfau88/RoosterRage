@@ -31,6 +31,7 @@ export class RoosterClassSystem {
     player.roosterId = definition.id;
     player.roosterName = definition.shortName;
     player.primaryAttack = { ...definition.primary };
+    player.primaryEvolution = null;
     player.upgradeAffinities = { ...definition.upgradeAffinities };
     player.maxHp = definition.stats.maxHp;
     player.hp = player.maxHp;
@@ -45,6 +46,28 @@ export class RoosterClassSystem {
       player.sprite.setTint(definition.visual.tint);
     }
     player.updateHealthBar();
+  }
+
+  evolvePrimary(baseId, evolutionId) {
+    if (!this.selected || baseId !== `primary-${this.selected.id}`) {
+      return false;
+    }
+    const evolution = this.selected.primaryEvolution;
+    if (!evolution || evolution.id !== evolutionId) {
+      return false;
+    }
+    this.scene.player.primaryEvolution = { ...evolution };
+    const halo = this.scene.add.circle(
+      this.scene.player.sprite.x,
+      this.scene.player.sprite.y,
+      35,
+      evolution.trailColor,
+      0.08
+    ).setStrokeStyle(3, evolution.trailColor, 0.84).setDepth(7);
+    halo.markerType = 'primary-evolution';
+    this.markers.push(halo);
+    this.scene.audio?.play('level-up', { volume: 0.34, cooldown: 180 });
+    return true;
   }
 
   createVisualIdentity(definition) {
@@ -102,6 +125,12 @@ export class RoosterClassSystem {
           x + Math.cos(perpendicular) * marker.side * 24,
           y + Math.sin(perpendicular) * marker.side * 24 + 6
         );
+        return;
+      }
+      if (marker.markerType === 'primary-evolution') {
+        marker.setPosition(x, y + 5);
+        marker.setScale(0.94 + Math.sin(time * 0.005) * 0.08);
+        marker.setAlpha(0.52 + Math.sin(time * 0.004) * 0.18);
         return;
       }
       const angle = time * 0.0032 + (Math.PI * 2 * marker.index) / 3;

@@ -9,8 +9,13 @@ export class SupportChicken {
     this.evolved = evolved;
     this.angle = (Math.PI * 2 * index) / count;
     this.nextShotAt = scene.time.now + 350 + index * 220;
-    this.fireRate = evolved ? 620 : Math.max(760, 1450 - rank * 180);
-    this.damage = (evolved ? 18 : 12) + rank * 5;
+    this.fireRate = evolved ? 540 : Math.max(720, 1450 - rank * 125);
+    this.damage = (evolved ? 19 : 12) + rank * 5;
+    this.salvoCount = evolved || rank >= 2 ? 2 : 1;
+    this.pierce = evolved || rank >= 2 ? 1 : 0;
+    this.slowRatio = evolved ? 0.68 : rank >= 5 ? 0.78 : rank >= 3 ? 0.86 : 1;
+    this.slowMs = evolved ? 1200 : rank >= 5 ? 950 : rank >= 3 ? 700 : 0;
+    this.ricochet = evolved || rank >= 5 ? 1 : 0;
 
     this.sprite = scene.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'support-chick');
     this.sprite.setScale(0.14);
@@ -37,20 +42,26 @@ export class SupportChicken {
       this.nextShotAt = this.scene.time.now + 400;
       return;
     }
-    const angle = Phaser.Math.Angle.Between(x, y, target.sprite.x, target.sprite.y);
-    this.scene.spawnSpecialProjectileFrom(x, y, angle, target, {
-      damage: this.damage,
-      speed: 470,
-      life: 1350,
-      homing: true,
-      maxTurnRate: 0.065,
-      hitRadius: 22,
-      trailRadius: 7,
-      trailAlpha: 0.16,
-      source: this.evolved ? 'evo-chick-squadron' : 'support-chick',
-      slowRatio: this.evolved ? 0.72 : 1,
-      slowMs: this.evolved ? 900 : 0
-    });
+    const baseAngle = Phaser.Math.Angle.Between(x, y, target.sprite.x, target.sprite.y);
+    for (let shot = 0; shot < this.salvoCount; shot += 1) {
+      const offset = this.salvoCount === 1 ? 0 : (shot === 0 ? -0.065 : 0.065);
+      this.scene.spawnSpecialProjectileFrom(x, y, baseAngle + offset, target, {
+        damage: this.damage,
+        speed: this.evolved ? 560 : 470 + this.rank * 12,
+        life: 1450,
+        homing: true,
+        maxTurnRate: this.evolved ? 0.09 : 0.065,
+        hitRadius: this.evolved ? 25 : 22,
+        trailRadius: this.evolved ? 9 : 7,
+        trailColor: this.evolved ? 0xffe16a : 0xfffbef,
+        trailAlpha: this.evolved ? 0.3 : 0.16,
+        source: this.evolved ? 'evo-chick-squadron' : 'support-chick',
+        pierce: this.pierce,
+        ricochet: this.ricochet,
+        slowRatio: this.slowRatio,
+        slowMs: this.slowMs
+      });
+    }
     this.nextShotAt = this.scene.time.now + this.fireRate;
   }
 

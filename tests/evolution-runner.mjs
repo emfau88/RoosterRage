@@ -9,6 +9,9 @@ import {
 
 const artifactDir = path.join(projectRoot, 'test-results');
 const recipes = [
+  { id: 'evo-sunshot-array', base: 'primary-ace', rank: 0, passive: 'ace-deadeye-drill', passiveRank: 3, primary: true, rooster: 'ace' },
+  { id: 'evo-siegebreaker-shell', base: 'primary-artillery', rank: 0, passive: 'artillery-reinforced-breech', passiveRank: 3, primary: true, rooster: 'artillery' },
+  { id: 'evo-tempest-crown', base: 'primary-storm', rank: 0, passive: 'storm-static-plumage', passiveRank: 3, primary: true, rooster: 'storm' },
   { id: 'evo-solar-scramble', base: 'golden-egg', rank: 3, passive: 'fire-eggs', ability: 'goldenEgg' },
   { id: 'evo-thunder-roost', base: 'lightning-comb', rank: 3, passive: 'critical-yolk', ability: 'lightningComb' },
   { id: 'evo-shell-halo', base: 'orbit-eggs', rank: 3, passive: 'armor', ability: 'orbitEggs', count: 4 },
@@ -16,7 +19,7 @@ const recipes = [
   { id: 'evo-singularity-nest', base: 'void-nest', rank: 3, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones' },
   { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 3, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones' },
   { id: 'evo-dawn-laser', base: 'laser-comb', rank: 3, passive: 'swift-shells', ability: 'laserComb' },
-  { id: 'evo-chick-squadron', base: 'support-chick', rank: 2, passive: 'faster-eggs', ability: 'supportChick', count: 4 }
+  { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4 }
 ];
 
 function assert(condition, message, details) {
@@ -25,7 +28,7 @@ function assert(condition, message, details) {
   }
 }
 
-async function openGame(browser, serverUrl, seed) {
+async function openGame(browser, serverUrl, seed, rooster = 'ace') {
   const page = await browser.newPage({ viewport: { width: 960, height: 540 } });
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
@@ -34,13 +37,13 @@ async function openGame(browser, serverUrl, seed) {
   });
   await page.goto(`${serverUrl}?seed=${seed}&profile=average`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => window.__ROOSTER_TEST__?.getLoadout);
-  await page.evaluate(() => {
-    window.__ROOSTER_TEST__.selectRooster('ace');
+  await page.evaluate((roosterId) => {
+    window.__ROOSTER_TEST__.selectRooster(roosterId);
     window.__ROOSTER_TEST__.pauseWaves();
     window.__ROOSTER_TEST__.clearEnemies();
     window.__ROOSTER_TEST__.clearProjectiles();
     window.__ROOSTER_TEST__.setPlayerLevel(20);
-  });
+  }, rooster);
   return { page, errors };
 }
 
@@ -84,15 +87,17 @@ async function testSlotsAndReroll(browser, serverUrl) {
 }
 
 async function testRecipe(browser, serverUrl, recipe) {
-  const { page, errors } = await openGame(browser, serverUrl, recipe.id);
+  const { page, errors } = await openGame(browser, serverUrl, recipe.id, recipe.rooster ?? 'ace');
   try {
     const before = await page.evaluate((id) => window.__ROOSTER_TEST__.getAvailableUpgradeIds().includes(id), recipe.id);
     assert(!before, `${recipe.id} was available before its recipe.`, { recipe });
-    await page.evaluate(({ base, rank, passive }) => {
+    await page.evaluate(({ base, rank, passive, passiveRank = 1 }) => {
       for (let index = 0; index < rank; index += 1) {
         window.__ROOSTER_TEST__.applyUpgradeById(base);
       }
-      window.__ROOSTER_TEST__.applyUpgradeById(passive);
+      for (let index = 0; index < passiveRank; index += 1) {
+        window.__ROOSTER_TEST__.applyUpgradeById(passive);
+      }
     }, recipe);
     const ready = await page.evaluate((id) => window.__ROOSTER_TEST__.getAvailableUpgradeIds().includes(id), recipe.id);
     assert(ready, `${recipe.id} was not available with a complete recipe.`, { recipe });
@@ -114,12 +119,18 @@ async function testRecipe(browser, serverUrl, recipe) {
     const result = await page.evaluate(() => ({
       loadout: window.__ROOSTER_TEST__.getLoadout(),
       abilities: window.__ROOSTER_TEST__.getAbilityState(),
+      player: window.__ROOSTER_TEST__.getPlayerStats(),
       state: window.__ROOSTER_TEST__.getState(),
       telemetry: window.__ROOSTER_TEST__.getTelemetry()
     }));
     assert(result.loadout.evolutions.some((evolution) => evolution.id === recipe.id),
       `${recipe.id} is absent from loadout.`, result);
-    assert(result.abilities[recipe.ability]?.evolved, `${recipe.id} did not evolve runtime behavior.`, result);
+    if (recipe.primary) {
+      assert(result.player.primaryEvolution === recipe.id,
+        `${recipe.id} did not evolve its class start weapon.`, result);
+    } else {
+      assert(result.abilities[recipe.ability]?.evolved, `${recipe.id} did not evolve runtime behavior.`, result);
+    }
     if (recipe.count) {
       assert(result.abilities[recipe.ability].count === recipe.count,
         `${recipe.id} did not create ${recipe.count} companions.`, result);
@@ -133,7 +144,7 @@ async function testRecipe(browser, serverUrl, recipe) {
     return {
       id: recipe.id,
       damage: result.telemetry.effectiveDamageBySource[recipe.id],
-      ability: result.abilities[recipe.ability],
+      ability: recipe.primary ? { primaryEvolution: result.player.primaryEvolution } : result.abilities[recipe.ability],
       peakObjects: result.telemetry.peakObjects
     };
   } finally {

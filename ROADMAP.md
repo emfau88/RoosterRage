@@ -28,12 +28,12 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 | 12 | Arenen und Pickups | Abgeschlossen |
 | 13 | Gegner-, Elite- und Boss-Paket | Abgeschlossen |
 | 14 | HUD, Feedback und Run-Report | Abgeschlossen |
-| 15 | Rooster-Tiefe und Build-Content | Offen |
+| 15 | Rooster-Tiefe und Build-Content | Abgeschlossen |
 | 16 | Meta und Challenges | Offen |
 | 17 | Vertical-Slice-Abnahme | Offen |
 | 18 | Kommerzielle Validierung | Offen |
 
-Aktueller Fokus: Phase 15. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
+Aktueller Fokus: Phase 16. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -559,14 +559,14 @@ Abnahmeprotokoll 10.08.2026:
 
 ## Phase 15: Rooster-Tiefe und Build-Content
 
-Status: Offen
+Status: Abgeschlossen am 10.08.2026
 
 Bulk-Ziel: Jeder Rooster besitzt mindestens drei tragfaehige, eigene Build-Archetypen.
 
-29. [ ] Ace, Boombardier und Stormcrest erhalten exklusive Startwaffen-EVOs und je zwei klassennahe Passives.
-30. [ ] Support Chick zu einem echten Summon-Pfad mit Projektil-, Debuff- und Mehrfachbegleiter-Raengen ausbauen.
-31. [ ] Pro Rooster drei Build-Archetypen definieren und mit Upgrade-Affinitaeten statt harten Sperren unterstuetzen.
-32. [ ] Fehlende finale Combat-Assets, Animationen und dosierte Sounds nur fuer bestaetigte Kernfaehigkeiten produzieren.
+29. [x] Ace, Boombardier und Stormcrest erhalten exklusive Startwaffen-EVOs und je zwei klassennahe Passives.
+30. [x] Support Chick zu einem echten Summon-Pfad mit Projektil-, Debuff- und Mehrfachbegleiter-Raengen ausbauen.
+31. [x] Pro Rooster drei Build-Archetypen definieren und mit Upgrade-Affinitaeten statt harten Sperren unterstuetzen.
+32. [x] Fehlende finale Combat-Assets, Animationen und dosierte Sounds nur fuer bestaetigte Kernfaehigkeiten produzieren.
 
 Balance-Arbeit:
 
@@ -578,6 +578,16 @@ Abnahme:
 
 - Neun dokumentierte Archetypen bestehen definierte Wave-, Elite- und Boss-Szenarien.
 - Klassen unterscheiden sich bereits in den ersten 20 Sekunden und bleiben bis zum Run-Ende verschieden.
+
+Abnahmeprotokoll 10.08.2026:
+
+- Ace, Boombardier und Stormcrest besitzen mit Sunshot Array, Siegebreaker Shell und Tempest Crown exklusive Startwaffen-EVOs. Schusszahl/Durchschlag/Ricochet, Doppel-Druckwelle und mehrstufige Ketten sind eigenstaendige Runtime-Mechaniken mit eigener Telemetrie.
+- Sechs nur der passenden Klasse angebotene Passivreihen vertiefen Krit-/Lenkverhalten, Explosion/Standfestigkeit und Kette/Tempo. Klassenfremde Angebote werden im Gate fuer alle drei Rooster ausgeschlossen.
+- Support Chick besitzt fuenf lesbare Ranks: Begleiter, Zweier-Projektilsalve mit Durchschlag, Slow-Debuff, zweiter und dritter Begleiter. Chick Squadron schliesst den Pfad mit vier schnellen, stark verlangsamenden Begleitern ab.
+- Neun dokumentierte Archetypen werden ueber mindestens drei Affinitaeten je Build unterstuetzt; generische Upgrades bleiben frei waehlbar. Alle neun bestanden im Mobile-Portrait-Viewport getrennte Fodder-, Elite- und Boss-Szenarien bei 16,8 ms oder besserem p95 und ohne Drops/Runtime-Fehler.
+- Fruehe Identitaet entsteht bereits durch unterschiedliche HP-, Tempo-, Takt-, Krit-, Splash- und Chain-Profile. Die drei exklusiven EVOs halten die Startwaffen auch im Endbuild mechanisch verschieden.
+- Die Asset-Pruefung bestaetigt 16 aktuelle Runtime-Assets. Fuer die bestaetigten Faehigkeiten waren keine weiteren Bitmap- oder Audio-Dateien notwendig; EVOs verwenden bewusst vorhandene Projektil-Silhouetten, neue Farb-/Ringeffekte und das priorisierte Level-up-Audiosignal.
+- Build, Smoke, Mechanics, Pacing, Loadout/EVO, HUD/Report und der neue `test:rooster-depth`-Gate bestanden. Abschlussquoten und Hauptwaffen-Damage-Share werden belastbar ueber die Seed-Matrix in Phase 17 bewertet.
 
 ## Phase 16: Meta und Challenges
 

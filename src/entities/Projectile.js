@@ -33,6 +33,7 @@ export class Projectile {
     this.slowMs = options.slowMs ?? 0;
     this.splashRadius = options.splashRadius ?? 0;
     this.splashDamageRatio = options.splashDamageRatio ?? 0;
+    this.secondaryBlastRatio = options.secondaryBlastRatio ?? 0;
     this.chainRemaining = options.chainCount ?? 0;
     this.chainRadius = options.chainRadius ?? 0;
     this.chainDamageRatio = options.chainDamageRatio ?? 0;

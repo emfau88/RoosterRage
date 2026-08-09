@@ -381,25 +381,30 @@ export class Telemetry {
   }
 
   getCombatSourceReport() {
-    const keys = new Set([
+    const rawKeys = new Set([
       ...Object.keys(this.summary.damageBySource),
       ...Object.keys(this.summary.shotsBySource),
       ...Object.keys(this.summary.hitsBySource),
       ...Object.keys(this.summary.killsBySource)
     ]);
+    const sourceFamily = (source) => source.split(':')[0];
+    const keys = new Set([...rawKeys].map(sourceFamily));
+    const sumFamily = (stats, family) => Object.entries(stats)
+      .filter(([source]) => sourceFamily(source) === family)
+      .reduce((sum, [, value]) => sum + value, 0);
     const totalEffective = Math.max(1, this.summary.effectiveDamage);
     return [...keys].map((source) => {
       const sourceEvents = this.events.filter((event) => (
-        event.source === source
+        sourceFamily(event.source ?? '') === source
         && ['projectileFired', 'projectileHit', 'damageDealt', 'enemyKilled'].includes(event.type)
       ));
       const firstAt = sourceEvents[0]?.time ?? null;
       const lastAt = sourceEvents[sourceEvents.length - 1]?.time ?? firstAt;
-      const shots = this.summary.shotsBySource[source] ?? 0;
-      const hits = this.summary.hitsBySource[source] ?? 0;
-      const damage = this.summary.damageBySource[source] ?? 0;
-      const effectiveDamage = this.summary.effectiveDamageBySource[source] ?? 0;
-      const overkill = this.summary.overkillBySource[source] ?? 0;
+      const shots = sumFamily(this.summary.shotsBySource, source);
+      const hits = sumFamily(this.summary.hitsBySource, source);
+      const damage = sumFamily(this.summary.damageBySource, source);
+      const effectiveDamage = sumFamily(this.summary.effectiveDamageBySource, source);
+      const overkill = sumFamily(this.summary.overkillBySource, source);
       return {
         source,
         shots,
@@ -410,7 +415,7 @@ export class Telemetry {
         damageShare: effectiveDamage / totalEffective,
         overkill,
         overkillRatio: damage > 0 ? overkill / damage : 0,
-        kills: this.summary.killsBySource[source] ?? 0,
+        kills: sumFamily(this.summary.killsBySource, source),
         firstAt,
         lastAt,
         usageMs: firstAt === null ? 0 : Math.max(0, lastAt - firstAt)

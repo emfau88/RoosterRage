@@ -25,6 +25,8 @@ export class CombatSystem {
     );
     scene.player.aimAt(baseAngle);
     const primary = scene.player.primaryAttack ?? {};
+    const evolution = scene.player.primaryEvolution;
+    const source = evolution?.id ?? (scene.player.fireEggs ? 'fire-eggs' : 'base-egg');
     const pattern = this.getShotPattern();
     const targets = this.getShotTargets(pattern.length, target);
     pattern.forEach((shot, index) => {
@@ -36,23 +38,28 @@ export class CombatSystem {
         shotTarget.sprite.y
       );
       this.spawnProjectile(angle, shotTarget, shot.laneOffset, {
+        damage: Math.round(scene.player.projectileDamage * (evolution?.damageMultiplier ?? 1)),
+        source,
         homing: true,
         maxTurnRate: primary.homingTurnRate ?? shot.maxTurnRate ?? 0.08,
         targetOffset: 0,
         laneOffset: shot.laneOffset,
         texture: scene.player.fireEggs ? undefined : primary.texture,
-        speed: (primary.speed ?? 520) + scene.player.projectileSpeedBonus,
-        scale: primary.scale,
-        hitRadius: primary.hitRadius,
+        speed: (primary.speed ?? 520) + scene.player.projectileSpeedBonus + (evolution?.speedBonus ?? 0),
+        scale: (primary.scale ?? 1) * (evolution?.scaleMultiplier ?? 1),
+        hitRadius: (primary.hitRadius ?? 24) + (evolution?.hitRadiusBonus ?? 0),
         bodyRadius: primary.bodyRadius,
         trailRadius: primary.trailRadius,
-        trailColor: scene.player.fireEggs ? 0xff6a28 : primary.trailColor,
-        trailAlpha: primary.trailAlpha,
-        splashRadius: primary.splashRadius,
-        splashDamageRatio: primary.splashDamageRatio,
-        chainCount: primary.chainCount,
-        chainRadius: primary.chainRadius,
-        chainDamageRatio: primary.chainDamageRatio
+        trailColor: evolution?.trailColor ?? (scene.player.fireEggs ? 0xff6a28 : primary.trailColor),
+        trailAlpha: evolution?.trailAlpha ?? primary.trailAlpha,
+        pierce: evolution ? Math.max(scene.player.projectilePierce, evolution.pierce ?? 0) : undefined,
+        ricochet: evolution ? Math.max(scene.player.projectileRicochets, evolution.ricochet ?? 0) : undefined,
+        splashRadius: (primary.splashRadius ?? 0) * (evolution?.splashRadiusMultiplier ?? 1),
+        splashDamageRatio: evolution?.splashDamageRatio ?? primary.splashDamageRatio,
+        secondaryBlastRatio: evolution?.secondaryBlastRatio ?? 0,
+        chainCount: (primary.chainCount ?? 0) + (evolution?.chainCountBonus ?? 0),
+        chainRadius: (primary.chainRadius ?? 0) + (evolution?.chainRadiusBonus ?? 0),
+        chainDamageRatio: evolution?.chainDamageRatio ?? primary.chainDamageRatio
       });
       scene.showShotFeedback(angle, shot.laneOffset);
     });
@@ -60,18 +67,20 @@ export class CombatSystem {
     scene.audio.play('egg-shot');
     scene.debugStats.shots += pattern.length;
     scene.debugStats.lastShotAt = time;
-    scene.telemetry.addShot(pattern.length, time, scene.waveSystem.currentWave, 'base-egg');
+    scene.telemetry.addShot(pattern.length, time, scene.waveSystem.currentWave, source);
   }
 
   getShotPattern() {
-    if (this.scene.player.shotCount >= 3) {
+    const minimumShots = this.scene.player.primaryEvolution?.minimumShots ?? 1;
+    const shotCount = Math.max(this.scene.player.shotCount, minimumShots);
+    if (shotCount >= 3) {
       return [
         { laneOffset: -24, maxTurnRate: 0.095 },
         { laneOffset: 0, maxTurnRate: 0.09 },
         { laneOffset: 24, maxTurnRate: 0.095 }
       ];
     }
-    if (this.scene.player.shotCount === 2) {
+    if (shotCount === 2) {
       return [
         { laneOffset: -18, maxTurnRate: 0.095 },
         { laneOffset: 18, maxTurnRate: 0.095 }
@@ -128,7 +137,7 @@ export class CombatSystem {
         muzzle.x + sideX,
         muzzle.y + sideY,
         angle,
-        scene.player.projectileDamage,
+        options.damage ?? scene.player.projectileDamage,
         scene.player.fireEggs,
         target,
         options.targetOffset ?? laneOffset,
@@ -263,38 +272,79 @@ export class CombatSystem {
       });
     }
 
+    if (projectile.secondaryBlastRatio > 0) {
+      const radius = Math.max(80, projectile.splashRadius * 1.28);
+      const secondaryDamage = Math.max(1, Math.round(damage * projectile.secondaryBlastRatio));
+      const wave = this.scene.add.circle(x, y, radius * 0.48, 0xffd35c, 0.08)
+        .setStrokeStyle(4, 0xfff3b0, 0.82)
+        .setDepth(9);
+      this.scene.tweens.add({
+        targets: wave,
+        alpha: 0,
+        scale: 2.05,
+        duration: 260,
+        onComplete: () => wave.destroy()
+      });
+      [...this.scene.enemies].forEach((candidate) => {
+        if (
+          candidate.sprite.active
+          && Phaser.Math.Distance.Between(x, y, candidate.sprite.x, candidate.sprite.y) <= radius
+        ) {
+          this.damageEnemy(candidate, secondaryDamage, candidate.sprite.x, candidate.sprite.y, {
+            source: `${projectile.source}:shockwave`
+          });
+        }
+      });
+    }
+
     if (projectile.chainRemaining <= 0 || projectile.chainDamageRatio <= 0) {
       return;
     }
-    const nextTarget = this.scene.enemies
-      .filter((candidate) => (
-        candidate !== hitEnemy
-        && candidate.sprite.active
-        && !projectile.hitEnemies.has(candidate.id)
-        && Phaser.Math.Distance.Between(x, y, candidate.sprite.x, candidate.sprite.y) <= projectile.chainRadius
-      ))
-      .sort((a, b) => Phaser.Math.Distance.Squared(x, y, a.sprite.x, a.sprite.y)
-        - Phaser.Math.Distance.Squared(x, y, b.sprite.x, b.sprite.y))[0];
-    if (!nextTarget) {
-      return;
+    let originX = x;
+    let originY = y;
+    let remaining = projectile.chainRemaining;
+    let chainDamage = Math.max(1, Math.round(damage * projectile.chainDamageRatio));
+    while (remaining > 0) {
+      const nextTarget = this.scene.enemies
+        .filter((candidate) => (
+          candidate !== hitEnemy
+          && candidate.sprite.active
+          && !projectile.hitEnemies.has(candidate.id)
+          && Phaser.Math.Distance.Between(
+            originX,
+            originY,
+            candidate.sprite.x,
+            candidate.sprite.y
+          ) <= projectile.chainRadius
+        ))
+        .sort((a, b) => Phaser.Math.Distance.Squared(originX, originY, a.sprite.x, a.sprite.y)
+          - Phaser.Math.Distance.Squared(originX, originY, b.sprite.x, b.sprite.y))[0];
+      if (!nextTarget) {
+        break;
+      }
+      const targetX = nextTarget.sprite.x;
+      const targetY = nextTarget.sprite.y;
+      projectile.hitEnemies.add(nextTarget.id);
+      const bolt = this.scene.add.graphics().setDepth(12);
+      bolt.lineStyle(5, 0xeefcff, 0.78);
+      bolt.lineBetween(originX, originY, targetX, targetY);
+      bolt.lineStyle(2, projectile.source === 'evo-tempest-crown' ? 0xcaa8ff : 0x5ad7ff, 1);
+      bolt.lineBetween(originX, originY, targetX, targetY);
+      this.scene.tweens.add({
+        targets: bolt,
+        alpha: 0,
+        duration: 150,
+        onComplete: () => bolt.destroy()
+      });
+      this.damageEnemy(nextTarget, chainDamage, targetX, targetY, {
+        source: `${projectile.source}:chain`
+      });
+      originX = targetX;
+      originY = targetY;
+      chainDamage = Math.max(1, Math.round(chainDamage * 0.9));
+      remaining -= 1;
     }
-    projectile.chainRemaining -= 1;
-    projectile.hitEnemies.add(nextTarget.id);
-    const bolt = this.scene.add.graphics().setDepth(12);
-    bolt.lineStyle(5, 0xeefcff, 0.78);
-    bolt.lineBetween(x, y, nextTarget.sprite.x, nextTarget.sprite.y);
-    bolt.lineStyle(2, 0x5ad7ff, 1);
-    bolt.lineBetween(x, y, nextTarget.sprite.x, nextTarget.sprite.y);
-    this.scene.tweens.add({
-      targets: bolt,
-      alpha: 0,
-      duration: 150,
-      onComplete: () => bolt.destroy()
-    });
-    const chainDamage = Math.max(1, Math.round(damage * projectile.chainDamageRatio));
-    this.damageEnemy(nextTarget, chainDamage, nextTarget.sprite.x, nextTarget.sprite.y, {
-      source: `${projectile.source}:chain`
-    });
+    projectile.chainRemaining = remaining;
   }
 
   redirectRicochet(projectile, hitEnemy) {

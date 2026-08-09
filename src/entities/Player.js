@@ -27,6 +27,7 @@ export class Player {
     this.roosterId = null;
     this.roosterName = '';
     this.primaryAttack = {};
+    this.primaryEvolution = null;
     this.upgradeAffinities = {};
     this.lastRegenAt = 0;
     this.aimAngle = 0;

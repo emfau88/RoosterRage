@@ -354,7 +354,9 @@ export class GameScene extends Phaser.Scene {
     this.activeAbilities.unlockLaserComb(rank);
   }
   evolveAbility(baseId, evolutionId) {
-    const evolved = this.activeAbilities.evolve(baseId, evolutionId);
+    const evolved = baseId.startsWith('primary-')
+      ? this.roosterClasses.evolvePrimary(baseId, evolutionId)
+      : this.activeAbilities.evolve(baseId, evolutionId);
     if (evolved) {
       this.telemetry.record('abilityEvolved', this.time.now, {
         wave: this.waveSystem.currentWave,

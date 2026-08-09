@@ -118,7 +118,7 @@ async function testUpgrades(browser) {
     assert(!choices.includes('double-shot') && !choices.includes('triple-shot'), 'Maxed shot upgrades should not be offered again.', choices);
 
     const catalog = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeCatalog());
-    assert(catalog.length === 33, 'Upgrade catalog should contain 25 base upgrades and 8 EVOs.', catalog);
+    assert(catalog.length === 42, 'Upgrade catalog should contain 31 base upgrades and 11 EVOs.', catalog);
     assert(catalog.every((upgrade) => upgrade.category && upgrade.rarity), 'Every upgrade needs category and rarity metadata.', catalog);
 
     return { name: 'upgrades', status: 'passed', before, after, choices, catalogSize: catalog.length };
