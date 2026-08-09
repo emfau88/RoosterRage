@@ -88,6 +88,12 @@ export class PlayerInputSystem {
       : Infinity;
 
     const profile = getPlayerProfile(this.scene.bot.strategy);
+    const arenaBounds = this.scene.arena?.bounds ?? {
+      x: 0,
+      y: 0,
+      width: this.arenaWidth,
+      height: this.arenaHeight
+    };
     const bossKiting = this.addBossKiting(movement, playerPosition, profile);
     const avoidingProjectile = this.addProjectileAvoidance(movement, playerPosition, profile);
     if (!bossKiting && nearestEnemy && nearestDistance < profile.dangerRadius) {
@@ -99,8 +105,14 @@ export class PlayerInputSystem {
         .scale(profile.pressureWeight));
     }
 
+    const priorityPickup = this.findPriorityPickup(playerPosition);
     const nearestOrb = this.findNearestXpOrb();
-    if (!bossKiting && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
+    if (!bossKiting && !avoidingProjectile && priorityPickup) {
+      movement.add(new Phaser.Math.Vector2(priorityPickup.sprite.x, priorityPickup.sprite.y)
+        .subtract(playerPosition)
+        .normalize()
+        .scale(1.15));
+    } else if (!bossKiting && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
       movement.add(new Phaser.Math.Vector2(nearestOrb.sprite.x, nearestOrb.sprite.y)
         .subtract(playerPosition)
         .normalize()
@@ -114,17 +126,17 @@ export class PlayerInputSystem {
         this.scene.bot.target.y
       ) < 80) {
         this.scene.bot.target.set(
-          this.scene.rng.int(260, this.arenaWidth - 260, 'bot-movement'),
-          this.scene.rng.int(200, this.arenaHeight - 200, 'bot-movement')
+          this.scene.rng.int(arenaBounds.x + 130, arenaBounds.x + arenaBounds.width - 130, 'bot-movement'),
+          this.scene.rng.int(arenaBounds.y + 130, arenaBounds.y + arenaBounds.height - 130, 'bot-movement')
         );
       }
     }
 
     const edgePadding = 150;
-    if (playerPosition.x < edgePadding) movement.x += profile.edgeWeight;
-    if (playerPosition.x > this.arenaWidth - edgePadding) movement.x -= profile.edgeWeight;
-    if (playerPosition.y < edgePadding) movement.y += profile.edgeWeight;
-    if (playerPosition.y > this.arenaHeight - edgePadding) movement.y -= profile.edgeWeight;
+    if (playerPosition.x < arenaBounds.x + edgePadding) movement.x += profile.edgeWeight;
+    if (playerPosition.x > arenaBounds.x + arenaBounds.width - edgePadding) movement.x -= profile.edgeWeight;
+    if (playerPosition.y < arenaBounds.y + edgePadding) movement.y += profile.edgeWeight;
+    if (playerPosition.y > arenaBounds.y + arenaBounds.height - edgePadding) movement.y -= profile.edgeWeight;
     if (movement.lengthSq() > 1) {
       movement.normalize();
     }
@@ -218,7 +230,8 @@ export class PlayerInputSystem {
     let dodge = playerPosition.clone().subtract(mostUrgent.closestPoint);
     if (dodge.lengthSq() < 4) {
       dodge = new Phaser.Math.Vector2(-mostUrgent.velocity.y, mostUrgent.velocity.x);
-      const arenaCenter = new Phaser.Math.Vector2(this.arenaWidth / 2, this.arenaHeight / 2);
+      const bounds = this.scene.arena?.bounds ?? { x: 0, y: 0, width: this.arenaWidth, height: this.arenaHeight };
+      const arenaCenter = new Phaser.Math.Vector2(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
       if (playerPosition.clone().add(dodge).distance(arenaCenter)
         > playerPosition.clone().subtract(dodge).distance(arenaCenter)) {
         dodge.negate();
@@ -247,6 +260,19 @@ export class PlayerInputSystem {
       }
     });
     return nearest;
+  }
+
+  findPriorityPickup(playerPosition) {
+    const candidates = (this.scene.pickups?.items ?? []).filter((pickup) => {
+      if (!pickup.sprite.active) return false;
+      if (pickup.kind === 'elite-chest') return true;
+      if (pickup.kind === 'heal') return this.scene.player.hp / this.scene.player.maxHp < 0.72;
+      if (pickup.kind === 'bomb') return this.scene.enemies.length >= 10;
+      if (pickup.kind === 'magnet') return this.scene.xpOrbs.length >= 4;
+      return false;
+    });
+    return candidates.sort((a, b) => playerPosition.distanceSq(a.sprite)
+      - playerPosition.distanceSq(b.sprite))[0] ?? null;
   }
 
   destroy() {

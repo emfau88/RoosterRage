@@ -37,8 +37,9 @@ export class XPOrb {
       player.sprite.x,
       player.sprite.y
     );
-    if (distance < player.xpMagnetRadius) {
-      this.scene.physics.moveToObject(this.sprite, player.sprite, 230);
+    const pickupMagnet = this.scene.pickups?.isMagnetActive() ?? false;
+    if (pickupMagnet || distance < player.xpMagnetRadius) {
+      this.scene.physics.moveToObject(this.sprite, player.sprite, pickupMagnet ? 560 : 230);
     } else {
       this.sprite.setVelocity(0, 0);
     }

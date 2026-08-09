@@ -144,19 +144,29 @@ export class SpawnDirector {
   }
 
   pointOnEdge(edge, index, count, minDistance, spacing = 58) {
-    const margin = 40;
-    const width = this.scene.entities.arenaWidth;
-    const height = this.scene.entities.arenaHeight;
+    const margin = 66;
+    const bounds = this.scene.arena?.bounds ?? {
+      x: 0,
+      y: 0,
+      width: this.scene.entities.arenaWidth,
+      height: this.scene.entities.arenaHeight
+    };
+    const width = bounds.width;
+    const height = bounds.height;
     const player = this.scene.player.sprite;
     const offset = (index - (count - 1) / 2) * spacing;
     const horizontal = edge === 0 || edge === 2;
     const center = horizontal
-      ? this.scene.rng.int(180, width - 180, 'spawn-formation')
-      : this.scene.rng.int(150, height - 150, 'spawn-formation');
-    let x = horizontal ? Phaser.Math.Clamp(center + offset, margin, width - margin) : (edge === 1 ? width - margin : margin);
-    let y = horizontal ? (edge === 0 ? margin : height - margin) : Phaser.Math.Clamp(center + offset, margin, height - margin);
+      ? this.scene.rng.int(bounds.x + margin, bounds.x + width - margin, 'spawn-formation')
+      : this.scene.rng.int(bounds.y + margin, bounds.y + height - margin, 'spawn-formation');
+    let x = horizontal
+      ? Phaser.Math.Clamp(center + offset, bounds.x + margin, bounds.x + width - margin)
+      : (edge === 1 ? bounds.x + width - margin : bounds.x + margin);
+    let y = horizontal
+      ? (edge === 0 ? bounds.y + margin : bounds.y + height - margin)
+      : Phaser.Math.Clamp(center + offset, bounds.y + margin, bounds.y + height - margin);
     let distance = Phaser.Math.Distance.Between(x, y, player.x, player.y);
-    if (distance < minDistance) {
+    if (distance < minDistance || this.scene.arena?.overlapsObstacle(x, y, 38)) {
       const fallback = this.scene.entities.findSafeEdgeSpawn(minDistance);
       x = fallback.x;
       y = fallback.y;

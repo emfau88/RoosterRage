@@ -9,12 +9,14 @@ import {
   preloadGameAssets
 } from '../systems/AssetSetup.js';
 import { AudioSystem } from '../systems/AudioSystem.js';
+import { ArenaSystem } from '../systems/ArenaSystem.js';
 import { CollisionSystem } from '../systems/CollisionSystem.js';
 import { CombatSystem } from '../systems/CombatSystem.js';
 import { CombatFeedbackSystem } from '../systems/CombatFeedbackSystem.js';
 import { EnemyAttackSystem } from '../systems/EnemyAttackSystem.js';
 import { EntitySystem } from '../systems/EntitySystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
+import { PickupSystem } from '../systems/PickupSystem.js';
 import { LoadoutSystem } from '../systems/LoadoutSystem.js';
 import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
 import { ProjectileLifecycleSystem } from '../systems/ProjectileLifecycleSystem.js';
@@ -48,6 +50,14 @@ export class GameScene extends Phaser.Scene {
     }
     createGeneratedTextures(this);
     createGameAnimations(this);
+    const searchParams = new URLSearchParams(window.location.search);
+    const requestedSeed = searchParams.get('seed');
+    const requestedProfile = searchParams.get('profile') ?? 'manual';
+    const requestedArena = searchParams.get('arena') ?? 'open-yard';
+    const generatedSeed = globalThis.crypto?.getRandomValues
+      ? globalThis.crypto.getRandomValues(new Uint32Array(1))[0]
+      : Date.now();
+    this.rng = new RandomSystem(requestedSeed ?? generatedSeed);
     this.physics.world.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
     this.cameras.main.setBounds(
       0,
@@ -57,6 +67,7 @@ export class GameScene extends Phaser.Scene {
     );
 
     addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y);
+    this.arena = new ArenaSystem(this, requestedArena, ARENA_WIDTH, ARENA_HEIGHT);
 
     this.enemies = [];
     this.projectiles = [];
@@ -69,13 +80,6 @@ export class GameScene extends Phaser.Scene {
     this.hazardZones = [];
     this.voidZones = [];
     this.xpOrbs = [];
-    const searchParams = new URLSearchParams(window.location.search);
-    const requestedSeed = searchParams.get('seed');
-    const requestedProfile = searchParams.get('profile') ?? 'manual';
-    const generatedSeed = globalThis.crypto?.getRandomValues
-      ? globalThis.crypto.getRandomValues(new Uint32Array(1))[0]
-      : Date.now();
-    this.rng = new RandomSystem(requestedSeed ?? generatedSeed);
     this.objectPools = new ObjectPoolSystem(this);
     this.activeAbilities = new ActiveAbilitySystem(this);
     this.goldenEgg = this.activeAbilities.goldenEgg;
@@ -107,7 +111,8 @@ export class GameScene extends Phaser.Scene {
       lastError: null
     };
     this.lastShotAt = -9999;
-    this.player = new Player(this, ARENA_WIDTH / 2, ARENA_HEIGHT / 2);
+    const arenaCenter = this.arena.getCenter();
+    this.player = new Player(this, arenaCenter.x, arenaCenter.y);
     this.loadout = new LoadoutSystem(this);
     this.roosterClasses = new RoosterClassSystem(this);
     this.combat = new CombatSystem(this);
@@ -115,6 +120,7 @@ export class GameScene extends Phaser.Scene {
     this.collisions = new CollisionSystem(this);
     this.enemyAttacks = new EnemyAttackSystem(this);
     this.entities = new EntitySystem(this, ARENA_WIDTH, ARENA_HEIGHT);
+    this.pickups = new PickupSystem(this);
     this.projectileLifecycle = new ProjectileLifecycleSystem(this);
     this.playerInput = new PlayerInputSystem(this, ARENA_WIDTH, ARENA_HEIGHT);
     this.cameras.main.startFollow(this.player.sprite, true, 0.12, 0.12);
@@ -158,6 +164,7 @@ export class GameScene extends Phaser.Scene {
       this.enemies.forEach((enemy) => enemy.update(this.player));
       this.projectileLifecycle.update(delta);
       this.activeAbilities.update(time);
+      this.pickups.update(time);
       this.checkProjectileHits();
       this.projectileLifecycle.cleanup();
       this.xpOrbs.forEach((orb) => orb.update(this.player));
@@ -390,6 +397,10 @@ export class GameScene extends Phaser.Scene {
     return this.entities.spawnXp(x, y, value);
   }
 
+  spawnPickup(kind, x, y, options = {}) {
+    return this.pickups.spawn(kind, x, y, options);
+  }
+
   removeOrb(orb) {
     return this.entities.removeOrb(orb);
   }
@@ -487,6 +498,7 @@ export class GameScene extends Phaser.Scene {
       projectiles: this.projectiles.length,
       enemyProjectiles: this.enemyProjectiles.length,
       xpOrbs: this.xpOrbs.length,
+      pickups: this.pickups.items.length,
       abilities: this.molotovProjectiles.length
         + this.rocketProjectiles.length
         + this.lightningBolts.length
@@ -515,5 +527,6 @@ export class GameScene extends Phaser.Scene {
     removeTestApi();
     this.hud?.destroy();
     this.objectPools?.destroy();
+    this.pickups?.destroy();
   }
 }

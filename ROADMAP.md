@@ -33,7 +33,7 @@ Rooster Rage wird zunaechst als fokussierter PC/Web-Premium-Prototyp entwickelt.
 | 17 | Vertical-Slice-Abnahme | Offen |
 | 18 | Kommerzielle Validierung | Offen |
 
-Aktueller Fokus: Phase 12. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
+Aktueller Fokus: Phase 13. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -463,14 +463,14 @@ Abnahmeprotokoll:
 
 ## Phase 12: Arenen und Pickups
 
-Status: Offen
+Status: Abgeschlossen am 10.08.2026
 
 Bulk-Ziel: Positionierung und Bewegung werden durch Kartenform und kurzfristige Ziele relevant.
 
-17. [ ] Drei Arenatopologien liefern: offene Arena, vertikaler Korridor und kompakte quadratische Arena.
-18. [ ] Heilfutter, Arena-Bombe, temporaeren XP-Magneten und Elite-Truhe mit klarer Silhouette und Spawnregeln einfuehren.
-19. [ ] Zerstoerbare Props und wenige kollidierende Hindernisse ergaenzen, ohne Auto-Aim oder Pathing unzuverlaessig zu machen.
-20. [ ] Wave-Kompositionen und Waffenwert pro Kartentyp pruefen; keine Karte darf nur einen Pflicht-Build erlauben.
+17. [x] Drei Arenatopologien liefern: offene Arena, vertikaler Korridor und kompakte quadratische Arena.
+18. [x] Heilfutter, Arena-Bombe, temporaeren XP-Magneten und Elite-Truhe mit klarer Silhouette und Spawnregeln einfuehren.
+19. [x] Zerstoerbare Props und wenige kollidierende Hindernisse ergaenzen, ohne Auto-Aim oder Pathing unzuverlaessig zu machen.
+20. [x] Wave-Kompositionen und Waffenwert pro Kartentyp pruefen; keine Karte darf nur einen Pflicht-Build erlauben.
 
 Balance-Arbeit:
 
@@ -482,6 +482,15 @@ Abnahme:
 
 - Jeder Kartentyp veraendert Bewegung und Waffenpraeferenz erkennbar.
 - Kein Pickup erscheint ausserhalb erreichbarer Flaechen oder unter UI/Collider-Geometrie.
+
+Abnahmeprotokoll 10.08.2026:
+
+- `open-yard`, `vertical-run` und `square-coop` besitzen eigene begehbare Grenzen, Spawnkanten, Collider-Geometrie und erkennbare Waffenpraeferenzen; alle Waffenfamilien bleiben mit einem Kartenwert von mindestens 0,8 spielbar.
+- Physische Rand- und Hindernis-Collider gelten fuer Spieler und Gegner. Innenliegende Kisten und Ballen werden von Auto-Aim-Projektilen beschaedigt und nach ihrem HP-Budget vollstaendig aus Physik und Darstellung entfernt.
+- Heilfutter heilt einmalig 25 Prozent Max-HP, die Bombe beseitigt normale Gegner und trifft Bosse begrenzt mit 5 Prozent Max-HP, der Magnet zieht XP acht Sekunden arenaweit an; Average-Bots priorisieren Pickups nur in einer passenden Spielsituation.
+- Run-Budgets sind fest auf drei Heilungen, zwei Bomben und zwei Magnete begrenzt. Elite-Truhen sind garantierte physische Pickups und oeffnen erst bei Aufnahme die bestehende Chest-Reward-Lane.
+- Der Arena-Gate prueft pro Karte 40 sichere Punkte, inaktive Collider nach Prop-Zerstoerung, unterschiedliche Kartenpraeferenzen, alle vier Pickup-Effekte, Erreichbarkeit, Budgets und Telemetrie. `npm run test:arena`, Smoke, Mechanics, Foundation und Pacing bestanden.
+- Die statistische Sieg-/Build-Matrix ueber alle Karten folgt gebuendelt in Phase 17, nachdem Phase 13-15 die Encounter, Klassen und finalen HUD-Signale nicht mehr veraendern.
 
 ## Phase 13: Gegner-, Elite- und Boss-Paket
 

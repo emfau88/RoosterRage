@@ -25,6 +25,8 @@ export function installTestApi(scene) {
       hazardZones: scene.hazardZones.length,
       voidZones: scene.voidZones.length,
       xpOrbs: scene.xpOrbs.length,
+      pickups: scene.pickups.items.length,
+      arenaId: scene.arena.id,
       wave: scene.waveSystem.currentWave,
       waveName: scene.waveSystem.waves[scene.waveSystem.currentWave - 1]?.name ?? null,
       roosterId: scene.player.roosterId,
@@ -63,6 +65,30 @@ export function installTestApi(scene) {
       ...scene.loadout.getSnapshot(),
       rerollsRemaining: scene.runState.rerollsRemaining
     }),
+    getArenaState: () => scene.arena.getState(),
+    getArenaCatalog: () => scene.arena.getCatalog(),
+    getPickupState: () => scene.pickups.getState(),
+    sampleSafeArenaPoints: (count = 20) => Array.from(
+      { length: Math.max(1, Math.min(100, count)) },
+      () => scene.arena.findSafePoint('test-safe-point', 56)
+    ).map((point) => ({
+      ...point,
+      reachable: scene.arena.isInsidePlayable(point.x, point.y, 40),
+      blocked: scene.arena.overlapsObstacle(point.x, point.y, 30)
+    })),
+    spawnPickup: (kind, x, y) => {
+      const pickup = scene.spawnPickup(kind, x, y);
+      return pickup ? { kind: pickup.kind, x: pickup.sprite.x, y: pickup.sprite.y } : null;
+    },
+    collectPickup: (kind) => {
+      const pickup = scene.pickups.items.find((item) => item.kind === kind);
+      return scene.pickups.collect(pickup);
+    },
+    damageFirstDestructible: (amount = 9999) => {
+      const obstacle = scene.arena.obstacles.find((item) => item.destructible && item.sprite.active);
+      if (!obstacle) return false;
+      return scene.arena.damageObstacle(obstacle, amount, 'test-api');
+    },
     getAbilityState: () => ({
       goldenEgg: { rank: scene.goldenEgg.rank, evolved: scene.goldenEgg.evolved },
       molotovEgg: { rank: scene.molotovEgg.rank, evolved: scene.molotovEgg.evolved },
@@ -343,8 +369,8 @@ export function installTestApi(scene) {
         x: enemy.sprite.x,
         y: enemy.sprite.y,
         distance: Phaser.Math.Distance.Between(
-          scene.player.sprite.x,
-          scene.player.sprite.y,
+          scene.arena.getCenter().x,
+          scene.arena.getCenter().y,
           enemy.sprite.x,
           enemy.sprite.y
         )

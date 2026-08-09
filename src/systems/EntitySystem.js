@@ -15,18 +15,28 @@ export class EntitySystem {
   }
 
   findSafeEdgeSpawn(minDistance) {
-    const margin = 36;
+    const bounds = this.scene.arena?.bounds ?? {
+      x: 0,
+      y: 0,
+      width: this.arenaWidth,
+      height: this.arenaHeight
+    };
+    const margin = 66;
     const player = this.scene.player?.sprite;
     let farthest = null;
 
     for (let attempt = 0; attempt < 16; attempt += 1) {
       const edge = this.scene.rng.int(0, 3, 'enemy-spawn');
-      let x = this.scene.rng.int(margin, this.arenaWidth - margin, 'enemy-spawn');
-      let y = this.scene.rng.int(margin, this.arenaHeight - margin, 'enemy-spawn');
-      if (edge === 0) y = margin;
-      if (edge === 1) x = this.arenaWidth - margin;
-      if (edge === 2) y = this.arenaHeight - margin;
-      if (edge === 3) x = margin;
+      let x = this.scene.rng.int(bounds.x + margin, bounds.x + bounds.width - margin, 'enemy-spawn');
+      let y = this.scene.rng.int(bounds.y + margin, bounds.y + bounds.height - margin, 'enemy-spawn');
+      if (edge === 0) y = bounds.y + margin;
+      if (edge === 1) x = bounds.x + bounds.width - margin;
+      if (edge === 2) y = bounds.y + bounds.height - margin;
+      if (edge === 3) x = bounds.x + margin;
+
+      if (this.scene.arena?.overlapsObstacle(x, y, 38)) {
+        continue;
+      }
 
       const distance = player
         ? Phaser.Math.Distance.Between(player.x, player.y, x, y)
@@ -40,7 +50,9 @@ export class EntitySystem {
       }
     }
 
-    return farthest ?? { x: margin, y: margin, distance: Infinity };
+    const fallback = this.scene.arena?.findSafePoint('enemy-spawn', margin)
+      ?? { x: margin, y: margin };
+    return farthest ?? { ...fallback, distance: Infinity };
   }
 
   spawnEnemyAt(waveConfig, x, y) {
@@ -85,9 +97,10 @@ export class EntitySystem {
       enemy.id,
       source
     );
-    if (enemy.elite) {
-      this.scene.runState.startChestReward(enemy.boss ? 'boss' : 'elite');
+    if (enemy.boss) {
+      this.scene.runState.startChestReward('boss');
     }
+    this.scene.pickups.onEnemyKilled(enemy);
     enemy.destroy();
   }
 

@@ -39,6 +39,24 @@ export class CollisionSystem {
       }
     });
 
+    scene.physics.add.collider(scene.player.sprite, scene.arena.obstacleGroup);
+    scene.physics.add.collider(scene.enemyGroup, scene.arena.obstacleGroup);
+    scene.physics.add.overlap(scene.projectileGroup, scene.arena.obstacleGroup, (projectileSprite, obstacleSprite) => {
+      const projectile = projectileSprite.entity;
+      const obstacle = obstacleSprite.entity;
+      if (!projectile || projectile.destroyed) {
+        return;
+      }
+      if (obstacle?.destructible) {
+        scene.arena.damageObstacle(obstacle, projectile.damage, projectile.source);
+      }
+      projectile.destroy();
+    });
+
+    scene.physics.add.overlap(scene.player.sprite, scene.pickups.group, (_playerSprite, pickupSprite) => {
+      scene.pickups.collect(pickupSprite.entity);
+    });
+
     scene.physics.add.overlap(scene.player.sprite, scene.enemyProjectileGroup, (_playerSprite, projectileSprite) => {
       const projectile = projectileSprite.entity;
       if (!projectile) {

@@ -61,6 +61,10 @@ export class Telemetry {
       chestsFound: 0,
       chestChoices: 0,
       chestPauseMs: 0,
+      pickupsSpawned: 0,
+      pickupsCollected: 0,
+      pickupsSpawnedByKind: {},
+      pickupsCollectedByKind: {},
       maxEnemiesAlive: 0,
       maxProjectilesAlive: 0,
       peakObjects: {},
@@ -81,6 +85,15 @@ export class Telemetry {
       this.events.shift();
     }
     this.events.push({ type, time, ...payload });
+
+    if (type === 'pickupSpawned') {
+      this.summary.pickupsSpawned += 1;
+      increment(this.summary.pickupsSpawnedByKind, payload.kind);
+    }
+    if (type === 'pickupCollected') {
+      this.summary.pickupsCollected += 1;
+      increment(this.summary.pickupsCollectedByKind, payload.kind);
+    }
 
     if (type === 'waveStarted') {
       this.waveStats.set(payload.wave, {
@@ -383,6 +396,8 @@ export class Telemetry {
       overkillBySource: cloneObjectStats(this.summary.overkillBySource),
       killsBySource: cloneObjectStats(this.summary.killsBySource),
       damageTakenBySource: cloneObjectStats(this.summary.damageTakenBySource),
+      pickupsSpawnedByKind: cloneObjectStats(this.summary.pickupsSpawnedByKind),
+      pickupsCollectedByKind: cloneObjectStats(this.summary.pickupsCollectedByKind),
       peakObjects: cloneObjectStats(this.summary.peakObjects),
       frameTimes: this.getFrameStats(),
       ttkByEnemyType: this.getTtkStats(),

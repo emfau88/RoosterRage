@@ -16,6 +16,7 @@
     "test:pacing": "node tests/pacing-runner.mjs",
     "test:boss": "node tests/boss-runner.mjs",
     "test:evolution": "node tests/evolution-runner.mjs",
+    "test:arena": "node tests/arena-runner.mjs",
     "test:balance": "node tests/balance-runner.mjs"
   },
   "dependencies": {
