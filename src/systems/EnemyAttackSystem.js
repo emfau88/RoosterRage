@@ -77,10 +77,10 @@ export class EnemyAttackSystem {
       this.scene.audio.play('summoner-charge');
     }
     this.scene.time.delayedCall(telegraphMs, () => {
-      enemy.abilityCharging = false;
-      if (!enemy.sprite.active || !player.sprite.active) {
+      if (!enemy.sprite.active || !player.sprite.active || enemy.ability !== ability) {
         return;
       }
+      enemy.abilityCharging = false;
 
       const angle = Phaser.Math.Angle.Between(
         enemy.sprite.x,
@@ -94,7 +94,7 @@ export class EnemyAttackSystem {
         this.spawnProjectile(enemy.sprite.x, enemy.sprite.y, angle, ability);
       } else if (ability.kind === 'fan') {
         this.scene.audio.play('spitter-shot');
-        this.fireFan(enemy, angle);
+        this.fireFan(enemy, angle, ability);
       } else if (ability.kind === 'summon') {
         this.scene.audio.play('summoner-spawn');
         this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, ability.count ?? 2);
@@ -125,29 +125,34 @@ export class EnemyAttackSystem {
       && !enemy.abilityCharging
       && this.scene.time.now >= enemy.nextHeavyAttackAt
     ) {
+      const heavyProjectile = enemy.heavyProjectile;
       const telegraphMs = Math.max(
         ENCOUNTER_STANDARDS.heavyTelegraphMs,
-        enemy.heavyProjectile.telegraphMs ?? ENCOUNTER_STANDARDS.heavyTelegraphMs
+        heavyProjectile.telegraphMs ?? ENCOUNTER_STANDARDS.heavyTelegraphMs
       );
       enemy.heavyCharging = true;
       this.scene.audio.play('summoner-charge', { rate: 0.72, volume: 0.16 });
-      enemy.nextHeavyAttackAt = this.scene.time.now + (enemy.heavyProjectile.cooldown ?? 4300);
-      this.scene.combatFeedback.showEnemyTelegraph(enemy, player, enemy.heavyProjectile, {
+      enemy.nextHeavyAttackAt = this.scene.time.now + (heavyProjectile.cooldown ?? 4300);
+      this.scene.combatFeedback.showEnemyTelegraph(enemy, player, heavyProjectile, {
         duration: telegraphMs,
         heavy: true
       });
       this.scene.time.delayedCall(telegraphMs, () => {
-        enemy.heavyCharging = false;
-        if (!enemy.sprite.active || !player.sprite.active) {
+        if (
+          !enemy.sprite.active
+          || !player.sprite.active
+          || enemy.heavyProjectile !== heavyProjectile
+        ) {
           return;
         }
+        enemy.heavyCharging = false;
         const angle = Phaser.Math.Angle.Between(
           enemy.sprite.x,
           enemy.sprite.y,
           player.sprite.x,
           player.sprite.y
         );
-        this.spawnBossFireball(enemy.sprite.x, enemy.sprite.y, angle, enemy.heavyProjectile);
+        this.spawnBossFireball(enemy.sprite.x, enemy.sprite.y, angle, heavyProjectile);
       });
     }
   }
@@ -226,17 +231,20 @@ export class EnemyAttackSystem {
     }
   }
 
-  fireFan(enemy, angle) {
-    const spread = enemy.ability.spread ?? 0.55;
-    const count = enemy.ability.count ?? 3;
-    this.showMuzzleFlash(enemy.sprite.x, enemy.sprite.y, angle, enemy.ability, count);
+  fireFan(enemy, angle, ability = enemy.ability) {
+    if (!ability) {
+      return;
+    }
+    const spread = ability.spread ?? 0.55;
+    const count = ability.count ?? 3;
+    this.showMuzzleFlash(enemy.sprite.x, enemy.sprite.y, angle, ability, count);
     for (let index = 0; index < count; index += 1) {
       const progress = count === 1 ? 0 : index / (count - 1);
       this.spawnProjectile(
         enemy.sprite.x,
         enemy.sprite.y,
         angle - spread / 2 + spread * progress,
-        enemy.ability
+        ability
       );
     }
   }

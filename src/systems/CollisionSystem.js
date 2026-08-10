@@ -71,7 +71,7 @@ export class CollisionSystem {
           scene.time.now,
           scene.waveSystem.currentWave,
           projectile.source,
-          { lethal: scene.player.hp <= 0 }
+          { lethal: scene.player.hp <= 0, projectile: true }
         );
         scene.combatFeedback.showPlayerDamage(
           projectile.sprite.x,

@@ -79,6 +79,15 @@ async function run() {
       enemiesSpawned: state.telemetry.enemiesSpawned,
       damageTaken: state.telemetry.damageTaken,
       damageTakenBySource: state.telemetry.damageTakenBySource,
+      enemyProjectiles: {
+        average: state.telemetry.averageEnemyProjectiles,
+        peak: state.telemetry.peakEnemyProjectiles,
+        peakHazards: state.telemetry.peakEnemyHazards,
+        hitsTaken: state.telemetry.projectileHitsTaken,
+        damageTaken: state.telemetry.projectileDamageTaken,
+        deaths: state.telemetry.projectileDeaths
+      },
+      combatSources: state.telemetry.combatSources,
       frameTimes: state.telemetry.frameTimes,
       peakObjects: state.telemetry.peakObjects
     };

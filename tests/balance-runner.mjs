@@ -142,12 +142,28 @@ async function runOne(browser, strategy) {
       } else {
         frozenPolls = 0;
       }
-      if (frozenPolls >= 4) {
-        throw new Error(`Game loop appears frozen for strategy ${strategy}.`);
-      }
       lastState = state;
       if (state.gameEnded) {
         break;
+      }
+      if (frozenPolls >= 4) {
+        const freezeDiagnostic = {
+          capturedAt: new Date().toISOString(),
+          strategy,
+          elapsedRealMs: Date.now() - startedAt,
+          state,
+          errors
+        };
+        await fs.writeFile(
+          path.join(artifactDir, `${reportPrefix}-${roosterId}-${strategy}-freeze.json`),
+          JSON.stringify(freezeDiagnostic, null, 2)
+        );
+        await page.screenshot({
+          path: path.join(artifactDir, `${reportPrefix}-${roosterId}-${strategy}-freeze.png`)
+        });
+        throw new Error(
+          `Game loop appears frozen for strategy ${strategy}; diagnostic artifact written.`
+        );
       }
     }
 

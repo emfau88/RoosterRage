@@ -1646,6 +1646,7 @@ body,
 
 .hud__boss {
   grid-area: boss;
+  box-sizing: border-box;
   width: min(660px, calc(100vw - 28px));
   padding: 7px 12px 10px;
   border-width: 1px;

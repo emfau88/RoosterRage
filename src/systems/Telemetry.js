@@ -55,6 +55,9 @@ export class Telemetry {
       healingReceived: 0,
       damageTakenBySource: {},
       playerDamageEvents: 0,
+      projectileHitsTaken: 0,
+      projectileDamageTaken: 0,
+      projectileDeaths: 0,
       deathCause: null,
       xpCollected: 0,
       levelUps: 0,
@@ -70,6 +73,10 @@ export class Telemetry {
       pickupsCollectedByKind: {},
       maxEnemiesAlive: 0,
       maxProjectilesAlive: 0,
+      enemyProjectileSamples: 0,
+      enemyProjectileTotal: 0,
+      peakEnemyProjectiles: 0,
+      peakEnemyHazards: 0,
       peakObjects: {},
       maxIdleMs: 0,
       idleMs: 0,
@@ -115,6 +122,10 @@ export class Telemetry {
         upgradeOffers: 0,
         upgradeChoices: 0,
         maxEnemiesAlive: 0,
+        enemyProjectileSamples: 0,
+        enemyProjectileTotal: 0,
+        peakEnemyProjectiles: 0,
+        peakEnemyHazards: 0,
         peakObjects: {},
         minHpRatio: 1,
         outcome: 'running'
@@ -158,6 +169,12 @@ export class Telemetry {
     }
     this.summary.maxEnemiesAlive = Math.max(this.summary.maxEnemiesAlive, state.enemiesAlive);
     this.summary.maxProjectilesAlive = Math.max(this.summary.maxProjectilesAlive, state.projectilesAlive);
+    const enemyProjectiles = state.enemyProjectilesAlive ?? state.objects?.enemyProjectiles ?? 0;
+    const enemyHazards = state.enemyHazardsAlive ?? enemyProjectiles;
+    this.summary.enemyProjectileSamples += 1;
+    this.summary.enemyProjectileTotal += enemyProjectiles;
+    this.summary.peakEnemyProjectiles = Math.max(this.summary.peakEnemyProjectiles, enemyProjectiles);
+    this.summary.peakEnemyHazards = Math.max(this.summary.peakEnemyHazards, enemyHazards);
     this.summary.minHpRatio = Math.min(this.summary.minHpRatio, state.hpRatio);
     Object.entries(state.objects ?? {}).forEach(([key, value]) => {
       this.summary.peakObjects[key] = Math.max(this.summary.peakObjects[key] ?? 0, value);
@@ -168,6 +185,10 @@ export class Telemetry {
     const stat = this.waveStats.get(state.wave);
     if (stat) {
       stat.maxEnemiesAlive = Math.max(stat.maxEnemiesAlive, state.enemiesAlive);
+      stat.enemyProjectileSamples += 1;
+      stat.enemyProjectileTotal += enemyProjectiles;
+      stat.peakEnemyProjectiles = Math.max(stat.peakEnemyProjectiles, enemyProjectiles);
+      stat.peakEnemyHazards = Math.max(stat.peakEnemyHazards, enemyHazards);
       stat.minHpRatio = Math.min(stat.minHpRatio, state.hpRatio);
       Object.entries(state.objects ?? {}).forEach(([key, value]) => {
         stat.peakObjects[key] = Math.max(stat.peakObjects[key] ?? 0, value);
@@ -251,6 +272,11 @@ export class Telemetry {
     this.summary.damageTaken += amount;
     this.summary.playerDamageEvents += 1;
     increment(this.summary.damageTakenBySource, source, amount);
+    if (options.projectile) {
+      this.summary.projectileHitsTaken += 1;
+      this.summary.projectileDamageTaken += amount;
+      if (options.lethal) this.summary.projectileDeaths += 1;
+    }
     if (options.lethal) {
       this.summary.deathCause = source;
     }
@@ -367,8 +393,21 @@ export class Telemetry {
     ));
     const elapsedMs = Math.max(1, (this.summary.endedAt ?? now) - this.summary.startedAt);
     const totalPauseMs = this.summary.upgradePauseMs + this.summary.chestPauseMs;
+    const choiceCounts = regularChoices.reduce((counts, event) => {
+      increment(counts, event.upgrade);
+      return counts;
+    }, {});
+    const offerCounts = this.events
+      .filter((event) => event.type === 'upgradeOffered' && event.selectionType === 'level')
+      .flatMap((event) => event.choices ?? [])
+      .reduce((counts, id) => {
+        increment(counts, id);
+        return counts;
+      }, {});
     return {
       choices: regularChoices.map((event) => event.upgrade),
+      choiceCounts,
+      offerCounts,
       firstUpgradeAtMs: choiceTimes[0] ?? null,
       firstSpectacleAtMs: spectacular
         ? Math.max(0, spectacular.time - this.summary.startedAt)
@@ -437,6 +476,9 @@ export class Telemetry {
   getSummary(now = 0) {
     const waveStats = Array.from(this.waveStats.values()).map((wave) => ({
       ...wave,
+      averageEnemyProjectiles: wave.enemyProjectileSamples > 0
+        ? wave.enemyProjectileTotal / wave.enemyProjectileSamples
+        : 0,
       peakObjects: cloneObjectStats(wave.peakObjects),
       durationMs: wave.durationMs ?? (wave.startedAt ? now - wave.startedAt : null)
     }));
@@ -451,6 +493,9 @@ export class Telemetry {
       damageTakenBySource: cloneObjectStats(this.summary.damageTakenBySource),
       pickupsSpawnedByKind: cloneObjectStats(this.summary.pickupsSpawnedByKind),
       pickupsCollectedByKind: cloneObjectStats(this.summary.pickupsCollectedByKind),
+      averageEnemyProjectiles: this.summary.enemyProjectileSamples > 0
+        ? this.summary.enemyProjectileTotal / this.summary.enemyProjectileSamples
+        : 0,
       peakObjects: cloneObjectStats(this.summary.peakObjects),
       frameTimes: this.getFrameStats(),
       ttkByEnemyType: this.getTtkStats(),

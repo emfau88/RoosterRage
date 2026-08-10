@@ -411,6 +411,29 @@ async function testEnemyAbilities(browser) {
     await page.evaluate(() => {
       window.__ROOSTER_TEST__.clearEnemies();
       window.__ROOSTER_TEST__.clearProjectiles();
+      window.__ROOSTER_TEST__.spawnEnemyType('fan-spitter', 900, 450, { speed: 0, damage: 0, hp: 999 });
+    });
+    await page.waitForTimeout(70);
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.spawnEnemyType('slime', 900, 450, { speed: 0, damage: 0, hp: 999 });
+    });
+    await page.waitForTimeout(360);
+    const afterRecycledFan = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    assert(
+      errors.length === 0,
+      'A recycled Fan Spitter fired its stale delayed attack.',
+      { errors, afterRecycledFan }
+    );
+    assert(
+      afterRecycledFan.enemyProjectiles === 0,
+      'A stale Fan Spitter timer emitted projectiles from a recycled enemy.',
+      afterRecycledFan
+    );
+
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearProjectiles();
       window.__ROOSTER_TEST__.movePlayer(700, 450);
       window.__ROOSTER_TEST__.setPlayerHp(100);
       const id = window.__ROOSTER_TEST__.spawnEnemyType('bomber', 725, 450, { speed: 0, damage: 0, hp: 20 });
@@ -452,6 +475,7 @@ async function testEnemyAbilities(browser) {
       afterSpitter,
       fanTelegraph,
       afterFan,
+      afterRecycledFan,
       afterBomber,
       bossTelegraph,
       bossFireball

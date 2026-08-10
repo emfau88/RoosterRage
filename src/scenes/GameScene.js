@@ -606,6 +606,8 @@ export class GameScene extends Phaser.Scene {
       enemies: this.enemies.length,
       projectiles: this.projectiles.length,
       enemyProjectiles: this.enemyProjectiles.length,
+      enemyTelegraphs: this.combatFeedback.activeTelegraphs,
+      enemyDangerZones: this.enemyDangerZones.length,
       xpOrbs: this.xpOrbs.length,
       pickups: this.pickups.items.length,
       abilities: this.molotovProjectiles.length
@@ -622,6 +624,10 @@ export class GameScene extends Phaser.Scene {
       wave: this.waveSystem.currentWave,
       enemiesAlive: this.enemies.length,
       projectilesAlive: this.projectiles.length + this.enemyProjectiles.length,
+      enemyProjectilesAlive: this.enemyProjectiles.length,
+      enemyHazardsAlive: this.enemyProjectiles.length
+        + this.combatFeedback.activeTelegraphs
+        + this.enemyDangerZones.length,
       hpRatio: this.player.hp / this.player.maxHp,
       nearestEnemyDistance,
       objects,
