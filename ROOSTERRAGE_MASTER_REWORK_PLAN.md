@@ -10,23 +10,23 @@ Repository: `https://github.com/emfau88/RoosterRage`
 | B – Weapon Progression | ✅ umgesetzt | R1–R4/EVO-Eskalation, Rank-FX und HUD-Kommunikation überarbeitet |
 | C – Enemy Pressure | ✅ umgesetzt | Fernkampfanteil und Projectile-Dichte gesenkt, Bewegungsdruck gestärkt |
 | D – Brood King | ✅ umgesetzt | geordnete Sequenzen, sichere Übergänge, maximal sechs Adds und Build-Matrix |
-| E – Map Topology | ⏸ ausstehend | Start erst nach Freigabe |
+| E – Map Topology | ✅ umgesetzt | Open Yard und Vertical Run streamen recycelte Chunks; Coop Square bleibt geschlossen |
 | F – Pickups & Chests | ⏸ ausstehend | nach Phase E |
 | G – Meta Progression | ⏸ ausstehend | nach stabilem Run-/Reward-Kern |
 | H – Integration & Validation | ⏸ ausstehend | abschließende Matrix, Geräte- und Fremdtests |
 
 ### Geschätzter verbleibender Aufwand
 
-Die Phasen E–H entsprechen zusammen voraussichtlich noch **rund 57 % des Gesamtaufwands**. Die Verteilung auf den Gesamtplan ist derzeit: **E 14 %**, **F 13 %**, **G 18 %**, **H 12 %**. A–D bilden damit ungefähr 43 % und sind abgeschlossen. Die Schätzung kann sich nach realen Karten- und Save-Migrationstests verschieben.
+Die Phasen F–H entsprechen zusammen voraussichtlich noch **rund 43 % des Gesamtaufwands**: **F 13 %**, **G 18 %**, **H 12 %**. A–E bilden damit ungefähr 57 % und sind abgeschlossen. Die Schätzung kann sich nach realen Reward- und Save-Migrationstests verschieben.
 
 ### Voraussichtlich noch benötigte Assets
 
-- **Phase E:** 2–3 wiederholbare Boden-/Straßenvarianten, seitliche Begrenzung für Vertical Run sowie wenige gut lesbare Landmark-/Farm-Prop-Varianten. Chunk-Recycling selbst benötigt keine neuen Assets.
+- **Phase E:** ✅ abgeschlossen mit Farmboden, Farmstraße, Scheunen- und Brunnen-Landmark; vorhandene Kisten, Heuballen und Mauern werden modular wiederverwendet.
 - **Phase F:** zerstörbare Welt-Props mit Schadenszustand, klar getrennte Chest-Tiers, Royal-Chest/Reward-Präsentation sowie Magnet-, Heal- und Bomb-Pickup-FX bzw. Icons.
 - **Phase G:** Körner-Währung, Talentknoten-Zustände, Mastery-/Unlock-Badges und kompakte Hub-Illustrationen/UI-Elemente. Neue Rooster-Sprites sind dafür nicht erforderlich.
 - **Phase H:** zunächst keine fest eingeplanten neuen Gameplay-Assets; nur gezielte VFX-, UI- und Audio-Politur, falls Geräte- und externe Tests konkrete Lesbarkeitslücken zeigen.
 
-Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`.
+Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`.
 
 ## Auftrag
 
@@ -1531,15 +1531,17 @@ Empfohlene Reihenfolge:
 
 ## PHASE A – Baseline & Instrumentation
 
+**Status: ✅ umgesetzt.** Ausgangswerte für Kampf, Progression, Boss, Karten, Pickups, Performance und Produktionsbundle sind reproduzierbar dokumentiert. Bericht: `docs/REWORK_BASELINE.md`.
+
 ### Aufgaben
 
-- aktuellen Stand auditieren
-- bestehende Balance-Gates ausführen
-- Projectile-Dichte messen
-- Boss-TTK messen
-- Damage Share messen
-- Upgrade-Pick-Frequenz messen
-- aktuelle Map-/Pickup-Daten dokumentieren
+- ✅ aktuellen Stand auditieren
+- ✅ bestehende Balance-Gates ausführen
+- ✅ Projectile-Dichte messen
+- ✅ Boss-TTK messen
+- ✅ Damage Share messen
+- ✅ Upgrade-Pick-Frequenz messen
+- ✅ aktuelle Map-/Pickup-Daten dokumentieren
 
 ### Kein Gameplay-Rework
 
@@ -1553,21 +1555,23 @@ Nur Baseline.
 
 ## PHASE B – Weapon Progression Rework
 
+**Status: ✅ umgesetzt.** Alle drei Startwaffen und acht aktive Waffen eskalieren über R1–R4 klarer; EVOs, Rank-FX, Beschreibungen, HUD-Pips und Rezepte wurden neu abgestimmt. Technische/codebasierte FX sind vollständig spielbar, finale individuelle Waffen-/EVO-Bitmapassets bleiben ein separater Produktionspass. Bericht: `docs/WEAPON_PROGRESSION_REWORK.md`.
+
 ### Aufgaben
 
-- Startwaffen R1–R4
-- aktive Waffen visuell eskalieren
-- UpgradeDescriptions aktualisieren
-- FX-Rank-Skalierung
-- EVOs gegen neue R4-Versionen absetzen
-- HUD Rank-Pips/EVO-Rezept verbessern
+- ✅ Startwaffen R1–R4
+- ✅ aktive Waffen visuell eskalieren
+- ✅ UpgradeDescriptions aktualisieren
+- ✅ FX-Rank-Skalierung
+- ✅ EVOs gegen neue R4-Versionen absetzen
+- ✅ HUD Rank-Pips/EVO-Rezept verbessern
 
 ### Tests
 
-- jede Waffe isoliert R1–R4 + EVO
-- Screenshot-/Visual-Gate
-- DPS sanity
-- Mobile Lesbarkeit
+- ✅ jede Waffe isoliert R1–R4 + EVO
+- ✅ Screenshot-/Visual-Gate
+- ✅ DPS sanity
+- ✅ Mobile Lesbarkeit
 
 ### Output
 
@@ -1577,26 +1581,28 @@ Nur Baseline.
 
 ## PHASE C – Enemy Pressure Rework
 
+**Status: ✅ umgesetzt.** Fernkampfanteil in Wellen 4–9 auf 5–10 % begrenzt, normales Projectile-Budget auf 12 gesetzt und Druck zu Fodder/Runner/Brute, Formationen und Bewegung verschoben. Bericht: `docs/ENCOUNTER_PRESSURE_REWORK.md`.
+
 ### Aufgaben
 
-- Fan-Spitter deutlich reduzieren
-- Summoner reduzieren
-- Projectile-Budget messen
-- mehr Fodder/Runner/Brute
-- Formation nutzen
-- Gefahr aus Bewegung statt Schüssen
+- ✅ Fan-Spitter deutlich reduzieren
+- ✅ Summoner reduzieren
+- ✅ Projectile-Budget messen
+- ✅ mehr Fodder/Runner/Brute
+- ✅ Formationen nutzen
+- ✅ Gefahr aus Bewegung statt Schüssen
 
 ### Tests
 
-- Peak projectiles
-- death causes
-- Average movement
-- mobile portrait
-- 3 Rooster
+- ✅ Peak Projectiles
+- ✅ Death Causes
+- ✅ Average Movement
+- ✅ Mobile Portrait
+- ✅ 3 Rooster
 
 ### Output
 
-`docs/ENCOUNTER_REWORK.md`
+`docs/ENCOUNTER_PRESSURE_REWORK.md`
 
 ---
 
@@ -1629,23 +1635,25 @@ Nur Baseline.
 
 ## PHASE E – Map Topology Rework
 
+**Status: ✅ umgesetzt.** Open Yard nutzt einen konstanten 5×5-Pool aus 700er-Chunks; Vertical Run einen 1×5-Pool aus 600er-Straßensegmenten mit festen Seiten. 131.072 Weltkoordinaten pro Achse erlauben mehr als zwei Minuten Lauf in jede vorgesehene Richtung. Coop Square blieb unverändert geschlossen. Bericht: `docs/MAP_REWORK.md`.
+
 ### Aufgaben
 
-- pseudo-infinite Open Farm
-- pseudo-infinite Vertical Road
-- Coop Square enclosed erhalten
-- Chunk recycling
-- landmarks
-- safe pickup placement
-- performance
+- ✅ pseudo-infinite Open Farm
+- ✅ pseudo-infinite Vertical Road
+- ✅ Coop Square enclosed erhalten
+- ✅ konstantes Chunk-Recycling ohne Objektwachstum
+- ✅ Scheunen- und Brunnen-Landmarks
+- ✅ sichere Pickup-Platzierung
+- ✅ Performance
 
 ### Tests
 
-- 10-Minuten Lauf
-- keine Chunk-Lücken
-- keine Collider-Leaks
-- keine unerreichbaren Pickups
-- Mobile
+- ✅ echter 10-Minuten-Soak: 60 Zyklen, p95 16,7 ms, keine Drops
+- ✅ keine Chunk-Lücken über 129 s äquivalente Richtungsdistanz
+- ✅ keine Collider-Leaks
+- ✅ keine unerreichbaren Pickups
+- ✅ Desktop und Mobile Portrait manuell geprüft
 
 ### Output
 

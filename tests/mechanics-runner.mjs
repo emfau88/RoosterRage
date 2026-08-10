@@ -541,11 +541,15 @@ async function testEnemyAbilities(browser) {
     await page.screenshot({ path: path.join(artifactDir, 'boss-fireball-telegraph.png') });
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
       .some((projectile) => projectile.texture === 'boss-fireball'), null, { timeout: 1200 });
-    const bossProjectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemyProjectileSnapshot());
+    const { bossProjectiles, bossPosition } = await page.evaluate(() => ({
+      bossProjectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot(),
+      bossPosition: window.__ROOSTER_TEST__.getEnemySnapshot().find((enemy) => enemy.type === 'boss')
+    }));
     const bossFireball = bossProjectiles.find((projectile) => projectile.texture === 'boss-fireball');
     assert(bossFireball, 'Boss did not create a visible fireball projectile.', bossProjectiles);
     assert(bossFireball.vx < -100, 'Boss fireball does not appear to fly toward the player.', bossFireball);
-    assert(bossFireball.x < 940, 'Boss fireball should spawn outside the boss and move left toward the player.', bossFireball);
+    assert(bossPosition && bossFireball.x < bossPosition.x,
+      'Boss fireball should spawn outside the boss and move left toward the player.', { bossFireball, bossPosition });
     assert(errors.length === 0, 'Browser reported errors during enemy ability test.', errors);
     return {
       name: 'enemy abilities',

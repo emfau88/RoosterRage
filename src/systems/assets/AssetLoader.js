@@ -36,6 +36,10 @@ import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-ope
 import arenaCrateUrl from '../../assets/map/arena-crate.webp';
 import arenaBaleUrl from '../../assets/map/arena-bale.webp';
 import arenaWallUrl from '../../assets/map/arena-wall.webp';
+import arenaGroundFarmUrl from '../../assets/map/arena-ground-farm.webp';
+import arenaGroundRoadUrl from '../../assets/map/arena-ground-road.webp';
+import landmarkBarnUrl from '../../assets/map/landmark-barn.webp';
+import landmarkWellUrl from '../../assets/map/landmark-well.webp';
 import {
   getSceneRenderScale,
   getSceneViewport
@@ -119,6 +123,10 @@ export function preloadGameAssets(scene) {
   scene.load.image('arena-crate', arenaCrateUrl);
   scene.load.image('arena-bale', arenaBaleUrl);
   scene.load.image('arena-wall', arenaWallUrl);
+  scene.load.image('arena-ground-farm', arenaGroundFarmUrl);
+  scene.load.image('arena-ground-road', arenaGroundRoadUrl);
+  scene.load.image('landmark-barn', landmarkBarnUrl);
+  scene.load.image('landmark-well', landmarkWellUrl);
   const audioKeys = new Set();
   Object.entries(audioAssetUrls).forEach(([assetPath, assetUrl]) => {
     const key = assetPath.split('/').at(-1).replace(/\.mp3$/i, '');

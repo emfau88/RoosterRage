@@ -264,11 +264,14 @@ async function verifyTelegraphAvoidance(browser, serverUrl) {
       'Bomber death did not expose its visible warning as a danger zone.', warning);
     await page.waitForTimeout(650);
     const escaped = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    const distance = Math.hypot(escaped.player.x - 750, escaped.player.y - 450);
+    const distance = Math.hypot(
+      escaped.player.x - (warning.player.x + 50),
+      escaped.player.y - warning.player.y
+    );
     assert(distance > 70 && escaped.telemetry.damageTaken === 0,
       'Average movement did not leave the announced bomber radius.', { escaped, distance });
 
-    await page.evaluate(() => {
+    const dashStart = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
       api.clearEnemies();
       api.clearProjectiles();
@@ -279,11 +282,12 @@ async function verifyTelegraphAvoidance(browser, serverUrl) {
         damage: 25,
         xpOverride: 0
       });
+      return api.getState();
     });
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().enemyDangerZones > 0);
     await page.waitForTimeout(320);
     const dash = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    const dashOffset = Math.abs(dash.player.y - 450);
+    const dashOffset = Math.abs(dash.player.y - dashStart.player.y);
     assert(dashOffset > 52 && dash.telemetry.damageTaken === 0,
       'Average movement did not leave the announced elite dash line.', { dash, dashOffset });
     await page.evaluate(() => window.__ROOSTER_TEST__.disableBot());

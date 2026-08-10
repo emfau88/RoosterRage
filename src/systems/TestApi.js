@@ -10,6 +10,17 @@ export function shouldInstallTestApi() {
   return import.meta.env.DEV;
 }
 
+function resolveLegacyTestPoint(scene, x, y) {
+  if (!scene.arena.streaming || !Number.isFinite(x) || !Number.isFinite(y) || x > 5000 || y > 5000) {
+    return { x, y };
+  }
+  const origin = scene.arena.getCenter();
+  return {
+    x: origin.x + x - 700,
+    y: origin.y + y - 450
+  };
+}
+
 export function installTestApi(scene) {
   if (!shouldInstallTestApi()) {
     return false;
@@ -89,6 +100,13 @@ export function installTestApi(scene) {
     getArenaState: () => scene.arena.getState(),
     getArenaCatalog: () => scene.arena.getCatalog(),
     getPickupState: () => scene.pickups.getState(),
+    movePlayerTo: (x, y) => {
+      const point = scene.arena.clampToWorld(x, y, 80);
+      scene.player.sprite.setPosition(point.x, point.y);
+      scene.player.sprite.body?.reset(point.x, point.y);
+      scene.arena.update(true);
+      return { x: scene.player.sprite.x, y: scene.player.sprite.y };
+    },
     sampleSafeArenaPoints: (count = 20) => Array.from(
       { length: Math.max(1, Math.min(100, count)) },
       () => scene.arena.findSafePoint('test-safe-point', 56)
@@ -98,7 +116,8 @@ export function installTestApi(scene) {
       blocked: scene.arena.overlapsObstacle(point.x, point.y, 30)
     })),
     spawnPickup: (kind, x, y) => {
-      const pickup = scene.spawnPickup(kind, x, y);
+      const point = resolveLegacyTestPoint(scene, x, y);
+      const pickup = scene.spawnPickup(kind, point.x, point.y);
       return pickup ? { kind: pickup.kind, x: pickup.sprite.x, y: pickup.sprite.y } : null;
     },
     collectPickup: (kind) => {
@@ -509,7 +528,8 @@ export function installTestApi(scene) {
         boss: () => scene.waveSystem.makeBoss()
       };
       const config = { ...(makers[type]?.() ?? scene.waveSystem.makeSlime()), ...overrides };
-      return scene.entities.spawnEnemyAt(config, x, y)?.id ?? null;
+      const point = resolveLegacyTestPoint(scene, x, y);
+      return scene.entities.spawnEnemyAt(config, point.x, point.y)?.id ?? null;
     },
     spawnSafeEnemyType: (type = 'slime', overrides = {}) => {
       const config = {
@@ -529,8 +549,8 @@ export function installTestApi(scene) {
         x: enemy.sprite.x,
         y: enemy.sprite.y,
         distance: Phaser.Math.Distance.Between(
-          scene.arena.getCenter().x,
-          scene.arena.getCenter().y,
+          scene.player.sprite.x,
+          scene.player.sprite.y,
           enemy.sprite.x,
           enemy.sprite.y
         )
@@ -562,8 +582,9 @@ export function installTestApi(scene) {
       active: orb.sprite.active
     })),
     spawnXpCluster: (count = 20, value = 3, x = 700, y = 450) => {
+      const point = resolveLegacyTestPoint(scene, x, y);
       for (let index = 0; index < count; index += 1) {
-        scene.spawnXp(x + (index % 4) * 5, y + Math.floor(index / 4) * 5, value);
+        scene.spawnXp(point.x + (index % 4) * 5, point.y + Math.floor(index / 4) * 5, value);
       }
       return window.__ROOSTER_TEST__.getXpSnapshot();
     },
@@ -591,11 +612,14 @@ export function installTestApi(scene) {
         hpBarYOffset: 32
       });
       const enemy = scene.enemies[scene.enemies.length - 1];
-      enemy.sprite.setPosition(x, y);
+      const point = resolveLegacyTestPoint(scene, x, y);
+      enemy.sprite.setPosition(point.x, point.y);
       return scene.enemies.length;
     },
     movePlayer: (x, y) => {
-      scene.player.sprite.setPosition(x, y);
+      const point = resolveLegacyTestPoint(scene, x, y);
+      scene.player.sprite.setPosition(point.x, point.y);
+      scene.arena.update(true);
       scene.player.updateHealthBar();
     },
     setShotCount: (count) => {

@@ -256,6 +256,42 @@
       "bytes": 8756
     },
     {
+      "source": "art-source/map/arena-ground-farm.png",
+      "sourceSha256": "404c5234cd5c6cfd3ec2c69bdf3056e6bae8cb2ee87f5880798a93adf9775476",
+      "runtime": "src/assets/map/arena-ground-farm.webp",
+      "runtimeSha256": "5cdc47106277ab123d983b4aea6164a13aee17ce56c0f0ebf809997194c72d91",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 114090
+    },
+    {
+      "source": "art-source/map/arena-ground-road.png",
+      "sourceSha256": "dee64736926656c262830d1af85fec39288c16a5e916e5bd02b694c1c7d26224",
+      "runtime": "src/assets/map/arena-ground-road.webp",
+      "runtimeSha256": "bc9007d35f9849f745cb4e47e810c6183600b8f2a09687bd1b1cb6d079cb8863",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 110538
+    },
+    {
+      "source": "art-source/map/landmark-barn.png",
+      "sourceSha256": "571b3d4b86a3504ab1a4f95745fcc2a19370ad860d242d6c002b214eab653fc3",
+      "runtime": "src/assets/map/landmark-barn.webp",
+      "runtimeSha256": "c4310b4ef35ebc407e5dd7bb21bd202901934ab8875ef61899007cf4a320fb80",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 76066
+    },
+    {
+      "source": "art-source/map/landmark-well.png",
+      "sourceSha256": "fe1eb1ef4283946da8244f6699f1660b4915b8c1f2cc2c45966e8a92225c5dd1",
+      "runtime": "src/assets/map/landmark-well.webp",
+      "runtimeSha256": "15b18446670562ee0803ed166cf070415772efb471dd90c41fcf09a76742e463",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 91002
+    },
+    {
       "source": "art-source/enemy-slime.png",
       "sourceSha256": "5d9ee3a54981876dce5c9ad05148d8661604d335d3081073251db021a512fa21",
       "runtime": "src/assets/enemy-slime.webp",

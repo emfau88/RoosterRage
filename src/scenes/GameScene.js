@@ -34,6 +34,7 @@ import {
 } from '../systems/DisplayResolutionSystem.js';
 import { installTestApi, removeTestApi } from '../systems/TestApi.js';
 import { WaveSystem } from '../systems/WaveSystem.js';
+import { getArenaDefinition } from '../data/arenaDefinitions.js';
 import { HUD } from '../ui/HUD.js';
 
 const ARENA_WIDTH = 1400;
@@ -77,15 +78,29 @@ export class GameScene extends Phaser.Scene {
       : 'standard';
     this.meta.selectChallenge(challengeId);
     this.challenge = new ChallengeSystem(challengeId, requestedArena);
-    this.physics.world.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
+    const arenaDefinition = getArenaDefinition(this.challenge.arenaId);
+    const worldBounds = arenaDefinition.streaming?.worldBounds ?? {
+      x: 0,
+      y: 0,
+      width: ARENA_WIDTH,
+      height: ARENA_HEIGHT
+    };
+    this.physics.world.setBounds(
+      worldBounds.x,
+      worldBounds.y,
+      worldBounds.width,
+      worldBounds.height
+    );
     this.cameras.main.setBounds(
-      0,
-      -ARENA_RENDER_PADDING_Y,
-      ARENA_WIDTH,
-      ARENA_HEIGHT + ARENA_RENDER_PADDING_Y * 2
+      worldBounds.x,
+      worldBounds.y - (arenaDefinition.streaming ? 0 : ARENA_RENDER_PADDING_Y),
+      worldBounds.width,
+      worldBounds.height + (arenaDefinition.streaming ? 0 : ARENA_RENDER_PADDING_Y * 2)
     );
 
-    addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y);
+    if (!arenaDefinition.streaming) {
+      addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y);
+    }
     this.arena = new ArenaSystem(this, this.challenge.arenaId, ARENA_WIDTH, ARENA_HEIGHT);
 
     this.enemies = [];
@@ -191,6 +206,7 @@ export class GameScene extends Phaser.Scene {
       this.elapsed += delta / 1000;
       this.enemyDangerZones = this.enemyDangerZones.filter((zone) => zone.expiresAt > time);
       this.player.update(this.getMovementVector());
+      this.arena.update();
       this.roosterClasses.update(time);
       this.enemyAttacks.updateAuras(delta);
       this.enemies.forEach((enemy) => enemy.update(this.player));
@@ -646,5 +662,6 @@ export class GameScene extends Phaser.Scene {
     this.hud?.destroy();
     this.objectPools?.destroy();
     this.pickups?.destroy();
+    this.arena?.destroy();
   }
 }

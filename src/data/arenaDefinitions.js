@@ -13,6 +13,14 @@ export const ARENA_DEFINITIONS = [
     topology: 'open',
     description: 'Breite Ausweichlinien und lange Schussachsen.',
     bounds: { x: 44, y: 44, width: 1312, height: 812 },
+    streaming: {
+      axis: 'both',
+      worldBounds: { x: 0, y: 0, width: 131072, height: 131072 },
+      start: { x: 65536, y: 65536 },
+      activeWindow: { width: 1600, height: 1100 },
+      chunk: { width: 700, height: 700, radiusX: 2, radiusY: 2 },
+      groundTexture: 'arena-ground-farm'
+    },
     accent: 0x86c85a,
     weaponRatings: { ...sharedRatings, projectile: 1.2, companion: 1.1 },
     obstacles: [
@@ -26,6 +34,15 @@ export const ARENA_DEFINITIONS = [
     topology: 'corridor',
     description: 'Engere Seiten, klare Nord-Sued-Linien und durchbrechbare Sperren.',
     bounds: { x: 300, y: 44, width: 800, height: 812 },
+    streaming: {
+      axis: 'vertical',
+      worldBounds: { x: 64836, y: 0, width: 1400, height: 131072 },
+      playableBounds: { x: 65136, y: 0, width: 800, height: 131072 },
+      start: { x: 65536, y: 65536 },
+      activeWindow: { width: 800, height: 1100 },
+      chunk: { width: 800, height: 600, radiusX: 0, radiusY: 2 },
+      groundTexture: 'arena-ground-road'
+    },
     accent: 0x58b9d8,
     weaponRatings: { ...sharedRatings, pierce: 1.25, projectile: 0.9 },
     obstacles: [
