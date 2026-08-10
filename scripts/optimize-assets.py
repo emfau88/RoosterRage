@@ -53,6 +53,10 @@ RUNTIME_IMAGES = (
     "map/arena-ground-road.png",
     "map/landmark-barn.png",
     "map/landmark-well.png",
+    "meta/kernel-currency.png",
+    "meta/mastery-ace.png",
+    "meta/mastery-artillery.png",
+    "meta/mastery-storm.png",
     "enemy-slime.png",
     "enemies/animations/enemy-slime-wobble.png",
     "enemies/animations/enemy-runner-walk.png",
@@ -76,6 +80,10 @@ RUNTIME_IMAGES = (
 )
 
 RUNTIME_SIZES = {
+    "meta/kernel-currency.png": (64, 64),
+    "meta/mastery-ace.png": (96, 96),
+    "meta/mastery-artillery.png": (96, 96),
+    "meta/mastery-storm.png": (96, 96),
     "projectiles/evolutions/evo-sunshot-array-projectile.png": (32, 32),
     "projectiles/evolutions/evo-siegebreaker-shell-projectile.png": (40, 40),
     "projectiles/evolutions/evo-tempest-crown-projectile.png": (32, 32),

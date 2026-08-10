@@ -12,22 +12,22 @@ Repository: `https://github.com/emfau88/RoosterRage`
 | D – Brood King | ✅ umgesetzt | geordnete Sequenzen, sichere Übergänge, maximal sechs Adds und Build-Matrix |
 | E – Map Topology | ✅ umgesetzt | Open Yard und Vertical Run streamen recycelte Chunks; Coop Square bleibt geschlossen |
 | F – Pickups & Chests | ⏸ ausstehend | nach Phase E |
-| G – Meta Progression | ⏸ ausstehend | nach stabilem Run-/Reward-Kern |
+| G – Meta Progression | ✅ umgesetzt | Körner, sechs Talentknoten, Rooster-Mastery, First Clears, v1→v2-Migration und Hub-Rework |
 | H – Integration & Validation | ⏸ ausstehend | abschließende Matrix, Geräte- und Fremdtests |
 
 ### Geschätzter verbleibender Aufwand
 
-Die Phasen F–H entsprechen zusammen voraussichtlich noch **rund 43 % des Gesamtaufwands**: **F 13 %**, **G 18 %**, **H 12 %**. A–E bilden damit ungefähr 57 % und sind abgeschlossen. Die Schätzung kann sich nach realen Reward- und Save-Migrationstests verschieben.
+Die verbleibenden Phasen F und H entsprechen voraussichtlich noch **rund 25 % des Gesamtaufwands**: **F 13 %**, **H 12 %**. A–E und G bilden damit ungefähr 75 % und sind abgeschlossen. Weapon Mastery bleibt bewusst optional, bis reale Meta- und Reward-Tests einen Bedarf zeigen.
 
 ### Voraussichtlich noch benötigte Assets
 
 - **Weapon/EVO Asset Bulk 1:** ✅ umgesetzt. Sunshot Array, Siegebreaker Shell, Tempest Crown, Solar Scramble, Phoenix Pan und Broodstorm besitzen je ein eigenes EVO-Icon, Kampfobjekt/Projektil und einen kurzen Impact-Effekt. Die Runtime-Größen sind auf 32–42 px für Projektile sowie 58–148 px sichtbaren Effekt-Durchmesser begrenzt. Die statischen Impacts sind als kurze 150–210-ms-Stufe bewusst kompakt; Phoenix/Broodstorm sind die ersten Kandidaten für spätere Frame-Animationen, falls Fremdtests die Bewegung vermissen.
 - **Phase E:** ✅ abgeschlossen mit Farmboden, Farmstraße, Scheunen- und Brunnen-Landmark; vorhandene Kisten, Heuballen und Mauern werden modular wiederverwendet.
 - **Phase F:** zerstörbare Welt-Props mit Schadenszustand, klar getrennte Chest-Tiers, Royal-Chest/Reward-Präsentation sowie Magnet-, Heal- und Bomb-Pickup-FX bzw. Icons.
-- **Phase G:** Körner-Währung, Talentknoten-Zustände, Mastery-/Unlock-Badges und kompakte Hub-Illustrationen/UI-Elemente. Neue Rooster-Sprites sind dafür nicht erforderlich.
+- **Phase G:** ✅ abgeschlossen mit Körner-Währung, eigenem Körner-Icon sowie drei Rooster-Mastery-Badges; Talentzustände verwenden das bestehende klare Icon-System. Neue Rooster-Sprites waren nicht erforderlich.
 - **Phase H:** zunächst keine fest eingeplanten neuen Gameplay-Assets; nur gezielte VFX-, UI- und Audio-Politur, falls Geräte- und externe Tests konkrete Lesbarkeitslücken zeigen.
 
-Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/WEAPON_EVO_ASSET_BULK_1.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`.
+Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/WEAPON_EVO_ASSET_BULK_1.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`, `docs/META_REWORK.md`.
 
 ## Auftrag
 
@@ -1689,6 +1689,8 @@ Nur Baseline.
 ---
 
 ## PHASE G – Meta Progression
+
+**Status: ✅ umgesetzt.** Körner werden pro Run, First Clear und Mastery-Meilenstein vergeben. Der Hub enthält einen persistenten, bewusst flach gedeckelten Talentbaum und individuelle Mastery-Anzeigen für alle drei Rooster. Alte v1-Saves werden nach v2 migriert; frischer Spieler, zehn Runs, Reset, Unlocks, beschädigte Daten und Legacy-Saves sind automatisiert abgedeckt. Details und Balancewerte: `docs/META_REWORK.md`.
 
 ### Aufgaben
 

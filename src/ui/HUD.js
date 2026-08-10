@@ -3,11 +3,21 @@ import uiIconAtlas from '../assets/ui/ui-icons-v1.json';
 import acePortraitUrl from '../assets/characters/rooster-ace-portrait.webp';
 import artilleryPortraitUrl from '../assets/characters/rooster-artillery-portrait.webp';
 import stormPortraitUrl from '../assets/characters/rooster-storm-portrait.webp';
+import kernelCurrencyUrl from '../assets/meta/kernel-currency.webp';
+import masteryAceUrl from '../assets/meta/mastery-ace.webp';
+import masteryArtilleryUrl from '../assets/meta/mastery-artillery.webp';
+import masteryStormUrl from '../assets/meta/mastery-storm.webp';
 
 const ROOSTER_PORTRAITS = {
   ace: acePortraitUrl,
   artillery: artilleryPortraitUrl,
   storm: stormPortraitUrl
+};
+
+const MASTERY_BADGES = {
+  ace: masteryAceUrl,
+  artillery: masteryArtilleryUrl,
+  storm: masteryStormUrl
 };
 
 const ICON_COLUMNS = uiIconAtlas.columns;
@@ -62,7 +72,7 @@ const ICON_ALIASES_BY_ID = {
 };
 
 export class HUD {
-  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected, onReroll, onSettings, onAnalyticsConsent) {
+  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected, onReroll, onSettings, onAnalyticsConsent, onTalentPurchased) {
     this.onUpgradeSelected = onUpgradeSelected;
     this.onRestart = onRestart;
     this.onFullscreen = onFullscreen;
@@ -70,6 +80,7 @@ export class HUD {
     this.onReroll = onReroll;
     this.onSettings = onSettings;
     this.onAnalyticsConsent = onAnalyticsConsent;
+    this.onTalentPurchased = onTalentPurchased;
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     document.documentElement.style.setProperty('--ui-icon-columns', `${ICON_COLUMNS * 100}%`);
     document.documentElement.style.setProperty('--ui-icon-rows', `${ICON_ROWS * 100}%`);
@@ -221,18 +232,29 @@ export class HUD {
   showRoosterSelection(definitions, hub = {}, onCosmeticSelected = null) {
     const progress = hub.progress ?? { totalRuns: 0, victories: 0, totalKills: 0 };
     const bests = hub.bests ?? { highestKills: 0, longestRunMs: 0, fastestVictoryMs: null };
+    const currency = hub.currency ?? { kernels: 0, lifetimeKernels: 0 };
+    const talentNodes = (hub.talents?.nodes ?? []).map((talent) => `
+      <button type="button" data-talent="${talent.id}"
+        class="talent-node ${talent.complete ? 'is-complete' : ''} ${talent.unlocked ? '' : 'is-locked'}"
+        ${talent.affordable ? '' : 'disabled'}
+        title="${talent.unlocked ? talent.description : talent.unlockLabel}">
+        <span class="talent-node__icon" data-talent-icon="${talent.icon}"></span>
+        <span><strong>${talent.name}</strong><small>${talent.description}</small></span>
+        <b>${talent.complete ? 'MAX' : talent.unlocked ? `${talent.rank}/${talent.maxRank} · ${talent.nextCost} Körner` : talent.unlockLabel}</b>
+      </button>
+    `).join('');
     let selectedChallenge = hub.selectedChallenge ?? 'standard';
     const challengeCards = (hub.challenges ?? []).map((challenge) => `
       <button class="challenge-card ${challenge.id === selectedChallenge ? 'is-selected' : ''} ${challenge.unlocked ? '' : 'is-locked'}"
         type="button" data-challenge="${challenge.id}" ${challenge.unlocked ? '' : 'disabled'}>
         <strong>${challenge.name}</strong>
         <span>${challenge.description}</span>
-        <small>${challenge.unlocked ? (challenge.arenaId ?? 'Freie Arena') : `Gesperrt: ${challenge.unlockLabel}`}</small>
+        <small>${challenge.unlocked ? `${challenge.arenaId ?? 'Freie Arena'} · ${challenge.firstClearClaimed ? 'First Clear geschafft' : `First Clear +${challenge.firstClearReward} Körner`}` : `Gesperrt: ${challenge.unlockLabel}`}</small>
       </button>
     `).join('');
     const historyRows = (hub.history ?? []).length
       ? hub.history.map((run) => `
-        <li><strong>${run.roosterName}</strong><span>${run.outcome === 'victory' ? 'Sieg' : 'Niederlage'} · ${run.kills} Kills · ${this.formatDuration(run.elapsedMs)}</span></li>
+        <li><strong>${run.roosterName}</strong><span>${run.outcome === 'victory' ? 'Sieg' : 'Niederlage'} · ${run.kills} Kills · +${run.kernels ?? 0} Körner · ${this.formatDuration(run.elapsedMs)}</span></li>
       `).join('')
       : '<li><span>Noch kein Run gespeichert.</span></li>';
     const enemyRows = (hub.lexicon?.enemies ?? []).map((enemy) => `
@@ -250,10 +272,15 @@ export class HUD {
             <span><strong>${progress.totalRuns}</strong> Runs</span>
             <span><strong>${progress.victories}</strong> Siege</span>
             <span><strong>${progress.totalKills}</strong> Kills</span>
+            <span class="henhouse-kernels"><img src="${kernelCurrencyUrl}" alt=""><strong>${currency.kernels}</strong> Körner</span>
           </div>
           <button type="button" class="henhouse-settings" data-hub-settings>Einstellungen</button>
         </div>
-        <p>Waehle Challenge und Rooster. Fortschritt schaltet nur neue Optionen frei, keine Pflicht-Stats.</p>
+        <p>Verdiene Körner in jedem Run, investiere sie in kleine dauerhafte Trainingsboni und steigere die Mastery deines Roosters.</p>
+        <details class="henhouse-meta" open>
+          <summary>Talentnest <small>${hub.talents?.totalRanks ?? 0} Ränge · ${currency.lifetimeKernels} Körner insgesamt verdient</small></summary>
+          <div class="talent-tree">${talentNodes}</div>
+        </details>
         <h2>Challenge</h2>
         <div class="challenge-list">${challengeCards}</div>
         <h2>Rooster</h2>
@@ -284,10 +311,16 @@ export class HUD {
       </div>
     `;
     const list = this.overlay.querySelector('.rooster-list');
+    this.overlay.querySelectorAll('[data-talent-icon]').forEach((icon) => this.setIcon(icon, icon.dataset.talentIcon));
+    this.overlay.querySelectorAll('[data-talent]').forEach((button) => {
+      button.addEventListener('click', () => this.onTalentPurchased?.(button.dataset.talent));
+    });
     this.overlay.querySelector('[data-hub-settings]')?.addEventListener('click', () => this.onSettings?.());
     definitions.forEach((definition) => {
       const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
         ?? { unlocked: true, cosmetics: [], runs: 0, wins: 0 };
+      const mastery = meta.mastery
+        ?? { level: 1, maxLevel: 5, progress: 0, xp: 0, nextTarget: 120, badgeUnlocked: false };
       const entry = document.createElement('div');
       entry.className = 'rooster-entry';
       const button = document.createElement('button');
@@ -304,6 +337,8 @@ export class HUD {
             <strong>${definition.name}</strong>
             <small>${definition.role}</small>
             </span>
+            <img class="rooster-card__mastery-badge ${mastery.badgeUnlocked ? '' : 'is-locked'}"
+              src="${MASTERY_BADGES[definition.id]}" alt="${definition.name} Mastery-Wappen">
           </span>
         </span>
         <span class="rooster-card__stats">
@@ -313,6 +348,10 @@ export class HUD {
         </span>
         <span class="rooster-card__primary">${definition.primary.name}: ${definition.description}</span>
         <span class="rooster-card__passive">${definition.passive}</span>
+        <span class="rooster-card__mastery">
+          <span><strong>Mastery ${mastery.level}/${mastery.maxLevel}</strong><small>${mastery.nextTarget === null ? `${mastery.xp} XP · MAX` : `${mastery.xp}/${mastery.nextTarget} XP`}</small></span>
+          <i><b style="width:${Math.round(mastery.progress * 100)}%"></b></i>
+        </span>
         <span class="rooster-card__progress">${meta.unlocked ? `${meta.runs} Runs · ${meta.wins} Siege` : `Gesperrt: ${meta.unlockLabel}`}</span>
       `;
       this.setIcon(button.querySelector('[data-rooster-icon]'), definition.icon);
@@ -379,9 +418,17 @@ export class HUD {
       .map((entry) => `<span>${entry.name} R${entry.rank}</span>`)
       .join('');
     const evos = build.evolutions.map((entry) => entry.name).join(', ') || 'Keine';
+    const unlockLabels = {
+      rooster: 'Rooster',
+      challenge: 'Challenge',
+      cosmetic: 'Kosmetik',
+      mastery: 'Mastery',
+      'first-clear': 'First Clear'
+    };
     const unlocks = (report.newUnlocks ?? []).map((unlock) => `
-      <span><strong>${unlock.type === 'rooster' ? 'Rooster' : unlock.type === 'challenge' ? 'Challenge' : 'Kosmetik'}</strong>${this.formatSource(unlock.id)}</span>
+      <span><strong>${unlockLabels[unlock.type] ?? 'Fortschritt'}</strong>${this.formatSource(unlock.id)}</span>
     `).join('');
+    const metaReward = report.metaReward;
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
       <div class="panel run-report">
@@ -401,6 +448,11 @@ export class HUD {
         <div class="run-report__build"><strong>Aktiv</strong>${active || '<span>–</span>'}</div>
         <div class="run-report__build run-report__build--passive"><strong>Passiv</strong>${passive || '<span>–</span>'}</div>
         <p class="run-report__evos"><strong>EVO:</strong> ${evos}</p>
+        ${metaReward ? `<div class="run-report__meta-reward">
+          <img src="${kernelCurrencyUrl}" alt="Körner">
+          <span><strong>+${metaReward.earnedKernels} Körner</strong><small>Run ${metaReward.runKernels}${metaReward.firstClearKernels ? ` · First Clear ${metaReward.firstClearKernels}` : ''}${metaReward.masteryKernels ? ` · Mastery ${metaReward.masteryKernels}` : ''} · Bestand ${metaReward.balance}</small></span>
+          <b>Mastery ${metaReward.masteryLevel} · +${metaReward.masteryXp} XP</b>
+        </div>` : ''}
         ${unlocks ? `<div class="run-report__unlocks"><h2>Neu freigeschaltet</h2>${unlocks}</div>` : ''}
         <div class="run-report__table-wrap">
           <table>

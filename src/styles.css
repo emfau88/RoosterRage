@@ -1457,6 +1457,231 @@ canvas {
   }
 }
 
+/* Phase G: compact meta progression, talent nest, and rooster mastery. */
+.henhouse-kernels {
+  display: grid !important;
+  grid-template-columns: 22px auto;
+  align-items: center;
+  column-gap: 3px;
+}
+
+.henhouse-kernels img {
+  grid-row: 1 / 3;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.henhouse-meta {
+  margin: 12px 0 4px;
+  padding: 10px;
+  border: 1px solid rgba(255, 215, 94, 0.3);
+  border-radius: 10px;
+  background: linear-gradient(145deg, rgba(48, 35, 16, 0.72), rgba(9, 20, 24, 0.82));
+}
+
+.henhouse-meta > summary {
+  color: #ffe9a7;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.henhouse-meta > summary small {
+  margin-left: 7px;
+  color: #b9c9c1;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.talent-tree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.talent-node {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 2px 7px;
+  padding: 7px;
+  border: 1px solid rgba(255, 226, 122, 0.35);
+  border-radius: 7px;
+  color: #f8f3df;
+  background: rgba(11, 26, 31, 0.88);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.talent-node:hover:not(:disabled) {
+  border-color: #ffe16a;
+  transform: translateY(-1px);
+}
+
+.talent-node:disabled {
+  cursor: not-allowed;
+}
+
+.talent-node.is-locked {
+  opacity: 0.42;
+  filter: grayscale(0.8);
+}
+
+.talent-node.is-complete {
+  border-color: rgba(101, 239, 139, 0.62);
+  background: rgba(21, 54, 39, 0.84);
+}
+
+.talent-node__icon {
+  grid-row: 1 / 3;
+  width: 32px;
+  height: 32px;
+}
+
+.talent-node span,
+.talent-node strong,
+.talent-node small {
+  min-width: 0;
+}
+
+.talent-node strong,
+.talent-node small,
+.talent-node b {
+  display: block;
+}
+
+.talent-node strong {
+  color: #fff4c7;
+  font-size: 10px;
+}
+
+.talent-node small {
+  margin-top: 2px;
+  color: #b9c9c1;
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.talent-node b {
+  grid-column: 2;
+  color: #ffd75e;
+  font-size: 8px;
+}
+
+.rooster-card__portrait .rooster-card__mastery-badge,
+.rooster-card:hover:not(:disabled) .rooster-card__portrait .rooster-card__mastery-badge {
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  object-fit: contain;
+  transform: none;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.48));
+}
+
+.rooster-card__portrait .rooster-card__mastery-badge.is-locked {
+  opacity: 0.32;
+  filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+}
+
+.rooster-card__mastery {
+  display: grid;
+  gap: 4px;
+}
+
+.rooster-card__mastery > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #465c62;
+  font-size: 9px;
+}
+
+.rooster-card__mastery small {
+  font-size: 8px;
+}
+
+.rooster-card__mastery > i {
+  display: block;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(18, 31, 36, 0.2);
+}
+
+.rooster-card__mastery > i > b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--class-accent), #ffe16a);
+}
+
+.run-report__meta-reward {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 215, 94, 0.44);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(68, 45, 12, 0.68), rgba(14, 29, 33, 0.86));
+}
+
+.run-report__meta-reward img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.run-report__meta-reward span,
+.run-report__meta-reward strong,
+.run-report__meta-reward small {
+  display: block;
+}
+
+.run-report__meta-reward strong {
+  color: #ffe16a;
+}
+
+.run-report__meta-reward small {
+  margin-top: 2px;
+  color: #c4d2cd;
+  font-size: 9px;
+}
+
+.run-report__meta-reward > b {
+  color: #9fe8ff;
+  font-size: 10px;
+}
+
+@media (max-width: 700px) {
+  .talent-tree {
+    grid-template-columns: 1fr;
+  }
+
+  .henhouse-stats {
+    flex-wrap: wrap;
+  }
+
+  .run-report__meta-reward {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .run-report__meta-reward img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .run-report__meta-reward > b {
+    grid-column: 2;
+  }
+}
+
 /* Professional vertical-slice visual pass: cockpit HUD and character-first hub. */
 :root {
   --hud-ink: #071014;

@@ -289,6 +289,18 @@ export function installTestApi(scene) {
       return scene.chooseRooster(id);
     },
     getMetaState: () => scene.meta.getState(),
+    getMetaRunBonuses: () => scene.meta.getRunBonuses(),
+    getLastMetaReward: () => scene.meta.getLastRunReward(),
+    grantMetaKernels: (amount) => {
+      const balance = scene.meta.grantKernelsForTesting(amount);
+      scene.runState.renderHub?.();
+      return balance;
+    },
+    purchaseMetaTalent: (id) => {
+      const result = scene.meta.purchaseTalent(id);
+      scene.runState.renderHub?.();
+      return result;
+    },
     getProductAnalytics: () => scene.productAnalytics.getState(),
     setProductAnalyticsConsent: (enabled) => scene.productAnalytics.setConsent(enabled),
     getMetaHub: () => scene.meta.getHubState(scene.roosterClasses.getDefinitions()),

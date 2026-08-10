@@ -346,6 +346,42 @@
       "bytes": 91002
     },
     {
+      "source": "art-source/meta/kernel-currency.png",
+      "sourceSha256": "68c9ee64df17d0670daf28ce9b61c71c8cd867a849c9b3f8692c5ab695db2219",
+      "runtime": "src/assets/meta/kernel-currency.webp",
+      "runtimeSha256": "2054420db3775cff4cf703b8f9eb5bdcd725e357b6868fa3c713b70ec2271f4f",
+      "width": 64,
+      "height": 64,
+      "bytes": 3298
+    },
+    {
+      "source": "art-source/meta/mastery-ace.png",
+      "sourceSha256": "5332ef3caa3389c0cf79161f30f534d5c18bf510c20a7090f8ae70401e17d069",
+      "runtime": "src/assets/meta/mastery-ace.webp",
+      "runtimeSha256": "8efd2e962ec83a40dcedaf4eae5b2107484b68d94c94202adff7083e7d45f973",
+      "width": 96,
+      "height": 96,
+      "bytes": 4526
+    },
+    {
+      "source": "art-source/meta/mastery-artillery.png",
+      "sourceSha256": "075bd324a7bc3a4a7116e5c78af5f8890df425d6d0777ff550d6bb0ab9e7e501",
+      "runtime": "src/assets/meta/mastery-artillery.webp",
+      "runtimeSha256": "7671cf6b2cd18cbb8d99111daff7e38730c2455738b725c93eedd2118b3c9e5a",
+      "width": 96,
+      "height": 96,
+      "bytes": 5232
+    },
+    {
+      "source": "art-source/meta/mastery-storm.png",
+      "sourceSha256": "0b90fb3664cd99728bf9a7b50acebcd21b50592f2b7af43301f5e7d4a2d14a95",
+      "runtime": "src/assets/meta/mastery-storm.webp",
+      "runtimeSha256": "478b6108c729cd908212a25fc2778ca6f366315b47fe723dc56c7d53ceced7d4",
+      "width": 96,
+      "height": 96,
+      "bytes": 5978
+    },
+    {
       "source": "art-source/enemy-slime.png",
       "sourceSha256": "5d9ee3a54981876dce5c9ad05148d8661604d335d3081073251db021a512fa21",
       "runtime": "src/assets/enemy-slime.webp",

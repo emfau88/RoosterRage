@@ -175,7 +175,13 @@ export class GameScene extends Phaser.Scene {
       (roosterId, selectedChallenge) => this.startRunFromHub(roosterId, selectedChallenge),
       () => this.rerollUpgradeChoices(),
       () => this.openSettings(),
-      (enabled) => this.productAnalytics.setConsent(enabled)
+      (enabled) => this.productAnalytics.setConsent(enabled),
+      (talentId) => {
+        const result = this.meta.purchaseTalent(talentId);
+        this.audio.play(result.ok ? 'ui-confirm' : 'ui-denied', { volume: 0.28 });
+        this.runState.renderHub?.();
+        return result;
+      }
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 

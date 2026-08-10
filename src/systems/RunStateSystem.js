@@ -44,6 +44,7 @@ export class RunStateSystem {
     ) {
       return false;
     }
+    this.scene.meta.applyRunBonuses(this.scene.player, this);
     this.choosingRooster = false;
     this.scene.audio.play('ui-confirm');
     this.scene.audio.play('rooster-crow');
@@ -250,6 +251,7 @@ export class RunStateSystem {
     const report = this.getRunReport();
     this.scene.productAnalytics.finishRun(report);
     report.newUnlocks = this.scene.meta.recordRun(report, this.scene.telemetry.events);
+    report.metaReward = this.scene.meta.getLastRunReward();
     report.meta = this.scene.meta.getState();
     this.scene.hud.showEndScreen(title, message, report);
   }

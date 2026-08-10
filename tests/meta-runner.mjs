@@ -47,6 +47,9 @@ async function verifyFreshHub(context, serverUrl) {
         enabledRoosters: document.querySelectorAll('.rooster-card:not(:disabled)').length,
         challengeCards: document.querySelectorAll('.challenge-card').length,
         enabledChallenges: document.querySelectorAll('.challenge-card:not(:disabled)').length,
+        talentNodes: document.querySelectorAll('.talent-node').length,
+        masteryBadges: document.querySelectorAll('.rooster-card__mastery-badge').length,
+        currencyText: document.querySelector('.henhouse-kernels')?.textContent,
         enemyEntries: hub.lexicon.enemies.length,
         evolutionEntries: hub.lexicon.evolutions.length,
         state: window.__ROOSTER_TEST__.getMetaState(),
@@ -67,8 +70,14 @@ async function verifyFreshHub(context, serverUrl) {
       'Fresh progression must offer only Standard Run.', snapshot);
     assert(snapshot.enemyEntries >= 12 && snapshot.evolutionEntries === 11,
       'The enemy or EVO lexicon is incomplete.', snapshot);
-    assert(snapshot.state.totalRuns === 0 && snapshot.state.unlockedRoosters.join(',') === 'ace',
+    assert(snapshot.state.version === 2 && snapshot.state.totalRuns === 0
+      && snapshot.state.kernels === 0 && snapshot.state.lifetimeKernels === 0
+      && Object.keys(snapshot.state.talentRanks).length === 0
+      && snapshot.state.unlockedRoosters.join(',') === 'ace',
       'Fresh progression is not deterministic.', snapshot.state);
+    assert(snapshot.talentNodes === 6 && snapshot.masteryBadges === 3
+      && snapshot.currencyText.includes('0'),
+    'The Phase G hub modules are incomplete.', snapshot);
     assert(snapshot.layout.left >= 0 && snapshot.layout.right <= 390 && snapshot.layout.bodyOverflow <= 0,
       'The portrait Hennenhuette overflows horizontally.', snapshot.layout);
     assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight,
@@ -144,9 +153,153 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
   }
 }
 
+async function verifyTenRunsTalentsAndReset(context, serverUrl) {
+  const { page, errors } = await openGame(context, serverUrl, '-ten-runs');
+  try {
+    const snapshot = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.resetMetaProgress();
+      const challenges = ['standard', 'rush-hour', 'featherweight', 'royal-gauntlet'];
+      for (let index = 0; index < 10; index += 1) {
+        const challengeId = challenges[index % challenges.length];
+        api.recordMetaRun({
+          kills: 120 + index * 8,
+          elapsedMs: 510000 - index * 3500,
+          rooster: { id: 'ace', name: 'Barnyard Ace' },
+          challenge: { id: challengeId, name: challengeId },
+          build: { active: [], passive: [], evolutions: [] }
+        });
+      }
+      const beforePurchases = api.getMetaState();
+      const purchases = [];
+      ['sturdy-nest', 'swift-spurs', 'polished-yolk'].forEach((id) => {
+        for (let rank = 0; rank < 3; rank += 1) purchases.push(api.purchaseMetaTalent(id));
+      });
+      for (let rank = 0; rank < 2; rank += 1) purchases.push(api.purchaseMetaTalent('wide-wings'));
+      purchases.push(api.purchaseMetaTalent('second-choice'));
+      purchases.push(api.purchaseMetaTalent('royal-instinct'));
+      return {
+        beforePurchases,
+        purchases,
+        afterPurchases: api.getMetaState(),
+        hub: api.getMetaHub()
+      };
+    });
+    assert(snapshot.beforePurchases.totalRuns === 10 && snapshot.beforePurchases.history.length === 10,
+      'The ten-run progression did not retain the expected bounded history.', snapshot.beforePurchases);
+    assert(snapshot.beforePurchases.firstClearClaims.length === 4
+      && snapshot.beforePurchases.kernels >= 455,
+    'Ten wins did not produce the intended first-clear/talent economy.', snapshot.beforePurchases);
+    assert(snapshot.purchases.every((purchase) => purchase.ok)
+      && Object.values(snapshot.afterPurchases.talentRanks).reduce((sum, rank) => sum + rank, 0) === 13,
+    'The complete six-node talent path could not be purchased in dependency order.', snapshot);
+    assert(snapshot.hub.roosters.find((rooster) => rooster.id === 'ace').mastery.level === 5
+      && snapshot.hub.roosters.find((rooster) => rooster.id === 'ace').mastery.badgeUnlocked,
+    'Ten successful Ace runs did not reach the capped mastery presentation.', snapshot.hub.roosters);
+
+    await page.screenshot({
+      path: path.join(artifactDir, 'henhouse-meta-progressed.png'),
+      fullPage: true
+    });
+
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
+    const applied = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.selectRooster('ace');
+      return {
+        state: api.getMetaState(),
+        stats: api.getPlayerStats(),
+        loadout: api.getLoadout(),
+        bonuses: api.getMetaRunBonuses()
+      };
+    });
+    assert(applied.state.totalRuns === 10 && applied.state.talentRanks['royal-instinct'] === 1,
+      'Talent progression did not persist across reload.', applied.state);
+    assert(applied.stats.maxHp === 106 && applied.stats.speed === 219
+      && applied.stats.projectileDamage === 21 && applied.stats.xpMagnetRadius === 246
+      && Math.abs(applied.stats.critChance - 0.09) < 0.0001
+      && applied.loadout.rerollsRemaining === 2,
+    'Capped talent bonuses were not applied exactly once to the run.', applied);
+
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
+    const reset = await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
+    assert(reset.version === 2 && reset.kernels === 0 && reset.lifetimeKernels === 0
+      && reset.totalRuns === 0 && reset.firstClearClaims.length === 0
+      && Object.keys(reset.talentRanks).length === 0
+      && Object.values(reset.roosterMastery).every((entry) => entry.xp === 0),
+    'Reset did not clear all Phase G progression.', reset);
+    assert(errors.length === 0, 'Browser errors in ten-run/talent/reset gate.', errors);
+    return { beforePurchases: snapshot.beforePurchases, applied, reset };
+  } finally {
+    await page.close();
+  }
+}
+
+async function verifyMigrationAndOldSaves(context, serverUrl) {
+  const { page, errors } = await openGame(context, serverUrl, '-migration');
+  try {
+    await page.evaluate(() => {
+      localStorage.removeItem('rooster-rage:meta:v2');
+      localStorage.setItem('rooster-rage:meta:v1', JSON.stringify({
+        version: 1,
+        totalRuns: 5,
+        victories: 2,
+        totalKills: 420,
+        bossDefeats: 2,
+        roosterRuns: { ace: 4, artillery: 1 },
+        roosterWins: { ace: 2 },
+        unlockedRoosters: ['ace', 'artillery', 'storm'],
+        unlockedChallenges: ['standard', 'rush-hour'],
+        unlockedCosmetics: ['ace-sunrise'],
+        selectedChallenge: 'rush-hour',
+        selectedCosmetics: { ace: 'ace-sunrise' },
+        discoveredEnemies: ['boss'],
+        discoveredEvolutions: ['evo-sunshot-array'],
+        bests: { highestKills: 190, longestRunMs: 520000, fastestVictoryMs: 470000 },
+        history: [{ id: 'legacy-run', roosterName: 'Barnyard Ace', outcome: 'victory', kills: 190, elapsedMs: 470000 }]
+      }));
+    });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
+    const migrated = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getMetaState(),
+      stored: JSON.parse(localStorage.getItem('rooster-rage:meta:v2'))
+    }));
+    assert(migrated.state.version === 2 && migrated.state.totalRuns === 5
+      && migrated.state.victories === 2 && migrated.state.totalKills === 420
+      && migrated.state.kernels === 80 && migrated.state.lifetimeKernels === 80,
+    'The v1 save was not migrated with the deterministic veteran grant.', migrated);
+    assert(migrated.state.selectedChallenge === 'rush-hour'
+      && migrated.state.selectedCosmetics.ace === 'ace-sunrise'
+      && migrated.state.history[0].id === 'legacy-run'
+      && migrated.stored.version === 2,
+    'Legacy unlock, selection, or history data was lost during migration.', migrated);
+
+    await page.evaluate(() => {
+      localStorage.removeItem('rooster-rage:meta:v1');
+      localStorage.setItem('rooster-rage:meta:v2', '{not-json');
+    });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
+    const recovered = await page.evaluate(() => window.__ROOSTER_TEST__.getMetaState());
+    assert(recovered.version === 2 && recovered.totalRuns === 0 && recovered.kernels === 0
+      && recovered.unlockedRoosters.join(',') === 'ace',
+    'Malformed persistent data did not recover to a safe fresh state.', recovered);
+    assert(errors.length === 0, 'Browser errors in migration/old-save gate.', errors);
+    return { migrated, recovered };
+  } finally {
+    await page.close();
+  }
+}
+
 async function verifyChallenge(context, serverUrl, id, expectedArena) {
   const { page, errors } = await openGame(context, serverUrl, `-${id}&challenge=${id}`);
   try {
+    await page.evaluate(() => window.__ROOSTER_TEST__.unlockAllMeta());
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
     const snapshot = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
       api.selectRooster('ace');
@@ -214,13 +367,22 @@ async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
   const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const inFreshContext = async (callback) => {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    try {
+      return await callback(context);
+    } finally {
+      await context.close();
+    }
+  };
   try {
     const report = {
       generatedAt: new Date().toISOString(),
-      fresh: await verifyFreshHub(context, serverState.url),
-      progression: await verifyUnlocksAndPersistence(context, serverState.url),
-      challenges: await verifyChallenges(context, serverState.url)
+      fresh: await inFreshContext((context) => verifyFreshHub(context, serverState.url)),
+      progression: await inFreshContext((context) => verifyUnlocksAndPersistence(context, serverState.url)),
+      tenRuns: await inFreshContext((context) => verifyTenRunsTalentsAndReset(context, serverState.url)),
+      migration: await inFreshContext((context) => verifyMigrationAndOldSaves(context, serverState.url)),
+      challenges: await inFreshContext((context) => verifyChallenges(context, serverState.url))
     };
     await fs.mkdir(artifactDir, { recursive: true });
     await fs.writeFile(path.join(artifactDir, 'meta-gate.json'), JSON.stringify(report, null, 2));
@@ -230,13 +392,14 @@ async function run() {
       challenges: report.progression.state.unlockedChallenges,
       cosmetics: report.progression.state.unlockedCosmetics,
       history: report.progression.state.history.length,
+      tenRunKernels: report.tenRuns.beforePurchases.kernels,
+      migratedVeteranKernels: report.migration.migrated.state.kernels,
       lexicon: {
         enemies: report.fresh.enemyEntries,
         evolutions: report.fresh.evolutionEntries
       }
     }, null, 2));
   } finally {
-    await context.close();
     await browser.close();
     await stopTestServer(serverState.server);
   }
