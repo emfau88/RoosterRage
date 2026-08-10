@@ -31,10 +31,10 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 | 15 | Rooster-Tiefe und Build-Content | Abgeschlossen |
 | 16 | Meta und Challenges | Abgeschlossen |
 | 17 | Vertical-Slice-Abnahme | Automatischer Freeze abgeschlossen; manuell/extern offen |
-| 18 | Kommerzielle Validierung | 3/4 vorbereitet; oeffentlicher Gate nach manueller Abnahme |
+| 18 | Kommerzielle Validierung | Oeffentliche Testfassung bereit; externe Messung offen |
 | 19 | Character Art und HUD Production Pass | Abgeschlossen |
 
-Aktueller Fokus: manueller und externer Phase-17-Gate. Der visuelle Phase-19-Production-Pass ist abgeschlossen; eine oeffentliche Phase-18-Demo wird erst nach der manuellen Slice-Abnahme freigegeben.
+Aktueller Fokus: manueller und externer Phase-17-Gate. Der visuelle Phase-19-Production-Pass ist abgeschlossen; die oeffentliche Testfassung dient jetzt der manuellen Slice-Abnahme.
 
 ## Phase 0: Technische Baseline
 
@@ -671,10 +671,10 @@ Vorbereitungsprotokoll 10.08.2026:
 - Ein textfreies 1672 x 941 Key-Art-Master, vier echte Build-Screenshots (Desktop-Hub, Stormcrest-Schwarm, Brood-King und 720 x 1280 Mobile Portrait) sowie ein 36,0-Sekunden-Gameplay-Reel in 1280 x 720 liegen unter `public/marketing/` und `docs/marketing/`.
 - Titel-, Description- und Open-Graph-Metadaten sind im Web-Build integriert. Der Capture-Runner reproduziert Screenshots und Reel aus dem echten Spiel statt aus Mockups.
 - Die Produkttelemetrie ist standardmaessig aus und besitzt eine sichtbare Einwilligung in der Hennenhuette. Erlaubt sind nur Funnel-/Run-Ereignisse mit sitzungsgebundener Zufalls-ID, grober Geraeteklasse, Orientierung und Sprachkuerzel; keine Cookies, Werbe-IDs, Fingerprints oder persistente Eventwarteschlange.
-- Ohne `VITE_TELEMETRY_ENDPOINT` findet kein Versand statt. Bei Widerruf endet die Erfassung sofort. Der Release-Endpunkt muss IP-Adressen verwerfen, Rohdaten nach 30 Tagen loeschen und vor Deploy eine kurze Datenschutzerklaerung erhalten. Der Pages-Workflow bleibt bis zur manuellen Abnahme ausschliesslich manuell ausloesbar.
+- Ohne `VITE_TELEMETRY_ENDPOINT` findet kein Versand statt. Bei Widerruf endet die Erfassung sofort. Der Release-Endpunkt muss IP-Adressen verwerfen, Rohdaten nach 30 Tagen loeschen und vor einer echten Messkampagne eine kurze Datenschutzerklaerung erhalten. Die oeffentliche Testfassung versendet ohne konfigurierten Endpunkt keine Telemetrie.
 - Empfohlen ist Demo-plus-Premium: kostenloser kompletter Slice zur Verstaendnis- und Nachfragepruefung, danach eine einmal bezahlte Vollversion. Kosmetische Erweiterungen sind nur spaeter und ohne Stats, Gacha, Energie, Ads oder Zufallskisten vertretbar.
 - Produktmodell, Store Copy, Trailer-Beat-Sheet, Eventdefinitionen und harte Go/No-Go-Schwellen stehen in `docs/PHASE_18_COMMERCIAL_VALIDATION.md` und `docs/marketing/STORE_COPY.md`.
-- Nicht vorweggenommen wird das echte Ergebnis: Der Branch wird nicht auf `master` gemergt, die Pages-Demo nicht neu deployed und es werden keine fiktiven Funnel-, Wunschlisten- oder Testerquoten eingetragen.
+- Nicht vorweggenommen wird das echte Ergebnis: Die Pages-Testfassung ist fuer die manuelle Abnahme veroeffentlicht; Funnel-, Wunschlisten- oder Testerquoten werden erst nach realen Tests eingetragen.
 
 ## Phase 19: Character Art und HUD Production Pass
 

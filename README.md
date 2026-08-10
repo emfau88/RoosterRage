@@ -4,9 +4,11 @@
 
 **Drei Kampfhaehne. Wilde Ei-Evolutionen. Ein Hof voller Monster.**
 
+### [Rooster Rage jetzt im Browser spielen](https://emfau88.github.io/RoosterRage/)
+
 Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Waehle Barnyard Ace, Boombardier oder Stormcrest, entwickle absurde Ei-Waffen und ueberlebe zehn eskalierende Wellen bis zum dreiphasigen Brood King.
 
-> **Projektstatus:** Der automatisierte Commercial Vertical Slice und der visuelle Character-/HUD-Production-Pass sind abgeschlossen. Der manuelle End-to-End-Test sowie externe Spieltests stehen noch aus; die oeffentliche Demo wird erst nach diesen Gates freigegeben.
+> **Projektstatus:** Der automatisierte Commercial Vertical Slice und der visuelle Character-/HUD-Production-Pass sind abgeschlossen. Die aktuelle GitHub-Pages-Version steht als oeffentliche Testfassung bereit; der manuelle End-to-End-Test sowie externe Spieltests stehen noch aus.
 
 ## Der Vertical Slice
 
