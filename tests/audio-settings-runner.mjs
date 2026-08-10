@@ -30,7 +30,7 @@ async function run() {
     const requiredAssets = [
       'menu-theme', 'run-theme', 'boss-theme', 'menu-coop',
       'egg-launch-ace', 'egg-launch-artillery', 'egg-launch-storm', 'egg-impact-1',
-      'level-up', 'evolution', 'chest-latch', 'chest-open', 'victory',
+      'level-up', 'evolution', 'upgrade-select', 'chest-latch', 'chest-open', 'chest-reward', 'victory',
       'spitter-shot', 'brute-stomp', 'summoner-charge', 'boss-phase', 'boss-fireball'
     ];
     assert(requiredAssets.every((key) => manifest.includes(key)),

@@ -118,10 +118,12 @@ export class ArenaSystem {
   }
 
   createObstacle(config) {
-    const texture = config.kind === 'wall' ? 'arena-wall' : `arena-${config.kind}`;
+    const texture = config.texture
+      ?? (config.kind === 'wall' || config.kind === 'landmark' ? 'arena-wall' : `arena-${config.kind}`);
     const sprite = this.obstacleGroup.create(config.x, config.y, texture)
       .setDisplaySize(config.width, config.height)
-      .setDepth(config.solid ? 3 : 4);
+      .setDepth(config.solid ? 3 : 4)
+      .setVisible(config.visible ?? true);
     sprite.refreshBody();
     const obstacle = {
       ...config,
@@ -141,6 +143,16 @@ export class ArenaSystem {
     for (let index = 0; index < count; index += 1) {
       const ground = this.scene.add.image(0, 0, this.streaming.groundTexture).setDepth(-2);
       const landmark = this.scene.add.image(0, 0, 'landmark-well').setDepth(1).setVisible(false);
+      const landmarkCollider = this.createObstacle({
+        id: `stream-${index}-landmark`,
+        x: 0,
+        y: 0,
+        width: 64,
+        height: 64,
+        kind: 'landmark',
+        solid: true,
+        visible: false
+      });
       const obstacleSlots = Array.from({ length: 4 }, (_, slot) => this.createObstacle({
         id: `stream-${index}-${slot}`,
         x: 0,
@@ -151,7 +163,16 @@ export class ArenaSystem {
         hp: 90
       }));
       obstacleSlots.forEach((obstacle) => obstacle.sprite.disableBody(true, true));
-      this.chunkRecords.push({ key: null, chunkX: 0, chunkY: 0, ground, landmark, obstacles: obstacleSlots });
+      landmarkCollider.sprite.disableBody(true, true);
+      this.chunkRecords.push({
+        key: null,
+        chunkX: 0,
+        chunkY: 0,
+        ground,
+        landmark,
+        landmarkCollider,
+        obstacles: obstacleSlots
+      });
     }
   }
 
@@ -217,6 +238,7 @@ export class ArenaSystem {
     const showWell = hash % (this.id === 'open-yard' ? 7 : 9) === 0;
     if (!showBarn && !showWell) {
       record.landmark.setVisible(false);
+      this.disableObstacle(record.landmarkCollider);
       return;
     }
     const texture = showBarn ? 'landmark-barn' : 'landmark-well';
@@ -229,6 +251,16 @@ export class ArenaSystem {
       .setDisplaySize(size, size)
       .setAlpha(0.9)
       .setVisible(true);
+    this.configureObstacle(record.landmarkCollider, {
+      id: `${record.key}-${showBarn ? 'barn' : 'well'}`,
+      x: centerX + offsetX,
+      y: centerY + offsetY + (showBarn ? 45 : 18),
+      width: showBarn ? 154 : 76,
+      height: showBarn ? 76 : 54,
+      kind: showBarn ? 'barn' : 'well',
+      solid: true,
+      visible: false
+    });
   }
 
   configureChunkObstacles(record, centerX, centerY, hash) {
@@ -300,7 +332,10 @@ export class ArenaSystem {
   }
 
   configureObstacle(obstacle, config) {
-    const texture = config.kind === 'wall' ? 'arena-wall' : `arena-${config.kind}`;
+    const texture = config.texture
+      ?? (config.kind === 'wall' || config.kind === 'barn' || config.kind === 'well'
+        ? 'arena-wall'
+        : `arena-${config.kind}`);
     Object.assign(obstacle, config, {
       maxHp: config.hp ?? Infinity,
       hp: config.hp ?? Infinity,
@@ -311,6 +346,7 @@ export class ArenaSystem {
       .setPosition(config.x, config.y)
       .setDisplaySize(config.width, config.height)
       .setDepth(config.solid ? 3 : 4)
+      .setVisible(config.visible ?? true)
       .clearTint();
     obstacle.sprite.refreshBody();
     obstacle.sprite.entity = obstacle;
@@ -432,7 +468,14 @@ export class ArenaSystem {
         y: record.ground.y,
         width: record.ground.displayWidth,
         height: record.ground.displayHeight,
-        landmark: record.landmark.visible ? record.landmark.texture.key : null
+        landmark: record.landmark.visible ? record.landmark.texture.key : null,
+        landmarkCollider: record.landmarkCollider.sprite.active ? {
+          x: record.landmarkCollider.x,
+          y: record.landmarkCollider.y,
+          width: record.landmarkCollider.width,
+          height: record.landmarkCollider.height,
+          kind: record.landmarkCollider.kind
+        } : null
       })),
       chunkAnchor: this.chunkAnchor ? { ...this.chunkAnchor } : null,
       recycledChunks: this.recycledChunks,
@@ -443,6 +486,7 @@ export class ArenaSystem {
         y: obstacle.y,
         width: obstacle.width,
         height: obstacle.height,
+        kind: obstacle.kind,
         destructible: obstacle.destructible,
         hp: Number.isFinite(obstacle.hp) ? Math.max(0, obstacle.hp) : null,
         active: obstacle.sprite.active

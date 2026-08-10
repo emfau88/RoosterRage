@@ -277,6 +277,9 @@ export function installTestApi(scene) {
       },
       frameTotal: scene.player.sprite.texture?.frameTotal ?? 0,
       animation: scene.player.sprite.anims.currentAnim?.key ?? null,
+      frame: scene.player.sprite.frame?.name ?? null,
+      flipX: scene.player.sprite.flipX,
+      displayScale: { x: scene.player.sprite.scaleX, y: scene.player.sprite.scaleY },
       scale: scene.player.baseScale,
       tint: scene.player.sprite.tintTopLeft,
       markers: scene.roosterClasses.markers.length,
@@ -287,6 +290,17 @@ export function installTestApi(scene) {
     selectRooster: (id = 'ace') => {
       scene.meta.unlockRoosterForTesting(id);
       return scene.chooseRooster(id);
+    },
+    previewRoosterDirection: (direction) => {
+      const velocity = {
+        west: new Phaser.Math.Vector2(-1, 0),
+        east: new Phaser.Math.Vector2(1, 0),
+        north: new Phaser.Math.Vector2(0, -1),
+        south: new Phaser.Math.Vector2(0, 1)
+      }[direction] ?? new Phaser.Math.Vector2(0, 0);
+      scene.player.updateAnimation(velocity);
+      scene.player.updateVisualPose(velocity);
+      return window.__ROOSTER_TEST__.getRoosterVisualState();
     },
     getMetaState: () => scene.meta.getState(),
     getMetaRunBonuses: () => scene.meta.getRunBonuses(),

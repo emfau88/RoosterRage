@@ -1,6 +1,8 @@
 export function createGameAnimations(scene) {
   const roosterTextures = ['ace', 'artillery', 'storm'];
-  const directions = [['south', 0], ['west', 4], ['east', 8], ['north', 12]];
+  // A single clean side row is mirrored at runtime. Besides making direction
+  // semantics unambiguous, this avoids baked edge bleed in opposing side rows.
+  const directions = [['south', 0], ['west', 4], ['east', 4], ['north', 12]];
   roosterTextures.forEach((roosterId) => {
     directions.forEach(([direction, start]) => {
       const key = `rooster-${roosterId}-walk-${direction}`;

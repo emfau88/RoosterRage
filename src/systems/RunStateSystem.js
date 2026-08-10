@@ -252,6 +252,11 @@ export class RunStateSystem {
     this.scene.productAnalytics.finishRun(report);
     report.newUnlocks = this.scene.meta.recordRun(report, this.scene.telemetry.events);
     report.metaReward = this.scene.meta.getLastRunReward();
+    if (report.metaReward?.earnedKernels > 0) {
+      this.scene.time.delayedCall(180, () => {
+        this.scene.audio.play('chest-reward', { volume: 0.24, cooldown: 0 });
+      });
+    }
     report.meta = this.scene.meta.getState();
     this.scene.hud.showEndScreen(title, message, report);
   }

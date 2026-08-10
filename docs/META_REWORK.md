@@ -25,7 +25,7 @@ Sechs dauerhaft gespeicherte Talente kosten zusammen 455 Körner. Voll ausgebaut
 
 Neu: ein Körner-Icon und je ein Mastery-Badge für Ace, Artillery und Storm. Die optimierten Runtime-Dateien liegen in `src/assets/meta/`; verlustfreie Arbeitsquellen liegen in `art-source/meta/`. Talentknoten verwenden vorhandene Upgrade-Icons, damit die Bedeutung konsistent bleibt.
 
-Talentkauf und Ablehnung besitzen bereits UI-Feedback; die abschließende Audio-Mix-Prüfung bleibt Bestandteil von Phase H.
+Talentkauf und Ablehnung besitzen UI-Feedback. Erfolgreiche Käufe verwenden den vorhandenen Upgrade-Bestätigungssound, jede Körnerauszahlung den kurzen Chest-Reward-Sound; Victory bleibt als eigener Sting erhalten. Die abschließende Lautstärkeprüfung über alle Geräte bleibt Bestandteil von Phase H.
 
 ## Validierung
 

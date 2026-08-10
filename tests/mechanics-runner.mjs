@@ -262,12 +262,16 @@ async function measureRoosterPrimary(browser, roosterId, waitMs) {
     await page.waitForTimeout(waitMs);
     const stats = await page.evaluate(() => window.__ROOSTER_TEST__.getPlayerStats());
     const visual = await page.evaluate(() => window.__ROOSTER_TEST__.getRoosterVisualState());
+    const directions = await page.evaluate(() => ({
+      west: window.__ROOSTER_TEST__.previewRoosterDirection('west'),
+      east: window.__ROOSTER_TEST__.previewRoosterDirection('east')
+    }));
     const enemies = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot())
       .then((items) => items.filter((enemy) => enemy.maxHp === 999));
     await page.screenshot({ path: path.join(artifactDir, `rooster-${roosterId}-primary.png`) });
     assert(errors.length === 0, `Browser reported errors for rooster ${roosterId}.`, errors);
     assert(enemies.length === 3, `Controlled targets missing for rooster ${roosterId}.`, enemies);
-    return { roosterId, catalog, stats, visual, enemies };
+    return { roosterId, catalog, stats, visual, directions, enemies };
   } finally {
     await page.close();
   }
@@ -297,6 +301,18 @@ async function testRoosterClasses(browser) {
     assert(result.visual.frameSize.width === 256 && result.visual.frameSize.height === 256
       && result.visual.frameTotal >= 16,
     `${result.roosterId} sprite sheet does not expose the expected 4x4 frame grid.`, result.visual);
+    const authoredEast = result.roosterId === 'storm';
+    assert(result.directions.west.flipX === authoredEast
+      && result.directions.east.flipX === !authoredEast,
+      `${result.roosterId} horizontal directions are not true mirrored counterparts.`, result.directions);
+    assert(result.directions.west.frame >= 4 && result.directions.west.frame <= 7
+      && result.directions.east.frame >= 4 && result.directions.east.frame <= 7,
+    `${result.roosterId} did not stay on the clean canonical side-animation row.`, result.directions);
+    assert(result.directions.west.displayScale.x === result.visual.scale
+      && result.directions.west.displayScale.y === result.visual.scale
+      && result.directions.east.displayScale.x === result.visual.scale
+      && result.directions.east.displayScale.y === result.visual.scale,
+    `${result.roosterId} side movement still changes apparent sprite size.`, result.directions);
   });
   assert(ace.visual.markers === 1, 'Ace visual identity marker is missing.', ace.visual);
   assert(artillery.visual.markers === 2, 'Artillery visual identity markers are missing.', artillery.visual);

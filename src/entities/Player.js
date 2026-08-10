@@ -157,6 +157,7 @@ export class Player {
     this.roosterId = roosterId;
     this.roosterTextureKey = textureKey;
     this.sprite.setTexture(textureKey, 0);
+    this.sprite.setFlipX(this.shouldFlipHorizontal(this.lastMoveDirection));
     this.sprite.play(`rooster-${roosterId}-walk-${this.lastMoveDirection}`, true);
   }
 
@@ -164,6 +165,12 @@ export class Player {
     const requirements = [35, 70, 105, 145, 190, 245, 305, 375, 455, 545, 645, 755];
     return requirements[Math.min(requirements.length - 1, Math.max(0, level - 1))]
       + Math.max(0, level - requirements.length) * 90;
+  }
+
+  shouldFlipHorizontal(direction) {
+    if (direction !== 'east' && direction !== 'west') return false;
+    // Storm's clean side row is authored facing east; Ace and Artillery face west.
+    return this.roosterId === 'storm' ? direction === 'west' : direction === 'east';
   }
 
   getUpgradeRank(id) {
@@ -189,9 +196,10 @@ export class Player {
       const frameByDirection = {
         south: 0,
         west: 4,
-        east: 8,
+        east: 4,
         north: 12
       };
+      this.sprite.setFlipX(this.shouldFlipHorizontal(this.lastMoveDirection));
       this.sprite.setFrame(frameByDirection[this.lastMoveDirection]);
       return;
     }
@@ -201,6 +209,7 @@ export class Player {
     } else {
       this.lastMoveDirection = velocity.y < 0 ? 'north' : 'south';
     }
+    this.sprite.setFlipX(this.shouldFlipHorizontal(this.lastMoveDirection));
     this.sprite.play(`rooster-${this.roosterId ?? 'ace'}-walk-${this.lastMoveDirection}`, true);
   }
 
@@ -221,11 +230,8 @@ export class Player {
     const lift = Math.abs(step);
     if (this.lastMoveDirection === 'east' || this.lastMoveDirection === 'west') {
       const directionSign = this.lastMoveDirection === 'east' ? 1 : -1;
-      this.sprite.setScale(
-        this.baseScale * (1 + lift * 0.045),
-        this.baseScale * (1 - lift * 0.035)
-      );
-      this.sprite.setAngle(directionSign * step * 4.5);
+      this.sprite.setScale(this.baseScale);
+      this.sprite.setAngle(directionSign * step * 2.2);
       return;
     }
 

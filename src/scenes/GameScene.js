@@ -178,7 +178,7 @@ export class GameScene extends Phaser.Scene {
       (enabled) => this.productAnalytics.setConsent(enabled),
       (talentId) => {
         const result = this.meta.purchaseTalent(talentId);
-        this.audio.play(result.ok ? 'ui-confirm' : 'ui-denied', { volume: 0.28 });
+        this.audio.play(result.ok ? 'upgrade-select' : 'ui-denied', { volume: 0.28 });
         this.runState.renderHub?.();
         return result;
       }

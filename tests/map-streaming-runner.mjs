@@ -32,6 +32,18 @@ function validateChunkCoverage(state, expectedPool) {
     Math.abs(obstacle.x - chunk.x) <= chunk.width / 2 + 48
       && Math.abs(obstacle.y - chunk.y) <= chunk.height / 2 + 48
   ))), 'A recycled collider remained outside the active chunks.', { activeObstacles, chunks: state.activeChunks });
+  const landmarkChunks = state.activeChunks.filter((chunk) => chunk.landmark);
+  assert(landmarkChunks.every((chunk) => chunk.landmarkCollider),
+    'A visible landmark is missing its recycled collision footprint.', landmarkChunks);
+  assert(landmarkChunks.every((chunk) => (
+    chunk.landmarkCollider.width >= 70
+      && chunk.landmarkCollider.height >= 50
+      && ['barn', 'well'].includes(chunk.landmarkCollider.kind)
+  )), 'A landmark collision footprint is too small or has the wrong type.', landmarkChunks);
+  const landmarkObstacles = activeObstacles.filter((obstacle) => ['barn', 'well'].includes(obstacle.kind));
+  assert(landmarkObstacles.length === landmarkChunks.length
+    && landmarkObstacles.every((obstacle) => !obstacle.destructible),
+  'Landmark colliders are not one-to-one solid bodies.', { landmarkChunks, landmarkObstacles });
 }
 
 async function openArena(browser, serverUrl, arenaId) {
