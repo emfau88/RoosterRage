@@ -329,7 +329,7 @@ export class HUD {
       button.disabled = !meta.unlocked;
       button.innerHTML = `
         <span class="rooster-card__portrait">
-          <img src="${ROOSTER_PORTRAITS[definition.id]}" alt="${definition.name} Portrait">
+          <img class="rooster-card__portrait-image" src="${ROOSTER_PORTRAITS[definition.id]}" alt="${definition.name} Portrait">
           <span class="rooster-card__portrait-shade"></span>
           <span class="rooster-card__header">
             <span class="rooster-card__icon" data-rooster-icon></span>

@@ -42,7 +42,7 @@ async function run() {
     }
 
     const roosterCards = await page.locator('.rooster-card').count();
-    const roosterPortraits = await page.locator('.rooster-card__portrait img').evaluateAll((images) => (
+    const roosterPortraits = await page.locator('.rooster-card__portrait-image').evaluateAll((images) => (
       images.map((image) => ({ src: image.currentSrc, width: image.naturalWidth, height: image.naturalHeight }))
     ));
     await page.screenshot({ path: path.join(artifactDir, 'rooster-class-selection.png') });
