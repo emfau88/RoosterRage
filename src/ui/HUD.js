@@ -51,15 +51,9 @@ const ICON_ALIASES_BY_ID = {
   'artillery-blast-plating': 'armor',
   'storm-static-plumage': 'lightning-comb',
   'storm-tailwind-training': 'move-speed',
-  'evo-sunshot-array': 'active-upgrade',
-  'evo-siegebreaker-shell': 'rocket-egg',
-  'evo-tempest-crown': 'lightning-comb',
-  'evo-solar-scramble': 'golden-egg',
   'evo-thunder-roost': 'lightning-comb',
   'evo-shell-halo': 'orbit-eggs',
-  'evo-broodstorm': 'rocket-egg',
   'evo-singularity-nest': 'void-nest',
-  'evo-phoenix-pan': 'molotov-egg',
   'evo-dawn-laser': 'laser-comb',
   'evo-chick-squadron': 'support-chick',
   'primary-ace': 'active-upgrade',
@@ -77,6 +71,8 @@ export class HUD {
     this.onSettings = onSettings;
     this.onAnalyticsConsent = onAnalyticsConsent;
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
+    document.documentElement.style.setProperty('--ui-icon-columns', `${ICON_COLUMNS * 100}%`);
+    document.documentElement.style.setProperty('--ui-icon-rows', `${ICON_ROWS * 100}%`);
     this.root = document.createElement('div');
     this.root.className = 'hud';
     this.root.innerHTML = `

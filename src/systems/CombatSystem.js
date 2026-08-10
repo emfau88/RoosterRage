@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { Projectile } from '../entities/Projectile.js';
+import { playEvolutionImpact } from './EvolutionVisuals.js';
 
 function getBossDamageMultiplier(enemy, source) {
   if (!enemy.boss) {
@@ -59,7 +60,7 @@ export class CombatSystem {
         maxTurnRate: primary.homingTurnRate ?? shot.maxTurnRate ?? 0.08,
         targetOffset: 0,
         laneOffset: shot.laneOffset,
-        texture: scene.player.fireEggs ? undefined : primary.texture,
+        texture: evolution?.texture ?? (scene.player.fireEggs ? undefined : primary.texture),
         speed: (primary.speed ?? 520) + scene.player.projectileSpeedBonus + (evolution?.speedBonus ?? 0),
         scale: (primary.scale ?? 1) * (evolution?.scaleMultiplier ?? 1),
         hitRadius: (primary.hitRadius ?? 24) + (evolution?.hitRadiusBonus ?? 0),
@@ -481,6 +482,14 @@ export class CombatSystem {
     const adjustedDamage = Math.max(1, Math.round(damage * bossMultiplier));
     const appliedDamage = enemy.mitigateDamage?.(adjustedDamage) ?? adjustedDamage;
     scene.showHitFeedback(x, y, appliedDamage, enemy, options);
+    if ([
+      'evo-sunshot-array',
+      'evo-siegebreaker-shell',
+      'evo-tempest-crown',
+      'evo-solar-scramble'
+    ].includes(source)) {
+      playEvolutionImpact(scene, source, x, y);
+    }
     const eggImpact = /^(base-egg|fire-eggs|golden-egg|support-chick|evo-solar-scramble|evo-chick-squadron|evo-sunshot-array|evo-siegebreaker-shell|evo-tempest-crown)/.test(source);
     if (eggImpact) {
       scene.audio.playVariant('egg-impact');

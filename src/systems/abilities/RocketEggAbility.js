@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { RocketProjectile } from '../../entities/RocketProjectile.js';
 import { TimedAbility } from './TimedAbility.js';
+import { playEvolutionImpact } from '../EvolutionVisuals.js';
 
 export class RocketEggAbility extends TimedAbility {
   constructor(scene) {
@@ -44,10 +45,17 @@ export class RocketEggAbility extends TimedAbility {
 
   createExplosion(x, y, damage, radius, evolved = false, rank = this.rank) {
     this.scene.audio.play('rocket-explosion');
-    this.scene.playFx('fx-rocket-explosion', x, y, {
-      scale: Phaser.Math.Clamp(radius / 118, 0.58, 1.05),
-      depth: 11
-    });
+    if (evolved) {
+      playEvolutionImpact(this.scene, 'evo-broodstorm', x, y, {
+        diameter: Phaser.Math.Clamp(radius * 1.05, 112, 148),
+        depth: 11
+      });
+    } else {
+      this.scene.playFx('fx-rocket-explosion', x, y, {
+        scale: Phaser.Math.Clamp(radius / 118, 0.58, 1.05),
+        depth: 11
+      });
+    }
     const core = this.scene.add.circle(x, y, 18, 0xfff0a6, 0.72).setDepth(10);
     const ring = this.scene.add.circle(x, y, radius, 0xff6a28, 0.22)
       .setStrokeStyle(4, 0xffd35c, 0.9)

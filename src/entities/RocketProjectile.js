@@ -15,12 +15,15 @@ export class RocketProjectile {
     this.active = true;
     this.angle = Phaser.Math.Angle.Between(x, y, target.sprite.x, target.sprite.y);
 
-    this.sprite = scene.physics.add.sprite(x, y, 'rocket-egg');
+    this.sprite = scene.physics.add.sprite(
+      x,
+      y,
+      evolved ? 'evo-broodstorm-projectile' : 'rocket-egg'
+    );
     this.sprite.setScale(1.05 + rank * 0.08);
     this.sprite.setCircle(11);
     this.sprite.setRotation(this.angle);
     this.sprite.setDepth(7);
-    if (evolved) this.sprite.setTint(0xffd35c);
     this.trail = scene.add.circle(x, y, 13, 0xff7a24, 0.28).setDepth(4);
   }
 

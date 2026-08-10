@@ -29,6 +29,12 @@ RUNTIME_IMAGES = (
     "projectiles/golden-egg.png",
     "projectiles/molotov-egg.png",
     "projectiles/rocket-egg.png",
+    "projectiles/evolutions/evo-sunshot-array-projectile.png",
+    "projectiles/evolutions/evo-siegebreaker-shell-projectile.png",
+    "projectiles/evolutions/evo-tempest-crown-projectile.png",
+    "projectiles/evolutions/evo-solar-scramble-projectile.png",
+    "projectiles/evolutions/evo-phoenix-pan-projectile.png",
+    "projectiles/evolutions/evo-broodstorm-projectile.png",
     "projectiles/enemy-shot.png",
     "projectiles/enemy-purple-shot.png",
     "projectiles/enemy-blue-shot.png",
@@ -59,8 +65,38 @@ RUNTIME_IMAGES = (
     "enemies/animations/enemy-elite-spitter-pulse.png",
     "enemies/animations/enemy-boss-heavy.png",
     "fx/fx-atlas-v1-sheet.png",
+    "fx/evolutions/evo-sunshot-array-impact.png",
+    "fx/evolutions/evo-siegebreaker-shell-impact.png",
+    "fx/evolutions/evo-tempest-crown-impact.png",
+    "fx/evolutions/evo-solar-scramble-impact.png",
+    "fx/evolutions/evo-phoenix-pan-impact.png",
+    "fx/evolutions/evo-broodstorm-impact.png",
     "map/arena-ground.png",
     "ui/ui-icons-v1-sheet.png",
+)
+
+RUNTIME_SIZES = {
+    "projectiles/evolutions/evo-sunshot-array-projectile.png": (32, 32),
+    "projectiles/evolutions/evo-siegebreaker-shell-projectile.png": (40, 40),
+    "projectiles/evolutions/evo-tempest-crown-projectile.png": (32, 32),
+    "projectiles/evolutions/evo-solar-scramble-projectile.png": (36, 36),
+    "projectiles/evolutions/evo-phoenix-pan-projectile.png": (36, 36),
+    "projectiles/evolutions/evo-broodstorm-projectile.png": (42, 42),
+    "fx/evolutions/evo-sunshot-array-impact.png": (256, 256),
+    "fx/evolutions/evo-siegebreaker-shell-impact.png": (256, 256),
+    "fx/evolutions/evo-tempest-crown-impact.png": (256, 256),
+    "fx/evolutions/evo-solar-scramble-impact.png": (256, 256),
+    "fx/evolutions/evo-phoenix-pan-impact.png": (256, 256),
+    "fx/evolutions/evo-broodstorm-impact.png": (256, 256),
+}
+
+BULK_1_ICONS = (
+    "evo-sunshot-array-icon.png",
+    "evo-siegebreaker-shell-icon.png",
+    "evo-tempest-crown-icon.png",
+    "evo-solar-scramble-icon.png",
+    "evo-phoenix-pan-icon.png",
+    "evo-broodstorm-icon.png",
 )
 
 
@@ -72,7 +108,33 @@ def digest(path):
     return sha256(path.read_bytes()).hexdigest()
 
 
+def fit_visible(image, size, margin):
+    image = image.convert("RGBA")
+    bounds = image.getchannel("A").getbbox()
+    if bounds:
+        image = image.crop(bounds)
+    max_size = (max(1, size[0] - margin * 2), max(1, size[1] - margin * 2))
+    image.thumbnail(max_size, Image.Resampling.LANCZOS)
+    canvas = Image.new("RGBA", size, (0, 0, 0, 0))
+    canvas.alpha_composite(image, ((size[0] - image.width) // 2, (size[1] - image.height) // 2))
+    return canvas
+
+
+def build_ui_icon_sheet():
+    sheet_path = SOURCE_ROOT / "ui" / "ui-icons-v1-sheet.png"
+    with Image.open(sheet_path) as current:
+        base = current.convert("RGBA").crop((0, 0, 768, 768))
+    sheet = Image.new("RGBA", (768, 896), (0, 0, 0, 0))
+    sheet.alpha_composite(base, (0, 0))
+    for index, filename in enumerate(BULK_1_ICONS):
+        with Image.open(SOURCE_ROOT / "ui" / "evolutions" / filename) as icon:
+            fitted = fit_visible(icon, (128, 128), 4)
+        sheet.alpha_composite(fitted, (index * 128, 768))
+    sheet.save(sheet_path, "PNG", optimize=True)
+
+
 def optimize_assets():
+    build_ui_icon_sheet()
     source_bytes = 0
     runtime_bytes = 0
     manifest_assets = []
@@ -82,7 +144,12 @@ def optimize_assets():
         if not source.exists():
             raise SystemExit(f"Missing source asset: {source.relative_to(PROJECT_ROOT)}")
         target.parent.mkdir(parents=True, exist_ok=True)
-        with Image.open(source) as image:
+        with Image.open(source) as source_image:
+            if relative_name in RUNTIME_SIZES:
+                margin = 10 if relative_name.startswith("fx/") else 2
+                image = fit_visible(source_image, RUNTIME_SIZES[relative_name], margin)
+            else:
+                image = source_image.convert("RGBA")
             width, height = image.size
             image.save(target, "WEBP", quality=88, method=6, alpha_quality=100)
         source_bytes += source.stat().st_size

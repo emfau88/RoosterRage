@@ -3,7 +3,7 @@
   "frameWidth": 128,
   "frameHeight": 128,
   "columns": 6,
-  "rows": 6,
+  "rows": 7,
   "frames": {
     "heal": 0,
     "double-shot": 1,
@@ -40,6 +40,12 @@
     "badge-4": 32,
     "badge-5": 33,
     "badge-6": 34,
-    "badge-7": 35
+    "badge-7": 35,
+    "evo-sunshot-array": 36,
+    "evo-siegebreaker-shell": 37,
+    "evo-tempest-crown": 38,
+    "evo-solar-scramble": 39,
+    "evo-phoenix-pan": 40,
+    "evo-broodstorm": 41
   }
 }

@@ -22,7 +22,7 @@ export class GoldenEggAbility extends TimedAbility {
     for (let index = 0; index < count; index += 1) {
       const offset = count === 1 ? 0 : (index - 1) * 0.18;
       this.scene.spawnSpecialProjectile(angle + offset, target, {
-      texture: 'golden-egg',
+      texture: this.evolved ? 'evo-solar-scramble-projectile' : 'golden-egg',
       damage: this.evolved ? 38 + this.rank * 10 : 42 + this.rank * 18,
       speed: 430,
       life: 2300,

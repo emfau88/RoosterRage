@@ -84,7 +84,7 @@ canvas {
   width: 22px;
   height: 22px;
   background-image: var(--ui-icon-sheet);
-  background-size: 600% 600%;
+  background-size: var(--ui-icon-columns) var(--ui-icon-rows);
   background-position: var(--icon-x) var(--icon-y);
   background-repeat: no-repeat;
 }

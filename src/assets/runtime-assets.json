@@ -130,6 +130,60 @@
       "bytes": 1074
     },
     {
+      "source": "art-source/projectiles/evolutions/evo-sunshot-array-projectile.png",
+      "sourceSha256": "451f76d78303e36d1c61f41a771ab2f8e30e83c91e4448f75a78c0b78a4b2184",
+      "runtime": "src/assets/projectiles/evolutions/evo-sunshot-array-projectile.webp",
+      "runtimeSha256": "f9a637c7fc79c6d798dd0223c646d87099bd0828748a39bc2df5706f9361c2b0",
+      "width": 32,
+      "height": 32,
+      "bytes": 1038
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-siegebreaker-shell-projectile.png",
+      "sourceSha256": "6349f8e6a9d879c718994131d9b5ef48621a032225cb78ae3b361ce735e0155a",
+      "runtime": "src/assets/projectiles/evolutions/evo-siegebreaker-shell-projectile.webp",
+      "runtimeSha256": "b543d20818446f7157f779f8d1785587407ed6dd6d7fd3a69187f97dcfb4d99e",
+      "width": 40,
+      "height": 40,
+      "bytes": 1054
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-tempest-crown-projectile.png",
+      "sourceSha256": "79b90ab741503dfc6f86cb6f9b6c1ef032dd40469de944344cce14b69c8c8713",
+      "runtime": "src/assets/projectiles/evolutions/evo-tempest-crown-projectile.webp",
+      "runtimeSha256": "66a15a83ad6e97edf5b20885a2cb80c7d6ead2ee175137a066a043c68422e790",
+      "width": 32,
+      "height": 32,
+      "bytes": 1074
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-solar-scramble-projectile.png",
+      "sourceSha256": "41b0d627ddb72222825a5044c35bf2247a8939e64554918f55360b6548e5fbfe",
+      "runtime": "src/assets/projectiles/evolutions/evo-solar-scramble-projectile.webp",
+      "runtimeSha256": "ef6d7282da92d9c8609306135abd558a016cf048d75b5c4a6e0d060906372d49",
+      "width": 36,
+      "height": 36,
+      "bytes": 1010
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-phoenix-pan-projectile.png",
+      "sourceSha256": "39d9078b02b1a5c27b81ce1823143b4ba00c9dbc310f760f12895953d3de9471",
+      "runtime": "src/assets/projectiles/evolutions/evo-phoenix-pan-projectile.webp",
+      "runtimeSha256": "722424fa16f4bff6fcd60cda7bc0b0ca705fe42eb13c34e41801cd4ae41b4191",
+      "width": 36,
+      "height": 36,
+      "bytes": 1020
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-broodstorm-projectile.png",
+      "sourceSha256": "773f12b3f91f963726e708b29c5eb45a32bb082570ec4263ce96055ec1ef616b",
+      "runtime": "src/assets/projectiles/evolutions/evo-broodstorm-projectile.webp",
+      "runtimeSha256": "f274989a332f2bda987c331e54b5d35b0c3c9975a7878d40c7042298bead70b2",
+      "width": 42,
+      "height": 42,
+      "bytes": 1328
+    },
+    {
       "source": "art-source/projectiles/enemy-shot.png",
       "sourceSha256": "d23cbc557c485fc7a592a42949fe1e606a08c35ae1b9792291bfa22e9b55e068",
       "runtime": "src/assets/projectiles/enemy-shot.webp",
@@ -400,6 +454,60 @@
       "bytes": 293708
     },
     {
+      "source": "art-source/fx/evolutions/evo-sunshot-array-impact.png",
+      "sourceSha256": "28b6669c5769586b13f379924ed0ebcb0db203b9b114fd18dbf27f656af84355",
+      "runtime": "src/assets/fx/evolutions/evo-sunshot-array-impact.webp",
+      "runtimeSha256": "7fb4625cf1fe43b32327cbc4d17dbba918bef8d35f60c585fd42957676368def",
+      "width": 256,
+      "height": 256,
+      "bytes": 23352
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-siegebreaker-shell-impact.png",
+      "sourceSha256": "78add92eba527cd69fc6727f03f8c5714ad7dae8b254865af4419ed8fc2051b6",
+      "runtime": "src/assets/fx/evolutions/evo-siegebreaker-shell-impact.webp",
+      "runtimeSha256": "fd703e6f44bfa72e9784428402169ca30a1d7f049173cdb471dfd8b1103a4b5c",
+      "width": 256,
+      "height": 256,
+      "bytes": 31824
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-tempest-crown-impact.png",
+      "sourceSha256": "d8bbf3521c763b1d64f7838996b8c89730ae2860b594e88ac3092535d3be372f",
+      "runtime": "src/assets/fx/evolutions/evo-tempest-crown-impact.webp",
+      "runtimeSha256": "d3f0abf96419ef5ae5b18ab74ef40a5bf292a0cf384134e4c4d285735088673d",
+      "width": 256,
+      "height": 256,
+      "bytes": 24384
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-solar-scramble-impact.png",
+      "sourceSha256": "b18c0108eb860cc8602af4f81336320faeb8b472c611c755d2c41adc75b0ce4c",
+      "runtime": "src/assets/fx/evolutions/evo-solar-scramble-impact.webp",
+      "runtimeSha256": "a119326ae76686b2548dca3663a7ebae0ffda27d767ac6e179fbc4a96bce3889",
+      "width": 256,
+      "height": 256,
+      "bytes": 33770
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-phoenix-pan-impact.png",
+      "sourceSha256": "5c40872e08843bbda30781778a1614afb46d22ab313dbdc374969d1cb5960002",
+      "runtime": "src/assets/fx/evolutions/evo-phoenix-pan-impact.webp",
+      "runtimeSha256": "be2cc3b1b5349ab5f4ec439a9b660a3cd0b9e32b4e07de11e97d151e3a94d742",
+      "width": 256,
+      "height": 256,
+      "bytes": 29198
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-broodstorm-impact.png",
+      "sourceSha256": "4c4e61852f23c16617ed3ea432538d9647147316ffb6511416f8fe29bcc0b7f4",
+      "runtime": "src/assets/fx/evolutions/evo-broodstorm-impact.webp",
+      "runtimeSha256": "a9f1eee8dabd3637aa8d76eba80ad49519c05df146418cc5bee3e4fd489c8193",
+      "width": 256,
+      "height": 256,
+      "bytes": 30798
+    },
+    {
       "source": "art-source/map/arena-ground.png",
       "sourceSha256": "afed83d1325346311a0c5837f6031e8d7eb4389fd536cb64d17f71642f47ba78",
       "runtime": "src/assets/map/arena-ground.webp",
@@ -410,12 +518,12 @@
     },
     {
       "source": "art-source/ui/ui-icons-v1-sheet.png",
-      "sourceSha256": "0adab3208088f4fdb5425588f4bbb3ed03ba103633a6fed447a462b9eaab9637",
+      "sourceSha256": "bb444cac40b6c936471d9bd518f725268f59ffd9c29f4a1f308a57ee19d39c44",
       "runtime": "src/assets/ui/ui-icons-v1-sheet.webp",
-      "runtimeSha256": "ffa21f05279eb36ed93bbfdb2eb20c214d039d5cfa193cf331ddf31fa392eae6",
+      "runtimeSha256": "a62c7668b796d92d77c763be4f150248dd73c790d19d9fbd6fc24cba1f1a1d01",
       "width": 768,
-      "height": 768,
-      "bytes": 244488
+      "height": 896,
+      "bytes": 296666
     }
   ]
 }

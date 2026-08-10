@@ -21,12 +21,13 @@ Die Phasen F–H entsprechen zusammen voraussichtlich noch **rund 43 % des Gesam
 
 ### Voraussichtlich noch benötigte Assets
 
+- **Weapon/EVO Asset Bulk 1:** ✅ umgesetzt. Sunshot Array, Siegebreaker Shell, Tempest Crown, Solar Scramble, Phoenix Pan und Broodstorm besitzen je ein eigenes EVO-Icon, Kampfobjekt/Projektil und einen kurzen Impact-Effekt. Die Runtime-Größen sind auf 32–42 px für Projektile sowie 58–148 px sichtbaren Effekt-Durchmesser begrenzt. Die statischen Impacts sind als kurze 150–210-ms-Stufe bewusst kompakt; Phoenix/Broodstorm sind die ersten Kandidaten für spätere Frame-Animationen, falls Fremdtests die Bewegung vermissen.
 - **Phase E:** ✅ abgeschlossen mit Farmboden, Farmstraße, Scheunen- und Brunnen-Landmark; vorhandene Kisten, Heuballen und Mauern werden modular wiederverwendet.
 - **Phase F:** zerstörbare Welt-Props mit Schadenszustand, klar getrennte Chest-Tiers, Royal-Chest/Reward-Präsentation sowie Magnet-, Heal- und Bomb-Pickup-FX bzw. Icons.
 - **Phase G:** Körner-Währung, Talentknoten-Zustände, Mastery-/Unlock-Badges und kompakte Hub-Illustrationen/UI-Elemente. Neue Rooster-Sprites sind dafür nicht erforderlich.
 - **Phase H:** zunächst keine fest eingeplanten neuen Gameplay-Assets; nur gezielte VFX-, UI- und Audio-Politur, falls Geräte- und externe Tests konkrete Lesbarkeitslücken zeigen.
 
-Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`.
+Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/WEAPON_EVO_ASSET_BULK_1.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`.
 
 ## Auftrag
 

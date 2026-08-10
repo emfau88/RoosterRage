@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export class MolotovEggProjectile {
-  constructor(scene, startX, startY, targetX, targetY, rank) {
+  constructor(scene, startX, startY, targetX, targetY, rank, evolved = false) {
     this.scene = scene;
     this.start = new Phaser.Math.Vector2(startX, startY);
     this.target = new Phaser.Math.Vector2(targetX, targetY);
@@ -10,7 +10,11 @@ export class MolotovEggProjectile {
     this.age = 0;
     this.active = true;
 
-    this.sprite = scene.add.sprite(startX, startY, 'molotov-egg')
+    this.sprite = scene.add.sprite(
+      startX,
+      startY,
+      evolved ? 'evo-phoenix-pan-projectile' : 'molotov-egg'
+    )
       .setDepth(12)
       .setScale(1.05 + rank * 0.08);
     this.trail = scene.add.graphics().setDepth(11);

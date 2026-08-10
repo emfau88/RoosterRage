@@ -24,6 +24,7 @@ export const ROOSTER_DEFINITIONS = [
     primaryEvolution: {
       id: 'evo-sunshot-array',
       name: 'Sunshot Array',
+      texture: 'evo-sunshot-array-projectile',
       passive: 'ace-deadeye-drill',
       description: 'Drei leuchtende Ziel-Eier durchschlagen und springen auf neue Ziele.',
       minimumShots: 3,
@@ -114,6 +115,7 @@ export const ROOSTER_DEFINITIONS = [
     primaryEvolution: {
       id: 'evo-siegebreaker-shell',
       name: 'Siegebreaker Shell',
+      texture: 'evo-siegebreaker-shell-projectile',
       passive: 'artillery-reinforced-breech',
       description: 'Eine panzerbrechende Granate durchschlaegt ihr Ziel und erzeugt eine massive Doppelwelle.',
       damageMultiplier: 1.18,
@@ -204,6 +206,7 @@ export const ROOSTER_DEFINITIONS = [
     primaryEvolution: {
       id: 'evo-tempest-crown',
       name: 'Tempest Crown',
+      texture: 'evo-tempest-crown-projectile',
       passive: 'storm-static-plumage',
       description: 'Zwillings-Sturmeier jagen als weit springende Blitze durch den Schwarm.',
       minimumShots: 2,
