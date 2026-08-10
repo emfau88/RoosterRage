@@ -262,7 +262,7 @@ async function verifyProtectionAndBoss(browser, serverUrl) {
       return true;
     }, bossId);
     assert(phases, 'Boss phase damage probe failed.');
-    await page.waitForTimeout(80);
+    await page.waitForTimeout(1050);
     await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 3300), bossId);
     await page.waitForTimeout(100);
     const boss = await page.evaluate((id) => ({
@@ -278,6 +278,12 @@ async function verifyProtectionAndBoss(browser, serverUrl) {
     assert(boss.state?.bossPhaseIndex === 2, 'Boss did not reach its third combat section.', boss);
     assert(boss.events.filter((event) => event.type === 'bossPhaseStarted').length === 2,
       'Boss phase telemetry does not expose both transitions.', boss);
+    assert(boss.events.filter((event) => event.type === 'bossProjectilesCleared').length === 2
+      && boss.events.filter((event) => event.type === 'bossAddsCleared').length === 2,
+    'Boss transitions did not clear old projectiles and adds.', boss);
+    assert(boss.state.bossSequences[2].steps.map((step) => step.kind).includes('dash')
+      && boss.state.bossSequences[2].steps.map((step) => step.kind).includes('add-pulse'),
+    'Final boss phase is missing its ordered dash/add sequence.', boss.state);
     assert(boss.bossHudVisible && boss.bossHudText.includes('THE BROOD KING'),
       'Named boss HP HUD is not visible.', boss);
     assert(boss.bossHudRect.left >= 0 && boss.bossHudRect.right <= 390 && boss.bossHudRect.top >= 0,

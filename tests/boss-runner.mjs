@@ -60,16 +60,28 @@ async function run() {
     }
 
     const state = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    const encounterEvents = await page.evaluate(() => window.__ROOSTER_TEST__.getEncounterEvents());
     const ttk = state.telemetry.ttkByEnemyType.boss?.averageMs ?? null;
     assert(errors.length === 0, 'Browser reported errors in boss scenario.', errors);
     assert(state.telemetry.outcome === 'victory', 'Representative build did not defeat the boss.', state.telemetry);
-    assert(ttk !== null && ttk >= 45000 && ttk <= 70000, 'Boss TTK is outside 45-70 seconds.', {
+    assert(ttk !== null && ttk >= 55000 && ttk <= 75000, 'Boss TTK is outside 55-75 seconds.', {
       ttk,
       summary: state.telemetry
     });
     assert(state.telemetry.chestsFound === 1 && state.telemetry.chestChoices === 1,
       'Boss reward lane did not resolve.', state.telemetry);
-    assert(state.telemetry.enemiesSpawned >= 26, 'Boss phases did not spawn their intended adds.', state.telemetry);
+    assert(state.telemetry.enemiesSpawned >= 13, 'Boss phases did not spawn their intended capped adds.', state.telemetry);
+    assert(state.telemetry.maxEnemiesAlive <= 7, 'Boss encounter exceeded boss plus six simultaneous adds.', state.telemetry);
+    const sequenceStarts = encounterEvents.filter((event) => event.type === 'bossSequenceStepStarted');
+    const phaseOneAttacks = sequenceStarts
+      .filter((event) => event.phase === 1 && ['fan', 'fireball'].includes(event.step))
+      .map((event) => event.step);
+    assert(phaseOneAttacks.slice(0, 2).join(',') === 'fan,fireball',
+      'Phase one did not teach fan before fireball.', phaseOneAttacks);
+    assert(encounterEvents.filter((event) => event.type === 'bossProjectilesCleared').length === 2,
+      'Boss phase transitions did not clear prior projectiles.', encounterEvents);
+    assert(sequenceStarts.some((event) => event.phase === 3 && event.step === 'dash'),
+      'Final boss phase never executed its charge step.', sequenceStarts);
 
     const report = {
       generatedAt: new Date().toISOString(),
@@ -79,6 +91,7 @@ async function run() {
       enemiesSpawned: state.telemetry.enemiesSpawned,
       damageTaken: state.telemetry.damageTaken,
       damageTakenBySource: state.telemetry.damageTakenBySource,
+      sequenceStarts,
       enemyProjectiles: {
         average: state.telemetry.averageEnemyProjectiles,
         peak: state.telemetry.peakEnemyProjectiles,

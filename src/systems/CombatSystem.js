@@ -1,6 +1,19 @@
 import Phaser from 'phaser';
 import { Projectile } from '../entities/Projectile.js';
 
+function getBossDamageMultiplier(enemy, source) {
+  if (!enemy.boss) {
+    return 1;
+  }
+  if (source.startsWith('void-nest') || source.startsWith('evo-singularity-nest')) {
+    return 0.45;
+  }
+  if (source.startsWith('support-chick') || source.startsWith('evo-chick-squadron')) {
+    return 0.55;
+  }
+  return 1;
+}
+
 export class CombatSystem {
   constructor(scene) {
     this.scene = scene;
@@ -463,9 +476,11 @@ export class CombatSystem {
       });
       return false;
     }
-    const appliedDamage = enemy.mitigateDamage?.(damage) ?? damage;
-    scene.showHitFeedback(x, y, appliedDamage, enemy, options);
     const source = options.source ?? 'base-egg';
+    const bossMultiplier = getBossDamageMultiplier(enemy, source);
+    const adjustedDamage = Math.max(1, Math.round(damage * bossMultiplier));
+    const appliedDamage = enemy.mitigateDamage?.(adjustedDamage) ?? adjustedDamage;
+    scene.showHitFeedback(x, y, appliedDamage, enemy, options);
     const eggImpact = /^(base-egg|fire-eggs|golden-egg|support-chick|evo-solar-scramble|evo-chick-squadron|evo-sunshot-array|evo-siegebreaker-shell|evo-tempest-crown)/.test(source);
     if (eggImpact) {
       scene.audio.playVariant('egg-impact');

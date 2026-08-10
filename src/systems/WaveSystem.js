@@ -177,6 +177,13 @@ export class WaveSystem {
       ...enemy,
       ability: enemy.ability ? { ...enemy.ability } : null,
       heavyProjectile: enemy.heavyProjectile ? { ...enemy.heavyProjectile } : null,
+      bossSequences: enemy.bossSequences?.map((sequence) => ({
+        ...sequence,
+        steps: sequence.steps.map((step) => ({
+          ...step,
+          groups: step.groups?.map((group) => ({ ...group }))
+        }))
+      })) ?? [],
       bossPhases: enemy.bossPhases?.map((phase) => ({
         ...phase,
         ability: phase.ability ? { ...phase.ability } : undefined,
@@ -382,7 +389,7 @@ export class WaveSystem {
       type: 'boss',
       role: 'boss',
       displayName: 'THE BROOD KING',
-      hp: 11800,
+      hp: 10000,
       boss: true,
       elite: true,
       entryProtectionMs: ENCOUNTER_STANDARDS.bossEntryProtectionMs,
@@ -401,25 +408,66 @@ export class WaveSystem {
       ability: { kind: 'fan', cooldown: 1900, speed: 280, damage: 12, source: 'boss-fan', texture: 'enemy-shot', radius: 8, count: 5, spread: 1.15, color: 0xff7a33, trailColor: 0xff3828, scale: 1.15, muzzleDistance: 72 },
       heavyAttackDelay: 1350,
       heavyProjectile: { cooldown: 3900, speed: 238, damage: 24, radius: 19, life: 4600, color: 0xff6824, trailColor: 0xff2a20, trailAlpha: 0.44, scale: 1.55, muzzleDistance: 82, depth: 8, pulse: true, tint: false },
+      bossSequences: [
+        {
+          name: 'Learn the King',
+          steps: [
+            { kind: 'fan', telegraphMs: 460 },
+            { kind: 'recovery', duration: 950 },
+            { kind: 'chase', duration: 900 },
+            { kind: 'fireball', telegraphMs: 620 },
+            { kind: 'recovery', duration: 1200 }
+          ]
+        },
+        {
+          name: 'Royal Fury',
+          steps: [
+            { kind: 'fan', count: 6, spread: 1.3, telegraphMs: 520 },
+            { kind: 'recovery', duration: 1000 },
+            { kind: 'chase', duration: 850 },
+            { kind: 'fireball', telegraphMs: 640 },
+            { kind: 'recovery', duration: 1300 }
+          ]
+        },
+        {
+          name: 'Last Hatch',
+          steps: [
+            { kind: 'fan', count: 7, spread: 1.45, telegraphMs: 680 },
+            { kind: 'recovery', duration: 950 },
+            { kind: 'dash', speed: 440, duration: 520, telegraphMs: 620 },
+            { kind: 'recovery', duration: 900 },
+            { kind: 'fireball', speed: 255, telegraphMs: 680 },
+            { kind: 'recovery', duration: 1100 },
+            {
+              kind: 'add-pulse',
+              maxActive: 6,
+              groups: [
+                { kind: 'runner', count: 4, multiplier: 1 },
+                { kind: 'spitter', count: 2, multiplier: 1 }
+              ]
+            },
+            { kind: 'recovery', duration: 1300 }
+          ]
+        }
+      ],
       bossPhases: [
         {
           name: 'Phase 2: Royal Fury',
-          subtitle: 'Schnellere Faechersalven und der erste Add-Ring.',
+          subtitle: 'Breiterer Faecher, sechs Adds und ein klares Atemfenster.',
           threshold: 0.65,
           speedMultiplier: 1.08,
-          adds: [{ kind: 'slime', count: 12, multiplier: 1 }]
+          transitionMs: 1000,
+          adds: [{ kind: 'slime', count: 6, multiplier: 1 }]
         },
         {
           name: 'Phase 3: Last Hatch',
-          subtitle: 'Siebenfacher Faecher, schnellere Feuerbaelle und gemischte Adds.',
+          subtitle: 'Siebenfacher Faecher, Charge und ein begrenzter Add-Trupp.',
           threshold: 0.32,
           speedMultiplier: 1.12,
-          ability: { count: 7, spread: 1.45, cooldown: 1700 },
-          heavyProjectile: { cooldown: 3200, speed: 255 },
+          transitionMs: 1100,
           adds: [
-            { kind: 'runner', count: 8, multiplier: 1 },
-            { kind: 'spitter', count: 5, multiplier: 1 },
-            { kind: 'bomber', count: 5, multiplier: 1 }
+            { kind: 'runner', count: 4, multiplier: 1 },
+            { kind: 'spitter', count: 2, multiplier: 1 }
           ]
         }
       ]

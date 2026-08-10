@@ -44,6 +44,7 @@ export class EnemyAttackSystem {
     }
     if (enemy.boss) {
       this.updateBoss(enemy, player);
+      return;
     }
     if (
       !enemy.ability
@@ -153,45 +154,142 @@ export class EnemyAttackSystem {
       phase = enemy.bossPhases[enemy.bossPhaseIndex];
     }
     if (
-      enemy.heavyProjectile
-      && !enemy.heavyCharging
-      && !enemy.abilityCharging
-      && this.scene.time.now >= enemy.nextHeavyAttackAt
+      enemy.abilityCharging
+      || enemy.heavyCharging
+      || this.scene.time.now < enemy.bossSequenceReadyAt
     ) {
-      const heavyProjectile = enemy.heavyProjectile;
-      const telegraphMs = Math.max(
-        ENCOUNTER_STANDARDS.heavyTelegraphMs,
-        heavyProjectile.telegraphMs ?? ENCOUNTER_STANDARDS.heavyTelegraphMs
-      );
-      enemy.heavyCharging = true;
-      this.scene.audio.play('summoner-charge', { rate: 0.72, volume: 0.16 });
-      enemy.nextHeavyAttackAt = this.scene.time.now + (heavyProjectile.cooldown ?? 4300);
-      this.scene.combatFeedback.showEnemyTelegraph(enemy, player, heavyProjectile, {
-        duration: telegraphMs,
-        heavy: true
-      });
-      this.scene.time.delayedCall(telegraphMs, () => {
-        if (
-          !enemy.sprite.active
-          || !player.sprite.active
-          || enemy.heavyProjectile !== heavyProjectile
-        ) {
-          return;
-        }
-        enemy.heavyCharging = false;
-        const angle = Phaser.Math.Angle.Between(
-          enemy.sprite.x,
-          enemy.sprite.y,
-          player.sprite.x,
-          player.sprite.y
-        );
-        this.spawnBossFireball(enemy.sprite.x, enemy.sprite.y, angle, heavyProjectile);
-      });
+      return;
     }
+    this.advanceBossSequence(enemy, player);
+  }
+
+  advanceBossSequence(enemy, player) {
+    const sequence = enemy.bossSequences[enemy.bossPhaseIndex] ?? enemy.bossSequences[0];
+    if (!sequence?.steps?.length) {
+      return;
+    }
+    const stepIndex = enemy.bossSequenceStep % sequence.steps.length;
+    const step = sequence.steps[stepIndex];
+    enemy.bossSequenceStep = (stepIndex + 1) % sequence.steps.length;
+    this.scene.telemetry.record('bossSequenceStepStarted', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      phase: enemy.bossPhaseIndex + 1,
+      sequence: sequence.name,
+      step: step.kind,
+      stepIndex
+    });
+
+    if (step.kind === 'recovery' || step.kind === 'chase') {
+      enemy.bossSequenceReadyAt = this.scene.time.now + step.duration;
+      return;
+    }
+    if (step.kind === 'add-pulse') {
+      this.spawnBossAddPulse(enemy, step);
+      enemy.bossSequenceReadyAt = this.scene.time.now;
+      return;
+    }
+    this.beginBossSequenceAttack(enemy, player, step);
+  }
+
+  beginBossSequenceAttack(enemy, player, step) {
+    const isFireball = step.kind === 'fireball';
+    const isDash = step.kind === 'dash';
+    const base = isFireball ? enemy.heavyProjectile : enemy.ability;
+    const attack = { ...base, ...step, kind: step.kind };
+    const heavy = isFireball || isDash;
+    const minimumTelegraph = heavy
+      ? ENCOUNTER_STANDARDS.heavyTelegraphMs
+      : ENCOUNTER_STANDARDS.normalTelegraphMs;
+    const telegraphMs = Math.max(minimumTelegraph, attack.telegraphMs ?? minimumTelegraph);
+    const token = ++enemy.bossSequenceToken;
+    enemy.abilityCharging = true;
+    enemy.heavyCharging = isFireball;
+    enemy.bossSequenceReadyAt = Infinity;
+    if (isFireball) {
+      this.scene.audio.play('summoner-charge', { rate: 0.72, volume: 0.16 });
+    }
+    this.scene.combatFeedback.showEnemyTelegraph(enemy, player, attack, {
+      duration: telegraphMs,
+      count: step.kind === 'fan' ? attack.count ?? 5 : 1,
+      spread: step.kind === 'fan' ? attack.spread ?? 1.15 : 0,
+      heavy,
+      radial: false
+    });
+    const activationId = enemy.activationId;
+    this.scene.time.delayedCall(telegraphMs, () => {
+      if (
+        !enemy.sprite.active
+        || !player.sprite.active
+        || enemy.activationId !== activationId
+        || enemy.bossSequenceToken !== token
+      ) {
+        return;
+      }
+      enemy.abilityCharging = false;
+      enemy.heavyCharging = false;
+      enemy.bossSequenceReadyAt = this.scene.time.now;
+      const angle = Phaser.Math.Angle.Between(
+        enemy.sprite.x,
+        enemy.sprite.y,
+        player.sprite.x,
+        player.sprite.y
+      );
+      if (step.kind === 'fan') {
+        this.scene.audio.play('spitter-shot');
+        this.fireFan(enemy, angle, attack);
+      } else if (isFireball) {
+        this.spawnBossFireball(enemy.sprite.x, enemy.sprite.y, angle, attack);
+      } else if (isDash) {
+        enemy.beginDash(angle, attack.speed ?? 440, attack.duration ?? 520);
+      }
+      this.scene.telemetry.record('bossSequenceStepResolved', this.scene.time.now, {
+        wave: this.scene.waveSystem.currentWave,
+        phase: enemy.bossPhaseIndex + 1,
+        step: step.kind
+      });
+      this.scene.telemetry.record('enemyAbilityFired', this.scene.time.now, {
+        wave: this.scene.waveSystem.currentWave,
+        enemyType: enemy.type,
+        ability: step.kind
+      });
+    });
+  }
+
+  spawnBossAddPulse(enemy, step) {
+    const activeAdds = this.scene.enemies.filter((candidate) => (
+      candidate.sprite.active && !candidate.boss
+    )).length;
+    let remaining = Math.max(0, (step.maxActive ?? 6) - activeAdds);
+    let spawned = 0;
+    step.groups?.forEach((group) => {
+      if (remaining <= 0) {
+        return;
+      }
+      const count = Math.min(group.count ?? 0, remaining);
+      this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, count, group);
+      remaining -= count;
+      spawned += count;
+    });
+    this.scene.telemetry.record('bossAddPulse', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      phase: enemy.bossPhaseIndex + 1,
+      activeBefore: activeAdds,
+      spawned,
+      cap: step.maxActive ?? 6
+    });
   }
 
   triggerBossPhase(enemy, phase) {
     this.scene.audio.play('boss-phase', { cooldown: 0 });
+    enemy.bossSequenceToken += 1;
+    enemy.abilityCharging = false;
+    enemy.heavyCharging = false;
+    enemy.bossSequenceStep = 0;
+    const transitionMs = phase.transitionMs ?? 1000;
+    enemy.bossSequenceReadyAt = this.scene.time.now + transitionMs;
+    enemy.invulnerableUntil = Math.max(enemy.invulnerableUntil ?? 0, enemy.bossSequenceReadyAt);
+    this.clearBossProjectiles();
+    this.clearBossAdds();
     enemy.speed *= phase.speedMultiplier ?? 1;
     if (phase.ability && enemy.ability) {
       enemy.ability = { ...enemy.ability, ...phase.ability };
@@ -199,9 +297,7 @@ export class EnemyAttackSystem {
     if (phase.heavyProjectile && enemy.heavyProjectile) {
       enemy.heavyProjectile = { ...enemy.heavyProjectile, ...phase.heavyProjectile };
     }
-    phase.adds?.forEach((add) => {
-      this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, add.count, add);
-    });
+    this.spawnBossTransitionAdds(enemy, phase.adds ?? [], 6);
 
     const ring = this.scene.add.circle(enemy.sprite.x, enemy.sprite.y, 62, 0xff6a28, 0.12)
       .setStrokeStyle(5, 0xffd35a, 0.9)
@@ -217,13 +313,60 @@ export class EnemyAttackSystem {
     this.scene.telemetry.record('bossPhaseStarted', this.scene.time.now, {
       wave: this.scene.waveSystem.currentWave,
       phase: enemy.bossPhaseIndex + 2,
-      name: phase.name ?? `Phase ${enemy.bossPhaseIndex + 2}`
+      name: phase.name ?? `Phase ${enemy.bossPhaseIndex + 2}`,
+      transitionMs
     });
     this.scene.hud.showEncounterBanner(
       phase.name ?? `Brood King Phase ${enemy.bossPhaseIndex + 2}`,
       phase.subtitle ?? 'Das Angriffsmuster veraendert sich.',
       'boss'
     );
+  }
+
+  clearBossProjectiles() {
+    let cleared = 0;
+    this.scene.enemyProjectiles.forEach((projectile) => {
+      if (projectile.sprite.active && projectile.source?.startsWith('boss-')) {
+        projectile.destroy();
+        cleared += 1;
+      }
+    });
+    this.scene.enemyProjectiles = this.scene.enemyProjectiles.filter((projectile) => (
+      projectile.sprite.active
+    ));
+    this.scene.telemetry.record('bossProjectilesCleared', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      cleared
+    });
+    return cleared;
+  }
+
+  clearBossAdds() {
+    const adds = this.scene.enemies.filter((candidate) => (
+      candidate.sprite.active && !candidate.boss
+    ));
+    adds.forEach((add) => add.destroy());
+    this.scene.enemies = this.scene.enemies.filter((candidate) => candidate.sprite.active);
+    this.scene.telemetry.record('bossAddsCleared', this.scene.time.now, {
+      wave: this.scene.waveSystem.currentWave,
+      cleared: adds.length
+    });
+    return adds.length;
+  }
+
+  spawnBossTransitionAdds(enemy, groups, cap) {
+    const existing = this.scene.enemies.filter((candidate) => (
+      candidate.sprite.active && !candidate.boss
+    )).length;
+    let remaining = Math.max(0, cap - existing);
+    groups.forEach((group) => {
+      if (remaining <= 0) {
+        return;
+      }
+      const count = Math.min(group.count ?? 0, remaining);
+      this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, count, group);
+      remaining -= count;
+    });
   }
 
   performSlam(enemy, player, ability) {

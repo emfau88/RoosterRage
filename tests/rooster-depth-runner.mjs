@@ -63,7 +63,8 @@ async function verifyCatalogAndExclusivity(browser, serverUrl) {
     }
 
     const classUpgrades = catalog.upgrades.filter((upgrade) => upgrade.classId);
-    assert(classUpgrades.length === 9, 'Expected six class passives and three class EVOs.', classUpgrades);
+    assert(classUpgrades.length === 12,
+      'Expected three class weapon ranks, six class passives, and three class EVOs.', classUpgrades);
     assert(errors.length === 0, 'Browser errors in rooster catalog gate.', errors);
     return catalog.roosters;
   } finally {

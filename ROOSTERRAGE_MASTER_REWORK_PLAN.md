@@ -2,6 +2,32 @@
 
 Repository: `https://github.com/emfau88/RoosterRage`
 
+## Umsetzungsstand (2026-08-10)
+
+| Phase | Status | Kernergebnis |
+| --- | --- | --- |
+| A – Baseline & Instrumentation | ✅ umgesetzt | Ausgangswerte, Telemetrie und reproduzierbare Gates dokumentiert |
+| B – Weapon Progression | ✅ umgesetzt | R1–R4/EVO-Eskalation, Rank-FX und HUD-Kommunikation überarbeitet |
+| C – Enemy Pressure | ✅ umgesetzt | Fernkampfanteil und Projectile-Dichte gesenkt, Bewegungsdruck gestärkt |
+| D – Brood King | ✅ umgesetzt | geordnete Sequenzen, sichere Übergänge, maximal sechs Adds und Build-Matrix |
+| E – Map Topology | ⏸ ausstehend | Start erst nach Freigabe |
+| F – Pickups & Chests | ⏸ ausstehend | nach Phase E |
+| G – Meta Progression | ⏸ ausstehend | nach stabilem Run-/Reward-Kern |
+| H – Integration & Validation | ⏸ ausstehend | abschließende Matrix, Geräte- und Fremdtests |
+
+### Geschätzter verbleibender Aufwand
+
+Die Phasen E–H entsprechen zusammen voraussichtlich noch **rund 57 % des Gesamtaufwands**. Die Verteilung auf den Gesamtplan ist derzeit: **E 14 %**, **F 13 %**, **G 18 %**, **H 12 %**. A–D bilden damit ungefähr 43 % und sind abgeschlossen. Die Schätzung kann sich nach realen Karten- und Save-Migrationstests verschieben.
+
+### Voraussichtlich noch benötigte Assets
+
+- **Phase E:** 2–3 wiederholbare Boden-/Straßenvarianten, seitliche Begrenzung für Vertical Run sowie wenige gut lesbare Landmark-/Farm-Prop-Varianten. Chunk-Recycling selbst benötigt keine neuen Assets.
+- **Phase F:** zerstörbare Welt-Props mit Schadenszustand, klar getrennte Chest-Tiers, Royal-Chest/Reward-Präsentation sowie Magnet-, Heal- und Bomb-Pickup-FX bzw. Icons.
+- **Phase G:** Körner-Währung, Talentknoten-Zustände, Mastery-/Unlock-Badges und kompakte Hub-Illustrationen/UI-Elemente. Neue Rooster-Sprites sind dafür nicht erforderlich.
+- **Phase H:** zunächst keine fest eingeplanten neuen Gameplay-Assets; nur gezielte VFX-, UI- und Audio-Politur, falls Geräte- und externe Tests konkrete Lesbarkeitslücken zeigen.
+
+Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`.
+
 ## Auftrag
 
 Arbeite am **aktuellen Stand des Repositories** und entwickle RoosterRage gezielt von einem bereits funktionierenden Vertical Slice zu einem deutlich stärkeren, professionelleren Survivors-Like weiter.
@@ -1576,26 +1602,28 @@ Nur Baseline.
 
 ## PHASE D – Brood King Rework
 
+**Status: ✅ umgesetzt.** Abweichungen nach Messung: Boss-HP erst nach Sequenzumbau von 11.800 auf 10.000 gesenkt; Übergangsgruppen auf exakt sechs Adds begrenzt; Orbit, Void und Support Chick erhielten Boss-spezifische Skalierung, damit sechs unterschiedliche Endbuilds fair bleiben. Gemessen: 53,5–80,9 s TTK, alle sechs Builds siegreich, maximal Boss + sechs Adds. Vollständiger Bericht: `docs/BOSS_SEQUENCE_REWORK.md`.
+
 ### Aufgaben
 
-- sequenzielle Angriffe
-- Recovery Windows
-- Projectile Clear bei Phasenwechsel
-- Add-Anzahl senken
-- Phase 3 vereinfachen
-- HP danach neu testen
+- ✅ sequenzielle Angriffe
+- ✅ Recovery Windows
+- ✅ Projectile Clear bei Phasenwechsel
+- ✅ Add-Anzahl senken
+- ✅ Phase 3 vereinfachen
+- ✅ HP danach neu testen
 
 ### Tests
 
-- 6 plausible Builds
-- 3 Rooster
-- 3 Arenen falls Boss überall
-- manual play mandatory
-- Average + human
+- ✅ 6 plausible Builds
+- ✅ 3 Rooster über die Build-/Archetyp-Gates
+- ➖ 3 Arenen nicht separat nötig; der Boss nutzt aktuell dieselbe Kampfarena, Kartenregression folgt in E/H
+- ✅ manueller sichtbarer Boss-Run
+- ✅ Average-Bot-Matrix plus menschlicher Run
 
 ### Output
 
-`docs/BOSS_REWORK.md`
+`docs/BOSS_SEQUENCE_REWORK.md`
 
 ---
 

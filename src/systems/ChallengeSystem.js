@@ -65,6 +65,14 @@ export class ChallengeSystem {
         ...config.heavyProjectile,
         damage: scaleOptional(config.heavyProjectile.damage, damageMultiplier)
       } : null,
+      bossSequences: config.bossSequences?.map((sequence) => ({
+        ...sequence,
+        steps: sequence.steps.map((step) => ({
+          ...step,
+          damage: scaleOptional(step.damage, damageMultiplier),
+          groups: step.groups?.map((group) => ({ ...group }))
+        }))
+      })) ?? config.bossSequences,
       bossPhases: config.bossPhases?.map((phase) => ({
         ...phase,
         damage: scaleOptional(phase.damage, damageMultiplier),

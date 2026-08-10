@@ -397,18 +397,26 @@ async function testWaveCuration(browser) {
     const phaseOne = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
     const bossAfterPhaseOne = phaseOne.find((enemy) => enemy.id === bossId);
     assert(bossAfterPhaseOne?.bossPhaseIndex === 1, 'Boss did not enter its first health phase.', phaseOne);
-    assert(phaseOne.filter((enemy) => enemy.type === 'slime').length === 12, 'Boss phase one did not summon twelve slimes.', phaseOne);
+    assert(phaseOne.filter((enemy) => enemy.type === 'slime').length === 6, 'Boss phase two did not summon six slimes.', phaseOne);
+    assert(bossAfterPhaseOne.invulnerableUntil > bossAfterPhaseOne.bossSequenceReadyAt - 1,
+      'Boss phase transition did not provide its protected recovery window.', bossAfterPhaseOne);
 
+    await page.waitForTimeout(1050);
     await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 3300), bossId);
     await page.waitForTimeout(80);
     const phaseTwo = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
     const bossAfterPhaseTwo = phaseTwo.find((enemy) => enemy.id === bossId);
     assert(bossAfterPhaseTwo?.bossPhaseIndex === 2, 'Boss did not enter its final health phase.', phaseTwo);
-    assert(bossAfterPhaseTwo.ability.count === 7 && bossAfterPhaseTwo.ability.cooldown === 1700, 'Final boss fan was not upgraded.', bossAfterPhaseTwo);
-    assert(bossAfterPhaseTwo.heavyProjectile.cooldown === 3200, 'Final boss fireball cadence was not upgraded.', bossAfterPhaseTwo);
-    assert(phaseTwo.filter((enemy) => enemy.type === 'runner').length === 8, 'Final boss phase did not summon runners.', phaseTwo);
-    assert(phaseTwo.filter((enemy) => enemy.type === 'spitter').length === 5, 'Final boss phase did not summon spitters.', phaseTwo);
-    assert(phaseTwo.filter((enemy) => enemy.type === 'bomber').length === 5, 'Final boss phase did not summon bombers.', phaseTwo);
+    const finalSteps = bossAfterPhaseTwo.bossSequences[2].steps;
+    assert(finalSteps.map((step) => step.kind).join(',')
+      === 'fan,recovery,dash,recovery,fireball,recovery,add-pulse,recovery',
+    'Final boss attack sequence is incomplete or unordered.', finalSteps);
+    assert(finalSteps[0].count === 7 && finalSteps[0].telegraphMs >= 650,
+      'Final boss fan does not expose its long seven-shot telegraph.', finalSteps[0]);
+    assert(phaseTwo.filter((enemy) => enemy.type === 'runner').length === 4, 'Final boss phase did not summon four runners.', phaseTwo);
+    assert(phaseTwo.filter((enemy) => enemy.type === 'spitter').length === 2, 'Final boss phase did not summon two spitters.', phaseTwo);
+    assert(phaseTwo.filter((enemy) => enemy.id !== bossId).length === 6,
+      'Final boss transition exceeded its six-add cap.', phaseTwo);
     assert(
       phaseTwo.filter((enemy) => enemy.id !== bossId).every((enemy) => Math.hypot(enemy.x - 700, enemy.y - 450) >= 190),
       'A boss add spawned inside the protected player radius.',
@@ -498,17 +506,41 @@ async function testEnemyAbilities(browser) {
         speed: 0,
         damage: 0,
         hp: 9999,
-        entryProtectionMs: 0,
-        ability: null,
-        heavyAttackDelay: 120
+        entryProtectionMs: 0
       });
     });
-    await page.waitForTimeout(160);
-    const bossTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    assert(bossTelegraph.enemyTelegraphs >= 1, 'Boss did not telegraph its heavy fireball.', bossTelegraph);
-    assert(bossTelegraph.enemyProjectiles === 0, 'Boss fireball launched before its telegraph completed.', bossTelegraph);
+    await page.waitForTimeout(120);
+    const bossFanTelegraph = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getState(),
+      events: window.__ROOSTER_TEST__.getEncounterEvents()
+    }));
+    const fanSequenceEvents = bossFanTelegraph.events.filter((event) => (
+      event.type === 'bossSequenceStepStarted'
+    ));
+    assert(bossFanTelegraph.state.enemyTelegraphs >= 1
+      && fanSequenceEvents.at(-1)?.step === 'fan',
+    'Boss sequence did not begin with its fan telegraph.', bossFanTelegraph);
+    await page.waitForTimeout(480);
+    await page.evaluate(() => window.__ROOSTER_TEST__.clearProjectiles());
+    await page.waitForTimeout(1900);
+    const bossTelegraph = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getState(),
+      events: window.__ROOSTER_TEST__.getEncounterEvents()
+    }));
+    const bossSequenceEvents = bossTelegraph.events.filter((event) => (
+      event.type === 'bossSequenceStepStarted'
+    ));
+    assert(bossTelegraph.state.enemyTelegraphs >= 1
+      && bossTelegraph.events.some((event) => event.type === 'bossSequenceStepStarted'
+        && event.step === 'recovery')
+      && bossTelegraph.events.some((event) => event.type === 'bossSequenceStepStarted'
+        && event.step === 'chase')
+      && bossSequenceEvents.at(-1)?.step === 'fireball',
+    'Boss did not sequence recovery and chase before its heavy fireball.', bossTelegraph);
+    assert(bossTelegraph.state.enemyProjectiles === 0, 'Boss fireball launched before its telegraph completed.', bossTelegraph);
     await page.screenshot({ path: path.join(artifactDir, 'boss-fireball-telegraph.png') });
-    await page.waitForTimeout(470);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
+      .some((projectile) => projectile.texture === 'boss-fireball'), null, { timeout: 1200 });
     const bossProjectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemyProjectileSnapshot());
     const bossFireball = bossProjectiles.find((projectile) => projectile.texture === 'boss-fireball');
     assert(bossFireball, 'Boss did not create a visible fireball projectile.', bossProjectiles);
@@ -524,6 +556,7 @@ async function testEnemyAbilities(browser) {
       afterFan,
       afterRecycledFan,
       afterBomber,
+      bossFanTelegraph,
       bossTelegraph,
       bossFireball
     };

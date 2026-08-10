@@ -47,7 +47,11 @@ export class Enemy {
     this.heavyCharging = false;
     this.nextHeavyAttackAt = scene.time.now + (config.heavyAttackDelay ?? 1700);
     this.bossPhases = config.bossPhases ?? [];
+    this.bossSequences = config.bossSequences ?? [];
     this.bossPhaseIndex = 0;
+    this.bossSequenceStep = 0;
+    this.bossSequenceReadyAt = scene.time.now + (config.entryProtectionMs ?? 0);
+    this.bossSequenceToken = 0;
     this.warning?.destroy();
     this.warning = null;
     this.warningPulse = 0;

@@ -15,6 +15,7 @@ export class OrbitEgg {
     this.damage = evolved ? 14 + rank * 3 : 14 + rank * 5;
     this.hitCooldownMs = evolved ? 450 : 420;
     this.lastHits = new Map();
+    this.nextBossPulseAt = scene.time.now + 650 + index * 180;
 
     this.sprite = scene.physics.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'egg');
     this.sprite.setScale(1.15 + rank * 0.08);
@@ -70,6 +71,36 @@ export class OrbitEgg {
           }
         }
       }
+    });
+    this.pulseBossAtRange(x, y);
+  }
+
+  pulseBossAtRange(x, y) {
+    const now = this.scene.time.now;
+    if (now < this.nextBossPulseAt) {
+      return;
+    }
+    const boss = this.scene.enemies.find((enemy) => enemy.boss && enemy.sprite.active);
+    if (!boss || Phaser.Math.Distance.Between(
+      this.scene.player.sprite.x,
+      this.scene.player.sprite.y,
+      boss.sprite.x,
+      boss.sprite.y
+    ) > 460) {
+      return;
+    }
+    this.nextBossPulseAt = now + (this.evolved ? 1350 : 1650);
+    const source = this.evolved ? 'evo-shell-halo:boss-pulse' : 'orbit-eggs:boss-pulse';
+    const damage = Math.max(1, Math.round(this.damage * (this.evolved ? 0.6 : 0.5)));
+    this.scene.damageEnemy(boss, damage, boss.sprite.x, boss.sprite.y, { source });
+    const bolt = this.scene.add.graphics().setDepth(8);
+    bolt.lineStyle(this.evolved ? 3 : 2, this.evolved ? 0x9ff7ff : 0xffd35c, 0.85);
+    bolt.lineBetween(x, y, boss.sprite.x, boss.sprite.y);
+    this.scene.tweens.add({
+      targets: bolt,
+      alpha: 0,
+      duration: 130,
+      onComplete: () => bolt.destroy()
     });
   }
 

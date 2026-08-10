@@ -225,6 +225,11 @@ export function installTestApi(scene) {
       'enemyProjectileSuppressed',
       'bossEntered',
       'bossPhaseStarted',
+      'bossSequenceStepStarted',
+      'bossSequenceStepResolved',
+      'bossProjectilesCleared',
+      'bossAddsCleared',
+      'bossAddPulse',
       'deathExplosionTelegraphed',
       'pickupSpawned'
     ]),
@@ -355,6 +360,12 @@ export function installTestApi(scene) {
       x: enemy.sprite.x,
       y: enemy.sprite.y,
       bossPhaseIndex: enemy.bossPhaseIndex,
+      bossSequenceStep: enemy.bossSequenceStep,
+      bossSequenceReadyAt: enemy.bossSequenceReadyAt,
+      bossSequences: enemy.bossSequences?.map((sequence) => ({
+        name: sequence.name,
+        steps: sequence.steps.map((step) => ({ ...step }))
+      })) ?? [],
       aura: enemy.aura ? { ...enemy.aura } : null,
       damageReduction: enemy.damageReduction,
       auraSpeedMultiplier: enemy.auraSpeedMultiplier,
