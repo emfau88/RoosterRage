@@ -121,11 +121,13 @@ async function run() {
     });
 
     const mobileErrors = [];
-    const mobilePage = await browser.newPage({
+    const mobileContext = await browser.newContext({
       viewport: { width: 390, height: 844 },
       hasTouch: true,
-      isMobile: true
+      isMobile: true,
+      deviceScaleFactor: 2
     });
+    const mobilePage = await mobileContext.newPage();
     mobilePage.on('pageerror', (error) => mobileErrors.push(error.stack ?? error.message));
     mobilePage.on('console', (message) => {
       if (message.type() === 'error') {
@@ -146,6 +148,10 @@ async function run() {
     await mobilePage.mouse.up();
     const mobileAfterTouch = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     const mobileCanvas = await mobilePage.locator('canvas').boundingBox();
+    const mobileCanvasBacking = await mobilePage.locator('canvas').evaluate((canvas) => ({
+      width: canvas.width,
+      height: canvas.height
+    }));
     const mobileHud = await mobilePage.locator('.hud').boundingBox();
     const joystickDisplay = await mobilePage.locator('.joystick').evaluate(
       (element) => getComputedStyle(element).display
@@ -154,6 +160,13 @@ async function run() {
     assert(mobileErrors.length === 0, 'Mobile browser reported console/page errors.', mobileErrors);
     assert(!mobileState.lastError && mobileState.frames > 30, 'Mobile game loop did not start cleanly.', mobileState);
     assert(mobileCanvas?.width >= 380 && mobileCanvas?.height >= 830, 'Mobile canvas does not fill the viewport.', mobileCanvas);
+    assert(mobileState.rendering.renderScale === 2, 'Mobile renderer did not select the Retina scale.', mobileState.rendering);
+    assert(
+      mobileCanvasBacking.width >= mobileCanvas.width * 1.9
+      && mobileCanvasBacking.height >= mobileCanvas.height * 1.9,
+      'Mobile canvas backing store is not rendered at Retina resolution.',
+      { mobileCanvas, mobileCanvasBacking }
+    );
     assert(joystickDisplay !== 'none', 'Mobile joystick is not visible.', { joystickDisplay });
     assert(mobileState.cameraZoom <= 0.9, 'Portrait camera is not zoomed out enough.', mobileState);
     assert(mobileHud?.height <= 125, 'Portrait HUD obscures too much of the arena.', mobileHud);
@@ -162,7 +175,21 @@ async function run() {
       'Mobile touch-drag input did not move the player.',
       { before: mobileState.player, after: mobileAfterTouch.player }
     );
-    await mobilePage.close();
+    await mobilePage.setViewportSize({ width: 844, height: 390 });
+    await mobilePage.waitForFunction(() => {
+      const state = window.__ROOSTER_TEST__?.getState();
+      return state?.viewport.width === 844 && state?.viewport.height === 390;
+    });
+    const rotatedMobileState = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
+    assert(
+      rotatedMobileState.rendering.renderScale === 2
+      && rotatedMobileState.rendering.renderWidth === 1688
+      && rotatedMobileState.rendering.renderHeight === 780,
+      'Retina backing store did not follow a mobile orientation change.',
+      rotatedMobileState.rendering
+    );
+    assert(rotatedMobileState.cameraZoom === 1, 'Rotated mobile camera did not restore landscape zoom.', rotatedMobileState);
+    await mobileContext.close();
 
     const landscapeContext = await browser.newContext({
       viewport: { width: 844, height: 390 },

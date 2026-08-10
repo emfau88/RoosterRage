@@ -47,11 +47,17 @@ import rocketExplosionSfxUrl from '../../assets/audio/rocket-explosion.wav';
 import lightningSfxUrl from '../../assets/audio/lightning.wav';
 import laserSfxUrl from '../../assets/audio/laser.wav';
 import voidOpenSfxUrl from '../../assets/audio/void-open.wav';
+import {
+  getSceneRenderScale,
+  getSceneViewport
+} from '../DisplayResolutionSystem.js';
 
 export function preloadGameAssets(scene) {
   document.body.dataset.roosterLoadState = 'loading';
-  const centerX = scene.scale.width / 2;
-  const centerY = scene.scale.height / 2;
+  const viewport = getSceneViewport(scene);
+  scene.cameras.main.setZoom(getSceneRenderScale(scene));
+  const centerX = viewport.width / 2;
+  const centerY = viewport.height / 2;
   const progressTrack = scene.add.rectangle(centerX, centerY + 24, 280, 8, 0x2b3a3f, 1);
   const progressBar = scene.add.rectangle(centerX - 140, centerY + 24, 280, 8, 0xffc94a, 1)
     .setOrigin(0, 0.5)

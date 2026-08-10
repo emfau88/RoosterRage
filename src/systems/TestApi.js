@@ -1,6 +1,10 @@
 import Phaser from 'phaser';
 import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
 import { AUDIO_PRIORITIES, VISUAL_LANGUAGE } from '../data/presentationStandards.js';
+import {
+  getSceneRenderScale,
+  getSceneViewport
+} from './DisplayResolutionSystem.js';
 
 export function shouldInstallTestApi() {
   return import.meta.env.DEV;
@@ -12,7 +16,10 @@ export function installTestApi(scene) {
   }
 
   window.__ROOSTER_TEST__ = {
-    getState: () => ({
+    getState: () => {
+      const renderScale = getSceneRenderScale(scene);
+      const viewport = getSceneViewport(scene);
+      return {
       frames: scene.debugStats.frames,
       elapsed: scene.elapsed,
       playerHp: scene.player.hp,
@@ -41,8 +48,14 @@ export function installTestApi(scene) {
       levelUps: scene.debugStats.levelUps,
       specialShots: scene.debugStats.specialShots,
       enemyTelegraphs: scene.combatFeedback.activeTelegraphs,
-      cameraZoom: scene.cameras.main.zoom,
-      viewport: { width: scene.scale.width, height: scene.scale.height },
+      cameraZoom: scene.logicalCameraZoom ?? scene.cameras.main.zoom / renderScale,
+      viewport,
+      rendering: {
+        renderScale,
+        renderWidth: scene.scale.width,
+        renderHeight: scene.scale.height,
+        renderer: scene.game.renderer.type === Phaser.WEBGL ? 'webgl' : 'canvas'
+      },
       audio: scene.audio.getState(),
       abilitySynergies: {
         rocketFire: scene.rocketEgg.lastSynergyActive,
@@ -67,7 +80,8 @@ export function installTestApi(scene) {
         velocityX: scene.player.sprite.body.velocity.x,
         velocityY: scene.player.sprite.body.velocity.y
       }
-    }),
+      };
+    },
     getLoadout: () => ({
       ...scene.loadout.getSnapshot(),
       rerollsRemaining: scene.runState.rerollsRemaining

@@ -28,6 +28,10 @@ import { RunStateSystem } from '../systems/RunStateSystem.js';
 import { RoosterClassSystem } from '../systems/RoosterClassSystem.js';
 import { UpgradeSystem } from '../systems/UpgradeSystem.js';
 import { Telemetry } from '../systems/Telemetry.js';
+import {
+  getSceneRenderScale,
+  getSceneViewport
+} from '../systems/DisplayResolutionSystem.js';
 import { installTestApi, removeTestApi } from '../systems/TestApi.js';
 import { WaveSystem } from '../systems/WaveSystem.js';
 import { HUD } from '../ui/HUD.js';
@@ -143,7 +147,7 @@ export class GameScene extends Phaser.Scene {
     this.projectileLifecycle = new ProjectileLifecycleSystem(this);
     this.playerInput = new PlayerInputSystem(this, ARENA_WIDTH, ARENA_HEIGHT);
     this.cameras.main.startFollow(this.player.sprite, true, 0.12, 0.12);
-    this.applyResponsiveCameraZoom(this.scale.gameSize);
+    this.applyResponsiveCameraZoom();
     this.scale.on(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
 
     this.upgradeSystem = new UpgradeSystem(undefined, this.rng);
@@ -270,18 +274,20 @@ export class GameScene extends Phaser.Scene {
     root.requestFullscreen?.({ navigationUI: 'hide' })?.catch(() => {});
   }
 
-  applyResponsiveCameraZoom(gameSize) {
-    const width = gameSize?.width ?? this.scale.width;
-    const height = gameSize?.height ?? this.scale.height;
+  applyResponsiveCameraZoom() {
+    const { width, height } = getSceneViewport(this);
+    const renderScale = getSceneRenderScale(this);
     const isPortraitMobile = width <= PORTRAIT_MOBILE_MAX_WIDTH && height > width;
     if (!isPortraitMobile) {
-      this.cameras.main.setZoom(1);
+      this.logicalCameraZoom = 1;
+      this.cameras.main.setZoom(renderScale);
       return;
     }
 
     const renderHeight = ARENA_HEIGHT + ARENA_RENDER_PADDING_Y * 2;
     const minimumCoverZoom = Math.max(width / ARENA_WIDTH, height / renderHeight);
-    this.cameras.main.setZoom(Math.max(PORTRAIT_MOBILE_ZOOM, minimumCoverZoom));
+    this.logicalCameraZoom = Math.max(PORTRAIT_MOBILE_ZOOM, minimumCoverZoom);
+    this.cameras.main.setZoom(this.logicalCameraZoom * renderScale);
   }
 
   updatePointerVector(pointer) {

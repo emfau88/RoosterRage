@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { getPlayerProfile } from '../data/playerProfiles.js';
+import { getSceneRenderScale } from './DisplayResolutionSystem.js';
 
 export class PlayerInputSystem {
   constructor(scene, arenaWidth, arenaHeight) {
@@ -51,11 +52,12 @@ export class PlayerInputSystem {
     if (!this.touchOrigin) {
       return;
     }
+    const maxDistance = 46 * getSceneRenderScale(this.scene);
     const vector = new Phaser.Math.Vector2(pointer.x, pointer.y).subtract(this.touchOrigin);
-    if (vector.length() > 46) {
-      vector.setLength(46);
+    if (vector.length() > maxDistance) {
+      vector.setLength(maxDistance);
     }
-    this.pointerVector.set(vector.x / 46, vector.y / 46);
+    this.pointerVector.set(vector.x / maxDistance, vector.y / maxDistance);
     this.scene.hud.setJoystick(this.pointerVector);
   }
 

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { getSceneViewport } from './DisplayResolutionSystem.js';
 
 const DEFAULT_CURVE = [
   { id: 'build', share: 0.24, durationShare: 0.24, batch: 2, pattern: 'scatter', pauseAfter: 450 },
@@ -91,8 +92,7 @@ export class SpawnDirector {
   }
 
   canSpawn(enemiesAlive) {
-    const width = this.scene.scale.width;
-    const height = this.scene.scale.height;
+    const { width, height } = getSceneViewport(this.scene);
     const mobile = Math.min(width, height) <= 600;
     const cap = mobile
       ? this.wave.mobileActiveCap ?? this.wave.targetPeak ?? 60
