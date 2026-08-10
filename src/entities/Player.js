@@ -15,7 +15,7 @@ export class Player {
     this.fireEggs = false;
     this.armor = 0;
     this.regenPerSecond = 0;
-    this.xpMagnetRadius = 118;
+    this.xpMagnetRadius = 220;
     this.projectilePierce = 0;
     this.projectileSizeBonus = 0;
     this.projectileSpeedBonus = 0;

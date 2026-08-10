@@ -94,6 +94,7 @@ export class GameScene extends Phaser.Scene {
     this.orbitEggs = [];
     this.supportChickens = [];
     this.hazardZones = [];
+    this.enemyDangerZones = [];
     this.voidZones = [];
     this.xpOrbs = [];
     this.objectPools = new ObjectPoolSystem(this);
@@ -181,6 +182,7 @@ export class GameScene extends Phaser.Scene {
     try {
       this.debugStats.frames += 1;
       this.elapsed += delta / 1000;
+      this.enemyDangerZones = this.enemyDangerZones.filter((zone) => zone.expiresAt > time);
       this.player.update(this.getMovementVector());
       this.roosterClasses.update(time);
       this.enemyAttacks.updateAuras(delta);
@@ -529,6 +531,10 @@ export class GameScene extends Phaser.Scene {
 
   onWaveCompleted(wave) {
     if (wave < this.waveSystem.totalWaves) {
+      const sweptXp = this.collisions.collectAllXp();
+      if (sweptXp > 0) {
+        this.telemetry.record('waveXpSwept', this.time.now, { wave, xp: sweptXp });
+      }
       const ratio = wave === this.waveSystem.totalWaves - 1 ? 0.5 : 0.06;
       const hpBefore = this.player.hp;
       this.player.heal(Math.max(6, Math.round(this.player.maxHp * ratio)));

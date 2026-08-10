@@ -95,6 +95,7 @@ export class PlayerInputSystem {
       height: this.arenaHeight
     };
     const bossKiting = this.addBossKiting(movement, playerPosition, profile);
+    const avoidingDangerZone = this.addDangerZoneAvoidance(movement, playerPosition, profile);
     const avoidingProjectile = this.addProjectileAvoidance(movement, playerPosition, profile);
     if (!bossKiting && nearestEnemy && nearestDistance < profile.dangerRadius) {
       this.addEnemyAvoidance(movement, playerPosition, profile);
@@ -107,12 +108,12 @@ export class PlayerInputSystem {
 
     const priorityPickup = this.findPriorityPickup(playerPosition);
     const nearestOrb = this.findNearestXpOrb();
-    if (!bossKiting && !avoidingProjectile && priorityPickup) {
+    if (!bossKiting && !avoidingDangerZone && !avoidingProjectile && priorityPickup) {
       movement.add(new Phaser.Math.Vector2(priorityPickup.sprite.x, priorityPickup.sprite.y)
         .subtract(playerPosition)
         .normalize()
         .scale(1.15));
-    } else if (!bossKiting && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
+    } else if (!bossKiting && !avoidingDangerZone && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
       movement.add(new Phaser.Math.Vector2(nearestOrb.sprite.x, nearestOrb.sprite.y)
         .subtract(playerPosition)
         .normalize()
@@ -152,13 +153,39 @@ export class PlayerInputSystem {
     const away = playerPosition.clone().subtract(bossPosition);
     const distance = Math.max(1, away.length());
     away.normalize();
-    const tangent = new Phaser.Math.Vector2(-away.y, away.x)
-      .scale(this.scene.bot.orbitDirection ?? 1);
-    movement.add(tangent.scale(1.15));
-    if (distance < 265) {
-      movement.add(away.scale(1.8 * (1 - distance / 265)));
-    } else if (distance > 390) {
-      movement.subtract(away.scale(Math.min(0.45, (distance - 390) / 300)));
+    const bounds = this.scene.arena?.bounds ?? {
+      x: 0,
+      y: 0,
+      width: this.arenaWidth,
+      height: this.arenaHeight
+    };
+    const center = new Phaser.Math.Vector2(
+      bounds.x + bounds.width / 2,
+      bounds.y + bounds.height / 2
+    );
+    const centerDirection = center.subtract(playerPosition).normalize();
+    const edgeDistance = Math.min(
+      playerPosition.x - bounds.x,
+      bounds.x + bounds.width - playerPosition.x,
+      playerPosition.y - bounds.y,
+      bounds.y + bounds.height - playerPosition.y
+    );
+    const tangentA = new Phaser.Math.Vector2(-away.y, away.x);
+    const tangentB = tangentA.clone().negate();
+    let tangent = (this.scene.bot.orbitDirection ?? 1) > 0 ? tangentA : tangentB;
+    if (edgeDistance < 185) {
+      tangent = tangentA.dot(centerDirection) >= tangentB.dot(centerDirection) ? tangentA : tangentB;
+      this.scene.bot.orbitDirection = tangent === tangentA ? 1 : -1;
+      movement.add(tangent.scale(1.75));
+      movement.add(centerDirection.scale(0.55));
+    } else {
+      movement.add(tangent.scale(1.05));
+    }
+    const awayHeadsInward = away.dot(centerDirection) > -0.1;
+    if (distance < 330 && (edgeDistance >= 185 || awayHeadsInward)) {
+      movement.add(away.scale(0.8 + 2.2 * (1 - distance / 330)));
+    } else if (distance > 440) {
+      movement.subtract(away.scale(Math.min(0.38, (distance - 440) / 340)));
     }
     if (profile.id === 'novice') {
       movement.scale(0.72);
@@ -183,6 +210,76 @@ export class PlayerInputSystem {
         .normalize()
         .scale(profile.evadeWeight * urgency));
     });
+  }
+
+  addDangerZoneAvoidance(movement, playerPosition, profile) {
+    const now = this.scene.time.now;
+    this.scene.enemyDangerZones = (this.scene.enemyDangerZones ?? [])
+      .filter((zone) => zone.expiresAt > now);
+    let mostUrgent = null;
+    this.scene.enemyDangerZones.forEach((zone) => {
+      const closest = zone.kind === 'line'
+        ? new Phaser.Math.Vector2()
+        : null;
+      if (closest) {
+        const start = new Phaser.Math.Vector2(zone.x, zone.y);
+        const end = new Phaser.Math.Vector2(zone.targetX, zone.targetY);
+        const segment = end.clone().subtract(start);
+        const lengthSq = Math.max(1, segment.lengthSq());
+        const progress = Phaser.Math.Clamp(
+          playerPosition.clone().subtract(start).dot(segment) / lengthSq,
+          0,
+          1
+        );
+        closest.copy(start).add(segment.scale(progress));
+      }
+      const dangerCenter = closest ?? new Phaser.Math.Vector2(zone.x, zone.y);
+      const distance = playerPosition.distance(dangerCenter);
+      const clearance = distance - zone.radius;
+      if (clearance > 90 || (mostUrgent && clearance >= mostUrgent.clearance)) {
+        return;
+      }
+      mostUrgent = { ...zone, distance, clearance, dangerX: dangerCenter.x, dangerY: dangerCenter.y };
+    });
+    if (!mostUrgent) {
+      return false;
+    }
+    let escape = playerPosition.clone().subtract(new Phaser.Math.Vector2(
+      mostUrgent.x,
+      mostUrgent.y
+    ));
+    if (mostUrgent.kind === 'line') {
+      escape = playerPosition.clone().subtract(new Phaser.Math.Vector2(
+        mostUrgent.dangerX,
+        mostUrgent.dangerY
+      ));
+    }
+    if (escape.lengthSq() < 4) {
+      const bounds = this.scene.arena?.bounds ?? {
+        x: 0,
+        y: 0,
+        width: this.arenaWidth,
+        height: this.arenaHeight
+      };
+      const towardCenter = new Phaser.Math.Vector2(
+        bounds.x + bounds.width / 2 - playerPosition.x,
+        bounds.y + bounds.height / 2 - playerPosition.y
+      );
+      if (mostUrgent.kind === 'line') {
+        const lineX = mostUrgent.targetX - mostUrgent.x;
+        const lineY = mostUrgent.targetY - mostUrgent.y;
+        const perpendicularA = new Phaser.Math.Vector2(-lineY, lineX).normalize();
+        const perpendicularB = perpendicularA.clone().negate();
+        escape.copy(perpendicularA.dot(towardCenter) >= perpendicularB.dot(towardCenter)
+          ? perpendicularA
+          : perpendicularB);
+      } else {
+        escape.copy(towardCenter);
+      }
+    }
+    const urgency = Phaser.Math.Clamp(1 - mostUrgent.clearance / 90, 0.4, 1.8);
+    movement.add(escape.normalize().scale(profile.evadeWeight * (1.35 + urgency)));
+    return true;
   }
 
   addProjectileAvoidance(movement, playerPosition, profile) {

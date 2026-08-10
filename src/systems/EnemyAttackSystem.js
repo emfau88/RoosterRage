@@ -353,6 +353,13 @@ export class EnemyAttackSystem {
     const x = enemy.sprite.x;
     const y = enemy.sprite.y;
     const source = `explosion:${enemy.type}`;
+    this.scene.enemyDangerZones.push({
+      x,
+      y,
+      radius,
+      expiresAt: this.scene.time.now + ENCOUNTER_STANDARDS.heavyTelegraphMs,
+      source
+    });
     const ring = this.scene.add.circle(x, y, radius, 0xff3048, 0.12)
       .setStrokeStyle(4, 0xffd8dc, 0.92)
       .setDepth(9);

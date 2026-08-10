@@ -82,11 +82,30 @@ export class CombatFeedbackSystem {
     const angle = Math.atan2(player.sprite.y - enemy.sprite.y, player.sprite.x - enemy.sprite.x);
     const graphics = this.scene.add.graphics().setDepth(12);
     if (radial) {
+      this.scene.enemyDangerZones.push({
+        x: enemy.sprite.x,
+        y: enemy.sprite.y,
+        radius: options.radius ?? 150,
+        expiresAt: this.scene.time.now + duration,
+        source: `telegraph:${enemy.type}`
+      });
       graphics.lineStyle(5, dangerColor, 0.68);
       graphics.strokeCircle(enemy.sprite.x, enemy.sprite.y, options.radius ?? 150);
       graphics.fillStyle(dangerColor, 0.08);
       graphics.fillCircle(enemy.sprite.x, enemy.sprite.y, options.radius ?? 150);
     } else {
+      if (config.kind === 'dash') {
+        this.scene.enemyDangerZones.push({
+          kind: 'line',
+          x: enemy.sprite.x,
+          y: enemy.sprite.y,
+          targetX: enemy.sprite.x + Math.cos(angle) * 320,
+          targetY: enemy.sprite.y + Math.sin(angle) * 320,
+          radius: 52,
+          expiresAt: this.scene.time.now + duration + (config.duration ?? 0),
+          source: `telegraph:${enemy.type}:dash`
+        });
+      }
       for (let index = 0; index < count; index += 1) {
         const progress = count === 1 ? 0.5 : index / (count - 1);
         const shotAngle = angle - spread / 2 + spread * progress;

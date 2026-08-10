@@ -29,11 +29,11 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 | 13 | Gegner-, Elite- und Boss-Paket | Abgeschlossen |
 | 14 | HUD, Feedback und Run-Report | Abgeschlossen |
 | 15 | Rooster-Tiefe und Build-Content | Abgeschlossen |
-| 16 | Meta und Challenges | Offen |
-| 17 | Vertical-Slice-Abnahme | Offen |
-| 18 | Kommerzielle Validierung | Offen |
+| 16 | Meta und Challenges | Abgeschlossen |
+| 17 | Vertical-Slice-Abnahme | Automatischer Freeze abgeschlossen; manuell/extern offen |
+| 18 | Kommerzielle Validierung | Release-Vorbereitung nach manuellem Gate |
 
-Aktueller Fokus: Phase 16. Die Phasen 8-15 sind bewusst sequenziell; Phase 16 beginnt erst nach bestaetigtem Kernspiel, Phase 18 erst nach bestandener Slice-Abnahme.
+Aktueller Fokus: manueller und externer Phase-17-Gate. Der automatisierte Feature-Freeze ist hergestellt; eine oeffentliche Phase-18-Demo wird erst nach dieser Slice-Abnahme freigegeben.
 
 ## Phase 0: Technische Baseline
 
@@ -621,14 +621,14 @@ Abnahmeprotokoll 10.08.2026:
 
 ## Phase 17: Vertical-Slice-Abnahme
 
-Status: Offen
+Status: Automatischer Feature-Freeze abgeschlossen am 10.08.2026; manuelle und externe Abnahme offen
 
 Bulk-Ziel: Den Content einfrieren und beweisen, dass der Slice stabil, verstaendlich und wiederholbar ist.
 
-37. [ ] Alle drei Rooster, neun Archetypen, drei Karten und Challenges automatisiert sowie manuell end-to-end pruefen.
-38. [ ] Desktop, Mobile Portrait und Landscape unter maximaler Gegner-/Effektlast und im zehnminuetigen Soak-Test abnehmen.
+37. [ ] Alle drei Rooster, neun Archetypen, drei Karten und Challenges automatisiert sowie manuell end-to-end pruefen. Automatischer Anteil abgeschlossen, manueller Anteil offen.
+38. [x] Desktop, Mobile Portrait und Landscape unter maximaler Gegner-/Effektlast und im zehnminuetigen Soak-Test abnehmen.
 39. [ ] Mindestens 10 externe Tester ohne Einfuehrung beobachten und Verstaendnis, Frust, Spannung und Wiederholungswunsch erfassen.
-40. [ ] Balance gegen Erfolgs-, TTK-, Pacing- und Damage-Share-Ziele korrigieren; danach Feature-Freeze fuer den Slice.
+40. [x] Balance gegen Erfolgs-, TTK-, Pacing- und Damage-Share-Ziele korrigieren; danach Feature-Freeze fuer den Slice.
 
 Abnahme:
 
@@ -636,6 +636,17 @@ Abnahme:
 - Mindestens 70 Prozent der Tester verstehen Upgrade, EVO, Elite-Truhe und Bossphase ohne Erklaerung.
 - Mindestens 50 Prozent starten freiwillig einen zweiten Run oder geben konkret an, einen weiteren spielen zu wollen.
 - Balancebericht dokumentiert Seed, Rooster, Build, Karte, Profil und Ergebnis.
+
+Automatisches Abnahmeprotokoll 10.08.2026:
+
+- Die Acceptance-Matrix deckt 12 Rooster-/Challenge-Szenarien, alle neun dokumentierten Archetypen und alle neun Rooster-/Arena-Kombinationen ab. Desktop, Mobile Portrait und Mobile Landscape halten bei 110 Gegnern und 260 Projektilen jeweils 16,8 ms oder besser im p95, ohne HUD-Overflow, Drops oder Browserfehler.
+- Sichtbare Bomber- und Elite-Dash-Warnungen werden vom Average-Modell ohne Treffer verlassen. Warnzonen werden zentral nach Ablauf entfernt und wachsen deshalb auch bei menschlicher Eingabe nicht ueber die Run-Dauer an.
+- Der finale reale 602,3-Sekunden-Soak verarbeitete 36.093 Frames und 60 Last-Recyclingzyklen. p95 lag bei 16,8 ms; 340 Objekte wurden erzeugt, 19.551 wiederverwendet, null verworfen und nach Abschluss waren null aktiv.
+- Drei aktuelle Average-Seeds ergaben zwei Siege und einen Build-/Survival-Tod in Welle 7, entsprechend 66,7 Prozent in dieser kleinen technischen Stichprobe. Das liegt im Zielkorridor 55-70 Prozent, wird aber ausdruecklich nicht als belastbare Nutzerquote ausgegeben.
+- Boombardier und Stormcrest gewannen in geschaetzten 7:40 beziehungsweise 7:36 Minuten menschlicher Run-Zeit; erste Upgrades erschienen nach 23,3 beziehungsweise 19,4 Sekunden, Boss-TTK lag bei 57,1 beziehungsweise 64,4 Sekunden. Ace starb mit einem duennen Zwei-Waffen-Build durch eine lesbare Fan-Spitter-Salve; der Seed bleibt als gewollter Gegenbeleg statt als ausgesuchter Sieg im Bericht.
+- Der Langlauf-Bericht behaelt fruehe Progressionswerte auch nach dem 6.000-Ereignis-Ringpuffer. Wellenende sammelt liegengebliebene XP verlustfrei ein, und die Average-Bewegung beruecksichtigt Arenakanten, Bosskiting sowie Kreis- und Linienwarnungen.
+- Der Content ist fuer die manuelle Abnahme eingefroren. Die Rohartefakte entstehen reproduzierbar unter `test-results/`; die versionierte Zusammenfassung liegt in `docs/PHASE_17_VALIDATION.md`.
+- Offen und nicht durch Automatisierung ersetzbar bleiben ein manueller End-to-End-Durchlauf sowie mindestens zehn unbeeinflusste externe Tester. Verstaendnis- und Zweitrun-Quoten werden erst danach eingetragen.
 
 ## Phase 18: Kommerzielle Validierung
 

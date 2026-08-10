@@ -25,6 +25,7 @@ export function installTestApi(scene) {
       orbitEggs: scene.orbitEggs.length,
       supportChickens: scene.supportChickens.length,
       hazardZones: scene.hazardZones.length,
+      enemyDangerZones: scene.enemyDangerZones.length,
       voidZones: scene.voidZones.length,
       xpOrbs: scene.xpOrbs.length,
       pickups: scene.pickups.items.length,
@@ -416,6 +417,7 @@ export function installTestApi(scene) {
       scene.supportChickens = [];
       scene.hazardZones.forEach((zone) => zone.destroy());
       scene.hazardZones = [];
+      scene.enemyDangerZones = [];
       scene.voidZones.forEach((zone) => zone.destroy());
       scene.voidZones = [];
       scene.clearEnemyProjectiles();
@@ -540,6 +542,10 @@ export function installTestApi(scene) {
       scene.telemetry.summary.profile = strategy;
       return { enabled: scene.bot.enabled, strategy: scene.bot.strategy };
     },
+    disableBot: () => {
+      scene.bot.enabled = false;
+      return { enabled: scene.bot.enabled, strategy: scene.bot.strategy };
+    },
     getPoolStats: () => scene.objectPools.getStats(),
     exerciseFxBudget: (count = 140) => {
       const fx = [];
@@ -611,6 +617,17 @@ export function installTestApi(scene) {
     },
     restart: () => scene.scene.restart(),
     getTelemetry: () => scene.telemetry.getSummary(scene.time.now),
+    exerciseTelemetryRetention: (count = 6200) => {
+      const before = scene.telemetry.getSummary(scene.time.now).progression;
+      for (let index = 0; index < Math.max(0, count); index += 1) {
+        scene.telemetry.record('retentionProbe', scene.time.now, { index });
+      }
+      return {
+        before,
+        after: scene.telemetry.getSummary(scene.time.now).progression,
+        retainedEvents: scene.telemetry.events.length
+      };
+    },
     getRunReport: () => scene.runState.getRunReport(),
     getEffectSettings: () => scene.effects.getState(),
     toggleEffectSetting: (key) => {

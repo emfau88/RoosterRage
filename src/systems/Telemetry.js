@@ -30,6 +30,7 @@ export class Telemetry {
     this.waveStats = new Map();
     this.enemyLifetimes = new Map();
     this.frameSamples = [];
+    this.progressionChoices = [];
     this.summary = {
       seed: this.metadata.seed ?? null,
       profile: this.metadata.profile ?? 'manual',
@@ -286,6 +287,11 @@ export class Telemetry {
     if (selectionType === 'level') {
       this.summary.upgradeChoices += 1;
       this.summary.upgradePauseMs += pauseMs;
+      this.progressionChoices.push({
+        time,
+        upgrade: upgrade.id,
+        category: upgrade.category
+      });
     }
     this.record('upgradeChosen', time, {
       wave,
@@ -353,9 +359,7 @@ export class Telemetry {
   }
 
   getProgressionStats(now = 0) {
-    const regularChoices = this.events.filter((event) => (
-      event.type === 'upgradeChosen' && event.selectionType === 'level'
-    ));
+    const regularChoices = this.progressionChoices;
     const choiceTimes = regularChoices.map((event) => Math.max(0, event.time - this.summary.startedAt));
     const intervalsMs = choiceTimes.slice(1).map((time, index) => time - choiceTimes[index]);
     const spectacular = regularChoices.find((event) => (

@@ -88,23 +88,38 @@ export class CollisionSystem {
       if (!orb) {
         return;
       }
-      const levelsGained = scene.player.addXp(orb.value);
-      scene.audio.play('xp-pickup');
-      scene.debugStats.xpCollected += orb.value;
-      scene.telemetry.addXp(orb.value, scene.time.now, scene.waveSystem.currentWave);
-      scene.removeOrb(orb);
-      if (levelsGained > 0) {
-        scene.audio.play('level-up');
-        scene.debugStats.levelUps += levelsGained;
-        for (let offset = levelsGained - 1; offset >= 0; offset -= 1) {
-          scene.telemetry.addLevelUp(
-            scene.time.now,
-            scene.waveSystem.currentWave,
-            scene.player.level - offset
-          );
-        }
-        scene.startLevelUp(levelsGained);
-      }
+      this.collectXpOrb(orb);
     });
+  }
+
+  collectXpOrb(orb) {
+    if (!orb?.sprite.active) {
+      return 0;
+    }
+    const { scene } = this;
+    const value = orb.value;
+    const levelsGained = scene.player.addXp(value);
+    scene.audio.play('xp-pickup');
+    scene.debugStats.xpCollected += value;
+    scene.telemetry.addXp(value, scene.time.now, scene.waveSystem.currentWave);
+    scene.removeOrb(orb);
+    if (levelsGained > 0) {
+      scene.audio.play('level-up');
+      scene.debugStats.levelUps += levelsGained;
+      for (let offset = levelsGained - 1; offset >= 0; offset -= 1) {
+        scene.telemetry.addLevelUp(
+          scene.time.now,
+          scene.waveSystem.currentWave,
+          scene.player.level - offset
+        );
+      }
+      scene.startLevelUp(levelsGained);
+    }
+    return value;
+  }
+
+  collectAllXp() {
+    return [...this.scene.xpOrbs]
+      .reduce((total, orb) => total + this.collectXpOrb(orb), 0);
   }
 }

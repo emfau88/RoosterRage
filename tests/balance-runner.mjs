@@ -17,6 +17,7 @@ const maxRunMs = Number(process.env.BALANCE_MAX_MS ?? 570000);
 const roosterId = process.env.BALANCE_ROOSTER ?? 'ace';
 const reportPrefix = process.env.BALANCE_REPORT_PREFIX ?? 'balance';
 const seed = process.env.BALANCE_SEED ?? 'rooster-balance-v1';
+const strict = process.env.BALANCE_STRICT === '1';
 const WAVE_TARGETS = {
   1: { durationMs: 25000, toleranceMs: 10000 },
   2: { durationMs: 25000, toleranceMs: 10000 },
@@ -151,6 +152,7 @@ async function runOne(browser, strategy) {
     }
 
     const finalState = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+    const runReport = await page.evaluate(() => window.__ROOSTER_TEST__.getRunReport());
     await page.screenshot({
       path: path.join(artifactDir, `${reportPrefix}-${roosterId}-${strategy}.png`)
     });
@@ -160,6 +162,7 @@ async function runOne(browser, strategy) {
       errors,
       finalState,
       summary,
+      runReport,
       analysis: scoreRun(summary)
     };
   } finally {
@@ -213,6 +216,7 @@ async function run() {
 
     const report = {
       generatedAt: new Date().toISOString(),
+      strict,
       target: {
         waveDurations: WAVE_TARGETS,
         runDurationMs: [420000, 540000],
@@ -233,7 +237,16 @@ async function run() {
     console.log(text);
 
     const runtimeFailure = results.some((result) => result.errors.length || !result.analysis.runtimeHealthy);
-    if (runtimeFailure) {
+    const strictFailure = strict && results.some((result) => {
+      const firstUpgradeAtMs = result.summary.progression?.firstUpgradeAtMs;
+      return result.summary.outcome !== 'victory'
+        || !result.analysis.pacingOk
+        || result.analysis.completedWaves !== 10
+        || !Number.isFinite(firstUpgradeAtMs)
+        || firstUpgradeAtMs < 18000
+        || firstUpgradeAtMs > 32000;
+    });
+    if (runtimeFailure || strictFailure) {
       process.exitCode = 1;
     }
   } finally {

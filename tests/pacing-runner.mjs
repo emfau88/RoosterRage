@@ -94,6 +94,11 @@ async function run() {
     assert(capped.telemetry.upgradeChoices === 11, 'Telemetry choice count differs from run state.', capped);
     assert(capped.telemetry.chestsFound === 2 && capped.telemetry.chestChoices === 2,
       'Chest telemetry did not record elite and boss rewards.', capped);
+    const retention = await page.evaluate(() => window.__ROOSTER_TEST__.exerciseTelemetryRetention());
+    assert(retention.retainedEvents === 6000
+      && retention.after.firstUpgradeAtMs === retention.before.firstUpgradeAtMs
+      && retention.after.choices.length === retention.before.choices.length,
+    'Long-run event retention discarded early progression metrics.', retention);
 
     await page.evaluate(() => window.__ROOSTER_TEST__.restart());
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster);
@@ -127,6 +132,7 @@ async function run() {
       beforeCap,
       capSteps: capSequence.length,
       final: capped,
+      retention,
       bossSpawn,
       bossCompletion: {
         outcome: bossCompletion.telemetry.outcome,
