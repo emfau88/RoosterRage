@@ -55,7 +55,11 @@ async function run() {
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 2);
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.keyboard.down('d');
-    await page.waitForTimeout(300);
+    await page.waitForFunction(
+      (startX) => window.__ROOSTER_TEST__?.getState().player.x > startX + 20,
+      initial.player.x,
+      { timeout: 3000 }
+    );
     await page.keyboard.up('d');
     const afterKeyboardMove = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.waitForFunction(
