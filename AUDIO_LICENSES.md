@@ -28,7 +28,7 @@ All external sources used in the production audio set were selected as CC0 in th
 | `ui-*.mp3`, `upgrade-select.mp3`, `chest-spawn.mp3` | Kenney Interface Sounds | Kenney | [OpenGameArt](https://opengameart.org/content/interface-sounds) | CC0 | Small coherent family selected from pack; trimmed/speed-shaped |
 | `menu-coop.mp3` | Chickens in the coop, morning | fthgurdy | [Freesound](https://freesound.org/people/fthgurdy/sounds/536693/) | CC0 | Quiet 28 s region, filtered, normalized, stereo fades |
 | `menu-theme.mp3` | Wacky Wobblings | Author not preserved in local metadata | [OpenGameArt](https://opengameart.org/content/wacky-wobblings) | CC0 | Loudness-normalized stereo MP3 |
-| `run-theme.mp3` | Backfoot | Author not preserved in local metadata | [OpenGameArt](https://opengameart.org/content/backfoot) | CC0 | Loudness-normalized stereo MP3 |
+| `run-theme.mp3` | Music loop, strong, downtempo, seamless (`space_ranger_seamless_loop.wav`) | Nostromo | [OpenGameArt](https://opengameart.org/content/music-loop-strong-downtempo-seamless) | CC0 | Seamless stereo loop, softened above 11.5 kHz and normalized to -20 LUFS |
 | `boss-theme.mp3` | Urban Boss Battle | MintoDog (embedded artist tag) | [OpenGameArt](https://opengameart.org/content/urban-boss-battle) | CC0 | Loudness-normalized stereo MP3 |
 | `victory.mp3` | Oldschool Action Theme (`Oldschool Intro.mp3`) | Author not preserved in local metadata | [OpenGameArt](https://opengameart.org/content/oldschool-action-theme) | CC0 | 4.8 s intro excerpt used as victory sting, normalized/faded |
 

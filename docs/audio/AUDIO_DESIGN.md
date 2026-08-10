@@ -2,7 +2,7 @@
 
 ## Identity and flow
 
-The final direction is arcade action with restrained farm character. Chicken voices punctuate run start, player hurt, support spawn and second wind; they never form a constant joke layer. Music follows one stable flow: menu theme plus quiet coop ambience → run theme → boss theme → delayed victory sting. Gameplay has no permanent ambience and music does not change per normal wave.
+The final direction is arcade action with restrained farm character. Chicken voices punctuate run start, player hurt, support spawn and second wind; they never form a constant joke layer. Music follows one stable flow: menu theme plus quiet coop ambience → restrained downtempo run theme → boss theme → delayed victory sting. Gameplay has no permanent ambience and music does not change per normal wave.
 
 ## Event mapping
 
@@ -32,6 +32,7 @@ Run `powershell -ExecutionPolicy Bypass -File scripts/process-audio-assets.ps1` 
 
 - Full clucking recordings: too busy for a combat loop; only a quiet menu excerpt was retained.
 - 8-bit boss alternatives: the strong chiptune texture conflicts with the illustrated high-resolution presentation.
+- Backfoot as the run theme: its forward, dense arrangement becomes fatiguing underneath sustained combat; the quieter downtempo loop leaves more room for gameplay cues.
 - 37-hit/punch pack: generic impacts weaken the egg identity; the existing compact enemy-hit sound remains cleaner.
 - Reverb gem version: too long and spacious for rapid XP chains.
 - Separate music for every wave/challenge: short waves need continuity more than novelty.

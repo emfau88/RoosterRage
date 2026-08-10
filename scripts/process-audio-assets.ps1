@@ -114,7 +114,7 @@ Convert-Audio (Source '667653__deltacode__wooden-crate-break1.wav') (Join-Path $
 
 # Stable musical flow; ambience is menu-only and intentionally quiet in the runtime mix.
 Convert-Audio (Source 'wackywobblings.ogg') (Join-Path $outputRoot 'music\menu-theme.mp3') 0 0 'loudnorm=I=-18:TP=-1.5:LRA=10' 2 5
-Convert-Audio (Source 'backfootextended.ogg') (Join-Path $outputRoot 'music\run-theme.mp3') 0 0 'loudnorm=I=-17:TP=-1.5:LRA=10' 2 5
+Convert-Audio (Source 'space_ranger_seamless_loop.wav') (Join-Path $outputRoot 'music\run-theme.mp3') 0 0 'highpass=f=45,lowpass=f=11500,loudnorm=I=-20:TP=-2:LRA=7' 2 5
 Convert-Audio (Source 'urban_boss_battle_bpm135.mp3') (Join-Path $outputRoot 'music\boss-theme.mp3') 0 0 'loudnorm=I=-16:TP=-1.2:LRA=10' 2 5
 Convert-Audio (Source '536693__fthgurdy__chickens-in-the-coop-morning.mp3') (Join-Path $outputRoot 'ambience\menu-coop.mp3') 12 28 "highpass=f=140,lowpass=f=9000,loudnorm=I=-29:TP=-5:LRA=10,afade=t=in:st=0:d=1.2,afade=t=out:st=26.5:d=1.2" 2 6
 
