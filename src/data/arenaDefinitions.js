@@ -31,8 +31,8 @@ export const ARENA_DEFINITIONS = [
     obstacles: [
       { id: 'corridor-left-wall', x: 146, y: 450, width: 292, height: 900, kind: 'wall', solid: true },
       { id: 'corridor-right-wall', x: 1254, y: 450, width: 292, height: 900, kind: 'wall', solid: true },
-      { id: 'corridor-gate-north', x: 520, y: 315, width: 120, height: 46, kind: 'bale', hp: 130 },
-      { id: 'corridor-gate-south', x: 880, y: 585, width: 120, height: 46, kind: 'bale', hp: 130 }
+      { id: 'corridor-gate-north', x: 520, y: 315, width: 120, height: 52, kind: 'bale', hp: 130 },
+      { id: 'corridor-gate-south', x: 880, y: 585, width: 120, height: 52, kind: 'bale', hp: 130 }
     ]
   },
   {

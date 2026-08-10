@@ -17,6 +17,7 @@ export class PickupSystem {
     this.scene = scene;
     this.group = scene.physics.add.group();
     this.items = [];
+    this.openingChests = new Set();
     this.spawned = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0 };
     this.collected = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0 };
     this.milestoneIndex = 0;
@@ -65,7 +66,7 @@ export class PickupSystem {
   }
 
   collect(pickup) {
-    if (!pickup?.sprite?.active) return false;
+    if (!pickup?.sprite?.active || pickup.opening) return false;
     const { scene } = this;
     const kind = pickup.kind;
     if (kind === 'heal') {
@@ -82,8 +83,6 @@ export class PickupSystem {
       }
     } else if (kind === 'magnet') {
       this.magnetUntil = Math.max(this.magnetUntil, scene.time.now + 8000);
-    } else if (kind === 'elite-chest') {
-      scene.runState.startChestReward('elite');
     }
     this.collected[kind] += 1;
     scene.telemetry.record('pickupCollected', scene.time.now, {
@@ -91,8 +90,54 @@ export class PickupSystem {
       kind
     });
     this.items = this.items.filter((item) => item !== pickup);
-    pickup.destroy();
+    this.group.remove(pickup.sprite, false, false);
+    if (kind === 'elite-chest') {
+      scene.physics.pause();
+      this.openingChests.add(pickup);
+      pickup.playChestOpening(() => {
+        this.openingChests.delete(pickup);
+        scene.runState.startChestReward('elite');
+        pickup.destroy();
+      });
+    } else {
+      this.playCollectFx(kind, pickup.sprite.x, pickup.sprite.y);
+      pickup.destroy();
+    }
     return true;
+  }
+
+  playCollectFx(kind, x, y) {
+    const palette = {
+      heal: { color: 0x65ef8b, radius: 20 },
+      bomb: { color: 0xffa24d, radius: 27 },
+      magnet: { color: 0x5ad7ff, radius: 23 }
+    }[kind];
+    if (!palette) return;
+
+    if (kind === 'bomb') {
+      this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.48, depth: 10 });
+    }
+    const ring = this.scene.add.circle(x, y, palette.radius)
+      .setStrokeStyle(kind === 'magnet' ? 3 : 2, palette.color, 0.88)
+      .setDepth(10)
+      .setScale(kind === 'magnet' ? 1.25 : 0.45);
+    const core = this.scene.add.circle(x, y, kind === 'bomb' ? 10 : 8, palette.color, 0.32).setDepth(9);
+    this.scene.tweens.add({
+      targets: ring,
+      scale: kind === 'magnet' ? 0.25 : 1.55,
+      alpha: 0,
+      duration: kind === 'magnet' ? 360 : 300,
+      ease: 'Cubic.Out',
+      onComplete: () => ring.destroy()
+    });
+    this.scene.tweens.add({
+      targets: core,
+      scale: 2.7,
+      alpha: 0,
+      duration: 280,
+      ease: 'Quad.Out',
+      onComplete: () => core.destroy()
+    });
   }
 
   isMagnetActive(time = this.scene.time.now) {
@@ -106,11 +151,21 @@ export class PickupSystem {
       collected: { ...this.collected },
       magnetActive: this.isMagnetActive(),
       magnetRemainingMs: Math.max(0, this.magnetUntil - this.scene.time.now),
+      openingChests: this.openingChests.size,
+      openingChestStates: [...this.openingChests].map((pickup) => ({
+        texture: pickup.sprite.texture.key,
+        displayWidth: Math.round(pickup.sprite.displayWidth),
+        displayHeight: Math.round(pickup.sprite.displayHeight)
+      })),
       items: this.items.map((pickup) => ({
         kind: pickup.kind,
         x: pickup.sprite.x,
         y: pickup.sprite.y,
         active: pickup.sprite.active,
+        opening: pickup.opening,
+        texture: pickup.sprite.texture.key,
+        displayWidth: Math.round(pickup.sprite.displayWidth),
+        displayHeight: Math.round(pickup.sprite.displayHeight),
         reachable: this.scene.arena.isInsidePlayable(pickup.sprite.x, pickup.sprite.y, 20)
           && !this.scene.arena.overlapsObstacle(pickup.sprite.x, pickup.sprite.y, 22)
       }))
@@ -119,6 +174,8 @@ export class PickupSystem {
 
   destroy() {
     this.items.forEach((pickup) => pickup.destroy());
+    this.openingChests.forEach((pickup) => pickup.destroy());
     this.items = [];
+    this.openingChests.clear();
   }
 }

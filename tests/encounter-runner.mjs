@@ -129,11 +129,12 @@ async function verifyElite(browser, serverUrl, eliteType) {
       `${eliteType} telegraph is below its reaction standard.`, telegraph);
     assert(ability.banner.includes(aura.elite.name), `${eliteType} announcement does not name the encounter.`, ability);
 
-    const reward = await page.evaluate((id) => {
+    const reward = await page.evaluate(async (id) => {
       const api = window.__ROOSTER_TEST__;
       api.damageEnemyById(id, 99999);
       const before = api.getPickupState();
       api.collectPickup('elite-chest');
+      await new Promise((resolve) => setTimeout(resolve, 850));
       const progression = api.getProgressionState();
       api.resumeIfUpgradeOpen();
       return { before, progression, telemetry: api.getTelemetry() };

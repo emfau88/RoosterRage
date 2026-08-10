@@ -82,7 +82,7 @@ async function verifyArena(browser, serverUrl, arenaId) {
 async function verifyPickups(browser, serverUrl) {
   const { page, errors } = await openArena(browser, serverUrl, 'open-yard');
   try {
-    const result = await page.evaluate(() => {
+    const result = await page.evaluate(async () => {
       const api = window.__ROOSTER_TEST__;
       api.setPlayerHp(40);
       api.spawnPickup('heal');
@@ -106,6 +106,11 @@ async function verifyPickups(browser, serverUrl) {
 
       api.spawnPickup('elite-chest');
       const chest = api.collectPickup('elite-chest');
+      await new Promise((resolve) => setTimeout(resolve, 175));
+      const chestAjar = api.getPickupState().openingChestStates[0]?.texture;
+      await new Promise((resolve) => setTimeout(resolve, 180));
+      const chestOpen = api.getPickupState().openingChestStates[0]?.texture;
+      await new Promise((resolve) => setTimeout(resolve, 500));
       const chestSelection = api.getProgressionState();
       const firstChoice = chestSelection.choices?.[0]?.id;
       if (firstChoice) api.applyUpgradeById(firstChoice);
@@ -119,6 +124,8 @@ async function verifyPickups(browser, serverUrl) {
         bomb,
         enemySurvived,
         chest,
+        chestAjar,
+        chestOpen,
         chestSelection,
         pickupState,
         telemetry: api.getTelemetry()
@@ -129,6 +136,9 @@ async function verifyPickups(browser, serverUrl) {
     assert(result.bomb && !result.enemySurvived, 'Arena bomb did not clear a normal enemy.', result);
     assert(result.chest && result.chestSelection.currentSelection?.type === 'chest',
       'Elite chest did not open the chest reward lane.', result);
+    assert(result.chestAjar === 'pickup-elite-chest-ajar'
+      && result.chestOpen === 'pickup-elite-chest-open',
+    'Elite chest did not pass through its half-open and open animation states.', result);
     assert(result.pickupState.spawned.heal === result.pickupState.budgets.heal,
       'Heal pickup exceeded or failed to reach its run budget.', result.pickupState);
     assert(result.pickupState.items.every((item) => item.reachable),

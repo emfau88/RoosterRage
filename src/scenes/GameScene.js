@@ -4,7 +4,6 @@ import { ActiveAbilitySystem } from '../systems/ActiveAbilitySystem.js';
 import {
   addArena,
   createGameAnimations,
-  createGeneratedTextures,
   playSceneFx,
   preloadGameAssets
 } from '../systems/AssetSetup.js';
@@ -56,7 +55,6 @@ export class GameScene extends Phaser.Scene {
     if (this.assetLoadErrors?.length) {
       return;
     }
-    createGeneratedTextures(this);
     createGameAnimations(this);
     const searchParams = new URLSearchParams(window.location.search);
     const requestedSeed = searchParams.get('seed');
