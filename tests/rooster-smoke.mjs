@@ -75,7 +75,11 @@ async function run() {
     window.__ROOSTER_TEST__.forceSpawnEnemy(790, 450);
   });
     const beforeCombat = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    await page.waitForTimeout(2400);
+    await page.waitForFunction(
+      (startFrames) => window.__ROOSTER_TEST__?.getState().frames > startFrames + 60,
+      beforeCombat.frames,
+      { timeout: 10000 }
+    );
     const afterCombat = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
 
     await page.evaluate(() => window.__ROOSTER_TEST__.restart());
@@ -83,7 +87,11 @@ async function run() {
     await page.locator('.rooster-card--ace').click();
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 5);
     const afterRestart = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    await page.waitForTimeout(500);
+    await page.waitForFunction(
+      (startFrames) => window.__ROOSTER_TEST__?.getState().frames > startFrames,
+      afterRestart.frames,
+      { timeout: 3000 }
+    );
     const afterRestartAdvance = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
 
     await page.screenshot({ path: path.join(artifactDir, 'rooster-smoke.png') });
@@ -152,7 +160,11 @@ async function run() {
     await mobilePage.mouse.move(70, 700);
     await mobilePage.mouse.down();
     await mobilePage.mouse.move(125, 700, { steps: 5 });
-    await mobilePage.waitForTimeout(350);
+    await mobilePage.waitForFunction(
+      (startX) => window.__ROOSTER_TEST__?.getState().player.x > startX + 20,
+      mobileState.player.x,
+      { timeout: 5000 }
+    );
     await mobilePage.mouse.up();
     const mobileAfterTouch = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     const mobileCanvas = await mobilePage.locator('canvas').boundingBox();
