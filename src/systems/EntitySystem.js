@@ -7,6 +7,7 @@ export class EntitySystem {
     this.scene = scene;
     this.arenaWidth = arenaWidth;
     this.arenaHeight = arenaHeight;
+    this.microXpBank = 0;
   }
 
   spawnEnemy(waveConfig) {
@@ -127,7 +128,10 @@ export class EntitySystem {
     } else {
       this.scene.audio.play('enemy-pop');
     }
-    this.spawnXp(enemy.sprite.x, enemy.sprite.y, enemy.xpValue);
+    const xpDrop = enemy.microFodder
+      ? this.releaseBundledMicroXp(enemy.xpValue)
+      : enemy.xpValue;
+    this.spawnXp(enemy.sprite.x, enemy.sprite.y, xpDrop);
     this.scene.debugStats.kills += 1;
     this.scene.telemetry.addKill(
       this.scene.time.now,
@@ -166,6 +170,13 @@ export class EntitySystem {
     this.scene.xpOrbs.push(orb);
     this.scene.xpGroup.add(orb.sprite);
     return orb;
+  }
+
+  releaseBundledMicroXp(value) {
+    this.microXpBank += Math.max(0, value ?? 0);
+    const released = Math.floor(this.microXpBank);
+    this.microXpBank -= released;
+    return released;
   }
 
   removeOrb(orb) {

@@ -1457,6 +1457,579 @@ canvas {
   }
 }
 
+/* Next production pass: game-first Hennenhuette hierarchy. */
+.henhouse-panel {
+  display: flex;
+  box-sizing: border-box;
+  width: min(1040px, 100%);
+  max-height: calc(100dvh - 24px);
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.henhouse-heading {
+  flex: 0 0 auto;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.henhouse-heading h1 {
+  font-size: 25px;
+}
+
+.henhouse-stats {
+  margin-left: auto;
+}
+
+.henhouse-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.henhouse-nav {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 10px;
+  padding: 4px;
+  border: 1px solid rgba(213, 233, 236, 0.14);
+  border-radius: 11px;
+  background: rgba(3, 11, 15, 0.6);
+}
+
+.henhouse-nav button,
+.hub-rooster-switch {
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #aebfc3;
+  background: transparent;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.henhouse-nav button:hover,
+.henhouse-nav button.is-selected,
+.hub-rooster-switch.is-selected {
+  border-color: rgba(255, 222, 104, 0.48);
+  color: #fff2b1;
+  background: linear-gradient(180deg, rgba(255, 217, 83, 0.15), rgba(255, 255, 255, 0.03));
+}
+
+.henhouse-view {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+}
+
+.henhouse-view[hidden] {
+  display: none;
+}
+
+.henhouse-play-grid {
+  display: grid;
+  min-height: 0;
+  height: 100%;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 12px;
+  overflow: hidden;
+}
+
+.hub-rooster-hero,
+.hub-run-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(213, 233, 236, 0.17);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(30, 48, 55, 0.97), rgba(7, 17, 22, 0.98));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.hub-rooster-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.hub-rooster-hero__portrait {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: #101b20;
+}
+
+.hub-rooster-hero__portrait > img:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 26%;
+}
+
+.hub-rooster-hero__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 38%, rgba(6, 14, 18, 0.16) 60%, rgba(6, 14, 18, 0.96));
+}
+
+.hub-rooster-hero__badge {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 9px rgba(0, 0, 0, 0.55));
+}
+
+.hub-rooster-hero__badge.is-locked {
+  opacity: 0.38;
+  filter: grayscale(1) drop-shadow(0 4px 7px rgba(0, 0, 0, 0.5));
+}
+
+.hub-rooster-hero__copy {
+  padding: 12px 14px 13px;
+}
+
+.hub-rooster-hero__copy > small,
+.hub-run-card > small,
+.henhouse-section-heading small,
+.hub-run-best small {
+  color: #ffd75e;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.hub-rooster-hero__copy h2,
+.hub-run-card h2 {
+  margin: 2px 0 3px;
+  color: #fff8df;
+  font-size: clamp(20px, 3vw, 30px);
+  line-height: 1;
+}
+
+.hub-rooster-hero__copy > strong {
+  color: #ffd75e;
+  font-size: 11px;
+}
+
+.hub-rooster-hero__copy > p,
+.hub-run-card > p {
+  margin: 7px 0 9px;
+  color: #bdcbce;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.hub-rooster-mastery {
+  display: grid;
+  grid-template-columns: auto minmax(50px, 1fr);
+  align-items: center;
+  gap: 8px;
+  color: #e7eef0;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.hub-rooster-mastery i {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.hub-rooster-mastery b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #53d9ff, #ffe16a);
+}
+
+.hub-rooster-switches {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.hub-rooster-switch:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.hub-rooster-switch {
+  min-height: 25px;
+}
+
+.hub-run-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-color: rgba(255, 215, 94, 0.3);
+  background:
+    radial-gradient(circle at 72% 16%, rgba(255, 194, 66, 0.13), transparent 35%),
+    linear-gradient(145deg, rgba(38, 48, 44, 0.98), rgba(8, 18, 22, 0.99));
+}
+
+.hub-run-best {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 2px 0 9px;
+}
+
+.hub-run-best > span {
+  padding: 7px 8px;
+  border: 1px solid rgba(255, 220, 101, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.hub-run-best small,
+.hub-run-best strong {
+  display: block;
+}
+
+.hub-run-best strong {
+  margin-top: 2px;
+  color: #f6f0d9;
+  font-size: 11px;
+}
+
+.hub-challenge-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 9px;
+}
+
+.hub-challenge-list .challenge-card {
+  min-height: 56px;
+  padding: 7px 8px;
+}
+
+.hub-challenge-list .challenge-card span {
+  display: none;
+}
+
+.hub-challenge-list .challenge-card strong {
+  font-size: 10px;
+}
+
+.hub-challenge-list .challenge-card small {
+  margin-top: 4px;
+  font-size: 8px;
+}
+
+.hub-start-button {
+  display: flex;
+  min-height: 58px;
+  margin-top: auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #fff0a6;
+  border-radius: 12px;
+  color: #1b1808;
+  background: linear-gradient(180deg, #ffe879, #eebc39);
+  box-shadow: inset 0 1px #fff9d5, 0 8px 22px rgba(246, 188, 48, 0.22);
+  font: inherit;
+  cursor: pointer;
+}
+
+.hub-start-button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.hub-start-button span {
+  font-size: 17px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+.hub-start-button small {
+  margin-top: 1px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  opacity: 0.68;
+}
+
+.henhouse-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.henhouse-section-heading h2 {
+  margin: 2px 0 0;
+  font-size: 22px;
+  text-transform: none;
+}
+
+.henhouse-section-heading p {
+  margin: 0;
+  font-size: 10px;
+}
+
+.rooster-card.is-selected {
+  border-color: #ffe16a;
+  box-shadow: inset 0 0 0 1px rgba(255, 225, 106, 0.35), 0 0 22px rgba(255, 199, 56, 0.16);
+}
+
+.henhouse-archive-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.henhouse-archive-stats span {
+  padding: 8px;
+  border: 1px solid rgba(255, 215, 94, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  text-align: center;
+}
+
+.henhouse-archive-stats small,
+.henhouse-archive-stats strong {
+  display: block;
+}
+
+.henhouse-archive-stats small {
+  color: #9fb1b5;
+  font-size: 8px;
+}
+
+.henhouse-archive-stats strong {
+  margin-top: 2px;
+  color: #ffe16a;
+}
+
+@media (max-width: 520px) {
+  .henhouse-panel {
+    max-height: calc(100dvh - 16px);
+    padding: 12px;
+  }
+
+  .henhouse-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px;
+  }
+
+  .henhouse-heading h1 {
+    font-size: 20px;
+  }
+
+  .henhouse-stats {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .henhouse-actions {
+    grid-column: 1 / 3;
+  }
+
+  .henhouse-actions button {
+    flex: 1;
+  }
+
+  .henhouse-nav {
+    margin-bottom: 7px;
+  }
+
+  .henhouse-nav button {
+    min-height: 38px;
+    padding: 4px 2px;
+    font-size: 9px;
+  }
+
+  .henhouse-play-grid {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hub-rooster-hero {
+    min-height: 176px;
+    grid-template-columns: 42% minmax(0, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .hub-rooster-hero__copy {
+    padding: 10px;
+  }
+
+  .hub-rooster-hero__copy h2 {
+    font-size: 19px;
+  }
+
+  .hub-rooster-hero__copy > p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .hub-rooster-hero__badge {
+    right: 7px;
+    bottom: 7px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .hub-rooster-switches {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-top: 6px;
+  }
+
+  .hub-rooster-switch {
+    min-height: 24px;
+    font-size: 8px;
+  }
+
+  .hub-run-card {
+    min-height: 360px;
+    padding: 12px;
+  }
+
+  .hub-run-card h2 {
+    font-size: 23px;
+  }
+
+  .hub-start-button {
+    min-height: 56px;
+  }
+
+  .henhouse-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .talent-tree,
+  .rooster-list,
+  .henhouse-drawers {
+    grid-template-columns: 1fr;
+  }
+
+  .henhouse-archive-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-height: 480px) {
+  .henhouse-panel {
+    max-height: calc(100dvh - 12px);
+    padding: 9px 12px;
+  }
+
+  .henhouse-heading {
+    margin-bottom: 5px;
+  }
+
+  .henhouse-heading h1 {
+    font-size: 18px;
+  }
+
+  .henhouse-nav {
+    margin-bottom: 5px;
+    padding: 2px;
+  }
+
+  .henhouse-nav button {
+    min-height: 27px;
+  }
+
+  .henhouse-play-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 7px;
+  }
+
+  .hub-rooster-hero {
+    grid-template-columns: 42% minmax(0, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .hub-rooster-hero__copy {
+    padding: 8px;
+  }
+
+  .hub-rooster-hero__copy h2,
+  .hub-run-card h2 {
+    font-size: 18px;
+  }
+
+  .hub-rooster-hero__copy > p,
+  .hub-run-card > p {
+    display: none;
+  }
+
+  .hub-rooster-hero__badge {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hub-rooster-switches {
+    grid-template-columns: 1fr;
+    gap: 1px;
+    margin-top: 5px;
+  }
+
+  .hub-rooster-switch {
+    min-height: 21px;
+    font-size: 7px;
+  }
+
+  .hub-run-card {
+    min-height: 0;
+    padding: 9px;
+  }
+
+  .hub-run-best {
+    margin-bottom: 5px;
+  }
+
+  .hub-run-best > span {
+    padding: 4px 6px;
+  }
+
+  .hub-challenge-list {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 5px;
+    overflow-x: auto;
+  }
+
+  .hub-challenge-list .challenge-card {
+    min-width: 112px;
+    min-height: 42px;
+    padding: 4px 6px;
+  }
+
+  .hub-start-button {
+    min-height: 42px;
+  }
+
+  .hub-start-button span {
+    font-size: 13px;
+  }
+
+  .hub-start-button small {
+    display: none;
+  }
+}
+
 /* Phase G: compact meta progression, talent nest, and rooster mastery. */
 .henhouse-kernels {
   display: grid !important;
@@ -2376,5 +2949,15 @@ body,
     flex-basis: 98px;
     margin-right: -10px;
     margin-left: -10px;
+  }
+}
+
+/* Landscape phones have little vertical room but plenty of width. Let the hub
+   use that full safe viewport instead of collapsing to its content height. */
+@media (max-height: 480px) and (min-width: 600px) {
+  .henhouse-panel {
+    height: calc(100dvh - 12px);
+    max-height: calc(100dvh - 12px);
+    padding: 10px 12px;
   }
 }

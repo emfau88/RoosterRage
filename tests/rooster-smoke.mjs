@@ -16,6 +16,14 @@ function assert(condition, message, details) {
   }
 }
 
+async function startRunFromHub(page, rooster = 'ace') {
+  await page.locator('[data-hub-tab="roosters"]').click();
+  await page.locator(`.rooster-card--${rooster}`).click();
+  const startButton = page.locator('[data-run-start]');
+  await startButton.scrollIntoViewIfNeeded();
+  await startButton.click();
+}
+
 async function run() {
   await fs.mkdir(artifactDir, { recursive: true });
   const { server, url } = await ensureTestServer();
@@ -51,7 +59,7 @@ async function run() {
       'Rooster cards must use three distinct portrait assets.', roosterPortraits);
     assert(roosterPortraits.every((portrait) => portrait.width === 512 && portrait.height === 512),
       'Rooster portraits were not loaded at their production dimensions.', roosterPortraits);
-    await page.locator('.rooster-card--ace').click();
+    await startRunFromHub(page);
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 2);
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.keyboard.down('d');
@@ -84,7 +92,7 @@ async function run() {
 
     await page.evaluate(() => window.__ROOSTER_TEST__.restart());
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster);
-    await page.locator('.rooster-card--ace').click();
+    await startRunFromHub(page);
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 5);
     const afterRestart = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     await page.waitForFunction(
@@ -152,9 +160,11 @@ async function run() {
     });
     await mobilePage.goto(url, { waitUntil: 'domcontentloaded' });
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState);
+    await mobilePage.locator('[data-hub-tab="roosters"]').click();
     await mobilePage.locator('.rooster-card--storm').scrollIntoViewIfNeeded();
     await mobilePage.screenshot({ path: path.join(artifactDir, 'rooster-class-selection-mobile.png') });
     await mobilePage.locator('.rooster-card--ace').click();
+    await mobilePage.locator('[data-run-start]').click();
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const mobileState = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     await mobilePage.mouse.move(70, 700);
@@ -221,8 +231,14 @@ async function run() {
     landscapePage.on('pageerror', (error) => landscapeErrors.push(error.stack ?? error.message));
     await landscapePage.goto(url, { waitUntil: 'domcontentloaded' });
     await landscapePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState);
+    const landscapeHubPanel = await landscapePage.locator('.henhouse-panel').boundingBox();
+    const landscapeStartButton = await landscapePage.locator('[data-run-start]').boundingBox();
     await landscapePage.screenshot({ path: path.join(artifactDir, 'rooster-class-selection-landscape.png') });
-    await landscapePage.locator('.rooster-card--ace').click();
+    assert(landscapeHubPanel?.height >= 370,
+      'Landscape hub leaves avoidable vertical space unused.', landscapeHubPanel);
+    assert(landscapeStartButton?.y + landscapeStartButton?.height <= 390,
+      'Landscape run CTA is outside the initial viewport.', landscapeStartButton);
+    await startRunFromHub(landscapePage);
     await landscapePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const landscapeState = await landscapePage.evaluate(() => window.__ROOSTER_TEST__.getState());
     const landscapeCanvas = await landscapePage.locator('canvas').boundingBox();

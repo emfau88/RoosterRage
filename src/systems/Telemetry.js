@@ -73,6 +73,8 @@ export class Telemetry {
       pickupsSpawnedByKind: {},
       pickupsCollectedByKind: {},
       maxEnemiesAlive: 0,
+      peakMicroFodder: 0,
+      peakSpecialEnemies: 0,
       maxProjectilesAlive: 0,
       enemyProjectileSamples: 0,
       enemyProjectileTotal: 0,
@@ -125,6 +127,8 @@ export class Telemetry {
         upgradeOffers: 0,
         upgradeChoices: 0,
         maxEnemiesAlive: 0,
+        peakMicroFodder: 0,
+        peakSpecialEnemies: 0,
         enemyProjectileSamples: 0,
         enemyProjectileTotal: 0,
         peakEnemyProjectiles: 0,
@@ -174,6 +178,8 @@ export class Telemetry {
       this.frameSamples.push(delta);
     }
     this.summary.maxEnemiesAlive = Math.max(this.summary.maxEnemiesAlive, state.enemiesAlive);
+    this.summary.peakMicroFodder = Math.max(this.summary.peakMicroFodder, state.microFodderAlive ?? 0);
+    this.summary.peakSpecialEnemies = Math.max(this.summary.peakSpecialEnemies, state.specialEnemiesAlive ?? 0);
     this.summary.maxProjectilesAlive = Math.max(this.summary.maxProjectilesAlive, state.projectilesAlive);
     const enemyProjectiles = state.enemyProjectilesAlive ?? state.objects?.enemyProjectiles ?? 0;
     const enemyHazards = state.enemyHazardsAlive ?? enemyProjectiles;
@@ -200,6 +206,8 @@ export class Telemetry {
     const stat = this.waveStats.get(state.wave);
     if (stat) {
       stat.maxEnemiesAlive = Math.max(stat.maxEnemiesAlive, state.enemiesAlive);
+      stat.peakMicroFodder = Math.max(stat.peakMicroFodder, state.microFodderAlive ?? 0);
+      stat.peakSpecialEnemies = Math.max(stat.peakSpecialEnemies, state.specialEnemiesAlive ?? 0);
       stat.enemyProjectileSamples += 1;
       stat.enemyProjectileTotal += enemyProjectiles;
       stat.peakEnemyProjectiles = Math.max(stat.peakEnemyProjectiles, enemyProjectiles);

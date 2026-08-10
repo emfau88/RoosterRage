@@ -427,6 +427,15 @@
       "bytes": 21126
     },
     {
+      "source": "art-source/enemies/animations/enemy-kornkrabbler-run.png",
+      "sourceSha256": "c7db332eacea0f2169dfc8bc0fd74b4808fceda1c19d1d24c4c3f3f9da5d008c",
+      "runtime": "src/assets/enemies/animations/enemy-kornkrabbler-run.webp",
+      "runtimeSha256": "e196280dc1339f81b0b06ff75f2cac9b31f34ed8e2c705554cdda7f5e9a6d505",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 114926
+    },
+    {
       "source": "art-source/enemies/animations/enemy-runner-walk.png",
       "sourceSha256": "d3bd26a116bfdb48b178f3f2030dd4203b6fb742f9a022af037609b1e0734acc",
       "runtime": "src/assets/enemies/animations/enemy-runner-walk.webp",

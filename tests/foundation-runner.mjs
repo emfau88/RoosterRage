@@ -121,7 +121,29 @@ async function testTelemetryAndLoad(browser) {
     const secondLoad = await page.evaluate(() => window.__ROOSTER_TEST__.spawnLoadScenario(100, 120));
     assert(secondLoad.pools.enemy.reused >= 100, 'Enemy pool did not reuse released objects.', secondLoad.pools);
     assert(secondLoad.pools.projectile.reused >= 120, 'Projectile pool did not reuse released objects.', secondLoad.pools);
-    return { damageProbe, fxBudget, firstLoad, loadedState, secondLoad };
+
+    const hordeLoad = {};
+    for (const enemyCount of [75, 110, 150]) {
+      const spawned = await page.evaluate((count) => {
+        window.__ROOSTER_TEST__.resetFrameTelemetry();
+        return window.__ROOSTER_TEST__.spawnLoadScenario(count, 0, 'kornkrabbler');
+      }, enemyCount);
+      assert(spawned.enemies === enemyCount, `${enemyCount}-enemy horde scenario was not created.`, spawned);
+      await page.waitForTimeout(1400);
+      const state = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
+      assert(!state.lastError && errors.length === 0,
+        `${enemyCount}-enemy horde scenario produced runtime errors.`, { state, errors });
+      assert(state.telemetry.frameTimes.p95Ms <= 34,
+        `${enemyCount}-enemy horde exceeded the 34ms p95 frame budget.`, state.telemetry.frameTimes);
+      assert(state.telemetry.peakMicroFodder >= enemyCount,
+        `${enemyCount}-enemy horde was not recorded as micro-fodder.`, state.telemetry);
+      hordeLoad[enemyCount] = {
+        frameTimes: state.telemetry.frameTimes,
+        pools: state.pools,
+        peakMicroFodder: state.telemetry.peakMicroFodder
+      };
+    }
+    return { damageProbe, fxBudget, firstLoad, loadedState, secondLoad, hordeLoad };
   } finally {
     await page.close();
   }
@@ -148,7 +170,8 @@ async function run() {
       profiles: Object.keys(report.deterministicScenarios),
       frameTimes: report.telemetryAndLoad.loadedState.telemetry.frameTimes,
       peaks: report.telemetryAndLoad.loadedState.telemetry.peakObjects,
-      reuse: report.telemetryAndLoad.secondLoad.pools.total
+      reuse: report.telemetryAndLoad.secondLoad.pools.total,
+      hordeLoad: report.telemetryAndLoad.hordeLoad
     }, null, 2));
   } finally {
     await stopTestServer(server);

@@ -49,6 +49,22 @@ export function createGameAnimations(scene) {
     ['enemy-elite-spitter-pulse-loop', 'enemy-elite-spitter-pulse', 0, 2, 6],
     ['enemy-boss-heavy-loop', 'enemy-boss-heavy', 0, 2, 4]
   ];
+  [
+    ['left', 0],
+    ['right', 4],
+    ['up', 8],
+    ['down', 12]
+  ].forEach(([direction, start]) => {
+    const key = `enemy-kornkrabbler-run-${direction}`;
+    if (!scene.anims.exists(key)) {
+      scene.anims.create({
+        key,
+        frames: scene.anims.generateFrameNumbers('enemy-kornkrabbler-run', { start, end: start + 3 }),
+        frameRate: 11,
+        repeat: -1
+      });
+    }
+  });
   enemyAnimations.forEach(([key, texture, start, end, frameRate]) => {
     if (scene.anims.exists(key)) {
       return;

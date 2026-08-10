@@ -62,6 +62,7 @@ RUNTIME_IMAGES = (
     "meta/mastery-storm.png",
     "enemy-slime.png",
     "enemies/animations/enemy-slime-wobble.png",
+    "enemies/animations/enemy-kornkrabbler-run.png",
     "enemies/animations/enemy-runner-walk.png",
     "enemies/animations/enemy-brute-stomp.png",
     "enemies/animations/enemy-spitter-pulse.png",
@@ -114,6 +115,12 @@ RUNTIME_SIZES = {
     "fx/evolutions/evo-dawn-laser-emitter.png": (64, 64),
     "fx/evolutions/evo-dawn-laser-impact.png": (256, 256),
     "fx/evolutions/evo-chick-squadron-impact.png": (256, 256),
+}
+
+# Animation sheets must retain their cell grid. Unlike individual sprites they
+# are resized as one canvas and are never cropped to visible pixels.
+RUNTIME_SHEET_SIZES = {
+    "enemies/animations/enemy-kornkrabbler-run.png": (1024, 1024),
 }
 
 BULK_1_ICONS = (
@@ -183,7 +190,11 @@ def optimize_assets():
             raise SystemExit(f"Missing source asset: {source.relative_to(PROJECT_ROOT)}")
         target.parent.mkdir(parents=True, exist_ok=True)
         with Image.open(source) as source_image:
-            if relative_name in RUNTIME_SIZES:
+            if relative_name in RUNTIME_SHEET_SIZES:
+                image = source_image.convert("RGBA").resize(
+                    RUNTIME_SHEET_SIZES[relative_name], Image.Resampling.LANCZOS
+                )
+            elif relative_name in RUNTIME_SIZES:
                 margin = 10 if relative_name.startswith("fx/") else 2
                 image = fit_visible(source_image, RUNTIME_SIZES[relative_name], margin)
             else:

@@ -3,6 +3,7 @@ import roosterArtilleryWalkSheetUrl from '../../assets/characters/rooster-artill
 import roosterStormWalkSheetUrl from '../../assets/characters/rooster-storm-walk.webp';
 import enemySlimeUrl from '../../assets/enemy-slime.webp';
 import enemySlimeWobbleUrl from '../../assets/enemies/animations/enemy-slime-wobble.webp';
+import enemyKornkrabblerRunUrl from '../../assets/enemies/animations/enemy-kornkrabbler-run.webp';
 import enemyRunnerWalkUrl from '../../assets/enemies/animations/enemy-runner-walk.webp';
 import enemyBruteStompUrl from '../../assets/enemies/animations/enemy-brute-stomp.webp';
 import enemySpitterPulseUrl from '../../assets/enemies/animations/enemy-spitter-pulse.webp';
@@ -111,6 +112,7 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('rooster-storm-walk', roosterStormWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('enemy-slime', enemySlimeUrl);
   scene.load.spritesheet('enemy-slime-wobble', enemySlimeWobbleUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('enemy-kornkrabbler-run', enemyKornkrabblerRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-runner-walk', enemyRunnerWalkUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-brute-stomp', enemyBruteStompUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-spitter-pulse', enemySpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });

@@ -645,6 +645,10 @@ export class GameScene extends Phaser.Scene {
     return {
       wave: this.waveSystem.currentWave,
       enemiesAlive: this.enemies.length,
+      microFodderAlive: this.enemies.filter((enemy) => enemy.microFodder).length,
+      specialEnemiesAlive: this.enemies.filter((enemy) => (
+        !enemy.microFodder && enemy.role !== 'fodder'
+      )).length,
       projectilesAlive: this.projectiles.length + this.enemyProjectiles.length,
       enemyProjectilesAlive: this.enemyProjectiles.length,
       enemyHazardsAlive: this.enemyProjectiles.length

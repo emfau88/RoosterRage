@@ -418,8 +418,11 @@ export function installTestApi(scene) {
       name: enemy.displayName,
       hp: enemy.hp,
       maxHp: enemy.maxHp,
+      xpValue: enemy.xpValue,
       x: enemy.sprite.x,
       y: enemy.sprite.y,
+      animation: enemy.sprite.anims.currentAnim?.key ?? null,
+      hpBarVisible: enemy.hpBarBack.visible || enemy.hpBarFill.visible,
       bossPhaseIndex: enemy.bossPhaseIndex,
       bossSequenceStep: enemy.bossSequenceStep,
       bossSequenceReadyAt: enemy.bossSequenceReadyAt,
@@ -529,6 +532,11 @@ export function installTestApi(scene) {
       scene.enemies = [];
       return true;
     },
+    clearXpOrbs: () => {
+      scene.xpOrbs.forEach((orb) => orb.destroy());
+      scene.xpOrbs = [];
+      return true;
+    },
     clearProjectiles: () => {
       scene.projectiles.forEach((projectile) => projectile.destroy());
       scene.projectiles = [];
@@ -556,6 +564,7 @@ export function installTestApi(scene) {
     },
     spawnEnemyType: (type, x = scene.player.sprite.x + 180, y = scene.player.sprite.y, overrides = {}) => {
       const makers = {
+        kornkrabbler: () => scene.waveSystem.makeKornkrabbler(),
         slime: () => scene.waveSystem.makeSlime(),
         runner: () => scene.waveSystem.makeRunner(),
         brute: () => scene.waveSystem.makeBrute(),
@@ -697,16 +706,23 @@ export function installTestApi(scene) {
       fx.forEach((item) => item.destroy());
       return { saturated, released: scene.objectPools.getStats().fx };
     },
-    spawnLoadScenario: (enemyCount = 100, projectileCount = 240) => {
+    resetFrameTelemetry: () => {
+      scene.telemetry.frameSamples = [];
+      return true;
+    },
+    spawnLoadScenario: (enemyCount = 100, projectileCount = 240, enemyType = 'slime') => {
       scene.waveSystem.active = false;
       window.__ROOSTER_TEST__.clearEnemies();
       window.__ROOSTER_TEST__.clearProjectiles();
       const columns = 20;
+      const makeLoadEnemy = enemyType === 'kornkrabbler'
+        ? () => scene.waveSystem.makeKornkrabbler(1)
+        : () => scene.waveSystem.makeSlime(0.6);
       for (let index = 0; index < enemyCount; index += 1) {
         const x = 90 + (index % columns) * 64;
         const y = 90 + Math.floor(index / columns) * 70;
         scene.entities.spawnEnemyAt({
-          ...scene.waveSystem.makeSlime(0.6),
+          ...makeLoadEnemy(),
           hp: 99999,
           speed: 0,
           damage: 0,

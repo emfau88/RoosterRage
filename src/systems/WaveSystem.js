@@ -54,6 +54,7 @@ export class WaveSystem {
 
   makeEnemyFromSpec({ kind, multiplier = 1 }) {
     const makers = {
+      kornkrabbler: () => this.makeKornkrabbler(multiplier),
       slime: () => this.makeSlime(multiplier),
       runner: () => this.makeRunner(multiplier),
       brute: () => this.makeBrute(multiplier),
@@ -230,6 +231,27 @@ export class WaveSystem {
     return { type: 'slime', role: 'fodder', hp: Math.round(18 * multiplier), speed: 78, damage: 5, xp: 3, texture: 'enemy-slime-wobble', animation: 'enemy-slime-wobble-loop', scale: 0.2, radius: 23, bodyOffsetX: 105, bodyOffsetY: 123, hpBarWidth: 34, hpBarYOffset: 27 };
   }
 
+  makeKornkrabbler(multiplier = 1) {
+    return {
+      type: 'kornkrabbler',
+      role: 'micro-fodder',
+      displayName: 'Kornkrabbler',
+      hp: Math.max(3, Math.round(7 * multiplier)),
+      speed: 96,
+      damage: 2,
+      xpScale: 0.2,
+      microFodder: true,
+      texture: 'enemy-kornkrabbler-run',
+      animation: 'enemy-kornkrabbler-run-left',
+      directionalAnimationPrefix: 'enemy-kornkrabbler-run',
+      scale: 0.2,
+      radius: 12,
+      bodyOffsetX: 116,
+      bodyOffsetY: 116,
+      showHpBar: false
+    };
+  }
+
   getXpForSpawn(config) {
     if (Number.isFinite(config.xpOverride)) {
       return Math.max(0, Math.round(config.xpOverride));
@@ -243,9 +265,13 @@ export class WaveSystem {
     }
     const segment = this.director.getState().segment;
     const multiplier = wave.xpCurve.segmentMultipliers?.[segment] ?? 1;
-    return Math.max(1, Math.round(
-      wave.xpCurve.perEnemy * multiplier * (this.scene.challenge?.modifiers.xpMultiplier ?? 1)
-    ));
+    const scaledXp = wave.xpCurve.perEnemy
+      * multiplier
+      * (this.scene.challenge?.modifiers.xpMultiplier ?? 1);
+    if (config.microFodder) {
+      return Math.max(0, scaledXp * (config.xpScale ?? 0.2));
+    }
+    return Math.max(1, Math.round(scaledXp));
   }
 
   makeRunner(multiplier = 1) {

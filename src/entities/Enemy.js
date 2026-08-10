@@ -31,6 +31,8 @@ export class Enemy {
     this.baseSpeed = config.speed;
     this.damage = config.damage;
     this.xpValue = config.xp;
+    this.microFodder = config.microFodder ?? false;
+    this.directionalAnimationPrefix = config.directionalAnimationPrefix ?? null;
     this.type = config.type ?? 'unknown';
     this.role = config.role ?? this.type;
     this.ability = config.ability ?? null;
@@ -67,6 +69,7 @@ export class Enemy {
     this.knockbackVelocity.set(0, 0);
     this.hpBarWidth = config.hpBarWidth ?? 42;
     this.hpBarYOffset = config.hpBarYOffset ?? 30;
+    this.showHpBar = config.showHpBar ?? true;
     this.baseTint = config.tint ?? null;
 
     this.sprite.enableBody(true, x, y, true, true);
@@ -103,15 +106,15 @@ export class Enemy {
       .setSize(this.hpBarWidth, 4)
       .setDisplaySize(this.hpBarWidth, 4)
       .setAlpha(0.9)
-      .setVisible(true)
-      .setActive(true);
+      .setVisible(this.showHpBar)
+      .setActive(this.showHpBar);
     this.hpBarFill.setPosition(x - this.hpBarWidth / 2, y - this.hpBarYOffset)
       .setSize(this.hpBarWidth, 4)
       .setDisplaySize(this.hpBarWidth, 4)
       .setScale(1, 1)
       .setAlpha(1)
-      .setVisible(true)
-      .setActive(true);
+      .setVisible(this.showHpBar)
+      .setActive(this.showHpBar);
     return this;
   }
 
@@ -128,6 +131,7 @@ export class Enemy {
       if (direction.lengthSq() > 0) {
         direction.normalize();
       }
+      this.updateDirectionalAnimation(direction);
       const movementSpeed = this.speed * this.auraSpeedMultiplier;
       this.sprite.setVelocity(direction.x * movementSpeed, direction.y * movementSpeed);
     }
@@ -140,6 +144,20 @@ export class Enemy {
     this.hpBarBack.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.scaleX = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
+  }
+
+  updateDirectionalAnimation(direction) {
+    if (!this.directionalAnimationPrefix) {
+      return;
+    }
+    const horizontal = Math.abs(direction.x) >= Math.abs(direction.y);
+    const facing = horizontal
+      ? (direction.x < 0 ? 'left' : 'right')
+      : (direction.y < 0 ? 'up' : 'down');
+    const key = `${this.directionalAnimationPrefix}-${facing}`;
+    if (this.sprite.anims.currentAnim?.key !== key) {
+      this.sprite.play(key);
+    }
   }
 
   updateWarningVisual() {

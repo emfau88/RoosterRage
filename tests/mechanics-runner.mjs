@@ -358,15 +358,15 @@ async function testWaveCuration(browser) {
     });
     const catalog = await page.evaluate(() => window.__ROOSTER_TEST__.getWaveCatalog());
     const expectedTypes = [
-      { slime: 30 },
-      { slime: 26, runner: 12 },
-      { slime: 24, runner: 17, brute: 4, 'elite-runner': 1 },
-      { slime: 36, runner: 14, spitter: 5 },
-      { slime: 40, runner: 16, 'fan-spitter': 5, brute: 4 },
-      { slime: 36, runner: 24, 'fan-spitter': 6, brute: 9, 'elite-runner': 1 },
-      { slime: 53, bomber: 20, 'fan-spitter': 5, support: 5, summoner: 2 },
-      { slime: 57, runner: 24, spitter: 6, support: 6, summoner: 2, 'elite-spitter': 1 },
-      { slime: 77, brute: 20, 'fan-spitter': 6, support: 6, summoner: 2, 'elite-brute': 1 },
+      { slime: 30, kornkrabbler: 18 },
+      { slime: 26, kornkrabbler: 24, runner: 12 },
+      { slime: 24, kornkrabbler: 32, runner: 17, brute: 4, 'elite-runner': 1 },
+      { slime: 36, kornkrabbler: 37, runner: 14, spitter: 5 },
+      { slime: 40, kornkrabbler: 47, runner: 16, 'fan-spitter': 5, brute: 4 },
+      { slime: 36, kornkrabbler: 56, runner: 24, 'fan-spitter': 6, brute: 9, 'elite-runner': 1 },
+      { slime: 53, kornkrabbler: 71, bomber: 20, 'fan-spitter': 5, support: 5, summoner: 2 },
+      { slime: 57, kornkrabbler: 84, runner: 24, spitter: 6, support: 6, summoner: 2, 'elite-spitter': 1 },
+      { slime: 77, kornkrabbler: 98, brute: 20, 'fan-spitter': 6, support: 6, summoner: 2, 'elite-brute': 1 },
       { boss: 1 }
     ];
     assert(catalog.length === 10, 'Wave catalog should contain exactly ten waves.', catalog);
@@ -379,6 +379,50 @@ async function testWaveCuration(browser) {
     });
     assert(catalog[9].bossWave && catalog[9].queue[0] === 'boss', 'Wave 10 must be the boss finale.', catalog[9]);
 
+    const microDirections = {};
+    const microId = await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.movePlayer(900, 450);
+      return window.__ROOSTER_TEST__.spawnEnemyType('kornkrabbler', 700, 450, { speed: 0, damage: 0 });
+    });
+    for (const [direction, point] of Object.entries({
+      right: [900, 450],
+      left: [500, 450],
+      up: [700, 250],
+      down: [700, 650]
+    })) {
+      await page.evaluate(([x, y]) => window.__ROOSTER_TEST__.movePlayer(x, y), point);
+      await page.waitForTimeout(50);
+      microDirections[direction] = await page.evaluate((id) => (
+        window.__ROOSTER_TEST__.getEnemySnapshot().find((enemy) => enemy.id === id)
+      ), microId);
+      assert(
+        microDirections[direction]?.animation === `enemy-kornkrabbler-run-${direction}`,
+        `Kornkrabbler did not select its ${direction} locomotion row.`,
+        microDirections
+      );
+    }
+    assert(microDirections.down.maxHp >= 6 && microDirections.down.maxHp <= 10,
+      'Kornkrabbler HP is outside the micro-fodder corridor.', microDirections.down);
+    assert(!microDirections.down.hpBarVisible,
+      'Kornkrabbler must not allocate visible per-unit HP bars.', microDirections.down);
+
+    const bundledMicroXp = await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearXpOrbs();
+      const ids = Array.from({ length: 5 }, (_, index) => (
+        window.__ROOSTER_TEST__.spawnEnemyType('kornkrabbler', 1000 + index * 3, 700, { speed: 0, damage: 0 })
+      ));
+      const enemies = window.__ROOSTER_TEST__.getEnemySnapshot();
+      const expected = Math.floor(enemies.reduce((sum, enemy) => sum + enemy.xpValue, 0));
+      ids.forEach((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 999));
+      return { expected, orbs: window.__ROOSTER_TEST__.getXpSnapshot() };
+    });
+    assert(bundledMicroXp.orbs.length <= 2,
+      'Micro-fodder emitted one XP orb per kill instead of bundled drops.', bundledMicroXp);
+    assert(bundledMicroXp.orbs.reduce((sum, orb) => sum + orb.value, 0) === bundledMicroXp.expected,
+      'Bundled micro-fodder XP did not match its fractional internal budget.', bundledMicroXp);
+
     const safeSpawns = await page.evaluate(() => {
       window.__ROOSTER_TEST__.movePlayer(50, 50);
       return Array.from({ length: 10 }, () => window.__ROOSTER_TEST__.spawnSafeEnemyType());
@@ -387,6 +431,7 @@ async function testWaveCuration(browser) {
 
     const clusteredXp = await page.evaluate(() => {
       window.__ROOSTER_TEST__.clearEnemies();
+      window.__ROOSTER_TEST__.clearXpOrbs();
       return window.__ROOSTER_TEST__.spawnXpCluster(20, 3, 1180, 720);
     });
     assert(clusteredXp.length <= 2, 'Nearby XP drops were not spatially consolidated.', clusteredXp);

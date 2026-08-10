@@ -1,5 +1,5 @@
 const DEFAULT_LIMITS = {
-  enemy: 140,
+  enemy: 170,
   projectile: 320,
   enemyProjectile: 240,
   xpOrb: 220,

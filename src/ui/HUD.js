@@ -81,6 +81,7 @@ export class HUD {
     this.onSettings = onSettings;
     this.onAnalyticsConsent = onAnalyticsConsent;
     this.onTalentPurchased = onTalentPurchased;
+    this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play' };
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     document.documentElement.style.setProperty('--ui-icon-columns', `${ICON_COLUMNS * 100}%`);
     document.documentElement.style.setProperty('--ui-icon-rows', `${ICON_ROWS * 100}%`);
@@ -263,51 +264,95 @@ export class HUD {
     const evoRows = (hub.lexicon?.evolutions ?? []).map((evolution) => `
       <li class="${evolution.discovered ? '' : 'is-undiscovered'}"><strong>${evolution.name}</strong><span>${evolution.base.replaceAll('-', ' ')} + ${evolution.passive.replaceAll('-', ' ')}</span></li>
     `).join('');
+    const unlockedDefinitions = definitions.filter((definition) => (
+      hub.roosters?.find((rooster) => rooster.id === definition.id)?.unlocked ?? true
+    ));
+    const selectedRoosterAvailable = unlockedDefinitions.some((definition) => definition.id === this.hubSelection.roosterId);
+    let selectedRoosterId = selectedRoosterAvailable
+      ? this.hubSelection.roosterId
+      : (unlockedDefinitions[0]?.id ?? definitions[0]?.id ?? 'ace');
+    if ((hub.challenges ?? []).some((challenge) => challenge.id === this.hubSelection.challengeId && challenge.unlocked)) {
+      selectedChallenge = this.hubSelection.challengeId;
+    }
+    this.hubSelection = { ...this.hubSelection, roosterId: selectedRoosterId, challengeId: selectedChallenge };
+    const roosterSwitches = definitions.map((definition) => {
+      const meta = hub.roosters?.find((rooster) => rooster.id === definition.id) ?? { unlocked: true };
+      return `<button type="button" class="hub-rooster-switch ${definition.id === selectedRoosterId ? 'is-selected' : ''}"
+        data-hub-rooster="${definition.id}" ${meta.unlocked ? '' : 'disabled'}
+        aria-label="${definition.name} auswählen">${definition.name}</button>`;
+    }).join('');
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
       <div class="panel rooster-panel henhouse-panel">
         <div class="henhouse-heading">
           <div><small>ROOSTER RAGE</small><h1>Hennenhuette</h1></div>
           <div class="henhouse-stats">
-            <span><strong>${progress.totalRuns}</strong> Runs</span>
-            <span><strong>${progress.victories}</strong> Siege</span>
-            <span><strong>${progress.totalKills}</strong> Kills</span>
             <span class="henhouse-kernels"><img src="${kernelCurrencyUrl}" alt=""><strong>${currency.kernels}</strong> Körner</span>
           </div>
-          <button type="button" class="henhouse-settings" data-hub-settings>Einstellungen</button>
+          <div class="henhouse-actions">
+            <button type="button" class="henhouse-settings" data-hub-fullscreen>Fullscreen</button>
+            <button type="button" class="henhouse-settings" data-hub-settings>Einstellungen</button>
+          </div>
         </div>
-        <p>Verdiene Körner in jedem Run, investiere sie in kleine dauerhafte Trainingsboni und steigere die Mastery deines Roosters.</p>
-        <details class="henhouse-meta" open>
-          <summary>Talentnest <small>${hub.talents?.totalRanks ?? 0} Ränge · ${currency.lifetimeKernels} Körner insgesamt verdient</small></summary>
+        <nav class="henhouse-nav" aria-label="Hennenhuette Bereiche">
+          <button type="button" data-hub-tab="play" class="is-selected">Spielen</button>
+          <button type="button" data-hub-tab="roosters">Hähne</button>
+          <button type="button" data-hub-tab="training">Training</button>
+          <button type="button" data-hub-tab="archive">Archiv</button>
+        </nav>
+        <section class="henhouse-view is-active" data-hub-view="play">
+          <div class="henhouse-play-grid">
+            <article class="hub-rooster-hero">
+              <div class="hub-rooster-hero__portrait">
+                <img data-hero-portrait alt="Ausgewählter Rooster">
+                <span class="hub-rooster-hero__shade"></span>
+                <img data-hero-mastery-badge class="hub-rooster-hero__badge" alt="Mastery-Wappen">
+              </div>
+              <div class="hub-rooster-hero__copy">
+                <small>DEIN ROOSTER</small>
+                <h2 data-hero-name></h2>
+                <strong data-hero-role></strong>
+                <p data-hero-description></p>
+                <div class="hub-rooster-mastery"><span data-hero-mastery></span><i><b data-hero-progress></b></i></div>
+                <div class="hub-rooster-switches">${roosterSwitches}</div>
+              </div>
+            </article>
+            <article class="hub-run-card">
+              <small data-run-arena>OPEN YARD</small>
+              <h2 data-run-challenge>STANDARD RUN</h2>
+              <p data-run-description></p>
+              <div class="hub-run-best"><span><small>BESTE JAGD</small><strong>${bests.highestKills} Kills</strong></span><span data-run-reward></span></div>
+              <div class="challenge-list hub-challenge-list">${challengeCards}</div>
+              <button type="button" class="hub-start-button" data-run-start><span>RUN STARTEN</span><small>Hof betreten</small></button>
+            </article>
+          </div>
+        </section>
+        <section class="henhouse-view" data-hub-view="roosters" hidden>
+          <div class="henhouse-section-heading"><span><small>ROOSTER</small><h2>Hähne</h2></span><p>Stats, Mastery, Kosmetik und Freischaltungen.</p></div>
+          <div class="rooster-list"></div>
+        </section>
+        <section class="henhouse-view" data-hub-view="training" hidden>
+          <div class="henhouse-section-heading"><span><small>DAUERHAFT</small><h2>Talentnest</h2></span><p>${hub.talents?.totalRanks ?? 0} Ränge · ${currency.lifetimeKernels} Körner insgesamt verdient</p></div>
           <div class="talent-tree">${talentNodes}</div>
-        </details>
-        <h2>Challenge</h2>
-        <div class="challenge-list">${challengeCards}</div>
-        <h2>Rooster</h2>
-        <div class="rooster-list"></div>
-        <div class="henhouse-drawers">
-          <details>
-            <summary>Bestwerte & Run-Historie</summary>
-            <div class="personal-bests">
-              <span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span>
-              <span><small>Laengster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span>
-              <span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span>
-            </div>
-            <ul class="history-list">${historyRows}</ul>
-          </details>
-          <details>
-            <summary>Gegner-Lexikon</summary>
-            <ul class="lexicon-list">${enemyRows}</ul>
-          </details>
-          <details>
-            <summary>EVO-Rezepte</summary>
-            <ul class="lexicon-list">${evoRows}</ul>
-          </details>
-        </div>
-        <div class="henhouse-privacy">
-          <span><strong>Anonyme Demo-Messung</strong><small>Nur Funnel und Run-Eckdaten, keine Konten, Cookies oder Werbe-IDs.</small></span>
-          <button type="button" data-analytics-toggle aria-pressed="${Boolean(hub.analytics?.enabled)}">${hub.analytics?.enabled ? 'AN' : 'AUS'}</button>
-        </div>
+        </section>
+        <section class="henhouse-view" data-hub-view="archive" hidden>
+          <div class="henhouse-section-heading"><span><small>FORTSCHRITT</small><h2>Archiv</h2></span><p>Bestwerte, letzte Runs und entdeckte Gegner/EVOs.</p></div>
+          <div class="henhouse-archive-stats">
+            <span><small>Runs</small><strong>${progress.totalRuns}</strong></span>
+            <span><small>Siege</small><strong>${progress.victories}</strong></span>
+            <span><small>Kills</small><strong>${progress.totalKills}</strong></span>
+            <span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span>
+          </div>
+          <div class="henhouse-drawers">
+            <details open><summary>Bestwerte & Run-Historie</summary><div class="personal-bests"><span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span><span><small>Längster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span><span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span></div><ul class="history-list">${historyRows}</ul></details>
+            <details><summary>Gegner-Lexikon</summary><ul class="lexicon-list">${enemyRows}</ul></details>
+            <details><summary>EVO-Rezepte</summary><ul class="lexicon-list">${evoRows}</ul></details>
+          </div>
+          <div class="henhouse-privacy">
+            <span><strong>Anonyme Demo-Messung</strong><small>Nur Funnel und Run-Eckdaten, keine Konten, Cookies oder Werbe-IDs.</small></span>
+            <button type="button" data-analytics-toggle aria-pressed="${Boolean(hub.analytics?.enabled)}">${hub.analytics?.enabled ? 'AN' : 'AUS'}</button>
+          </div>
+        </section>
       </div>
     `;
     const list = this.overlay.querySelector('.rooster-list');
@@ -316,6 +361,7 @@ export class HUD {
       button.addEventListener('click', () => this.onTalentPurchased?.(button.dataset.talent));
     });
     this.overlay.querySelector('[data-hub-settings]')?.addEventListener('click', () => this.onSettings?.());
+    this.overlay.querySelector('[data-hub-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
     definitions.forEach((definition) => {
       const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
         ?? { unlocked: true, cosmetics: [], runs: 0, wins: 0 };
@@ -324,7 +370,7 @@ export class HUD {
       const entry = document.createElement('div');
       entry.className = 'rooster-entry';
       const button = document.createElement('button');
-      button.className = `rooster-card rooster-card--${definition.id} ${meta.unlocked ? '' : 'is-locked'}`;
+      button.className = `rooster-card rooster-card--${definition.id} ${definition.id === selectedRoosterId ? 'is-selected' : ''} ${meta.unlocked ? '' : 'is-locked'}`;
       button.type = 'button';
       button.disabled = !meta.unlocked;
       button.innerHTML = `
@@ -355,7 +401,12 @@ export class HUD {
         <span class="rooster-card__progress">${meta.unlocked ? `${meta.runs} Runs · ${meta.wins} Siege` : `Gesperrt: ${meta.unlockLabel}`}</span>
       `;
       this.setIcon(button.querySelector('[data-rooster-icon]'), definition.icon);
-      button.addEventListener('click', () => this.onRoosterSelected?.(definition.id, selectedChallenge), { once: true });
+      button.addEventListener('click', () => {
+        selectedRoosterId = definition.id;
+        this.hubSelection.roosterId = definition.id;
+        updateSelectedRooster();
+        switchHubView('play');
+      });
       entry.append(button);
       if (meta.cosmetics?.length) {
         const cosmetics = document.createElement('div');
@@ -379,14 +430,74 @@ export class HUD {
       }
       list.append(entry);
     });
+    const updateSelectedRooster = () => {
+      const definition = definitions.find((candidate) => candidate.id === selectedRoosterId) ?? definitions[0];
+      const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
+        ?? { mastery: { level: 1, maxLevel: 5, progress: 0 } };
+      const mastery = meta.mastery ?? { level: 1, maxLevel: 5, progress: 0 };
+      const portrait = this.overlay.querySelector('[data-hero-portrait]');
+      portrait.src = ROOSTER_PORTRAITS[definition.id];
+      portrait.alt = `${definition.name} Portrait`;
+      const badge = this.overlay.querySelector('[data-hero-mastery-badge]');
+      badge.src = MASTERY_BADGES[definition.id];
+      badge.alt = `${definition.name} Mastery-Wappen`;
+      badge.classList.toggle('is-locked', !mastery.badgeUnlocked);
+      this.overlay.querySelector('[data-hero-name]').textContent = definition.name;
+      this.overlay.querySelector('[data-hero-role]').textContent = definition.role;
+      this.overlay.querySelector('[data-hero-description]').textContent = `${definition.primary.name}: ${definition.description}`;
+      this.overlay.querySelector('[data-hero-mastery]').textContent = `Mastery ${mastery.level}/${mastery.maxLevel}`;
+      this.overlay.querySelector('[data-hero-progress]').style.width = `${Math.round(mastery.progress * 100)}%`;
+      this.overlay.querySelectorAll('[data-hub-rooster]').forEach((candidate) => (
+        candidate.classList.toggle('is-selected', candidate.dataset.hubRooster === definition.id)
+      ));
+      this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
+        candidate.classList.toggle('is-selected', candidate.classList.contains(`rooster-card--${definition.id}`))
+      ));
+    };
+    const updateChallenge = () => {
+      const challenge = (hub.challenges ?? []).find((candidate) => candidate.id === selectedChallenge)
+        ?? hub.challenges?.[0];
+      if (!challenge) return;
+      this.overlay.querySelector('[data-run-arena]').textContent = (challenge.arenaId ?? 'Freie Arena').replaceAll('-', ' ').toUpperCase();
+      this.overlay.querySelector('[data-run-challenge]').textContent = challenge.name.toUpperCase();
+      this.overlay.querySelector('[data-run-description]').textContent = challenge.description;
+      this.overlay.querySelector('[data-run-reward]').innerHTML = `<small>BELOHNUNG</small><strong>${challenge.firstClearClaimed ? 'First Clear geschafft' : `+${challenge.firstClearReward} Körner`}</strong>`;
+      this.overlay.querySelectorAll('[data-challenge]').forEach((candidate) => (
+        candidate.classList.toggle('is-selected', candidate.dataset.challenge === challenge.id)
+      ));
+    };
+    const switchHubView = (view) => {
+      const target = this.overlay.querySelector(`[data-hub-view="${view}"]`) ? view : 'play';
+      this.hubSelection.view = target;
+      this.overlay.querySelectorAll('[data-hub-view]').forEach((section) => {
+        const active = section.dataset.hubView === target;
+        section.hidden = !active;
+        section.classList.toggle('is-active', active);
+      });
+      this.overlay.querySelectorAll('[data-hub-tab]').forEach((button) => (
+        button.classList.toggle('is-selected', button.dataset.hubTab === target)
+      ));
+    };
+    this.overlay.querySelectorAll('[data-hub-tab]').forEach((button) => {
+      button.addEventListener('click', () => switchHubView(button.dataset.hubTab));
+    });
+    this.overlay.querySelectorAll('[data-hub-rooster]').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedRoosterId = button.dataset.hubRooster;
+        this.hubSelection.roosterId = selectedRoosterId;
+        updateSelectedRooster();
+      });
+    });
     this.overlay.querySelectorAll('[data-challenge]').forEach((button) => {
       button.addEventListener('click', () => {
         selectedChallenge = button.dataset.challenge;
-        this.overlay.querySelectorAll('[data-challenge]').forEach((candidate) => (
-          candidate.classList.toggle('is-selected', candidate === button)
-        ));
+        this.hubSelection.challengeId = selectedChallenge;
+        updateChallenge();
       });
     });
+    this.overlay.querySelector('[data-run-start]')?.addEventListener('click', () => (
+      this.onRoosterSelected?.(selectedRoosterId, selectedChallenge)
+    ));
     this.overlay.querySelector('[data-analytics-toggle]')?.addEventListener('click', (event) => {
       const button = event.currentTarget;
       const next = button.getAttribute('aria-pressed') !== 'true';
@@ -394,6 +505,9 @@ export class HUD {
       button.setAttribute('aria-pressed', String(state.enabled));
       button.textContent = state.enabled ? 'AN' : 'AUS';
     });
+    updateSelectedRooster();
+    updateChallenge();
+    switchHubView(this.hubSelection.view);
   }
 
   showEndScreen(title, message, report = {}) {
