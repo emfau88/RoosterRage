@@ -7,6 +7,7 @@ const DANGER_RECOVERY_MS = 180;
 export class EnemyAttackSystem {
   constructor(scene) {
     this.scene = scene;
+    this.reservedNormalProjectiles = 0;
   }
 
   updateAuras(delta) {
@@ -58,6 +59,17 @@ export class EnemyAttackSystem {
 
   beginAbility(enemy, player) {
     const ability = enemy.ability;
+    const projectileCost = this.getNormalProjectileCost(enemy, ability);
+    if (projectileCost > 0 && !this.reserveNormalProjectiles(projectileCost)) {
+      enemy.nextAbilityAt = this.scene.time.now + 260;
+      this.scene.telemetry.record('enemyAbilityDeferred', this.scene.time.now, {
+        wave: this.scene.waveSystem.currentWave,
+        enemyType: enemy.type,
+        ability: ability.kind,
+        projectileCost
+      });
+      return;
+    }
     const heavy = ability.heavy ?? ability.kind === 'slam';
     const minimumTelegraph = heavy
       ? ENCOUNTER_STANDARDS.heavyTelegraphMs
@@ -77,6 +89,7 @@ export class EnemyAttackSystem {
       this.scene.audio.play('summoner-charge');
     }
     this.scene.time.delayedCall(telegraphMs, () => {
+      this.releaseNormalProjectiles(projectileCost);
       if (!enemy.sprite.active || !player.sprite.active || enemy.ability !== ability) {
         return;
       }
@@ -109,6 +122,26 @@ export class EnemyAttackSystem {
         ability: ability.kind
       });
     });
+  }
+
+  getNormalProjectileCost(enemy, ability) {
+    if (enemy.elite || enemy.boss || !['shoot', 'fan'].includes(ability.kind)) {
+      return 0;
+    }
+    return ability.kind === 'fan' ? ability.count ?? 3 : 1;
+  }
+
+  reserveNormalProjectiles(count) {
+    const active = this.scene.enemyProjectiles.filter((projectile) => projectile.sprite.active).length;
+    if (active + this.reservedNormalProjectiles + count > ENCOUNTER_STANDARDS.normalProjectileBudget) {
+      return false;
+    }
+    this.reservedNormalProjectiles += count;
+    return true;
+  }
+
+  releaseNormalProjectiles(count) {
+    this.reservedNormalProjectiles = Math.max(0, this.reservedNormalProjectiles - count);
   }
 
   updateBoss(enemy, player) {

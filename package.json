@@ -20,6 +20,7 @@
     "test:weapon-progression": "node tests/weapon-progression-runner.mjs",
     "test:arena": "node tests/arena-runner.mjs",
     "test:encounter": "node tests/encounter-runner.mjs",
+    "test:pressure": "node tests/pressure-runner.mjs",
     "test:hud-report": "node tests/hud-report-runner.mjs",
     "test:rooster-depth": "node tests/rooster-depth-runner.mjs",
     "test:meta": "node tests/meta-runner.mjs",

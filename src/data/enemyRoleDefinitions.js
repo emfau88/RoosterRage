@@ -12,6 +12,7 @@ export const ENEMY_ROLE_MATRIX = Object.freeze([
 export const ENCOUNTER_STANDARDS = Object.freeze({
   normalTelegraphMs: 300,
   heavyTelegraphMs: 500,
+  normalProjectileBudget: 12,
   playerProtectionRadius: 140,
   eliteAnnouncementMs: 1700,
   bossEntryProtectionMs: 1300

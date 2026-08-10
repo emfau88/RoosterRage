@@ -52,6 +52,7 @@ async function verifyCatalog(browser, serverUrl) {
     ]), 'Enemy role matrix is incomplete.', result.roles);
     assert(result.standards.normalTelegraphMs >= 300
       && result.standards.heavyTelegraphMs >= 500
+      && result.standards.normalProjectileBudget === 12
       && result.standards.playerProtectionRadius >= 140,
     'Encounter reaction standards are below the roadmap gate.', result.standards);
     result.waves.slice(0, 4).forEach((wave) => assert(
@@ -64,11 +65,53 @@ async function verifyCatalog(browser, serverUrl) {
       `Late wave ${wave.wave} exceeds three primary danger roles.`,
       wave
     ));
+    result.waves.slice(3, 9).forEach((wave) => {
+      const normalShooters = (wave.roleCounts.shooter ?? 0) + (wave.roleCounts['area-denial'] ?? 0);
+      const shooterShare = normalShooters / wave.count;
+      assert(shooterShare >= 0.05 && shooterShare <= 0.1,
+        `Wave ${wave.wave} normal shooter share is outside the 5-10% pressure target.`,
+        { shooterShare, wave });
+    });
     assert(result.waves.some((wave) => wave.roleCounts.support > 0)
       && result.waves.some((wave) => wave.roleCounts.summoner > 0),
     'Support and summoner roles are absent from curated waves.', result.waves);
     assert(errors.length === 0, 'Browser errors in encounter catalog gate.', errors);
     return result;
+  } finally {
+    await page.close();
+  }
+}
+
+async function verifyNormalProjectileBudget(browser, serverUrl) {
+  const { page, errors } = await openGame(browser, serverUrl, 'projectile-budget');
+  try {
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      for (let index = 0; index < 10; index += 1) {
+        api.spawnEnemyType('fan-spitter', 940 + (index % 2) * 100, 180 + index * 55, {
+          speed: 0,
+          damage: 0,
+          hp: 9999
+        });
+      }
+    });
+    await page.waitForTimeout(950);
+    const result = await page.evaluate(() => ({
+      telemetry: window.__ROOSTER_TEST__.getTelemetry(),
+      events: window.__ROOSTER_TEST__.getEncounterEvents(),
+      projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot().length
+    }));
+    const deferred = result.events.filter((event) => event.type === 'enemyAbilityDeferred').length;
+    assert(result.telemetry.peakEnemyProjectiles <= 12 && result.projectiles <= 12,
+      'Normal encounter projectile budget was exceeded.', result);
+    assert(deferred > 0 && result.telemetry.enemyAttacksDeferred > 0,
+      'Projectile pressure did not defer overlapping normal volleys.', result);
+    assert(errors.length === 0, 'Browser errors in projectile budget gate.', errors);
+    return {
+      budget: 12,
+      peak: result.telemetry.peakEnemyProjectiles,
+      deferred
+    };
   } finally {
     await page.close();
   }
@@ -283,6 +326,7 @@ async function run() {
     const report = {
       generatedAt: new Date().toISOString(),
       catalog: await verifyCatalog(browser, serverState.url),
+      projectileBudget: await verifyNormalProjectileBudget(browser, serverState.url),
       elites: [],
       protectionAndBoss: null,
       matrix: null
@@ -298,6 +342,7 @@ async function run() {
     console.log(JSON.stringify({
       roles: report.catalog.roles.map((role) => role.id),
       standards: report.catalog.standards,
+      projectileBudget: report.projectileBudget,
       elites: report.elites,
       boss: report.protectionAndBoss,
       matrixCases: report.matrix.length

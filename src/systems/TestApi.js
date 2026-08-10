@@ -221,6 +221,7 @@ export function installTestApi(scene) {
     getEncounterEvents: () => scene.telemetry.getEventSequence([
       'enemyTelegraphShown',
       'enemyAbilityFired',
+      'enemyAbilityDeferred',
       'enemyProjectileSuppressed',
       'bossEntered',
       'bossPhaseStarted',

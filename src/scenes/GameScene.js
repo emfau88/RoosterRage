@@ -628,6 +628,8 @@ export class GameScene extends Phaser.Scene {
       enemyHazardsAlive: this.enemyProjectiles.length
         + this.combatFeedback.activeTelegraphs
         + this.enemyDangerZones.length,
+      playerX: this.player.sprite.x,
+      playerY: this.player.sprite.y,
       hpRatio: this.player.hp / this.player.maxHp,
       nearestEnemyDistance,
       objects,

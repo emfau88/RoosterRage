@@ -344,12 +344,12 @@ async function testWaveCuration(browser) {
       { slime: 30 },
       { slime: 26, runner: 12 },
       { slime: 24, runner: 17, brute: 4, 'elite-runner': 1 },
-      { slime: 31, runner: 14, spitter: 10 },
-      { slime: 35, runner: 16, 'fan-spitter': 10, brute: 4 },
-      { slime: 28, runner: 24, 'fan-spitter': 14, brute: 9, 'elite-runner': 1 },
-      { slime: 40, bomber: 20, 'fan-spitter': 16, support: 5, summoner: 4 },
-      { slime: 45, runner: 24, spitter: 15, support: 6, summoner: 5, 'elite-spitter': 1 },
-      { slime: 59, brute: 20, 'fan-spitter': 18, support: 6, summoner: 8, 'elite-brute': 1 },
+      { slime: 36, runner: 14, spitter: 5 },
+      { slime: 40, runner: 16, 'fan-spitter': 5, brute: 4 },
+      { slime: 36, runner: 24, 'fan-spitter': 6, brute: 9, 'elite-runner': 1 },
+      { slime: 53, bomber: 20, 'fan-spitter': 5, support: 5, summoner: 2 },
+      { slime: 57, runner: 24, spitter: 6, support: 6, summoner: 2, 'elite-spitter': 1 },
+      { slime: 77, brute: 20, 'fan-spitter': 6, support: 6, summoner: 2, 'elite-brute': 1 },
       { boss: 1 }
     ];
     assert(catalog.length === 10, 'Wave catalog should contain exactly ten waves.', catalog);

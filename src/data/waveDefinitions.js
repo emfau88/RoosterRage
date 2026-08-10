@@ -83,9 +83,9 @@ export const WAVE_DEFINITIONS = [
     pressureCurve: pressureCurve({ opening: 3, pressure: 5, finale: 6 }),
     xpCurve: xpCurve(3),
     composition: [
-      { count: 31, enemy: { kind: 'slime' } },
+      { count: 36, enemy: { kind: 'slime' } },
       { count: 14, enemy: { kind: 'runner' } },
-      { count: 10, enemy: { kind: 'spitter' } }
+      { count: 5, enemy: { kind: 'spitter' } }
     ]
   },
   {
@@ -102,9 +102,9 @@ export const WAVE_DEFINITIONS = [
     pressureCurve: pressureCurve({ opening: 3, pressure: 5, finale: 7, finalePattern: 'rusher-line' }),
     xpCurve: xpCurve(3),
     composition: [
-      { count: 35, enemy: { kind: 'slime' } },
+      { count: 40, enemy: { kind: 'slime' } },
       { count: 16, enemy: { kind: 'runner' } },
-      { count: 10, enemy: { kind: 'fan-spitter' } },
+      { count: 5, enemy: { kind: 'fan-spitter' } },
       { count: 4, enemy: { kind: 'brute' } }
     ]
   },
@@ -123,9 +123,9 @@ export const WAVE_DEFINITIONS = [
     xpCurve: xpCurve(3),
     elites: [{ kind: 'elite-runner' }],
     composition: [
-      { count: 28, enemy: { kind: 'slime' } },
+      { count: 36, enemy: { kind: 'slime' } },
       { count: 24, enemy: { kind: 'runner' } },
-      { count: 14, enemy: { kind: 'fan-spitter' } },
+      { count: 6, enemy: { kind: 'fan-spitter' } },
       { count: 9, enemy: { kind: 'brute' } }
     ]
   },
@@ -143,11 +143,11 @@ export const WAVE_DEFINITIONS = [
     pressureCurve: pressureCurve({ opening: 4, pressure: 7, finale: 9, finalePattern: 'surround' }),
     xpCurve: xpCurve(4),
     composition: [
-      { count: 40, enemy: { kind: 'slime' } },
+      { count: 53, enemy: { kind: 'slime' } },
       { count: 20, enemy: { kind: 'bomber' } },
-      { count: 16, enemy: { kind: 'fan-spitter' } },
+      { count: 5, enemy: { kind: 'fan-spitter' } },
       { count: 5, enemy: { kind: 'support' } },
-      { count: 4, enemy: { kind: 'summoner' } }
+      { count: 2, enemy: { kind: 'summoner' } }
     ]
   },
   {
@@ -165,11 +165,11 @@ export const WAVE_DEFINITIONS = [
     xpCurve: xpCurve(4),
     elites: [{ kind: 'elite-spitter' }],
     composition: [
-      { count: 45, enemy: { kind: 'slime' } },
+      { count: 57, enemy: { kind: 'slime' } },
       { count: 24, enemy: { kind: 'runner' } },
-      { count: 15, enemy: { kind: 'spitter' } },
+      { count: 6, enemy: { kind: 'spitter' } },
       { count: 6, enemy: { kind: 'support' } },
-      { count: 5, enemy: { kind: 'summoner' } }
+      { count: 2, enemy: { kind: 'summoner' } }
     ]
   },
   {
@@ -187,11 +187,11 @@ export const WAVE_DEFINITIONS = [
     xpCurve: xpCurve(4),
     elites: [{ kind: 'elite-brute' }],
     composition: [
-      { count: 59, enemy: { kind: 'slime' } },
+      { count: 77, enemy: { kind: 'slime' } },
       { count: 20, enemy: { kind: 'brute' } },
-      { count: 18, enemy: { kind: 'fan-spitter' } },
+      { count: 6, enemy: { kind: 'fan-spitter' } },
       { count: 6, enemy: { kind: 'support' } },
-      { count: 8, enemy: { kind: 'summoner' } }
+      { count: 2, enemy: { kind: 'summoner' } }
     ]
   },
   {

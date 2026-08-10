@@ -58,6 +58,7 @@ export class Telemetry {
       projectileHitsTaken: 0,
       projectileDamageTaken: 0,
       projectileDeaths: 0,
+      enemyAttacksDeferred: 0,
       deathCause: null,
       xpCollected: 0,
       levelUps: 0,
@@ -76,6 +77,7 @@ export class Telemetry {
       enemyProjectileSamples: 0,
       enemyProjectileTotal: 0,
       peakEnemyProjectiles: 0,
+      playerDistanceTravelled: 0,
       peakEnemyHazards: 0,
       peakObjects: {},
       maxIdleMs: 0,
@@ -88,6 +90,7 @@ export class Telemetry {
       outcome: 'running'
     };
     this.lastSampleTime = 0;
+    this.lastPlayerPosition = null;
   }
 
   record(type, time, payload = {}) {
@@ -152,6 +155,9 @@ export class Telemetry {
     if (type === 'levelUp') stat.levelUps += 1;
     if (type === 'upgradeOffered' && payload.selectionType === 'level') stat.upgradeOffers += 1;
     if (type === 'upgradeChosen' && payload.selectionType === 'level') stat.upgradeChoices += 1;
+    if (type === 'enemyAbilityDeferred') {
+      this.summary.enemyAttacksDeferred += 1;
+    }
   }
 
   sample(time, state) {
@@ -174,6 +180,15 @@ export class Telemetry {
     this.summary.enemyProjectileSamples += 1;
     this.summary.enemyProjectileTotal += enemyProjectiles;
     this.summary.peakEnemyProjectiles = Math.max(this.summary.peakEnemyProjectiles, enemyProjectiles);
+    if (Number.isFinite(state.playerX) && Number.isFinite(state.playerY)) {
+      if (this.lastPlayerPosition && delta > 0 && delta < 1000) {
+        this.summary.playerDistanceTravelled += Math.hypot(
+          state.playerX - this.lastPlayerPosition.x,
+          state.playerY - this.lastPlayerPosition.y
+        );
+      }
+      this.lastPlayerPosition = { x: state.playerX, y: state.playerY };
+    }
     this.summary.peakEnemyHazards = Math.max(this.summary.peakEnemyHazards, enemyHazards);
     this.summary.minHpRatio = Math.min(this.summary.minHpRatio, state.hpRatio);
     Object.entries(state.objects ?? {}).forEach(([key, value]) => {
@@ -474,6 +489,7 @@ export class Telemetry {
   }
 
   getSummary(now = 0) {
+    const elapsedMs = Math.max(1, (this.summary.endedAt ?? now) - this.summary.startedAt);
     const waveStats = Array.from(this.waveStats.values()).map((wave) => ({
       ...wave,
       averageEnemyProjectiles: wave.enemyProjectileSamples > 0
@@ -496,12 +512,13 @@ export class Telemetry {
       averageEnemyProjectiles: this.summary.enemyProjectileSamples > 0
         ? this.summary.enemyProjectileTotal / this.summary.enemyProjectileSamples
         : 0,
+      averagePlayerSpeed: this.summary.playerDistanceTravelled / (elapsedMs / 1000),
       peakObjects: cloneObjectStats(this.summary.peakObjects),
       frameTimes: this.getFrameStats(),
       ttkByEnemyType: this.getTtkStats(),
       progression: this.getProgressionStats(now),
       combatSources: this.getCombatSourceReport(),
-      elapsedMs: (this.summary.endedAt ?? now) - this.summary.startedAt,
+      elapsedMs,
       waves: waveStats,
       eventCount: this.events.length
     };
