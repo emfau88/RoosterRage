@@ -1036,6 +1036,14 @@ canvas {
   gap: 7px;
 }
 
+.settings-panel h3 {
+  margin: 15px 0 7px;
+  color: #ffd35c;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .settings-list button,
 .settings-close {
   display: flex;
@@ -1056,6 +1064,40 @@ canvas {
 
 .settings-list button[aria-pressed="false"] strong {
   color: #ff7080;
+}
+
+.henhouse-settings {
+  align-self: center;
+  border: 1px solid rgba(255, 229, 136, 0.55);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  color: #fff4cf;
+  background: rgba(34, 25, 18, 0.72);
+  font: 700 0.78rem/1 system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.settings-volume {
+  display: grid;
+  grid-template-columns: minmax(92px, 1fr) minmax(110px, 1.5fr) 42px;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.settings-volume input {
+  width: 100%;
+  accent-color: #ffd35c;
+}
+
+.settings-volume strong {
+  color: #bfefff;
+  font-size: 0.82rem;
+  text-align: right;
 }
 
 .settings-close {

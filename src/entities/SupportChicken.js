@@ -59,7 +59,10 @@ export class SupportChicken {
         pierce: this.pierce,
         ricochet: this.ricochet,
         slowRatio: this.slowRatio,
-        slowMs: this.slowMs
+        slowMs: this.slowMs,
+        sfx: 'egg-launch-ace',
+        sfxVolume: 0.08,
+        sfxCooldown: 180
       });
     }
     this.nextShotAt = this.scene.time.now + this.fireRate;

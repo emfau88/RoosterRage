@@ -64,7 +64,7 @@ export class CombatSystem {
       scene.showShotFeedback(angle, shot.laneOffset);
     });
     scene.lastShotAt = time;
-    scene.audio.play('egg-shot');
+    scene.audio.play(`egg-launch-${scene.player.roosterId}`);
     scene.debugStats.shots += pattern.length;
     scene.debugStats.lastShotAt = time;
     scene.telemetry.addShot(pattern.length, time, scene.waveSystem.currentWave, source);
@@ -187,7 +187,10 @@ export class CombatSystem {
     scene.projectileGroup.add(projectile.sprite);
     projectile.setVelocity(angle);
     scene.showShotFeedback(angle, 0);
-    scene.audio.play(options.sfx ?? 'egg-shot', { volume: options.sfxVolume });
+    scene.audio.play(options.sfx ?? 'egg-launch-ace', {
+      volume: options.sfxVolume,
+      cooldown: options.sfxCooldown
+    });
     scene.debugStats.specialShots += 1;
     scene.telemetry.addShot(1, scene.time.now, scene.waveSystem.currentWave, options.source ?? 'special-projectile');
     return projectile;
@@ -336,6 +339,7 @@ export class CombatSystem {
         duration: 150,
         onComplete: () => bolt.destroy()
       });
+      this.scene.audio.play('lightning-chain', { cooldown: 90 });
       this.damageEnemy(nextTarget, chainDamage, targetX, targetY, {
         source: `${projectile.source}:chain`
       });
@@ -399,10 +403,15 @@ export class CombatSystem {
     }
     const appliedDamage = enemy.mitigateDamage?.(damage) ?? damage;
     scene.showHitFeedback(x, y, appliedDamage, enemy, options);
-    scene.audio.play('enemy-hit');
+    const source = options.source ?? 'base-egg';
+    const eggImpact = /^(base-egg|fire-eggs|golden-egg|support-chick|evo-solar-scramble|evo-chick-squadron|evo-sunshot-array|evo-siegebreaker-shell|evo-tempest-crown)/.test(source);
+    if (eggImpact) {
+      scene.audio.playVariant('egg-impact');
+    } else {
+      scene.audio.play('enemy-hit');
+    }
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;
-    const source = options.source ?? 'base-egg';
     const hpBefore = Math.max(0, enemy.hp);
     const effective = Math.min(hpBefore, appliedDamage);
     const overkill = Math.max(0, appliedDamage - hpBefore);

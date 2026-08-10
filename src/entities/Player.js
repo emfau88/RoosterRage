@@ -115,7 +115,7 @@ export class Player {
     if (this.scene.effects.enabled('screenFlash')) {
       this.scene.cameras.main.flash(140, 255, 226, 115, false);
     }
-    this.scene.audio?.play('level-up', { volume: 0.26, cooldown: 250 });
+    this.scene.audio?.play('second-wind');
   }
 
   regenerate() {

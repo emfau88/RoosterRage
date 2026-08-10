@@ -105,8 +105,8 @@ export class HUD {
         <div class="hud__upgrades hud__upgrades--passive" data-passive-loadout></div>
       </div>
       <div class="hud__controls">
-        <button class="hud__icon-button" type="button" data-settings title="Effekte" aria-label="Effekte">
-          <span class="settings-glyph" aria-hidden="true">FX</span>
+        <button class="hud__icon-button" type="button" data-settings title="Einstellungen" aria-label="Einstellungen">
+          <span class="settings-glyph" aria-hidden="true">SET</span>
         </button>
         <button class="hud__icon-button" type="button" data-fullscreen title="Fullscreen" aria-label="Fullscreen">
           <span class="fullscreen-glyph" aria-hidden="true"></span>
@@ -251,6 +251,7 @@ export class HUD {
             <span><strong>${progress.victories}</strong> Siege</span>
             <span><strong>${progress.totalKills}</strong> Kills</span>
           </div>
+          <button type="button" class="henhouse-settings" data-hub-settings>Einstellungen</button>
         </div>
         <p>Waehle Challenge und Rooster. Fortschritt schaltet nur neue Optionen frei, keine Pflicht-Stats.</p>
         <h2>Challenge</h2>
@@ -283,6 +284,7 @@ export class HUD {
       </div>
     `;
     const list = this.overlay.querySelector('.rooster-list');
+    this.overlay.querySelector('[data-hub-settings]')?.addEventListener('click', () => this.onSettings?.());
     definitions.forEach((definition) => {
       const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
         ?? { unlocked: true, cosmetics: [], runs: 0, wins: 0 };
@@ -413,31 +415,55 @@ export class HUD {
     this.overlay.querySelector('button').addEventListener('click', this.onRestart);
   }
 
-  showEffectSettings(settings, onToggle, onClose) {
+  showSettings(effectSettings, audioSettings, onEffectToggle, onAudioChange, onClose) {
     const labels = {
       damageNumbers: 'Damage Numbers',
       screenShake: 'Screen Shake',
       screenFlash: 'Screen Flash',
       vibration: 'Vibration'
     };
+    const audioLabels = {
+      master: 'Master',
+      sfx: 'Soundeffekte',
+      ui: 'UI',
+      music: 'Musik',
+      ambience: 'Ambiente'
+    };
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
       <div class="panel settings-panel">
-        <h2>Effekte</h2>
-        <p>Jeden Reiz einzeln reduzieren.</p>
+        <h2>Einstellungen</h2>
+        <p>Darstellung und Audio getrennt anpassen.</p>
+        <h3>Darstellung</h3>
         <div class="settings-list">
           ${Object.entries(labels).map(([key, label]) => `
-            <button type="button" data-effect="${key}" aria-pressed="${settings[key]}">
-              <span>${label}</span><strong>${settings[key] ? 'AN' : 'AUS'}</strong>
+            <button type="button" data-effect="${key}" aria-pressed="${effectSettings[key]}">
+              <span>${label}</span><strong>${effectSettings[key] ? 'AN' : 'AUS'}</strong>
             </button>`).join('')}
+        </div>
+        <h3>Audio</h3>
+        <div class="settings-list settings-list--audio">
+          ${Object.entries(audioLabels).map(([key, label]) => `
+            <label class="settings-volume">
+              <span>${label}</span>
+              <input type="range" min="0" max="1" step="0.05" value="${audioSettings[key]}"
+                data-audio-volume="${key}" aria-label="${label} Lautstaerke">
+              <strong>${Math.round(audioSettings[key] * 100)}%</strong>
+            </label>`).join('')}
         </div>
         <button class="settings-close" type="button">Weiter</button>
       </div>`;
     this.overlay.querySelectorAll('[data-effect]').forEach((button) => {
       button.addEventListener('click', () => {
-        const next = onToggle?.(button.dataset.effect) ?? settings;
+        const next = onEffectToggle?.(button.dataset.effect) ?? effectSettings;
         button.setAttribute('aria-pressed', String(next[button.dataset.effect]));
         button.querySelector('strong').textContent = next[button.dataset.effect] ? 'AN' : 'AUS';
+      });
+    });
+    this.overlay.querySelectorAll('[data-audio-volume]').forEach((input) => {
+      input.addEventListener('input', () => {
+        const next = onAudioChange?.(input.dataset.audioVolume, Number(input.value)) ?? audioSettings;
+        input.closest('.settings-volume').querySelector('strong').textContent = `${Math.round(next[input.dataset.audioVolume] * 100)}%`;
       });
     });
     this.overlay.querySelector('.settings-close').addEventListener('click', () => onClose?.(), { once: true });

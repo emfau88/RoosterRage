@@ -32,6 +32,7 @@ export class RunStateSystem {
         if (this.scene.meta.selectCosmetic(roosterId, cosmeticId)) renderHub();
       }
     );
+    this.renderHub = renderHub;
     renderHub();
   }
 
@@ -44,6 +45,10 @@ export class RunStateSystem {
       return false;
     }
     this.choosingRooster = false;
+    this.scene.audio.play('ui-confirm');
+    this.scene.audio.play('rooster-crow');
+    this.scene.audio.stopAmbience(650);
+    this.scene.audio.playMusic('run-theme', { fadeMs: 750 });
     this.scene.hud.hideOverlay();
     this.scene.physics.resume();
     this.scene.waveSystem.start();
@@ -122,6 +127,7 @@ export class RunStateSystem {
     }
     const { scene } = this;
     this.rerollsRemaining -= 1;
+    scene.audio.play('ui-reroll');
     this.pendingUpgradeChoices = this.currentSelection.type === 'chest'
       ? scene.upgradeSystem.getRewardChoices(
         this.currentSelection.kind === 'boss' ? 4 : 3,
@@ -151,6 +157,7 @@ export class RunStateSystem {
     const selection = this.currentSelection;
     const pauseMs = this.upgradeStartedAt ? scene.time.now - this.upgradeStartedAt : 0;
     scene.player.applyUpgrade(upgrade, scene);
+    if (upgrade.category !== 'evolution') scene.audio.play('upgrade-select');
     scene.telemetry.addUpgradeChoice(
       scene.time.now,
       scene.waveSystem.currentWave,
@@ -232,6 +239,13 @@ export class RunStateSystem {
     }
     this.gameEnded = true;
     this.scene.physics.pause();
+    this.scene.audio.stopAmbience(250);
+    this.scene.audio.stopMusic(outcome === 'victory' ? 700 : 450);
+    if (outcome === 'victory') {
+      this.scene.time.delayedCall(560, () => this.scene.audio.play('victory'));
+    } else {
+      this.scene.audio.play('ui-denied', { volume: 0.34, priority: true });
+    }
     this.scene.telemetry.finish(this.scene.time.now, outcome);
     const report = this.getRunReport();
     this.scene.productAnalytics.finishRun(report);

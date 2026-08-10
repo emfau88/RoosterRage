@@ -159,7 +159,7 @@ export class GameScene extends Phaser.Scene {
       () => this.toggleFullscreen(),
       (roosterId, selectedChallenge) => this.startRunFromHub(roosterId, selectedChallenge),
       () => this.rerollUpgradeChoices(),
-      () => this.openEffectSettings(),
+      () => this.openSettings(),
       (enabled) => this.productAnalytics.setConsent(enabled)
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
@@ -167,6 +167,8 @@ export class GameScene extends Phaser.Scene {
     this.setupTouchInput();
     this.setupPhysics();
     installTestApi(this);
+    this.audio.playMusic('menu-theme', { fadeMs: 700 });
+    this.audio.playAmbience('menu-coop', { fadeMs: 900, volume: 0.52 });
     this.runState.startRoosterSelection(this.roosterClasses.getDefinitions());
     if (this.launchConfig.roosterId) {
       this.chooseRooster(this.launchConfig.roosterId);
@@ -234,20 +236,34 @@ export class GameScene extends Phaser.Scene {
     return this.runState?.pendingUpgradeChoices ?? null;
   }
 
-  openEffectSettings() {
-    if (this.isChoosingRooster || this.gameEnded || this.isChoosingUpgrade) return false;
+  openSettings() {
+    if (this.gameEnded || this.isChoosingUpgrade) return false;
+    const returnToHub = this.isChoosingRooster;
+    this.audio.play('ui-navigate');
     this.isSettingsOpen = true;
     this.physics.pause();
-    this.hud.showEffectSettings(
+    this.hud.showSettings(
       this.effects.getState(),
+      this.audio.getSettings(),
       (key) => {
         this.effects.toggle(key);
+        this.audio.play('ui-toggle');
         return this.effects.getState();
       },
+      (key, value) => {
+        this.audio.setVolume(key, value);
+        this.audio.play('ui-toggle', { cooldown: 110 });
+        return this.audio.getSettings();
+      },
       () => {
+        this.audio.play('ui-back');
         this.isSettingsOpen = false;
-        this.hud.hideOverlay();
-        this.physics.resume();
+        if (returnToHub) {
+          this.runState.renderHub?.();
+        } else {
+          this.hud.hideOverlay();
+          this.physics.resume();
+        }
       }
     );
     return true;
@@ -266,6 +282,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   toggleFullscreen() {
+    this.audio.play('ui-toggle');
     const root = document.documentElement;
     if (document.fullscreenElement) {
       document.exitFullscreen?.();
@@ -386,6 +403,7 @@ export class GameScene extends Phaser.Scene {
       ? this.roosterClasses.evolvePrimary(baseId, evolutionId)
       : this.activeAbilities.evolve(baseId, evolutionId);
     if (evolved) {
+      this.audio.play('evolution');
       this.telemetry.record('abilityEvolved', this.time.now, {
         wave: this.waveSystem.currentWave,
         baseId,
@@ -530,7 +548,16 @@ export class GameScene extends Phaser.Scene {
 
   onWaveStarted(wave, config) {
     this.hud.showWaveBanner(wave, config);
-    if (config.bossWave) this.productAnalytics.trackBossReached(wave);
+    if (config.bossWave) {
+      this.productAnalytics.trackBossReached(wave);
+      this.audio.stopAmbience(350);
+      this.audio.playMusic('boss-theme', { fadeMs: 850 });
+      this.audio.play('boss-roar');
+    } else if (config.elites?.length) {
+      this.audio.play('elite-entry', { cooldown: 800 });
+    } else if (wave > 1) {
+      this.audio.play('ui-navigate', { volume: 0.12, cooldown: 300 });
+    }
     this.telemetry.record('waveStarted', this.time.now, {
       wave,
       name: config.name,
@@ -606,6 +633,7 @@ export class GameScene extends Phaser.Scene {
     this.scale.off(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
     this.playerInput?.destroy();
     this.roosterClasses?.destroy();
+    this.audio?.destroy();
     removeTestApi();
     this.hud?.destroy();
     this.objectPools?.destroy();

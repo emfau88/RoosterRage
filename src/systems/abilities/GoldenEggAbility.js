@@ -35,7 +35,7 @@ export class GoldenEggAbility extends TimedAbility {
       trailAlpha: this.evolved ? 0.42 : 0.28,
       homing: true,
       maxTurnRate: 0.045,
-      sfx: 'egg-shot',
+      sfx: 'egg-launch-ace',
       sfxVolume: 0.16,
       source: this.evolved ? 'evo-solar-scramble' : 'golden-egg'
       });

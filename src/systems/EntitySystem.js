@@ -121,8 +121,11 @@ export class EntitySystem {
     }
     if (enemy.explodeOnDeath) {
       this.scene.explodeEnemy(enemy);
+    } else if (enemy.type === 'boss') {
+      this.scene.audio.play('boss-roar', { rate: 0.82, volume: 0.32, cooldown: 0 });
+      this.scene.audio.play('boss-phase', { rate: 0.72, volume: 0.2, cooldown: 0 });
     } else {
-      this.scene.audio.play(enemy.type === 'boss' ? 'rocket-explosion' : 'enemy-pop');
+      this.scene.audio.play('enemy-pop');
     }
     this.spawnXp(enemy.sprite.x, enemy.sprite.y, enemy.xpValue);
     this.scene.debugStats.kills += 1;

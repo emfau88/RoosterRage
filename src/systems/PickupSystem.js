@@ -100,6 +100,7 @@ export class PickupSystem {
         pickup.destroy();
       });
     } else {
+      scene.audio.play(`pickup-${kind}`);
       this.playCollectFx(kind, pickup.sprite.x, pickup.sprite.y);
       pickup.destroy();
     }

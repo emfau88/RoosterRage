@@ -26,7 +26,7 @@ export class MolotovEggAbility extends TimedAbility {
         this.rank
       ));
     });
-    this.scene.audio.play('egg-shot', { volume: 0.14, cooldown: 160 });
+    this.scene.audio.play('egg-launch-artillery', { volume: 0.14, cooldown: 160 });
     this.nextAt = time + (this.evolved ? 3900 : Math.max(3200, 6400 - this.rank * 700));
   }
 

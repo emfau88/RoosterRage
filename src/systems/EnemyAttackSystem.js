@@ -73,6 +73,9 @@ export class EnemyAttackSystem {
       radial: ability.kind === 'slam',
       radius: ability.radius
     });
+    if (ability.kind === 'summon') {
+      this.scene.audio.play('summoner-charge');
+    }
     this.scene.time.delayedCall(telegraphMs, () => {
       enemy.abilityCharging = false;
       if (!enemy.sprite.active || !player.sprite.active) {
@@ -86,11 +89,14 @@ export class EnemyAttackSystem {
         player.sprite.y
       );
       if (ability.kind === 'shoot') {
+        this.scene.audio.play('spitter-shot');
         this.showMuzzleFlash(enemy.sprite.x, enemy.sprite.y, angle, ability);
         this.spawnProjectile(enemy.sprite.x, enemy.sprite.y, angle, ability);
       } else if (ability.kind === 'fan') {
+        this.scene.audio.play('spitter-shot');
         this.fireFan(enemy, angle);
       } else if (ability.kind === 'summon') {
+        this.scene.audio.play('summoner-spawn');
         this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, ability.count ?? 2);
       } else if (ability.kind === 'dash') {
         enemy.beginDash(angle, ability.speed ?? 430, ability.duration ?? 480);
@@ -124,6 +130,7 @@ export class EnemyAttackSystem {
         enemy.heavyProjectile.telegraphMs ?? ENCOUNTER_STANDARDS.heavyTelegraphMs
       );
       enemy.heavyCharging = true;
+      this.scene.audio.play('summoner-charge', { rate: 0.72, volume: 0.16 });
       enemy.nextHeavyAttackAt = this.scene.time.now + (enemy.heavyProjectile.cooldown ?? 4300);
       this.scene.combatFeedback.showEnemyTelegraph(enemy, player, enemy.heavyProjectile, {
         duration: telegraphMs,
@@ -146,6 +153,7 @@ export class EnemyAttackSystem {
   }
 
   triggerBossPhase(enemy, phase) {
+    this.scene.audio.play('boss-phase', { cooldown: 0 });
     enemy.speed *= phase.speedMultiplier ?? 1;
     if (phase.ability && enemy.ability) {
       enemy.ability = { ...enemy.ability, ...phase.ability };
@@ -181,6 +189,7 @@ export class EnemyAttackSystem {
   }
 
   performSlam(enemy, player, ability) {
+    this.scene.audio.play('brute-stomp');
     const radius = ability.radius ?? 150;
     const ring = this.scene.add.circle(enemy.sprite.x, enemy.sprite.y, radius, 0xff5b32, 0.13)
       .setStrokeStyle(6, 0xffd35c, 0.9)
@@ -287,6 +296,7 @@ export class EnemyAttackSystem {
       ...config
     };
     this.showMuzzleFlash(x, y, angle, fireballConfig, 3);
+    this.scene.audio.play('boss-fireball');
     return this.spawnProjectile(x, y, angle, fireballConfig);
   }
 
@@ -379,7 +389,7 @@ export class EnemyAttackSystem {
     });
     this.scene.time.delayedCall(ENCOUNTER_STANDARDS.heavyTelegraphMs, () => {
       const core = this.scene.add.circle(x, y, 22, 0xfff08a, 0.55).setDepth(10);
-      this.scene.audio.play('rocket-explosion');
+      this.scene.audio.play('bomber-explosion');
       this.scene.tweens.add({
         targets: core,
         alpha: 0,

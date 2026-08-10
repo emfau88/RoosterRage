@@ -34,7 +34,7 @@ export class RocketEggAbility extends TimedAbility {
       Phaser.Math.Angle.Between(start.x, start.y, target.sprite.x, target.sprite.y),
       0
     );
-    this.scene.audio.play('egg-shot', { volume: 0.16, cooldown: 160 });
+    this.scene.audio.play('rocket-launch', { volume: 0.16, cooldown: 160 });
     this.scene.debugStats.specialShots += 1;
     this.scene.telemetry.addShot(targets.length, time, this.scene.waveSystem.currentWave, this.evolved ? 'evo-broodstorm' : 'rocket-egg');
     this.nextAt = time + (this.evolved ? 3900 : Math.max(2800, 5600 - this.rank * 620));

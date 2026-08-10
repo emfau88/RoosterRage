@@ -660,6 +660,12 @@ export function installTestApi(scene) {
     },
     getRunReport: () => scene.runState.getRunReport(),
     getEffectSettings: () => scene.effects.getState(),
+    getAudioSettings: () => scene.audio.getSettings(),
+    getAudioManifest: () => scene.cache.audio.getKeys().sort(),
+    setAudioVolume: (key, value) => {
+      scene.audio.setVolume(key, value);
+      return scene.audio.getSettings();
+    },
     toggleEffectSetting: (key) => {
       scene.effects.toggle(key);
       return scene.effects.getState();

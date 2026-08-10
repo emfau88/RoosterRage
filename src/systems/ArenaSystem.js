@@ -157,6 +157,7 @@ export class ArenaSystem {
     }
     const { x, y } = obstacle.sprite;
     obstacle.sprite.disableBody(true, true);
+    this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
     this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.72, depth: 9 });
     this.scene.telemetry.record('propDestroyed', this.scene.time.now, {
       wave: this.scene.waveSystem?.currentWave ?? 0,

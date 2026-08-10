@@ -11,6 +11,7 @@
     "pretest:production": "npm run build",
     "test:production": "node tests/production-gate.mjs",
     "test:smoke": "node tests/rooster-smoke.mjs",
+    "test:audio": "node tests/audio-settings-runner.mjs",
     "test:mechanics": "node tests/mechanics-runner.mjs",
     "test:foundation": "node tests/foundation-runner.mjs",
     "test:pacing": "node tests/pacing-runner.mjs",

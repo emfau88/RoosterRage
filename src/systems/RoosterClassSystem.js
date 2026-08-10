@@ -69,7 +69,6 @@ export class RoosterClassSystem {
     ).setStrokeStyle(3, evolution.trailColor, 0.84).setDepth(7);
     halo.markerType = 'primary-evolution';
     this.markers.push(halo);
-    this.scene.audio?.play('level-up', { volume: 0.34, cooldown: 180 });
     return true;
   }
 

@@ -44,6 +44,7 @@ export class Pickup {
   }
 
   playChestSpawnFx() {
+    this.scene.audio?.play('chest-spawn');
     const ring = this.trackFx(this.scene.add.circle(this.sprite.x, this.sprite.y, 27)
       .setStrokeStyle(3, 0xffd35c, 0.75)
       .setDepth(8)
@@ -83,6 +84,7 @@ export class Pickup {
     });
 
     this.schedule(120, () => {
+      this.scene.audio?.play('chest-latch', { cooldown: 0 });
       this.sprite.setTexture('pickup-elite-chest-ajar');
       this.scene.tweens.add({
         targets: this.sprite,
@@ -98,7 +100,7 @@ export class Pickup {
       this.sprite.setTexture('pickup-elite-chest-open');
       this.sprite.y = this.baseY - 6;
       this.playChestRewardBurst();
-      this.scene.audio?.play('level-up', { volume: 0.24, cooldown: 0, tier: 'reward' });
+      this.scene.audio?.play('chest-open', { cooldown: 0 });
       if (this.scene.effects?.enabled('screenShake')) {
         this.scene.cameras.main.shake(95, 0.0032);
       }
@@ -113,6 +115,10 @@ export class Pickup {
         yoyo: true,
         ease: 'Sine.Out'
       });
+    });
+
+    this.schedule(500, () => {
+      this.scene.audio?.play('chest-reward', { cooldown: 0 });
     });
 
     this.schedule(760, onComplete);

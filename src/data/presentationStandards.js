@@ -7,11 +7,11 @@ export const VISUAL_LANGUAGE = Object.freeze({
 });
 
 export const AUDIO_PRIORITIES = Object.freeze({
-  critical: ['player-hit', 'level-up'],
-  reward: ['xp-pickup'],
-  ability: ['rocket-explosion', 'lightning', 'laser', 'void-open', 'molotov-impact'],
-  weapon: ['egg-shot'],
-  impact: ['enemy-hit', 'enemy-pop']
+  critical: ['player-hurt', 'second-wind', 'level-up', 'evolution', 'boss-phase'],
+  reward: ['xp-pickup', 'upgrade-select', 'chest-reward', 'pickup-heal', 'pickup-magnet', 'pickup-bomb', 'victory'],
+  ability: ['rocket-launch', 'rocket-explosion', 'lightning', 'lightning-chain', 'laser', 'void-open', 'molotov-impact'],
+  weapon: ['egg-launch-ace', 'egg-launch-artillery', 'egg-launch-storm', 'egg-impact'],
+  impact: ['enemy-hit', 'enemy-pop', 'spitter-shot', 'brute-stomp', 'bomber-explosion']
 });
 
 export const EFFECT_DEFAULTS = Object.freeze({

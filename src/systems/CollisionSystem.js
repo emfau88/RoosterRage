@@ -27,7 +27,7 @@ export class CollisionSystem {
       const hpBefore = scene.player.hp;
       if (scene.player.damage(enemy.damage, scene.time.now)) {
         const appliedDamage = Math.max(0, hpBefore - scene.player.hp);
-        scene.audio.play('player-hit');
+        scene.audio.play('player-hurt');
         scene.telemetry.addDamageTaken(
           appliedDamage,
           scene.time.now,
@@ -65,7 +65,7 @@ export class CollisionSystem {
       const hpBefore = scene.player.hp;
       if (scene.player.damage(projectile.damage, scene.time.now)) {
         const appliedDamage = Math.max(0, hpBefore - scene.player.hp);
-        scene.audio.play('player-hit');
+        scene.audio.play('player-hurt');
         scene.telemetry.addDamageTaken(
           appliedDamage,
           scene.time.now,

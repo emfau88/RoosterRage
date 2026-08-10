@@ -36,21 +36,16 @@ import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-ope
 import arenaCrateUrl from '../../assets/map/arena-crate.webp';
 import arenaBaleUrl from '../../assets/map/arena-bale.webp';
 import arenaWallUrl from '../../assets/map/arena-wall.webp';
-import eggShotSfxUrl from '../../assets/audio/egg-shot.wav';
-import enemyHitSfxUrl from '../../assets/audio/enemy-hit.wav';
-import enemyPopSfxUrl from '../../assets/audio/enemy-pop.wav';
-import xpPickupSfxUrl from '../../assets/audio/xp-pickup.wav';
-import levelUpSfxUrl from '../../assets/audio/level-up.wav';
-import playerHitSfxUrl from '../../assets/audio/player-hit.wav';
-import molotovImpactSfxUrl from '../../assets/audio/molotov-impact.wav';
-import rocketExplosionSfxUrl from '../../assets/audio/rocket-explosion.wav';
-import lightningSfxUrl from '../../assets/audio/lightning.wav';
-import laserSfxUrl from '../../assets/audio/laser.wav';
-import voidOpenSfxUrl from '../../assets/audio/void-open.wav';
 import {
   getSceneRenderScale,
   getSceneViewport
 } from '../DisplayResolutionSystem.js';
+
+const audioAssetUrls = import.meta.glob('../../assets/audio/**/*.mp3', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
 
 export function preloadGameAssets(scene) {
   document.body.dataset.roosterLoadState = 'loading';
@@ -124,15 +119,11 @@ export function preloadGameAssets(scene) {
   scene.load.image('arena-crate', arenaCrateUrl);
   scene.load.image('arena-bale', arenaBaleUrl);
   scene.load.image('arena-wall', arenaWallUrl);
-  scene.load.audio('egg-shot', eggShotSfxUrl);
-  scene.load.audio('enemy-hit', enemyHitSfxUrl);
-  scene.load.audio('enemy-pop', enemyPopSfxUrl);
-  scene.load.audio('xp-pickup', xpPickupSfxUrl);
-  scene.load.audio('level-up', levelUpSfxUrl);
-  scene.load.audio('player-hit', playerHitSfxUrl);
-  scene.load.audio('molotov-impact', molotovImpactSfxUrl);
-  scene.load.audio('rocket-explosion', rocketExplosionSfxUrl);
-  scene.load.audio('lightning', lightningSfxUrl);
-  scene.load.audio('laser', laserSfxUrl);
-  scene.load.audio('void-open', voidOpenSfxUrl);
+  const audioKeys = new Set();
+  Object.entries(audioAssetUrls).forEach(([assetPath, assetUrl]) => {
+    const key = assetPath.split('/').at(-1).replace(/\.mp3$/i, '');
+    if (audioKeys.has(key)) throw new Error(`Duplicate audio asset key: ${key}`);
+    audioKeys.add(key);
+    scene.load.audio(key, assetUrl);
+  });
 }
