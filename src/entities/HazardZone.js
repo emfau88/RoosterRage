@@ -13,6 +13,7 @@ export class HazardZone {
     this.life = evolved ? 3800 : 2050;
     this.maxLife = this.life;
     this.nextTickAt = 0;
+    this.nextPulseFxAt = 0;
     this.age = 0;
     this.active = true;
 
@@ -63,6 +64,19 @@ export class HazardZone {
           });
         }
       });
+      if (this.rank >= 3 && this.scene.time.now >= this.nextPulseFxAt) {
+        this.nextPulseFxAt = this.scene.time.now + this.tickMs * 2;
+        const pulseRing = this.scene.add.circle(this.x, this.y, this.radius * 0.42, 0xff6a28, 0.06)
+          .setStrokeStyle(3, 0xffd35c, 0.68)
+          .setDepth(5);
+        this.scene.tweens.add({
+          targets: pulseRing,
+          alpha: 0,
+          scale: 2.15,
+          duration: 260,
+          onComplete: () => pulseRing.destroy()
+        });
+      }
     }
     const lifeRatio = Phaser.Math.Clamp(this.life / this.maxLife, 0, 1);
     const pulse = 0.85 + Math.sin(this.age * 0.008) * 0.12;

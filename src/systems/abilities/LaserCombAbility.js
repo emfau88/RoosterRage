@@ -16,7 +16,7 @@ export class LaserCombAbility extends TimedAbility {
     const start = this.scene.player.getMuzzlePosition(30);
     this.scene.audio.play('laser');
     const baseAngle = Phaser.Math.Angle.Between(start.x, start.y, target.sprite.x, target.sprite.y);
-    const offsets = this.evolved ? [-0.18, 0, 0.18] : [0];
+    const offsets = this.evolved ? [-0.18, 0, 0.18] : this.rank >= 3 ? [0, 0.09] : [0];
     const colors = [0x5ad7ff, 0xfff3b0, 0x9b5cff];
     offsets.forEach((offset, index) => {
       const angle = baseAngle + offset;
@@ -26,9 +26,9 @@ export class LaserCombAbility extends TimedAbility {
         y: start.y + Math.sin(angle) * length
       };
       const beam = this.scene.add.graphics().setDepth(12);
-      beam.lineStyle(this.evolved ? 12 : 9, 0xfff3b0, 0.58);
+      beam.lineStyle(this.evolved ? 12 : this.rank >= 4 ? 12 : this.rank >= 2 ? 10 : 8, 0xfff3b0, 0.58);
       beam.lineBetween(start.x, start.y, end.x, end.y);
-      beam.lineStyle(this.evolved ? 4 : 3, this.evolved ? colors[index] : 0xff5b25, 0.95);
+      beam.lineStyle(this.evolved ? 4 : this.rank >= 4 ? 5 : 3, this.evolved ? colors[index] : 0xff5b25, 0.95);
       beam.lineBetween(start.x, start.y, end.x, end.y);
       this.scene.tweens.add({
         targets: beam,

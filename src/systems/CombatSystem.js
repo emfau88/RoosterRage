@@ -4,6 +4,7 @@ import { Projectile } from '../entities/Projectile.js';
 export class CombatSystem {
   constructor(scene) {
     this.scene = scene;
+    this.primaryAttackSequence = 0;
   }
 
   autoShoot(time) {
@@ -27,6 +28,7 @@ export class CombatSystem {
     const primary = scene.player.primaryAttack ?? {};
     const evolution = scene.player.primaryEvolution;
     const source = evolution?.id ?? (scene.player.fireEggs ? 'fire-eggs' : 'base-egg');
+    this.primaryAttackSequence += 1;
     const pattern = this.getShotPattern();
     const targets = this.getShotTargets(pattern.length, target);
     pattern.forEach((shot, index) => {
@@ -56,7 +58,15 @@ export class CombatSystem {
         ricochet: evolution ? Math.max(scene.player.projectileRicochets, evolution.ricochet ?? 0) : undefined,
         splashRadius: (primary.splashRadius ?? 0) * (evolution?.splashRadiusMultiplier ?? 1),
         splashDamageRatio: evolution?.splashDamageRatio ?? primary.splashDamageRatio,
-        secondaryBlastRatio: evolution?.secondaryBlastRatio ?? 0,
+        secondaryBlastRatio: evolution?.secondaryBlastRatio ?? primary.secondaryBlastRatio ?? 0,
+        shrapnelCount: primary.shrapnelCount ?? 0,
+        shrapnelDamageRatio: primary.shrapnelDamageRatio ?? 0,
+        criticalPierceBonus: primary.criticalPierceBonus ?? 0,
+        criticalRicochetBonus: primary.criticalRicochetBonus ?? 0,
+        forceCritical: Boolean(
+          primary.deadeyeCadence
+          && this.primaryAttackSequence % primary.deadeyeCadence === 0
+        ),
         chainCount: (primary.chainCount ?? 0) + (evolution?.chainCountBonus ?? 0),
         chainRadius: (primary.chainRadius ?? 0) + (evolution?.chainRadiusBonus ?? 0),
         chainDamageRatio: evolution?.chainDamageRatio ?? primary.chainDamageRatio
@@ -71,7 +81,16 @@ export class CombatSystem {
   }
 
   getShotPattern() {
-    const minimumShots = this.scene.player.primaryEvolution?.minimumShots ?? 1;
+    const primary = this.scene.player.primaryAttack ?? {};
+    const cadenceShots = primary.twinCadence
+      && this.primaryAttackSequence % primary.twinCadence === 0
+      ? 2
+      : 1;
+    const minimumShots = Math.max(
+      this.scene.player.primaryEvolution?.minimumShots ?? 1,
+      primary.minimumShots ?? 1,
+      cadenceShots
+    );
     const shotCount = Math.max(this.scene.player.shotCount, minimumShots);
     if (shotCount >= 3) {
       return [
@@ -228,10 +247,16 @@ export class CombatSystem {
     const hitX = enemy.sprite.x;
     const hitY = enemy.sprite.y;
     projectile.hitEnemies.add(enemy.id);
-    const critical = projectile.canCrit && this.scene.rng.chance(this.scene.player.critChance, 'combat-crit');
+    const critical = projectile.forceCritical
+      || (projectile.canCrit && this.scene.rng.chance(this.scene.player.critChance, 'combat-crit'));
     const damage = critical
       ? Math.round(projectile.damage * this.scene.player.critMultiplier)
       : projectile.damage;
+    if (critical && !projectile.criticalBonusApplied) {
+      projectile.pierceRemaining += projectile.criticalPierceBonus;
+      projectile.ricochetRemaining += projectile.criticalRicochetBonus;
+      projectile.criticalBonusApplied = true;
+    }
     this.damageEnemy(enemy, damage, hitX, hitY, { critical, source: projectile.source });
     this.applyPrimaryImpact(projectile, enemy, damage, hitX, hitY);
     if (projectile.knockbackRank > 0 && enemy.sprite.active) {
@@ -298,6 +323,43 @@ export class CombatSystem {
           });
         }
       });
+    }
+
+    if (projectile.shrapnelCount > 0 && projectile.shrapnelDamageRatio > 0) {
+      const shrapnelDamage = Math.max(1, Math.round(damage * projectile.shrapnelDamageRatio));
+      const radius = Math.max(58, projectile.splashRadius * 0.85);
+      for (let index = 0; index < projectile.shrapnelCount; index += 1) {
+        const angle = (Math.PI * 2 * index) / projectile.shrapnelCount;
+        const burstX = x + Math.cos(angle) * radius * 0.48;
+        const burstY = y + Math.sin(angle) * radius * 0.48;
+        const burst = this.scene.add.circle(burstX, burstY, 12, 0xffd35c, 0.34)
+          .setStrokeStyle(2, 0xfff3b0, 0.86)
+          .setDepth(9);
+        this.scene.tweens.add({
+          targets: burst,
+          alpha: 0,
+          scale: 1.8,
+          duration: 180,
+          onComplete: () => burst.destroy()
+        });
+        const candidate = this.scene.enemies
+          .filter((enemy) => enemy.sprite.active && enemy !== hitEnemy)
+          .sort((a, b) => Phaser.Math.Distance.Squared(burstX, burstY, a.sprite.x, a.sprite.y)
+            - Phaser.Math.Distance.Squared(burstX, burstY, b.sprite.x, b.sprite.y))[0];
+        if (
+          candidate
+          && Phaser.Math.Distance.Between(
+            burstX,
+            burstY,
+            candidate.sprite.x,
+            candidate.sprite.y
+          ) <= radius
+        ) {
+          this.damageEnemy(candidate, shrapnelDamage, candidate.sprite.x, candidate.sprite.y, {
+            source: `${projectile.source}:shrapnel`
+          });
+        }
+      }
     }
 
     if (projectile.chainRemaining <= 0 || projectile.chainDamageRatio <= 0) {

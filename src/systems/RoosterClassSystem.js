@@ -30,7 +30,7 @@ export class RoosterClassSystem {
     const { player } = this.scene;
     player.setRoosterVisual(definition.id, definition.visual.texture);
     player.roosterName = definition.shortName;
-    player.primaryAttack = { ...definition.primary };
+    player.primaryAttack = { ...definition.primary, rank: 1 };
     player.primaryEvolution = null;
     player.upgradeAffinities = { ...definition.upgradeAffinities };
     player.maxHp = definition.stats.maxHp;

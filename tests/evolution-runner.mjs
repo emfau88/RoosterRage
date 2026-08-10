@@ -9,16 +9,16 @@ import {
 
 const artifactDir = path.join(projectRoot, 'test-results');
 const recipes = [
-  { id: 'evo-sunshot-array', base: 'primary-ace', rank: 0, passive: 'ace-deadeye-drill', passiveRank: 3, primary: true, rooster: 'ace' },
-  { id: 'evo-siegebreaker-shell', base: 'primary-artillery', rank: 0, passive: 'artillery-reinforced-breech', passiveRank: 3, primary: true, rooster: 'artillery' },
-  { id: 'evo-tempest-crown', base: 'primary-storm', rank: 0, passive: 'storm-static-plumage', passiveRank: 3, primary: true, rooster: 'storm' },
-  { id: 'evo-solar-scramble', base: 'golden-egg', rank: 3, passive: 'fire-eggs', ability: 'goldenEgg' },
-  { id: 'evo-thunder-roost', base: 'lightning-comb', rank: 3, passive: 'critical-yolk', ability: 'lightningComb' },
-  { id: 'evo-shell-halo', base: 'orbit-eggs', rank: 3, passive: 'armor', ability: 'orbitEggs', count: 4 },
-  { id: 'evo-broodstorm', base: 'rocket-egg', rank: 3, passive: 'bigger-eggs', ability: 'rocketEgg' },
-  { id: 'evo-singularity-nest', base: 'void-nest', rank: 3, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones' },
-  { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 3, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones' },
-  { id: 'evo-dawn-laser', base: 'laser-comb', rank: 3, passive: 'swift-shells', ability: 'laserComb' },
+  { id: 'evo-sunshot-array', base: 'primary-ace-rank', rank: 3, passive: 'ace-deadeye-drill', primary: true, rooster: 'ace' },
+  { id: 'evo-siegebreaker-shell', base: 'primary-artillery-rank', rank: 3, passive: 'artillery-reinforced-breech', primary: true, rooster: 'artillery' },
+  { id: 'evo-tempest-crown', base: 'primary-storm-rank', rank: 3, passive: 'storm-static-plumage', primary: true, rooster: 'storm' },
+  { id: 'evo-solar-scramble', base: 'golden-egg', rank: 4, passive: 'fire-eggs', ability: 'goldenEgg' },
+  { id: 'evo-thunder-roost', base: 'lightning-comb', rank: 4, passive: 'critical-yolk', ability: 'lightningComb' },
+  { id: 'evo-shell-halo', base: 'orbit-eggs', rank: 4, passive: 'armor', ability: 'orbitEggs', count: 6 },
+  { id: 'evo-broodstorm', base: 'rocket-egg', rank: 4, passive: 'bigger-eggs', ability: 'rocketEgg' },
+  { id: 'evo-singularity-nest', base: 'void-nest', rank: 4, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones' },
+  { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 4, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones' },
+  { id: 'evo-dawn-laser', base: 'laser-comb', rank: 4, passive: 'swift-shells', ability: 'laserComb' },
   { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4 }
 ];
 

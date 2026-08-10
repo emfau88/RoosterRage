@@ -22,7 +22,7 @@ export class LoadoutSystem {
       name: rooster.primary.name,
       slotType: 'active',
       rank: 1,
-      maxRank: 1,
+      maxRank: 4,
       startWeapon: true,
       evolved: false,
       evolutionId: null
@@ -33,6 +33,9 @@ export class LoadoutSystem {
     if (upgrade.consumable || upgrade.evolution) {
       return null;
     }
+    if (upgrade.startWeaponUpgrade) {
+      return 'active';
+    }
     if (upgrade.slotType) {
       return upgrade.slotType;
     }
@@ -40,7 +43,7 @@ export class LoadoutSystem {
   }
 
   getSlotKey(upgrade) {
-    return upgrade.slotKey ?? upgrade.id;
+    return upgrade.baseWeaponId ?? upgrade.slotKey ?? upgrade.id;
   }
 
   canAcquire(upgrade, player) {
@@ -72,6 +75,12 @@ export class LoadoutSystem {
       return;
     }
     const existing = slots.get(key);
+    if (upgrade.startWeaponUpgrade && existing?.startWeapon) {
+      existing.rank = player.getUpgradeRank(upgrade.id) + (upgrade.rankOffset ?? 0);
+      existing.maxRank = upgrade.displayMaxRank ?? existing.maxRank;
+      existing.rankUpgradeId = upgrade.id;
+      return;
+    }
     slots.set(key, {
       id: key,
       sourceId: upgrade.id,

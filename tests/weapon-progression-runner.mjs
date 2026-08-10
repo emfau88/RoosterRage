@@ -1,0 +1,241 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { UPGRADE_DEFINITIONS } from '../src/data/upgradeDefinitions.js';
+import {
+  ensureTestServer,
+  loadPlaywright,
+  projectRoot,
+  stopTestServer
+} from './helpers/test-runtime.mjs';
+
+const artifactDir = path.join(projectRoot, 'test-results', 'weapon-progression');
+
+const weapons = [
+  {
+    id: 'primary-ace-rank',
+    base: 'primary-ace',
+    rooster: 'ace',
+    normalRanks: 4,
+    evolution: 'evo-sunshot-array',
+    passive: 'ace-deadeye-drill',
+    source: 'base-egg',
+    primary: true
+  },
+  {
+    id: 'primary-artillery-rank',
+    base: 'primary-artillery',
+    rooster: 'artillery',
+    normalRanks: 4,
+    evolution: 'evo-siegebreaker-shell',
+    passive: 'artillery-reinforced-breech',
+    source: 'base-egg',
+    primary: true
+  },
+  {
+    id: 'primary-storm-rank',
+    base: 'primary-storm',
+    rooster: 'storm',
+    normalRanks: 4,
+    evolution: 'evo-tempest-crown',
+    passive: 'storm-static-plumage',
+    source: 'base-egg',
+    primary: true
+  },
+  { id: 'golden-egg', normalRanks: 4, evolution: 'evo-solar-scramble', passive: 'fire-eggs' },
+  { id: 'orbit-eggs', normalRanks: 4, evolution: 'evo-shell-halo', passive: 'armor', companion: true },
+  { id: 'molotov-egg', normalRanks: 4, evolution: 'evo-phoenix-pan', passive: 'regen' },
+  { id: 'lightning-comb', normalRanks: 4, evolution: 'evo-thunder-roost', passive: 'critical-yolk' },
+  { id: 'support-chick', normalRanks: 5, evolution: 'evo-chick-squadron', passive: 'faster-eggs', companion: true },
+  { id: 'rocket-egg', normalRanks: 4, evolution: 'evo-broodstorm', passive: 'bigger-eggs' },
+  { id: 'void-nest', normalRanks: 4, evolution: 'evo-singularity-nest', passive: 'xp-magnet' },
+  { id: 'laser-comb', normalRanks: 4, evolution: 'evo-dawn-laser', passive: 'swift-shells' }
+].map((weapon) => ({
+  rooster: 'ace',
+  base: weapon.id,
+  source: weapon.id,
+  ...weapon
+}));
+
+function assert(condition, message, details = null) {
+  if (!condition) {
+    throw new Error(`${message}${details ? `\n${JSON.stringify(details, null, 2)}` : ''}`);
+  }
+}
+
+function sourceDamage(telemetry, source) {
+  return Object.entries(telemetry.effectiveDamageBySource ?? {})
+    .filter(([candidate]) => candidate === source || candidate.startsWith(`${source}:`))
+    .reduce((total, [, damage]) => total + damage, 0);
+}
+
+function validateDefinitions() {
+  for (const weapon of weapons) {
+    const definition = UPGRADE_DEFINITIONS.find((upgrade) => upgrade.id === weapon.id);
+    assert(definition, `Missing progression definition for ${weapon.id}.`);
+    const expectedPicks = weapon.primary ? weapon.normalRanks - 1 : weapon.normalRanks;
+    assert(definition.maxRank === expectedPicks, `${weapon.id} has the wrong normal-rank count.`, definition);
+    assert(
+      definition.rankDescriptions?.length === expectedPicks,
+      `${weapon.id} does not describe every normal rank.`,
+      definition.rankDescriptions
+    );
+    const evolution = UPGRADE_DEFINITIONS.find((upgrade) => upgrade.id === weapon.evolution);
+    assert(evolution?.evolution?.base === weapon.base, `${weapon.id} has no matching EVO recipe.`, evolution);
+  }
+}
+
+async function openWeapon(browser, serverUrl, weapon) {
+  const page = await browser.newPage({ viewport: { width: 960, height: 540 } });
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  await page.goto(`${serverUrl}?seed=weapon-${weapon.id}&profile=average`, { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => window.__ROOSTER_TEST__?.triggerActiveAbility);
+  await page.evaluate((rooster) => {
+    const api = window.__ROOSTER_TEST__;
+    api.selectRooster(rooster);
+    api.pauseWaves();
+    api.clearEnemies();
+    api.clearProjectiles();
+    api.setPlayerLevel(20);
+    api.movePlayer(700, 450);
+  }, weapon.rooster);
+  return { page, errors };
+}
+
+async function spawnTargetsAndTrigger(page, weapon) {
+  return page.evaluate(({ id, primary, companion }) => {
+    const api = window.__ROOSTER_TEST__;
+    api.clearEnemies();
+    if (!companion) api.clearProjectiles();
+    api.movePlayer(700, 450);
+    for (let index = 0; index < 14; index += 1) {
+      const angle = (Math.PI * 2 * index) / 14;
+      const radius = index < 6 ? 82 : 145 + (index % 3) * 34;
+      api.spawnEnemyType(
+        'slime',
+        700 + Math.cos(angle) * radius,
+        450 + Math.sin(angle) * radius,
+        { hp: 9999, speed: 0, damage: 0, xpOverride: 0 }
+      );
+    }
+    const before = api.getTelemetry();
+    if (primary) {
+      api.triggerPrimaryAttack();
+    } else if (!companion) {
+      api.triggerActiveAbility(id);
+    }
+    return before;
+  }, weapon);
+}
+
+async function captureStage(page, weapon, stage, expectedRank, source) {
+  const before = await spawnTargetsAndTrigger(page, weapon);
+  const visualDelay = weapon.primary ? 45
+    : ['lightning-comb', 'laser-comb'].includes(weapon.id) ? 55
+      : weapon.id === 'golden-egg' ? 90
+        : weapon.id === 'rocket-egg' ? 360
+          : weapon.id === 'molotov-egg' ? 520
+            : 180;
+  await page.waitForTimeout(visualDelay);
+  const screenshot = `${weapon.id}-${stage}.png`;
+  await page.screenshot({ path: path.join(artifactDir, screenshot) });
+  await page.waitForTimeout(1050 - visualDelay);
+  const after = await page.evaluate(() => ({
+    telemetry: window.__ROOSTER_TEST__.getTelemetry(),
+    loadout: window.__ROOSTER_TEST__.getLoadout(),
+    abilities: window.__ROOSTER_TEST__.getAbilityState(),
+    player: window.__ROOSTER_TEST__.getRoosterVisualState(),
+    state: window.__ROOSTER_TEST__.getState()
+  }));
+  const entry = after.loadout.active.find((item) => item.id === weapon.base || item.sourceId === weapon.id);
+  const damageBefore = sourceDamage(before, source);
+  const damageAfter = sourceDamage(after.telemetry, source);
+  const damage = damageAfter - damageBefore;
+  assert(entry, `${weapon.id} is missing from the active loadout at ${stage}.`, after.loadout);
+  if (stage !== 'evo') {
+    assert(entry.rank === expectedRank, `${weapon.id} loadout rank mismatch at ${stage}.`, entry);
+  } else {
+    assert(entry.rank === 'EVO' && entry.evolved, `${weapon.id} did not become an EVO.`, entry);
+  }
+  assert(damage > 0, `${weapon.id} produced no isolated damage at ${stage}.`, {
+    source,
+    before: damageBefore,
+    after: damageAfter,
+    state: after.state
+  });
+  return {
+    stage,
+    rank: entry.rank,
+    damage,
+    screenshot,
+    ability: weapon.primary ? after.player.primary : after.abilities[
+      weapon.id === 'orbit-eggs' ? 'orbitEggs'
+        : weapon.id === 'support-chick' ? 'supportChick'
+          : weapon.id.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())
+    ],
+    peakObjects: after.telemetry.peakObjects
+  };
+}
+
+async function testWeapon(browser, serverUrl, weapon) {
+  const { page, errors } = await openWeapon(browser, serverUrl, weapon);
+  try {
+    if (!weapon.primary) {
+      const applied = await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.id);
+      assert(applied, `Could not apply ${weapon.id} R1.`);
+    }
+    const r1 = await captureStage(page, weapon, 'r1', 1, weapon.source);
+
+    const remainingPicks = weapon.primary ? weapon.normalRanks - 1 : weapon.normalRanks - 1;
+    for (let index = 0; index < remainingPicks; index += 1) {
+      const applied = await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.id);
+      assert(applied, `Could not advance ${weapon.id} to its final normal rank.`, { index });
+    }
+    const final = await captureStage(
+      page,
+      weapon,
+      `r${weapon.normalRanks}`,
+      weapon.normalRanks,
+      weapon.source
+    );
+
+    await page.evaluate((passive) => window.__ROOSTER_TEST__.applyUpgradeById(passive), weapon.passive);
+    const ready = await page.evaluate((id) => window.__ROOSTER_TEST__.getAvailableUpgradeIds().includes(id), weapon.evolution);
+    assert(ready, `${weapon.evolution} was not offered after the full recipe.`);
+    await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.evolution);
+    const evolved = await captureStage(page, weapon, 'evo', 'EVO', weapon.evolution);
+    assert(errors.length === 0, `Browser errors while testing ${weapon.id}.`, errors);
+    return { id: weapon.id, r1, final, evolved };
+  } finally {
+    await page.close();
+  }
+}
+
+async function run() {
+  validateDefinitions();
+  await fs.mkdir(artifactDir, { recursive: true });
+  const serverState = await ensureTestServer();
+  const { chromium } = loadPlaywright();
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const results = [];
+    for (const weapon of weapons) {
+      results.push(await testWeapon(browser, serverState.url, weapon));
+    }
+    const report = { generatedAt: new Date().toISOString(), results };
+    await fs.writeFile(path.join(artifactDir, 'report.json'), JSON.stringify(report, null, 2));
+    console.log('Weapon progression gate passed.');
+    console.log(JSON.stringify(report, null, 2));
+  } finally {
+    await browser.close();
+    await stopTestServer(serverState.server);
+  }
+}
+
+run().catch((error) => {
+  console.error(error.stack ?? error);
+  process.exitCode = 1;
+});

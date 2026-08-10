@@ -45,7 +45,14 @@ export class RocketProjectile {
       enemy.sprite.y
     ) < 32);
     if (hit) {
-      this.scene.createRocketExplosion(this.sprite.x, this.sprite.y, this.damage, this.radius, this.evolved);
+      this.scene.createRocketExplosion(
+        this.sprite.x,
+        this.sprite.y,
+        this.damage,
+        this.radius,
+        this.evolved,
+        this.rank
+      );
       this.destroy();
       return;
     }

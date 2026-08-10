@@ -359,8 +359,8 @@ export class GameScene extends Phaser.Scene {
     this.activeAbilities.update(time);
   }
 
-  createRocketExplosion(x, y, damage, radius, evolved = false) {
-    this.activeAbilities.createRocketExplosion(x, y, damage, radius, evolved);
+  createRocketExplosion(x, y, damage, radius, evolved = false, rank = this.rocketEggRank) {
+    this.activeAbilities.createRocketExplosion(x, y, damage, radius, evolved, rank);
   }
 
   createMolotovImpact(x, y) {

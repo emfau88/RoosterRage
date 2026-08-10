@@ -8,10 +8,12 @@ export class OrbitEgg {
     this.rank = rank;
     this.evolved = evolved;
     this.angle = (Math.PI * 2 * index) / count;
-    this.radius = (evolved ? 90 : 66) + rank * 8;
+    this.radius = evolved
+      ? 94 + (index % 2) * 24
+      : rank >= 4 ? 76 + (index % 2) * 24 : 66 + rank * 8;
     this.speed = (evolved ? 0.0038 : 0.0028) + rank * 0.00045;
-    this.damage = (evolved ? 28 : 14) + rank * 5;
-    this.hitCooldownMs = evolved ? 300 : 420;
+    this.damage = evolved ? 14 + rank * 3 : 14 + rank * 5;
+    this.hitCooldownMs = evolved ? 450 : 420;
     this.lastHits = new Map();
 
     this.sprite = scene.physics.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'egg');
@@ -19,6 +21,15 @@ export class OrbitEgg {
     this.sprite.setCircle(10);
     this.sprite.setDepth(7);
     if (evolved) this.sprite.setTint(0x8deaff);
+    this.trail = rank >= 3
+      ? scene.add.circle(
+        scene.player.sprite.x,
+        scene.player.sprite.y,
+        evolved ? 10 : 7,
+        evolved ? 0x9ff7ff : 0xffd35c,
+        evolved ? 0.34 : 0.22
+      ).setDepth(5)
+      : null;
   }
 
   update(delta) {
@@ -30,6 +41,7 @@ export class OrbitEgg {
     const y = this.scene.player.sprite.y + Math.sin(this.angle) * this.radius;
     this.sprite.setPosition(x, y);
     this.sprite.rotation = this.angle;
+    this.trail?.setPosition(x, y);
 
     this.scene.enemies.forEach((enemy) => {
       if (!enemy.sprite.active) {
@@ -62,6 +74,7 @@ export class OrbitEgg {
   }
 
   destroy() {
+    this.trail?.destroy();
     if (this.sprite.active) {
       this.sprite.destroy();
     }

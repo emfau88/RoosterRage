@@ -54,6 +54,120 @@ export const UPGRADE_DEFINITIONS = [
     }
   },
   {
+    id: 'primary-ace-rank',
+    name: 'Target Egg',
+    description: 'Entwickelt Aces Startwaffe von R1 bis R4.',
+    rankDescriptions: [
+      'R2 Twin Lock: Jeder zweite Angriff markiert und feuert ein zweites Ziel-Ei.',
+      'R3 Deadeye Shell: Jeder vierte Angriff ist ein Krit mit Pierce und zusaetzlichem Ricochet.',
+      'R4 Hunter Array: Dauerhafte Doppelsalve, staerkere Zielerfassung und goldene Trails.'
+    ],
+    category: 'weapon',
+    rarity: 'uncommon',
+    maxRank: 3,
+    displayMaxRank: 4,
+    rankOffset: 1,
+    baseWeaponId: 'primary-ace',
+    startWeaponUpgrade: true,
+    minLevel: 2,
+    rankMinLevels: [2, 4, 6],
+    weight: 8,
+    classId: 'ace',
+    condition: (player) => player.roosterId === 'ace',
+    apply: (player, _scene, rank) => {
+      player.primaryAttack.rank = rank + 1;
+      if (rank === 1) {
+        player.primaryAttack.twinCadence = 2;
+        player.primaryAttack.homingTurnRate = (player.primaryAttack.homingTurnRate ?? 0.08) + 0.02;
+      } else if (rank === 2) {
+        player.primaryAttack.deadeyeCadence = 4;
+        player.primaryAttack.criticalPierceBonus = 1;
+        player.primaryAttack.criticalRicochetBonus = 1;
+      } else {
+        player.primaryAttack.minimumShots = 2;
+        player.primaryAttack.homingTurnRate = (player.primaryAttack.homingTurnRate ?? 0.08) + 0.025;
+        player.primaryAttack.trailRadius = Math.max(13, player.primaryAttack.trailRadius ?? 8);
+        player.primaryAttack.trailAlpha = Math.max(0.38, player.primaryAttack.trailAlpha ?? 0.2);
+        player.primaryAttack.trailColor = 0xffd35c;
+      }
+    }
+  },
+  {
+    id: 'primary-artillery-rank',
+    name: 'Blast Shell',
+    description: 'Entwickelt Boombardiers Startwaffe von R1 bis R4.',
+    rankDescriptions: [
+      'R2 Heavy Load: Groessere Granate, staerkere Trail und breiterer Splash.',
+      'R3 Shrapnel Yolk: Der Einschlag erzeugt vier kurze Mini-Blasts.',
+      'R4 Siege Load: Massive Granate mit staerkerer zweiter Druckwelle.'
+    ],
+    category: 'weapon',
+    rarity: 'uncommon',
+    maxRank: 3,
+    displayMaxRank: 4,
+    rankOffset: 1,
+    baseWeaponId: 'primary-artillery',
+    startWeaponUpgrade: true,
+    minLevel: 2,
+    rankMinLevels: [2, 4, 6],
+    weight: 8,
+    classId: 'artillery',
+    condition: (player) => player.roosterId === 'artillery',
+    apply: (player, _scene, rank) => {
+      player.primaryAttack.rank = rank + 1;
+      if (rank === 1) {
+        player.primaryAttack.scale = (player.primaryAttack.scale ?? 1) * 1.12;
+        player.primaryAttack.splashRadius = (player.primaryAttack.splashRadius ?? 56) + 12;
+        player.primaryAttack.trailRadius = (player.primaryAttack.trailRadius ?? 10) + 3;
+      } else if (rank === 2) {
+        player.primaryAttack.shrapnelCount = 4;
+        player.primaryAttack.shrapnelDamageRatio = 0.22;
+      } else {
+        player.primaryAttack.scale = (player.primaryAttack.scale ?? 1) * 1.16;
+        player.primaryAttack.splashRadius = (player.primaryAttack.splashRadius ?? 68) + 16;
+        player.primaryAttack.secondaryBlastRatio = Math.max(0.28, player.primaryAttack.secondaryBlastRatio ?? 0);
+        player.primaryAttack.trailAlpha = Math.max(0.42, player.primaryAttack.trailAlpha ?? 0.24);
+      }
+    }
+  },
+  {
+    id: 'primary-storm-rank',
+    name: 'Storm Egg',
+    description: 'Entwickelt Stormcrests Startwaffe von R1 bis R4.',
+    rankDescriptions: [
+      'R2 Static Fork: Ein zusaetzlicher, weiter reichender Kettensprung.',
+      'R3 Arc Pair: Jeder Angriff feuert zwei versetzte elektrische Impulse.',
+      'R4 Storm Circuit: Drei Kettenspruenge, groessere Reichweite und helle Afterimage-Trails.'
+    ],
+    category: 'weapon',
+    rarity: 'uncommon',
+    maxRank: 3,
+    displayMaxRank: 4,
+    rankOffset: 1,
+    baseWeaponId: 'primary-storm',
+    startWeaponUpgrade: true,
+    minLevel: 2,
+    rankMinLevels: [2, 4, 6],
+    weight: 8,
+    classId: 'storm',
+    condition: (player) => player.roosterId === 'storm',
+    apply: (player, _scene, rank) => {
+      player.primaryAttack.rank = rank + 1;
+      if (rank === 1) {
+        player.primaryAttack.chainCount = (player.primaryAttack.chainCount ?? 1) + 1;
+        player.primaryAttack.chainRadius = (player.primaryAttack.chainRadius ?? 190) + 35;
+      } else if (rank === 2) {
+        player.primaryAttack.minimumShots = 2;
+      } else {
+        player.primaryAttack.chainCount = Math.max(3, player.primaryAttack.chainCount ?? 0);
+        player.primaryAttack.chainRadius = (player.primaryAttack.chainRadius ?? 225) + 55;
+        player.primaryAttack.trailRadius = Math.max(13, player.primaryAttack.trailRadius ?? 8);
+        player.primaryAttack.trailAlpha = Math.max(0.48, player.primaryAttack.trailAlpha ?? 0.3);
+        player.primaryAttack.trailColor = 0x9ff7ff;
+      }
+    }
+  },
+  {
     id: 'faster-eggs',
     name: 'Faster Eggs',
     description: '18% kuerzere Abklingzeit des Basisangriffs.',
@@ -71,12 +185,13 @@ export const UPGRADE_DEFINITIONS = [
     description: 'Periodisches grosses Ei: 60 Schaden, 3 Durchschlaege.',
     rankDescriptions: [
       '60 Schaden, 3 Durchschlaege, 4,55 s Abklingzeit.',
-      '78 Schaden, 4 Durchschlaege, 3,90 s Abklingzeit.',
-      '96 Schaden, 5 Durchschlaege, 3,25 s Abklingzeit.'
+      'R2: groesseres Ei, breiterer Treffer und staerkerer Gold-Trail.',
+      'R3: Solar-Sparks springen beim Durchschlag auf nahe Gegner.',
+      'R4: zwei Golden Eggs starten als kurze versetzte Salve.'
     ],
     category: 'active',
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 2,
     weight: 6,
     apply: (_player, scene, rank) => scene.unlockGoldenEgg(rank)
@@ -88,11 +203,12 @@ export const UPGRADE_DEFINITIONS = [
     rankDescriptions: [
       '1 Orbit-Ei mit 19 Kontaktschaden.',
       '2 Orbit-Eier mit je 24 Kontaktschaden.',
-      '3 Orbit-Eier mit je 29 Kontaktschaden.'
+      '3 Orbit-Eier mit Shell-Trail und je 29 Kontaktschaden.',
+      '4 Orbit-Eier wechseln zwischen innerer und aeusserer Umlaufbahn.'
     ],
     category: 'orbit',
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 2,
     weight: 6,
     synergy: { with: 'lightning-comb', description: 'Lightning Comb trifft ein Ziel mehr und verursacht 20% mehr Schaden.' },
@@ -104,13 +220,14 @@ export const UPGRADE_DEFINITIONS = [
     description: 'Wirft alle 5,7 s eine brennende Flaeche.',
     rankDescriptions: [
       '90 Radius, 12 Schaden pro Tick, 5,7 s Abklingzeit.',
-      '106 Radius, 16 Schaden pro Tick, 5,0 s Abklingzeit.',
-      '122 Radius, 20 Schaden pro Tick, 4,3 s Abklingzeit.'
+      'R2: groessere Brandzone mit dichterer Glut.',
+      'R3: die Brandzone pulsiert in sichtbaren Schadensringen.',
+      'R4: zwei Molotovs landen kurz versetzt.'
     ],
     category: 'active',
     tags: ['area'],
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 2,
     weight: 6,
     synergy: { with: 'void-nest', description: 'Void Nest zieht Gegner 25% staerker in die Feuerflaeche.' },
@@ -123,11 +240,12 @@ export const UPGRADE_DEFINITIONS = [
     rankDescriptions: [
       'Bis zu 3 Ziele, 34 Basisschaden, 4,55 s Abklingzeit.',
       'Bis zu 4 Ziele, 44 Basisschaden, 3,90 s Abklingzeit.',
-      'Bis zu 5 Ziele, 54 Basisschaden, 3,25 s Abklingzeit.'
+      'R3: bis zu 5 Ziele und ein verzweigter End-Burst.',
+      'R4: bis zu 6 Ziele mit zentraler Entladung.'
     ],
     category: 'active',
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 2,
     weight: 6,
     synergy: { with: 'orbit-eggs', description: 'Ein zusaetzliches Ziel und 20% mehr Blitzschaden.' },
@@ -157,12 +275,13 @@ export const UPGRADE_DEFINITIONS = [
     description: 'Zielsuchende Rakete mit 48 Flaechenschaden.',
     rankDescriptions: [
       '48 Schaden in 74 Radius, 4,98 s Abklingzeit.',
-      '62 Schaden in 86 Radius, 4,36 s Abklingzeit.',
-      '76 Schaden in 98 Radius, 3,74 s Abklingzeit.'
+      'R2: groesserer Blast, staerkere Trail und besseres Homing.',
+      'R3: drei kurze Cluster-Blasts folgen dem Einschlag.',
+      'R4: zwei Raketen starten als gestaffelte Salve.'
     ],
     category: 'active',
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 3,
     weight: 5,
     synergy: { with: 'fire-eggs', description: '25% mehr Explosionsschaden.' },
@@ -174,13 +293,14 @@ export const UPGRADE_DEFINITIONS = [
     description: 'Zieht Gegner in einer Zone zusammen und verursacht Schaden.',
     rankDescriptions: [
       '110 Radius, 11 Schaden pro Tick, 6,8 s Abklingzeit.',
-      '128 Radius, 15 Schaden pro Tick, 6,0 s Abklingzeit.',
-      '146 Radius, 19 Schaden pro Tick, 5,2 s Abklingzeit.'
+      'R2: groesserer Pull-Radius und staerkere Spiral-FX.',
+      'R3: Sog und Schaden pulsieren in sichtbaren Wellen.',
+      'R4: zwei kurze Singularitaeten kontrollieren mehr Raum.'
     ],
     category: 'active',
     tags: ['area'],
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 3,
     weight: 5,
     synergy: { with: 'molotov-egg', description: '25% staerkerer Sog haelt Gegner im Feuer.' },
@@ -192,12 +312,13 @@ export const UPGRADE_DEFINITIONS = [
     description: 'Gerader Piercing-Laser mit 48 Schaden.',
     rankDescriptions: [
       '48 Schaden, 610 Reichweite, 5,64 s Abklingzeit.',
-      '64 Schaden, 700 Reichweite, 4,88 s Abklingzeit.',
-      '80 Schaden, 790 Reichweite, 4,12 s Abklingzeit.'
+      'R2: breiterer Beam und staerkerer Impact.',
+      'R3: ein kurzer paralleler Side-Beam begleitet den Hauptstrahl.',
+      'R4: langer breiter Hauptbeam mit sichtbarer Nachentladung.'
     ],
     category: 'active',
     rarity: 'rare',
-    maxRank: 3,
+    maxRank: 4,
     minLevel: 3,
     weight: 5,
     apply: (_player, scene, rank) => scene.unlockLaserComb(rank)
@@ -459,8 +580,8 @@ export const UPGRADE_DEFINITIONS = [
     maxRank: 1,
     weight: 100,
     classId: 'ace',
-    requires: ['ace-deadeye-drill'],
-    requiresMaxRank: ['ace-deadeye-drill'],
+    requires: ['primary-ace-rank', 'ace-deadeye-drill'],
+    requiresMaxRank: ['primary-ace-rank'],
     condition: (player) => player.roosterId === 'ace',
     evolution: { base: 'primary-ace', passive: 'ace-deadeye-drill' },
     apply: (_player, scene) => scene.evolveAbility('primary-ace', 'evo-sunshot-array')
@@ -474,8 +595,8 @@ export const UPGRADE_DEFINITIONS = [
     maxRank: 1,
     weight: 100,
     classId: 'artillery',
-    requires: ['artillery-reinforced-breech'],
-    requiresMaxRank: ['artillery-reinforced-breech'],
+    requires: ['primary-artillery-rank', 'artillery-reinforced-breech'],
+    requiresMaxRank: ['primary-artillery-rank'],
     condition: (player) => player.roosterId === 'artillery',
     evolution: { base: 'primary-artillery', passive: 'artillery-reinforced-breech' },
     apply: (_player, scene) => scene.evolveAbility('primary-artillery', 'evo-siegebreaker-shell')
@@ -489,8 +610,8 @@ export const UPGRADE_DEFINITIONS = [
     maxRank: 1,
     weight: 100,
     classId: 'storm',
-    requires: ['storm-static-plumage'],
-    requiresMaxRank: ['storm-static-plumage'],
+    requires: ['primary-storm-rank', 'storm-static-plumage'],
+    requiresMaxRank: ['primary-storm-rank'],
     condition: (player) => player.roosterId === 'storm',
     evolution: { base: 'primary-storm', passive: 'storm-static-plumage' },
     apply: (_player, scene) => scene.evolveAbility('primary-storm', 'evo-tempest-crown')

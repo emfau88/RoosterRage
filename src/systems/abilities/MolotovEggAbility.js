@@ -15,7 +15,7 @@ export class MolotovEggAbility extends TimedAbility {
       return;
     }
     const start = this.scene.player.getMuzzlePosition(28);
-    const offsets = this.evolved ? [-62, 62] : [0];
+    const offsets = this.evolved ? [-62, 62] : this.rank >= 4 ? [-46, 46] : [0];
     offsets.forEach((offset) => {
       this.scene.molotovProjectiles.push(new MolotovEggProjectile(
         this.scene,

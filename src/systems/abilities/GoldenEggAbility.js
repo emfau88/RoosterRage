@@ -18,7 +18,7 @@ export class GoldenEggAbility extends TimedAbility {
       target.sprite.x,
       target.sprite.y
     );
-    const count = this.evolved ? 3 : 1;
+    const count = this.evolved ? 3 : this.rank >= 4 ? 2 : 1;
     for (let index = 0; index < count; index += 1) {
       const offset = count === 1 ? 0 : (index - 1) * 0.18;
       this.scene.spawnSpecialProjectile(angle + offset, target, {
@@ -27,14 +27,17 @@ export class GoldenEggAbility extends TimedAbility {
       speed: 430,
       life: 2300,
       pierce: (this.evolved ? 4 : 2) + this.rank,
-      hitRadius: this.evolved ? 42 : 34,
+      hitRadius: this.evolved ? 42 : 30 + this.rank * 3,
       bodyRadius: 14,
       scale: (this.evolved ? 1.42 : 1.15) + this.rank * 0.12,
-      trailRadius: this.evolved ? 23 : 17,
+      trailRadius: this.evolved ? 23 : 14 + this.rank * 2,
       trailColor: this.evolved ? 0xff5b25 : 0xffd35c,
       trailAlpha: this.evolved ? 0.42 : 0.28,
       homing: true,
       maxTurnRate: 0.045,
+      chainCount: !this.evolved && this.rank >= 3 ? 1 : 0,
+      chainRadius: 190,
+      chainDamageRatio: 0.38,
       sfx: 'egg-launch-ace',
       sfxVolume: 0.16,
       source: this.evolved ? 'evo-solar-scramble' : 'golden-egg'

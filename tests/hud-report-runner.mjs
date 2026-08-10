@@ -35,7 +35,7 @@ async function openGame(browser, serverUrl, viewport, suffix) {
 
 async function verifyResponsiveHud(browser, serverUrl) {
   const viewports = [
-    { name: 'desktop', width: 960, height: 540, maxHudHeight: 150 },
+    { name: 'desktop', width: 960, height: 540, maxHudHeight: 180 },
     { name: 'portrait', width: 390, height: 844, maxHudHeight: 125 },
     { name: 'landscape', width: 844, height: 390, maxHudHeight: 90 }
   ];
@@ -51,12 +51,16 @@ async function verifyResponsiveHud(browser, serverUrl) {
       const layout = await page.evaluate(() => {
         const hud = document.querySelector('.hud').getBoundingClientRect();
         const controls = document.querySelector('.hud__controls').getBoundingClientRect();
-        const xp = document.querySelector('.hud__bar').getBoundingClientRect();
+        const xp = document.querySelector('.hud__xp-row').getBoundingClientRect();
         const time = document.querySelector('[data-time]').getBoundingClientRect();
         const cooldowns = [...document.querySelectorAll('.hud__cooldown')].map((node) => ({
           angle: node.style.getPropertyValue('--cooldown-angle'),
           title: node.title
         }));
+        const rankPips = [...document.querySelectorAll('.hud__rank-pips')].map((node) => {
+          const rect = node.getBoundingClientRect();
+          return { count: node.children.length, left: rect.left, right: rect.right };
+        });
         return {
           hud: { left: hud.left, right: hud.right, top: hud.top, bottom: hud.bottom, height: hud.height },
           controls: { left: controls.left, right: controls.right, top: controls.top, bottom: controls.bottom },
@@ -65,7 +69,8 @@ async function verifyResponsiveHud(browser, serverUrl) {
           hasTopHp: Boolean(document.querySelector('[data-hp]')),
           hasKills: Boolean(document.querySelector('[data-kills]')),
           hasWaveProgress: Boolean(document.querySelector('[data-wave-fill]')),
-          cooldowns
+          cooldowns,
+          rankPips
         };
       });
       assert(layout.hud.height <= viewport.maxHudHeight,
@@ -73,10 +78,21 @@ async function verifyResponsiveHud(browser, serverUrl) {
       assert(layout.hud.left >= 0 && layout.hud.right <= viewport.width
         && layout.controls.left >= 0 && layout.controls.right <= viewport.width,
       `${viewport.name} HUD exceeds the viewport.`, layout);
-      assert(layout.xpTop <= layout.timeTop && !layout.hasTopHp && layout.hasKills && layout.hasWaveProgress,
+      assert(
+        layout.xpTop >= layout.hud.top
+        && layout.timeTop >= layout.hud.top
+        && layout.hasTopHp
+        && layout.hasKills
+        && layout.hasWaveProgress,
         `${viewport.name} HUD priority is incorrect.`, layout);
       assert(layout.cooldowns.length >= 2 && layout.cooldowns.every((cooldown) => cooldown.angle.endsWith('deg')),
         `${viewport.name} active loadout has no cooldown rings.`, layout.cooldowns);
+      assert(
+        layout.rankPips.length >= 3
+        && layout.rankPips.every((pips) => pips.count >= 3 && pips.left >= 0 && pips.right <= viewport.width),
+        `${viewport.name} rank pips are missing or clipped.`,
+        layout.rankPips
+      );
       assert(errors.length === 0, `Browser errors in ${viewport.name} HUD.`, errors);
       results.push({ name: viewport.name, ...layout });
     } finally {

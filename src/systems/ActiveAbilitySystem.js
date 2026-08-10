@@ -29,8 +29,8 @@ export class ActiveAbilitySystem {
     this.timedAbilities.forEach((ability) => ability.update(time));
   }
 
-  createRocketExplosion(x, y, damage, radius, evolved = false) {
-    this.rocketEgg.createExplosion(x, y, damage, radius, evolved);
+  createRocketExplosion(x, y, damage, radius, evolved = false, rank = this.rocketEgg.rank) {
+    this.rocketEgg.createExplosion(x, y, damage, radius, evolved, rank);
   }
 
   createMolotovImpact(x, y) {

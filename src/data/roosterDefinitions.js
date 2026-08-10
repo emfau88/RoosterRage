@@ -58,6 +58,7 @@ export const ROOSTER_DEFINITIONS = [
       }
     ],
     upgradeAffinities: {
+      'primary-ace-rank': 2.1,
       'ace-deadeye-drill': 1.8,
       'ace-guidance-fins': 1.55,
       'critical-yolk': 1.25,
@@ -148,6 +149,7 @@ export const ROOSTER_DEFINITIONS = [
       }
     ],
     upgradeAffinities: {
+      'primary-artillery-rank': 2.1,
       'artillery-reinforced-breech': 1.8,
       'artillery-blast-plating': 1.55,
       'fire-eggs': 1.35,
@@ -237,6 +239,7 @@ export const ROOSTER_DEFINITIONS = [
       }
     ],
     upgradeAffinities: {
+      'primary-storm-rank': 2.1,
       'storm-static-plumage': 1.8,
       'storm-tailwind-training': 1.55,
       'lightning-comb': 1.65,

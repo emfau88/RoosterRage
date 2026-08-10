@@ -213,6 +213,28 @@ canvas {
   z-index: 3;
 }
 
+.hud__rank-pips {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: -5px;
+  z-index: 4;
+  display: flex;
+  gap: 1px;
+}
+
+.hud__rank-pips i {
+  flex: 1;
+  height: 2px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.hud__rank-pips i.is-filled {
+  background: #ffd35c;
+  box-shadow: 0 0 3px rgba(255, 211, 92, 0.7);
+}
+
 .hud__cooldown {
   position: absolute;
   inset: 0;
@@ -863,6 +885,31 @@ canvas {
   font-weight: 700;
 }
 
+.upgrade-button__rank-pips {
+  display: flex;
+  gap: 3px;
+  margin: 4px 0 3px;
+}
+
+.upgrade-button__rank-pips i {
+  width: 18px;
+  height: 5px;
+  border: 1px solid rgba(38, 58, 63, 0.48);
+  border-radius: 999px;
+  background: rgba(38, 58, 63, 0.12);
+}
+
+.upgrade-button__rank-pips i.is-filled {
+  border-color: #d4931f;
+  background: #d4931f;
+}
+
+.upgrade-button__rank-pips i.is-next {
+  border-color: #f6c64d;
+  background: rgba(246, 198, 77, 0.36);
+  box-shadow: 0 0 7px rgba(246, 198, 77, 0.46);
+}
+
 .upgrade-button__meta {
   color: #6a3e2c;
   font-size: 10px;
@@ -902,6 +949,14 @@ canvas {
   color: #7a3e00;
   font-size: 11px;
   font-weight: 700;
+}
+
+.upgrade-button__evolution-hint {
+  display: block;
+  margin-top: 5px;
+  color: #61418c;
+  font-size: 10px;
+  font-weight: 800;
 }
 
 .upgrade-button--uncommon {

@@ -17,7 +17,9 @@ export class RocketEggAbility extends TimedAbility {
     const start = this.scene.player.getMuzzlePosition(36);
     const targets = this.evolved
       ? [...this.scene.enemies].filter((enemy) => enemy.sprite.active).slice(0, 3)
-      : [target];
+      : this.rank >= 4
+        ? [...this.scene.enemies].filter((enemy) => enemy.sprite.active).slice(0, 2)
+        : [target];
     targets.forEach((rocketTarget, index) => {
       const projectile = new RocketProjectile(
         this.scene,
@@ -40,7 +42,7 @@ export class RocketEggAbility extends TimedAbility {
     this.nextAt = time + (this.evolved ? 3900 : Math.max(2800, 5600 - this.rank * 620));
   }
 
-  createExplosion(x, y, damage, radius, evolved = false) {
+  createExplosion(x, y, damage, radius, evolved = false, rank = this.rank) {
     this.scene.audio.play('rocket-explosion');
     this.scene.playFx('fx-rocket-explosion', x, y, {
       scale: Phaser.Math.Clamp(radius / 118, 0.58, 1.05),
@@ -71,5 +73,33 @@ export class RocketEggAbility extends TimedAbility {
         });
       }
     });
+    if (!evolved && rank >= 3) {
+      for (let index = 0; index < 3; index += 1) {
+        const angle = (Math.PI * 2 * index) / 3;
+        const clusterX = x + Math.cos(angle) * radius * 0.58;
+        const clusterY = y + Math.sin(angle) * radius * 0.58;
+        const clusterRadius = radius * 0.42;
+        const cluster = this.scene.add.circle(clusterX, clusterY, clusterRadius, 0xff8a28, 0.18)
+          .setStrokeStyle(3, 0xffd35c, 0.76)
+          .setDepth(9);
+        this.scene.tweens.add({
+          targets: cluster,
+          alpha: 0,
+          scale: 1.32,
+          duration: 210,
+          onComplete: () => cluster.destroy()
+        });
+        this.scene.enemies.forEach((enemy) => {
+          if (
+            enemy.sprite.active
+            && Phaser.Math.Distance.Between(clusterX, clusterY, enemy.sprite.x, enemy.sprite.y) <= clusterRadius
+          ) {
+            this.scene.damageEnemy(enemy, Math.round(damage * 0.24), enemy.sprite.x, enemy.sprite.y, {
+              source: 'rocket-egg:cluster'
+            });
+          }
+        });
+      }
+    }
   }
 }

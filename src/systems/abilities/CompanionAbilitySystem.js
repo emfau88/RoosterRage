@@ -16,7 +16,7 @@ export class CompanionAbilitySystem {
     this.scene.orbitEggs.forEach((egg) => egg.destroy());
     this.scene.orbitEggs = [];
     const evolved = Boolean(this.orbitEvolutionId);
-    const count = evolved ? 4 : Phaser.Math.Clamp(rank, 1, 3);
+    const count = evolved ? 6 : Phaser.Math.Clamp(rank, 1, 4);
     for (let index = 0; index < count; index += 1) {
       this.scene.orbitEggs.push(new OrbitEgg(this.scene, index, count, rank, evolved));
     }

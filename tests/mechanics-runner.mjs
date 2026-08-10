@@ -118,7 +118,7 @@ async function testUpgrades(browser) {
     assert(!choices.includes('double-shot') && !choices.includes('triple-shot'), 'Maxed shot upgrades should not be offered again.', choices);
 
     const catalog = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeCatalog());
-    assert(catalog.length === 42, 'Upgrade catalog should contain 31 base upgrades and 11 EVOs.', catalog);
+    assert(catalog.length === 45, 'Upgrade catalog should contain 34 base upgrades and 11 EVOs.', catalog);
     assert(catalog.every((upgrade) => upgrade.category && upgrade.rarity), 'Every upgrade needs category and rarity metadata.', catalog);
 
     return { name: 'upgrades', status: 'passed', before, after, choices, catalogSize: catalog.length };
@@ -145,6 +145,53 @@ async function testUpgradeOffers(browser) {
     assert(choices.every((choice) => choice.rankLabel && /Rang|Sofort/.test(choice.rankLabel)), 'Cards need rank labels.', choices);
     assert(choices.every((choice) => /\d/.test(choice.description)), 'Cards should communicate concrete numeric effects.', choices);
     assert(!availableAtFullHp.includes('heal'), 'Heal should not be offered at full HP.', availableAtFullHp);
+    assert(choices.some((choice) => choice.id === 'primary-ace-rank'), 'R2 start-weapon progress should be guaranteed at level 2.', choices);
+
+    const startWeaponCadence = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.applyUpgradeById('primary-ace-rank');
+      api.setPlayerLevel(3);
+      const levelThree = api.getAvailableUpgradeIds().includes('primary-ace-rank');
+      api.setPlayerLevel(4);
+      const levelFour = api.getAvailableUpgradeIds().includes('primary-ace-rank');
+      api.applyUpgradeById('primary-ace-rank');
+      api.setPlayerLevel(5);
+      const levelFive = api.getAvailableUpgradeIds().includes('primary-ace-rank');
+      api.setPlayerLevel(6);
+      const levelSix = api.getAvailableUpgradeIds().includes('primary-ace-rank');
+      return { levelThree, levelFour, levelFive, levelSix };
+    });
+    assert(
+      !startWeaponCadence.levelThree
+      && startWeaponCadence.levelFour
+      && !startWeaponCadence.levelFive
+      && startWeaponCadence.levelSix,
+      'Start-weapon R2/R3/R4 level cadence is not enforced.',
+      startWeaponCadence
+    );
+    const deadeyeCadence = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.movePlayer(400, 450);
+      api.spawnEnemyType('slime', 1050, 450, { speed: 0, damage: 0, hp: 9999, xpOverride: 0 });
+      for (let index = 0; index < 4; index += 1) api.triggerPrimaryAttack();
+      return api.getProjectileSnapshot().map((projectile) => ({
+        forceCritical: projectile.forceCritical,
+        criticalPierceBonus: projectile.criticalPierceBonus,
+        criticalRicochetBonus: projectile.criticalRicochetBonus
+      }));
+    });
+    assert(
+      deadeyeCadence.length === 6
+      && deadeyeCadence.some((projectile) => projectile.forceCritical)
+      && deadeyeCadence.filter((projectile) => projectile.forceCritical).every((projectile) => (
+        projectile.criticalPierceBonus === 1
+        && projectile.criticalRicochetBonus === 1
+      )),
+      'Deadeye Shell should guarantee the fourth attack and preserve its one-time bonuses.',
+      deadeyeCadence
+    );
 
     await page.evaluate(() => window.__ROOSTER_TEST__.previewUpgradeOverlay());
     await page.screenshot({ path: path.join(artifactDir, 'upgrade-cards-phase-5.png') });
@@ -154,7 +201,7 @@ async function testUpgradeOffers(browser) {
     const guaranteeAfter = await page.evaluate(() => window.__ROOSTER_TEST__.shouldGuaranteeSpectacle());
     assert(!guaranteeAfter, 'Spectacle guarantee should stop after choosing a spectacle upgrade.');
     assert(errors.length === 0, 'Browser reported errors during upgrade offer test.', errors);
-    return { name: 'upgrade offers', status: 'passed', choices, spectacle: spectacle.id };
+    return { name: 'upgrade offers', status: 'passed', choices, spectacle: spectacle.id, startWeaponCadence, deadeyeCadence };
   } finally {
     await page.close();
   }

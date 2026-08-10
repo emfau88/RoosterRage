@@ -200,6 +200,7 @@ export class HUD {
             <strong>${choice.name}</strong>
             <span class="upgrade-button__rank">${choice.rankLabel ?? ''}</span>
           </span>
+          ${this.renderRankPips(choice.rankProgress)}
           <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
           ${choice.rewardPriority
             ? `<span class="upgrade-button__reward">${choice.rewardPriority === 'rank-up' ? 'Rank-Up' : choice.rewardPriority === 'evolution' ? 'EVO bereit' : 'Neue Option'}</span>`
@@ -207,6 +208,9 @@ export class HUD {
           <span class="upgrade-button__description">${choice.description}</span>
           ${choice.synergyActive
             ? `<span class="upgrade-button__synergy">Synergie aktiv: ${choice.synergyDescription}</span>`
+            : ''}
+          ${choice.evolutionHint
+            ? `<span class="upgrade-button__evolution-hint">EVO ${choice.evolutionHint.name}: R4 ${choice.evolutionHint.baseReady ? '✓' : '○'} · ${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span>`
             : ''}
         </span>
       `;
@@ -567,6 +571,16 @@ export class HUD {
         const rank = document.createElement('small');
         rank.textContent = entry.rank === 'EVO' ? 'E' : entry.rank;
         icon.append(rank);
+        if (entry.rank !== 'EVO' && entry.maxRank > 1) {
+          const pips = document.createElement('span');
+          pips.className = 'hud__rank-pips';
+          for (let pipIndex = 1; pipIndex <= entry.maxRank; pipIndex += 1) {
+            const pip = document.createElement('i');
+            pip.classList.toggle('is-filled', pipIndex <= entry.rank);
+            pips.append(pip);
+          }
+          icon.append(pips);
+        }
         if (entry.cooldown) {
           const cooldown = document.createElement('i');
           cooldown.className = 'hud__cooldown';
@@ -579,6 +593,18 @@ export class HUD {
       }
       container.append(icon);
     }
+  }
+
+  renderRankPips(progress) {
+    if (!progress?.max || progress.max <= 1) {
+      return '';
+    }
+    const pips = Array.from({ length: progress.max }, (_value, index) => {
+      const rank = index + 1;
+      const state = rank < progress.next ? 'is-filled' : rank === progress.next ? 'is-next' : '';
+      return `<i class="${state}"></i>`;
+    }).join('');
+    return `<span class="upgrade-button__rank-pips" aria-label="Rang ${progress.next} von ${progress.max}">${pips}</span>`;
   }
 
   iconIdFromLabel(label) {

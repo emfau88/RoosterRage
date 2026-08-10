@@ -19,6 +19,16 @@ export class LightningBolt {
     for (let i = 0; i < points.length - 1; i += 1) {
       this.createSegment(points[i], points[i + 1]);
     }
+    if (!evolved && rank >= 3 && points.length >= 4) {
+      this.createSegment(points[1], points[points.length - 1]);
+    }
+    if (!evolved && rank >= 4) {
+      const burst = scene.add.circle(points[0].x, points[0].y, 28, 0x5ad7ff, 0.18)
+        .setStrokeStyle(4, 0xeefcff, 0.86)
+        .setDepth(10);
+      this.segments.push(burst);
+      scene.tweens.add({ targets: burst, scale: 2.1, duration: this.life });
+    }
 
     targets.forEach((enemy, index) => {
       const falloff = Math.max(0.55, 1 - index * 0.18);

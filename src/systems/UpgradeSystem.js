@@ -21,8 +21,15 @@ export class UpgradeSystem {
   getChoices(count = 3, player) {
     const available = this.upgrades.filter((upgrade) => this.isAvailable(upgrade, player));
     const choices = [];
+    const startWeaponProgress = this.pickWeighted(
+      available.filter((upgrade) => upgrade.startWeaponUpgrade),
+      player
+    );
+    if (startWeaponProgress) {
+      choices.push(startWeaponProgress);
+    }
     const evolution = this.pickWeighted(
-      available.filter((upgrade) => upgrade.evolution),
+      available.filter((upgrade) => upgrade.evolution && !choices.includes(upgrade)),
       player
     );
     if (evolution) {
@@ -108,6 +115,11 @@ export class UpgradeSystem {
     if (upgrade.minLevel && player.level < upgrade.minLevel) {
       return false;
     }
+    const nextInternalRank = player.getUpgradeRank(upgrade.id) + 1;
+    const rankMinLevel = upgrade.rankMinLevels?.[nextInternalRank - 1];
+    if (rankMinLevel && player.level < rankMinLevel) {
+      return false;
+    }
     if (!upgrade.consumable && upgrade.maxRank && player.getUpgradeRank(upgrade.id) >= upgrade.maxRank) {
       return false;
     }
@@ -150,10 +162,15 @@ export class UpgradeSystem {
   }
 
   presentUpgrade(upgrade, player) {
-    const nextRank = upgrade.consumable || upgrade.evolution
+    const internalNextRank = upgrade.consumable || upgrade.evolution
       ? null
       : (player?.getUpgradeRank(upgrade.id) ?? 0) + 1;
-    const rankDescription = nextRank ? upgrade.rankDescriptions?.[nextRank - 1] : null;
+    const rankOffset = upgrade.rankOffset ?? 0;
+    const nextRank = internalNextRank === null ? null : internalNextRank + rankOffset;
+    const displayMaxRank = upgrade.displayMaxRank ?? upgrade.maxRank;
+    const rankDescription = internalNextRank
+      ? upgrade.rankDescriptions?.[internalNextRank - 1]
+      : null;
     const synergyActive = Boolean(
       player
       && upgrade.synergy
@@ -163,12 +180,39 @@ export class UpgradeSystem {
       ...upgrade,
       description: rankDescription ?? upgrade.description,
       nextRank,
+      displayMaxRank,
+      rankProgress: nextRank ? {
+        current: Math.max(0, nextRank - 1),
+        next: nextRank,
+        max: displayMaxRank
+      } : null,
       rankLabel: upgrade.consumable || upgrade.evolution
         ? upgrade.evolution ? 'EVO' : 'Sofort'
-        : `Rang ${nextRank}/${upgrade.maxRank}`,
+        : `Rang ${nextRank}/${displayMaxRank}`,
       categoryLabel: CATEGORY_LABELS[upgrade.category] ?? upgrade.category,
       synergyActive,
-      synergyDescription: synergyActive ? upgrade.synergy.description : null
+      synergyDescription: synergyActive ? upgrade.synergy.description : null,
+      evolutionHint: this.getEvolutionHint(upgrade, player)
+    };
+  }
+
+  getEvolutionHint(upgrade, player) {
+    const baseId = upgrade.baseWeaponId ?? upgrade.id;
+    const evolution = this.upgrades.find((candidate) => candidate.evolution?.base === baseId);
+    if (!evolution) {
+      return null;
+    }
+    const passive = this.upgrades.find((candidate) => candidate.id === evolution.evolution.passive);
+    const baseRank = upgrade.startWeaponUpgrade
+      ? (player?.getUpgradeRank(upgrade.id) ?? 0) + (upgrade.rankOffset ?? 0) + 1
+      : (player?.getUpgradeRank(upgrade.id) ?? 0) + 1;
+    const baseMax = upgrade.displayMaxRank ?? upgrade.maxRank ?? 1;
+    const passiveOwned = (player?.getUpgradeRank(evolution.evolution.passive) ?? 0) > 0;
+    return {
+      name: evolution.name,
+      baseReady: baseRank >= baseMax,
+      passiveName: passive?.name ?? evolution.evolution.passive,
+      passiveOwned
     };
   }
 

@@ -128,6 +128,26 @@ export function installTestApi(scene) {
         count: scene.supportChickens.length
       }
     }),
+    triggerPrimaryAttack: () => {
+      scene.lastShotAt = -Infinity;
+      scene.combat.autoShoot(scene.time.now);
+      return scene.projectiles.length;
+    },
+    triggerActiveAbility: (id) => {
+      const ability = {
+        'golden-egg': scene.goldenEgg,
+        'molotov-egg': scene.molotovEgg,
+        'lightning-comb': scene.lightningComb,
+        'void-nest': scene.voidNest,
+        'rocket-egg': scene.rocketEgg,
+        'laser-comb': scene.laserComb
+      }[id];
+      if (!ability?.rank) {
+        return false;
+      }
+      ability.activate(scene.time.now);
+      return true;
+    },
     getPlayerStats: () => ({
       hp: scene.player.hp,
       roosterId: scene.player.roosterId,
@@ -308,6 +328,10 @@ export function installTestApi(scene) {
       chainRemaining: projectile.chainRemaining,
       pierceRemaining: projectile.pierceRemaining,
       ricochetRemaining: projectile.ricochetRemaining,
+      forceCritical: projectile.forceCritical,
+      criticalPierceBonus: projectile.criticalPierceBonus,
+      criticalRicochetBonus: projectile.criticalRicochetBonus,
+      criticalBonusApplied: projectile.criticalBonusApplied,
       slowRatio: projectile.slowRatio,
       active: projectile.sprite.active
     })),
