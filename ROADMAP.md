@@ -591,14 +591,14 @@ Abnahmeprotokoll 10.08.2026:
 
 ## Phase 16: Meta und Challenges
 
-Status: Offen
+Status: Abgeschlossen am 10.08.2026
 
 Bulk-Ziel: Wiederholungsgruende schaffen, ohne schwache Kernbalance durch Stat-Grind zu verdecken.
 
-33. [ ] Hennenhuette als kompakten Hub fuer Rooster-Auswahl, Freischaltungen, Challenges und Run-Historie bauen.
-34. [ ] Rooster und kosmetische Varianten ueber klare Leistungen freischalten; keine Pflicht-Wartezeiten oder Zufallskisten im Slice.
-35. [ ] Challenge-Modifikatoren und drei kuratierte Varianten aus bestehenden Karten/Wellen ableiten.
-36. [ ] Ein kleines Lexikon fuer Gegner, EVO-Rezepte und persoenliche Bestwerte ergaenzen.
+33. [x] Hennenhuette als kompakten Hub fuer Rooster-Auswahl, Freischaltungen, Challenges und Run-Historie bauen.
+34. [x] Rooster und kosmetische Varianten ueber klare Leistungen freischalten; keine Pflicht-Wartezeiten oder Zufallskisten im Slice.
+35. [x] Challenge-Modifikatoren und drei kuratierte Varianten aus bestehenden Karten/Wellen ableiten.
+36. [x] Ein kleines Lexikon fuer Gegner, EVO-Rezepte und persoenliche Bestwerte ergaenzen.
 
 Balance-Arbeit:
 
@@ -609,6 +609,15 @@ Abnahme:
 
 - Ein kompletter Run schaltet ein klares neues Ziel frei.
 - Der Kern-Run bleibt ohne Meta-Grind vollstaendig gewinnbar.
+
+Abnahmeprotokoll 10.08.2026:
+
+- Die Hennenhuette vereint Challenge- und Rooster-Wahl, Freischaltfortschritt, kosmetische Varianten, persoenliche Bestwerte, acht lokale History-Eintraege sowie Gegner- und EVO-Lexika in einem responsiven, vertikal scrollbaren Mobile-First-Hub.
+- Fortschritt bleibt horizontal: Ace und der Standard Run sind sofort vollstaendig spielbar. 75 Kills, ein Sieg und rooster-spezifische Siege schalten Rooster oder rein kosmetische Tints frei; es gibt weder Stat-Grind, Wartezeiten noch Zufallskisten.
+- Rush Hour nutzt Vertical Run mit 18 Prozent kuerzeren Zielzeiten und 12 Prozent schnelleren Gegnern. Featherweight nutzt Coop Square mit 28 Prozent weniger HP, 12 Prozent mehr Tempo und 15 Prozent mehr Eigen- sowie Gegnerschaden. Royal Gauntlet nutzt Open Yard mit 18 Prozent mehr Gegner-HP, zusaetzlichen 22 Prozent Elite-HP, 12 Prozent mehr Gegnerschaden und 18 Prozent mehr XP.
+- Challenge und Arena werden im HUD sowie im Run-Report ausgewiesen. Der normale Modus behaelt nach Freischaltungen exakt seine Ace-Basiswerte HP 100, Tempo 210 und Schaden 20.
+- `npm run test:meta` prueft frischen und vollstaendig freigeschalteten Zustand, Reload-Persistenz, Cosmetics, History, 12 Gegner- und 11 EVO-Eintraege, alle Challenge-Modifikatoren und horizontale Standard-Stats im Portrait-Viewport. Das Portrait-Artefakt besitzt keinen horizontalen Overflow.
+- Production, Build, Smoke, Mechanics, Foundation, Pacing und HUD/Report bestanden nach der Integration. Der manuelle Haltepunkt bleibt wie beauftragt bis nach Abschluss der restlichen Roadmap ausgesetzt.
 
 ## Phase 17: Vertical-Slice-Abnahme
 

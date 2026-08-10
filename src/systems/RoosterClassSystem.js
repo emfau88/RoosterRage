@@ -39,11 +39,14 @@ export class RoosterClassSystem {
     player.fireRate = definition.stats.fireRate;
     player.projectileDamage = definition.stats.projectileDamage;
     player.critChance = definition.stats.critChance;
+    this.scene.challenge?.applyPlayer(player);
     player.baseScale = definition.visual.scale;
     player.sprite.setScale(player.baseScale);
     player.sprite.clearTint();
-    if (definition.visual.tint) {
-      player.sprite.setTint(definition.visual.tint);
+    const cosmetic = this.scene.meta?.getSelectedCosmetic(definition.id);
+    const tint = cosmetic?.tint ?? definition.visual.tint;
+    if (tint) {
+      player.sprite.setTint(tint);
     }
     player.updateHealthBar();
   }

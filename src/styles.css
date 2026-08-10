@@ -393,10 +393,122 @@ canvas {
   width: min(920px, 100%);
 }
 
+.henhouse-panel {
+  max-height: calc(100dvh - 28px);
+  overflow: auto;
+}
+
+.henhouse-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+
+.henhouse-heading h1,
+.henhouse-panel h2 {
+  margin: 0;
+}
+
+.henhouse-heading > div > small {
+  color: #ffe16a;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.henhouse-panel h2 {
+  margin: 14px 0 7px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.henhouse-stats,
+.personal-bests {
+  display: flex;
+  gap: 7px;
+}
+
+.henhouse-stats span,
+.personal-bests span {
+  min-width: 68px;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 10px;
+  text-align: center;
+}
+
+.henhouse-stats strong,
+.personal-bests strong,
+.personal-bests small {
+  display: block;
+}
+
+.henhouse-stats strong {
+  color: #ffe16a;
+  font-size: 15px;
+}
+
+.challenge-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.challenge-card {
+  min-width: 0;
+  min-height: 92px;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: #27383d;
+  color: #eef7f0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.challenge-card strong,
+.challenge-card span,
+.challenge-card small {
+  display: block;
+}
+
+.challenge-card span {
+  margin: 4px 0;
+  color: #c9d8d1;
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.challenge-card small {
+  color: #ffe16a;
+  font-size: 9px;
+}
+
+.challenge-card.is-selected {
+  border-color: #ffe16a;
+  box-shadow: inset 0 0 0 2px rgba(255, 225, 106, 0.2);
+}
+
+.challenge-card.is-locked,
+.rooster-card.is-locked {
+  opacity: 0.48;
+  cursor: not-allowed;
+  filter: grayscale(0.72);
+}
+
 .rooster-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
+}
+
+.rooster-entry {
+  min-width: 0;
 }
 
 .rooster-card {
@@ -443,6 +555,144 @@ canvas {
 .rooster-card__primary,
 .rooster-card__passive {
   display: block;
+}
+
+.rooster-card__progress {
+  color: #31555f;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.cosmetic-list {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.cosmetic-list button {
+  flex: 1;
+  min-height: 28px;
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 5px;
+  background: #26383d;
+  color: #dce9e1;
+  font: inherit;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.cosmetic-list button.is-selected {
+  border-color: #ffe16a;
+  color: #ffe16a;
+}
+
+.cosmetic-list button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.henhouse-drawers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.henhouse-drawers details {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.henhouse-drawers summary {
+  color: #ffe9a7;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.personal-bests {
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.personal-bests span {
+  flex: 1 1 80px;
+}
+
+.personal-bests small {
+  color: #aebdb6;
+  font-size: 8px;
+}
+
+.history-list,
+.lexicon-list {
+  display: grid;
+  gap: 5px;
+  max-height: 210px;
+  margin: 8px 0 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.history-list li,
+.lexicon-list li {
+  padding: 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 9px;
+}
+
+.history-list strong,
+.history-list span,
+.lexicon-list strong,
+.lexicon-list span {
+  display: block;
+}
+
+.history-list span,
+.lexicon-list span {
+  margin-top: 2px;
+  color: #b9c9c1;
+  line-height: 1.3;
+}
+
+.lexicon-list li.is-undiscovered {
+  opacity: 0.62;
+}
+
+.run-report__unlocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+  padding: 9px;
+  border: 1px solid rgba(255, 225, 106, 0.45);
+  border-radius: 6px;
+  background: rgba(255, 225, 106, 0.08);
+}
+
+.run-report__unlocks h2 {
+  flex: 1 0 100%;
+  margin: 0;
+  color: #ffe16a;
+  font-size: 13px;
+}
+
+.run-report__unlocks span {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.run-report__unlocks strong {
+  margin-right: 5px;
 }
 
 .rooster-card__header strong {
@@ -909,6 +1159,28 @@ canvas {
     padding: 14px;
   }
 
+  .henhouse-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .henhouse-stats {
+    width: 100%;
+  }
+
+  .henhouse-stats span {
+    flex: 1;
+  }
+
+  .challenge-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .henhouse-drawers {
+    grid-template-columns: 1fr;
+  }
+
   .rooster-list {
     grid-template-columns: 1fr;
   }
@@ -1008,6 +1280,34 @@ canvas {
   .rooster-panel h1 {
     margin-bottom: 4px;
     font-size: 20px;
+  }
+
+  .henhouse-panel {
+    max-height: calc(100dvh - 16px);
+  }
+
+  .henhouse-heading {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .henhouse-stats span {
+    min-width: 56px;
+    padding: 4px;
+  }
+
+  .challenge-list {
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    overflow-x: auto;
+  }
+
+  .challenge-card {
+    min-height: 76px;
+  }
+
+  .henhouse-drawers {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    overflow-x: auto;
   }
 
   .rooster-panel > p {

@@ -20,6 +20,7 @@
     "test:encounter": "node tests/encounter-runner.mjs",
     "test:hud-report": "node tests/hud-report-runner.mjs",
     "test:rooster-depth": "node tests/rooster-depth-runner.mjs",
+    "test:meta": "node tests/meta-runner.mjs",
     "test:balance": "node tests/balance-runner.mjs"
   },
   "dependencies": {

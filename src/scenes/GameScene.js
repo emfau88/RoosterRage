@@ -13,12 +13,14 @@ import { ArenaSystem } from '../systems/ArenaSystem.js';
 import { CollisionSystem } from '../systems/CollisionSystem.js';
 import { CombatSystem } from '../systems/CombatSystem.js';
 import { CombatFeedbackSystem } from '../systems/CombatFeedbackSystem.js';
+import { ChallengeSystem } from '../systems/ChallengeSystem.js';
 import { EnemyAttackSystem } from '../systems/EnemyAttackSystem.js';
 import { EffectSettingsSystem } from '../systems/EffectSettingsSystem.js';
 import { EntitySystem } from '../systems/EntitySystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
 import { PickupSystem } from '../systems/PickupSystem.js';
 import { LoadoutSystem } from '../systems/LoadoutSystem.js';
+import { MetaProgressionSystem } from '../systems/MetaProgressionSystem.js';
 import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
 import { ProjectileLifecycleSystem } from '../systems/ProjectileLifecycleSystem.js';
 import { RandomSystem } from '../systems/RandomSystem.js';
@@ -41,6 +43,10 @@ export class GameScene extends Phaser.Scene {
     super('GameScene');
   }
 
+  init(data = {}) {
+    this.launchConfig = { ...data };
+  }
+
   preload() {
     preloadGameAssets(this);
   }
@@ -59,6 +65,15 @@ export class GameScene extends Phaser.Scene {
       ? globalThis.crypto.getRandomValues(new Uint32Array(1))[0]
       : Date.now();
     this.rng = new RandomSystem(requestedSeed ?? generatedSeed);
+    this.meta = new MetaProgressionSystem();
+    const requestedChallenge = this.launchConfig.challengeId
+      ?? searchParams.get('challenge')
+      ?? this.meta.getState().selectedChallenge;
+    const challengeId = this.meta.getState().unlockedChallenges.includes(requestedChallenge)
+      ? requestedChallenge
+      : 'standard';
+    this.meta.selectChallenge(challengeId);
+    this.challenge = new ChallengeSystem(challengeId, requestedArena);
     this.physics.world.setBounds(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
     this.cameras.main.setBounds(
       0,
@@ -68,7 +83,7 @@ export class GameScene extends Phaser.Scene {
     );
 
     addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y);
-    this.arena = new ArenaSystem(this, requestedArena, ARENA_WIDTH, ARENA_HEIGHT);
+    this.arena = new ArenaSystem(this, this.challenge.arenaId, ARENA_WIDTH, ARENA_HEIGHT);
 
     this.enemies = [];
     this.projectiles = [];
@@ -91,6 +106,7 @@ export class GameScene extends Phaser.Scene {
     this.laserComb = this.activeAbilities.laserComb;
     this.elapsed = 0;
     this.telemetry = new Telemetry({ seed: this.rng.seed, profile: requestedProfile });
+    this.telemetry.summary.challengeId = this.challenge.id;
     this.effects = new EffectSettingsSystem();
     this.audio = new AudioSystem(this);
     this.bot = {
@@ -136,7 +152,7 @@ export class GameScene extends Phaser.Scene {
       (upgrade) => this.chooseUpgrade(upgrade),
       () => this.scene.restart(),
       () => this.toggleFullscreen(),
-      (roosterId) => this.chooseRooster(roosterId),
+      (roosterId, selectedChallenge) => this.startRunFromHub(roosterId, selectedChallenge),
       () => this.rerollUpgradeChoices(),
       () => this.openEffectSettings()
     );
@@ -146,6 +162,9 @@ export class GameScene extends Phaser.Scene {
     this.setupPhysics();
     installTestApi(this);
     this.runState.startRoosterSelection(this.roosterClasses.getDefinitions());
+    if (this.launchConfig.roosterId) {
+      this.chooseRooster(this.launchConfig.roosterId);
+    }
     document.body.dataset.roosterLoadState = 'ready';
   }
 
@@ -446,6 +465,17 @@ export class GameScene extends Phaser.Scene {
     return this.runState.chooseRooster(id);
   }
 
+  startRunFromHub(roosterId, challengeId = this.challenge.id) {
+    if (!this.meta.isRoosterUnlocked(roosterId) || !this.meta.selectChallenge(challengeId)) {
+      return false;
+    }
+    if (challengeId !== this.challenge.id) {
+      this.scene.restart({ challengeId, roosterId });
+      return true;
+    }
+    return this.chooseRooster(roosterId);
+  }
+
   maybeChooseBotUpgrade(time) {
     return this.runState.maybeChooseBotUpgrade(time);
   }
@@ -463,6 +493,7 @@ export class GameScene extends Phaser.Scene {
       roosterName: this.player.roosterName,
       xpPercent: this.player.xp / this.player.xpToNext,
       wave: this.waveSystem.currentWave,
+      challenge: this.challenge.getState(),
       elapsed: this.elapsed,
       kills: this.debugStats.kills,
       upgrades: this.player.upgrades,

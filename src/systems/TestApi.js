@@ -29,6 +29,7 @@ export function installTestApi(scene) {
       xpOrbs: scene.xpOrbs.length,
       pickups: scene.pickups.items.length,
       arenaId: scene.arena.id,
+      challengeId: scene.challenge.id,
       wave: scene.waveSystem.currentWave,
       waveName: scene.waveSystem.waves[scene.waveSystem.currentWave - 1]?.name ?? null,
       roosterId: scene.player.roosterId,
@@ -209,7 +210,57 @@ export function installTestApi(scene) {
       primaryEvolution: scene.player.primaryEvolution ? { ...scene.player.primaryEvolution } : null,
       upgradeAffinities: { ...scene.player.upgradeAffinities }
     }),
-    selectRooster: (id = 'ace') => scene.chooseRooster(id),
+    selectRooster: (id = 'ace') => {
+      scene.meta.unlockRoosterForTesting(id);
+      return scene.chooseRooster(id);
+    },
+    getMetaState: () => scene.meta.getState(),
+    getMetaHub: () => scene.meta.getHubState(scene.roosterClasses.getDefinitions()),
+    resetMetaProgress: () => {
+      const state = scene.meta.reset();
+      scene.runState.startRoosterSelection(scene.roosterClasses.getDefinitions());
+      return state;
+    },
+    unlockAllMeta: () => {
+      const state = scene.meta.unlockAllForTesting();
+      scene.runState.startRoosterSelection(scene.roosterClasses.getDefinitions());
+      return state;
+    },
+    recordMetaRun: (overrides = {}) => scene.meta.recordRun({
+      outcome: 'victory',
+      kills: 180,
+      elapsedMs: 480000,
+      rooster: { id: 'ace', name: 'Barnyard Ace' },
+      arena: { id: 'open-yard', name: 'Open Yard' },
+      challenge: { id: 'standard', name: 'Standard Run' },
+      build: { active: [], passive: [], evolutions: [] },
+      ...overrides
+    }),
+    selectMetaChallenge: (id) => scene.meta.selectChallenge(id),
+    selectMetaCosmetic: (roosterId, cosmeticId) => scene.meta.selectCosmetic(roosterId, cosmeticId),
+    getChallengeState: () => scene.challenge.getState(),
+    getChallengeCatalog: () => scene.challenge.getCatalog(),
+    getChallengeProbe: () => {
+      const slime = scene.waveSystem.makeSlime();
+      const elite = scene.waveSystem.makeEliteBrute();
+      const boss = scene.waveSystem.makeBoss();
+      return {
+        raw: {
+          slime: { hp: slime.hp, speed: slime.speed, damage: slime.damage, xp: slime.xp },
+          elite: { hp: elite.hp, speed: elite.speed, damage: elite.damage, xp: elite.xp },
+          boss: {
+            abilityDamage: boss.ability.damage,
+            heavyDamage: boss.heavyProjectile.damage
+          }
+        },
+        modified: {
+          slime: scene.challenge.modifyEnemy(slime),
+          elite: scene.challenge.modifyEnemy(elite),
+          boss: scene.challenge.modifyEnemy(boss),
+          wave: scene.challenge.modifyWave({ targetDuration: [25, 35] })
+        }
+      };
+    },
     getProjectileSnapshot: () => scene.projectiles.map((projectile) => ({
       x: projectile.sprite.x,
       y: projectile.sprite.y,

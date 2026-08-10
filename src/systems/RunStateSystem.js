@@ -20,11 +20,23 @@ export class RunStateSystem {
   startRoosterSelection(definitions) {
     this.choosingRooster = true;
     this.scene.physics.pause();
-    this.scene.hud.showRoosterSelection(definitions);
+    const renderHub = () => this.scene.hud.showRoosterSelection(
+      definitions,
+      this.scene.meta.getHubState(definitions),
+      (roosterId, cosmeticId, challengeId) => {
+        this.scene.meta.selectChallenge(challengeId);
+        if (this.scene.meta.selectCosmetic(roosterId, cosmeticId)) renderHub();
+      }
+    );
+    renderHub();
   }
 
   chooseRooster(id) {
-    if (!this.choosingRooster || !this.scene.roosterClasses.select(id)) {
+    if (
+      !this.choosingRooster
+      || !this.scene.meta.isRoosterUnlocked(id)
+      || !this.scene.roosterClasses.select(id)
+    ) {
       return false;
     }
     this.choosingRooster = false;
@@ -207,7 +219,10 @@ export class RunStateSystem {
     this.gameEnded = true;
     this.scene.physics.pause();
     this.scene.telemetry.finish(this.scene.time.now, outcome);
-    this.scene.hud.showEndScreen(title, message, this.getRunReport());
+    const report = this.getRunReport();
+    report.newUnlocks = this.scene.meta.recordRun(report, this.scene.telemetry.events);
+    report.meta = this.scene.meta.getState();
+    this.scene.hud.showEndScreen(title, message, report);
   }
 
   getRunReport() {
@@ -221,6 +236,7 @@ export class RunStateSystem {
         name: scene.roosterClasses.selected?.name ?? scene.player.roosterName
       },
       arena: { id: scene.arena.id, name: scene.arena.definition.name },
+      challenge: scene.challenge.getState(),
       build: {
         active: loadout.active,
         passive: loadout.passive,

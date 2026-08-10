@@ -37,7 +37,7 @@ export class WaveSystem {
   }
 
   hydrateWave(wave) {
-    return {
+    const hydrated = {
       ...wave,
       elites: (wave.elites ?? []).map((enemy) => this.makeEnemyFromSpec(enemy)),
       composition: (wave.composition ?? []).map((entry) => ({
@@ -49,6 +49,7 @@ export class WaveSystem {
         enemy: this.makeEnemyFromSpec(entry.enemy)
       }))
     };
+    return this.scene.challenge?.modifyWave(hydrated) ?? hydrated;
   }
 
   makeEnemyFromSpec({ kind, multiplier = 1 }) {
@@ -70,7 +71,8 @@ export class WaveSystem {
     if (!makeEnemy) {
       throw new Error(`Unknown enemy kind in wave definition: ${kind}`);
     }
-    return makeEnemy();
+    const enemy = makeEnemy();
+    return this.scene.challenge?.modifyEnemy(enemy) ?? enemy;
   }
 
   start() {
@@ -230,11 +232,13 @@ export class WaveSystem {
       return config.xp ?? 0;
     }
     if (config.boss) {
-      return wave.xpCurve.bossXp ?? 0;
+      return Math.round((wave.xpCurve.bossXp ?? 0) * (this.scene.challenge?.modifiers.xpMultiplier ?? 1));
     }
     const segment = this.director.getState().segment;
     const multiplier = wave.xpCurve.segmentMultipliers?.[segment] ?? 1;
-    return Math.max(1, Math.round(wave.xpCurve.perEnemy * multiplier));
+    return Math.max(1, Math.round(
+      wave.xpCurve.perEnemy * multiplier * (this.scene.challenge?.modifiers.xpMultiplier ?? 1)
+    ));
   }
 
   makeRunner(multiplier = 1) {

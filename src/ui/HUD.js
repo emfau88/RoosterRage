@@ -113,7 +113,10 @@ export class HUD {
   update(state) {
     const roosterLabel = state.roosterName ? `${state.roosterName} L${state.level}` : `Level ${state.level}`;
     this.root.querySelector('[data-level] [data-value]').textContent = roosterLabel;
-    this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10`;
+    const challengeSuffix = state.challenge?.id && state.challenge.id !== 'standard'
+      ? ` · ${state.challenge.name}`
+      : '';
+    this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10${challengeSuffix}`;
     this.root.querySelector('[data-time] [data-value]').textContent = this.formatTime(state.elapsed);
     this.root.querySelector('[data-kills] [data-value]').textContent = `${state.kills ?? 0} Kills`;
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
@@ -181,20 +184,76 @@ export class HUD {
     this.overlay.querySelector('.reroll-button')?.addEventListener('click', () => this.onReroll?.(), { once: true });
   }
 
-  showRoosterSelection(definitions) {
+  showRoosterSelection(definitions, hub = {}, onCosmeticSelected = null) {
+    const progress = hub.progress ?? { totalRuns: 0, victories: 0, totalKills: 0 };
+    const bests = hub.bests ?? { highestKills: 0, longestRunMs: 0, fastestVictoryMs: null };
+    let selectedChallenge = hub.selectedChallenge ?? 'standard';
+    const challengeCards = (hub.challenges ?? []).map((challenge) => `
+      <button class="challenge-card ${challenge.id === selectedChallenge ? 'is-selected' : ''} ${challenge.unlocked ? '' : 'is-locked'}"
+        type="button" data-challenge="${challenge.id}" ${challenge.unlocked ? '' : 'disabled'}>
+        <strong>${challenge.name}</strong>
+        <span>${challenge.description}</span>
+        <small>${challenge.unlocked ? (challenge.arenaId ?? 'Freie Arena') : `Gesperrt: ${challenge.unlockLabel}`}</small>
+      </button>
+    `).join('');
+    const historyRows = (hub.history ?? []).length
+      ? hub.history.map((run) => `
+        <li><strong>${run.roosterName}</strong><span>${run.outcome === 'victory' ? 'Sieg' : 'Niederlage'} · ${run.kills} Kills · ${this.formatDuration(run.elapsedMs)}</span></li>
+      `).join('')
+      : '<li><span>Noch kein Run gespeichert.</span></li>';
+    const enemyRows = (hub.lexicon?.enemies ?? []).map((enemy) => `
+      <li class="${enemy.seen ? '' : 'is-undiscovered'}"><strong>${enemy.id.replaceAll('-', ' ')}</strong><span>${enemy.purpose} · ${enemy.counterplay}</span></li>
+    `).join('');
+    const evoRows = (hub.lexicon?.evolutions ?? []).map((evolution) => `
+      <li class="${evolution.discovered ? '' : 'is-undiscovered'}"><strong>${evolution.name}</strong><span>${evolution.base.replaceAll('-', ' ')} + ${evolution.passive.replaceAll('-', ' ')}</span></li>
+    `).join('');
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
-      <div class="panel rooster-panel">
-        <h1>Rooster Arena</h1>
-        <p>Waehle deinen Rooster.</p>
+      <div class="panel rooster-panel henhouse-panel">
+        <div class="henhouse-heading">
+          <div><small>ROOSTER RAGE</small><h1>Hennenhuette</h1></div>
+          <div class="henhouse-stats">
+            <span><strong>${progress.totalRuns}</strong> Runs</span>
+            <span><strong>${progress.victories}</strong> Siege</span>
+            <span><strong>${progress.totalKills}</strong> Kills</span>
+          </div>
+        </div>
+        <p>Waehle Challenge und Rooster. Fortschritt schaltet nur neue Optionen frei, keine Pflicht-Stats.</p>
+        <h2>Challenge</h2>
+        <div class="challenge-list">${challengeCards}</div>
+        <h2>Rooster</h2>
         <div class="rooster-list"></div>
+        <div class="henhouse-drawers">
+          <details>
+            <summary>Bestwerte & Run-Historie</summary>
+            <div class="personal-bests">
+              <span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span>
+              <span><small>Laengster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span>
+              <span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span>
+            </div>
+            <ul class="history-list">${historyRows}</ul>
+          </details>
+          <details>
+            <summary>Gegner-Lexikon</summary>
+            <ul class="lexicon-list">${enemyRows}</ul>
+          </details>
+          <details>
+            <summary>EVO-Rezepte</summary>
+            <ul class="lexicon-list">${evoRows}</ul>
+          </details>
+        </div>
       </div>
     `;
     const list = this.overlay.querySelector('.rooster-list');
     definitions.forEach((definition) => {
+      const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
+        ?? { unlocked: true, cosmetics: [], runs: 0, wins: 0 };
+      const entry = document.createElement('div');
+      entry.className = 'rooster-entry';
       const button = document.createElement('button');
-      button.className = `rooster-card rooster-card--${definition.id}`;
+      button.className = `rooster-card rooster-card--${definition.id} ${meta.unlocked ? '' : 'is-locked'}`;
       button.type = 'button';
+      button.disabled = !meta.unlocked;
       button.innerHTML = `
         <span class="rooster-card__header">
           <span class="rooster-card__icon" data-rooster-icon></span>
@@ -210,10 +269,40 @@ export class HUD {
         </span>
         <span class="rooster-card__primary">${definition.primary.name}: ${definition.description}</span>
         <span class="rooster-card__passive">${definition.passive}</span>
+        <span class="rooster-card__progress">${meta.unlocked ? `${meta.runs} Runs · ${meta.wins} Siege` : `Gesperrt: ${meta.unlockLabel}`}</span>
       `;
       this.setIcon(button.querySelector('[data-rooster-icon]'), definition.icon);
-      button.addEventListener('click', () => this.onRoosterSelected?.(definition.id), { once: true });
-      list.append(button);
+      button.addEventListener('click', () => this.onRoosterSelected?.(definition.id, selectedChallenge), { once: true });
+      entry.append(button);
+      if (meta.cosmetics?.length) {
+        const cosmetics = document.createElement('div');
+        cosmetics.className = 'cosmetic-list';
+        cosmetics.innerHTML = `
+          <button type="button" data-cosmetic="" class="${meta.selectedCosmetic ? '' : 'is-selected'}">Original</button>
+          ${meta.cosmetics.map((cosmetic) => `
+            <button type="button" data-cosmetic="${cosmetic.id}" class="${meta.selectedCosmetic === cosmetic.id ? 'is-selected' : ''}"
+              ${cosmetic.unlocked ? '' : 'disabled'} title="${cosmetic.unlocked ? cosmetic.name : cosmetic.unlockLabel}">
+              ${cosmetic.unlocked ? cosmetic.name : 'Gesperrt'}
+            </button>
+          `).join('')}`;
+        cosmetics.querySelectorAll('[data-cosmetic]').forEach((cosmeticButton) => {
+          cosmeticButton.addEventListener('click', () => onCosmeticSelected?.(
+            definition.id,
+            cosmeticButton.dataset.cosmetic || null,
+            selectedChallenge
+          ));
+        });
+        entry.append(cosmetics);
+      }
+      list.append(entry);
+    });
+    this.overlay.querySelectorAll('[data-challenge]').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedChallenge = button.dataset.challenge;
+        this.overlay.querySelectorAll('[data-challenge]').forEach((candidate) => (
+          candidate.classList.toggle('is-selected', candidate === button)
+        ));
+      });
     });
   }
 
@@ -239,6 +328,9 @@ export class HUD {
       .map((entry) => `<span>${entry.name} R${entry.rank}</span>`)
       .join('');
     const evos = build.evolutions.map((entry) => entry.name).join(', ') || 'Keine';
+    const unlocks = (report.newUnlocks ?? []).map((unlock) => `
+      <span><strong>${unlock.type === 'rooster' ? 'Rooster' : unlock.type === 'challenge' ? 'Challenge' : 'Kosmetik'}</strong>${this.formatSource(unlock.id)}</span>
+    `).join('');
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
       <div class="panel run-report">
@@ -247,6 +339,7 @@ export class HUD {
         <div class="run-report__summary">
           <span><small>Rooster</small><strong>${report.rooster?.name ?? 'Unbekannt'}</strong></span>
           <span><small>Arena</small><strong>${report.arena?.name ?? 'Unbekannt'}</strong></span>
+          <span><small>Modus</small><strong>${report.challenge?.name ?? 'Standard Run'}</strong></span>
           <span><small>Zeit</small><strong>${this.formatDuration(report.elapsedMs ?? 0)}</strong></span>
           <span><small>Kills</small><strong>${report.kills ?? 0}</strong></span>
           <span><small>Treffer</small><strong>${report.shots ? `${Math.round(Math.min(1, report.hits / report.shots) * 100)}%` : '–'}</strong></span>
@@ -257,13 +350,14 @@ export class HUD {
         <div class="run-report__build"><strong>Aktiv</strong>${active || '<span>–</span>'}</div>
         <div class="run-report__build run-report__build--passive"><strong>Passiv</strong>${passive || '<span>–</span>'}</div>
         <p class="run-report__evos"><strong>EVO:</strong> ${evos}</p>
+        ${unlocks ? `<div class="run-report__unlocks"><h2>Neu freigeschaltet</h2>${unlocks}</div>` : ''}
         <div class="run-report__table-wrap">
           <table>
             <thead><tr><th>Quelle</th><th>Schaden</th><th>Share</th><th>Treffer</th><th>Kills</th><th>Overkill</th><th>Aktiv</th></tr></thead>
             <tbody>${sourceRows}</tbody>
           </table>
         </div>
-        <button class="restart-button"><span data-restart-icon></span><span>Restart</span></button>
+        <button class="restart-button"><span data-restart-icon></span><span>Zur Hennenhuette</span></button>
       </div>
     `;
     this.setIcon(this.overlay.querySelector('[data-restart-icon]'), 'restart');
