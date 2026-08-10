@@ -7,11 +7,10 @@ function pressureCurve({ opening = 2, pressure = 4, finale = 5, finalePattern = 
   ];
 }
 
-function xpCurve(perEnemy, bossXp = 0) {
+function xpCurve(budget, bossXp = 0) {
   return {
-    perEnemy,
-    bossXp,
-    segmentMultipliers: { build: 0.85, escalate: 1, recover: 1.15, finale: 1.2 }
+    budget,
+    bossXp
   };
 }
 
@@ -28,7 +27,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 300,
     primaryRoles: [],
     pressureCurve: pressureCurve({ opening: 2, pressure: 3, finale: 4 }),
-    xpCurve: xpCurve(3),
+    xpCurve: xpCurve(90),
     composition: [
       { count: 30, enemy: { kind: 'slime' } },
       { count: 18, enemy: { kind: 'kornkrabbler' } }
@@ -46,7 +45,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 295,
     primaryRoles: ['runner'],
     pressureCurve: pressureCurve({ opening: 2, pressure: 4, finale: 6, finalePattern: 'rusher-line' }),
-    xpCurve: xpCurve(3),
+    xpCurve: xpCurve(114),
     composition: [
       { count: 26, enemy: { kind: 'slime' } },
       { count: 24, enemy: { kind: 'kornkrabbler' } },
@@ -65,7 +64,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 290,
     primaryRoles: ['runner', 'tank'],
     pressureCurve: pressureCurve({ opening: 3, pressure: 4, finale: 5 }),
-    xpCurve: xpCurve(3),
+    xpCurve: xpCurve(138),
     elites: [{ kind: 'elite-runner' }],
     composition: [
       { count: 24, enemy: { kind: 'slime' } },
@@ -86,7 +85,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 285,
     primaryRoles: ['runner', 'shooter'],
     pressureCurve: pressureCurve({ opening: 3, pressure: 5, finale: 6 }),
-    xpCurve: xpCurve(3),
+    xpCurve: xpCurve(165),
     composition: [
       { count: 36, enemy: { kind: 'slime' } },
       { count: 37, enemy: { kind: 'kornkrabbler' } },
@@ -106,7 +105,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 280,
     primaryRoles: ['runner', 'area-denial', 'tank'],
     pressureCurve: pressureCurve({ opening: 3, pressure: 5, finale: 7, finalePattern: 'rusher-line' }),
-    xpCurve: xpCurve(3),
+    xpCurve: xpCurve(195),
     composition: [
       { count: 40, enemy: { kind: 'slime' } },
       { count: 47, enemy: { kind: 'kornkrabbler' } },
@@ -127,7 +126,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 275,
     primaryRoles: ['runner', 'area-denial', 'tank'],
     pressureCurve: pressureCurve({ opening: 4, pressure: 6, finale: 8, finalePattern: 'rusher-line' }),
-    xpCurve: xpCurve(3),
+    xpCurve: xpCurve(228),
     elites: [{ kind: 'elite-runner' }],
     composition: [
       { count: 36, enemy: { kind: 'slime' } },
@@ -149,7 +148,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 275,
     primaryRoles: ['exploder', 'area-denial', 'summoner'],
     pressureCurve: pressureCurve({ opening: 4, pressure: 7, finale: 9, finalePattern: 'surround' }),
-    xpCurve: xpCurve(4),
+    xpCurve: xpCurve(340),
     composition: [
       { count: 53, enemy: { kind: 'slime' } },
       { count: 71, enemy: { kind: 'kornkrabbler' } },
@@ -171,7 +170,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 270,
     primaryRoles: ['runner', 'shooter', 'summoner'],
     pressureCurve: pressureCurve({ opening: 5, pressure: 8, finale: 10, finalePattern: 'surround' }),
-    xpCurve: xpCurve(4),
+    xpCurve: xpCurve(384),
     elites: [{ kind: 'elite-spitter' }],
     composition: [
       { count: 57, enemy: { kind: 'slime' } },
@@ -194,7 +193,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 270,
     primaryRoles: ['tank', 'area-denial', 'summoner'],
     pressureCurve: pressureCurve({ opening: 5, pressure: 9, finale: 12, finalePattern: 'rusher-line' }),
-    xpCurve: xpCurve(4),
+    xpCurve: xpCurve(448),
     elites: [{ kind: 'elite-brute' }],
     composition: [
       { count: 77, enemy: { kind: 'slime' } },
@@ -217,7 +216,7 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 340,
     primaryRoles: ['boss'],
     pressureCurve: [{ id: 'boss-entry', share: 1, durationShare: 1, batch: 1, pattern: 'scatter', pauseAfter: 0 }],
-    xpCurve: xpCurve(3, 120),
+    xpCurve: xpCurve(0, 120),
     bossWave: true,
     elites: [{ kind: 'boss' }],
     composition: []

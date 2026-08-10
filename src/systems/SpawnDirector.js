@@ -8,7 +8,7 @@ const DEFAULT_CURVE = [
   { id: 'finale', share: 0.28, durationShare: 0.26, batch: 4, pattern: 'surround', pauseAfter: 0 }
 ];
 
-function allocateBudgets(total, segments) {
+export function allocateBudgets(total, segments) {
   const budgets = segments.map((segment) => Math.floor(total * segment.share));
   let remaining = total - budgets.reduce((sum, value) => sum + value, 0);
   let index = budgets.length - 1;

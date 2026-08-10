@@ -6,7 +6,7 @@ https://github.com/emfau88/RoosterRage
 
 ## Umsetzungsstand – 10.08.2026
 
-**Punkte/Phasen 1–3 umgesetzt und technisch abgenommen.** Der vollständige
+**Punkte/Phasen 1–4 umgesetzt und technisch abgenommen.** Der vollständige
 Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
 
 - **Phase 1 – Hauptmenü: erledigt.** Default ist jetzt `Spielen` mit einem
@@ -25,24 +25,33 @@ Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
 - **Micro-Fodder-XP-Bremse: erledigt.** Kornkrabbler erhalten intern nur 20 %
   des jeweiligen Wave-/Segment-XP-Werts. Bruchteile werden deterministisch in
   einer Bank gesammelt und erst als ganze, räumlich weiterhin zusammengeführte
-  XP-Drops freigegeben. Dadurch entsteht nicht ein Orb pro Micro-Kill. Dies ist
-  bewusst nur der für Phasen 2/3 nötige Ausschnitt; der allgemeine XP-/Pickup-
-  Pass aus Phase 4 bleibt offen.
+  XP-Drops freigegeben. Dadurch entsteht nicht ein Orb pro Micro-Kill.
 - **Phase 3 – Horde Density: erledigt.** Spezialgegnerzahlen blieben unverändert;
   ausschließlich Kornkrabbler erhöhen die Masse. Desktop-Zielpeaks W1–W9:
   `28 / 42 / 52 / 62 / 76 / 90 / 105 / 120 / 140`. Mobile-Caps:
   `26 / 36 / 44 / 50 / 58 / 66 / 74 / 82 / 90`. Wave-Gesamtbudgets:
   `48 / 62 / 78 / 92 / 112 / 132 / 156 / 180 / 210`; W10 bleibt der Boss.
+- **Phase 4 – XP + Pickups: erledigt.** Die Waves 1–9 besitzen feste
+  XP-Budgets von `90 / 114 / 138 / 165 / 195 / 228 / 340 / 384 / 448`
+  (gesamt 2.102 XP vor dem Boss), verteilt auf die tatsächlichen Segmente und
+  Gegnerrollen. Dadurch bleibt die Levelgeschwindigkeit trotz der neuen
+  Hordenmenge kontrolliert. Sichtbare XP-Orbs, Magnetzug, Pickup-Sound und
+  Level-up-Feedback bleiben vollständig erhalten. Nahe Orbs bündeln sich; bei
+  72 aktiven Orbs auf Desktop bzw. 48 auf Mobile wird weiterer Wert verlustfrei
+  in vorhandene, sichtbar größere Orbs integriert. Heal, Magnet und Bomb sind
+  nun an sieben definierte Wave-/Encounter-Momente statt an globale Killzahlen
+  gekoppelt; Elite-Truhen und Pickup-Budgets bleiben unverändert.
 - **Messwerte:** 75, 110 und 150 aktive Kornkrabbler jeweils 16,7 ms p95 im
   automatisierten Desktop-Lastgate, keine Enemy-Pool-Drops. Das bestehende
   390×844-Pressure-Gate für Wave 7 besteht mit allen drei Hähnen; Peak der
   gegnerischen Projektile bleibt 12. Build, Asset-Manifest, Mechanik, Pacing,
-  Smoke, Audio/Settings und Meta/Challenges sind grün.
+  Smoke, Arena/Pickups, Audio/Settings und Meta/Challenges sind grün. Der
+  XP-Werterhalt und beide Orb-Caps besitzen eigene Browser-Regressionstests.
 - **QA-Bilder:** Menü-Nachherbilder liegen unter
   `docs/qa/next-production-pass/` für Desktop, Portrait und Landscape.
 
-**Noch offen:** Phase 4 (allgemeines XP-/Pickup-Pacing), Phase 5 (weitere
-Gegneranimationen), optionale Phase 6 und das vollständige Multi-Seed-/Real-Run-
+**Noch offen:** Phase 5 (weitere Gegneranimationen), optionale Phase 6 und das
+vollständige Multi-Seed-/Real-Run-
 Production-Gate aus Phase 7. Späte echte Runs können noch Feintuning bei
 Contact-Druck oder Wave-Dauer nahelegen; deshalb sind die Peaks Messkorridore.
 
@@ -885,9 +894,12 @@ Unbedingt in dieser Reihenfolge arbeiten:
 - [x] automatisierte Balance-, Pressure- und Lastgates.
 
 ## Phase 4 – XP + Pickups
-- XP-Entkopplung;
-- Orb-Bündelung;
-- Pickup-Pacing.
+**Status: erledigt.**
+- [x] feste Wave-/Segment-XP-Budgets und Micro-Fodder-Gewichtung;
+- [x] verlustfreie Orb-Bündelung mit Desktop-/Mobile-Caps;
+- [x] wertabhängig größere Orbs, Magnet- und Sammelgefühl erhalten;
+- [x] Pickup-Pacing an Wave-/Encounter-Fortschritt gekoppelt;
+- [x] Mechanik-, Mobile-, Arena-, Pacing- und Performance-Regressionstests.
 
 ## Phase 5 – Enemy Animation Polish
 - zuerst Support/Summoner eigene Identität;

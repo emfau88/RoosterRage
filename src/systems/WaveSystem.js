@@ -1,6 +1,6 @@
 import { WAVE_DEFINITIONS } from '../data/waveDefinitions.js';
 import { ENCOUNTER_STANDARDS, ENEMY_ROLE_MATRIX } from '../data/enemyRoleDefinitions.js';
-import { SpawnDirector } from './SpawnDirector.js';
+import { allocateBudgets, SpawnDirector } from './SpawnDirector.js';
 
 export class WaveSystem {
   constructor(scene) {
@@ -155,10 +155,39 @@ export class WaveSystem {
       throw new Error(`Wave ${wave.name} defines ${queue.length} enemies but count is ${wave.count}.`);
     }
 
-    return queue.map((enemy) => ({
+    return this.applyXpBudget(queue, wave).map((enemy) => ({
       ...enemy,
       spawnMinDistance: wave.spawnMinDistance
     }));
+  }
+
+  applyXpBudget(queue, wave) {
+    const budget = wave.xpCurve?.budget ?? 0;
+    if (budget <= 0 || wave.bossWave || queue.length === 0) {
+      return queue;
+    }
+    const segments = wave.pressureCurve?.length ? wave.pressureCurve : [{ share: 1 }];
+    const enemyBudgets = allocateBudgets(queue.length, segments);
+    const shareTotal = segments.reduce((sum, segment) => sum + (segment.share ?? 0), 0) || 1;
+    let offset = 0;
+    enemyBudgets.forEach((enemyCount, segmentIndex) => {
+      const group = queue.slice(offset, offset + enemyCount);
+      const segmentBudget = budget * ((segments[segmentIndex]?.share ?? 0) / shareTotal);
+      const weightTotal = group.reduce((sum, enemy) => sum + this.getXpWeight(enemy), 0) || 1;
+      group.forEach((enemy) => {
+        enemy.xpOverride = segmentBudget * (this.getXpWeight(enemy) / weightTotal);
+      });
+      offset += enemyCount;
+    });
+    return queue;
+  }
+
+  getXpWeight(enemy) {
+    if (enemy.microFodder) return 0.2;
+    if (enemy.elite) return 3;
+    if (enemy.role === 'tank' || enemy.role === 'area-denial' || enemy.role === 'summoner') return 1.4;
+    if (enemy.role === 'runner' || enemy.role === 'shooter' || enemy.role === 'exploder') return 1.15;
+    return 1;
   }
 
   pickFromPool(pool) {
@@ -219,7 +248,8 @@ export class WaveSystem {
         mobileActiveCap: wave.mobileActiveCap,
         primaryRoles: [...(wave.primaryRoles ?? [])],
         pressureCurve: (wave.pressureCurve ?? []).map((segment) => ({ ...segment })),
-        xpCurve: { ...wave.xpCurve, segmentMultipliers: { ...wave.xpCurve?.segmentMultipliers } },
+        xpCurve: { ...wave.xpCurve },
+        allocatedXp: queue.reduce((sum, enemy) => sum + (enemy.xpOverride ?? 0), 0),
         typeCounts,
         roleCounts,
         queue: queue.map((enemy) => enemy.type)
@@ -239,7 +269,6 @@ export class WaveSystem {
       hp: Math.max(3, Math.round(7 * multiplier)),
       speed: 96,
       damage: 2,
-      xpScale: 0.2,
       microFodder: true,
       texture: 'enemy-kornkrabbler-run',
       animation: 'enemy-kornkrabbler-run-left',
@@ -254,7 +283,7 @@ export class WaveSystem {
 
   getXpForSpawn(config) {
     if (Number.isFinite(config.xpOverride)) {
-      return Math.max(0, Math.round(config.xpOverride));
+      return Math.max(0, config.xpOverride * (this.scene.challenge?.modifiers.xpMultiplier ?? 1));
     }
     const wave = this.waves[this.currentWave - 1];
     if (!wave?.xpCurve) {
@@ -263,15 +292,7 @@ export class WaveSystem {
     if (config.boss) {
       return Math.round((wave.xpCurve.bossXp ?? 0) * (this.scene.challenge?.modifiers.xpMultiplier ?? 1));
     }
-    const segment = this.director.getState().segment;
-    const multiplier = wave.xpCurve.segmentMultipliers?.[segment] ?? 1;
-    const scaledXp = wave.xpCurve.perEnemy
-      * multiplier
-      * (this.scene.challenge?.modifiers.xpMultiplier ?? 1);
-    if (config.microFodder) {
-      return Math.max(0, scaledXp * (config.xpScale ?? 0.2));
-    }
-    return Math.max(1, Math.round(scaledXp));
+    return Math.max(0, (config.xp ?? 0) * (this.scene.challenge?.modifiers.xpMultiplier ?? 1));
   }
 
   makeRunner(multiplier = 1) {

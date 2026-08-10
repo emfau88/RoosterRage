@@ -100,6 +100,11 @@ export function installTestApi(scene) {
     getArenaState: () => scene.arena.getState(),
     getArenaCatalog: () => scene.arena.getCatalog(),
     getPickupState: () => scene.pickups.getState(),
+    advancePickupSchedule: (wave, progress) => {
+      scene.pickups.processWaveProgress(Number(wave), Number(progress));
+      return scene.pickups.getState();
+    },
+    getXpState: () => scene.entities.getXpState(),
     movePlayerTo: (x, y) => {
       const point = scene.arena.clampToWorld(x, y, 80);
       scene.player.sprite.setPosition(point.x, point.y);
@@ -638,6 +643,16 @@ export function installTestApi(scene) {
         scene.spawnXp(point.x + (index % 4) * 5, point.y + Math.floor(index / 4) * 5, value);
       }
       return window.__ROOSTER_TEST__.getXpSnapshot();
+    },
+    spawnXpField: (count = 100, value = 2) => {
+      const center = scene.arena.getCenter();
+      const columns = 12;
+      for (let index = 0; index < count; index += 1) {
+        const x = center.x + ((index % columns) - (columns - 1) / 2) * 90;
+        const y = center.y + (Math.floor(index / columns) - 4) * 90;
+        scene.spawnXp(x, y, value);
+      }
+      return scene.entities.getXpState();
     },
     damageEnemyById: (id, amount) => {
       const enemy = scene.enemies.find((item) => item.id === id);

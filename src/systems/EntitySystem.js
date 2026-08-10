@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 import { Enemy } from '../entities/Enemy.js';
 import { XPOrb } from '../entities/XPOrb.js';
+import { getSceneViewport } from './DisplayResolutionSystem.js';
+
+const XP_ORB_SOFT_CAP = Object.freeze({ desktop: 72, mobile: 48 });
 
 export class EntitySystem {
   constructor(scene, arenaWidth, arenaHeight) {
@@ -153,11 +156,20 @@ export class EntitySystem {
     }
     const nearby = this.scene.xpOrbs.find((orb) => (
       orb.sprite.active
-      && Phaser.Math.Distance.Between(x, y, orb.sprite.x, orb.sprite.y) <= 54
+      && Phaser.Math.Distance.Between(x, y, orb.sprite.x, orb.sprite.y) <= 64
     ));
     if (nearby) {
       nearby.addValue(value);
       return nearby;
+    }
+    const activeOrbs = this.scene.xpOrbs.filter((orb) => orb.sprite.active);
+    if (activeOrbs.length >= this.getXpOrbSoftCap()) {
+      const nearest = activeOrbs.reduce((best, orb) => {
+        const distance = Phaser.Math.Distance.Squared(x, y, orb.sprite.x, orb.sprite.y);
+        return !best || distance < best.distance ? { orb, distance } : best;
+      }, null)?.orb;
+      nearest?.addValue(value);
+      return nearest ?? null;
     }
     const orb = this.scene.objectPools.acquire(
       'xpOrb',
@@ -177,6 +189,23 @@ export class EntitySystem {
     const released = Math.floor(this.microXpBank);
     this.microXpBank -= released;
     return released;
+  }
+
+  getXpOrbSoftCap() {
+    const { width, height } = getSceneViewport(this.scene);
+    const touchDevice = Boolean(this.scene.sys?.game?.device?.input?.touch);
+    return width <= 600 || touchDevice || (width < height && Math.min(width, height) <= 600)
+      ? XP_ORB_SOFT_CAP.mobile
+      : XP_ORB_SOFT_CAP.desktop;
+  }
+
+  getXpState() {
+    return {
+      active: this.scene.xpOrbs.filter((orb) => orb.sprite.active).length,
+      value: this.scene.xpOrbs.reduce((sum, orb) => sum + (orb.sprite.active ? orb.value : 0), 0),
+      softCap: this.getXpOrbSoftCap(),
+      microBank: this.microXpBank
+    };
   }
 
   removeOrb(orb) {

@@ -369,6 +369,7 @@ async function testWaveCuration(browser) {
       { slime: 77, kornkrabbler: 98, brute: 20, 'fan-spitter': 6, support: 6, summoner: 2, 'elite-brute': 1 },
       { boss: 1 }
     ];
+    const expectedXpBudgets = [90, 114, 138, 165, 195, 228, 340, 384, 448, 0];
     assert(catalog.length === 10, 'Wave catalog should contain exactly ten waves.', catalog);
     catalog.forEach((wave, index) => {
       assert(wave.queue.length === wave.count, `Wave ${wave.wave} queue length does not match its budget.`, wave);
@@ -376,6 +377,8 @@ async function testWaveCuration(browser) {
       assert(wave.pressureCurve.length >= 1, `Wave ${wave.wave} is missing a pressure curve.`, wave);
       assert(wave.mobileActiveCap <= wave.targetPeak, `Wave ${wave.wave} mobile cap exceeds target peak.`, wave);
       assert(JSON.stringify(wave.typeCounts) === JSON.stringify(expectedTypes[index]), `Wave ${wave.wave} composition changed unexpectedly.`, wave);
+      assert(Math.abs(wave.allocatedXp - expectedXpBudgets[index]) < 0.001,
+        `Wave ${wave.wave} XP allocation drifted away from its fixed budget.`, wave);
     });
     assert(catalog[9].bossWave && catalog[9].queue[0] === 'boss', 'Wave 10 must be the boss finale.', catalog[9]);
 
@@ -441,6 +444,17 @@ async function testWaveCuration(browser) {
       clusteredXp
     );
 
+    const cappedXp = await page.evaluate(() => {
+      window.__ROOSTER_TEST__.clearXpOrbs();
+      const state = window.__ROOSTER_TEST__.spawnXpField(120, 2);
+      window.__ROOSTER_TEST__.clearXpOrbs();
+      return state;
+    });
+    assert(cappedXp.active === cappedXp.softCap && cappedXp.softCap === 72,
+      'Desktop XP-orb field did not stop at its soft cap.', cappedXp);
+    assert(Math.abs(cappedXp.value - 240) < 0.001,
+      'XP-orb cap discarded reward value instead of merging it.', cappedXp);
+
     const bossId = await page.evaluate(() => {
       window.__ROOSTER_TEST__.clearEnemies();
       window.__ROOSTER_TEST__.clearProjectiles();
@@ -463,7 +477,7 @@ async function testWaveCuration(browser) {
     assert(bossAfterPhaseOne.invulnerableUntil > bossAfterPhaseOne.bossSequenceReadyAt - 1,
       'Boss phase transition did not provide its protected recovery window.', bossAfterPhaseOne);
 
-    await page.waitForTimeout(1050);
+    await page.waitForTimeout(1200);
     await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 3300), bossId);
     await page.waitForTimeout(80);
     const phaseTwo = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());

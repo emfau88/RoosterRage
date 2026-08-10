@@ -84,13 +84,14 @@ async function verifyPickups(browser, serverUrl) {
   try {
     const result = await page.evaluate(async () => {
       const api = window.__ROOSTER_TEST__;
+      const beforeFirstPickup = api.advancePickupSchedule(1, 0.59);
+      const firstPickup = api.advancePickupSchedule(1, 0.6);
       api.setPlayerHp(40);
-      api.spawnPickup('heal');
       const healed = api.collectPickup('heal');
       const hpAfterHeal = api.getPlayerStats().hp;
 
       api.spawnXpCluster(8, 3, 1020, 700);
-      api.spawnPickup('magnet');
+      api.advancePickupSchedule(2, 0.55);
       const magnet = api.collectPickup('magnet');
 
       const enemyId = api.spawnEnemyType('slime', 880, 450, {
@@ -100,7 +101,7 @@ async function verifyPickups(browser, serverUrl) {
         damage: 0,
         xpOverride: 0
       });
-      api.spawnPickup('bomb');
+      api.advancePickupSchedule(3, 0.55);
       const bomb = api.collectPickup('bomb');
       const enemySurvived = api.getEnemySnapshot().some((enemy) => enemy.id === enemyId);
 
@@ -115,6 +116,10 @@ async function verifyPickups(browser, serverUrl) {
       const firstChoice = chestSelection.choices?.[0]?.id;
       if (firstChoice) api.applyUpgradeById(firstChoice);
 
+      api.advancePickupSchedule(5, 0.45);
+      api.advancePickupSchedule(6, 0.55);
+      api.advancePickupSchedule(7, 0.6);
+      api.advancePickupSchedule(9, 0.5);
       for (let index = 0; index < 8; index += 1) api.spawnPickup('heal');
       const pickupState = api.getPickupState();
       return {
@@ -127,11 +132,15 @@ async function verifyPickups(browser, serverUrl) {
         chestAjar,
         chestOpen,
         chestSelection,
+        beforeFirstPickup,
+        firstPickup,
         pickupState,
         telemetry: api.getTelemetry()
       };
     });
     assert(result.healed && result.hpAfterHeal === 65, 'Heal pickup is not a bounded 25% max-HP heal.', result);
+    assert(result.beforeFirstPickup.spawned.heal === 0 && result.firstPickup.spawned.heal === 1,
+      'First heal did not respect its Wave 1 progress threshold.', result);
     assert(result.magnet && result.pickupState.magnetActive, 'Temporary XP magnet did not activate.', result);
     assert(result.bomb && !result.enemySurvived, 'Arena bomb did not clear a normal enemy.', result);
     assert(result.chest && result.chestSelection.currentSelection?.type === 'chest',
@@ -141,6 +150,9 @@ async function verifyPickups(browser, serverUrl) {
     'Elite chest did not pass through its half-open and open animation states.', result);
     assert(result.pickupState.spawned.heal === result.pickupState.budgets.heal,
       'Heal pickup exceeded or failed to reach its run budget.', result.pickupState);
+    assert(result.pickupState.scheduleIndex === result.pickupState.schedule.length
+      && result.pickupState.nextScheduled === null,
+    'Wave-based pickup schedule did not advance through its seven strategic moments.', result.pickupState);
     assert(result.pickupState.items.every((item) => item.reachable),
       'A pickup spawned outside reachable geometry.', result.pickupState);
     assert(result.telemetry.pickupsCollectedByKind.heal === 1

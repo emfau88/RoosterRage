@@ -26,7 +26,7 @@ export class XPOrb {
   }
 
   updateScale() {
-    const scale = Phaser.Math.Clamp(0.82 + Math.log2(Math.max(1, this.value)) * 0.08, 0.82, 1.45);
+    const scale = Phaser.Math.Clamp(0.82 + Math.log2(Math.max(1, this.value)) * 0.08, 0.82, 1.65);
     this.sprite.setScale(scale);
   }
 

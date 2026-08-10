@@ -167,6 +167,12 @@ async function run() {
     await mobilePage.locator('[data-run-start]').click();
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const mobileState = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());
+    const mobileXpCap = await mobilePage.evaluate(() => {
+      window.__ROOSTER_TEST__.clearXpOrbs();
+      const state = window.__ROOSTER_TEST__.spawnXpField(80, 1);
+      window.__ROOSTER_TEST__.clearXpOrbs();
+      return state;
+    });
     await mobilePage.mouse.move(70, 700);
     await mobilePage.mouse.down();
     await mobilePage.mouse.move(125, 700, { steps: 5 });
@@ -191,6 +197,8 @@ async function run() {
     assert(!mobileState.lastError && mobileState.frames > 30, 'Mobile game loop did not start cleanly.', mobileState);
     assert(mobileCanvas?.width >= 380 && mobileCanvas?.height >= 830, 'Mobile canvas does not fill the viewport.', mobileCanvas);
     assert(mobileState.rendering.renderScale === 2, 'Mobile renderer did not select the Retina scale.', mobileState.rendering);
+    assert(mobileXpCap.active === 48 && mobileXpCap.softCap === 48 && mobileXpCap.value === 80,
+      'Portrait XP-orb cap did not merge rewards without value loss.', mobileXpCap);
     assert(
       mobileCanvasBacking.width >= mobileCanvas.width * 1.9
       && mobileCanvasBacking.height >= mobileCanvas.height * 1.9,

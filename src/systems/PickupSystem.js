@@ -2,14 +2,14 @@ import Phaser from 'phaser';
 import { Pickup } from '../entities/Pickup.js';
 
 const PICKUP_BUDGETS = Object.freeze({ heal: 3, bomb: 2, magnet: 2 });
-const MILESTONES = Object.freeze([
-  { kills: 18, kind: 'heal' },
-  { kills: 48, kind: 'magnet' },
-  { kills: 90, kind: 'bomb' },
-  { kills: 155, kind: 'heal' },
-  { kills: 235, kind: 'magnet' },
-  { kills: 330, kind: 'bomb' },
-  { kills: 440, kind: 'heal' }
+const PICKUP_SCHEDULE = Object.freeze([
+  { wave: 1, progress: 0.6, kind: 'heal' },
+  { wave: 2, progress: 0.55, kind: 'magnet' },
+  { wave: 3, progress: 0.55, kind: 'bomb' },
+  { wave: 5, progress: 0.45, kind: 'heal' },
+  { wave: 6, progress: 0.55, kind: 'magnet' },
+  { wave: 7, progress: 0.6, kind: 'bomb' },
+  { wave: 9, progress: 0.5, kind: 'heal' }
 ]);
 
 export class PickupSystem {
@@ -20,7 +20,7 @@ export class PickupSystem {
     this.openingChests = new Set();
     this.spawned = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0 };
     this.collected = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0 };
-    this.milestoneIndex = 0;
+    this.scheduleIndex = 0;
     this.magnetUntil = 0;
   }
 
@@ -32,11 +32,22 @@ export class PickupSystem {
     if (enemy.elite && !enemy.boss) {
       this.spawn('elite-chest', enemy.sprite.x, enemy.sprite.y, { guaranteed: true });
     }
-    while (MILESTONES[this.milestoneIndex]?.kills <= this.scene.debugStats.kills) {
-      const milestone = MILESTONES[this.milestoneIndex];
-      this.milestoneIndex += 1;
-      this.spawn(milestone.kind);
+    const wave = this.scene.waveSystem?.currentWave ?? 0;
+    const progress = this.scene.waveSystem?.getProgressState().percent ?? 0;
+    this.processWaveProgress(wave, progress);
+  }
+
+  processWaveProgress(wave, progress) {
+    let spawned = 0;
+    while (this.scheduleIndex < PICKUP_SCHEDULE.length) {
+      const next = PICKUP_SCHEDULE[this.scheduleIndex];
+      if (wave < next.wave || (wave === next.wave && progress < next.progress)) {
+        break;
+      }
+      this.scheduleIndex += 1;
+      if (this.spawn(next.kind)) spawned += 1;
     }
+    return spawned;
   }
 
   canSpawn(kind) {
@@ -148,6 +159,11 @@ export class PickupSystem {
   getState() {
     return {
       budgets: { ...PICKUP_BUDGETS },
+      schedule: PICKUP_SCHEDULE.map((entry) => ({ ...entry })),
+      scheduleIndex: this.scheduleIndex,
+      nextScheduled: PICKUP_SCHEDULE[this.scheduleIndex]
+        ? { ...PICKUP_SCHEDULE[this.scheduleIndex] }
+        : null,
       spawned: { ...this.spawned },
       collected: { ...this.collected },
       magnetActive: this.isMagnetActive(),
