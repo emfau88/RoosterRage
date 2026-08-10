@@ -118,7 +118,7 @@ export class PlayerInputSystem {
         .subtract(playerPosition)
         .normalize()
         .scale(profile.pickupWeight));
-    } else if (!nearestEnemy) {
+    } else if (!nearestEnemy && !avoidingDangerZone && !avoidingProjectile) {
       movement.add(this.scene.bot.target.clone().subtract(playerPosition).normalize());
       if (Phaser.Math.Distance.Between(
         playerPosition.x,

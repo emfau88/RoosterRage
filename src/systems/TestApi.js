@@ -59,10 +59,13 @@ export function installTestApi(scene) {
       pools: scene.objectPools.getStats(),
       seed: scene.rng.seed,
       profile: scene.bot.strategy,
+      botEnabled: scene.bot.enabled,
       player: {
         x: scene.player.sprite.x,
         y: scene.player.sprite.y,
-        rotation: scene.player.sprite.rotation
+        rotation: scene.player.sprite.rotation,
+        velocityX: scene.player.sprite.body.velocity.x,
+        velocityY: scene.player.sprite.body.velocity.y
       }
     }),
     getLoadout: () => ({
@@ -204,6 +207,17 @@ export function installTestApi(scene) {
     }),
     getRoosterVisualState: () => ({
       id: scene.player.roosterId,
+      texture: scene.player.sprite.texture?.key ?? null,
+      textureSize: {
+        width: scene.player.sprite.texture?.source?.[0]?.width ?? 0,
+        height: scene.player.sprite.texture?.source?.[0]?.height ?? 0
+      },
+      frameSize: {
+        width: scene.player.sprite.frame?.width ?? 0,
+        height: scene.player.sprite.frame?.height ?? 0
+      },
+      frameTotal: scene.player.sprite.texture?.frameTotal ?? 0,
+      animation: scene.player.sprite.anims.currentAnim?.key ?? null,
       scale: scene.player.baseScale,
       tint: scene.player.sprite.tintTopLeft,
       markers: scene.roosterClasses.markers.length,

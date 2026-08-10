@@ -1,5 +1,14 @@
 import uiIconSheetUrl from '../assets/ui/ui-icons-v1-sheet.webp';
 import uiIconAtlas from '../assets/ui/ui-icons-v1.json';
+import acePortraitUrl from '../assets/characters/rooster-ace-portrait.webp';
+import artilleryPortraitUrl from '../assets/characters/rooster-artillery-portrait.webp';
+import stormPortraitUrl from '../assets/characters/rooster-storm-portrait.webp';
+
+const ROOSTER_PORTRAITS = {
+  ace: acePortraitUrl,
+  artillery: artilleryPortraitUrl,
+  storm: stormPortraitUrl
+};
 
 const ICON_COLUMNS = uiIconAtlas.columns;
 const ICON_ROWS = uiIconAtlas.rows;
@@ -71,11 +80,22 @@ export class HUD {
     this.root = document.createElement('div');
     this.root.className = 'hud';
     this.root.innerHTML = `
-      <div class="hud__bar"><span data-icon="xp"></span><div class="hud__bar-track"><div class="hud__bar-fill" data-xp></div></div></div>
-      <div class="hud__item" data-time><span data-icon="timer"></span><span data-value>00:00</span></div>
-      <div class="hud__item hud__item--wave" data-wave><span data-icon="wave"></span><span data-value>Wave 1/10</span><span class="hud__wave-track"><i data-wave-fill></i></span></div>
-      <div class="hud__item" data-kills><span data-icon="enemy"></span><span data-value>0 Kills</span></div>
-      <div class="hud__item" data-level><span data-icon="badge-1"></span><span data-value>Level 1</span></div>
+      <div class="hud__identity" data-identity>
+        <span class="hud__avatar-shell"><img data-rooster-avatar alt="Ausgewaehlter Rooster"></span>
+        <div class="hud__vitals">
+          <div class="hud__identity-heading" data-level>
+            <span><small>ROOSTER</small><strong data-value>Level 1</strong></span>
+            <b data-hp-value>100 / 100 HP</b>
+          </div>
+          <div class="hud__health" data-hp><i data-hp-fill></i></div>
+          <div class="hud__xp-row"><span data-icon="xp"></span><div class="hud__bar-track"><div class="hud__bar-fill" data-xp></div></div></div>
+        </div>
+      </div>
+      <div class="hud__metrics">
+        <div class="hud__item" data-time><span data-icon="timer"></span><span><small>RUN</small><strong data-value>00:00</strong></span></div>
+        <div class="hud__item hud__item--wave" data-wave><span data-icon="wave"></span><span><small>WELLE</small><strong data-value>Wave 1/10</strong></span><span class="hud__wave-track"><i data-wave-fill></i></span></div>
+        <div class="hud__item" data-kills><span data-icon="enemy"></span><span><small>JAGD</small><strong data-value>0 Kills</strong></span></div>
+      </div>
       <div class="hud__boss" data-boss>
         <div class="hud__boss-heading"><strong data-boss-name>BROOD KING</strong><span data-boss-phase>PHASE 1/3</span></div>
         <div class="hud__boss-track"><div class="hud__boss-fill" data-boss-fill></div></div>
@@ -114,6 +134,19 @@ export class HUD {
   update(state) {
     const roosterLabel = state.roosterName ? `${state.roosterName} L${state.level}` : `Level ${state.level}`;
     this.root.querySelector('[data-level] [data-value]').textContent = roosterLabel;
+    if (state.roosterId && state.roosterId !== this.roosterId) {
+      this.roosterId = state.roosterId;
+      const avatar = this.root.querySelector('[data-rooster-avatar]');
+      avatar.src = ROOSTER_PORTRAITS[state.roosterId];
+      avatar.alt = `${state.roosterName ?? state.roosterId} Portrait`;
+      this.root.querySelector('[data-identity]').dataset.rooster = state.roosterId;
+    }
+    const hpRatio = Math.max(0, Math.min(1, state.hp / state.maxHp));
+    const hp = this.root.querySelector('[data-hp]');
+    hp.classList.toggle('is-warning', hpRatio <= 0.55 && hpRatio > 0.25);
+    hp.classList.toggle('is-danger', hpRatio <= 0.25);
+    hp.querySelector('[data-hp-fill]').style.width = `${hpRatio * 100}%`;
+    this.root.querySelector('[data-hp-value]').textContent = `${Math.ceil(state.hp)} / ${state.maxHp} HP`;
     const challengeSuffix = state.challenge?.id && state.challenge.id !== 'standard'
       ? ` · ${state.challenge.name}`
       : '';
@@ -260,11 +293,15 @@ export class HUD {
       button.type = 'button';
       button.disabled = !meta.unlocked;
       button.innerHTML = `
-        <span class="rooster-card__header">
-          <span class="rooster-card__icon" data-rooster-icon></span>
-          <span>
+        <span class="rooster-card__portrait">
+          <img src="${ROOSTER_PORTRAITS[definition.id]}" alt="${definition.name} Portrait">
+          <span class="rooster-card__portrait-shade"></span>
+          <span class="rooster-card__header">
+            <span class="rooster-card__icon" data-rooster-icon></span>
+            <span>
             <strong>${definition.name}</strong>
             <small>${definition.role}</small>
+            </span>
           </span>
         </span>
         <span class="rooster-card__stats">

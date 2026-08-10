@@ -42,8 +42,15 @@ async function run() {
     }
 
     const roosterCards = await page.locator('.rooster-card').count();
+    const roosterPortraits = await page.locator('.rooster-card__portrait img').evaluateAll((images) => (
+      images.map((image) => ({ src: image.currentSrc, width: image.naturalWidth, height: image.naturalHeight }))
+    ));
     await page.screenshot({ path: path.join(artifactDir, 'rooster-class-selection.png') });
     assert(roosterCards === 3, 'Pre-run selection should show three rooster classes.', { roosterCards });
+    assert(roosterPortraits.length === 3 && new Set(roosterPortraits.map((portrait) => portrait.src)).size === 3,
+      'Rooster cards must use three distinct portrait assets.', roosterPortraits);
+    assert(roosterPortraits.every((portrait) => portrait.width === 512 && portrait.height === 512),
+      'Rooster portraits were not loaded at their production dimensions.', roosterPortraits);
     await page.locator('.rooster-card--ace').click();
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 2);
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getState());

@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { EnemyProjectile } from '../entities/EnemyProjectile.js';
 import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
 
+const DANGER_RECOVERY_MS = 180;
+
 export class EnemyAttackSystem {
   constructor(scene) {
     this.scene = scene;
@@ -357,7 +359,7 @@ export class EnemyAttackSystem {
       x,
       y,
       radius,
-      expiresAt: this.scene.time.now + ENCOUNTER_STANDARDS.heavyTelegraphMs,
+      expiresAt: this.scene.time.now + ENCOUNTER_STANDARDS.heavyTelegraphMs + DANGER_RECOVERY_MS,
       source
     });
     const ring = this.scene.add.circle(x, y, radius, 0xff3048, 0.12)

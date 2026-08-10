@@ -495,6 +495,7 @@ export class GameScene extends Phaser.Scene {
       hp: this.player.hp,
       maxHp: this.player.maxHp,
       level: this.player.level,
+      roosterId: this.player.roosterId,
       roosterName: this.player.roosterName,
       xpPercent: this.player.xp / this.player.xpToNext,
       wave: this.waveSystem.currentWave,

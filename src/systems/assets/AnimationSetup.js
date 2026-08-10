@@ -1,19 +1,18 @@
 export function createGameAnimations(scene) {
-  const directions = [
-    ['rooster-walk-south', 0],
-    ['rooster-walk-west', 4],
-    ['rooster-walk-east', 8],
-    ['rooster-walk-north', 12]
-  ];
-  directions.forEach(([key, start]) => {
-    if (scene.anims.exists(key)) {
-      return;
-    }
-    scene.anims.create({
-      key,
-      frames: scene.anims.generateFrameNumbers('rooster-walk', { start, end: start + 3 }),
-      frameRate: 10,
-      repeat: -1
+  const roosterTextures = ['ace', 'artillery', 'storm'];
+  const directions = [['south', 0], ['west', 4], ['east', 8], ['north', 12]];
+  roosterTextures.forEach((roosterId) => {
+    directions.forEach(([direction, start]) => {
+      const key = `rooster-${roosterId}-walk-${direction}`;
+      if (scene.anims.exists(key)) {
+        return;
+      }
+      scene.anims.create({
+        key,
+        frames: scene.anims.generateFrameNumbers(`rooster-${roosterId}-walk`, { start, end: start + 3 }),
+        frameRate: roosterId === 'artillery' ? 8 : roosterId === 'storm' ? 12 : 10,
+        repeat: -1
+      });
     });
   });
 

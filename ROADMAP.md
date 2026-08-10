@@ -32,8 +32,9 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 | 16 | Meta und Challenges | Abgeschlossen |
 | 17 | Vertical-Slice-Abnahme | Automatischer Freeze abgeschlossen; manuell/extern offen |
 | 18 | Kommerzielle Validierung | 3/4 vorbereitet; oeffentlicher Gate nach manueller Abnahme |
+| 19 | Character Art und HUD Production Pass | Abgeschlossen |
 
-Aktueller Fokus: manueller und externer Phase-17-Gate. Der automatisierte Feature-Freeze ist hergestellt; eine oeffentliche Phase-18-Demo wird erst nach dieser Slice-Abnahme freigegeben.
+Aktueller Fokus: manueller und externer Phase-17-Gate. Der visuelle Phase-19-Production-Pass ist abgeschlossen; eine oeffentliche Phase-18-Demo wird erst nach der manuellen Slice-Abnahme freigegeben.
 
 ## Phase 0: Technische Baseline
 
@@ -216,7 +217,7 @@ Abnahmeprotokoll:
 - Stormcrest startet mit 85 HP, hoher Bewegung/Schussrate und einer 60%-Kettenentladung auf ein zweites Ziel.
 - Artillery-Angebote gewichten Feuer, Raketen und Molotov hoeher; Storm-Angebote gewichten Blitz, Laser und Orbit hoeher, ohne Builds hart zu sperren.
 - Die Auswahl erscheint vor jedem Run und nach Restart; erst danach starten Physik, Wellen und Spielzeit.
-- Eigene Groesse, Tint und Klassenmarker erzeugen im Prototyp klar unterscheidbare Silhouetten; finale individuelle Rooster-Sprites bleiben ein spaeteres Asset-Paket.
+- Eigene Groesse, Tint und Klassenmarker erzeugten zunaechst klar unterscheidbare Prototyp-Silhouetten. Dieser Zwischenstand wurde am 10.08.2026 in Phase 19 durch drei individuelle Produktions-Sprite-Sheets und eigene Portraets ersetzt.
 - Auswahlkarten zeigen Rolle, HP, Geschwindigkeit, Schaden, Primaerangriff und Passive auf Desktop, Portrait und Landscape.
 - `npm run test:mechanics`: bestanden; Fokus-, Splash- und Chain-Angriffe sowie Startwerte, Marker und Affinitaeten werden geprueft.
 - `npm run test:smoke`: bestanden; Auswahl per echter UI, Restart, Touch-Drag, Portrait, Landscape und Fullscreen funktionieren.
@@ -670,10 +671,39 @@ Vorbereitungsprotokoll 10.08.2026:
 - Ein textfreies 1672 x 941 Key-Art-Master, vier echte Build-Screenshots (Desktop-Hub, Stormcrest-Schwarm, Brood-King und 720 x 1280 Mobile Portrait) sowie ein 36,0-Sekunden-Gameplay-Reel in 1280 x 720 liegen unter `public/marketing/` und `docs/marketing/`.
 - Titel-, Description- und Open-Graph-Metadaten sind im Web-Build integriert. Der Capture-Runner reproduziert Screenshots und Reel aus dem echten Spiel statt aus Mockups.
 - Die Produkttelemetrie ist standardmaessig aus und besitzt eine sichtbare Einwilligung in der Hennenhuette. Erlaubt sind nur Funnel-/Run-Ereignisse mit sitzungsgebundener Zufalls-ID, grober Geraeteklasse, Orientierung und Sprachkuerzel; keine Cookies, Werbe-IDs, Fingerprints oder persistente Eventwarteschlange.
-- Ohne `VITE_TELEMETRY_ENDPOINT` findet kein Versand statt. Bei Widerruf endet die Erfassung sofort. Der Release-Endpunkt muss IP-Adressen verwerfen, Rohdaten nach 30 Tagen loeschen und vor Deploy eine kurze Datenschutzerklaerung erhalten.
+- Ohne `VITE_TELEMETRY_ENDPOINT` findet kein Versand statt. Bei Widerruf endet die Erfassung sofort. Der Release-Endpunkt muss IP-Adressen verwerfen, Rohdaten nach 30 Tagen loeschen und vor Deploy eine kurze Datenschutzerklaerung erhalten. Der Pages-Workflow bleibt bis zur manuellen Abnahme ausschliesslich manuell ausloesbar.
 - Empfohlen ist Demo-plus-Premium: kostenloser kompletter Slice zur Verstaendnis- und Nachfragepruefung, danach eine einmal bezahlte Vollversion. Kosmetische Erweiterungen sind nur spaeter und ohne Stats, Gacha, Energie, Ads oder Zufallskisten vertretbar.
 - Produktmodell, Store Copy, Trailer-Beat-Sheet, Eventdefinitionen und harte Go/No-Go-Schwellen stehen in `docs/PHASE_18_COMMERCIAL_VALIDATION.md` und `docs/marketing/STORE_COPY.md`.
 - Nicht vorweggenommen wird das echte Ergebnis: Der Branch wird nicht auf `master` gemergt, die Pages-Demo nicht neu deployed und es werden keine fiktiven Funnel-, Wunschlisten- oder Testerquoten eingetragen.
+
+## Phase 19: Character Art und HUD Production Pass
+
+Status: Abgeschlossen am 10.08.2026
+
+Bulk-Ziel: Die visuelle Qualitaet des spielbaren Builds an das bereits produzierte Key Art angleichen, ohne Mobile-Sichtflaeche, Lesbarkeit oder Performance zu opfern.
+
+45. [x] Barnyard Ace, Boombardier und Stormcrest als drei eigenstaendige 4-x-4-Richtungs-Sprite-Sheets im bestehenden 1024-x-1024-/256-x-256-Raster produzieren.
+46. [x] Drei individuelle 512-x-512-Charakterportraets fuer Hennenhuette und Gameplay-HUD integrieren.
+47. [x] Gameplay-HUD und Hennenhuette visuell neu hierarchisieren: Klassenidentitaet, HP/XP, Runwerte, Loadout, Bosszustand und Roster-Karten.
+48. [x] Asset-Pipeline und Browser-Gates um getrennte Texturen, Portraet-Dimensionen, Alpha-/Zellrandsicherheit und Mobile-HUD-Budgets erweitern.
+
+Abnahme:
+
+- Jede Ingame-Figur besitzt eine kompakte, grob quadratische Rooster-Silhouette statt einer hohen humanoiden Form und bleibt in allen vier Bewegungsrichtungen eindeutig ihrer Klasse zugeordnet.
+- Menueportraet, HUD-Portraet und Ingame-Sprite bilden pro Klasse dieselbe Identitaet ab.
+- Das neue HUD bleibt unter 125 px in Mobile Portrait und unter 90 px in niedrigem Mobile Landscape.
+- Key Art, README, Store-Screenshots und Gameplay-Reel zeigen denselben aktuellen Buildstand.
+
+Abnahmeprotokoll 10.08.2026:
+
+- Das Key Art dient als Identitaets-, Farb- und Ausruestungsreferenz; das bisherige Rooster-Sheet dient verbindlich als Proportions-, Blickwinkel- und Zellformatreferenz.
+- Alle 48 Laufzellen wurden einzeln freigestellt, proportional in eine 214-x-214-Sicherheitsflaeche gesetzt und auf gemeinsamer Baseline normalisiert. Gemessene Breite-Hoehe-Verhaeltnisse: Ace 0,80-0,90, Boombardier 0,88-1,23 und Stormcrest 0,78-0,95.
+- Die drei Runtime-Sheets und drei Portraets werden reproduzierbar als WebP optimiert und ueber das Hash-Manifest geprueft. Phaser verwendet pro Rooster eine eigene Textur und vier eigene Richtungsanimationen mit klassenspezifischer Schrittfrequenz.
+- Die Hennenhuette verwendet grosse klassenfarbene Portraetkarten statt generischer Upgrade-Icons. Das Gameplay-HUD zeigt Portraet, HP, XP, Runzeit, Welle, Kills, Loadout und Bossstatus in einer responsiven Cockpit-Hierarchie.
+- Der zuvor gelegentlich rote Telegraph-Gate wurde an der Ursache korrigiert: Average-Bots behalten nach einer angekuendigten Explosion ein kurzes Sicherheitsfenster und kehren nicht unmittelbar in die gerade ausgeloeste Zone zurueck. Drei Wiederholungen bestanden.
+- Asset-Hashpruefung, Production, Foundation, Smoke, Mechanics, Pacing und Boss bestanden nach der Integration. Der Telegraph-Gate bestand anschliessend dreimal reproduzierbar.
+- Vier aktuelle Store-Screenshots und ein visuell geprueftes 36,12-Sekunden-Reel in 1280 x 720 wurden aus dem echten Build neu erzeugt. Der README bindet das Key Art prominent ein und verweist auf Roadmap, Validierungsberichte, Store-Paket und dieses Produktionsprotokoll.
+- Die bereits dokumentierte zehnminuetige Phase-17-Soak-Baseline bleibt gueltig; auf ausdruecklichen Wunsch wurde fuer diesen reinen Visual-/HUD-Abschluss keine weitere Mammut-Testserie gestartet.
 
 ## Bulk-Arbeitsweise
 

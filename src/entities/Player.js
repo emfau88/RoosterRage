@@ -26,6 +26,7 @@ export class Player {
     this.secondWindCharges = 0;
     this.roosterId = null;
     this.roosterName = '';
+    this.roosterTextureKey = 'rooster-ace-walk';
     this.primaryAttack = {};
     this.primaryEvolution = null;
     this.upgradeAffinities = {};
@@ -36,7 +37,7 @@ export class Player {
     this.invulnerableUntil = 0;
     this.baseScale = 0.25;
 
-    this.sprite = scene.physics.add.sprite(x, y, 'rooster-walk', 0);
+    this.sprite = scene.physics.add.sprite(x, y, this.roosterTextureKey, 0);
     this.sprite.setScale(this.baseScale);
     this.sprite.setCircle(58, 70, 86);
     this.sprite.setDepth(6);
@@ -44,7 +45,7 @@ export class Player {
     this.sprite.body.setDamping(true);
     this.sprite.body.setDrag(0.88);
     this.lastMoveDirection = 'south';
-    this.sprite.play('rooster-walk-south');
+    this.sprite.play('rooster-ace-walk-south');
 
     this.hpBarWidth = 54;
     this.hpBarBack = scene.add.rectangle(x - 27, y - 46, this.hpBarWidth, 6, 0x1c0f12, 0.92).setOrigin(0, 0.5).setDepth(20);
@@ -152,6 +153,13 @@ export class Player {
     return levelsGained;
   }
 
+  setRoosterVisual(roosterId, textureKey = `rooster-${roosterId}-walk`) {
+    this.roosterId = roosterId;
+    this.roosterTextureKey = textureKey;
+    this.sprite.setTexture(textureKey, 0);
+    this.sprite.play(`rooster-${roosterId}-walk-${this.lastMoveDirection}`, true);
+  }
+
   getXpRequirement(level) {
     const requirements = [35, 70, 105, 145, 190, 245, 305, 375, 455, 545, 645, 755];
     return requirements[Math.min(requirements.length - 1, Math.max(0, level - 1))]
@@ -193,7 +201,7 @@ export class Player {
     } else {
       this.lastMoveDirection = velocity.y < 0 ? 'north' : 'south';
     }
-    this.sprite.play(`rooster-walk-${this.lastMoveDirection}`, true);
+    this.sprite.play(`rooster-${this.roosterId ?? 'ace'}-walk-${this.lastMoveDirection}`, true);
   }
 
   updateVisualPose(velocity) {

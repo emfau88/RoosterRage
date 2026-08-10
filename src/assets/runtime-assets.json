@@ -4,13 +4,58 @@
   "quality": 88,
   "assets": [
     {
-      "source": "art-source/characters/rooster-walk-v2.png",
-      "sourceSha256": "98295a9771a95cdb7fb27230c8c1b7eded02375b860d4d2b5fa5faf3995add31",
-      "runtime": "src/assets/characters/rooster-walk-v2.webp",
-      "runtimeSha256": "166c8b85029a9b293606b08b0e90dd7de47ba0a29b6afe79ea77c98cc1c10e0a",
+      "source": "art-source/characters/rooster-ace-walk.png",
+      "sourceSha256": "4c96595bbae57120fcf490ae2c91208ba342adf4c9337f780d0b099364f43897",
+      "runtime": "src/assets/characters/rooster-ace-walk.webp",
+      "runtimeSha256": "0a7afde0d85ddb17d31f5573b9e159a1de808b6162fb6ed3fff0a189685ee177",
       "width": 1024,
       "height": 1024,
-      "bytes": 203772
+      "bytes": 258906
+    },
+    {
+      "source": "art-source/characters/rooster-artillery-walk.png",
+      "sourceSha256": "36ab51630f38ab1666a220287228baaa30b97ce0df0f6a3cd00b2fef4d763c5a",
+      "runtime": "src/assets/characters/rooster-artillery-walk.webp",
+      "runtimeSha256": "78c8a7808c44b1eece3d4cc41dd85763ad4adef51f746069e41e011c994a6be5",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 274150
+    },
+    {
+      "source": "art-source/characters/rooster-storm-walk.png",
+      "sourceSha256": "3ceedf3dfe0dfb20d76de65de0522e46b291e7ae4d47f716f3026e4ed61e7df1",
+      "runtime": "src/assets/characters/rooster-storm-walk.webp",
+      "runtimeSha256": "32a744ccdc38ae48f31f134029c0a801231ec463d84dd9abcc0e9961ea721ffa",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 252270
+    },
+    {
+      "source": "art-source/characters/rooster-ace-portrait.png",
+      "sourceSha256": "dbea949c4c9d7a8e0b0d6c4b4c570a84afb404d19bfc0d8acba20fcd11b69404",
+      "runtime": "src/assets/characters/rooster-ace-portrait.webp",
+      "runtimeSha256": "1b48bd5a40a5275573223c3a65f6bae12cca27a80f9755956c207256a1019045",
+      "width": 512,
+      "height": 512,
+      "bytes": 46440
+    },
+    {
+      "source": "art-source/characters/rooster-artillery-portrait.png",
+      "sourceSha256": "1ad1ad3a9addf789627a40125121dfc13aefb763393c9d1e22f0617293ef4aaa",
+      "runtime": "src/assets/characters/rooster-artillery-portrait.webp",
+      "runtimeSha256": "5af4be59534f439f8d166cf29d5e1da1d254ca2bef979c146587d197dc45a5de",
+      "width": 512,
+      "height": 512,
+      "bytes": 53976
+    },
+    {
+      "source": "art-source/characters/rooster-storm-portrait.png",
+      "sourceSha256": "5935e59383c3969c821ec8a46f7694e8bdb8e9a906c3f6106f6ef2a256adad9b",
+      "runtime": "src/assets/characters/rooster-storm-portrait.webp",
+      "runtimeSha256": "60c808765d9cc3f676207c8aeb28b532fb76b85f941ab0afe856b5b50598b99a",
+      "width": 512,
+      "height": 512,
+      "bytes": 40380
     },
     {
       "source": "art-source/companions/support-chick-orb.png",

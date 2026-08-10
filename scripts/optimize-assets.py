@@ -15,7 +15,12 @@ RUNTIME_ROOT = PROJECT_ROOT / "src" / "assets"
 MANIFEST_PATH = RUNTIME_ROOT / "runtime-assets.json"
 
 RUNTIME_IMAGES = (
-    "characters/rooster-walk-v2.png",
+    "characters/rooster-ace-walk.png",
+    "characters/rooster-artillery-walk.png",
+    "characters/rooster-storm-walk.png",
+    "characters/rooster-ace-portrait.png",
+    "characters/rooster-artillery-portrait.png",
+    "characters/rooster-storm-portrait.png",
     "companions/support-chick-orb.png",
     "enemy-slime.png",
     "enemies/animations/enemy-slime-wobble.png",

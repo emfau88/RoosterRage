@@ -28,7 +28,7 @@ export class RoosterClassSystem {
 
   applyStats(definition) {
     const { player } = this.scene;
-    player.roosterId = definition.id;
+    player.setRoosterVisual(definition.id, definition.visual.texture);
     player.roosterName = definition.shortName;
     player.primaryAttack = { ...definition.primary };
     player.primaryEvolution = null;
@@ -44,7 +44,7 @@ export class RoosterClassSystem {
     player.sprite.setScale(player.baseScale);
     player.sprite.clearTint();
     const cosmetic = this.scene.meta?.getSelectedCosmetic(definition.id);
-    const tint = cosmetic?.tint ?? definition.visual.tint;
+    const tint = cosmetic?.tint ?? null;
     if (tint) {
       player.sprite.setTint(tint);
     }

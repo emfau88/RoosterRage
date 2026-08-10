@@ -76,6 +76,7 @@ export const ROOSTER_DEFINITIONS = [
     },
     visual: {
       scale: 0.25,
+      texture: 'rooster-ace-walk',
       tint: null,
       accent: 0xffd35c
     }
@@ -164,7 +165,8 @@ export const ROOSTER_DEFINITIONS = [
     },
     visual: {
       scale: 0.275,
-      tint: 0xffc19b,
+      texture: 'rooster-artillery-walk',
+      tint: null,
       accent: 0xff6a28
     }
   },
@@ -250,7 +252,8 @@ export const ROOSTER_DEFINITIONS = [
     },
     visual: {
       scale: 0.235,
-      tint: 0x9feaff,
+      texture: 'rooster-storm-walk',
+      tint: null,
       accent: 0x5ad7ff
     }
   }

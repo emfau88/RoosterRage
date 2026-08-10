@@ -239,6 +239,18 @@ async function testRoosterClasses(browser) {
   assert(ace.enemies.filter((enemy) => enemy.hp < 999).length === 1, 'Ace primary should focus one target.', ace.enemies);
   assert(artillery.enemies.filter((enemy) => enemy.hp < 999).length >= 2, 'Artillery primary did not deal splash damage.', artillery.enemies);
   assert(storm.enemies.filter((enemy) => enemy.hp < 999).length >= 2, 'Storm primary did not chain to another target.', storm.enemies);
+  assert(ace.visual.texture === 'rooster-ace-walk', 'Ace is not using its own sprite sheet.', ace.visual);
+  assert(artillery.visual.texture === 'rooster-artillery-walk', 'Boombardier is not using its own sprite sheet.', artillery.visual);
+  assert(storm.visual.texture === 'rooster-storm-walk', 'Stormcrest is not using its own sprite sheet.', storm.visual);
+  assert(new Set([ace.visual.texture, artillery.visual.texture, storm.visual.texture]).size === 3,
+    'Rooster classes must not share a player texture.', { ace: ace.visual, artillery: artillery.visual, storm: storm.visual });
+  [ace, artillery, storm].forEach((result) => {
+    assert(result.visual.textureSize.width === 1024 && result.visual.textureSize.height === 1024,
+      `${result.roosterId} sprite sheet has the wrong production dimensions.`, result.visual);
+    assert(result.visual.frameSize.width === 256 && result.visual.frameSize.height === 256
+      && result.visual.frameTotal >= 16,
+    `${result.roosterId} sprite sheet does not expose the expected 4x4 frame grid.`, result.visual);
+  });
   assert(ace.visual.markers === 1, 'Ace visual identity marker is missing.', ace.visual);
   assert(artillery.visual.markers === 2, 'Artillery visual identity markers are missing.', artillery.visual);
   assert(storm.visual.markers === 3, 'Storm visual identity markers are missing.', storm.visual);
