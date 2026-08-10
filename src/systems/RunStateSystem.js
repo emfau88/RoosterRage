@@ -20,9 +20,13 @@ export class RunStateSystem {
   startRoosterSelection(definitions) {
     this.choosingRooster = true;
     this.scene.physics.pause();
+    this.scene.productAnalytics.viewHub();
     const renderHub = () => this.scene.hud.showRoosterSelection(
       definitions,
-      this.scene.meta.getHubState(definitions),
+      {
+        ...this.scene.meta.getHubState(definitions),
+        analytics: this.scene.productAnalytics.getState()
+      },
       (roosterId, cosmeticId, challengeId) => {
         this.scene.meta.selectChallenge(challengeId);
         if (this.scene.meta.selectCosmetic(roosterId, cosmeticId)) renderHub();
@@ -43,6 +47,11 @@ export class RunStateSystem {
     this.scene.hud.hideOverlay();
     this.scene.physics.resume();
     this.scene.waveSystem.start();
+    this.scene.productAnalytics.startRun({
+      roosterId: id,
+      challengeId: this.scene.challenge.id,
+      arenaId: this.scene.arena.id
+    });
     this.scene.updateHud();
     return true;
   }
@@ -149,6 +158,11 @@ export class RunStateSystem {
       pauseMs,
       selection?.type ?? 'level'
     );
+    scene.productAnalytics.trackUpgrade(upgrade, {
+      type: selection?.type ?? 'level',
+      kind: selection?.kind ?? null,
+      wave: scene.waveSystem.currentWave
+    });
     if (selection?.type === 'level') {
       this.regularChoices += 1;
     } else if (selection?.type === 'chest') {
@@ -220,6 +234,7 @@ export class RunStateSystem {
     this.scene.physics.pause();
     this.scene.telemetry.finish(this.scene.time.now, outcome);
     const report = this.getRunReport();
+    this.scene.productAnalytics.finishRun(report);
     report.newUnlocks = this.scene.meta.recordRun(report, this.scene.telemetry.events);
     report.meta = this.scene.meta.getState();
     this.scene.hud.showEndScreen(title, message, report);

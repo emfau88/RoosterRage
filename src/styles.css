@@ -614,6 +614,44 @@ canvas {
   cursor: pointer;
 }
 
+.henhouse-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.henhouse-privacy span,
+.henhouse-privacy small {
+  display: block;
+}
+
+.henhouse-privacy small {
+  margin-top: 2px;
+  color: #b7c4ca;
+  font-size: 10px;
+}
+
+.henhouse-privacy button {
+  min-width: 54px;
+  padding: 7px 10px;
+  border: 1px solid #ffe16a;
+  border-radius: 5px;
+  color: #ffe16a;
+  background: #253439;
+  font-weight: 900;
+}
+
+.henhouse-privacy button[aria-pressed="true"] {
+  color: #102026;
+  background: #ffe16a;
+}
+
 .personal-bests {
   margin-top: 8px;
   flex-wrap: wrap;

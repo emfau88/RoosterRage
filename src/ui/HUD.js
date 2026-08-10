@@ -59,13 +59,14 @@ const ICON_ALIASES_BY_ID = {
 };
 
 export class HUD {
-  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected, onReroll, onSettings) {
+  constructor(onUpgradeSelected, onRestart, onFullscreen, onRoosterSelected, onReroll, onSettings, onAnalyticsConsent) {
     this.onUpgradeSelected = onUpgradeSelected;
     this.onRestart = onRestart;
     this.onFullscreen = onFullscreen;
     this.onRoosterSelected = onRoosterSelected;
     this.onReroll = onReroll;
     this.onSettings = onSettings;
+    this.onAnalyticsConsent = onAnalyticsConsent;
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     this.root = document.createElement('div');
     this.root.className = 'hud';
@@ -242,6 +243,10 @@ export class HUD {
             <ul class="lexicon-list">${evoRows}</ul>
           </details>
         </div>
+        <div class="henhouse-privacy">
+          <span><strong>Anonyme Demo-Messung</strong><small>Nur Funnel und Run-Eckdaten, keine Konten, Cookies oder Werbe-IDs.</small></span>
+          <button type="button" data-analytics-toggle aria-pressed="${Boolean(hub.analytics?.enabled)}">${hub.analytics?.enabled ? 'AN' : 'AUS'}</button>
+        </div>
       </div>
     `;
     const list = this.overlay.querySelector('.rooster-list');
@@ -303,6 +308,13 @@ export class HUD {
           candidate.classList.toggle('is-selected', candidate === button)
         ));
       });
+    });
+    this.overlay.querySelector('[data-analytics-toggle]')?.addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      const next = button.getAttribute('aria-pressed') !== 'true';
+      const state = this.onAnalyticsConsent?.(next) ?? { enabled: next };
+      button.setAttribute('aria-pressed', String(state.enabled));
+      button.textContent = state.enabled ? 'AN' : 'AUS';
     });
   }
 

@@ -31,7 +31,7 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 | 15 | Rooster-Tiefe und Build-Content | Abgeschlossen |
 | 16 | Meta und Challenges | Abgeschlossen |
 | 17 | Vertical-Slice-Abnahme | Automatischer Freeze abgeschlossen; manuell/extern offen |
-| 18 | Kommerzielle Validierung | Release-Vorbereitung nach manuellem Gate |
+| 18 | Kommerzielle Validierung | 3/4 vorbereitet; oeffentlicher Gate nach manueller Abnahme |
 
 Aktueller Fokus: manueller und externer Phase-17-Gate. Der automatisierte Feature-Freeze ist hergestellt; eine oeffentliche Phase-18-Demo wird erst nach dieser Slice-Abnahme freigegeben.
 
@@ -650,19 +650,30 @@ Automatisches Abnahmeprotokoll 10.08.2026:
 
 ## Phase 18: Kommerzielle Validierung
 
-Status: Offen
+Status: Releasepaket vorbereitet am 10.08.2026; Veroeffentlichung und reale Messung offen
 
 Bulk-Ziel: Erst nach belastbarer Slice-Abnahme Produktumfang und Geschaeftsmodell festlegen.
 
-41. [ ] Eine oeffentliche Web-Demo mit anonymer, datensparsamer Funnel- und Run-Telemetrie veroeffentlichen.
-42. [ ] Store-tauglichen Namen, Key Art, Screenshots, Kurzbeschreibung und 30-45-Sekunden-Trailer erstellen.
-43. [ ] Premium, Demo-plus-Premium oder faire kosmetische Erweiterungen anhand Zielgruppe und Plattform vergleichen; keine F2P-Systeme blind kopieren.
-44. [ ] Go/No-Go-Kriterien fuer Vollproduktion definieren: Starts, Run-Abschluss, zweiter Run, bevorzugte Klasse, Wunschlisten und qualitative Resonanz.
+41. [ ] Eine oeffentliche Web-Demo mit anonymer, datensparsamer Funnel- und Run-Telemetrie veroeffentlichen. Release-Code fertig, Deploy nach manuellem Phase-17-Gate offen.
+42. [x] Store-tauglichen Namen, Key Art, Screenshots, Kurzbeschreibung und 30-45-Sekunden-Trailer erstellen.
+43. [x] Premium, Demo-plus-Premium oder faire kosmetische Erweiterungen anhand Zielgruppe und Plattform vergleichen; keine F2P-Systeme blind kopieren.
+44. [x] Go/No-Go-Kriterien fuer Vollproduktion definieren: Starts, Run-Abschluss, zweiter Run, bevorzugte Klasse, Wunschlisten und qualitative Resonanz.
 
 Abnahme:
 
 - Produktumfang und Budget beruhen auf beobachtetem Verhalten statt interner Begeisterung.
 - Content-Produktion fuer weitere Akte beginnt erst nach einer positiven Entscheidung.
+
+Vorbereitungsprotokoll 10.08.2026:
+
+- `Rooster Rage` bleibt nach einer vorlaeufigen Web-/Store-Kollisionssuche der Arbeitsname. Das ist keine rechtliche Markenfreigabe; Register-, Domain- und anwaltliche Pruefung bleiben vor Store-Anmeldung Pflicht.
+- Ein textfreies 1672 x 941 Key-Art-Master, vier echte Build-Screenshots (Desktop-Hub, Stormcrest-Schwarm, Brood-King und 720 x 1280 Mobile Portrait) sowie ein 36,0-Sekunden-Gameplay-Reel in 1280 x 720 liegen unter `public/marketing/` und `docs/marketing/`.
+- Titel-, Description- und Open-Graph-Metadaten sind im Web-Build integriert. Der Capture-Runner reproduziert Screenshots und Reel aus dem echten Spiel statt aus Mockups.
+- Die Produkttelemetrie ist standardmaessig aus und besitzt eine sichtbare Einwilligung in der Hennenhuette. Erlaubt sind nur Funnel-/Run-Ereignisse mit sitzungsgebundener Zufalls-ID, grober Geraeteklasse, Orientierung und Sprachkuerzel; keine Cookies, Werbe-IDs, Fingerprints oder persistente Eventwarteschlange.
+- Ohne `VITE_TELEMETRY_ENDPOINT` findet kein Versand statt. Bei Widerruf endet die Erfassung sofort. Der Release-Endpunkt muss IP-Adressen verwerfen, Rohdaten nach 30 Tagen loeschen und vor Deploy eine kurze Datenschutzerklaerung erhalten.
+- Empfohlen ist Demo-plus-Premium: kostenloser kompletter Slice zur Verstaendnis- und Nachfragepruefung, danach eine einmal bezahlte Vollversion. Kosmetische Erweiterungen sind nur spaeter und ohne Stats, Gacha, Energie, Ads oder Zufallskisten vertretbar.
+- Produktmodell, Store Copy, Trailer-Beat-Sheet, Eventdefinitionen und harte Go/No-Go-Schwellen stehen in `docs/PHASE_18_COMMERCIAL_VALIDATION.md` und `docs/marketing/STORE_COPY.md`.
+- Nicht vorweggenommen wird das echte Ergebnis: Der Branch wird nicht auf `master` gemergt, die Pages-Demo nicht neu deployed und es werden keine fiktiven Funnel-, Wunschlisten- oder Testerquoten eingetragen.
 
 ## Bulk-Arbeitsweise
 

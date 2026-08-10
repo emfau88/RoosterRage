@@ -47,6 +47,9 @@ jobs:
       - name: Mechanics test
         run: npm run test:mechanics
 
+      - name: Privacy-safe product analytics test
+        run: npm run test:product
+
       - name: Build GitHub Pages artifact
         run: npm run build -- --base=/RoosterRage/
 

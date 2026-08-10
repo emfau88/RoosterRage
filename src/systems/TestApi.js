@@ -216,6 +216,8 @@ export function installTestApi(scene) {
       return scene.chooseRooster(id);
     },
     getMetaState: () => scene.meta.getState(),
+    getProductAnalytics: () => scene.productAnalytics.getState(),
+    setProductAnalyticsConsent: (enabled) => scene.productAnalytics.setConsent(enabled),
     getMetaHub: () => scene.meta.getHubState(scene.roosterClasses.getDefinitions()),
     resetMetaProgress: () => {
       const state = scene.meta.reset();

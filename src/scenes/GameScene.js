@@ -23,6 +23,7 @@ import { LoadoutSystem } from '../systems/LoadoutSystem.js';
 import { MetaProgressionSystem } from '../systems/MetaProgressionSystem.js';
 import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
 import { ProjectileLifecycleSystem } from '../systems/ProjectileLifecycleSystem.js';
+import { ProductAnalyticsSystem } from '../systems/ProductAnalyticsSystem.js';
 import { RandomSystem } from '../systems/RandomSystem.js';
 import { RunStateSystem } from '../systems/RunStateSystem.js';
 import { RoosterClassSystem } from '../systems/RoosterClassSystem.js';
@@ -108,6 +109,7 @@ export class GameScene extends Phaser.Scene {
     this.elapsed = 0;
     this.telemetry = new Telemetry({ seed: this.rng.seed, profile: requestedProfile });
     this.telemetry.summary.challengeId = this.challenge.id;
+    this.productAnalytics = new ProductAnalyticsSystem();
     this.effects = new EffectSettingsSystem();
     this.audio = new AudioSystem(this);
     this.bot = {
@@ -155,7 +157,8 @@ export class GameScene extends Phaser.Scene {
       () => this.toggleFullscreen(),
       (roosterId, selectedChallenge) => this.startRunFromHub(roosterId, selectedChallenge),
       () => this.rerollUpgradeChoices(),
-      () => this.openEffectSettings()
+      () => this.openEffectSettings(),
+      (enabled) => this.productAnalytics.setConsent(enabled)
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
@@ -522,6 +525,7 @@ export class GameScene extends Phaser.Scene {
 
   onWaveStarted(wave, config) {
     this.hud.showWaveBanner(wave, config);
+    if (config.bossWave) this.productAnalytics.trackBossReached(wave);
     this.telemetry.record('waveStarted', this.time.now, {
       wave,
       name: config.name,

@@ -36,7 +36,7 @@ async function isRoosterServerReady(url) {
       return false;
     }
     const html = await response.text();
-    return html.includes('<title>Rooster Arena</title>');
+    return html.includes('<title>Rooster Rage');
   } catch {
     return false;
   }
