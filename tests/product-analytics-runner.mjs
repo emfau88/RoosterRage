@@ -11,6 +11,13 @@ function assert(condition, message, details) {
   if (!condition) throw new Error(`${message}\n${JSON.stringify(details, null, 2)}`);
 }
 
+async function toggleAnalyticsFromArchive(page) {
+  await page.locator('[data-hub-tab="archive"]').click();
+  const toggle = page.locator('[data-analytics-toggle]:visible');
+  await toggle.scrollIntoViewIfNeeded();
+  await toggle.click();
+}
+
 async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
@@ -29,7 +36,7 @@ async function run() {
     assert(!initial.enabled && !initial.endpointConfigured && initial.capturedEvents.length === 0,
       'Analytics was not private-by-default.', initial);
 
-    await page.locator('[data-analytics-toggle]').click();
+    await toggleAnalyticsFromArchive(page);
     const optedIn = await page.evaluate(() => window.__ROOSTER_TEST__.getProductAnalytics());
     assert(optedIn.enabled && optedIn.capturedEvents.map((entry) => entry.event).includes('consent_granted'),
       'Visible consent did not enable anonymous analytics.', optedIn);
@@ -46,7 +53,7 @@ async function run() {
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getProductAnalytics);
     const persisted = await page.evaluate(() => window.__ROOSTER_TEST__.getProductAnalytics());
     assert(persisted.enabled, 'Consent preference did not persist across reload.', persisted);
-    await page.locator('[data-analytics-toggle]').click();
+    await toggleAnalyticsFromArchive(page);
     await page.evaluate(() => window.__ROOSTER_TEST__.selectRooster('ace'));
     const optedOut = await page.evaluate(() => window.__ROOSTER_TEST__.getProductAnalytics());
     assert(!optedOut.enabled
