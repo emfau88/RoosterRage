@@ -156,7 +156,7 @@ Three start-weapon R1–R4 paths, R4 and behavior escalation for seven three-ran
 
 ### Remaining risks
 
-- EVO asset Bulk 1 now gives Sunshot Array, Siegebreaker Shell, Tempest Crown, Solar Scramble, Phoenix Pan, and Broodstorm dedicated icons, projectiles, and short impact signatures. Their final size and timing limits are recorded in `docs/WEAPON_EVO_ASSET_BULK_1.md`.
+- EVO asset Bulks 1 and 2 now cover all eleven evolutions with dedicated icons and mechanically appropriate combat signatures. Final size, motion, and asset decisions are recorded in `docs/WEAPON_EVO_ASSET_BULK_1.md` and `docs/WEAPON_EVO_ASSET_BULK_2.md`.
 - The full-run rank guarantee needs another multi-seed balance sweep after Phase C changes enemy pressure; repeating an eight-minute run now would tune against encounter values scheduled to change next.
 - Void Nest and area weapons show high stationary-cluster damage; moving-target performance should be compared after formation and pressure rework.
 - Extra player-side projectiles/FX must remain below telegraph occlusion thresholds when Phase C reduces enemy bullets.

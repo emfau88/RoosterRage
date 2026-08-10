@@ -4,7 +4,11 @@ const EVOLUTION_IMPACTS = {
   'evo-tempest-crown': { texture: 'evo-tempest-crown-impact', diameter: 66, duration: 155, rotation: 0.08 },
   'evo-solar-scramble': { texture: 'evo-solar-scramble-impact', diameter: 90, duration: 185, rotation: 0.22 },
   'evo-phoenix-pan': { texture: 'evo-phoenix-pan-impact', diameter: 108, duration: 205, rotation: 0 },
-  'evo-broodstorm': { texture: 'evo-broodstorm-impact', diameter: 124, duration: 210, rotation: 0.12 }
+  'evo-broodstorm': { texture: 'evo-broodstorm-impact', diameter: 124, duration: 210, rotation: 0.12 },
+  'evo-thunder-roost': { texture: 'evo-thunder-roost-impact', diameter: 64, duration: 165, rotation: 0.12 },
+  'evo-shell-halo': { texture: 'evo-shell-halo-impact', diameter: 64, duration: 160, rotation: -0.08 },
+  'evo-dawn-laser': { texture: 'evo-dawn-laser-impact', diameter: 72, duration: 175, rotation: 0.06 },
+  'evo-chick-squadron': { texture: 'evo-chick-squadron-impact', diameter: 58, duration: 155, rotation: -0.1 }
 };
 
 export function playEvolutionImpact(scene, source, x, y, overrides = {}) {

@@ -22,6 +22,7 @@ RUNTIME_IMAGES = (
     "characters/rooster-artillery-portrait.png",
     "characters/rooster-storm-portrait.png",
     "companions/support-chick-orb.png",
+    "companions/evo-chick-squadron-companion.png",
     "projectiles/egg.png",
     "projectiles/fire-egg.png",
     "projectiles/heavy-egg.png",
@@ -35,6 +36,8 @@ RUNTIME_IMAGES = (
     "projectiles/evolutions/evo-solar-scramble-projectile.png",
     "projectiles/evolutions/evo-phoenix-pan-projectile.png",
     "projectiles/evolutions/evo-broodstorm-projectile.png",
+    "projectiles/evolutions/evo-shell-halo-projectile.png",
+    "projectiles/evolutions/evo-chick-squadron-projectile.png",
     "projectiles/enemy-shot.png",
     "projectiles/enemy-purple-shot.png",
     "projectiles/enemy-blue-shot.png",
@@ -75,6 +78,12 @@ RUNTIME_IMAGES = (
     "fx/evolutions/evo-solar-scramble-impact.png",
     "fx/evolutions/evo-phoenix-pan-impact.png",
     "fx/evolutions/evo-broodstorm-impact.png",
+    "fx/evolutions/evo-thunder-roost-impact.png",
+    "fx/evolutions/evo-shell-halo-impact.png",
+    "fx/evolutions/evo-singularity-nest-zone.png",
+    "fx/evolutions/evo-dawn-laser-emitter.png",
+    "fx/evolutions/evo-dawn-laser-impact.png",
+    "fx/evolutions/evo-chick-squadron-impact.png",
     "map/arena-ground.png",
     "ui/ui-icons-v1-sheet.png",
 )
@@ -90,12 +99,21 @@ RUNTIME_SIZES = {
     "projectiles/evolutions/evo-solar-scramble-projectile.png": (36, 36),
     "projectiles/evolutions/evo-phoenix-pan-projectile.png": (36, 36),
     "projectiles/evolutions/evo-broodstorm-projectile.png": (42, 42),
+    "projectiles/evolutions/evo-shell-halo-projectile.png": (40, 40),
+    "projectiles/evolutions/evo-chick-squadron-projectile.png": (36, 36),
+    "companions/evo-chick-squadron-companion.png": (96, 96),
     "fx/evolutions/evo-sunshot-array-impact.png": (256, 256),
     "fx/evolutions/evo-siegebreaker-shell-impact.png": (256, 256),
     "fx/evolutions/evo-tempest-crown-impact.png": (256, 256),
     "fx/evolutions/evo-solar-scramble-impact.png": (256, 256),
     "fx/evolutions/evo-phoenix-pan-impact.png": (256, 256),
     "fx/evolutions/evo-broodstorm-impact.png": (256, 256),
+    "fx/evolutions/evo-thunder-roost-impact.png": (256, 256),
+    "fx/evolutions/evo-shell-halo-impact.png": (256, 256),
+    "fx/evolutions/evo-singularity-nest-zone.png": (256, 256),
+    "fx/evolutions/evo-dawn-laser-emitter.png": (64, 64),
+    "fx/evolutions/evo-dawn-laser-impact.png": (256, 256),
+    "fx/evolutions/evo-chick-squadron-impact.png": (256, 256),
 }
 
 BULK_1_ICONS = (
@@ -105,6 +123,14 @@ BULK_1_ICONS = (
     "evo-solar-scramble-icon.png",
     "evo-phoenix-pan-icon.png",
     "evo-broodstorm-icon.png",
+)
+
+BULK_2_ICONS = (
+    "evo-thunder-roost-icon.png",
+    "evo-shell-halo-icon.png",
+    "evo-singularity-nest-icon.png",
+    "evo-dawn-laser-icon.png",
+    "evo-chick-squadron-icon.png",
 )
 
 
@@ -132,12 +158,16 @@ def build_ui_icon_sheet():
     sheet_path = SOURCE_ROOT / "ui" / "ui-icons-v1-sheet.png"
     with Image.open(sheet_path) as current:
         base = current.convert("RGBA").crop((0, 0, 768, 768))
-    sheet = Image.new("RGBA", (768, 896), (0, 0, 0, 0))
+    sheet = Image.new("RGBA", (768, 1024), (0, 0, 0, 0))
     sheet.alpha_composite(base, (0, 0))
     for index, filename in enumerate(BULK_1_ICONS):
         with Image.open(SOURCE_ROOT / "ui" / "evolutions" / filename) as icon:
             fitted = fit_visible(icon, (128, 128), 4)
         sheet.alpha_composite(fitted, (index * 128, 768))
+    for index, filename in enumerate(BULK_2_ICONS):
+        with Image.open(SOURCE_ROOT / "ui" / "evolutions" / filename) as icon:
+            fitted = fit_visible(icon, (128, 128), 4)
+        sheet.alpha_composite(fitted, (index * 128, 896))
     sheet.save(sheet_path, "PNG", optimize=True)
 
 

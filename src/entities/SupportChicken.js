@@ -17,10 +17,13 @@ export class SupportChicken {
     this.slowMs = evolved ? 1200 : rank >= 5 ? 950 : rank >= 3 ? 700 : 0;
     this.ricochet = evolved || rank >= 5 ? 1 : 0;
 
-    this.sprite = scene.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'support-chick');
-    this.sprite.setScale(0.14);
+    this.sprite = scene.add.sprite(
+      scene.player.sprite.x,
+      scene.player.sprite.y,
+      evolved ? 'evo-chick-squadron-companion' : 'support-chick'
+    );
+    this.sprite.setDisplaySize(evolved ? 44 : 36, evolved ? 44 : 36);
     this.sprite.setDepth(8);
-    if (evolved) this.sprite.setTint(0xfff3b0);
   }
 
   update(delta) {
@@ -55,6 +58,8 @@ export class SupportChicken {
         trailRadius: this.evolved ? 9 : 7,
         trailColor: this.evolved ? 0xffe16a : 0xfffbef,
         trailAlpha: this.evolved ? 0.3 : 0.16,
+        texture: this.evolved ? 'evo-chick-squadron-projectile' : 'egg',
+        scale: this.evolved ? 1 : undefined,
         source: this.evolved ? 'evo-chick-squadron' : 'support-chick',
         pierce: this.pierce,
         ricochet: this.ricochet,

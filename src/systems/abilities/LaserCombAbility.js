@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { TimedAbility } from './TimedAbility.js';
 import { distanceToSegment } from './abilityUtils.js';
+import { playEvolutionImpact } from '../EvolutionVisuals.js';
 
 export class LaserCombAbility extends TimedAbility {
   constructor(scene) {
@@ -18,6 +19,20 @@ export class LaserCombAbility extends TimedAbility {
     const baseAngle = Phaser.Math.Angle.Between(start.x, start.y, target.sprite.x, target.sprite.y);
     const offsets = this.evolved ? [-0.18, 0, 0.18] : this.rank >= 3 ? [0, 0.09] : [0];
     const colors = [0x5ad7ff, 0xfff3b0, 0x9b5cff];
+    if (this.evolved) {
+      const emitter = this.scene.add.image(start.x, start.y, 'evo-dawn-laser-emitter')
+        .setDisplaySize(38, 38)
+        .setRotation(baseAngle)
+        .setDepth(13);
+      const emitterScale = emitter.scaleX;
+      this.scene.tweens.add({
+        targets: emitter,
+        alpha: 0,
+        scale: emitterScale * 1.18,
+        duration: 260,
+        onComplete: () => emitter.destroy()
+      });
+    }
     offsets.forEach((offset, index) => {
       const angle = baseAngle + offset;
       const length = (this.evolved ? 700 : 520) + this.rank * 90;
@@ -50,11 +65,17 @@ export class LaserCombAbility extends TimedAbility {
           end.y
         );
         if (distance <= (this.evolved ? 40 : 32)) {
-          this.scene.playFx('fx-laser-impact', enemy.sprite.x, enemy.sprite.y + 8, {
-            scale: 0.34 + this.rank * 0.04,
-            depth: 13,
-            rotation: angle + Math.PI / 2
-          });
+          if (this.evolved) {
+            playEvolutionImpact(this.scene, 'evo-dawn-laser', enemy.sprite.x, enemy.sprite.y + 8, {
+              depth: 13
+            });
+          } else {
+            this.scene.playFx('fx-laser-impact', enemy.sprite.x, enemy.sprite.y + 8, {
+              scale: 0.34 + this.rank * 0.04,
+              depth: 13,
+              rotation: angle + Math.PI / 2
+            });
+          }
           this.scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, {
             source: this.evolved ? 'evo-dawn-laser' : 'laser-comb'
           });

@@ -486,7 +486,8 @@ export class CombatSystem {
       'evo-sunshot-array',
       'evo-siegebreaker-shell',
       'evo-tempest-crown',
-      'evo-solar-scramble'
+      'evo-solar-scramble',
+      'evo-chick-squadron'
     ].includes(source)) {
       playEvolutionImpact(scene, source, x, y);
     }

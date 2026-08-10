@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { playEvolutionImpact } from '../systems/EvolutionVisuals.js';
 
 export class OrbitEgg {
   constructor(scene, index, count, rank, evolved = false) {
@@ -17,11 +18,14 @@ export class OrbitEgg {
     this.lastHits = new Map();
     this.nextBossPulseAt = scene.time.now + 650 + index * 180;
 
-    this.sprite = scene.physics.add.sprite(scene.player.sprite.x, scene.player.sprite.y, 'egg');
-    this.sprite.setScale(1.15 + rank * 0.08);
+    this.sprite = scene.physics.add.sprite(
+      scene.player.sprite.x,
+      scene.player.sprite.y,
+      evolved ? 'evo-shell-halo-projectile' : 'egg'
+    );
+    this.sprite.setScale(evolved ? 1 : 1.15 + rank * 0.08);
     this.sprite.setCircle(10);
     this.sprite.setDepth(7);
-    if (evolved) this.sprite.setTint(0x8deaff);
     this.trail = rank >= 3
       ? scene.add.circle(
         scene.player.sprite.x,
@@ -56,6 +60,7 @@ export class OrbitEgg {
         const source = this.evolved ? 'evo-shell-halo' : 'orbit-eggs';
         this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, { source });
         if (this.evolved) {
+          playEvolutionImpact(this.scene, source, enemy.sprite.x, enemy.sprite.y);
           const chained = this.scene.enemies.find((candidate) => (
             candidate !== enemy
             && candidate.sprite.active

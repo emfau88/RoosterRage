@@ -13,13 +13,13 @@ const recipes = [
   { id: 'evo-siegebreaker-shell', base: 'primary-artillery-rank', rank: 3, passive: 'artillery-reinforced-breech', primary: true, rooster: 'artillery' },
   { id: 'evo-tempest-crown', base: 'primary-storm-rank', rank: 3, passive: 'storm-static-plumage', primary: true, rooster: 'storm' },
   { id: 'evo-solar-scramble', base: 'golden-egg', rank: 4, passive: 'fire-eggs', ability: 'goldenEgg' },
-  { id: 'evo-thunder-roost', base: 'lightning-comb', rank: 4, passive: 'critical-yolk', ability: 'lightningComb' },
-  { id: 'evo-shell-halo', base: 'orbit-eggs', rank: 4, passive: 'armor', ability: 'orbitEggs', count: 6 },
+  { id: 'evo-thunder-roost', base: 'lightning-comb', rank: 4, passive: 'critical-yolk', ability: 'lightningComb', textures: ['evo-thunder-roost-impact'] },
+  { id: 'evo-shell-halo', base: 'orbit-eggs', rank: 4, passive: 'armor', ability: 'orbitEggs', count: 6, textures: ['evo-shell-halo-projectile', 'evo-shell-halo-impact'], activeTextures: 'orbitTextures' },
   { id: 'evo-broodstorm', base: 'rocket-egg', rank: 4, passive: 'bigger-eggs', ability: 'rocketEgg' },
-  { id: 'evo-singularity-nest', base: 'void-nest', rank: 4, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones' },
+  { id: 'evo-singularity-nest', base: 'void-nest', rank: 4, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones', textures: ['evo-singularity-nest-zone'], activeTextures: 'voidZoneTextures' },
   { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 4, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones' },
-  { id: 'evo-dawn-laser', base: 'laser-comb', rank: 4, passive: 'swift-shells', ability: 'laserComb' },
-  { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4 }
+  { id: 'evo-dawn-laser', base: 'laser-comb', rank: 4, passive: 'swift-shells', ability: 'laserComb', textures: ['evo-dawn-laser-emitter', 'evo-dawn-laser-impact'] },
+  { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4, textures: ['evo-chick-squadron-companion', 'evo-chick-squadron-projectile', 'evo-chick-squadron-impact'], activeTextures: 'supportTextures' }
 ];
 
 function assert(condition, message, details) {
@@ -121,7 +121,8 @@ async function testRecipe(browser, serverUrl, recipe) {
       abilities: window.__ROOSTER_TEST__.getAbilityState(),
       player: window.__ROOSTER_TEST__.getPlayerStats(),
       state: window.__ROOSTER_TEST__.getState(),
-      telemetry: window.__ROOSTER_TEST__.getTelemetry()
+      telemetry: window.__ROOSTER_TEST__.getTelemetry(),
+      visuals: window.__ROOSTER_TEST__.getEvolutionVisualState()
     }));
     assert(result.loadout.evolutions.some((evolution) => evolution.id === recipe.id),
       `${recipe.id} is absent from loadout.`, result);
@@ -137,6 +138,14 @@ async function testRecipe(browser, serverUrl, recipe) {
     }
     if (recipe.zones) {
       assert(result.state[recipe.zones] >= 2, `${recipe.id} did not create two zones.`, result);
+    }
+    if (recipe.textures) {
+      assert(recipe.textures.every((texture) => result.visuals.loadedTextures.includes(texture)),
+        `${recipe.id} did not load all dedicated visual assets.`, result.visuals);
+    }
+    if (recipe.activeTextures) {
+      assert(result.visuals[recipe.activeTextures].every((texture) => recipe.textures.includes(texture)),
+        `${recipe.id} did not use its dedicated runtime texture.`, result.visuals);
     }
     assert((result.telemetry.effectiveDamageBySource[recipe.id] ?? 0) > 0,
       `${recipe.id} produced no attributed combat damage.`, result.telemetry);

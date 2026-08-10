@@ -331,8 +331,9 @@ async function testTripleShotTrajectory(browser) {
       window.__ROOSTER_TEST__.movePlayer(700, 450);
       window.__ROOSTER_TEST__.setShotCount(3);
       window.__ROOSTER_TEST__.spawnEnemyType('slime', 900, 450, { speed: 0, damage: 0, hp: 999 });
+      window.__ROOSTER_TEST__.triggerPrimaryAttack();
     });
-    await page.waitForTimeout(950);
+    await page.waitForTimeout(120);
     const projectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getProjectileSnapshot());
     assert(errors.length === 0, 'Browser reported errors during triple-shot test.', errors);
     assert(projectiles.length >= 3, 'Triple Shot did not spawn at least three projectiles.', projectiles);

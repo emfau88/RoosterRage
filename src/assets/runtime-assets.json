@@ -67,6 +67,15 @@
       "bytes": 24068
     },
     {
+      "source": "art-source/companions/evo-chick-squadron-companion.png",
+      "sourceSha256": "a9a9240be9c19fa5a828776161168583fa4ca951c6579de136658af27267d0b9",
+      "runtime": "src/assets/companions/evo-chick-squadron-companion.webp",
+      "runtimeSha256": "5ad5b04dfdbd83a95ada3e1feaa8d5c421b5ce27c6357a657dba63aadcf1e265",
+      "width": 96,
+      "height": 96,
+      "bytes": 4938
+    },
+    {
       "source": "art-source/projectiles/egg.png",
       "sourceSha256": "e2a89d9f861232261f2fe8ab6282c239394ffe1fbb6082342768a254eea80dbc",
       "runtime": "src/assets/projectiles/egg.webp",
@@ -182,6 +191,24 @@
       "width": 42,
       "height": 42,
       "bytes": 1328
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-shell-halo-projectile.png",
+      "sourceSha256": "e6679f5cc5b59f3d97cb4a6193a20e100ab1864033edc6b7796637c1ad20b827",
+      "runtime": "src/assets/projectiles/evolutions/evo-shell-halo-projectile.webp",
+      "runtimeSha256": "756ec3bd49af7864b49cb4c9c23e17a9481d3664cb44569f7194586ce9aba518",
+      "width": 40,
+      "height": 40,
+      "bytes": 1056
+    },
+    {
+      "source": "art-source/projectiles/evolutions/evo-chick-squadron-projectile.png",
+      "sourceSha256": "4ff5f0766bdc388a1c1c23c2dcd69fca7b105f00d213809915f6f74251c17734",
+      "runtime": "src/assets/projectiles/evolutions/evo-chick-squadron-projectile.webp",
+      "runtimeSha256": "da2d91dcec62ba8d2e535bf642cbf96664b47106cafa85711c886e50030a053a",
+      "width": 36,
+      "height": 36,
+      "bytes": 1072
     },
     {
       "source": "art-source/projectiles/enemy-shot.png",
@@ -544,6 +571,60 @@
       "bytes": 30798
     },
     {
+      "source": "art-source/fx/evolutions/evo-thunder-roost-impact.png",
+      "sourceSha256": "e4d07419516c7d4ea87cdba1382f0ad5abdd4e40fee46da940ec1ff4ac58a980",
+      "runtime": "src/assets/fx/evolutions/evo-thunder-roost-impact.webp",
+      "runtimeSha256": "a1e98d0aaad6ed5e56893db996dd8d22c324eb9242350de1542731856786c160",
+      "width": 256,
+      "height": 256,
+      "bytes": 30672
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-shell-halo-impact.png",
+      "sourceSha256": "317ff82a7be0e73ce13c6968fe76b8757db63d0c8124e505e4650ab10bd3d1cd",
+      "runtime": "src/assets/fx/evolutions/evo-shell-halo-impact.webp",
+      "runtimeSha256": "8fd370357f41af918c5edd41fabf86133ff68aae7c77e5c9a3f0d1bd54fb4744",
+      "width": 256,
+      "height": 256,
+      "bytes": 32506
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-singularity-nest-zone.png",
+      "sourceSha256": "513a630505eaba76083de9bdeec1c6ff17d751e7fcd2ed12acf2fd20c21170ab",
+      "runtime": "src/assets/fx/evolutions/evo-singularity-nest-zone.webp",
+      "runtimeSha256": "066de8f2d0280c36c5ae80a6c506318f8ebeaaca5ae6f94716f7c078486ffbd1",
+      "width": 256,
+      "height": 256,
+      "bytes": 25756
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-dawn-laser-emitter.png",
+      "sourceSha256": "b2fff4206577be0b033f77844c4639b99846bb86322ca429e4358a85ac669a2d",
+      "runtime": "src/assets/fx/evolutions/evo-dawn-laser-emitter.webp",
+      "runtimeSha256": "383b9c7cfcbf49eab3f9b71d9321bc78fd0b528732a32455335b572b971f5264",
+      "width": 64,
+      "height": 64,
+      "bytes": 2142
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-dawn-laser-impact.png",
+      "sourceSha256": "552774d66f26b27d92aaecf9cc1b7e4103e0cc63d1afc0f98e9366f21c5d0002",
+      "runtime": "src/assets/fx/evolutions/evo-dawn-laser-impact.webp",
+      "runtimeSha256": "195d1913e7a78646adfddc8e88b27510cc9849ea5debf7cf8aa7e08b4d720ce4",
+      "width": 256,
+      "height": 256,
+      "bytes": 23582
+    },
+    {
+      "source": "art-source/fx/evolutions/evo-chick-squadron-impact.png",
+      "sourceSha256": "e2170e683cc64115ad0b6d0f7b0675ee99792c528106d068b81a4e36989d96cb",
+      "runtime": "src/assets/fx/evolutions/evo-chick-squadron-impact.webp",
+      "runtimeSha256": "2cbdc3244732911fb41df9cee96b9f2a2344660f899c3896c71647f91f831e33",
+      "width": 256,
+      "height": 256,
+      "bytes": 31662
+    },
+    {
       "source": "art-source/map/arena-ground.png",
       "sourceSha256": "afed83d1325346311a0c5837f6031e8d7eb4389fd536cb64d17f71642f47ba78",
       "runtime": "src/assets/map/arena-ground.webp",
@@ -554,12 +635,12 @@
     },
     {
       "source": "art-source/ui/ui-icons-v1-sheet.png",
-      "sourceSha256": "bb444cac40b6c936471d9bd518f725268f59ffd9c29f4a1f308a57ee19d39c44",
+      "sourceSha256": "bb3d3431a1799b9e12c95ead15d71a7f529bb633f661f0a95f2c2af2a39ae6bc",
       "runtime": "src/assets/ui/ui-icons-v1-sheet.webp",
-      "runtimeSha256": "a62c7668b796d92d77c763be4f150248dd73c790d19d9fbd6fc24cba1f1a1d01",
+      "runtimeSha256": "7ee83390d22770d073a6f7dd8d43f4685529930a08e9e163b50a0d52e6d49423",
       "width": 768,
-      "height": 896,
-      "bytes": 296666
+      "height": 1024,
+      "bytes": 340310
     }
   ]
 }

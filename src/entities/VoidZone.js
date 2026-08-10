@@ -22,11 +22,16 @@ export class VoidZone {
       .setStrokeStyle(3, 0x9b5cff, 0.78)
       .setDepth(3);
     this.core = scene.add.circle(x, y, this.radius * 0.3, 0x05030d, 0.62).setDepth(4);
-    this.portal = scene.add.sprite(x, y, 'fx-atlas-v1', 12)
-      .setScale((this.radius * 2) / 256)
+    this.portalBaseScale = evolved
+      ? Math.min((this.radius * 1.05) / 256, 0.9)
+      : (this.radius * 2) / 256;
+    this.portal = (evolved
+      ? scene.add.image(x, y, 'evo-singularity-nest-zone')
+      : scene.add.sprite(x, y, 'fx-atlas-v1', 12))
+      .setScale(this.portalBaseScale)
       .setAlpha(0.58)
       .setDepth(4);
-    this.portal.play('fx-void-portal');
+    if (!evolved) this.portal.play('fx-void-portal');
     this.runes = [];
     for (let i = 0; i < 8; i += 1) {
       const angle = (Math.PI * 2 * i) / 8;
@@ -80,7 +85,7 @@ export class VoidZone {
     this.outer.setAlpha(lifeRatio * 0.24);
     this.core.setScale(0.85 + Math.sin(this.age * 0.012) * 0.16);
     this.core.setAlpha(lifeRatio * 0.62);
-    this.portal.setScale(((this.radius * 2) / 256) * (0.9 + Math.sin(this.age * 0.006) * 0.08));
+    this.portal.setScale(this.portalBaseScale * (0.9 + Math.sin(this.age * 0.006) * 0.08));
     this.portal.setAlpha(lifeRatio * 0.58);
     this.portal.rotation -= delta * 0.00035;
     this.runes.forEach((rune, index) => {

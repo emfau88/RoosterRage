@@ -147,6 +147,22 @@ export function installTestApi(scene) {
         count: scene.supportChickens.length
       }
     }),
+    getEvolutionVisualState: () => ({
+      loadedTextures: [
+        'evo-thunder-roost-impact',
+        'evo-shell-halo-projectile',
+        'evo-shell-halo-impact',
+        'evo-singularity-nest-zone',
+        'evo-dawn-laser-emitter',
+        'evo-dawn-laser-impact',
+        'evo-chick-squadron-companion',
+        'evo-chick-squadron-projectile',
+        'evo-chick-squadron-impact'
+      ].filter((key) => scene.textures.exists(key)),
+      orbitTextures: scene.orbitEggs.map((egg) => egg.sprite.texture?.key),
+      supportTextures: scene.supportChickens.map((chick) => chick.sprite.texture?.key),
+      voidZoneTextures: scene.voidZones.map((zone) => zone.portal.texture?.key)
+    }),
     triggerPrimaryAttack: () => {
       scene.lastShotAt = -Infinity;
       scene.combat.autoShoot(scene.time.now);

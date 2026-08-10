@@ -3,7 +3,7 @@
   "frameWidth": 128,
   "frameHeight": 128,
   "columns": 6,
-  "rows": 7,
+  "rows": 8,
   "frames": {
     "heal": 0,
     "double-shot": 1,
@@ -46,6 +46,11 @@
     "evo-tempest-crown": 38,
     "evo-solar-scramble": 39,
     "evo-phoenix-pan": 40,
-    "evo-broodstorm": 41
+    "evo-broodstorm": 41,
+    "evo-thunder-roost": 42,
+    "evo-shell-halo": 43,
+    "evo-singularity-nest": 44,
+    "evo-dawn-laser": 45,
+    "evo-chick-squadron": 46
   }
 }

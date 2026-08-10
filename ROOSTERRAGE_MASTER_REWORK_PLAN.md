@@ -22,12 +22,13 @@ Die verbleibenden Phasen F und H entsprechen voraussichtlich noch **rund 25 % de
 ### Voraussichtlich noch benötigte Assets
 
 - **Weapon/EVO Asset Bulk 1:** ✅ umgesetzt. Sunshot Array, Siegebreaker Shell, Tempest Crown, Solar Scramble, Phoenix Pan und Broodstorm besitzen je ein eigenes EVO-Icon, Kampfobjekt/Projektil und einen kurzen Impact-Effekt. Die Runtime-Größen sind auf 32–42 px für Projektile sowie 58–148 px sichtbaren Effekt-Durchmesser begrenzt. Die statischen Impacts sind als kurze 150–210-ms-Stufe bewusst kompakt; Phoenix/Broodstorm sind die ersten Kandidaten für spätere Frame-Animationen, falls Fremdtests die Bewegung vermissen.
+- **Weapon/EVO Asset Bulk 2:** ✅ umgesetzt. Thunder Roost, Shell Halo, Singularity Nest, Dawn Prism (`evo-dawn-laser`) und Chick Squadron besitzen eigene EVO-Icons und mechanisch passende Kampfassets. Projektile bleiben 36–40 px, Companions 44 px, Treffer-FX 58–72 px/155–175 ms; die Singularity-Zone ist als einziges großes, dauerhaft rotierendes/pulsierendes Asset auf ca. 145–230 px begrenzt. Dawn Prisms drei Strahlen bleiben dynamisch gezeichnet, damit der Angriff lebendig und richtungsgenau bleibt.
 - **Phase E:** ✅ abgeschlossen mit Farmboden, Farmstraße, Scheunen- und Brunnen-Landmark; vorhandene Kisten, Heuballen und Mauern werden modular wiederverwendet.
 - **Phase F:** zerstörbare Welt-Props mit Schadenszustand, klar getrennte Chest-Tiers, Royal-Chest/Reward-Präsentation sowie Magnet-, Heal- und Bomb-Pickup-FX bzw. Icons.
 - **Phase G:** ✅ abgeschlossen mit Körner-Währung, eigenem Körner-Icon sowie drei Rooster-Mastery-Badges; Talentzustände verwenden das bestehende klare Icon-System. Neue Rooster-Sprites waren nicht erforderlich.
 - **Phase H:** zunächst keine fest eingeplanten neuen Gameplay-Assets; nur gezielte VFX-, UI- und Audio-Politur, falls Geräte- und externe Tests konkrete Lesbarkeitslücken zeigen.
 
-Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/WEAPON_EVO_ASSET_BULK_1.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`, `docs/META_REWORK.md`.
+Detailberichte: `docs/REWORK_BASELINE.md`, `docs/WEAPON_PROGRESSION_REWORK.md`, `docs/WEAPON_EVO_ASSET_BULK_1.md`, `docs/WEAPON_EVO_ASSET_BULK_2.md`, `docs/ENCOUNTER_PRESSURE_REWORK.md`, `docs/BOSS_SEQUENCE_REWORK.md`, `docs/MAP_REWORK.md`, `docs/META_REWORK.md`.
 
 ## Auftrag
 

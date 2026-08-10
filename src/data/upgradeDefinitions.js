@@ -645,7 +645,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-shell-halo',
     name: 'Shell Halo',
-    description: 'Vier geladene Orbit-Eier springen nach Kontakt auf ein zweites Ziel.',
+    description: 'Sechs geladene Orbit-Eier springen nach Kontakt auf ein zweites Ziel.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
