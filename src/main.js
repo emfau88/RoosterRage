@@ -7,9 +7,10 @@ import {
 import './styles.css';
 
 const displayMetrics = createDisplayMetrics();
+const rendererType = import.meta.env.DEV ? Phaser.CANVAS : Phaser.AUTO;
 
 const config = {
-  type: Phaser.AUTO,
+  type: rendererType,
   parent: 'game-root',
   backgroundColor: '#172226',
   render: {
