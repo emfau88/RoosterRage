@@ -20,6 +20,8 @@ Alle Sheets sind 1024 x 1024 Pixel gross. Jede der 16 Zellen ist 256 x 256 Pixel
 
 - Ace und Stormcrest besitzen neu gezeichnete, exakt gerade Nord-/Rueckenreihen;
   kein sichtbares Auge, kein Schnabel und keine Drei-Viertel-Drehung mehr.
+- Boombardiers urspruenglich nach links unten blickende Suedreihe wurde durch
+  eine exakt zentrierte Frontreihe mit symmetrischen Augen und Schultern ersetzt.
 - Boombardiers bereits korrekte Nordreihe blieb unveraendert und diente als
   Kamerawinkel-Referenz.
 - Die zusaetzlichen prozeduralen Laufrotationen und Stauchungen wurden entfernt.
@@ -55,7 +57,7 @@ Klassenvariablen:
 
 > Use case: stylized-concept. Asset type: square main-menu character portrait. Image 1 defines the premium Rooster Rage key-art style and class identity. Image 2 defines the final compact ingame character design. Create one polished hero portrait of [CLASS NAME] for a mobile game roster card. Square centered head-and-upper-torso three-quarter portrait, full comb/crest and shoulder silhouette visible, circular-crop safe with generous edge padding. Use a deep charcoal-to-[CLASS COLOR] radial backdrop with a restrained feather/storm/ember motif and soft rim glow. One rooster only; no attacks, projectiles, weapon, enemy, text, logo, watermark, UI, border or cropped comb.
 
-### Korrigierte Nordreihen
+### Korrigierte Richtungsreihen
 
 Fuer Ace und Stormcrest wurde der eingebaute ImageGen-Modus erneut verwendet.
 Der finale Prompt-Satz verlangte je Klasse genau vier getrennte Laufphasen in
@@ -64,6 +66,12 @@ Gesicht oder Seitendrehung, identische Groesse und Bodenlinie sowie die exakte
 Klassenidentitaet des bestehenden Sheets. Ace wurde auf `#00ff00`, Stormcrest
 auf `#ff00ff` erzeugt; beide Reihen wurden mit Soft Matte und Despill freigestellt.
 Es kam weiterhin kein CLI-/API-Fallback zum Einsatz.
+
+Boombardiers Suedkorrektur verwendete denselben Built-in-Workflow: bestehendes
+Boombardier-Sheet als verbindliche Identitaetsreferenz, Ace nur als Referenz fuer
+eine mittige Frontkamera, vier getrennte Laufphasen auf `#00ff00`. Der Prompt
+verlangte einen mittigen Schnabel, gleich sichtbare Augen, symmetrische Schultern
+und verbot ausdruecklich jede Links-/Rechts- oder Drei-Viertel-Drehung.
 
 ## Technische Aufbereitung
 

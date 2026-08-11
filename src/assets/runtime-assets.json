@@ -14,12 +14,12 @@
     },
     {
       "source": "art-source/characters/rooster-artillery-walk.png",
-      "sourceSha256": "36ab51630f38ab1666a220287228baaa30b97ce0df0f6a3cd00b2fef4d763c5a",
+      "sourceSha256": "b77d4a8a4c17a14cfc5d28986e3772c8d0008b58acd8b888d7792826b69d957a",
       "runtime": "src/assets/characters/rooster-artillery-walk.webp",
-      "runtimeSha256": "78c8a7808c44b1eece3d4cc41dd85763ad4adef51f746069e41e011c994a6be5",
+      "runtimeSha256": "2af19f2f18a0969570af8c44fe36a8a732c776d4d528ea19153815ad30d8d965",
       "width": 1024,
       "height": 1024,
-      "bytes": 274150
+      "bytes": 274696
     },
     {
       "source": "art-source/characters/rooster-storm-walk.png",

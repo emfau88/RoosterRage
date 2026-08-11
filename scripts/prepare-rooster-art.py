@@ -40,20 +40,33 @@ def normalize_character(character: Image.Image) -> Image.Image:
     return character
 
 
-def build_normalized_sheet(source: Path, target: Path, north_source: Path | None = None) -> None:
+def load_optional_strip(source: Path | None) -> Image.Image | None:
+    if not source or not source.exists():
+        return None
+    with Image.open(source) as image:
+        return image.convert("RGBA").copy()
+
+
+def build_normalized_sheet(
+    source: Path,
+    target: Path,
+    south_source: Path | None = None,
+    north_source: Path | None = None,
+) -> None:
     with Image.open(source) as image:
         converted = image.convert("RGBA")
-        north_strip = None
-        if north_source and north_source.exists():
-            with Image.open(north_source) as north_image:
-                north_strip = north_image.convert("RGBA").copy()
+        direction_strips = {
+            0: load_optional_strip(south_source),
+            3: load_optional_strip(north_source),
+        }
         sheet = Image.new("RGBA", SHEET_SIZE, (0, 0, 0, 0))
         for index in range(16):
             column = index % 4
             row = index // 4
-            frame_source = north_strip if row == 3 and north_strip is not None else converted
-            source_rows = 1 if frame_source is north_strip else 4
-            source_row = 0 if frame_source is north_strip else row
+            strip = direction_strips.get(row)
+            frame_source = strip if strip is not None else converted
+            source_rows = 1 if strip is not None else 4
+            source_row = 0 if strip is not None else row
             left = round(column * frame_source.width / 4)
             top = round(source_row * frame_source.height / source_rows)
             right = round((column + 1) * frame_source.width / 4)
@@ -122,12 +135,13 @@ def validate_portrait(path: Path) -> None:
 def main() -> None:
     for rooster in ROOSTERS:
         sheet_source = GENERATED_ROOT / f"rooster-{rooster}-walk-alpha.png"
+        south_source = GENERATED_ROOT / f"rooster-{rooster}-south-alpha.png"
         north_source = GENERATED_ROOT / f"rooster-{rooster}-north-alpha.png"
         portrait_source = GENERATED_ROOT / f"rooster-{rooster}-portrait-master.png"
         sheet_target = CHARACTER_ROOT / f"rooster-{rooster}-walk.png"
         portrait_target = CHARACTER_ROOT / f"rooster-{rooster}-portrait.png"
 
-        build_normalized_sheet(sheet_source, sheet_target, north_source)
+        build_normalized_sheet(sheet_source, sheet_target, south_source, north_source)
         resize_rgba(portrait_source, portrait_target, PORTRAIT_SIZE)
         metrics = validate_sheet(sheet_target)
         validate_portrait(portrait_target)
