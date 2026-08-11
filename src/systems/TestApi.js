@@ -134,6 +134,13 @@ export function installTestApi(scene) {
       if (!obstacle) return false;
       return scene.arena.damageObstacle(obstacle, amount, 'test-api');
     },
+    forcePropDrop: (wave = 2) => {
+      scene.waveSystem.currentWave = Number(wave);
+      const obstacle = scene.arena.obstacles.find((item) => item.destructible && item.sprite.active);
+      if (!obstacle) return null;
+      const pickup = scene.pickups.spawnFromProp(obstacle.sprite.x, obstacle.sprite.y, obstacle, { force: true });
+      return pickup?.kind ?? null;
+    },
     getAbilityState: () => ({
       goldenEgg: { rank: scene.goldenEgg.rank, evolved: scene.goldenEgg.evolved },
       molotovEgg: { rank: scene.molotovEgg.rank, evolved: scene.molotovEgg.evolved },
@@ -420,6 +427,7 @@ export function installTestApi(scene) {
       id: enemy.id,
       type: enemy.type,
       role: enemy.role,
+      champion: enemy.champion,
       name: enemy.displayName,
       hp: enemy.hp,
       maxHp: enemy.maxHp,
@@ -580,6 +588,7 @@ export function installTestApi(scene) {
         bomber: () => scene.waveSystem.makeBomber(),
         support: () => scene.waveSystem.makeSupport(),
         summoner: () => scene.waveSystem.makeSummoner(),
+        'champion-charger': () => scene.waveSystem.makeChampionCharger(),
         'elite-runner': () => scene.waveSystem.makeEliteRunner(),
         'elite-brute': () => scene.waveSystem.makeEliteBrute(),
         'elite-spitter': () => scene.waveSystem.makeEliteSpitter(),

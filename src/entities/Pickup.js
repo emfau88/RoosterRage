@@ -1,24 +1,63 @@
-const CHEST_SCALE = 1.22;
+const CHEST_CONFIGS = Object.freeze({
+  'elite-chest': {
+    scale: 1.22,
+    rewardKind: 'elite',
+    tint: null,
+    glow: 0xffd35c,
+    burst: 0xffe588
+  },
+  'golden-chest': {
+    scale: 1.36,
+    rewardKind: 'golden',
+    tint: 0xffdc72,
+    glow: 0xffa92f,
+    burst: 0xfff2a3
+  },
+  'royal-chest': {
+    scale: 1.5,
+    rewardKind: 'boss',
+    tint: 0xd9b7ff,
+    glow: 0xa85cff,
+    burst: 0xf4ddff
+  }
+});
 
 export class Pickup {
   constructor(scene, kind, x, y) {
     this.scene = scene;
     this.kind = kind;
+    this.chest = CHEST_CONFIGS[kind] ?? null;
     this.baseY = y;
     this.spawnedAt = scene.time.now;
     this.opening = false;
     this.destroyed = false;
     this.timers = [];
     this.transientFx = [];
-    this.sprite = scene.physics.add.sprite(x, y, `pickup-${kind}`)
+    const texture = this.chest ? 'pickup-elite-chest' : `pickup-${kind}`;
+    this.sprite = scene.physics.add.sprite(x, y, texture)
       .setDepth(9)
-      .setScale(kind === 'elite-chest' ? CHEST_SCALE : 1);
-    this.sprite.setCircle(kind === 'elite-chest' ? 18 : 14);
+      .setScale(this.chest?.scale ?? 1);
+    if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
+    this.sprite.setCircle(this.chest ? 18 : 14);
     this.sprite.entity = this;
-    this.glow = scene.add.circle(x, y, kind === 'elite-chest' ? 28 : 22, 0xffe588, 0.09)
-      .setStrokeStyle(2, kind === 'elite-chest' ? 0xffd35c : 0xffffff, 0.55)
+    this.glow = scene.add.circle(x, y, this.chest ? 28 + (this.chest.scale - 1.22) * 22 : 22,
+      this.chest?.glow ?? 0xffe588, this.chest ? 0.12 : 0.09)
+      .setStrokeStyle(this.kind === 'royal-chest' ? 4 : 2, this.chest?.glow ?? 0xffffff, 0.62)
       .setDepth(3);
-    if (kind === 'elite-chest') {
+    this.tierMarker = null;
+    if (kind === 'golden-chest' || kind === 'royal-chest') {
+      const royal = kind === 'royal-chest';
+      this.tierMarker = scene.add.star(
+        x,
+        y - (royal ? 40 : 35),
+        royal ? 6 : 4,
+        royal ? 4 : 3,
+        royal ? 10 : 8,
+        royal ? 0xc18aff : 0xffd35c,
+        0.96
+      ).setStrokeStyle(2, royal ? 0xf4ddff : 0xfff2a3, 0.95).setDepth(11);
+    }
+    if (this.chest) {
       this.playChestSpawnFx();
     }
   }
@@ -28,6 +67,12 @@ export class Pickup {
     const bob = Math.sin((time - this.spawnedAt) * 0.005) * 4;
     this.sprite.y = this.baseY + bob;
     this.glow.setPosition(this.sprite.x, this.sprite.y).setScale(1 + Math.sin(time * 0.006) * 0.08);
+    if (this.tierMarker) {
+      this.tierMarker
+        .setPosition(this.sprite.x, this.sprite.y - (this.kind === 'royal-chest' ? 40 : 35))
+        .setRotation(time * (this.kind === 'royal-chest' ? -0.0012 : 0.0015))
+        .setScale(0.94 + Math.sin(time * 0.007) * 0.08);
+    }
   }
 
   schedule(delay, callback) {
@@ -46,7 +91,7 @@ export class Pickup {
   playChestSpawnFx() {
     this.scene.audio?.play('chest-spawn');
     const ring = this.trackFx(this.scene.add.circle(this.sprite.x, this.sprite.y, 27)
-      .setStrokeStyle(3, 0xffd35c, 0.75)
+      .setStrokeStyle(this.kind === 'royal-chest' ? 4 : 3, this.chest.glow, 0.78)
       .setDepth(8)
       .setScale(0.45));
     this.scene.tweens.add({
@@ -70,14 +115,16 @@ export class Pickup {
     if (this.sprite.body) this.sprite.body.enable = false;
     this.scene.tweens.killTweensOf([this.sprite, this.glow]);
     this.glow.setPosition(this.sprite.x, this.sprite.y)
-      .setFillStyle(0xffc940, 0.16)
-      .setStrokeStyle(3, 0xffe588, 0.88);
+      .setFillStyle(this.chest.glow, 0.16)
+      .setStrokeStyle(this.kind === 'royal-chest' ? 4 : 3, this.chest.burst, 0.88);
+
+    const chestScale = this.chest.scale;
 
     this.scene.tweens.add({
       targets: this.sprite,
       y: this.baseY + 3,
-      scaleX: CHEST_SCALE * 1.07,
-      scaleY: CHEST_SCALE * 0.88,
+      scaleX: chestScale * 1.07,
+      scaleY: chestScale * 0.88,
       duration: 105,
       yoyo: true,
       ease: 'Sine.InOut'
@@ -86,11 +133,12 @@ export class Pickup {
     this.schedule(120, () => {
       this.scene.audio?.play('chest-latch', { cooldown: 0 });
       this.sprite.setTexture('pickup-elite-chest-ajar');
+      if (this.chest.tint) this.sprite.setTint(this.chest.tint);
       this.scene.tweens.add({
         targets: this.sprite,
         y: this.baseY - 4,
-        scaleX: CHEST_SCALE * 1.05,
-        scaleY: CHEST_SCALE * 1.08,
+        scaleX: chestScale * 1.05,
+        scaleY: chestScale * 1.08,
         duration: 150,
         ease: 'Back.Out'
       });
@@ -98,6 +146,7 @@ export class Pickup {
 
     this.schedule(285, () => {
       this.sprite.setTexture('pickup-elite-chest-open');
+      if (this.chest.tint) this.sprite.setTint(this.chest.tint);
       this.sprite.y = this.baseY - 6;
       this.playChestRewardBurst();
       this.scene.audio?.play('chest-open', { cooldown: 0 });
@@ -109,8 +158,8 @@ export class Pickup {
       }
       this.scene.tweens.add({
         targets: this.sprite,
-        scaleX: CHEST_SCALE * 1.13,
-        scaleY: CHEST_SCALE * 1.13,
+        scaleX: chestScale * 1.13,
+        scaleY: chestScale * 1.13,
         duration: 115,
         yoyo: true,
         ease: 'Sine.Out'
@@ -128,9 +177,9 @@ export class Pickup {
   playChestRewardBurst() {
     const { scene, sprite } = this;
     const centerY = sprite.y - 4;
-    const halo = this.trackFx(scene.add.circle(sprite.x, centerY, 14, 0xffd35c, 0.32).setDepth(8));
+    const halo = this.trackFx(scene.add.circle(sprite.x, centerY, 14, this.chest.glow, 0.32).setDepth(8));
     const ring = this.trackFx(scene.add.circle(sprite.x, centerY, 25)
-      .setStrokeStyle(3, 0xfff0a3, 0.92)
+      .setStrokeStyle(this.kind === 'royal-chest' ? 4 : 3, this.chest.burst, 0.92)
       .setDepth(10)
       .setScale(0.45));
     scene.tweens.add({
@@ -152,7 +201,7 @@ export class Pickup {
 
     const angles = [-2.65, -2.15, -1.7, -1.25, -0.75, -0.3, 0.25, 0.75];
     angles.forEach((angle, index) => {
-      const spark = this.trackFx(scene.add.circle(sprite.x, centerY, index % 3 === 0 ? 3 : 2, 0xffe588, 0.95)
+      const spark = this.trackFx(scene.add.circle(sprite.x, centerY, index % 3 === 0 ? 3 : 2, this.chest.burst, 0.95)
         .setDepth(11));
       const distance = 34 + (index % 2) * 12;
       scene.tweens.add({
@@ -179,6 +228,7 @@ export class Pickup {
     });
     this.transientFx = [];
     if (this.glow?.active) this.glow.destroy();
+    if (this.tierMarker?.active) this.tierMarker.destroy();
     if (this.sprite?.active) this.sprite.destroy();
   }
 }

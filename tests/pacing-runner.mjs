@@ -116,6 +116,9 @@ async function run() {
     assert(!bossSpawn.state.gameEnded, 'Wave cleared in the same frame as its boss spawn.', bossSpawn);
     await page.waitForTimeout(1400);
     await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 999999), bossSpawn.boss.id);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getPickupState().items
+      .some((pickup) => pickup.kind === 'royal-chest'));
+    await page.evaluate(() => window.__ROOSTER_TEST__.collectPickup('royal-chest'));
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().choosingUpgrade);
     await resolveSelections(page);
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().gameEnded);

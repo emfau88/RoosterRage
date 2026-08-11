@@ -4,9 +4,9 @@
 Repository:
 https://github.com/emfau88/RoosterRage
 
-## Umsetzungsstand – 10.08.2026
+## Umsetzungsstand – 11.08.2026
 
-**Punkte/Phasen 1–4 umgesetzt und technisch abgenommen.** Der vollständige
+**Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der vollständige
 Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
 
 **Veröffentlicht:** Commit `7de459b` auf `master`; GitHub-Pages-Workflow #30
@@ -916,8 +916,14 @@ Unbedingt in dieser Reihenfolge arbeiten:
 Details: `docs/ENEMY_ANIMATION_POLISH.md`.
 
 ## Phase 6 – optional neue Specials/Champions
-**Status: in Arbeit; auf eine kontrollierte Champion-Lage begrenzt.**
-Nur wenn der Kern nach Phase 1–5 wirklich besser ist.
+**Status: abgeschlossen am 11.08.2026; bewusst fokussiert.**
+- [x] Stormclaw Champion als seltener Charger in Wave 6 und 8.
+- [x] 520-ms-Charge-Telegraph, Ankunftsbanner und eigener Goldmarker.
+- [x] garantierte Golden Chest; kein neuer Projektil-/Hazard-Typ.
+
+Der Kern war nach Phase 5 stabil genug. Statt mehrere neue Gegnertypen halb
+auszuarbeiten, ergänzt genau ein kontrollierter Champion die Zielpriorität.
+Details: `docs/REWARD_REWORK.md`.
 
 ## Phase 7 – Balance & Production Gate
 **Status: offen; nach dem Enemy-Art-Pass.**

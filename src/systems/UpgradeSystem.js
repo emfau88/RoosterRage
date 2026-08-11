@@ -82,7 +82,7 @@ export class UpgradeSystem {
       available.filter((upgrade) => SPECTACLE_CATEGORIES.includes(upgrade.category))
     ];
     for (const group of priorityGroups) {
-      if (choices.length >= Math.min(count, kind === 'boss' ? 2 : 1)) {
+      if (choices.length >= Math.min(count, kind === 'boss' || kind === 'golden' ? 2 : 1)) {
         break;
       }
       const picked = this.pickWeighted(group.filter((upgrade) => !choices.includes(upgrade)), player);

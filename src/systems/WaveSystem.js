@@ -63,6 +63,7 @@ export class WaveSystem {
       bomber: () => this.makeBomber(multiplier),
       support: () => this.makeSupport(multiplier),
       summoner: () => this.makeSummoner(multiplier),
+      'champion-charger': () => this.makeChampionCharger(),
       'elite-runner': () => this.makeEliteRunner(),
       'elite-brute': () => this.makeEliteBrute(),
       'elite-spitter': () => this.makeEliteSpitter(),
@@ -107,6 +108,7 @@ export class WaveSystem {
     // or advancing a wave.
     if (this.waitingForClear && this.scene.enemies.length === 0) {
       if (this.currentWave >= this.waves.length) {
+        if (this.scene.pickups?.hasPendingRoyalReward()) return;
         this.completed = true;
         this.active = false;
         this.scene.onWaveCompleted?.(this.currentWave);
@@ -184,6 +186,7 @@ export class WaveSystem {
 
   getXpWeight(enemy) {
     if (enemy.microFodder) return 0.2;
+    if (enemy.champion) return 2.2;
     if (enemy.elite) return 3;
     if (enemy.role === 'tank' || enemy.role === 'area-denial' || enemy.role === 'summoner') return 1.4;
     if (enemy.role === 'runner' || enemy.role === 'shooter' || enemy.role === 'exploder') return 1.15;
@@ -541,6 +544,36 @@ export class WaveSystem {
 
   getEnemyRoleMatrix() {
     return ENEMY_ROLE_MATRIX.map((role) => ({ ...role }));
+  }
+
+  makeChampionCharger() {
+    return {
+      ...this.makeEliteRunner(),
+      type: 'champion-charger',
+      role: 'runner',
+      displayName: 'Stormclaw Champion',
+      elite: false,
+      champion: true,
+      hp: 520,
+      speed: 112,
+      damage: 15,
+      xp: 30,
+      tint: 0xffd475,
+      scale: 0.32,
+      radius: 28,
+      hpBarWidth: 58,
+      hpBarYOffset: 40,
+      aura: null,
+      ability: {
+        kind: 'dash',
+        label: 'Stormclaw Charge',
+        cooldown: 4200,
+        telegraphMs: 520,
+        speed: 455,
+        duration: 460,
+        color: 0xffd35c
+      }
+    };
   }
 
   makeAnimationSet(prefix) {

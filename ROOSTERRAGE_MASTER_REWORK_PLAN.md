@@ -11,20 +11,20 @@ Repository: `https://github.com/emfau88/RoosterRage`
 | C – Enemy Pressure | ✅ umgesetzt | Fernkampfanteil und Projectile-Dichte gesenkt, Bewegungsdruck gestärkt |
 | D – Brood King | ✅ umgesetzt | geordnete Sequenzen, sichere Übergänge, maximal sechs Adds und Build-Matrix |
 | E – Map Topology | ✅ umgesetzt | Open Yard und Vertical Run streamen recycelte Chunks; Coop Square bleibt geschlossen |
-| F – Pickups & Chests | 🟡 teilweise umgesetzt | XP-/Pickup-Pacing, Magnet, Heal und Bomb fertig; Prop-Drops und Chest-Tiers offen |
+| F – Pickups & Chests | ✅ umgesetzt | Schadensstufen/Prop-Drops, drei Chest-Tiers, EVO-Prio und physische Royal Boss Chest |
 | G – Meta Progression | ✅ umgesetzt | Körner, sechs Talentknoten, Rooster-Mastery, First Clears, v1→v2-Migration und Hub-Rework |
 | H – Integration & Validation | ⏸ ausstehend | abschließende Matrix, Geräte- und Fremdtests |
 
 ### Geschätzter verbleibender Aufwand
 
-Die noch offenen Teile von F und H entsprechen voraussichtlich **rund 20 % des ursprünglichen Gesamtaufwands**: **Rest-F etwa 8 %**, **H etwa 12 %**. A–E und G sind abgeschlossen; bei F sind XP-/Pickup-Pacing und die drei Welt-Pickups technisch abgenommen. Weapon Mastery bleibt bewusst optional, bis reale Meta- und Reward-Tests einen Bedarf zeigen.
+Als eigentliche Masterplan-Phase bleibt nur **H mit rund 12 % des ursprünglichen Gesamtaufwands** offen. A–G sind umgesetzt. Weapon Mastery bleibt bewusst optional, bis reale Meta- und Reward-Tests einen Bedarf zeigen.
 
 ### Voraussichtlich noch benötigte Assets
 
 - **Weapon/EVO Asset Bulk 1:** ✅ umgesetzt. Sunshot Array, Siegebreaker Shell, Tempest Crown, Solar Scramble, Phoenix Pan und Broodstorm besitzen je ein eigenes EVO-Icon, Kampfobjekt/Projektil und einen kurzen Impact-Effekt. Die Runtime-Größen sind auf 32–42 px für Projektile sowie 58–148 px sichtbaren Effekt-Durchmesser begrenzt. Die statischen Impacts sind als kurze 150–210-ms-Stufe bewusst kompakt; Phoenix/Broodstorm sind die ersten Kandidaten für spätere Frame-Animationen, falls Fremdtests die Bewegung vermissen.
 - **Weapon/EVO Asset Bulk 2:** ✅ umgesetzt. Thunder Roost, Shell Halo, Singularity Nest, Dawn Prism (`evo-dawn-laser`) und Chick Squadron besitzen eigene EVO-Icons und mechanisch passende Kampfassets. Projektile bleiben 36–40 px, Companions 44 px, Treffer-FX 58–72 px/155–175 ms; die Singularity-Zone ist als einziges großes, dauerhaft rotierendes/pulsierendes Asset auf ca. 145–230 px begrenzt. Dawn Prisms drei Strahlen bleiben dynamisch gezeichnet, damit der Angriff lebendig und richtungsgenau bleibt.
 - **Phase E:** ✅ abgeschlossen mit Farmboden, Farmstraße, Scheunen- und Brunnen-Landmark; vorhandene Kisten, Heuballen und Mauern werden modular wiederverwendet.
-- **Phase F:** 🟡 teilweise umgesetzt. Magnet, Heal und Bomb funktionieren als liegenbleibende Welt-Pickups mit eigenen Sounds; der Magnet sammelt XP korrekt ein. Das Spawn-Pacing ist an sieben Wave-/Encounter-Momente gekoppelt, XP-Orbs bündeln sich verlustfrei bei 72 Desktop-/48 Mobile-Orbs. Offen bleiben zerstörbare World-Props mit Drops, klar getrennte Chest-Tiers, Royal-Chest/Reward-Präsentation und ggf. zusätzliche Pickup-FX/Icons.
+- **Phase F:** ✅ abgeschlossen. Magnet, Heal und Bomb bleiben als Welt-Pickups erhalten; Props besitzen zwei Schadensstufen und maximal drei budgetierte Drops. Elite-, Golden- und Royal-Chest sind über 59/65/72 px, Palette, Aura und animierte Siegel getrennt. Die Royal Chest liegt nach dem Boss physisch in der Arena und öffnet vier EVO-/Rank-priorisierte Choices.
 - **Phase G:** ✅ abgeschlossen mit Körner-Währung, eigenem Körner-Icon sowie drei Rooster-Mastery-Badges; Talentzustände verwenden das bestehende klare Icon-System. Neue Rooster-Sprites waren nicht erforderlich.
 - **Phase H:** zunächst keine fest eingeplanten neuen Gameplay-Assets; nur gezielte VFX-, UI- und Audio-Politur, falls Geräte- und externe Tests konkrete Lesbarkeitslücken zeigen.
 
@@ -1665,38 +1665,32 @@ Nur Baseline.
 
 ## PHASE F – Pickup & Chest Rework
 
-**Status: 🟡 teilweise umgesetzt am 10.08.2026.** Der allgemeine XP-/Pickup-Pass
-ist abgeschlossen und in `RoosterRage_Next_Production_Pass.md` dokumentiert.
-Pickups werden nicht mehr über globale Kill-Meilensteine beschleunigt, sondern
-an sieben strategischen Wave-/Encounter-Zeitpunkten platziert. Magnet, Heal und
-Bomb bleiben als bewusst einsammelbare Weltobjekte erhalten. Offen ist der
-eigentliche Prop-/Chest-Ausbau.
+**Status: ✅ abgeschlossen am 11.08.2026.** XP-/Pickup-Pacing, Prop-Drops und
+Chest-Tiers sind umgesetzt; Details stehen in `docs/REWARD_REWORK.md`.
 
 ### Aufgaben
 
-- [ ] zerstörbare World Props mit Schadenszustand
+- [x] zerstörbare World Props mit zwei Schadenszuständen
 - [x] Run-Budgets für Heal, Bomb und Magnet beibehalten
-- [ ] Drops aus Props
+- [x] budgetierte Drops aus Props (maximal drei pro Run/einer pro Wave)
 - [x] World Magnet als zeitlich begrenztes XP Vacuum
 - [x] Heal/Bomb bleiben sichtbar liegen und können bewusst eingesammelt werden
 - [x] Kill-Meilensteine durch Wave-/Encounter-Pacing ersetzen
 - [x] XP-Orbs verlustfrei bündeln und aktive Anzahl begrenzen
-- [ ] Chest-Tiers
-- [ ] Royal Boss Reward
+- [x] Elite-, Golden- und Royal-Chest als klare Tiers
+- [x] physische Royal Boss Chest mit Vierer-Reward
 
 ### Tests
 
 - [x] kein Pickup außerhalb erreichbarer Welt
 - [x] Magnet sammelt korrekt
 - [x] kein XP-Verlust bei Bündelung oder Mobile-/Desktop-Cap
-- [ ] Chest EVO-Prio für neue Chest-Tiers
+- [x] Chest EVO-/Rank-Prio für alle Tiers
 - [x] Bomb wirkt auf normale Gegner/Projektilräumung wie vorgesehen
 
 ### Output
 
-Teilabschluss: `RoosterRage_Next_Production_Pass.md` (Phase 4).
-
-Finaler Output nach Prop-/Chest-Ausbau: `docs/REWARD_REWORK.md`.
+Output: `docs/REWARD_REWORK.md`.
 
 ---
 

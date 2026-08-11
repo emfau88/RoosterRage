@@ -79,9 +79,11 @@ export class EntitySystem {
       this.scene.time.now,
       this.scene.waveSystem.currentWave
     );
-    if (enemy.elite) {
+    if (enemy.elite || enemy.champion) {
       const subtitle = enemy.boss
         ? 'Drei Phasen. Lies die Faechersalven und den schweren Feuerball.'
+        : enemy.champion
+          ? `Champion - ${enemy.ability?.label ?? 'Spezialangriff'} - Golden Chest`
         : `${enemy.aura?.label ?? 'Elite-Aura'} · ${enemy.ability?.label ?? 'Spezialangriff'}`;
       this.scene.hud?.showEncounterBanner(
         enemy.displayName,
@@ -143,9 +145,6 @@ export class EntitySystem {
       enemy.id,
       source
     );
-    if (enemy.boss) {
-      this.scene.runState.startChestReward('boss');
-    }
     this.scene.pickups.onEnemyKilled(enemy);
     enemy.destroy();
   }

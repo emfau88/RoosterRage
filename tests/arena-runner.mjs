@@ -59,10 +59,22 @@ async function verifyArena(browser, serverUrl, arenaId) {
       .sort((a, b) => b[1] - a[1])[0][0]);
     assert(new Set(preferred).size === 3, 'Arena topologies do not create distinct weapon preferences.', preferred);
 
-    const destructible = await page.evaluate(() => ({
-      destroyed: window.__ROOSTER_TEST__.damageFirstDestructible(),
-      arena: window.__ROOSTER_TEST__.getArenaState()
-    }));
+    const destructible = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      const initial = api.getArenaState().obstacles.find((obstacle) => obstacle.destructible && obstacle.active);
+      api.damageFirstDestructible(initial.maxHp * 0.4);
+      const stageOne = api.getArenaState().obstacles.find((obstacle) => obstacle.destructible && obstacle.active);
+      api.damageFirstDestructible(initial.maxHp * 0.3);
+      const stageTwo = api.getArenaState().obstacles.find((obstacle) => obstacle.destructible && obstacle.active);
+      return {
+        stageOne: stageOne?.damageStage,
+        stageTwo: stageTwo?.damageStage,
+        destroyed: api.damageFirstDestructible(),
+        arena: api.getArenaState()
+      };
+    });
+    assert(destructible.stageOne === 1 && destructible.stageTwo === 2,
+      'Destructible cover did not expose both readable damage states.', destructible);
     assert(destructible.destroyed, 'Destructible cover survived lethal prop damage.', destructible);
     assert(destructible.arena.obstacles.some((obstacle) => obstacle.destructible && !obstacle.active),
       'Destroyed cover remains an active collider.', destructible);
@@ -107,14 +119,28 @@ async function verifyPickups(browser, serverUrl) {
 
       api.spawnPickup('elite-chest');
       const chest = api.collectPickup('elite-chest');
-      await new Promise((resolve) => setTimeout(resolve, 175));
+      await new Promise((resolve) => setTimeout(resolve, 240));
       const chestAjar = api.getPickupState().openingChestStates[0]?.texture;
-      await new Promise((resolve) => setTimeout(resolve, 180));
+      await new Promise((resolve) => setTimeout(resolve, 220));
       const chestOpen = api.getPickupState().openingChestStates[0]?.texture;
       await new Promise((resolve) => setTimeout(resolve, 500));
       const chestSelection = api.getProgressionState();
       const firstChoice = chestSelection.choices?.[0]?.id;
-      if (firstChoice) api.applyUpgradeById(firstChoice);
+      if (firstChoice) api.resumeIfUpgradeOpen();
+
+      api.spawnPickup('golden-chest');
+      const goldenChest = api.collectPickup('golden-chest');
+      await new Promise((resolve) => setTimeout(resolve, 820));
+      const goldenSelection = api.getProgressionState();
+      api.resumeIfUpgradeOpen();
+
+      api.spawnPickup('royal-chest');
+      const royalChest = api.collectPickup('royal-chest');
+      await new Promise((resolve) => setTimeout(resolve, 820));
+      const royalSelection = api.getProgressionState();
+      api.resumeIfUpgradeOpen();
+
+      const propDrop = api.forcePropDrop(4);
 
       api.advancePickupSchedule(5, 0.45);
       api.advancePickupSchedule(6, 0.55);
@@ -132,6 +158,11 @@ async function verifyPickups(browser, serverUrl) {
         chestAjar,
         chestOpen,
         chestSelection,
+        goldenChest,
+        goldenSelection,
+        royalChest,
+        royalSelection,
+        propDrop,
         beforeFirstPickup,
         firstPickup,
         pickupState,
@@ -148,6 +179,15 @@ async function verifyPickups(browser, serverUrl) {
     assert(result.chestAjar === 'pickup-elite-chest-ajar'
       && result.chestOpen === 'pickup-elite-chest-open',
     'Elite chest did not pass through its half-open and open animation states.', result);
+    assert(result.goldenChest && result.goldenSelection.currentSelection?.kind === 'golden'
+      && result.goldenSelection.choices.length === 3
+      && result.goldenSelection.choices.some((choice) => choice.rewardPriority !== 'new'),
+    'Golden champion chest did not prioritize owned/EVO progression.', result.goldenSelection);
+    assert(result.royalChest && result.royalSelection.currentSelection?.kind === 'boss'
+      && result.royalSelection.choices.length === 4,
+    'Royal boss chest did not provide the four-choice boss reward.', result.royalSelection);
+    assert(['heal', 'magnet', 'bomb'].includes(result.propDrop) && result.pickupState.propDrops === 1,
+      'Destructible world prop did not release a budgeted world pickup.', result);
     assert(result.pickupState.spawned.heal === result.pickupState.budgets.heal,
       'Heal pickup exceeded or failed to reach its run budget.', result.pickupState);
     assert(result.pickupState.scheduleIndex === result.pickupState.schedule.length
@@ -172,6 +212,33 @@ async function verifyPickups(browser, serverUrl) {
   }
 }
 
+async function verifyRewardPresentation(browser, serverUrl) {
+  const { page, errors } = await openArena(browser, serverUrl, 'open-yard');
+  try {
+    const state = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.movePlayerTo(65536, 65536);
+      api.spawnEnemyType('champion-charger', 700, 300, { speed: 0, damage: 0, hp: 9999 });
+      api.spawnPickup('elite-chest', 600, 600);
+      api.spawnPickup('golden-chest', 700, 600);
+      api.spawnPickup('royal-chest', 800, 600);
+      return api.getPickupState();
+    });
+    await page.waitForTimeout(180);
+    await page.screenshot({ path: path.join(artifactDir, 'reward-tiers-mobile.png') });
+    const tiers = ['elite-chest', 'golden-chest', 'royal-chest']
+      .map((kind) => state.items.find((item) => item.kind === kind));
+    assert(tiers.every(Boolean)
+      && tiers[0].displayWidth < tiers[1].displayWidth
+      && tiers[1].displayWidth < tiers[2].displayWidth,
+    'Chest tiers are not visibly ordered by importance.', tiers);
+    assert(errors.length === 0, 'Browser errors in reward-presentation gate.', errors);
+    return tiers.map(({ kind, displayWidth, displayHeight }) => ({ kind, displayWidth, displayHeight }));
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
@@ -182,7 +249,8 @@ async function run() {
       arenas.push(await verifyArena(browser, serverState.url, arenaId));
     }
     const pickups = await verifyPickups(browser, serverState.url);
-    const report = { generatedAt: new Date().toISOString(), arenas, pickups };
+    const rewardPresentation = await verifyRewardPresentation(browser, serverState.url);
+    const report = { generatedAt: new Date().toISOString(), arenas, pickups, rewardPresentation };
     await fs.mkdir(artifactDir, { recursive: true });
     await fs.writeFile(path.join(artifactDir, 'arena-report.json'), JSON.stringify(report, null, 2));
     console.log('Rooster arena/pickup gate passed.');

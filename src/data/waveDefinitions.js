@@ -131,7 +131,8 @@ export const WAVE_DEFINITIONS = [
     composition: [
       { count: 36, enemy: { kind: 'slime' } },
       { count: 56, enemy: { kind: 'kornkrabbler' } },
-      { count: 24, enemy: { kind: 'runner' } },
+      { count: 23, enemy: { kind: 'runner' } },
+      { count: 1, enemy: { kind: 'champion-charger' } },
       { count: 6, enemy: { kind: 'fan-spitter' } },
       { count: 9, enemy: { kind: 'brute' } }
     ]
@@ -175,7 +176,8 @@ export const WAVE_DEFINITIONS = [
     composition: [
       { count: 57, enemy: { kind: 'slime' } },
       { count: 84, enemy: { kind: 'kornkrabbler' } },
-      { count: 24, enemy: { kind: 'runner' } },
+      { count: 23, enemy: { kind: 'runner' } },
+      { count: 1, enemy: { kind: 'champion-charger' } },
       { count: 6, enemy: { kind: 'spitter' } },
       { count: 6, enemy: { kind: 'support' } },
       { count: 2, enemy: { kind: 'summoner' } }

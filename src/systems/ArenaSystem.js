@@ -130,6 +130,7 @@ export class ArenaSystem {
       maxHp: config.hp ?? Infinity,
       hp: config.hp ?? Infinity,
       destructible: !config.solid,
+      damageStage: 0,
       sprite
     };
     sprite.entity = obstacle;
@@ -339,7 +340,8 @@ export class ArenaSystem {
     Object.assign(obstacle, config, {
       maxHp: config.hp ?? Infinity,
       hp: config.hp ?? Infinity,
-      destructible: !config.solid
+      destructible: !config.solid,
+      damageStage: 0
     });
     obstacle.sprite.enableBody(true, config.x, config.y, true, true);
     obstacle.sprite.setTexture(texture)
@@ -347,6 +349,7 @@ export class ArenaSystem {
       .setDisplaySize(config.width, config.height)
       .setDepth(config.solid ? 3 : 4)
       .setVisible(config.visible ?? true)
+      .setAlpha(1)
       .clearTint();
     obstacle.sprite.refreshBody();
     obstacle.sprite.entity = obstacle;
@@ -356,6 +359,7 @@ export class ArenaSystem {
     obstacle.destructible = false;
     obstacle.hp = Infinity;
     obstacle.maxHp = Infinity;
+    obstacle.damageStage = 0;
     obstacle.sprite.disableBody(true, true);
   }
 
@@ -430,7 +434,7 @@ export class ArenaSystem {
     obstacle.hp -= Math.max(0, amount);
     obstacle.sprite.setTintFill(0xffffff);
     this.scene.time.delayedCall(60, () => {
-      if (obstacle.sprite.active) obstacle.sprite.clearTint();
+      if (obstacle.sprite.active) this.applyObstacleDamageVisual(obstacle);
     });
     this.scene.telemetry.record('propDamaged', this.scene.time.now, {
       wave: this.scene.waveSystem?.currentWave ?? 0,
@@ -438,17 +442,39 @@ export class ArenaSystem {
       source,
       amount
     });
-    if (obstacle.hp > 0) return false;
+    if (obstacle.hp > 0) {
+      const healthRatio = obstacle.hp / obstacle.maxHp;
+      const nextStage = healthRatio <= 0.34 ? 2 : healthRatio <= 0.67 ? 1 : 0;
+      if (nextStage !== obstacle.damageStage) {
+        obstacle.damageStage = nextStage;
+        this.scene.telemetry.record('propDamageStageChanged', this.scene.time.now, {
+          wave: this.scene.waveSystem?.currentWave ?? 0,
+          id: obstacle.id,
+          stage: nextStage
+        });
+      }
+      return false;
+    }
     const { x, y } = obstacle.sprite;
     obstacle.sprite.disableBody(true, true);
     this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
     this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.72, depth: 9 });
+    this.scene.pickups?.spawnFromProp(x, y, obstacle);
     this.scene.telemetry.record('propDestroyed', this.scene.time.now, {
       wave: this.scene.waveSystem?.currentWave ?? 0,
       id: obstacle.id,
       source
     });
     return true;
+  }
+
+  applyObstacleDamageVisual(obstacle) {
+    obstacle.sprite.clearTint().setAlpha(1);
+    if (obstacle.damageStage === 1) {
+      obstacle.sprite.setTint(0xffc985).setAlpha(0.94);
+    } else if (obstacle.damageStage >= 2) {
+      obstacle.sprite.setTint(0xe66d42).setAlpha(0.86);
+    }
   }
 
   getState() {
@@ -488,7 +514,9 @@ export class ArenaSystem {
         height: obstacle.height,
         kind: obstacle.kind,
         destructible: obstacle.destructible,
+        damageStage: obstacle.damageStage ?? 0,
         hp: Number.isFinite(obstacle.hp) ? Math.max(0, obstacle.hp) : null,
+        maxHp: Number.isFinite(obstacle.maxHp) ? obstacle.maxHp : null,
         active: obstacle.sprite.active
       }))
     };

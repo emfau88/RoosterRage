@@ -379,6 +379,39 @@ async function verifyEncounterMatrix(browser, serverUrl) {
   return rows;
 }
 
+async function verifyChampion(browser, serverUrl) {
+  const { page, errors } = await openGame(browser, serverUrl, 'champion');
+  try {
+    const id = await page.evaluate(() => window.__ROOSTER_TEST__.spawnEnemyType(
+      'champion-charger', 900, 450, { damage: 0, hp: 900 }
+    ));
+    await page.waitForTimeout(760);
+    const combat = await page.evaluate((championId) => ({
+      enemy: window.__ROOSTER_TEST__.getEnemySnapshot().find((enemy) => enemy.id === championId),
+      events: window.__ROOSTER_TEST__.getEncounterEvents(),
+      banner: document.querySelector('.wave-banner')?.textContent ?? ''
+    }), id);
+    assert(combat.enemy?.champion && combat.enemy.type === 'champion-charger',
+      'Stormclaw did not enter the champion layer.', combat);
+    assert(combat.events.some((event) => event.type === 'enemyTelegraphShown'
+      && event.enemyType === 'champion-charger' && event.duration >= 500),
+    'Stormclaw Charge is missing its heavy readable telegraph.', combat.events);
+    assert(combat.banner.includes('Stormclaw Champion'),
+      'Champion arrival is not announced.', combat.banner);
+    const reward = await page.evaluate((championId) => {
+      const api = window.__ROOSTER_TEST__;
+      api.damageEnemyById(championId, 99999);
+      return api.getPickupState();
+    }, id);
+    assert(reward.items.some((item) => item.kind === 'golden-chest'),
+      'Champion did not drop its guaranteed Golden Chest.', reward);
+    assert(errors.length === 0, 'Browser errors in champion gate.', errors);
+    return { type: combat.enemy.type, telegraphMs: 520, reward: 'golden-chest' };
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
@@ -390,12 +423,14 @@ async function run() {
       projectileBudget: await verifyNormalProjectileBudget(browser, serverState.url),
       stateDrivenArt: await verifyStateDrivenEnemyArt(browser, serverState.url),
       elites: [],
+      champion: null,
       protectionAndBoss: null,
       matrix: null
     };
     for (const type of ['elite-runner', 'elite-brute', 'elite-spitter']) {
       report.elites.push(await verifyElite(browser, serverState.url, type));
     }
+    report.champion = await verifyChampion(browser, serverState.url);
     report.protectionAndBoss = await verifyProtectionAndBoss(browser, serverState.url);
     report.matrix = await verifyEncounterMatrix(browser, serverState.url);
     await fs.mkdir(artifactDir, { recursive: true });
@@ -407,6 +442,7 @@ async function run() {
       projectileBudget: report.projectileBudget,
       stateDrivenArt: report.stateDrivenArt,
       elites: report.elites,
+      champion: report.champion,
       boss: report.protectionAndBoss,
       matrixCases: report.matrix.length
     }, null, 2));

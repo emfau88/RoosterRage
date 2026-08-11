@@ -39,9 +39,10 @@ Aktueller Fokus: Phase 20 hat Hauptmenü, vierdirektionalen Kornkrabbler,
 skalierte Horde-Dichte, feste XP-Budgets, verlustfreie Orb-Bündelung,
 Wave-basiertes Pickup-Pacing und den Enemy-Animation-Polish geliefert.
 Support/Summoner besitzen eigene 4-Zustands-Sheets; sechs weitere Spezial-
-und Elitegegner laufen state-driven. Als Nächstes folgen der verbleibende
-Prop-/Chest-Ausbau und eine begrenzte Champion-Lage, anschließend das
-vollständige Multi-Seed-/Geräte-Production-Gate.
+und Elitegegner laufen state-driven. Auch Prop-Schadensstufen/-Drops, drei
+Chest-Tiers, die physische Royal Boss Chest und der seltene Stormclaw Champion
+sind umgesetzt. Als Nächstes folgt das vollständige Multi-Seed-/Geräte-
+Production-Gate.
 
 ## Phase 0: Technische Baseline
 

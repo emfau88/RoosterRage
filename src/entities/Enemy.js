@@ -6,6 +6,7 @@ export class Enemy {
     this.activationId = 0;
     this.warning = null;
     this.auraVisual = null;
+    this.championVisual = null;
     this.knockbackVelocity = new Phaser.Math.Vector2();
     this.sprite = scene.physics.add.sprite(0, 0, 'enemy-slime');
     this.sprite.setActive(false).setVisible(false);
@@ -43,6 +44,7 @@ export class Enemy {
     this.ability = config.ability ?? null;
     this.heavyProjectile = config.heavyProjectile ?? null;
     this.elite = config.elite ?? false;
+    this.champion = config.champion ?? false;
     this.boss = config.boss ?? false;
     this.displayName = config.displayName ?? this.type;
     this.aura = config.aura ? { ...config.aura } : null;
@@ -108,6 +110,13 @@ export class Enemy {
         .setStrokeStyle(3, this.aura.color ?? 0x7cff67, 0.48)
         .setDepth(3);
     }
+    this.championVisual?.destroy();
+    this.championVisual = null;
+    if (this.champion) {
+      this.championVisual = scene.add.star(x, y - this.hpBarYOffset - 12, 4, 4, 9, 0xffd35c, 0.95)
+        .setStrokeStyle(2, 0xfff4b0, 0.95)
+        .setDepth(9);
+    }
 
     this.hpBarBack.setPosition(x - this.hpBarWidth / 2, y - this.hpBarYOffset)
       .setSize(this.hpBarWidth, 4)
@@ -151,6 +160,12 @@ export class Enemy {
       this.auraVisual
         .setAlpha((resolving ? 0.27 : 0.16) + Math.sin(this.scene.time.now * 0.005) * 0.05)
         .setScale(resolving ? 1.08 : 1);
+    }
+    if (this.championVisual) {
+      this.championVisual
+        .setPosition(this.sprite.x, this.sprite.y - this.hpBarYOffset - 12)
+        .setRotation(this.scene.time.now * 0.0017)
+        .setScale(0.92 + Math.sin(this.scene.time.now * 0.007) * 0.1);
     }
     this.hpBarBack.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
@@ -263,6 +278,8 @@ export class Enemy {
     this.warning = null;
     this.auraVisual?.destroy();
     this.auraVisual = null;
+    this.championVisual?.destroy();
+    this.championVisual = null;
     this.scene.objectPools.release(this);
   }
 
@@ -274,11 +291,13 @@ export class Enemy {
     this.hpBarBack.setActive(false).setVisible(false);
     this.hpBarFill.setActive(false).setVisible(false);
     this.auraVisual?.setActive(false).setVisible(false);
+    this.championVisual?.setActive(false).setVisible(false);
   }
 
   dispose() {
     this.warning?.destroy();
     this.auraVisual?.destroy();
+    this.championVisual?.destroy();
     this.hpBarBack.destroy();
     this.hpBarFill.destroy();
     this.sprite.destroy();

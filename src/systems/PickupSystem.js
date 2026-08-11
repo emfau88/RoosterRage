@@ -2,6 +2,12 @@ import Phaser from 'phaser';
 import { Pickup } from '../entities/Pickup.js';
 
 const PICKUP_BUDGETS = Object.freeze({ heal: 3, bomb: 2, magnet: 2 });
+const CHEST_KINDS = Object.freeze(['elite-chest', 'golden-chest', 'royal-chest']);
+const CHEST_REWARDS = Object.freeze({
+  'elite-chest': 'elite',
+  'golden-chest': 'golden',
+  'royal-chest': 'boss'
+});
 const PICKUP_SCHEDULE = Object.freeze([
   { wave: 1, progress: 0.6, kind: 'heal' },
   { wave: 2, progress: 0.55, kind: 'magnet' },
@@ -18,9 +24,11 @@ export class PickupSystem {
     this.group = scene.physics.add.group();
     this.items = [];
     this.openingChests = new Set();
-    this.spawned = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0 };
-    this.collected = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0 };
+    this.spawned = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0, 'golden-chest': 0, 'royal-chest': 0 };
+    this.collected = { heal: 0, bomb: 0, magnet: 0, 'elite-chest': 0, 'golden-chest': 0, 'royal-chest': 0 };
     this.scheduleIndex = 0;
+    this.propDrops = 0;
+    this.propDropWaves = new Set();
     this.magnetUntil = 0;
   }
 
@@ -29,7 +37,11 @@ export class PickupSystem {
   }
 
   onEnemyKilled(enemy) {
-    if (enemy.elite && !enemy.boss) {
+    if (enemy.boss) {
+      this.spawn('royal-chest', enemy.sprite.x, enemy.sprite.y, { guaranteed: true });
+    } else if (enemy.champion) {
+      this.spawn('golden-chest', enemy.sprite.x, enemy.sprite.y, { guaranteed: true });
+    } else if (enemy.elite) {
       this.spawn('elite-chest', enemy.sprite.x, enemy.sprite.y, { guaranteed: true });
     }
     const wave = this.scene.waveSystem?.currentWave ?? 0;
@@ -51,7 +63,29 @@ export class PickupSystem {
   }
 
   canSpawn(kind) {
-    return kind === 'elite-chest' || this.spawned[kind] < (PICKUP_BUDGETS[kind] ?? 0);
+    return CHEST_KINDS.includes(kind) || this.spawned[kind] < (PICKUP_BUDGETS[kind] ?? 0);
+  }
+
+  spawnFromProp(x, y, obstacle = null, options = {}) {
+    const wave = this.scene.waveSystem?.currentWave ?? 0;
+    if (wave < 2 || this.propDrops >= 3 || this.propDropWaves.has(wave)) return null;
+    const roll = this.scene.rng.next(`prop-drop-${obstacle?.id ?? 'world'}`);
+    if (!options.force && roll > 0.42) return null;
+    const candidates = ['heal', 'magnet', 'bomb']
+      .filter((kind) => this.canSpawn(kind))
+      .sort((a, b) => (this.spawned[a] / PICKUP_BUDGETS[a]) - (this.spawned[b] / PICKUP_BUDGETS[b]));
+    const kind = candidates[0];
+    if (!kind) return null;
+    const pickup = this.spawn(kind, x, y, { fromProp: true });
+    if (!pickup) return null;
+    this.propDrops += 1;
+    this.propDropWaves.add(wave);
+    this.scene.telemetry.record('propDropSpawned', this.scene.time.now, {
+      wave,
+      propId: obstacle?.id ?? null,
+      kind
+    });
+    return pickup;
   }
 
   spawn(kind, x, y, options = {}) {
@@ -102,12 +136,12 @@ export class PickupSystem {
     });
     this.items = this.items.filter((item) => item !== pickup);
     this.group.remove(pickup.sprite, false, false);
-    if (kind === 'elite-chest') {
+    if (CHEST_KINDS.includes(kind)) {
       scene.physics.pause();
       this.openingChests.add(pickup);
       pickup.playChestOpening(() => {
         this.openingChests.delete(pickup);
-        scene.runState.startChestReward('elite');
+        scene.runState.startChestReward(CHEST_REWARDS[kind]);
         pickup.destroy();
       });
     } else {
@@ -168,6 +202,7 @@ export class PickupSystem {
       collected: { ...this.collected },
       magnetActive: this.isMagnetActive(),
       magnetRemainingMs: Math.max(0, this.magnetUntil - this.scene.time.now),
+      propDrops: this.propDrops,
       openingChests: this.openingChests.size,
       openingChestStates: [...this.openingChests].map((pickup) => ({
         texture: pickup.sprite.texture.key,
@@ -194,5 +229,12 @@ export class PickupSystem {
     this.openingChests.forEach((pickup) => pickup.destroy());
     this.items = [];
     this.openingChests.clear();
+  }
+
+  hasPendingRoyalReward() {
+    return this.items.some((pickup) => pickup.kind === 'royal-chest')
+      || [...this.openingChests].some((pickup) => pickup.kind === 'royal-chest')
+      || this.scene.runState?.currentSelection?.kind === 'boss'
+      || this.scene.runState?.rewardQueue?.includes('boss');
   }
 }

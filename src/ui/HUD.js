@@ -178,7 +178,8 @@ export class HUD {
   showUpgradeChoices(choices, context = {}) {
     const chest = context.type === 'chest';
     const title = chest
-      ? context.kind === 'boss' ? 'Boss Chest' : 'Elite Chest'
+      ? context.kind === 'boss' ? 'Royal Boss Chest'
+        : context.kind === 'golden' ? 'Golden Champion Chest' : 'Elite Chest'
       : 'Level Up';
     const subtitle = chest
       ? 'Waehle eine garantierte Build-Belohnung.'

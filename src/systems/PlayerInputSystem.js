@@ -364,7 +364,7 @@ export class PlayerInputSystem {
   findPriorityPickup(playerPosition) {
     const candidates = (this.scene.pickups?.items ?? []).filter((pickup) => {
       if (!pickup.sprite.active) return false;
-      if (pickup.kind === 'elite-chest') return true;
+      if (['elite-chest', 'golden-chest', 'royal-chest'].includes(pickup.kind)) return true;
       if (pickup.kind === 'heal') return this.scene.player.hp / this.scene.player.maxHp < 0.72;
       if (pickup.kind === 'bomb') return this.scene.enemies.length >= 10;
       if (pickup.kind === 'magnet') return this.scene.xpOrbs.length >= 4;
