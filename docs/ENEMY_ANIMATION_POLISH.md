@@ -37,12 +37,24 @@ Zeilenreihenfolge beider Sheets: links, rechts, oben/rückwärts, unten/vorwärt
 Quellen liegen unter `art-source/enemies/generated/`, die freigestellten Sheets
 unter `art-source/enemies/animations/`.
 
+## Jitter-Schutz
+
+- `scripts/normalize_directional_enemy_sheets.py` richtet alle Frames je
+  Bewegungsrichtung auf eine gemeinsame Skalierung, horizontale Mitte und
+  Bodenlinie aus.
+- Abnahme der Runtime-WebPs: maximal 0,5 px horizontale Mittelpunktabweichung,
+  0 px Abweichung an der Bodenlinie und keine berührte Zellkante.
+- Dadurch bleiben absichtliche Schritt- und Flügelbewegungen erhalten, ohne
+  dass die gesamte Figur beim Animieren springt oder ihre Größe wechselt.
+
 ## Abnahme
 
 - `npm run assets:check`
 - `npm run build`
 - `npm run test:encounter`
 - automatische Prüfung aller vier Bewegungsrichtungen für beide Figuren
+- quantitative Prüfung von Mittelpunkt, Bodenlinie und Zellgrenzen aller
+  32 Runtime-Frames
 - Laufzeit-Screenshot in mobiler Portrait-Auflösung
 
 Die zuerst erzeugten detaillierten Illustrationsfiguren wurden verworfen und

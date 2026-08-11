@@ -482,21 +482,21 @@
     },
     {
       "source": "art-source/enemies/animations/enemy-support-run.png",
-      "sourceSha256": "93b890f89905ba93910b8650cfeae3b9c5d742aa6e78f0656fc7222559cc4fb0",
+      "sourceSha256": "865bd5710849a6350229dbacf6fe7cd5e9b168f55b9b3b099be4d994cfd44c34",
       "runtime": "src/assets/enemies/animations/enemy-support-run.webp",
-      "runtimeSha256": "c6e8bbcd9b11c726205bc5ea510084fe6872b00423f69a8b3be0aa7e25a972df",
+      "runtimeSha256": "fd6bfe94ee65d6b87bbe522948cbea5e55e906b10a5d6f4601afa41f2c0d2f60",
       "width": 1024,
       "height": 1024,
-      "bytes": 110912
+      "bytes": 154588
     },
     {
       "source": "art-source/enemies/animations/enemy-summoner-run.png",
-      "sourceSha256": "f1812fc131e2710131fab6a0597e886811baab84b2c0477fb4b673fb01ad622c",
+      "sourceSha256": "4cc1a6cd5aed383650cfb86d7c3c63666bcbee62ce5b5c44a07c42986191ee45",
       "runtime": "src/assets/enemies/animations/enemy-summoner-run.webp",
-      "runtimeSha256": "445f7dc06c890fc1d7eb673129f33893e3e6f4050aca08f8e29a5b5e6ad366c0",
+      "runtimeSha256": "3846fe1725ef60441571108057971c1e2b98387baebcffcd6490bb13a2ea28d5",
       "width": 1024,
       "height": 1024,
-      "bytes": 116074
+      "bytes": 153886
     },
     {
       "source": "art-source/enemies/animations/enemy-elite-runner-walk.png",
