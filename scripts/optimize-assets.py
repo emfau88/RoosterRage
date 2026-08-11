@@ -69,12 +69,16 @@ RUNTIME_IMAGES = (
     "enemies/animations/enemy-boss-run.png",
     "enemies/animations/enemy-brute-stomp.png",
     "enemies/animations/enemy-spitter-pulse.png",
+    "enemies/animations/enemy-spitter-run.png",
     "enemies/animations/enemy-fan-spitter-recoil.png",
+    "enemies/animations/enemy-fan-spitter-run.png",
     "enemies/animations/enemy-bomber-bob.png",
+    "enemies/animations/enemy-bomber-run.png",
     "enemies/animations/enemy-support-run.png",
     "enemies/animations/enemy-summoner-run.png",
     "enemies/animations/enemy-elite-brute-stomp.png",
     "enemies/animations/enemy-elite-spitter-pulse.png",
+    "enemies/animations/enemy-elite-spitter-run.png",
     "fx/fx-atlas-v1-sheet.png",
     "fx/evolutions/evo-sunshot-array-impact.png",
     "fx/evolutions/evo-siegebreaker-shell-impact.png",
@@ -130,6 +134,10 @@ RUNTIME_SHEET_SIZES = {
     "enemies/animations/enemy-boss-run.png": (1024, 1024),
     "enemies/animations/enemy-support-run.png": (1024, 1024),
     "enemies/animations/enemy-summoner-run.png": (1024, 1024),
+    "enemies/animations/enemy-spitter-run.png": (1024, 1024),
+    "enemies/animations/enemy-fan-spitter-run.png": (1024, 1024),
+    "enemies/animations/enemy-bomber-run.png": (1024, 1024),
+    "enemies/animations/enemy-elite-spitter-run.png": (1024, 1024),
 }
 
 BULK_1_ICONS = (

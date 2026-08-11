@@ -47,8 +47,9 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   gekoppelt; Elite-Truhen und Pickup-Budgets bleiben unverändert.
 - **Phase 5 – Enemy Animation Polish: erledigt.** Kornkrabbler, Runner, Brute,
   Brood Tender, Nest Caller, Gilded Talon/Stormclaw und Brood King besitzen echte
-  4-Richtungs-Locomotion. Der Slime bleibt bewusst beim richtungsneutralen
-  Wobble. Zustandsgebundene Angriffs-Sheets der Spezialgegner bleiben getrennt.
+  4-Richtungs-Locomotion. Der Combat-Bulk ergänzt Spitter, Fan-Spitter, Bomber
+  und Elite-Spitter. Der Slime bleibt bewusst beim richtungsneutralen Wobble;
+  zustandsgebundene Angriffs-Sheets der Spezialgegner bleiben getrennt.
 - **Messwerte:** 75, 110 und 150 aktive Kornkrabbler jeweils 16,7 ms p95 im
   automatisierten Desktop-Lastgate, keine Enemy-Pool-Drops. Das bestehende
   390×844-Pressure-Gate für Wave 7 besteht mit allen drei Hähnen; Peak der
@@ -920,9 +921,14 @@ Unbedingt in dieser Reihenfolge arbeiten:
 - [x] Mobile Laufzeitgröße, Collider und Asset-Budget technisch abgenommen.
 - [x] Movement-Bulk ergänzt: Runner, Brute, Gilded Talon/Stormclaw Champion und
   Brood King besitzen je vier echte Laufphasen für links, rechts, oben und unten.
+- [x] Combat-Bulk ergänzt: Spitter, Fan-Spitter, Bomber und Elite-Spitter
+  besitzen eigene 4×4-Walksheets; die vorhandenen Angriffsposen übernehmen
+  weiterhin ausschließlich während Windup, Resolve und Recovery.
+- [x] Elite-Spitter-Rückenreihe korrigiert: dritte Zeile ohne Gesicht und
+  vorderes Mittelrohr, vierte Zeile als Front mit allen drei Rohren.
 - [x] Slime bewusst unverändert: seine runde Silhouette und der Wobble sind
   richtungsneutral bereits lesbar.
-- [x] Alle 64 neuen Runtime-Frames auf Mittelpunkt, Bodenlinie, Zellgrenzen und
+- [x] Alle 128 neuen Runtime-Frames auf Mittelpunkt, Bodenlinie, Zellgrenzen und
   sichtbare Vorder-/Rückansicht geprüft; maximal 0,5 px Mittelpunktabweichung.
 
 Details: `docs/ENEMY_ANIMATION_POLISH.md`.

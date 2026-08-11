@@ -55,7 +55,11 @@ export function createGameAnimations(scene) {
     ['enemy-brute-run', 7],
     ['enemy-boss-run', 5],
     ['enemy-support-run', 9],
-    ['enemy-summoner-run', 9]
+    ['enemy-summoner-run', 9],
+    ['enemy-spitter-run', 7],
+    ['enemy-fan-spitter-run', 7],
+    ['enemy-bomber-run', 10],
+    ['enemy-elite-spitter-run', 7]
   ].forEach(([texture, frameRate]) => {
     [
       ['left', 0],

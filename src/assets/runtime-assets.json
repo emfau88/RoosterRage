@@ -490,6 +490,15 @@
       "bytes": 69606
     },
     {
+      "source": "art-source/enemies/animations/enemy-spitter-run.png",
+      "sourceSha256": "622f751d4d15d19059716652403dbe4d9e0cac469c1223de4aec6341fec24938",
+      "runtime": "src/assets/enemies/animations/enemy-spitter-run.webp",
+      "runtimeSha256": "04117b75818ee16e23459cd599060e73de3c4e408e1c0a01a71c7a7f91e3eab7",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 256170
+    },
+    {
       "source": "art-source/enemies/animations/enemy-fan-spitter-recoil.png",
       "sourceSha256": "ebef8775ddfee1e9d450ef8760acbd82bc37dff11fb3b3bd9eff1726df9e9944",
       "runtime": "src/assets/enemies/animations/enemy-fan-spitter-recoil.webp",
@@ -499,6 +508,15 @@
       "bytes": 42814
     },
     {
+      "source": "art-source/enemies/animations/enemy-fan-spitter-run.png",
+      "sourceSha256": "d600ff257a55016832ce2481db7ad9375bad56da3f68a4ba950813814556f361",
+      "runtime": "src/assets/enemies/animations/enemy-fan-spitter-run.webp",
+      "runtimeSha256": "27d39ede4af47c4243d66d470bb4cc7d8b01352875ee552d25aeea317dc61f0a",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 221410
+    },
+    {
       "source": "art-source/enemies/animations/enemy-bomber-bob.png",
       "sourceSha256": "72e3ceffdd2965edf81710397d4dd0fc8d2c4011efb0692447a71290985ca899",
       "runtime": "src/assets/enemies/animations/enemy-bomber-bob.webp",
@@ -506,6 +524,15 @@
       "width": 768,
       "height": 256,
       "bytes": 38766
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-bomber-run.png",
+      "sourceSha256": "b2aeb7dc9df0504c640dbbefbf79848d0aee14c7d846a365ce849b488a8a0aa1",
+      "runtime": "src/assets/enemies/animations/enemy-bomber-run.webp",
+      "runtimeSha256": "2a184debd3d78a799347343117dd34d05e28b2c33db511cc91e3f61677b7b7b8",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 221558
     },
     {
       "source": "art-source/enemies/animations/enemy-support-run.png",
@@ -542,6 +569,15 @@
       "width": 768,
       "height": 256,
       "bytes": 48572
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-elite-spitter-run.png",
+      "sourceSha256": "4e37848cb223fa88eed5caa304ca314e79865a2d516c5838d7febf339214fca5",
+      "runtime": "src/assets/enemies/animations/enemy-elite-spitter-run.webp",
+      "runtimeSha256": "ad968a391c4274a5039336e7ce6dbc853e1061ffcf9cbf349fc6bea465888c04",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 269246
     },
     {
       "source": "art-source/fx/fx-atlas-v1-sheet.png",

@@ -307,15 +307,15 @@ export class WaveSystem {
   }
 
   makeSpitter(multiplier = 1) {
-    return { ...this.makeSlime(0.9 * multiplier), type: 'spitter', role: 'shooter', hp: Math.round(68 * multiplier), speed: 56, damage: 7, xp: 9, texture: 'enemy-spitter-pulse', animation: null, animationSet: this.makeAnimationSet('enemy-spitter'), scale: 0.25, radius: 26, bodyOffsetX: 101, bodyOffsetY: 102, ability: { kind: 'shoot', cooldown: 2350, speed: 230, damage: 7, source: 'spitter-shot', texture: 'enemy-shot', radius: 8, color: 0x7cff67, trailColor: 0x4dea7e, scale: 1.18 } };
+    return { ...this.makeSlime(0.9 * multiplier), type: 'spitter', role: 'shooter', hp: Math.round(68 * multiplier), speed: 56, damage: 7, xp: 9, texture: 'enemy-spitter-run', animation: 'enemy-spitter-run-left', directionalAnimationPrefix: 'enemy-spitter-run', animationSet: this.makeAnimationSet('enemy-spitter'), scale: 0.25, radius: 26, bodyOffsetX: 101, bodyOffsetY: 102, ability: { kind: 'shoot', cooldown: 2350, speed: 230, damage: 7, source: 'spitter-shot', texture: 'enemy-shot', radius: 8, color: 0x7cff67, trailColor: 0x4dea7e, scale: 1.18 } };
   }
 
   makeFanSpitter(multiplier = 1) {
-    return { ...this.makeSlime(1.05 * multiplier), type: 'fan-spitter', role: 'area-denial', hp: Math.round(80 * multiplier), speed: 50, damage: 8, xp: 12, texture: 'enemy-fan-spitter-recoil', animation: null, animationSet: this.makeAnimationSet('enemy-fan-spitter'), scale: 0.29, radius: 31, bodyOffsetX: 97, bodyOffsetY: 100, hpBarWidth: 48, hpBarYOffset: 36, ability: { kind: 'fan', cooldown: 3300, speed: 210, damage: 5, source: 'fan-spitter-shot', texture: 'enemy-blue-shot', radius: 10, count: 3, spread: 0.75, color: 0xffffff, trailColor: 0x51a8ff, scale: 1.18, muzzleDistance: 36 } };
+    return { ...this.makeSlime(1.05 * multiplier), type: 'fan-spitter', role: 'area-denial', hp: Math.round(80 * multiplier), speed: 50, damage: 8, xp: 12, texture: 'enemy-fan-spitter-run', animation: 'enemy-fan-spitter-run-left', directionalAnimationPrefix: 'enemy-fan-spitter-run', animationSet: this.makeAnimationSet('enemy-fan-spitter'), scale: 0.29, radius: 31, bodyOffsetX: 97, bodyOffsetY: 100, hpBarWidth: 48, hpBarYOffset: 36, ability: { kind: 'fan', cooldown: 3300, speed: 210, damage: 5, source: 'fan-spitter-shot', texture: 'enemy-blue-shot', radius: 10, count: 3, spread: 0.75, color: 0xffffff, trailColor: 0x51a8ff, scale: 1.18, muzzleDistance: 36 } };
   }
 
   makeBomber(multiplier = 1) {
-    return { ...this.makeRunner(0.95 * multiplier), type: 'bomber', role: 'exploder', hp: Math.round(72 * multiplier), speed: 94, damage: 10, xp: 10, texture: 'enemy-bomber-bob', animation: null, animationSet: this.makeAnimationSet('enemy-bomber'), directionalAnimationPrefix: null, scale: 0.28, radius: 29, bodyOffsetX: 99, bodyOffsetY: 100, hpBarWidth: 46, hpBarYOffset: 36, explodeOnDeath: true, explosionRadius: 86, explosionDamage: 18 };
+    return { ...this.makeRunner(0.95 * multiplier), type: 'bomber', role: 'exploder', hp: Math.round(72 * multiplier), speed: 94, damage: 10, xp: 10, texture: 'enemy-bomber-run', animation: 'enemy-bomber-run-left', animationSet: this.makeAnimationSet('enemy-bomber'), directionalAnimationPrefix: 'enemy-bomber-run', scale: 0.28, radius: 29, bodyOffsetX: 99, bodyOffsetY: 100, hpBarWidth: 46, hpBarYOffset: 36, explodeOnDeath: true, explosionRadius: 86, explosionDamage: 18 };
   }
 
   makeSupport(multiplier = 1) {
@@ -441,9 +441,10 @@ export class WaveSystem {
       eliteTint: false,
       speed: 48,
       xp: 40,
-      texture: 'enemy-elite-spitter-pulse',
-      animation: null,
+      texture: 'enemy-elite-spitter-run',
+      animation: 'enemy-elite-spitter-run-left',
       animationSet: this.makeAnimationSet('enemy-elite-spitter'),
+      directionalAnimationPrefix: 'enemy-elite-spitter-run',
       scale: 0.34,
       radius: 36,
       bodyOffsetX: 92,

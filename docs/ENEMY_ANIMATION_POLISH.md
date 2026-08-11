@@ -16,8 +16,11 @@ Status: korrigiert und abgeschlossen am 11.08.2026.
   verbindlich an Kornkrabbler, Runner, Slime und Spitter.
 - Das alte Brute-Aktionssheet bleibt getrennt erhalten. Im Bewegungszustand
   läuft der Brute richtungsabhängig; zustandsgebundene Spezialanimationen können
-  den Walk gezielt unterbrechen. Spitter, Fan-Spitter, Bomber, Elite-Brute und
-  Elite-Spitter verwenden weiterhin mechanisch gekoppelte Zustände.
+  den Walk gezielt unterbrechen.
+- Der Combat-Bulk ergänzt eigenständige 4×4-Walksheets für Spitter,
+  Fan-Spitter, Bomber und Elite-Spitter. Die vorhandenen Pulse-, Recoil-,
+  Armed- und Explosionsgrafiken bleiben getrennt erhalten und übernehmen nur
+  während Windup, Resolve und Recovery.
 - Support/Summoner zeigen ihre Fähigkeiten über vorhandene Aura- und Telegraph-
   Effekte; ihre Bewegungsrichtung wird nicht mehr von einer Ability-Pose
   überschrieben.
@@ -43,8 +46,14 @@ im Chroma-Key-Modus erzeugt und lokal freigestellt.
 - Movement-Bulk: Identität, Palette und Silhouette der vorhandenen 3-Frame-
   Sheets von Runner, Gilded Talon, Brute und Brood King wurden verbindlich als
   Referenz verwendet; es wurden keine neuen Gegnerdesigns eingeführt.
+- Combat-Bulk: Dieselbe Referenzmethode wurde auf Spitter, Fan-Spitter, Bomber
+  und Elite-Spitter angewendet. Beim Elite-Spitter wurde die zunächst
+  missverständliche dritte Zeile vollständig durch eine echte Rückenreihe ohne
+  Gesicht und vorderes Mittelrohr ersetzt; die vierte Zeile ist die Frontansicht
+  mit allen drei Rohren.
 
-Zeilenreihenfolge beider Sheets: links, rechts, oben/rückwärts, unten/vorwärts.
+Zeilenreihenfolge aller Richtungssheets: links, rechts, oben/rückwärts,
+unten/vorwärts.
 Quellen liegen unter `art-source/enemies/generated/`, die freigestellten Sheets
 unter `art-source/enemies/animations/`.
 
@@ -67,9 +76,12 @@ unter `art-source/enemies/animations/`.
 - `npm run build`
 - `npm run test:encounter`
 - automatische Prüfung aller vier Bewegungsrichtungen für Runner, Brute,
-  Support, Summoner, Elite Runner, Champion und Boss
+  Support, Summoner, Spitter, Fan-Spitter, Bomber, Elite Runner,
+  Elite-Spitter, Champion und Boss
+- automatische Prüfung, dass die originalen Angriffsanimationen von Spitter,
+  Fan-Spitter und Elite-Spitter im Windup die Walksheets übernehmen
 - quantitative Prüfung von Mittelpunkt, Bodenlinie und Zellgrenzen aller
-  64 neuen Movement-Bulk-Frames
+  128 neuen Movement- und Combat-Bulk-Frames
 - `npm run test:smoke`
 - `npm run test:mechanics`
 - Laufzeit-Screenshot in mobiler Portrait-Auflösung
