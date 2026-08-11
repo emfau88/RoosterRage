@@ -385,8 +385,8 @@ export class GameScene extends Phaser.Scene {
     this.activeAbilities.createRocketExplosion(x, y, damage, radius, evolved, rank);
   }
 
-  createMolotovImpact(x, y) {
-    this.activeAbilities.createMolotovImpact(x, y);
+  createMolotovImpact(x, y, rank, evolved) {
+    this.activeAbilities.createMolotovImpact(x, y, rank, evolved);
   }
 
   setOrbitEggRank(rank) {

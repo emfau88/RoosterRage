@@ -159,6 +159,42 @@ export function installTestApi(scene) {
         count: scene.supportChickens.length
       }
     }),
+    getAreaEffectState: () => ({
+      molotovProjectiles: scene.molotovProjectiles.filter((projectile) => projectile.active).length,
+      molotovTargets: scene.molotovProjectiles.filter((projectile) => projectile.active).map((projectile) => ({
+        x: projectile.target.x,
+        y: projectile.target.y
+      })),
+      hazards: scene.hazardZones.filter((zone) => zone.active).map((zone) => ({
+        rank: zone.rank,
+        evolved: zone.evolved,
+        radius: zone.radius,
+        damage: zone.damage,
+        life: zone.life,
+        maxLife: zone.maxLife,
+        extinguishing: zone.extinguishing,
+        texture: zone.fireSprite.texture?.key,
+        animation: zone.fireSprite.anims.currentAnim?.key ?? null
+      })),
+      voids: scene.voidZones.filter((zone) => zone.active).map((zone) => ({
+        rank: zone.rank,
+        evolved: zone.evolved,
+        life: zone.life,
+        maxLife: zone.maxLife,
+        collapsing: zone.collapsing,
+        alpha: zone.portal.alpha,
+        frame: Number(zone.portal.frame?.name ?? -1)
+      })),
+      laserVisuals: scene.laserComb.activeVisuals.size,
+      burningEnemies: scene.enemies.filter((enemy) => enemy.sprite.active && enemy.burnUntil > scene.time.now)
+        .map((enemy) => ({
+          id: enemy.id,
+          remainingMs: enemy.burnUntil - scene.time.now,
+          damage: enemy.burnDamage,
+          overlay: enemy.burnOverlay?.texture?.key ?? null,
+          animation: enemy.burnOverlay?.anims.currentAnim?.key ?? null
+        }))
+    }),
     getEvolutionVisualState: () => ({
       loadedTextures: [
         'evo-thunder-roost-impact',
@@ -439,6 +475,8 @@ export function installTestApi(scene) {
       xpValue: enemy.xpValue,
       x: enemy.sprite.x,
       y: enemy.sprite.y,
+      velocityX: enemy.sprite.body?.velocity.x ?? 0,
+      velocityY: enemy.sprite.body?.velocity.y ?? 0,
       animation: enemy.sprite.anims.currentAnim?.key ?? null,
       animationState: enemy.animationState ?? null,
       texture: enemy.sprite.texture.key,

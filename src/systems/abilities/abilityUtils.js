@@ -18,7 +18,12 @@ export function findClusterTarget(scene) {
       bestEnemy = enemy;
     }
   });
-  return bestEnemy ? { x: bestEnemy.sprite.x, y: bestEnemy.sprite.y } : null;
+  return bestEnemy ? {
+    x: bestEnemy.sprite.x,
+    y: bestEnemy.sprite.y,
+    velocityX: bestEnemy.sprite.body?.velocity.x ?? 0,
+    velocityY: bestEnemy.sprite.body?.velocity.y ?? 0
+  } : null;
 }
 
 export function distanceToSegment(px, py, ax, ay, bx, by) {

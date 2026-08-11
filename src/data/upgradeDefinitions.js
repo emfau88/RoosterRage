@@ -219,10 +219,10 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Molotov Egg',
     description: 'Wirft alle 5,7 s eine brennende Flaeche.',
     rankDescriptions: [
-      '90 Radius, 12 Schaden pro Tick, 5,7 s Abklingzeit.',
-      'R2: groessere Brandzone mit dichterer Glut.',
-      'R3: die Brandzone pulsiert in sichtbaren Schadensringen.',
-      'R4: zwei Molotovs landen kurz versetzt.'
+      '90 Radius, 10 Schaden pro Tick, 3,0 s Branddauer, 5,7 s Abklingzeit.',
+      'R2: 108 Radius, 12 Schaden pro Tick und 3,4 s Branddauer.',
+      'R3: 124 Radius, 14 Schaden pro Tick, 3,8 s Dauer und sichtbare Schadenspulse.',
+      'R4: zwei kompakte Brandfelder landen um 0,25 s versetzt und halten 4,0 s.'
     ],
     category: 'active',
     tags: ['area'],
@@ -292,10 +292,10 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Void Nest',
     description: 'Zieht Gegner in einer Zone zusammen und verursacht Schaden.',
     rankDescriptions: [
-      '110 Radius, 11 Schaden pro Tick, 6,8 s Abklingzeit.',
-      'R2: groesserer Pull-Radius und staerkere Spiral-FX.',
-      'R3: Sog und Schaden pulsieren in sichtbaren Wellen.',
-      'R4: zwei kurze Singularitaeten kontrollieren mehr Raum.'
+      '110 Radius, 11 Schaden pro Tick, 3,4 s Haltedauer, 6,8 s Abklingzeit.',
+      'R2: groesserer Pull-Radius und 3,8 s stabile Portalphase.',
+      'R3: Sog und Schaden pulsieren 4,2 s in sichtbaren Wellen.',
+      'R4: zwei Singularitaeten kontrollieren den Raum fuer 4,4 s.'
     ],
     category: 'active',
     tags: ['area'],
@@ -311,10 +311,10 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Laser Comb',
     description: 'Gerader Piercing-Laser mit 48 Schaden.',
     rankDescriptions: [
-      '48 Schaden, 610 Reichweite, 5,64 s Abklingzeit.',
-      'R2: breiterer Beam und staerkerer Impact.',
-      'R3: ein kurzer paralleler Side-Beam begleitet den Hauptstrahl.',
-      'R4: langer breiter Hauptbeam mit sichtbarer Nachentladung.'
+      '48 Schaden, 610 Reichweite und klar lesbare Charge-/Beam-/Nachgluehphase.',
+      'R2: breiterer, heller-oranger Beam mit laengerem Nachgluehen.',
+      'R3: ein goldener paralleler Side-Beam begleitet den Hauptstrahl.',
+      'R4: fast weissgluehender Hauptbeam mit rund 0,58 s Nachentladung.'
     ],
     category: 'active',
     rarity: 'rare',

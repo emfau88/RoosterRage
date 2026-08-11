@@ -7,6 +7,7 @@ export class Enemy {
     this.warning = null;
     this.auraVisual = null;
     this.championVisual = null;
+    this.burnOverlay = null;
     this.knockbackVelocity = new Phaser.Math.Vector2();
     this.sprite = scene.physics.add.sprite(0, 0, 'enemy-slime');
     this.sprite.setActive(false).setVisible(false);
@@ -73,6 +74,7 @@ export class Enemy {
       ? scene.time.now + config.entryProtectionMs
       : 0;
     this.contactReadyAt = 0;
+    this.clearBurn();
     this.knockbackVelocity.set(0, 0);
     this.hpBarWidth = config.hpBarWidth ?? 42;
     this.hpBarYOffset = config.hpBarYOffset ?? 30;
@@ -155,6 +157,7 @@ export class Enemy {
     }
     this.updateAbility(player);
     this.updateStateAnimation();
+    this.updateBurn();
     this.updateWarningVisual();
     if (this.auraVisual) {
       this.auraVisual.setPosition(this.sprite.x, this.sprite.y);
@@ -280,6 +283,62 @@ export class Enemy {
     });
   }
 
+  applyBurn(duration = 3000, damage = 3) {
+    const now = this.scene.time.now;
+    this.burnUntil = Math.max(this.burnUntil ?? 0, now + duration);
+    this.burnDamage = Math.max(this.burnDamage ?? 0, damage);
+    this.nextBurnTickAt = Math.max(this.nextBurnTickAt ?? 0, now + 650);
+    if (!this.burnOverlay?.active) {
+      this.burnOverlay = this.scene.add.sprite(
+        this.sprite.x,
+        this.sprite.y,
+        'enemy-burn-overlay-sheet',
+        0
+      )
+        .setAlpha(0.78)
+        .setDepth(6)
+        .play('enemy-burn-overlay-loop');
+    }
+    this.updateBurnOverlay();
+  }
+
+  updateBurn() {
+    if (!this.burnUntil) return;
+    const now = this.scene.time.now;
+    if (now >= this.burnUntil) {
+      this.clearBurn();
+      return;
+    }
+    this.updateBurnOverlay();
+    if (now < this.nextBurnTickAt) return;
+    this.nextBurnTickAt = now + 600;
+    const killed = this.scene.damageEnemy(
+      this,
+      this.burnDamage,
+      this.sprite.x,
+      this.sprite.y,
+      { source: 'molotov-burn', quiet: true }
+    );
+    if (killed) this.clearBurn();
+  }
+
+  updateBurnOverlay() {
+    if (!this.burnOverlay?.active) return;
+    const size = Math.max(54, Math.min(150, this.sprite.displayWidth * 1.22));
+    this.burnOverlay
+      .setPosition(this.sprite.x, this.sprite.y + 2)
+      .setDisplaySize(size, size)
+      .setAlpha(0.72 + Math.sin(this.scene.time.now * 0.012) * 0.08);
+  }
+
+  clearBurn() {
+    this.burnUntil = 0;
+    this.burnDamage = 0;
+    this.nextBurnTickAt = 0;
+    this.burnOverlay?.destroy();
+    this.burnOverlay = null;
+  }
+
   destroy() {
     this.warning?.destroy();
     this.warning = null;
@@ -291,6 +350,7 @@ export class Enemy {
   }
 
   deactivate() {
+    this.clearBurn();
     this.sprite.stop();
     this.sprite.clearTint();
     this.sprite.setAlpha(1).setVelocity(0, 0);
@@ -302,6 +362,7 @@ export class Enemy {
   }
 
   dispose() {
+    this.clearBurn();
     this.warning?.destroy();
     this.auraVisual?.destroy();
     this.championVisual?.destroy();

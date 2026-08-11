@@ -6,6 +6,7 @@ export class MolotovEggProjectile {
     this.start = new Phaser.Math.Vector2(startX, startY);
     this.target = new Phaser.Math.Vector2(targetX, targetY);
     this.rank = rank;
+    this.evolved = evolved;
     this.duration = Math.max(620, 920 - rank * 70);
     this.age = 0;
     this.active = true;
@@ -44,7 +45,7 @@ export class MolotovEggProjectile {
 
     if (progress >= 1) {
       this.destroy();
-      this.scene.createMolotovImpact(this.target.x, this.target.y);
+      this.scene.createMolotovImpact(this.target.x, this.target.y, this.rank, this.evolved);
     }
   }
 

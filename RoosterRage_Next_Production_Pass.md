@@ -50,6 +50,12 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   4-Richtungs-Locomotion. Der Combat-Bulk ergänzt Spitter, Fan-Spitter, Bomber
   und Elite-Spitter. Der Slime bleibt bewusst beim richtungsneutralen Wobble;
   zustandsgebundene Angriffs-Sheets der Spezialgegner bleiben getrennt.
+- **AOE Combat Polish: umgesetzt.** Void Nest und Laser besitzen längere,
+  klar getrennte Präsentationsphasen. Molotov Egg nutzt ein neues Impact-/Loop-/
+  Ausglüh-Sheet, echte Rangskalierung, gestaffelten Doppelwurf, begrenztes
+  Vorhalte-Aiming und einen dreisekündigen animierten Burn-Status. Die globale
+  Zielreichweite wurde in diesem Pass ausdrücklich nicht verändert. Details:
+  `docs/AOE_COMBAT_POLISH.md`.
 - **Messwerte:** 75, 110 und 150 aktive Kornkrabbler jeweils 16,7 ms p95 im
   automatisierten Desktop-Lastgate, keine Enemy-Pool-Drops. Das bestehende
   390×844-Pressure-Gate für Wave 7 besteht mit allen drei Hähnen; Peak der

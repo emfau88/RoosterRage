@@ -78,6 +78,42 @@ export function createGameAnimations(scene) {
       }
     });
   });
+
+  [
+    ['fx-void-open', 12, 14, 9],
+    ['fx-void-collapse', 14, 15, 6]
+  ].forEach(([key, start, end, frameRate]) => {
+    if (scene.anims.exists(key)) return;
+    scene.anims.create({
+      key,
+      frames: scene.anims.generateFrameNumbers('fx-atlas-v1', { start, end }),
+      frameRate,
+      repeat: 0
+    });
+  });
+
+  [
+    ['molotov-v2-impact', 0, 3, 12, 0],
+    ['molotov-v2-loop', 4, 11, 10, -1],
+    ['molotov-v2-extinguish', 12, 15, 9, 0]
+  ].forEach(([key, start, end, frameRate, repeat]) => {
+    if (scene.anims.exists(key)) return;
+    scene.anims.create({
+      key,
+      frames: scene.anims.generateFrameNumbers('molotov-v2-sheet', { start, end }),
+      frameRate,
+      repeat
+    });
+  });
+
+  if (!scene.anims.exists('enemy-burn-overlay-loop')) {
+    scene.anims.create({
+      key: 'enemy-burn-overlay-loop',
+      frames: scene.anims.generateFrameNumbers('enemy-burn-overlay-sheet', { start: 0, end: 7 }),
+      frameRate: 10,
+      repeat: -1
+    });
+  }
   enemyAnimations.forEach(([key, texture, start, end, frameRate]) => {
     if (scene.anims.exists(key)) {
       return;

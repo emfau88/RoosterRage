@@ -481,7 +481,7 @@ export class CombatSystem {
     const bossMultiplier = getBossDamageMultiplier(enemy, source);
     const adjustedDamage = Math.max(1, Math.round(damage * bossMultiplier));
     const appliedDamage = enemy.mitigateDamage?.(adjustedDamage) ?? adjustedDamage;
-    scene.showHitFeedback(x, y, appliedDamage, enemy, options);
+    if (!options.quiet) scene.showHitFeedback(x, y, appliedDamage, enemy, options);
     if ([
       'evo-sunshot-array',
       'evo-siegebreaker-shell',
@@ -492,10 +492,12 @@ export class CombatSystem {
       playEvolutionImpact(scene, source, x, y);
     }
     const eggImpact = /^(base-egg|fire-eggs|golden-egg|support-chick|evo-solar-scramble|evo-chick-squadron|evo-sunshot-array|evo-siegebreaker-shell|evo-tempest-crown)/.test(source);
-    if (eggImpact) {
-      scene.audio.playVariant('egg-impact');
-    } else {
-      scene.audio.play('enemy-hit');
+    if (!options.quiet) {
+      if (eggImpact) {
+        scene.audio.playVariant('egg-impact');
+      } else {
+        scene.audio.play('enemy-hit');
+      }
     }
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;

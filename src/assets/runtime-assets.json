@@ -589,6 +589,24 @@
       "bytes": 293708
     },
     {
+      "source": "art-source/fx/molotov-v2-sheet.png",
+      "sourceSha256": "83fc992a44c395824edb111fa888abdcebf33fb2759883ce77e5c7f31cdd0448",
+      "runtime": "src/assets/fx/molotov-v2-sheet.webp",
+      "runtimeSha256": "44d99f249dd22fb2b6683241bd972f606fc721944431190016d083d7dc0f5b96",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 269876
+    },
+    {
+      "source": "art-source/fx/enemy-burn-overlay-sheet.png",
+      "sourceSha256": "1091c9aff3830199b07a64da5f5a27af7036d35c9c5df87280484b7af01b7ac1",
+      "runtime": "src/assets/fx/enemy-burn-overlay-sheet.webp",
+      "runtimeSha256": "3e3a167db209e18d26ef6142867d6255326e2b2d2f36e4d8160b7716a41bc11d",
+      "width": 1024,
+      "height": 512,
+      "bytes": 130976
+    },
+    {
       "source": "art-source/fx/evolutions/evo-sunshot-array-impact.png",
       "sourceSha256": "28b6669c5769586b13f379924ed0ebcb0db203b9b114fd18dbf27f656af84355",
       "runtime": "src/assets/fx/evolutions/evo-sunshot-array-impact.webp",

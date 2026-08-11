@@ -80,6 +80,8 @@ RUNTIME_IMAGES = (
     "enemies/animations/enemy-elite-spitter-pulse.png",
     "enemies/animations/enemy-elite-spitter-run.png",
     "fx/fx-atlas-v1-sheet.png",
+    "fx/molotov-v2-sheet.png",
+    "fx/enemy-burn-overlay-sheet.png",
     "fx/evolutions/evo-sunshot-array-impact.png",
     "fx/evolutions/evo-siegebreaker-shell-impact.png",
     "fx/evolutions/evo-tempest-crown-impact.png",
@@ -138,6 +140,8 @@ RUNTIME_SHEET_SIZES = {
     "enemies/animations/enemy-fan-spitter-run.png": (1024, 1024),
     "enemies/animations/enemy-bomber-run.png": (1024, 1024),
     "enemies/animations/enemy-elite-spitter-run.png": (1024, 1024),
+    "fx/molotov-v2-sheet.png": (1024, 1024),
+    "fx/enemy-burn-overlay-sheet.png": (1024, 512),
 }
 
 BULK_1_ICONS = (

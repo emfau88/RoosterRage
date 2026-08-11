@@ -21,6 +21,8 @@ import enemyEliteBruteStompUrl from '../../assets/enemies/animations/enemy-elite
 import enemyEliteSpitterPulseUrl from '../../assets/enemies/animations/enemy-elite-spitter-pulse.webp';
 import enemyEliteSpitterRunUrl from '../../assets/enemies/animations/enemy-elite-spitter-run.webp';
 import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
+import molotovV2SheetUrl from '../../assets/fx/molotov-v2-sheet.webp';
+import enemyBurnOverlaySheetUrl from '../../assets/fx/enemy-burn-overlay-sheet.webp';
 import arenaGroundUrl from '../../assets/map/arena-ground.webp';
 import supportChickOrbUrl from '../../assets/companions/support-chick-orb.webp';
 import evoChickSquadronCompanionUrl from '../../assets/companions/evo-chick-squadron-companion.webp';
@@ -137,6 +139,8 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-elite-spitter-pulse', enemyEliteSpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-run', enemyEliteSpitterRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('fx-atlas-v1', fxAtlasUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('molotov-v2-sheet', molotovV2SheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('enemy-burn-overlay-sheet', enemyBurnOverlaySheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('arena-ground', arenaGroundUrl);
   scene.load.image('support-chick', supportChickOrbUrl);
   scene.load.image('evo-chick-squadron-companion', evoChickSquadronCompanionUrl);

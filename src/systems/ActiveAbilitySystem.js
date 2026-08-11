@@ -33,8 +33,8 @@ export class ActiveAbilitySystem {
     this.rocketEgg.createExplosion(x, y, damage, radius, evolved, rank);
   }
 
-  createMolotovImpact(x, y) {
-    this.molotovEgg.createImpact(x, y);
+  createMolotovImpact(x, y, rank, evolved) {
+    this.molotovEgg.createImpact(x, y, rank, evolved);
   }
 
   setOrbitEggRank(rank) {

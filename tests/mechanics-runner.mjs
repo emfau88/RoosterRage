@@ -721,6 +721,107 @@ async function testActiveUpgradeAbilities(browser) {
   }
 }
 
+async function testAreaEffectReadability(browser) {
+  const { page, errors } = await openGame(browser, 'area-effect-readability');
+  try {
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.pauseWaves();
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.movePlayer(700, 450);
+      api.spawnEnemyType('brute', 900, 450, { speed: 0, damage: 0, hp: 9999 });
+      ['molotov-egg', 'void-nest', 'laser-comb'].forEach((id) => api.applyUpgradeById(id));
+      api.triggerActiveAbility('molotov-egg');
+      api.triggerActiveAbility('void-nest');
+      api.triggerActiveAbility('laser-comb');
+    });
+    const charge = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(charge.laserVisuals >= 1, 'Laser charge visual did not start.', charge);
+    assert(charge.molotovProjectiles === 1, 'Rank-one Molotov should launch one projectile.', charge);
+    assert(charge.voids[0]?.maxLife === 3400 && charge.voids[0]?.alpha >= 0.5,
+      'Void Nest did not start its stable 3.4 second presentation.', charge);
+
+    await page.waitForTimeout(210);
+    const beam = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(beam.laserVisuals >= 1, 'Laser disappeared before its readable beam phase.', beam);
+    await page.screenshot({ path: path.join(artifactDir, 'laser-readability-runtime.png') });
+
+    await page.waitForTimeout(700);
+    const settled = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(settled.laserVisuals === 0, 'Laser visuals outlived their bounded afterglow.', settled);
+    assert(settled.hazards[0]?.maxLife === 3000
+      && settled.hazards[0]?.radius === 90
+      && settled.hazards[0]?.texture === 'molotov-v2-sheet'
+      && settled.hazards[0]?.animation === 'molotov-v2-loop',
+    'Molotov did not enter the dedicated rank-one ground-fire loop.', settled);
+    assert(settled.voids[0]?.frame === 14 && settled.voids[0]?.alpha >= 0.5,
+      'Void Nest did not hold its readable portal frame.', settled);
+    assert(settled.burningEnemies[0]?.overlay === 'enemy-burn-overlay-sheet'
+      && settled.burningEnemies[0]?.animation === 'enemy-burn-overlay-loop'
+      && settled.burningEnemies[0]?.remainingMs > 2500,
+    'Molotov contact did not apply the three-second animated burn status.', settled);
+    await page.screenshot({ path: path.join(artifactDir, 'aoe-readability-runtime.png') });
+
+    await page.waitForTimeout(1450);
+    const sustained = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(sustained.hazards.length === 1 && sustained.voids.length === 1,
+      'Area effects vanished before their new readable hold windows.', sustained);
+
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.clearProjectiles();
+      for (let rank = 2; rank <= 4; rank += 1) api.applyUpgradeById('molotov-egg');
+      api.triggerActiveAbility('molotov-egg');
+    });
+    const firstThrow = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(firstThrow.molotovProjectiles === 1,
+      'Rank-four Molotov launched both projectiles simultaneously.', firstThrow);
+    await page.waitForTimeout(300);
+    const secondThrow = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(secondThrow.molotovProjectiles === 2,
+      'Rank-four Molotov did not launch its delayed second projectile.', secondThrow);
+    await page.waitForTimeout(720);
+    const rankFour = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(rankFour.hazards.length === 2
+      && rankFour.hazards.every((zone) => zone.maxLife === 4000 && zone.radius === 112),
+    'Rank-four Molotov did not create two compact four-second fields.', rankFour);
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.spawnEnemyType('runner', 1000, 450, { damage: 0, hp: 9999 });
+    });
+    await page.waitForTimeout(120);
+    const predictiveAim = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      const enemy = api.getEnemySnapshot()[0];
+      api.triggerActiveAbility('molotov-egg');
+      const target = api.getAreaEffectState().molotovTargets[0];
+      return {
+        enemy,
+        target,
+        leadDot: (target.x - enemy.x) * enemy.velocityX + (target.y - enemy.y) * enemy.velocityY
+      };
+    });
+    assert(predictiveAim.leadDot > 0,
+      'Molotov did not lead a moving target along its travel direction.', predictiveAim);
+    assert(errors.length === 0, 'Browser reported errors during area-effect readability test.', errors);
+    return {
+      name: 'area effect readability',
+      status: 'passed',
+      charge,
+      beam,
+      settled,
+      sustained,
+      rankFour,
+      predictiveAim
+    };
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   await fs.mkdir(artifactDir, { recursive: true });
   const { server, url } = await ensureTestServer();
@@ -737,6 +838,7 @@ async function run() {
     results.push(await testWaveCuration(browser));
     results.push(await testEnemyAbilities(browser));
     results.push(await testActiveUpgradeAbilities(browser));
+    results.push(await testAreaEffectReadability(browser));
     const report = {
       generatedAt: new Date().toISOString(),
       results

@@ -1,5 +1,9 @@
 import Phaser from 'phaser';
 
+const COLLAPSE_MS = 380;
+const BASE_LIFETIMES = [0, 3400, 3800, 4200, 4400];
+const EVOLVED_LIFETIME = 5200;
+
 export class VoidZone {
   constructor(scene, x, y, rank, evolved = false) {
     this.scene = scene;
@@ -13,10 +17,11 @@ export class VoidZone {
     this.pull = ((evolved ? 62 : 34) + rank * 14) * (this.synergyActive ? 1.25 : 1);
     this.tickMs = evolved ? 290 : 360;
     this.nextTickAt = 0;
-    this.life = (evolved ? 3900 : 2300) + rank * 420;
+    this.life = evolved ? EVOLVED_LIFETIME : (BASE_LIFETIMES[rank] ?? BASE_LIFETIMES[1]);
     this.maxLife = this.life;
     this.age = 0;
     this.active = true;
+    this.collapsing = false;
 
     this.outer = scene.add.circle(x, y, this.radius, 0x25124b, 0.24)
       .setStrokeStyle(3, 0x9b5cff, 0.78)
@@ -31,7 +36,12 @@ export class VoidZone {
       .setScale(this.portalBaseScale)
       .setAlpha(0.58)
       .setDepth(4);
-    if (!evolved) this.portal.play('fx-void-portal');
+    if (!evolved) {
+      this.portal.play('fx-void-open');
+      this.portal.once('animationcomplete', () => {
+        if (this.active && !this.collapsing) this.portal.setFrame(14);
+      });
+    }
     this.runes = [];
     for (let i = 0; i < 8; i += 1) {
       const angle = (Math.PI * 2 * i) / 8;
@@ -54,6 +64,10 @@ export class VoidZone {
 
     this.age += delta;
     this.life -= delta;
+    if (!this.collapsing && this.life <= COLLAPSE_MS) {
+      this.collapsing = true;
+      if (!this.evolved) this.portal.play('fx-void-collapse');
+    }
     this.scene.enemies.forEach((enemy) => {
       if (!enemy.sprite.active) {
         return;
@@ -68,7 +82,7 @@ export class VoidZone {
       }
     });
 
-    if (this.scene.time.now >= this.nextTickAt) {
+    if (!this.collapsing && this.scene.time.now >= this.nextTickAt) {
       this.nextTickAt = this.scene.time.now + this.tickMs;
       this.scene.enemies.forEach((enemy) => {
         if (enemy.sprite.active && Phaser.Math.Distance.Between(this.x, this.y, enemy.sprite.x, enemy.sprite.y) <= this.radius) {
@@ -79,14 +93,16 @@ export class VoidZone {
       });
     }
 
-    const lifeRatio = Phaser.Math.Clamp(this.life / this.maxLife, 0, 1);
+    const exitRatio = this.collapsing
+      ? Phaser.Math.Clamp(this.life / COLLAPSE_MS, 0, 1)
+      : 1;
     const pulse = 0.92 + Math.sin(this.age * 0.007) * 0.1;
     this.outer.setScale(pulse);
-    this.outer.setAlpha(lifeRatio * 0.24);
+    this.outer.setAlpha(exitRatio * 0.24);
     this.core.setScale(0.85 + Math.sin(this.age * 0.012) * 0.16);
-    this.core.setAlpha(lifeRatio * 0.62);
+    this.core.setAlpha(exitRatio * 0.62);
     this.portal.setScale(this.portalBaseScale * (0.9 + Math.sin(this.age * 0.006) * 0.08));
-    this.portal.setAlpha(lifeRatio * 0.58);
+    this.portal.setAlpha(exitRatio * 0.58);
     this.portal.rotation -= delta * 0.00035;
     this.runes.forEach((rune, index) => {
       const angle = (Math.PI * 2 * index) / this.runes.length + this.age * 0.0015;
@@ -95,7 +111,7 @@ export class VoidZone {
         this.y + Math.sin(angle) * this.radius * 0.68
       );
       rune.setRotation(angle + Math.PI / 2);
-      rune.setAlpha(lifeRatio * 0.58);
+      rune.setAlpha(exitRatio * 0.58);
     });
 
     if (this.life <= 0) {
