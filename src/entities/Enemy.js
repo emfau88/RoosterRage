@@ -93,7 +93,9 @@ export class Enemy {
     }
     this.sprite.setAlpha(1);
     this.sprite.stop();
-    if (this.animationSet?.move) {
+    if (this.directionalAnimationPrefix && config.animation) {
+      this.sprite.play(config.animation);
+    } else if (this.animationSet?.move) {
       this.sprite.play(this.animationSet.move);
     } else if (config.animation) {
       this.sprite.play(config.animation);
@@ -173,7 +175,8 @@ export class Enemy {
   }
 
   updateDirectionalAnimation(direction) {
-    if (!this.directionalAnimationPrefix) {
+    if (!this.directionalAnimationPrefix
+      || (this.animationSet && this.animationState !== 'move')) {
       return;
     }
     const horizontal = Math.abs(direction.x) >= Math.abs(direction.y);
@@ -207,6 +210,10 @@ export class Enemy {
           ? 'recovery'
           : 'move';
     const key = this.animationSet[nextState] ?? this.animationSet.move;
+    if (nextState === 'move' && this.directionalAnimationPrefix) {
+      this.animationState = 'move';
+      return;
+    }
     if (this.animationState !== nextState || this.sprite.anims.currentAnim?.key !== key) {
       this.animationState = nextState;
       this.sprite.play(key);

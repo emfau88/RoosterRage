@@ -38,10 +38,7 @@ export function createGameAnimations(scene) {
   });
 
   const enemyAnimations = [
-    ['enemy-slime-wobble-loop', 'enemy-slime-wobble', 0, 2, 7],
-    ['enemy-runner-walk-loop', 'enemy-runner-walk', 0, 2, 8],
-    ['enemy-elite-runner-walk-loop', 'enemy-elite-runner-walk', 0, 2, 8],
-    ['enemy-boss-heavy-loop', 'enemy-boss-heavy', 0, 2, 4]
+    ['enemy-slime-wobble-loop', 'enemy-slime-wobble', 0, 2, 7]
   ];
   const stateDrivenEnemies = [
     ['enemy-brute', 'enemy-brute-stomp', 6],
@@ -53,6 +50,10 @@ export function createGameAnimations(scene) {
   ];
   [
     ['enemy-kornkrabbler-run', 11],
+    ['enemy-runner-run', 10],
+    ['enemy-elite-runner-run', 12],
+    ['enemy-brute-run', 7],
+    ['enemy-boss-run', 5],
     ['enemy-support-run', 9],
     ['enemy-summoner-run', 9]
   ].forEach(([texture, frameRate]) => {

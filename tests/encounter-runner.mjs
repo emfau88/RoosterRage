@@ -89,12 +89,19 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
     const initial = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
       const ids = {};
-      ['brute', 'spitter', 'fan-spitter', 'bomber', 'support', 'summoner', 'elite-brute', 'elite-spitter']
+      [
+        'brute', 'spitter', 'fan-spitter', 'bomber',
+        'support', 'summoner', 'elite-brute', 'elite-spitter',
+        'runner', 'elite-runner', 'champion-charger', 'boss'
+      ]
         .forEach((type, index) => {
-          ids[type] = api.spawnEnemyType(type, 840 + (index % 3) * 90, 220 + Math.floor(index / 3) * 120, {
+          const movementOnly = ['runner', 'brute', 'elite-runner', 'champion-charger', 'boss']
+            .includes(type);
+          ids[type] = api.spawnEnemyType(type, 840 + (index % 4) * 90, 220 + Math.floor(index / 4) * 120, {
             speed: 0,
             damage: 0,
-            hp: 9999
+            hp: 9999,
+            ...(movementOnly ? { ability: null, heavyAttackDelay: 999999 } : {})
           });
         });
       return { ids, enemies: api.getEnemySnapshot() };
@@ -103,32 +110,70 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
     assert(byType.support.texture === 'enemy-support-run'
       && byType.summoner.texture === 'enemy-summoner-run',
     'Support and summoner still reuse a tinted spitter texture.', byType);
-    ['brute', 'spitter', 'fan-spitter', 'bomber', 'elite-brute', 'elite-spitter']
+    assert(byType.runner.texture === 'enemy-runner-run'
+      && byType.brute.texture === 'enemy-brute-run'
+      && byType['elite-runner'].texture === 'enemy-elite-runner-run'
+      && byType['champion-charger'].texture === 'enemy-elite-runner-run'
+      && byType.boss.texture === 'enemy-boss-run',
+    'Movement-bulk enemies did not enter their directional sheets.', byType);
+    ['spitter', 'fan-spitter', 'bomber', 'elite-brute', 'elite-spitter']
       .forEach((type) => assert(
         byType[type].animation?.endsWith('-move') && byType[type].animationState === 'move',
         `${type} did not enter a dedicated movement state.`, byType[type]
       ));
+    const directionalPrefixes = {
+      runner: 'enemy-runner-run',
+      brute: 'enemy-brute-run',
+      support: 'enemy-support-run',
+      summoner: 'enemy-summoner-run',
+      'elite-runner': 'enemy-elite-runner-run',
+      'champion-charger': 'enemy-elite-runner-run',
+      boss: 'enemy-boss-run'
+    };
     const directionalAnimations = {};
     for (const [direction, point] of Object.entries({
       left: [600, 340],
-      right: [1150, 340],
+      right: [1250, 340],
       up: [930, 50],
       down: [930, 720]
     })) {
       await page.evaluate(([x, y]) => window.__ROOSTER_TEST__.movePlayer(x, y), point);
       await page.waitForTimeout(55);
-      directionalAnimations[direction] = await page.evaluate(() => Object.fromEntries(
+      directionalAnimations[direction] = await page.evaluate((types) => Object.fromEntries(
         window.__ROOSTER_TEST__.getEnemySnapshot()
-          .filter((enemy) => ['support', 'summoner'].includes(enemy.type))
+          .filter((enemy) => types.includes(enemy.type))
           .map((enemy) => [enemy.type, enemy.animation])
-      ));
+      ), Object.keys(directionalPrefixes));
     }
     for (const [direction, animations] of Object.entries(directionalAnimations)) {
-      ['support', 'summoner'].forEach((type) => assert(
-        animations[type] === `enemy-${type}-run-${direction}`,
+      Object.entries(directionalPrefixes).forEach(([type, prefix]) => assert(
+        animations[type] === `${prefix}-${direction}`,
         `${type} is missing its ${direction} movement row.`, directionalAnimations
       ));
     }
+    const actionBruteId = await page.evaluate(() => window.__ROOSTER_TEST__.spawnEnemyType(
+      'brute', 1080, 520, {
+        speed: 0,
+        damage: 0,
+        hp: 9999,
+        ability: {
+          kind: 'slam',
+          label: 'Animation Gate',
+          cooldown: 999999,
+          telegraphMs: 620,
+          heavy: true,
+          radius: 120,
+          damage: 0,
+          color: 0xff6a32
+        }
+      }
+    ));
+    await page.waitForTimeout(100);
+    const bruteWindup = await page.evaluate((id) => window.__ROOSTER_TEST__.getEnemySnapshot()
+      .find((enemy) => enemy.id === id), actionBruteId);
+    assert(bruteWindup.animation === 'enemy-brute-windup'
+      && bruteWindup.animationState === 'windup',
+    'Directional Brute locomotion prevented its action sheet from taking over.', bruteWindup);
     await page.screenshot({ path: path.join(artifactDir, 'enemy-directional-art-runtime.png') });
     await page.waitForTimeout(650);
     const resolved = await page.evaluate(() => ({
@@ -142,6 +187,10 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
     return {
       supportTexture: byType.support.texture,
       summonerTexture: byType.summoner.texture,
+      movementBulkTextures: Object.fromEntries(
+        Object.keys(directionalPrefixes).map((type) => [type, byType[type].texture])
+      ),
+      bruteActionTransition: bruteWindup.animation,
       initialStates: Object.fromEntries(Object.entries(byType).map(([type, enemy]) => [type, enemy.animation])),
       directionalAnimations
     };

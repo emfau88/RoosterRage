@@ -299,11 +299,11 @@ export class WaveSystem {
   }
 
   makeRunner(multiplier = 1) {
-    return { type: 'runner', role: 'runner', hp: Math.round(36 * multiplier), speed: 118, damage: 7, xp: 5, texture: 'enemy-runner-walk', animation: 'enemy-runner-walk-loop', scale: 0.22, radius: 22, bodyOffsetX: 106, bodyOffsetY: 124, hpBarWidth: 36, hpBarYOffset: 27 };
+    return { type: 'runner', role: 'runner', hp: Math.round(36 * multiplier), speed: 118, damage: 7, xp: 5, texture: 'enemy-runner-run', animation: 'enemy-runner-run-left', directionalAnimationPrefix: 'enemy-runner-run', scale: 0.22, radius: 22, bodyOffsetX: 106, bodyOffsetY: 124, hpBarWidth: 36, hpBarYOffset: 27 };
   }
 
   makeBrute(multiplier = 1) {
-    return { type: 'brute', role: 'tank', hp: Math.round(145 * multiplier), speed: 68, damage: 12, xp: 12, texture: 'enemy-brute-stomp', animationSet: this.makeAnimationSet('enemy-brute'), scale: 0.28, radius: 35, bodyOffsetX: 93, bodyOffsetY: 107, hpBarWidth: 56, hpBarYOffset: 43 };
+    return { type: 'brute', role: 'tank', hp: Math.round(145 * multiplier), speed: 68, damage: 12, xp: 12, texture: 'enemy-brute-run', animation: 'enemy-brute-run-left', directionalAnimationPrefix: 'enemy-brute-run', animationSet: this.makeAnimationSet('enemy-brute'), scale: 0.28, radius: 35, bodyOffsetX: 93, bodyOffsetY: 107, hpBarWidth: 56, hpBarYOffset: 43 };
   }
 
   makeSpitter(multiplier = 1) {
@@ -315,7 +315,7 @@ export class WaveSystem {
   }
 
   makeBomber(multiplier = 1) {
-    return { ...this.makeRunner(0.95 * multiplier), type: 'bomber', role: 'exploder', hp: Math.round(72 * multiplier), speed: 94, damage: 10, xp: 10, texture: 'enemy-bomber-bob', animation: null, animationSet: this.makeAnimationSet('enemy-bomber'), scale: 0.28, radius: 29, bodyOffsetX: 99, bodyOffsetY: 100, hpBarWidth: 46, hpBarYOffset: 36, explodeOnDeath: true, explosionRadius: 86, explosionDamage: 18 };
+    return { ...this.makeRunner(0.95 * multiplier), type: 'bomber', role: 'exploder', hp: Math.round(72 * multiplier), speed: 94, damage: 10, xp: 10, texture: 'enemy-bomber-bob', animation: null, animationSet: this.makeAnimationSet('enemy-bomber'), directionalAnimationPrefix: null, scale: 0.28, radius: 29, bodyOffsetX: 99, bodyOffsetY: 100, hpBarWidth: 46, hpBarYOffset: 36, explodeOnDeath: true, explosionRadius: 86, explosionDamage: 18 };
   }
 
   makeSupport(multiplier = 1) {
@@ -391,8 +391,9 @@ export class WaveSystem {
       speed: 126,
       damage: 13,
       xp: 34,
-      texture: 'enemy-elite-runner-walk',
-      animation: 'enemy-elite-runner-walk-loop',
+      texture: 'enemy-elite-runner-run',
+      animation: 'enemy-elite-runner-run-left',
+      directionalAnimationPrefix: 'enemy-elite-runner-run',
       scale: 0.34,
       radius: 29,
       bodyOffsetX: 99,
@@ -418,6 +419,7 @@ export class WaveSystem {
       texture: 'enemy-elite-brute-stomp',
       animation: null,
       animationSet: this.makeAnimationSet('enemy-elite-brute'),
+      directionalAnimationPrefix: null,
       scale: 0.39,
       radius: 41,
       bodyOffsetX: 87,
@@ -467,8 +469,10 @@ export class WaveSystem {
       speed: 58,
       damage: 24,
       xp: 120,
-      texture: 'enemy-boss-heavy',
-      animation: 'enemy-boss-heavy-loop',
+      texture: 'enemy-boss-run',
+      animation: 'enemy-boss-run-left',
+      animationSet: null,
+      directionalAnimationPrefix: 'enemy-boss-run',
       scale: 0.58,
       radius: 58,
       bodyOffsetX: 70,

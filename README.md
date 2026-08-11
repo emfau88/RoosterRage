@@ -8,14 +8,16 @@
 
 Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Wähle Barnyard Ace, Boombardier oder Stormcrest, entwickle absurde Ei-Waffen und überlebe zehn eskalierende Wellen bis zum dreiphasigen Brood King.
 
-> **Projektstatus:** Hauptmenü, Micro-Fodder, Horde-Dichte sowie XP-/Pickup-Pacing des aktuellen Production Pass sind umgesetzt und automatisiert abgenommen. Die GitHub-Pages-Version ist eine öffentliche Testfassung. Als Nächstes folgen Enemy-Animation-Polish und das abschließende Multi-Seed-/Real-Run-Production-Gate.
+> **Projektstatus:** Hauptmenü, Micro-Fodder, Horde-Dichte, XP-/Pickup-Pacing und Enemy-Animation-Polish des aktuellen Production Pass sind umgesetzt und automatisiert abgenommen. Die GitHub-Pages-Version ist eine öffentliche Testfassung. Als Nächstes folgt das abschließende Multi-Seed-/Real-Run-Production-Gate.
 
 ## Aktueller Spielumfang
 
 - Drei Rooster-Klassen mit eigenem Primärangriff, eigener Passive und je drei Build-Archetypen
 - Klar gegliederte Hennenhütte mit `Spielen`, `Hähne`, `Training` und `Archiv`; der Run-Start bleibt auf Desktop und Mobile die Hauptaktion
 - Zehn handkuratierte Wellen, drei Arenen, drei Elite-Archetypen und ein dreiphasiger Boss
-- Echter 4-Richtungs-Micro-Fodder `Kornkrabbler` und Horde-Peaks bis 140 Gegner auf Desktop bzw. 90 auf Mobile
+- Echte 4-Richtungs-Locomotion für Kornkrabbler, Runner, Brute, Support,
+  Summoner, Gilded Talon/Stormclaw und Brood King; Horde-Peaks bis 140 Gegner
+  auf Desktop beziehungsweise 90 auf Mobile
 - 45 Upgrades, elf sichtbare EVOs sowie Active-, Passive-, Orbit- und Summon-Builds
 - Feste Wave-/Segment-XP-Budgets: Hordenmenge und Levelgeschwindigkeit sind getrennt steuerbar
 - Sichtbare, magnetische XP-Orbs mit verlustfreier Bündelung: maximal 72 auf Desktop und 48 auf Mobile

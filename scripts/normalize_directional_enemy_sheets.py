@@ -10,15 +10,49 @@ PADDING = 14
 BASELINE = 238
 
 
+def find_content_bands(alpha: Image.Image, axis: str) -> list[tuple[int, int]]:
+    """Return contiguous occupied bands along one axis of an alpha image."""
+    length = alpha.width if axis == "x" else alpha.height
+    occupied = []
+    for position in range(length):
+        strip = (
+            alpha.crop((position, 0, position + 1, alpha.height))
+            if axis == "x"
+            else alpha.crop((0, position, alpha.width, position + 1))
+        )
+        occupied.append(strip.getbbox() is not None)
+
+    bands = []
+    start = None
+    for position, has_content in enumerate(occupied + [False]):
+        if has_content and start is None:
+            start = position
+        elif not has_content and start is not None:
+            bands.append((start, position))
+            start = None
+    return bands
+
+
 def split_frames(source: Image.Image) -> list[list[Image.Image]]:
+    alpha = source.getchannel("A")
+    column_bands = find_content_bands(alpha, "x")
+    row_bands = find_content_bands(alpha, "y")
+    use_content_grid = (
+        len(column_bands) == GRID_SIZE and len(row_bands) == GRID_SIZE
+    )
+
     rows = []
     for row in range(GRID_SIZE):
         frames = []
         for column in range(GRID_SIZE):
-            left = round(column * source.width / GRID_SIZE)
-            right = round((column + 1) * source.width / GRID_SIZE)
-            top = round(row * source.height / GRID_SIZE)
-            bottom = round((row + 1) * source.height / GRID_SIZE)
+            if use_content_grid:
+                left, right = column_bands[column]
+                top, bottom = row_bands[row]
+            else:
+                left = round(column * source.width / GRID_SIZE)
+                right = round((column + 1) * source.width / GRID_SIZE)
+                top = round(row * source.height / GRID_SIZE)
+                bottom = round((row + 1) * source.height / GRID_SIZE)
             cell = source.crop((left, top, right, bottom))
             bounds = cell.getchannel("A").getbbox()
             if not bounds:

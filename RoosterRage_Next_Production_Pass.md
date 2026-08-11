@@ -9,9 +9,9 @@ https://github.com/emfau88/RoosterRage
 **Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der vollständige
 Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
 
-**Veröffentlicht:** Commit `7de459b` auf `master`; GitHub-Pages-Workflow #30
-erfolgreich. README, Desktop-/Mobile-Gates und der frühere Analytics-Fehler sind
-auf diesem Stand grün.
+**Aktueller Stand:** Hauptmenü, Horde-/XP-Pass, Enemy-Art-Pass und der bewusst
+fokussierte Champion-Pass sind auf `master`. README, Desktop-/Mobile-Gates und
+der frühere Analytics-Fehler sind auf diesem Stand grün.
 
 - **Phase 1 – Hauptmenü: erledigt.** Default ist jetzt `Spielen` mit einem
   kompakten Rooster-Hero, Challenge/Arena-Block und dominantem `RUN STARTEN`.
@@ -45,6 +45,10 @@ auf diesem Stand grün.
   in vorhandene, sichtbar größere Orbs integriert. Heal, Magnet und Bomb sind
   nun an sieben definierte Wave-/Encounter-Momente statt an globale Killzahlen
   gekoppelt; Elite-Truhen und Pickup-Budgets bleiben unverändert.
+- **Phase 5 – Enemy Animation Polish: erledigt.** Kornkrabbler, Runner, Brute,
+  Brood Tender, Nest Caller, Gilded Talon/Stormclaw und Brood King besitzen echte
+  4-Richtungs-Locomotion. Der Slime bleibt bewusst beim richtungsneutralen
+  Wobble. Zustandsgebundene Angriffs-Sheets der Spezialgegner bleiben getrennt.
 - **Messwerte:** 75, 110 und 150 aktive Kornkrabbler jeweils 16,7 ms p95 im
   automatisierten Desktop-Lastgate, keine Enemy-Pool-Drops. Das bestehende
   390×844-Pressure-Gate für Wave 7 besteht mit allen drei Hähnen; Peak der
@@ -54,9 +58,8 @@ auf diesem Stand grün.
 - **QA-Bilder:** Menü-Nachherbilder liegen unter
   `docs/qa/next-production-pass/` für Desktop, Portrait und Landscape.
 
-**Noch offen:** Phase 5 (weitere Gegneranimationen), optionale Phase 6 und das
-vollständige Multi-Seed-/Real-Run-
-Production-Gate aus Phase 7. Späte echte Runs können noch Feintuning bei
+**Noch offen:** das vollständige Multi-Seed-/Real-Run-Production-Gate aus
+Phase 7. Späte echte Runs können noch Feintuning bei
 Contact-Druck oder Wave-Dauer nahelegen; deshalb sind die Peaks Messkorridore.
 
 ## Rolle
@@ -915,6 +918,12 @@ Unbedingt in dieser Reihenfolge arbeiten:
   Fähigkeiten; Support/Summoner behalten währenddessen die Richtungsanimation
   und nutzen Aura/Telegraph für die Fähigkeitslesbarkeit.
 - [x] Mobile Laufzeitgröße, Collider und Asset-Budget technisch abgenommen.
+- [x] Movement-Bulk ergänzt: Runner, Brute, Gilded Talon/Stormclaw Champion und
+  Brood King besitzen je vier echte Laufphasen für links, rechts, oben und unten.
+- [x] Slime bewusst unverändert: seine runde Silhouette und der Wobble sind
+  richtungsneutral bereits lesbar.
+- [x] Alle 64 neuen Runtime-Frames auf Mittelpunkt, Bodenlinie, Zellgrenzen und
+  sichtbare Vorder-/Rückansicht geprüft; maximal 0,5 px Mittelpunktabweichung.
 
 Details: `docs/ENEMY_ANIMATION_POLISH.md`.
 

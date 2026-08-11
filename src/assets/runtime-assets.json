@@ -436,13 +436,40 @@
       "bytes": 114926
     },
     {
-      "source": "art-source/enemies/animations/enemy-runner-walk.png",
-      "sourceSha256": "d3bd26a116bfdb48b178f3f2030dd4203b6fb742f9a022af037609b1e0734acc",
-      "runtime": "src/assets/enemies/animations/enemy-runner-walk.webp",
-      "runtimeSha256": "6039400a89ab8f986f967d165c2876206cf63945477754cbf1ba220c6ac64b26",
-      "width": 768,
-      "height": 256,
-      "bytes": 19950
+      "source": "art-source/enemies/animations/enemy-runner-run.png",
+      "sourceSha256": "00a706645077c4e7da6bc02281f7a42223643ec73ec529e7975d6121c23f00c4",
+      "runtime": "src/assets/enemies/animations/enemy-runner-run.webp",
+      "runtimeSha256": "731ca6b2e782a58bdc49673bf3477ec8608c48133929870b63ea60cd5c72659a",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 197136
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-elite-runner-run.png",
+      "sourceSha256": "71488f975a61716aa75ba8be8141ca34fe4c8b97a32d1e90d5ceb39f12be0d55",
+      "runtime": "src/assets/enemies/animations/enemy-elite-runner-run.webp",
+      "runtimeSha256": "6bfa89e155df677d578ea27681846e55f06362fa6344bf6882531abf5a121a5d",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 193432
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-brute-run.png",
+      "sourceSha256": "c1ee2c6d423f87189538e75dd6a05e0fcb864aadd099cbe64f1c834aaea314db",
+      "runtime": "src/assets/enemies/animations/enemy-brute-run.webp",
+      "runtimeSha256": "1a2ba7b570c9edc2efbe9895ba504229805aa190e70fdf66b9f907ff4ee695e5",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 180860
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-boss-run.png",
+      "sourceSha256": "f0fe2b61b24f28950ebc274c911f2d45762f25511a067c8e055b66213f8df76a",
+      "runtime": "src/assets/enemies/animations/enemy-boss-run.webp",
+      "runtimeSha256": "f162a9cd02e1126a7522c7134cd3d5dd0af8e123cf43c06d050544fe513c4ed3",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 297452
     },
     {
       "source": "art-source/enemies/animations/enemy-brute-stomp.png",
@@ -499,15 +526,6 @@
       "bytes": 153886
     },
     {
-      "source": "art-source/enemies/animations/enemy-elite-runner-walk.png",
-      "sourceSha256": "9dcc9d2cf00fee0a70faf6bd0aa17947636bb923d0314f292653468c3fa08b72",
-      "runtime": "src/assets/enemies/animations/enemy-elite-runner-walk.webp",
-      "runtimeSha256": "b2506c583f29422f52d9115eedf427bd731b27b05d422bfecbc8670c4ec59a76",
-      "width": 768,
-      "height": 256,
-      "bytes": 37578
-    },
-    {
       "source": "art-source/enemies/animations/enemy-elite-brute-stomp.png",
       "sourceSha256": "61496dccb27e097ca366fd44b08dc1da712de593676e50447ab8475a2f040e77",
       "runtime": "src/assets/enemies/animations/enemy-elite-brute-stomp.webp",
@@ -524,15 +542,6 @@
       "width": 768,
       "height": 256,
       "bytes": 48572
-    },
-    {
-      "source": "art-source/enemies/animations/enemy-boss-heavy.png",
-      "sourceSha256": "cf0f49815163f17fe33f06c19ced0a4c380ae213d815cb9578a5af2b17e7878d",
-      "runtime": "src/assets/enemies/animations/enemy-boss-heavy.webp",
-      "runtimeSha256": "f2b68342f0c32060a4efc4b8ee73d931b057e9a08f9af5174c2cd908db229301",
-      "width": 768,
-      "height": 256,
-      "bytes": 53250
     },
     {
       "source": "art-source/fx/fx-atlas-v1-sheet.png",
