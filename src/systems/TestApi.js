@@ -307,6 +307,7 @@ export function installTestApi(scene) {
       animation: scene.player.sprite.anims.currentAnim?.key ?? null,
       frame: scene.player.sprite.frame?.name ?? null,
       flipX: scene.player.sprite.flipX,
+      angle: scene.player.sprite.angle,
       displayScale: { x: scene.player.sprite.scaleX, y: scene.player.sprite.scaleY },
       scale: scene.player.baseScale,
       tint: scene.player.sprite.tintTopLeft,
@@ -324,7 +325,11 @@ export function installTestApi(scene) {
         west: new Phaser.Math.Vector2(-1, 0),
         east: new Phaser.Math.Vector2(1, 0),
         north: new Phaser.Math.Vector2(0, -1),
-        south: new Phaser.Math.Vector2(0, 1)
+        south: new Phaser.Math.Vector2(0, 1),
+        'north-west': new Phaser.Math.Vector2(-1, -1),
+        'north-east': new Phaser.Math.Vector2(1, -1),
+        'south-west': new Phaser.Math.Vector2(-1, 1),
+        'south-east': new Phaser.Math.Vector2(1, 1)
       }[direction] ?? new Phaser.Math.Vector2(0, 0);
       scene.player.updateAnimation(velocity);
       scene.player.updateVisualPose(velocity);

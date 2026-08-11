@@ -5,12 +5,12 @@
   "assets": [
     {
       "source": "art-source/characters/rooster-ace-walk.png",
-      "sourceSha256": "4c96595bbae57120fcf490ae2c91208ba342adf4c9337f780d0b099364f43897",
+      "sourceSha256": "fb1c1a2dbb4b62ce019c5fca20b9f3aeee4a23c8d0f5e4cf2612f1d949a7ce65",
       "runtime": "src/assets/characters/rooster-ace-walk.webp",
-      "runtimeSha256": "0a7afde0d85ddb17d31f5573b9e159a1de808b6162fb6ed3fff0a189685ee177",
+      "runtimeSha256": "f1fa0bedd4a5b28fa2e9493a4850cc1089f39465c5c9adc59f1b888a5eb7ad23",
       "width": 1024,
       "height": 1024,
-      "bytes": 258906
+      "bytes": 262358
     },
     {
       "source": "art-source/characters/rooster-artillery-walk.png",
@@ -23,12 +23,12 @@
     },
     {
       "source": "art-source/characters/rooster-storm-walk.png",
-      "sourceSha256": "3ceedf3dfe0dfb20d76de65de0522e46b291e7ae4d47f716f3026e4ed61e7df1",
+      "sourceSha256": "69fcf70744ed32b6b56a4560fa1d04e71fd812242ca14f453e84a8ad9e202c5d",
       "runtime": "src/assets/characters/rooster-storm-walk.webp",
-      "runtimeSha256": "32a744ccdc38ae48f31f134029c0a801231ec463d84dd9abcc0e9961ea721ffa",
+      "runtimeSha256": "69c839d8472320cf1d37d79bc9b219157c0012e23bce25d2f35247628c721fd6",
       "width": 1024,
       "height": 1024,
-      "bytes": 252270
+      "bytes": 252996
     },
     {
       "source": "art-source/characters/rooster-ace-portrait.png",

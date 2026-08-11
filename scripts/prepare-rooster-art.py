@@ -23,28 +23,43 @@ def resize_rgba(source: Path, target: Path, size: tuple[int, int]) -> None:
         resized.save(target, "PNG", optimize=True)
 
 
-def build_normalized_sheet(source: Path, target: Path) -> None:
+def crop_character(frame: Image.Image, label: str) -> Image.Image:
+    bbox = frame.getchannel("A").getbbox()
+    if bbox is None:
+        raise SystemExit(f"Empty source frame {label}")
+    return frame.crop(bbox)
+
+
+def normalize_character(character: Image.Image) -> Image.Image:
+    character.thumbnail(MAX_CHARACTER_SIZE, Image.Resampling.LANCZOS)
+    if character.width / character.height < 0.78:
+        character = character.resize(
+            (round(character.height * 0.78), character.height),
+            Image.Resampling.LANCZOS,
+        )
+    return character
+
+
+def build_normalized_sheet(source: Path, target: Path, north_source: Path | None = None) -> None:
     with Image.open(source) as image:
         converted = image.convert("RGBA")
+        north_strip = None
+        if north_source and north_source.exists():
+            with Image.open(north_source) as north_image:
+                north_strip = north_image.convert("RGBA").copy()
         sheet = Image.new("RGBA", SHEET_SIZE, (0, 0, 0, 0))
         for index in range(16):
             column = index % 4
             row = index // 4
-            left = round(column * converted.width / 4)
-            top = round(row * converted.height / 4)
-            right = round((column + 1) * converted.width / 4)
-            bottom = round((row + 1) * converted.height / 4)
-            raw_frame = converted.crop((left, top, right, bottom))
-            bbox = raw_frame.getchannel("A").getbbox()
-            if bbox is None:
-                raise SystemExit(f"Empty source frame {index} in {source}")
-            character = raw_frame.crop(bbox)
-            character.thumbnail(MAX_CHARACTER_SIZE, Image.Resampling.LANCZOS)
-            if character.width / character.height < 0.78:
-                character = character.resize(
-                    (round(character.height * 0.78), character.height),
-                    Image.Resampling.LANCZOS,
-                )
+            frame_source = north_strip if row == 3 and north_strip is not None else converted
+            source_rows = 1 if frame_source is north_strip else 4
+            source_row = 0 if frame_source is north_strip else row
+            left = round(column * frame_source.width / 4)
+            top = round(source_row * frame_source.height / source_rows)
+            right = round((column + 1) * frame_source.width / 4)
+            bottom = round((source_row + 1) * frame_source.height / source_rows)
+            raw_frame = frame_source.crop((left, top, right, bottom))
+            character = normalize_character(crop_character(raw_frame, f"{index} in {source}"))
             x = column * FRAME_SIZE + (FRAME_SIZE - character.width) // 2
             y = row * FRAME_SIZE + CHARACTER_BASELINE - character.height
             sheet.alpha_composite(character, (x, y))
@@ -83,8 +98,18 @@ def validate_sheet(path: Path) -> list[dict[str, int | float]]:
                 "frame": index,
                 "width": width,
                 "height": height,
+                "center_x": (bbox[0] + bbox[2]) / 2,
+                "baseline": bbox[3],
                 "ratio": round(ratio, 2),
             })
+        for row in range(4):
+            row_metrics = frame_metrics[row * 4:(row + 1) * 4]
+            centers = [frame["center_x"] for frame in row_metrics]
+            baselines = [frame["baseline"] for frame in row_metrics]
+            if max(centers) - min(centers) > 1:
+                raise SystemExit(f"Row {row} in {path} jitters horizontally: {centers}")
+            if max(baselines) - min(baselines) > 1:
+                raise SystemExit(f"Row {row} in {path} has an unstable baseline: {baselines}")
         return frame_metrics
 
 
@@ -97,11 +122,12 @@ def validate_portrait(path: Path) -> None:
 def main() -> None:
     for rooster in ROOSTERS:
         sheet_source = GENERATED_ROOT / f"rooster-{rooster}-walk-alpha.png"
+        north_source = GENERATED_ROOT / f"rooster-{rooster}-north-alpha.png"
         portrait_source = GENERATED_ROOT / f"rooster-{rooster}-portrait-master.png"
         sheet_target = CHARACTER_ROOT / f"rooster-{rooster}-walk.png"
         portrait_target = CHARACTER_ROOT / f"rooster-{rooster}-portrait.png"
 
-        build_normalized_sheet(sheet_source, sheet_target)
+        build_normalized_sheet(sheet_source, sheet_target, north_source)
         resize_rgba(portrait_source, portrait_target, PORTRAIT_SIZE)
         metrics = validate_sheet(sheet_target)
         validate_portrait(portrait_target)

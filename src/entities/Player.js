@@ -219,27 +219,17 @@ export class Player {
     if (!moving) {
       const idle = Math.sin(now * 0.0042);
       this.sprite.setScale(
-        this.baseScale * (1 + idle * 0.018),
-        this.baseScale * (1 - idle * 0.014)
+        this.baseScale * (1 + idle * 0.012),
+        this.baseScale * (1 - idle * 0.008)
       );
-      this.sprite.setAngle(Math.sin(now * 0.0026) * 1.4);
+      this.sprite.setAngle(0);
       return;
     }
 
-    const step = Math.sin(now * 0.018);
-    const lift = Math.abs(step);
-    if (this.lastMoveDirection === 'east' || this.lastMoveDirection === 'west') {
-      const directionSign = this.lastMoveDirection === 'east' ? 1 : -1;
-      this.sprite.setScale(this.baseScale);
-      this.sprite.setAngle(directionSign * step * 2.2);
-      return;
-    }
-
-    this.sprite.setScale(
-      this.baseScale * (1 + lift * 0.025),
-      this.baseScale * (1 - lift * 0.025)
-    );
-    this.sprite.setAngle(step * 2);
+    // The authored four-frame sheets carry the complete walk cycle. Keeping the
+    // sprite transform stable avoids apparent jitter and preserves a true north view.
+    this.sprite.setScale(this.baseScale);
+    this.sprite.setAngle(0);
   }
 
   updateHealthBar() {

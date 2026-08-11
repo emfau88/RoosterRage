@@ -1,6 +1,6 @@
 # Phase 19 - Character Art und HUD Production Pass
 
-Stand: 10.08.2026
+Stand: 11.08.2026
 
 ## Ziel
 
@@ -15,6 +15,19 @@ Der spielbare Build uebernimmt die drei klaren Rooster-Identitaeten des Key Arts
 | Stormcrest | `art-source/characters/rooster-storm-walk.png` | `src/assets/characters/rooster-storm-walk.webp` | `src/assets/characters/rooster-storm-portrait.webp` |
 
 Alle Sheets sind 1024 x 1024 Pixel gross. Jede der 16 Zellen ist 256 x 256 Pixel gross; die Reihenfolge lautet Sued, West, Ost und Nord mit jeweils vier Laufphasen. Die Portraets sind 512 x 512 Pixel gross.
+
+### Spielercharakter-Polish vom 11.08.2026
+
+- Ace und Stormcrest besitzen neu gezeichnete, exakt gerade Nord-/Rueckenreihen;
+  kein sichtbares Auge, kein Schnabel und keine Drei-Viertel-Drehung mehr.
+- Boombardiers bereits korrekte Nordreihe blieb unveraendert und diente als
+  Kamerawinkel-Referenz.
+- Die zusaetzlichen prozeduralen Laufrotationen und Stauchungen wurden entfernt.
+  Die vier gezeichneten Frames tragen nun den Laufzyklus ohne optisches Wackeln.
+- Die Pipeline setzt optionale Nord-Quellstreifen deterministisch in Reihe 4 ein;
+  die vorherigen Sued- und Seitenframes bleiben dabei pixelgenau erhalten.
+- Automatisierte Gates decken je Klasse Sued, West, Ost, Nord sowie alle vier
+  Diagonalen ab und verbieten Laufrotation, Laufskalierung und falsche Frame-Reihen.
 
 ## ImageGen-Modus und Referenzen
 
@@ -42,6 +55,16 @@ Klassenvariablen:
 
 > Use case: stylized-concept. Asset type: square main-menu character portrait. Image 1 defines the premium Rooster Rage key-art style and class identity. Image 2 defines the final compact ingame character design. Create one polished hero portrait of [CLASS NAME] for a mobile game roster card. Square centered head-and-upper-torso three-quarter portrait, full comb/crest and shoulder silhouette visible, circular-crop safe with generous edge padding. Use a deep charcoal-to-[CLASS COLOR] radial backdrop with a restrained feather/storm/ember motif and soft rim glow. One rooster only; no attacks, projectiles, weapon, enemy, text, logo, watermark, UI, border or cropped comb.
 
+### Korrigierte Nordreihen
+
+Fuer Ace und Stormcrest wurde der eingebaute ImageGen-Modus erneut verwendet.
+Der finale Prompt-Satz verlangte je Klasse genau vier getrennte Laufphasen in
+einer horizontalen Reihe, eine strikt zentrierte Rueckenansicht ohne sichtbares
+Gesicht oder Seitendrehung, identische Groesse und Bodenlinie sowie die exakte
+Klassenidentitaet des bestehenden Sheets. Ace wurde auf `#00ff00`, Stormcrest
+auf `#ff00ff` erzeugt; beide Reihen wurden mit Soft Matte und Despill freigestellt.
+Es kam weiterhin kein CLI-/API-Fallback zum Einsatz.
+
 ## Technische Aufbereitung
 
 1. ImageGen-Rohsheets auf uniformem `#00ff00` erzeugen.
@@ -58,6 +81,8 @@ Gemessene Zellverhaeltnisse Breite/Hoehe:
 - Stormcrest: 0,78 bis 0,95
 
 Keine Zelle beruehrt ihren 256-x-256-Rand. Alle 48 Zellen besitzen einen nichtleeren Alphabereich.
+Jede Richtungsreihe besitzt zudem hoechstens 1 px Mittelpunkt- und
+Bodenlinienabweichung; die aktuelle Produktion liegt praktisch bei 0-0,5 px.
 
 ## UI-Ergebnis
 

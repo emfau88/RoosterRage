@@ -264,11 +264,21 @@ async function measureRoosterPrimary(browser, roosterId, waitMs) {
     const visual = await page.evaluate(() => window.__ROOSTER_TEST__.getRoosterVisualState());
     const directions = await page.evaluate(() => ({
       west: window.__ROOSTER_TEST__.previewRoosterDirection('west'),
-      east: window.__ROOSTER_TEST__.previewRoosterDirection('east')
+      east: window.__ROOSTER_TEST__.previewRoosterDirection('east'),
+      northWest: window.__ROOSTER_TEST__.previewRoosterDirection('north-west'),
+      northEast: window.__ROOSTER_TEST__.previewRoosterDirection('north-east'),
+      north: window.__ROOSTER_TEST__.previewRoosterDirection('north'),
+      southWest: window.__ROOSTER_TEST__.previewRoosterDirection('south-west'),
+      southEast: window.__ROOSTER_TEST__.previewRoosterDirection('south-east'),
+      south: window.__ROOSTER_TEST__.previewRoosterDirection('south')
     }));
     const enemies = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot())
       .then((items) => items.filter((enemy) => enemy.maxHp === 999));
-    await page.screenshot({ path: path.join(artifactDir, `rooster-${roosterId}-primary.png`) });
+    await page.waitForTimeout(50);
+    await page.screenshot({ path: path.join(artifactDir, `rooster-${roosterId}-south.png`) });
+    await page.evaluate(() => window.__ROOSTER_TEST__.previewRoosterDirection('north'));
+    await page.waitForTimeout(50);
+    await page.screenshot({ path: path.join(artifactDir, `rooster-${roosterId}-north.png`) });
     assert(errors.length === 0, `Browser reported errors for rooster ${roosterId}.`, errors);
     assert(enemies.length === 3, `Controlled targets missing for rooster ${roosterId}.`, enemies);
     return { roosterId, catalog, stats, visual, directions, enemies };
@@ -313,6 +323,24 @@ async function testRoosterClasses(browser) {
       && result.directions.east.displayScale.x === result.visual.scale
       && result.directions.east.displayScale.y === result.visual.scale,
     `${result.roosterId} side movement still changes apparent sprite size.`, result.directions);
+    ['west', 'east', 'south', 'northWest', 'northEast', 'north', 'southWest', 'southEast']
+      .forEach((direction) => {
+        const state = result.directions[direction];
+        assert(state.displayScale.x === result.visual.scale
+          && state.displayScale.y === result.visual.scale
+          && state.angle === 0,
+        `${result.roosterId} ${direction} movement still introduces transform jitter.`, state);
+      });
+    ['southWest', 'southEast', 'south'].forEach((direction) => {
+      const state = result.directions[direction];
+      assert(state.frame >= 0 && state.frame <= 3 && state.flipX === false,
+      `${result.roosterId} ${direction} movement does not use the true south row.`, state);
+    });
+    ['northWest', 'northEast', 'north'].forEach((direction) => {
+      const state = result.directions[direction];
+      assert(state.frame >= 12 && state.frame <= 15 && state.flipX === false,
+      `${result.roosterId} ${direction} movement does not use the true north row.`, state);
+    });
   });
   assert(ace.visual.markers === 1, 'Ace visual identity marker is missing.', ace.visual);
   assert(artillery.visual.markers === 2, 'Artillery visual identity markers are missing.', artillery.visual);
