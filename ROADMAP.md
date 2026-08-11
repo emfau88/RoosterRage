@@ -38,8 +38,8 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 Aktueller Fokus: Phase 20 hat Hauptmenü, vierdirektionalen Kornkrabbler,
 skalierte Horde-Dichte, feste XP-Budgets, verlustfreie Orb-Bündelung,
 Wave-basiertes Pickup-Pacing und den Enemy-Animation-Polish geliefert.
-Support/Summoner besitzen eigene 4-Zustands-Sheets; sechs weitere Spezial-
-und Elitegegner laufen state-driven. Auch Prop-Schadensstufen/-Drops, drei
+Support/Summoner besitzen eigene vereinfachte 4×4-Richtungssheets; sechs
+weitere Spezial- und Elitegegner laufen state-driven. Auch Prop-Schadensstufen/-Drops, drei
 Chest-Tiers, die physische Royal Boss Chest und der seltene Stormclaw Champion
 sind umgesetzt. Als Nächstes folgt das vollständige Multi-Seed-/Geräte-
 Production-Gate.

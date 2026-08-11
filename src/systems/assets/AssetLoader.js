@@ -9,8 +9,8 @@ import enemyBruteStompUrl from '../../assets/enemies/animations/enemy-brute-stom
 import enemySpitterPulseUrl from '../../assets/enemies/animations/enemy-spitter-pulse.webp';
 import enemyFanSpitterRecoilUrl from '../../assets/enemies/animations/enemy-fan-spitter-recoil.webp';
 import enemyBomberBobUrl from '../../assets/enemies/animations/enemy-bomber-bob.webp';
-import enemySupportStatesUrl from '../../assets/enemies/animations/enemy-support-states.webp';
-import enemySummonerStatesUrl from '../../assets/enemies/animations/enemy-summoner-states.webp';
+import enemySupportRunUrl from '../../assets/enemies/animations/enemy-support-run.webp';
+import enemySummonerRunUrl from '../../assets/enemies/animations/enemy-summoner-run.webp';
 import enemyEliteRunnerWalkUrl from '../../assets/enemies/animations/enemy-elite-runner-walk.webp';
 import enemyEliteBruteStompUrl from '../../assets/enemies/animations/enemy-elite-brute-stomp.webp';
 import enemyEliteSpitterPulseUrl from '../../assets/enemies/animations/enemy-elite-spitter-pulse.webp';
@@ -120,8 +120,8 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-spitter-pulse', enemySpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-fan-spitter-recoil', enemyFanSpitterRecoilUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-bomber-bob', enemyBomberBobUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('enemy-support-states', enemySupportStatesUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('enemy-summoner-states', enemySummonerStatesUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('enemy-support-run', enemySupportRunUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('enemy-summoner-run', enemySummonerRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-runner-walk', enemyEliteRunnerWalkUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-brute-stomp', enemyEliteBruteStompUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-pulse', enemyEliteSpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });

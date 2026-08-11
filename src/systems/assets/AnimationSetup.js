@@ -48,26 +48,30 @@ export function createGameAnimations(scene) {
     ['enemy-spitter', 'enemy-spitter-pulse', 7],
     ['enemy-fan-spitter', 'enemy-fan-spitter-recoil', 7],
     ['enemy-bomber', 'enemy-bomber-bob', 8],
-    ['enemy-support', 'enemy-support-states', 7],
-    ['enemy-summoner', 'enemy-summoner-states', 7],
     ['enemy-elite-brute', 'enemy-elite-brute-stomp', 6],
     ['enemy-elite-spitter', 'enemy-elite-spitter-pulse', 7]
   ];
   [
-    ['left', 0],
-    ['right', 4],
-    ['up', 8],
-    ['down', 12]
-  ].forEach(([direction, start]) => {
-    const key = `enemy-kornkrabbler-run-${direction}`;
-    if (!scene.anims.exists(key)) {
-      scene.anims.create({
-        key,
-        frames: scene.anims.generateFrameNumbers('enemy-kornkrabbler-run', { start, end: start + 3 }),
-        frameRate: 11,
-        repeat: -1
-      });
-    }
+    ['enemy-kornkrabbler-run', 11],
+    ['enemy-support-run', 9],
+    ['enemy-summoner-run', 9]
+  ].forEach(([texture, frameRate]) => {
+    [
+      ['left', 0],
+      ['right', 4],
+      ['up', 8],
+      ['down', 12]
+    ].forEach(([direction, start]) => {
+      const key = `${texture}-${direction}`;
+      if (!scene.anims.exists(key)) {
+        scene.anims.create({
+          key,
+          frames: scene.anims.generateFrameNumbers(texture, { start, end: start + 3 }),
+          frameRate,
+          repeat: -1
+        });
+      }
+    });
   });
   enemyAnimations.forEach(([key, texture, start, end, frameRate]) => {
     if (scene.anims.exists(key)) {

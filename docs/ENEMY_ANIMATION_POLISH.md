@@ -1,40 +1,40 @@
 # Enemy Animation Polish
 
-Status: abgeschlossen am 11.08.2026.
+Status: korrigiert und abgeschlossen am 11.08.2026.
 
 ## Ergebnis
 
-- Brood Tender und Nest Caller besitzen eigene, transparent freigestellte
-  4-Zustands-Sheets statt eingefärbter Spitter-Grafik.
-- Brute, Spitter, Fan-Spitter, Bomber, Support, Summoner, Elite-Brute und
-  Elite-Spitter verwenden `move`, `windup`, `resolve` und `recovery`.
-- Windup und Resolve werden von der tatsächlichen Angriffslogik gesteuert;
-  die Animation ist damit ein lesbarer Telegraph und kein Dauer-Loop.
-- Der Bomber zeigt während seiner Explosion zusätzlich den scharf lesbaren
-  bewaffneten Zustand.
+- Brood Tender und Nest Caller besitzen eigene, bewusst einfache 4×4-
+  Bewegungssheets statt eingefärbter Spitter-Grafik.
+- Jedes Sheet enthält vier echte Laufphasen für links, rechts, oben und unten.
+- Proportionen, Konturstärke, Cel-Shading und Detaildichte orientieren sich
+  verbindlich an Kornkrabbler, Runner, Slime und Spitter.
+- Brute, Spitter, Fan-Spitter, Bomber, Elite-Brute und Elite-Spitter verwenden
+  weiterhin mechanisch gekoppelte `move`-, `windup`-, `resolve`- und
+  `recovery`-Zustände.
+- Support/Summoner zeigen ihre Fähigkeiten über vorhandene Aura- und Telegraph-
+  Effekte; ihre Bewegungsrichtung wird nicht mehr von einer Ability-Pose
+  überschrieben.
 
 ## Runtime-Budget
 
-- Quellsheets: 1024 × 256 px, vier gleich große Frames.
-- Runtime: WebP, 256 × 256 px pro Frame.
-- Brood Tender: ca. 54 KB; Nest Caller: ca. 52 KB.
-- Darstellung im Kampf: ca. 72–78 px; Collider und HP-Balken bleiben kleiner
-  als die sichtbare Silhouette.
+- Quellsheets: 4×4-Raster mit 16 Frames.
+- Runtime: 1024×1024 WebP, 256×256 px pro Frame.
+- Darstellung bleibt auf kompakte Ingame-Silhouetten begrenzt; Collider und
+  HP-Balken sind kleiner als die sichtbare Figur.
 
 ## Asset-Herkunft
 
-Die beiden Figuren wurden im Chroma-Key-Modus generiert, anschließend lokal
-freigestellt, auf gemeinsame Grundlinie normalisiert und als Spritesheet
-optimiert. Verwendete Arbeits-Prompts:
+Die Figuren wurden mit den bestehenden Gegner-Sheets als strikte Stilreferenz
+im Chroma-Key-Modus erzeugt und lokal freigestellt.
 
-- Brood Tender: freundliche, aber kampflesbare mint/cremefarbene Hennen-
-  Supportfigur im handgemalten Rooster-Rage-Stil; vier horizontale Zustände
-  Bewegung, Aufladung, Heilauslösung und Erholung; Magenta-Key-Hintergrund.
-- Nest Caller: düstere avianische Beschwörerfigur mit Eierschalenkapuze,
-  violettem Kern und Stab; vier horizontale Zustände Bewegung, Aufladung,
-  Beschwörung und Erholung; Grün-Key-Hintergrund.
+- Brood Tender: runder mint/cremefarbener Support-Kükengegner, Blattkamm,
+  einzelner grüner Kern, keine Kleidung oder kleinteilige Federstruktur.
+- Nest Caller: rundes dunkles Küken mit einfacher Eierschalenhaube, zwei
+  violetten Augen und einem einzelnen Beschwörungssymbol; kein Stab oder Mantel.
 
-Quellen liegen unter `art-source/enemies/generated/`, die aufbereiteten Sheets
+Zeilenreihenfolge beider Sheets: links, rechts, oben/rückwärts, unten/vorwärts.
+Quellen liegen unter `art-source/enemies/generated/`, die freigestellten Sheets
 unter `art-source/enemies/animations/`.
 
 ## Abnahme
@@ -42,9 +42,8 @@ unter `art-source/enemies/animations/`.
 - `npm run assets:check`
 - `npm run build`
 - `npm run test:encounter`
+- automatische Prüfung aller vier Bewegungsrichtungen für beide Figuren
 - Laufzeit-Screenshot in mobiler Portrait-Auflösung
 
-Der Brood Tender bleibt absichtlich heller als andere Gegner, wird in echter
-Spielgröße aber durch roten HP-Balken, grünen Wirkungsradius und gegnerische
-Bewegung eindeutig als prioritäres Supportziel gelesen. Der Nest Caller ist
-bereits über Silhouette und violetten Telegraph eindeutig feindlich.
+Die zuerst erzeugten detaillierten Illustrationsfiguren wurden verworfen und
+aus Quell- sowie Runtime-Assets entfernt.

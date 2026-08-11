@@ -907,10 +907,13 @@ Unbedingt in dieser Reihenfolge arbeiten:
 
 ## Phase 5 – Enemy Animation Polish
 **Status: abgeschlossen am 11.08.2026.**
-- [x] Support und Summoner besitzen eigene Identität und 4-Zustands-Sheets.
+- [x] Support und Summoner besitzen eigene, vereinfachte 4×4-Sheets mit je
+  vier Laufphasen für links, rechts, oben und unten.
 - [x] Brute, Spitter, Fan-Spitter, Bomber und die betroffenen Elites laufen
   state-driven statt als permanenter Attack-Loop.
-- [x] Windup, Resolve und Recovery sind mit den realen Fähigkeiten gekoppelt.
+- [x] Die übrigen Spezialgegner koppeln Windup, Resolve und Recovery an ihre
+  Fähigkeiten; Support/Summoner behalten währenddessen die Richtungsanimation
+  und nutzen Aura/Telegraph für die Fähigkeitslesbarkeit.
 - [x] Mobile Laufzeitgröße, Collider und Asset-Budget technisch abgenommen.
 
 Details: `docs/ENEMY_ANIMATION_POLISH.md`.

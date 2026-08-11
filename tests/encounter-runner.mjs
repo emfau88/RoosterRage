@@ -100,24 +100,37 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
       return { ids, enemies: api.getEnemySnapshot() };
     });
     const byType = Object.fromEntries(initial.enemies.map((enemy) => [enemy.type, enemy]));
-    assert(byType.support.texture === 'enemy-support-states'
-      && byType.summoner.texture === 'enemy-summoner-states',
+    assert(byType.support.texture === 'enemy-support-run'
+      && byType.summoner.texture === 'enemy-summoner-run',
     'Support and summoner still reuse a tinted spitter texture.', byType);
-    ['brute', 'spitter', 'fan-spitter', 'bomber', 'support', 'summoner', 'elite-brute', 'elite-spitter']
+    ['brute', 'spitter', 'fan-spitter', 'bomber', 'elite-brute', 'elite-spitter']
       .forEach((type) => assert(
         byType[type].animation?.endsWith('-move') && byType[type].animationState === 'move',
         `${type} did not enter a dedicated movement state.`, byType[type]
       ));
-
-    await page.waitForTimeout(120);
-    await page.screenshot({ path: path.join(artifactDir, 'enemy-state-art-runtime.png') });
-    const charging = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
-    const summonerCharging = charging.find((enemy) => enemy.type === 'summoner');
-    assert(summonerCharging.animationState === 'windup'
-      && summonerCharging.animation === 'enemy-summoner-windup',
-    'Summoner telegraph is not synchronized with its windup frames.', summonerCharging);
-
-    await page.waitForTimeout(600);
+    const directionalAnimations = {};
+    for (const [direction, point] of Object.entries({
+      left: [600, 340],
+      right: [1150, 340],
+      up: [930, 50],
+      down: [930, 720]
+    })) {
+      await page.evaluate(([x, y]) => window.__ROOSTER_TEST__.movePlayer(x, y), point);
+      await page.waitForTimeout(55);
+      directionalAnimations[direction] = await page.evaluate(() => Object.fromEntries(
+        window.__ROOSTER_TEST__.getEnemySnapshot()
+          .filter((enemy) => ['support', 'summoner'].includes(enemy.type))
+          .map((enemy) => [enemy.type, enemy.animation])
+      ));
+    }
+    for (const [direction, animations] of Object.entries(directionalAnimations)) {
+      ['support', 'summoner'].forEach((type) => assert(
+        animations[type] === `enemy-${type}-run-${direction}`,
+        `${type} is missing its ${direction} movement row.`, directionalAnimations
+      ));
+    }
+    await page.screenshot({ path: path.join(artifactDir, 'enemy-directional-art-runtime.png') });
+    await page.waitForTimeout(650);
     const resolved = await page.evaluate(() => ({
       enemies: window.__ROOSTER_TEST__.getEnemySnapshot(),
       events: window.__ROOSTER_TEST__.getEncounterEvents()
@@ -130,7 +143,7 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
       supportTexture: byType.support.texture,
       summonerTexture: byType.summoner.texture,
       initialStates: Object.fromEntries(Object.entries(byType).map(([type, enemy]) => [type, enemy.animation])),
-      summonerWindup: summonerCharging.animation
+      directionalAnimations
     };
   } finally {
     await page.close();
