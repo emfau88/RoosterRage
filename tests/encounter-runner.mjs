@@ -67,9 +67,10 @@ async function verifyCatalog(browser, serverUrl) {
     ));
     result.waves.slice(3, 9).forEach((wave) => {
       const normalShooters = (wave.roleCounts.shooter ?? 0) + (wave.roleCounts['area-denial'] ?? 0);
-      const shooterShare = normalShooters / wave.count;
+      const fullSizeEnemies = wave.count - (wave.roleCounts['micro-fodder'] ?? 0);
+      const shooterShare = normalShooters / fullSizeEnemies;
       assert(shooterShare >= 0.05 && shooterShare <= 0.1,
-        `Wave ${wave.wave} normal shooter share is outside the 5-10% pressure target.`,
+        `Wave ${wave.wave} normal shooter share is outside the 5-10% full-size pressure target.`,
         { shooterShare, wave });
     });
     assert(result.waves.some((wave) => wave.roleCounts.support > 0)
@@ -77,6 +78,60 @@ async function verifyCatalog(browser, serverUrl) {
     'Support and summoner roles are absent from curated waves.', result.waves);
     assert(errors.length === 0, 'Browser errors in encounter catalog gate.', errors);
     return result;
+  } finally {
+    await page.close();
+  }
+}
+
+async function verifyStateDrivenEnemyArt(browser, serverUrl) {
+  const { page, errors } = await openGame(browser, serverUrl, 'state-driven-art');
+  try {
+    const initial = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      const ids = {};
+      ['brute', 'spitter', 'fan-spitter', 'bomber', 'support', 'summoner', 'elite-brute', 'elite-spitter']
+        .forEach((type, index) => {
+          ids[type] = api.spawnEnemyType(type, 840 + (index % 3) * 90, 220 + Math.floor(index / 3) * 120, {
+            speed: 0,
+            damage: 0,
+            hp: 9999
+          });
+        });
+      return { ids, enemies: api.getEnemySnapshot() };
+    });
+    const byType = Object.fromEntries(initial.enemies.map((enemy) => [enemy.type, enemy]));
+    assert(byType.support.texture === 'enemy-support-states'
+      && byType.summoner.texture === 'enemy-summoner-states',
+    'Support and summoner still reuse a tinted spitter texture.', byType);
+    ['brute', 'spitter', 'fan-spitter', 'bomber', 'support', 'summoner', 'elite-brute', 'elite-spitter']
+      .forEach((type) => assert(
+        byType[type].animation?.endsWith('-move') && byType[type].animationState === 'move',
+        `${type} did not enter a dedicated movement state.`, byType[type]
+      ));
+
+    await page.waitForTimeout(120);
+    await page.screenshot({ path: path.join(artifactDir, 'enemy-state-art-runtime.png') });
+    const charging = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
+    const summonerCharging = charging.find((enemy) => enemy.type === 'summoner');
+    assert(summonerCharging.animationState === 'windup'
+      && summonerCharging.animation === 'enemy-summoner-windup',
+    'Summoner telegraph is not synchronized with its windup frames.', summonerCharging);
+
+    await page.waitForTimeout(600);
+    const resolved = await page.evaluate(() => ({
+      enemies: window.__ROOSTER_TEST__.getEnemySnapshot(),
+      events: window.__ROOSTER_TEST__.getEncounterEvents()
+    }));
+    assert(resolved.events.some((event) => event.type === 'enemyAbilityFired'
+      && event.enemyType === 'summoner'),
+    'Summoner state animation completed without resolving its brood call.', resolved);
+    assert(errors.length === 0, 'Browser errors in state-driven enemy-art gate.', errors);
+    return {
+      supportTexture: byType.support.texture,
+      summonerTexture: byType.summoner.texture,
+      initialStates: Object.fromEntries(Object.entries(byType).map(([type, enemy]) => [type, enemy.animation])),
+      summonerWindup: summonerCharging.animation
+    };
   } finally {
     await page.close();
   }
@@ -207,7 +262,7 @@ async function verifyProtectionAndBoss(browser, serverUrl) {
       damage: 0,
       hp: 999
     }));
-    await page.waitForTimeout(380);
+    await page.waitForTimeout(480);
     const protection = await page.evaluate(() => ({
       projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot(),
       events: window.__ROOSTER_TEST__.getEncounterEvents()
@@ -333,6 +388,7 @@ async function run() {
       generatedAt: new Date().toISOString(),
       catalog: await verifyCatalog(browser, serverState.url),
       projectileBudget: await verifyNormalProjectileBudget(browser, serverState.url),
+      stateDrivenArt: await verifyStateDrivenEnemyArt(browser, serverState.url),
       elites: [],
       protectionAndBoss: null,
       matrix: null
@@ -349,6 +405,7 @@ async function run() {
       roles: report.catalog.roles.map((role) => role.id),
       standards: report.catalog.standards,
       projectileBudget: report.projectileBudget,
+      stateDrivenArt: report.stateDrivenArt,
       elites: report.elites,
       boss: report.protectionAndBoss,
       matrixCases: report.matrix.length

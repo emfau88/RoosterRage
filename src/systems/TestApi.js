@@ -427,6 +427,8 @@ export function installTestApi(scene) {
       x: enemy.sprite.x,
       y: enemy.sprite.y,
       animation: enemy.sprite.anims.currentAnim?.key ?? null,
+      animationState: enemy.animationState ?? null,
+      texture: enemy.sprite.texture.key,
       hpBarVisible: enemy.hpBarBack.visible || enemy.hpBarFill.visible,
       bossPhaseIndex: enemy.bossPhaseIndex,
       bossSequenceStep: enemy.bossSequenceStep,

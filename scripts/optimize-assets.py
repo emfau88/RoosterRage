@@ -68,6 +68,8 @@ RUNTIME_IMAGES = (
     "enemies/animations/enemy-spitter-pulse.png",
     "enemies/animations/enemy-fan-spitter-recoil.png",
     "enemies/animations/enemy-bomber-bob.png",
+    "enemies/animations/enemy-support-states.png",
+    "enemies/animations/enemy-summoner-states.png",
     "enemies/animations/enemy-elite-runner-walk.png",
     "enemies/animations/enemy-elite-brute-stomp.png",
     "enemies/animations/enemy-elite-spitter-pulse.png",
@@ -121,6 +123,8 @@ RUNTIME_SIZES = {
 # are resized as one canvas and are never cropped to visible pixels.
 RUNTIME_SHEET_SIZES = {
     "enemies/animations/enemy-kornkrabbler-run.png": (1024, 1024),
+    "enemies/animations/enemy-support-states.png": (1024, 256),
+    "enemies/animations/enemy-summoner-states.png": (1024, 256),
 }
 
 BULK_1_ICONS = (

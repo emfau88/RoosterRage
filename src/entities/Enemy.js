@@ -33,6 +33,11 @@ export class Enemy {
     this.xpValue = config.xp;
     this.microFodder = config.microFodder ?? false;
     this.directionalAnimationPrefix = config.directionalAnimationPrefix ?? null;
+    this.animationSet = config.animationSet ? { ...config.animationSet } : null;
+    this.animationState = 'move';
+    this.resolveAnimationUntil = 0;
+    this.recoveryAnimationUntil = 0;
+    this.nextPassiveAnimationAt = scene.time.now + 850 + (this.id % 5) * 170;
     this.type = config.type ?? 'unknown';
     this.role = config.role ?? this.type;
     this.ability = config.ability ?? null;
@@ -86,7 +91,9 @@ export class Enemy {
     }
     this.sprite.setAlpha(1);
     this.sprite.stop();
-    if (config.animation) {
+    if (this.animationSet?.move) {
+      this.sprite.play(this.animationSet.move);
+    } else if (config.animation) {
       this.sprite.play(config.animation);
     }
     if (this.explodeOnDeath) {
@@ -136,10 +143,14 @@ export class Enemy {
       this.sprite.setVelocity(direction.x * movementSpeed, direction.y * movementSpeed);
     }
     this.updateAbility(player);
+    this.updateStateAnimation();
     this.updateWarningVisual();
     if (this.auraVisual) {
       this.auraVisual.setPosition(this.sprite.x, this.sprite.y);
-      this.auraVisual.setAlpha(0.16 + Math.sin(this.scene.time.now * 0.005) * 0.05);
+      const resolving = this.animationState === 'resolve';
+      this.auraVisual
+        .setAlpha((resolving ? 0.27 : 0.16) + Math.sin(this.scene.time.now * 0.005) * 0.05)
+        .setScale(resolving ? 1.08 : 1);
     }
     this.hpBarBack.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
@@ -156,6 +167,33 @@ export class Enemy {
       : (direction.y < 0 ? 'up' : 'down');
     const key = `${this.directionalAnimationPrefix}-${facing}`;
     if (this.sprite.anims.currentAnim?.key !== key) {
+      this.sprite.play(key);
+    }
+  }
+
+  markAbilityResolved(resolveMs = 150, recoveryMs = 230) {
+    const now = this.scene.time.now;
+    this.resolveAnimationUntil = Math.max(this.resolveAnimationUntil, now + resolveMs);
+    this.recoveryAnimationUntil = Math.max(this.recoveryAnimationUntil, now + resolveMs + recoveryMs);
+  }
+
+  updateStateAnimation() {
+    if (!this.animationSet) return;
+    const now = this.scene.time.now;
+    if (this.aura && !this.ability && now >= this.nextPassiveAnimationAt) {
+      this.markAbilityResolved(260, 260);
+      this.nextPassiveAnimationAt = now + 2500 + (this.id % 4) * 180;
+    }
+    const nextState = this.abilityCharging || this.heavyCharging
+      ? 'windup'
+      : now < this.resolveAnimationUntil
+        ? 'resolve'
+        : now < this.recoveryAnimationUntil
+          ? 'recovery'
+          : 'move';
+    const key = this.animationSet[nextState] ?? this.animationSet.move;
+    if (this.animationState !== nextState || this.sprite.anims.currentAnim?.key !== key) {
+      this.animationState = nextState;
       this.sprite.play(key);
     }
   }

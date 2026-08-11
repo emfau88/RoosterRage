@@ -40,14 +40,18 @@ export function createGameAnimations(scene) {
   const enemyAnimations = [
     ['enemy-slime-wobble-loop', 'enemy-slime-wobble', 0, 2, 7],
     ['enemy-runner-walk-loop', 'enemy-runner-walk', 0, 2, 8],
-    ['enemy-brute-stomp-loop', 'enemy-brute-stomp', 0, 2, 6],
-    ['enemy-spitter-pulse-loop', 'enemy-spitter-pulse', 0, 2, 6],
-    ['enemy-fan-spitter-recoil-loop', 'enemy-fan-spitter-recoil', 0, 2, 6],
-    ['enemy-bomber-bob-loop', 'enemy-bomber-bob', 0, 2, 7],
     ['enemy-elite-runner-walk-loop', 'enemy-elite-runner-walk', 0, 2, 8],
-    ['enemy-elite-brute-stomp-loop', 'enemy-elite-brute-stomp', 0, 2, 5],
-    ['enemy-elite-spitter-pulse-loop', 'enemy-elite-spitter-pulse', 0, 2, 6],
     ['enemy-boss-heavy-loop', 'enemy-boss-heavy', 0, 2, 4]
+  ];
+  const stateDrivenEnemies = [
+    ['enemy-brute', 'enemy-brute-stomp', 6],
+    ['enemy-spitter', 'enemy-spitter-pulse', 7],
+    ['enemy-fan-spitter', 'enemy-fan-spitter-recoil', 7],
+    ['enemy-bomber', 'enemy-bomber-bob', 8],
+    ['enemy-support', 'enemy-support-states', 7],
+    ['enemy-summoner', 'enemy-summoner-states', 7],
+    ['enemy-elite-brute', 'enemy-elite-brute-stomp', 6],
+    ['enemy-elite-spitter', 'enemy-elite-spitter-pulse', 7]
   ];
   [
     ['left', 0],
@@ -75,6 +79,24 @@ export function createGameAnimations(scene) {
       frameRate,
       repeat: -1,
       yoyo: true
+    });
+  });
+  stateDrivenEnemies.forEach(([prefix, texture, frameRate]) => {
+    const specs = [
+      [`${prefix}-move`, [0, 1], frameRate, -1, true],
+      [`${prefix}-windup`, [1, 2], Math.max(7, frameRate), 0, false],
+      [`${prefix}-resolve`, [2], frameRate, -1, false],
+      [`${prefix}-recovery`, [2, 1, 0], Math.max(8, frameRate + 1), 0, false]
+    ];
+    specs.forEach(([key, frames, rate, repeat, yoyo]) => {
+      if (scene.anims.exists(key)) return;
+      scene.anims.create({
+        key,
+        frames: frames.map((frame) => ({ key: texture, frame })),
+        frameRate: rate,
+        repeat,
+        yoyo
+      });
     });
   });
 }

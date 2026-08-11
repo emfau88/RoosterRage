@@ -481,6 +481,24 @@
       "bytes": 38766
     },
     {
+      "source": "art-source/enemies/animations/enemy-support-states.png",
+      "sourceSha256": "dcfa33e4cd98a06260f1e1568cb0114d52555732c1b0898d6bb9d798ec0e802a",
+      "runtime": "src/assets/enemies/animations/enemy-support-states.webp",
+      "runtimeSha256": "3f677a91bc30f1eca265c1bbed55ecfb8ef5a483323759fb5367a10d5a8ced90",
+      "width": 1024,
+      "height": 256,
+      "bytes": 54116
+    },
+    {
+      "source": "art-source/enemies/animations/enemy-summoner-states.png",
+      "sourceSha256": "17a130da8f3d480f78bcd201a1221cfa483c6cfa141e106782eda06b1d9e208b",
+      "runtime": "src/assets/enemies/animations/enemy-summoner-states.webp",
+      "runtimeSha256": "5ca796c9c35992b81a8e0a97505976f6a333763256bb4ecb33da1643b32a85c2",
+      "width": 1024,
+      "height": 256,
+      "bytes": 51636
+    },
+    {
       "source": "art-source/enemies/animations/enemy-elite-runner-walk.png",
       "sourceSha256": "9dcc9d2cf00fee0a70faf6bd0aa17947636bb923d0314f292653468c3fa08b72",
       "runtime": "src/assets/enemies/animations/enemy-elite-runner-walk.webp",

@@ -95,6 +95,10 @@ export class EnemyAttackSystem {
         return;
       }
       enemy.abilityCharging = false;
+      enemy.markAbilityResolved?.(
+        ability.kind === 'summon' || ability.kind === 'slam' ? 220 : 150,
+        ability.kind === 'dash' ? 160 : 240
+      );
 
       const angle = Phaser.Math.Angle.Between(
         enemy.sprite.x,
@@ -227,6 +231,7 @@ export class EnemyAttackSystem {
       }
       enemy.abilityCharging = false;
       enemy.heavyCharging = false;
+      enemy.markAbilityResolved?.(isFireball || isDash ? 220 : 170, 260);
       enemy.bossSequenceReadyAt = this.scene.time.now;
       const angle = Phaser.Math.Angle.Between(
         enemy.sprite.x,
@@ -549,6 +554,22 @@ export class EnemyAttackSystem {
     const x = enemy.sprite.x;
     const y = enemy.sprite.y;
     const source = `explosion:${enemy.type}`;
+    const armedSprite = enemy.type === 'bomber'
+      ? this.scene.add.sprite(x, y, 'enemy-bomber-bob', 2)
+        .setScale(enemy.sprite.scaleX)
+        .setDepth(8)
+      : null;
+    if (armedSprite) {
+      this.scene.tweens.add({
+        targets: armedSprite,
+        scaleX: enemy.sprite.scaleX * 1.12,
+        scaleY: enemy.sprite.scaleY * 1.12,
+        alpha: { from: 0.9, to: 1 },
+        duration: 150,
+        yoyo: true,
+        repeat: 1
+      });
+    }
     this.scene.enemyDangerZones.push({
       x,
       y,
@@ -572,6 +593,7 @@ export class EnemyAttackSystem {
       duration: ENCOUNTER_STANDARDS.heavyTelegraphMs
     });
     this.scene.time.delayedCall(ENCOUNTER_STANDARDS.heavyTelegraphMs, () => {
+      armedSprite?.destroy();
       const core = this.scene.add.circle(x, y, 22, 0xfff08a, 0.55).setDepth(10);
       this.scene.audio.play('bomber-explosion');
       this.scene.tweens.add({

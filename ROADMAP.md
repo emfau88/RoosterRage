@@ -5,7 +5,7 @@
 Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp entwickelt.
 
 - Klarer Hook: verrueckte Rooster-Klassen, charakteristische Ei-Waffen und spektakulaere Build-Synergien.
-- Commercial Vertical Slice: 3 spielbare Rooster, 10 abwechslungsreiche Wellen, 1 Boss und etwa 25 belastbare Upgrades.
+- Commercial Vertical Slice: 3 spielbare Rooster, 10 abwechslungsreiche Wellen, 1 Boss und 45 belastbare Upgrades.
 - Die heutigen 10 Wellen bilden zunaechst einen kurzen, vollstaendig spielbaren Run. Eine spaetere Vollversion braucht laengere Runs oder mehrere 10-Wellen-Akte.
 - Mobile Portrait und Landscape bestimmen Bedienung, Lesbarkeit und Performance-Budgets; Desktop bleibt vollstaendig unterstuetzt.
 
@@ -33,8 +33,15 @@ Rooster Rage wird zunaechst als fokussierter Mobile-first-Web-Premium-Prototyp e
 | 17 | Vertical-Slice-Abnahme | Automatischer Freeze abgeschlossen; manuell/extern offen |
 | 18 | Kommerzielle Validierung | Oeffentliche Testfassung bereit; externe Messung offen |
 | 19 | Character Art und HUD Production Pass | Abgeschlossen |
+| 20 | Hauptmenü, Micro-Fodder, Horde sowie XP-/Pickup-Pacing | Phasen 1–4 abgeschlossen; Enemy-Art und finales Production-Gate offen |
 
-Aktueller Fokus: manueller und externer Phase-17-Gate. Der visuelle Phase-19-Production-Pass ist abgeschlossen; die oeffentliche Testfassung dient jetzt der manuellen Slice-Abnahme.
+Aktueller Fokus: Phase 20 hat Hauptmenü, vierdirektionalen Kornkrabbler,
+skalierte Horde-Dichte, feste XP-Budgets, verlustfreie Orb-Bündelung,
+Wave-basiertes Pickup-Pacing und den Enemy-Animation-Polish geliefert.
+Support/Summoner besitzen eigene 4-Zustands-Sheets; sechs weitere Spezial-
+und Elitegegner laufen state-driven. Als Nächstes folgen der verbleibende
+Prop-/Chest-Ausbau und eine begrenzte Champion-Lage, anschließend das
+vollständige Multi-Seed-/Geräte-Production-Gate.
 
 ## Phase 0: Technische Baseline
 

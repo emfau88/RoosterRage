@@ -9,6 +9,10 @@ https://github.com/emfau88/RoosterRage
 **Punkte/Phasen 1–4 umgesetzt und technisch abgenommen.** Der vollständige
 Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
 
+**Veröffentlicht:** Commit `7de459b` auf `master`; GitHub-Pages-Workflow #30
+erfolgreich. README, Desktop-/Mobile-Gates und der frühere Analytics-Fehler sind
+auf diesem Stand grün.
+
 - **Phase 1 – Hauptmenü: erledigt.** Default ist jetzt `Spielen` mit einem
   kompakten Rooster-Hero, Challenge/Arena-Block und dominantem `RUN STARTEN`.
   `Hähne`, `Training` und `Archiv` halten die vorhandenen Meta-Inhalte erreichbar.
@@ -902,13 +906,21 @@ Unbedingt in dieser Reihenfolge arbeiten:
 - [x] Mechanik-, Mobile-, Arena-, Pacing- und Performance-Regressionstests.
 
 ## Phase 5 – Enemy Animation Polish
-- zuerst Support/Summoner eigene Identität;
-- danach Brute/Spitter/Bomber state-driven.
+**Status: abgeschlossen am 11.08.2026.**
+- [x] Support und Summoner besitzen eigene Identität und 4-Zustands-Sheets.
+- [x] Brute, Spitter, Fan-Spitter, Bomber und die betroffenen Elites laufen
+  state-driven statt als permanenter Attack-Loop.
+- [x] Windup, Resolve und Recovery sind mit den realen Fähigkeiten gekoppelt.
+- [x] Mobile Laufzeitgröße, Collider und Asset-Budget technisch abgenommen.
+
+Details: `docs/ENEMY_ANIMATION_POLISH.md`.
 
 ## Phase 6 – optional neue Specials/Champions
+**Status: in Arbeit; auf eine kontrollierte Champion-Lage begrenzt.**
 Nur wenn der Kern nach Phase 1–5 wirklich besser ist.
 
 ## Phase 7 – Balance & Production Gate
+**Status: offen; nach dem Enemy-Art-Pass.**
 - echte Runs;
 - Multi-Seed;
 - alle Rooster;
