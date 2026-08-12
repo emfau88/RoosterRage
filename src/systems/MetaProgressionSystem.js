@@ -45,10 +45,10 @@ const COSMETICS = [
 ];
 
 const EXTRA_ENEMIES = [
-  { id: 'elite-runner', purpose: 'Gilded Talon: Haste-Aura und Dash', counterplay: 'Dash-Linie frueh verlassen' },
-  { id: 'elite-brute', purpose: 'Iron Brooder: Panzer-Aura und Slam', counterplay: 'Slam-Ring raeumen' },
-  { id: 'elite-spitter', purpose: 'Violet Matron: Regeneration und Faecher', counterplay: 'Matron priorisieren' },
-  { id: 'boss', purpose: 'THE BROOD KING: drei Phasen', counterplay: 'Faecher lesen, Feuerball weit fuehren' }
+  { id: 'elite-runner', purpose: 'Gilded Talon: Tempo-Aura und Dash', counterplay: 'Dash-Linie früh verlassen' },
+  { id: 'elite-brute', purpose: 'Iron Brooder: Panzer-Aura und Slam', counterplay: 'Slam-Ring räumen' },
+  { id: 'elite-spitter', purpose: 'Violet Matron: Regeneration und Fächer', counterplay: 'Matron priorisieren' },
+  { id: 'boss', purpose: 'THE BROOD KING: drei Phasen', counterplay: 'Fächer lesen, Feuerball weit führen' }
 ];
 
 function defaultState() {

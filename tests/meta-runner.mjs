@@ -48,7 +48,12 @@ async function verifyFreshHub(context, serverUrl) {
         challengeCards: document.querySelectorAll('.challenge-card').length,
         enabledChallenges: document.querySelectorAll('.challenge-card:not(:disabled)').length,
         talentNodes: document.querySelectorAll('.talent-node').length,
+        talentTiers: document.querySelectorAll('.talent-tier').length,
         masteryBadges: document.querySelectorAll('.rooster-card__mastery-badge').length,
+        archiveSummary: [...document.querySelectorAll('.henhouse-archive-stats small')].map((node) => node.textContent),
+        archiveRecords: [...document.querySelectorAll('.henhouse-records .personal-bests > span > small')].map((node) => node.textContent),
+        archiveDrawers: [...document.querySelectorAll('.henhouse-drawers summary')].map((node) => node.textContent),
+        analyticsInArchive: document.querySelector('[data-hub-view="archive"] [data-analytics-toggle]') !== null,
         currencyText: document.querySelector('.henhouse-kernels')?.textContent,
         enemyEntries: hub.lexicon.enemies.length,
         evolutionEntries: hub.lexicon.evolutions.length,
@@ -63,7 +68,7 @@ async function verifyFreshHub(context, serverUrl) {
         }
       };
     });
-    assert(snapshot.title === 'Hennenhuette', 'The Hennenhuette hub is not visible.', snapshot);
+    assert(snapshot.title === 'Hennenhütte', 'The Hennenhütte hub is not visible.', snapshot);
     assert(snapshot.roosterCards === 3 && snapshot.enabledRoosters === 1,
       'Fresh progression must offer only the Ace.', snapshot);
     assert(snapshot.challengeCards === 4 && snapshot.enabledChallenges === 1,
@@ -78,8 +83,14 @@ async function verifyFreshHub(context, serverUrl) {
     assert(snapshot.talentNodes === 6 && snapshot.masteryBadges === 3
       && snapshot.currencyText.includes('0'),
     'The Phase G hub modules are incomplete.', snapshot);
+    assert(snapshot.talentTiers === 3
+      && snapshot.archiveSummary.join(',') === 'Runs,Siege,Kills'
+      && snapshot.archiveRecords.join(',') === 'Meiste Kills,Schnellster Sieg,Längster Run'
+      && snapshot.archiveDrawers.join(',') === 'Run-Historie,Gegner-Lexikon,EVO-Lexikon'
+      && !snapshot.analyticsInArchive,
+    'Talent tiers or the simplified archive hierarchy are incomplete.', snapshot);
     assert(snapshot.layout.left >= 0 && snapshot.layout.right <= 390 && snapshot.layout.bodyOverflow <= 0,
-      'The portrait Hennenhuette overflows horizontally.', snapshot.layout);
+      'The portrait Hennenhütte overflows horizontally.', snapshot.layout);
     assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight,
       'The portrait hub should provide a vertically scrollable layout.', snapshot.layout);
     assert(errors.length === 0, 'Browser errors in the fresh hub.', errors);

@@ -267,6 +267,7 @@ export class GameScene extends Phaser.Scene {
     this.hud.showSettings(
       this.effects.getState(),
       this.audio.getSettings(),
+      this.productAnalytics.getState(),
       (key) => {
         this.effects.toggle(key);
         this.audio.play('ui-toggle');
@@ -276,6 +277,10 @@ export class GameScene extends Phaser.Scene {
         this.audio.setVolume(key, value);
         this.audio.play('ui-toggle', { cooldown: 110 });
         return this.audio.getSettings();
+      },
+      (enabled) => {
+        this.audio.play('ui-toggle');
+        return this.productAnalytics.setConsent(enabled);
       },
       () => {
         this.audio.play('ui-back');

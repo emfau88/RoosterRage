@@ -8,17 +8,17 @@
 
 Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Wähle Barnyard Ace, Boombardier oder Stormcrest, entwickle absurde Ei-Waffen und überlebe zehn eskalierende Wellen bis zum dreiphasigen Brood King.
 
-> **Projektstatus:** Hauptmenü, Micro-Fodder, Horde-Dichte, XP-/Pickup-Pacing und Enemy-Animation-Polish des aktuellen Production Pass sind umgesetzt und automatisiert abgenommen. Die GitHub-Pages-Version ist eine öffentliche Testfassung. Als Nächstes folgt das abschließende Multi-Seed-/Real-Run-Production-Gate.
+> **Projektstatus:** Hauptmenü, Micro-Fodder, Horde-Dichte, XP-/Pickup-Pacing, Enemy-Animation-Polish und der UI-/Meta-Polish des aktuellen Production Pass sind umgesetzt und automatisiert abgenommen. Die GitHub-Pages-Version ist eine öffentliche Testfassung. Als Nächstes folgt das abschließende Multi-Seed-/Real-Run-Production-Gate.
 
 ## Aktueller Spielumfang
 
 - Drei Rooster-Klassen mit eigenem Primärangriff, eigener Passive und je drei Build-Archetypen
-- Klar gegliederte Hennenhütte mit `Spielen`, `Hähne`, `Training` und `Archiv`; der Run-Start bleibt auf Desktop und Mobile die Hauptaktion
+- Klar gegliederte Hennenhütte mit `Spielen`, `Hähne`, dreistufigem Talentnest und vereinfachtem `Archiv`; der Run-Start bleibt auf Desktop und Mobile die Hauptaktion
 - Zehn handkuratierte Wellen, drei Arenen, drei Elite-Archetypen und ein dreiphasiger Boss
 - Echte 4-Richtungs-Locomotion für Kornkrabbler, Runner, Brute, Support,
   Summoner, Gilded Talon/Stormclaw und Brood King; Horde-Peaks bis 140 Gegner
   auf Desktop beziehungsweise 90 auf Mobile
-- 45 Upgrades, elf sichtbare EVOs sowie Active-, Passive-, Orbit- und Summon-Builds
+- 45 Upgrades, elf sichtbare EVOs sowie Active-, Passive-, Orbit- und Summon-Builds; Karten zeigen neue Fähigkeiten, Rang-Deltas und EVO-Ziele getrennt
 - Feste Wave-/Segment-XP-Budgets: Hordenmenge und Levelgeschwindigkeit sind getrennt steuerbar
 - Sichtbare, magnetische XP-Orbs mit verlustfreier Bündelung: maximal 72 auf Desktop und 48 auf Mobile
 - Heal-, Magnet- und Bomb-Pickups an strategischen Wave-Momenten statt an schnell steigenden Killzahlen

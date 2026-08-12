@@ -3,12 +3,12 @@ import { RandomSystem } from './RandomSystem.js';
 
 const SPECTACLE_CATEGORIES = ['active', 'orbit', 'area', 'summon'];
 const CATEGORY_LABELS = {
-  weapon: 'Weapon',
-  active: 'Active',
+  weapon: 'Waffe',
+  active: 'Aktiv',
   orbit: 'Orbit',
-  summon: 'Summon',
-  passive: 'Passive',
-  utility: 'Utility',
+  summon: 'Begleiter',
+  passive: 'Passiv',
+  utility: 'Hilfsmittel',
   evolution: 'EVO'
 };
 
@@ -162,9 +162,10 @@ export class UpgradeSystem {
   }
 
   presentUpgrade(upgrade, player) {
+    const currentInternalRank = player?.getUpgradeRank(upgrade.id) ?? 0;
     const internalNextRank = upgrade.consumable || upgrade.evolution
       ? null
-      : (player?.getUpgradeRank(upgrade.id) ?? 0) + 1;
+      : currentInternalRank + 1;
     const rankOffset = upgrade.rankOffset ?? 0;
     const nextRank = internalNextRank === null ? null : internalNextRank + rankOffset;
     const displayMaxRank = upgrade.displayMaxRank ?? upgrade.maxRank;
@@ -176,11 +177,27 @@ export class UpgradeSystem {
       && upgrade.synergy
       && player.getUpgradeRank(upgrade.synergy.with) > 0
     );
+    const currentRank = nextRank === null ? null : Math.max(0, nextRank - 1);
+    const upgradeMoment = upgrade.evolution
+      ? 'evolution'
+      : upgrade.consumable
+        ? 'instant'
+        : currentRank > 0 ? 'rank-up' : 'new';
+    const deltaDescription = rankDescription
+      ? rankDescription.replace(/^R\d+\s*([^:]*):\s*/, (_match, label) => label ? `${label}: ` : '')
+      : upgrade.description;
     return {
       ...upgrade,
-      description: rankDescription ?? upgrade.description,
+      description: deltaDescription,
+      currentRank,
       nextRank,
       displayMaxRank,
+      upgradeMoment,
+      rankDeltaLabel: upgrade.evolution
+        ? 'EVO'
+        : upgrade.consumable
+          ? 'SOFORT'
+          : currentRank > 0 ? `R${currentRank} → R${nextRank}` : `NEU · R${nextRank}`,
       rankProgress: nextRank ? {
         current: Math.max(0, nextRank - 1),
         next: nextRank,

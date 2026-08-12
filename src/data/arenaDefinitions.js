@@ -32,7 +32,7 @@ export const ARENA_DEFINITIONS = [
     id: 'vertical-run',
     name: 'Vertical Run',
     topology: 'corridor',
-    description: 'Engere Seiten, klare Nord-Sued-Linien und durchbrechbare Sperren.',
+    description: 'Engere Seiten, klare Nord-Süd-Linien und durchbrechbare Sperren.',
     bounds: { x: 300, y: 44, width: 800, height: 812 },
     streaming: {
       axis: 'vertical',

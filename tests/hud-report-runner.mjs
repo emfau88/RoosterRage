@@ -61,6 +61,11 @@ async function verifyResponsiveHud(browser, serverUrl) {
           const rect = node.getBoundingClientRect();
           return { count: node.children.length, left: rect.left, right: rect.right };
         });
+        const loadoutRows = [...document.querySelectorAll('.hud__upgrades')].map((node) => ({
+          icons: node.querySelectorAll('.hud__upgrade-icon').length,
+          open: node.querySelectorAll('.hud__upgrade-icon.is-open').length,
+          capacity: node.querySelector('.hud__slot-count')?.textContent ?? ''
+        }));
         return {
           hud: { left: hud.left, right: hud.right, top: hud.top, bottom: hud.bottom, height: hud.height },
           controls: { left: controls.left, right: controls.right, top: controls.top, bottom: controls.bottom },
@@ -70,7 +75,8 @@ async function verifyResponsiveHud(browser, serverUrl) {
           hasKills: Boolean(document.querySelector('[data-kills]')),
           hasWaveProgress: Boolean(document.querySelector('[data-wave-fill]')),
           cooldowns,
-          rankPips
+          rankPips,
+          loadoutRows
         };
       });
       assert(layout.hud.height <= viewport.maxHudHeight,
@@ -93,6 +99,14 @@ async function verifyResponsiveHud(browser, serverUrl) {
         `${viewport.name} rank pips are missing or clipped.`,
         layout.rankPips
       );
+      assert(
+        layout.loadoutRows.length === 2
+        && layout.loadoutRows.every((row) => row.open <= 1 && /^\d\/\d$/.test(row.capacity))
+        && layout.loadoutRows[0].icons === 3
+        && layout.loadoutRows[1].icons === 2,
+        `${viewport.name} loadout should show occupied slots plus only one quiet placeholder.`,
+        layout.loadoutRows
+      );
       assert(errors.length === 0, `Browser errors in ${viewport.name} HUD.`, errors);
       results.push({ name: viewport.name, ...layout });
     } finally {
@@ -109,10 +123,11 @@ async function verifySettingsAndReport(browser, serverUrl) {
     const settingsOpen = await page.evaluate(() => ({
       buttons: document.querySelectorAll('[data-effect]').length,
       visible: document.querySelector('.settings-panel') !== null,
+      privacyVisible: document.querySelector('.settings-privacy [data-analytics-toggle]') !== null,
       settings: window.__ROOSTER_TEST__.getEffectSettings()
     }));
-    assert(settingsOpen.visible && settingsOpen.buttons === 4,
-      'Effect settings do not expose four independent controls.', settingsOpen);
+    assert(settingsOpen.visible && settingsOpen.buttons === 4 && settingsOpen.privacyVisible,
+      'Settings must expose four effect controls and the privacy toggle.', settingsOpen);
     await page.click('[data-effect="damageNumbers"]');
     const toggled = await page.evaluate(() => window.__ROOSTER_TEST__.getEffectSettings());
     assert(toggled.damageNumbers !== settingsOpen.settings.damageNumbers,

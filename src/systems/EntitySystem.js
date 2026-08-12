@@ -81,7 +81,7 @@ export class EntitySystem {
     );
     if (enemy.elite || enemy.champion) {
       const subtitle = enemy.boss
-        ? 'Drei Phasen. Lies die Faechersalven und den schweren Feuerball.'
+        ? 'Drei Phasen. Lies die Fächersalven und den schweren Feuerball.'
         : enemy.champion
           ? `Champion - ${enemy.ability?.label ?? 'Spezialangriff'} - Golden Chest`
         : `${enemy.aura?.label ?? 'Elite-Aura'} · ${enemy.ability?.label ?? 'Spezialangriff'}`;

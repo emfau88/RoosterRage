@@ -2,15 +2,15 @@ export const CHALLENGE_DEFINITIONS = [
   {
     id: 'standard',
     name: 'Standard Run',
-    description: 'Der unveraenderte, vollstaendig gewinnbare Kern-Run.',
+    description: 'Überlebe zehn eskalierende Wellen und besiege den Brood King.',
     arenaId: null,
-    unlock: { type: 'default', target: 0, label: 'Immer verfuegbar' },
+    unlock: { type: 'default', target: 0, label: 'Immer verfügbar' },
     modifiers: {}
   },
   {
     id: 'rush-hour',
     name: 'Rush Hour',
-    description: 'Vertical Run, schnellere Gegner und kuerzere Druckphasen.',
+    description: 'Vertikaler Hof mit schnelleren Gegnern und kürzeren Druckphasen.',
     arenaId: 'vertical-run',
     unlock: { type: 'victories', target: 1, label: '1 Standard-Run gewinnen' },
     modifiers: {
@@ -22,7 +22,7 @@ export const CHALLENGE_DEFINITIONS = [
   {
     id: 'featherweight',
     name: 'Featherweight',
-    description: 'Coop Square mit weniger HP, mehr Tempo und hoeherem Eigenschaden.',
+    description: 'Enges Karree mit weniger HP, mehr Tempo und höherem Eigenschaden.',
     arenaId: 'square-coop',
     unlock: { type: 'totalKills', target: 150, label: '150 Gegner besiegen' },
     modifiers: {
@@ -35,7 +35,7 @@ export const CHALLENGE_DEFINITIONS = [
   {
     id: 'royal-gauntlet',
     name: 'Royal Gauntlet',
-    description: 'Open Yard mit zaeherem Hofstaat und wertvollerer XP.',
+    description: 'Offener Hof mit zäherem Hofstaat und wertvollerer XP.',
     arenaId: 'open-yard',
     unlock: { type: 'bossDefeats', target: 1, label: 'THE BROOD KING besiegen' },
     modifiers: {

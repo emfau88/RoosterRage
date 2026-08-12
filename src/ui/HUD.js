@@ -89,7 +89,7 @@ export class HUD {
     this.root.className = 'hud';
     this.root.innerHTML = `
       <div class="hud__identity" data-identity>
-        <span class="hud__avatar-shell"><img data-rooster-avatar alt="Ausgewaehlter Rooster"></span>
+        <span class="hud__avatar-shell"><img data-rooster-avatar alt="Ausgewählter Rooster"></span>
         <div class="hud__vitals">
           <div class="hud__identity-heading" data-level>
             <span><small>ROOSTER</small><strong data-value>Level 1</strong></span>
@@ -182,10 +182,10 @@ export class HUD {
         : context.kind === 'golden' ? 'Golden Champion Chest' : 'Elite Chest'
       : 'Level Up';
     const subtitle = chest
-      ? 'Waehle eine garantierte Build-Belohnung.'
+      ? 'Wähle eine garantierte Build-Belohnung.'
       : context.remaining > 0
-        ? `Waehle ein Upgrade. Danach folgen noch ${context.remaining}.`
-        : 'Waehle ein Upgrade.';
+        ? `Wähle ein Upgrade. Danach folgen noch ${context.remaining}.`
+        : 'Wähle ein Upgrade.';
     this.overlay.classList.add('is-visible');
     this.overlay.innerHTML = `
       <div class="panel ${chest ? 'panel--reward' : ''}">
@@ -207,19 +207,21 @@ export class HUD {
         <span class="upgrade-button__copy">
           <span class="upgrade-button__heading">
             <strong>${choice.name}</strong>
-            <span class="upgrade-button__rank">${choice.rankLabel ?? ''}</span>
+            <span class="upgrade-button__rank">${choice.rankDeltaLabel ?? choice.rankLabel ?? ''}</span>
           </span>
           ${this.renderRankPips(choice.rankProgress)}
           <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
-          ${choice.rewardPriority
-            ? `<span class="upgrade-button__reward">${choice.rewardPriority === 'rank-up' ? 'Rank-Up' : choice.rewardPriority === 'evolution' ? 'EVO bereit' : 'Neue Option'}</span>`
-            : ''}
+          <span class="upgrade-button__reward upgrade-button__reward--${choice.upgradeMoment ?? 'new'}">${
+            choice.upgradeMoment === 'rank-up' ? 'Rangaufstieg'
+              : choice.upgradeMoment === 'evolution' ? 'EVO bereit'
+                : choice.upgradeMoment === 'instant' ? 'Soforteffekt' : 'Neue Fähigkeit'
+          }</span>
           <span class="upgrade-button__description">${choice.description}</span>
           ${choice.synergyActive
             ? `<span class="upgrade-button__synergy">Synergie aktiv: ${choice.synergyDescription}</span>`
             : ''}
           ${choice.evolutionHint
-            ? `<span class="upgrade-button__evolution-hint">EVO ${choice.evolutionHint.name}: R4 ${choice.evolutionHint.baseReady ? '✓' : '○'} · ${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span>`
+            ? `<span class="upgrade-button__evolution-hint"><strong>EVO-ZIEL · ${choice.evolutionHint.name}</strong><span class="${choice.evolutionHint.baseReady ? 'is-ready' : ''}">R4 ${choice.evolutionHint.baseReady ? '✓' : '○'}</span><span class="${choice.evolutionHint.passiveOwned ? 'is-ready' : ''}">${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span></span>`
             : ''}
         </span>
       `;
@@ -235,15 +237,28 @@ export class HUD {
     const progress = hub.progress ?? { totalRuns: 0, victories: 0, totalKills: 0 };
     const bests = hub.bests ?? { highestKills: 0, longestRunMs: 0, fastestVictoryMs: null };
     const currency = hub.currency ?? { kernels: 0, lifetimeKernels: 0 };
-    const talentNodes = (hub.talents?.nodes ?? []).map((talent) => `
+    const talentNodeMarkup = (talent) => `
       <button type="button" data-talent="${talent.id}"
-        class="talent-node ${talent.complete ? 'is-complete' : ''} ${talent.unlocked ? '' : 'is-locked'}"
+        class="talent-node ${talent.complete ? 'is-complete' : ''} ${talent.unlocked ? '' : 'is-locked'} ${talent.affordable ? 'is-affordable' : ''}"
         ${talent.affordable ? '' : 'disabled'}
         title="${talent.unlocked ? talent.description : talent.unlockLabel}">
         <span class="talent-node__icon" data-talent-icon="${talent.icon}"></span>
         <span><strong>${talent.name}</strong><small>${talent.description}</small></span>
-        <b>${talent.complete ? 'MAX' : talent.unlocked ? `${talent.rank}/${talent.maxRank} · ${talent.nextCost} Körner` : talent.unlockLabel}</b>
+        <em>Rang ${talent.rank}/${talent.maxRank}</em>
+        <b>${talent.complete ? 'MAXIMAL' : talent.unlocked ? `${talent.nextCost} Körner · VERBESSERN` : talent.unlockLabel}</b>
       </button>
+    `;
+    const talentNodes = hub.talents?.nodes ?? [];
+    const talentTiers = [
+      { numeral: 'I', title: 'Nestfundament', unlockAt: 0, nodes: talentNodes.filter((talent) => talent.unlockAt < 3) },
+      { numeral: 'II', title: 'Erweiterte Instinkte', unlockAt: 3, nodes: talentNodes.filter((talent) => talent.unlockAt >= 3 && talent.unlockAt < 8) },
+      { numeral: 'III', title: 'Königsweg', unlockAt: 8, nodes: talentNodes.filter((talent) => talent.unlockAt >= 8) }
+    ];
+    const talentTree = talentTiers.map((tier) => `
+      <section class="talent-tier ${tier.unlockAt > (hub.talents?.totalRanks ?? 0) ? 'is-locked' : ''}">
+        <header><span>STUFE ${tier.numeral}</span><strong>${tier.title}</strong><small>${tier.unlockAt === 0 ? 'Sofort verfügbar' : `Ab ${tier.unlockAt} Talent-Rängen`}</small></header>
+        <div class="talent-tier__nodes">${tier.nodes.map(talentNodeMarkup).join('')}</div>
+      </section>
     `).join('');
     let selectedChallenge = hub.selectedChallenge ?? 'standard';
     const challengeCards = (hub.challenges ?? []).map((challenge) => `
@@ -251,7 +266,7 @@ export class HUD {
         type="button" data-challenge="${challenge.id}" ${challenge.unlocked ? '' : 'disabled'}>
         <strong>${challenge.name}</strong>
         <span>${challenge.description}</span>
-        <small>${challenge.unlocked ? `${challenge.arenaId ?? 'Freie Arena'} · ${challenge.firstClearClaimed ? 'First Clear geschafft' : `First Clear +${challenge.firstClearReward} Körner`}` : `Gesperrt: ${challenge.unlockLabel}`}</small>
+        <small>${challenge.unlocked ? `${challenge.arenaId ?? 'Freie Arena'} · ${challenge.firstClearClaimed ? 'Erstsieg geschafft' : `Erstsieg +${challenge.firstClearReward} Körner`}` : `Gesperrt: ${challenge.unlockLabel}`}</small>
       </button>
     `).join('');
     const historyRows = (hub.history ?? []).length
@@ -286,7 +301,7 @@ export class HUD {
     this.overlay.innerHTML = `
       <div class="panel rooster-panel henhouse-panel">
         <div class="henhouse-heading">
-          <div><small>ROOSTER RAGE</small><h1>Hennenhuette</h1></div>
+          <div><small>ROOSTER RAGE</small><h1>Hennenhütte</h1></div>
           <div class="henhouse-stats">
             <span class="henhouse-kernels"><img src="${kernelCurrencyUrl}" alt=""><strong>${currency.kernels}</strong> Körner</span>
           </div>
@@ -295,7 +310,7 @@ export class HUD {
             <button type="button" class="henhouse-settings" data-hub-settings>Einstellungen</button>
           </div>
         </div>
-        <nav class="henhouse-nav" aria-label="Hennenhuette Bereiche">
+        <nav class="henhouse-nav" aria-label="Hennenhütte Bereiche">
           <button type="button" data-hub-tab="play" class="is-selected">Spielen</button>
           <button type="button" data-hub-tab="roosters">Hähne</button>
           <button type="button" data-hub-tab="training">Training</button>
@@ -334,7 +349,7 @@ export class HUD {
         </section>
         <section class="henhouse-view" data-hub-view="training" hidden>
           <div class="henhouse-section-heading"><span><small>DAUERHAFT</small><h2>Talentnest</h2></span><p>${hub.talents?.totalRanks ?? 0} Ränge · ${currency.lifetimeKernels} Körner insgesamt verdient</p></div>
-          <div class="talent-tree">${talentNodes}</div>
+          <div class="talent-tree" aria-label="Talentfortschritt">${talentTree}</div>
         </section>
         <section class="henhouse-view" data-hub-view="archive" hidden>
           <div class="henhouse-section-heading"><span><small>FORTSCHRITT</small><h2>Archiv</h2></span><p>Bestwerte, letzte Runs und entdeckte Gegner/EVOs.</p></div>
@@ -342,16 +357,12 @@ export class HUD {
             <span><small>Runs</small><strong>${progress.totalRuns}</strong></span>
             <span><small>Siege</small><strong>${progress.victories}</strong></span>
             <span><small>Kills</small><strong>${progress.totalKills}</strong></span>
-            <span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span>
           </div>
+          <div class="henhouse-records"><small>REKORDE</small><div class="personal-bests"><span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span><span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span><span><small>Längster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span></div></div>
           <div class="henhouse-drawers">
-            <details open><summary>Bestwerte & Run-Historie</summary><div class="personal-bests"><span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span><span><small>Längster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span><span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span></div><ul class="history-list">${historyRows}</ul></details>
+            <details open><summary>Run-Historie</summary><ul class="history-list">${historyRows}</ul></details>
             <details><summary>Gegner-Lexikon</summary><ul class="lexicon-list">${enemyRows}</ul></details>
-            <details><summary>EVO-Rezepte</summary><ul class="lexicon-list">${evoRows}</ul></details>
-          </div>
-          <div class="henhouse-privacy">
-            <span><strong>Anonyme Demo-Messung</strong><small>Nur Funnel und Run-Eckdaten, keine Konten, Cookies oder Werbe-IDs.</small></span>
-            <button type="button" data-analytics-toggle aria-pressed="${Boolean(hub.analytics?.enabled)}">${hub.analytics?.enabled ? 'AN' : 'AUS'}</button>
+            <details><summary>EVO-Lexikon</summary><ul class="lexicon-list">${evoRows}</ul></details>
           </div>
         </section>
       </div>
@@ -462,7 +473,7 @@ export class HUD {
       this.overlay.querySelector('[data-run-arena]').textContent = (challenge.arenaId ?? 'Freie Arena').replaceAll('-', ' ').toUpperCase();
       this.overlay.querySelector('[data-run-challenge]').textContent = challenge.name.toUpperCase();
       this.overlay.querySelector('[data-run-description]').textContent = challenge.description;
-      this.overlay.querySelector('[data-run-reward]').innerHTML = `<small>BELOHNUNG</small><strong>${challenge.firstClearClaimed ? 'First Clear geschafft' : `+${challenge.firstClearReward} Körner`}</strong>`;
+      this.overlay.querySelector('[data-run-reward]').innerHTML = `<small>BELOHNUNG</small><strong>${challenge.firstClearClaimed ? 'Erstsieg geschafft' : `+${challenge.firstClearReward} Körner`}</strong>`;
       this.overlay.querySelectorAll('[data-challenge]').forEach((candidate) => (
         candidate.classList.toggle('is-selected', candidate.dataset.challenge === challenge.id)
       ));
@@ -499,13 +510,6 @@ export class HUD {
     this.overlay.querySelector('[data-run-start]')?.addEventListener('click', () => (
       this.onRoosterSelected?.(selectedRoosterId, selectedChallenge)
     ));
-    this.overlay.querySelector('[data-analytics-toggle]')?.addEventListener('click', (event) => {
-      const button = event.currentTarget;
-      const next = button.getAttribute('aria-pressed') !== 'true';
-      const state = this.onAnalyticsConsent?.(next) ?? { enabled: next };
-      button.setAttribute('aria-pressed', String(state.enabled));
-      button.textContent = state.enabled ? 'AN' : 'AUS';
-    });
     updateSelectedRooster();
     updateChallenge();
     switchHubView(this.hubSelection.view);
@@ -538,7 +542,7 @@ export class HUD {
       challenge: 'Challenge',
       cosmetic: 'Kosmetik',
       mastery: 'Mastery',
-      'first-clear': 'First Clear'
+      'first-clear': 'Erstsieg'
     };
     const unlocks = (report.newUnlocks ?? []).map((unlock) => `
       <span><strong>${unlockLabels[unlock.type] ?? 'Fortschritt'}</strong>${this.formatSource(unlock.id)}</span>
@@ -565,7 +569,7 @@ export class HUD {
         <p class="run-report__evos"><strong>EVO:</strong> ${evos}</p>
         ${metaReward ? `<div class="run-report__meta-reward">
           <img src="${kernelCurrencyUrl}" alt="Körner">
-          <span><strong>+${metaReward.earnedKernels} Körner</strong><small>Run ${metaReward.runKernels}${metaReward.firstClearKernels ? ` · First Clear ${metaReward.firstClearKernels}` : ''}${metaReward.masteryKernels ? ` · Mastery ${metaReward.masteryKernels}` : ''} · Bestand ${metaReward.balance}</small></span>
+          <span><strong>+${metaReward.earnedKernels} Körner</strong><small>Run ${metaReward.runKernels}${metaReward.firstClearKernels ? ` · Erstsieg ${metaReward.firstClearKernels}` : ''}${metaReward.masteryKernels ? ` · Mastery ${metaReward.masteryKernels}` : ''} · Bestand ${metaReward.balance}</small></span>
           <b>Mastery ${metaReward.masteryLevel} · +${metaReward.masteryXp} XP</b>
         </div>` : ''}
         ${unlocks ? `<div class="run-report__unlocks"><h2>Neu freigeschaltet</h2>${unlocks}</div>` : ''}
@@ -575,18 +579,18 @@ export class HUD {
             <tbody>${sourceRows}</tbody>
           </table>
         </div>
-        <button class="restart-button"><span data-restart-icon></span><span>Zur Hennenhuette</span></button>
+        <button class="restart-button"><span data-restart-icon></span><span>Zur Hennenhütte</span></button>
       </div>
     `;
     this.setIcon(this.overlay.querySelector('[data-restart-icon]'), 'restart');
     this.overlay.querySelector('button').addEventListener('click', this.onRestart);
   }
 
-  showSettings(effectSettings, audioSettings, onEffectToggle, onAudioChange, onClose) {
+  showSettings(effectSettings, audioSettings, analyticsSettings, onEffectToggle, onAudioChange, onAnalyticsChange, onClose) {
     const labels = {
-      damageNumbers: 'Damage Numbers',
-      screenShake: 'Screen Shake',
-      screenFlash: 'Screen Flash',
+      damageNumbers: 'Schadenszahlen',
+      screenShake: 'Bildschirmwackeln',
+      screenFlash: 'Trefferblitze',
       vibration: 'Vibration'
     };
     const audioLabels = {
@@ -614,9 +618,14 @@ export class HUD {
             <label class="settings-volume">
               <span>${label}</span>
               <input type="range" min="0" max="1" step="0.05" value="${audioSettings[key]}"
-                data-audio-volume="${key}" aria-label="${label} Lautstaerke">
+                data-audio-volume="${key}" aria-label="${label} Lautstärke">
               <strong>${Math.round(audioSettings[key] * 100)}%</strong>
             </label>`).join('')}
+        </div>
+        <h3>Datenschutz</h3>
+        <div class="settings-privacy">
+          <span><strong>Anonyme Spielanalyse</strong><small>Erfasst nur Run-Ablauf und Eckdaten. Keine Konten, Cookies oder Werbe-IDs.</small></span>
+          <button type="button" data-analytics-toggle aria-pressed="${Boolean(analyticsSettings?.enabled)}">${analyticsSettings?.enabled ? 'AN' : 'AUS'}</button>
         </div>
         <button class="settings-close" type="button">Weiter</button>
       </div>`;
@@ -632,6 +641,13 @@ export class HUD {
         const next = onAudioChange?.(input.dataset.audioVolume, Number(input.value)) ?? audioSettings;
         input.closest('.settings-volume').querySelector('strong').textContent = `${Math.round(next[input.dataset.audioVolume] * 100)}%`;
       });
+    });
+    this.overlay.querySelector('[data-analytics-toggle]')?.addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      const next = button.getAttribute('aria-pressed') !== 'true';
+      const state = onAnalyticsChange?.(next) ?? { enabled: next };
+      button.setAttribute('aria-pressed', String(state.enabled));
+      button.textContent = state.enabled ? 'AN' : 'AUS';
     });
     this.overlay.querySelector('.settings-close').addEventListener('click', () => onClose?.(), { once: true });
   }
@@ -720,7 +736,10 @@ export class HUD {
   renderLoadoutRow(container, entries, capacity, kind) {
     container.innerHTML = '';
     container.classList.toggle('is-empty', capacity === 0);
-    for (let index = 0; index < capacity; index += 1) {
+    container.dataset.kind = kind;
+    container.setAttribute('aria-label', `${kind === 'active' ? 'Aktive Fähigkeiten' : 'Passive Verbesserungen'}: ${entries.length} von ${capacity}`);
+    const visibleSlots = Math.min(capacity, Math.max(1, entries.length + (entries.length < capacity ? 1 : 0)));
+    for (let index = 0; index < visibleSlots; index += 1) {
       const entry = entries[index];
       const icon = document.createElement('span');
       icon.className = `hud__upgrade-icon hud__upgrade-icon--${kind}`;
@@ -755,6 +774,13 @@ export class HUD {
         }
       }
       container.append(icon);
+    }
+    if (capacity > 0) {
+      const count = document.createElement('span');
+      count.className = 'hud__slot-count';
+      count.textContent = `${entries.length}/${capacity}`;
+      count.title = `${entries.length} von ${capacity} ${kind === 'active' ? 'aktiven' : 'passiven'} Slots belegt`;
+      container.append(count);
     }
   }
 

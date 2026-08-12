@@ -528,7 +528,7 @@ export class WaveSystem {
       bossPhases: [
         {
           name: 'Phase 2: Royal Fury',
-          subtitle: 'Breiterer Faecher, sechs Adds und ein klares Atemfenster.',
+          subtitle: 'Breiterer Fächer, sechs Adds und ein klares Atemfenster.',
           threshold: 0.65,
           speedMultiplier: 1.08,
           transitionMs: 1000,
@@ -536,7 +536,7 @@ export class WaveSystem {
         },
         {
           name: 'Phase 3: Last Hatch',
-          subtitle: 'Siebenfacher Faecher, Charge und ein begrenzter Add-Trupp.',
+          subtitle: 'Siebenfacher Fächer, Charge und ein begrenzter Add-Trupp.',
           threshold: 0.32,
           speedMultiplier: 1.12,
           transitionMs: 1100,

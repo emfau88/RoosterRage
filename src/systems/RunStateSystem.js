@@ -223,14 +223,14 @@ export class RunStateSystem {
   }
 
   gameOver() {
-    this.end('gameOver', 'Game Over', 'Der Hahn wurde ueberrannt.');
+    this.end('gameOver', 'Game Over', 'Der Hahn wurde überrannt.');
   }
 
   victory() {
     this.end(
       'victory',
       'Victory',
-      `Alle ${this.scene.waveSystem.totalWaves} Wellen sind ueberstanden.`
+      `Alle ${this.scene.waveSystem.totalWaves} Wellen sind überstanden.`
     );
   }
 

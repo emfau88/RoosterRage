@@ -54,7 +54,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Heavy Company',
-    intent: 'Erste Zielprioritaet mit Elite-Abschluss und kurzer Erholung davor',
+    intent: 'Erste Zielpriorität mit Elite-Abschluss und kurzer Erholung davor',
     count: 78,
     interval: 520,
     targetDuration: [31, 39],
@@ -95,7 +95,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Firing Line',
-    intent: 'Erster echter Crossfire-Druck mit Faechern in der Schlussphase',
+    intent: 'Erster echter Kreuzfeuer-Druck mit Fächern in der Schlussphase',
     count: 112,
     interval: 380,
     targetDuration: [31, 39],
@@ -161,7 +161,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Pressure Cooker',
-    intent: 'Gemischte Raumkontrolle mit Elite-Fernkaempfer als Abschluss',
+    intent: 'Gemischte Raumkontrolle mit Elite-Fernkämpfer als Abschluss',
     count: 180,
     interval: 320,
     targetDuration: [36, 44],

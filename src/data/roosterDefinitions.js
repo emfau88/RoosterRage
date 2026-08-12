@@ -3,7 +3,7 @@ export const ROOSTER_DEFINITIONS = [
     id: 'ace',
     name: 'Barnyard Ace',
     shortName: 'Ace',
-    role: 'Praeziser Allrounder',
+    role: 'Präziser Allrounder',
     icon: 'golden-egg',
     description: 'Zielsuchende Eier und eine eingebaute Chance auf kritische Treffer.',
     passive: 'Deadeye: 8% Chance auf doppelten Basis-Ei-Schaden.',
@@ -87,7 +87,7 @@ export const ROOSTER_DEFINITIONS = [
     id: 'artillery',
     name: 'Boombardier',
     shortName: 'Boom',
-    role: 'Schwerer Flaechenschaden',
+    role: 'Schwerer Flächenschaden',
     icon: 'rocket-egg',
     description: 'Langsame, schwere Eier explodieren beim Einschlag.',
     passive: 'Blast Shell: Treffer verursachen 55% Schaden in 64 Radius.',
@@ -117,7 +117,7 @@ export const ROOSTER_DEFINITIONS = [
       name: 'Siegebreaker Shell',
       texture: 'evo-siegebreaker-shell-projectile',
       passive: 'artillery-reinforced-breech',
-      description: 'Eine panzerbrechende Granate durchschlaegt ihr Ziel und erzeugt eine massive Doppelwelle.',
+      description: 'Eine panzerbrechende Granate durchschlägt ihr Ziel und erzeugt eine massive Doppelwelle.',
       damageMultiplier: 1.18,
       speedBonus: 55,
       pierce: 1,
@@ -225,7 +225,7 @@ export const ROOSTER_DEFINITIONS = [
       {
         id: 'storm-crown-circuit',
         name: 'Crown Circuit',
-        focus: 'Schnelle Startwaffen-Ketten und Mobilitaet',
+        focus: 'Schnelle Startwaffen-Ketten und Mobilität',
         upgrades: ['storm-static-plumage', 'storm-tailwind-training', 'faster-eggs', 'move-speed', 'critical-yolk']
       },
       {

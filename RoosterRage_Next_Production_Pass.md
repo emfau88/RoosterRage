@@ -25,6 +25,18 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   schweren Projektilen und Bossangriffen vorbehalten; Charge-, Explosions- und
   AoE-Telegraphs bleiben dominant. Desktop und 390×844-Mobile sind geprüft.
   Details: `docs/ENEMY_PROJECTILE_VISUAL_HIERARCHY.md`.
+- **UI-/Meta-Polish (Punkte 14–18): erledigt.** Der Run-HUD zeigt belegte
+  Fähigkeiten, höchstens einen dezenten freien Slot und die Kapazität; Settings
+  und Fullscreen sind kompakter. Upgrade- und Chest-Karten unterscheiden `NEU`,
+  klare Rang-Deltas (`R1 → R2`) und kontrastreiche EVO-Ziele, ohne die
+  Elite-Chest-Struktur zu ändern. Das Talentnest besitzt drei verbundene Stufen
+  mit unveränderten Kosten/Freischaltungen und einer eindeutigen
+  `Körner · VERBESSERN`-Aktion. Das Archiv trennt Gesamtwerte, Rekorde,
+  Run-Historie und Lexika ohne Doppelungen; die anonyme Spielanalyse liegt nun
+  ausschließlich unter `Einstellungen → Datenschutz`. Sichtbare Prototyptexte
+  und ASCII-Umlaute wurden systematisch bereinigt. Desktop, 390×844 Portrait
+  und 844×390 Landscape sind ohne Überlauf geprüft; Build, Mechanik-, Meta-,
+  Datenschutz- und HUD-Gates sind grün.
 
 - **Phase 1 – Hauptmenü: erledigt.** Default ist jetzt `Spielen` mit einem
   kompakten Rooster-Hero, Challenge/Arena-Block und dominantem `RUN STARTEN`.

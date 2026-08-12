@@ -58,9 +58,9 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Target Egg',
     description: 'Entwickelt Aces Startwaffe von R1 bis R4.',
     rankDescriptions: [
-      'R2 Twin Lock: Jeder zweite Angriff markiert und feuert ein zweites Ziel-Ei.',
-      'R3 Deadeye Shell: Jeder vierte Angriff ist ein Krit mit Pierce und zusaetzlichem Ricochet.',
-      'R4 Hunter Array: Dauerhafte Doppelsalve, staerkere Zielerfassung und goldene Trails.'
+      'R2 Twin Lock: Jeder 2. Angriff markiert und feuert ein zweites Ziel-Ei.',
+      'R3 Deadeye Shell: Jeder vierte Angriff ist ein Krit mit Pierce und zusätzlichem Ricochet.',
+      'R4 Hunter Array: Dauerhafte Doppelsalve, stärkere Zielerfassung und goldene Trails.'
     ],
     category: 'weapon',
     rarity: 'uncommon',
@@ -97,9 +97,9 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Blast Shell',
     description: 'Entwickelt Boombardiers Startwaffe von R1 bis R4.',
     rankDescriptions: [
-      'R2 Heavy Load: Groessere Granate, staerkere Trail und breiterer Splash.',
+      'R2 Heavy Load: Größere Granate, stärkere Spur und breiterer Explosionsradius.',
       'R3 Shrapnel Yolk: Der Einschlag erzeugt vier kurze Mini-Blasts.',
-      'R4 Siege Load: Massive Granate mit staerkerer zweiter Druckwelle.'
+      'R4 Siege Load: Massive Granate mit stärkerer zweiter Druckwelle.'
     ],
     category: 'weapon',
     rarity: 'uncommon',
@@ -135,9 +135,9 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Storm Egg',
     description: 'Entwickelt Stormcrests Startwaffe von R1 bis R4.',
     rankDescriptions: [
-      'R2 Static Fork: Ein zusaetzlicher, weiter reichender Kettensprung.',
+      'R2 Static Fork: Ein zusätzlicher, weiter reichender Kettensprung.',
       'R3 Arc Pair: Jeder Angriff feuert zwei versetzte elektrische Impulse.',
-      'R4 Storm Circuit: Drei Kettenspruenge, groessere Reichweite und helle Afterimage-Trails.'
+      'R4 Storm Circuit: Drei Kettensprünge, größere Reichweite und helle Nachleuchtspuren.'
     ],
     category: 'weapon',
     rarity: 'uncommon',
@@ -170,7 +170,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'faster-eggs',
     name: 'Faster Eggs',
-    description: '18% kuerzere Abklingzeit des Basisangriffs.',
+    description: '18 % kürzere Abklingzeit des Basisangriffs.',
     category: 'weapon',
     rarity: 'common',
     maxRank: 4,
@@ -182,10 +182,10 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'golden-egg',
     name: 'Golden Egg',
-    description: 'Periodisches grosses Ei: 60 Schaden, 3 Durchschlaege.',
+    description: 'Periodisches großes Ei: 60 Schaden, 3 Durchschläge.',
     rankDescriptions: [
-      '60 Schaden, 3 Durchschlaege, 4,55 s Abklingzeit.',
-      'R2: groesseres Ei, breiterer Treffer und staerkerer Gold-Trail.',
+      '60 Schaden, 3 Durchschläge, 4,55 s Abklingzeit.',
+      'R2: größeres Ei, breiterer Treffer und stärkere Goldspur.',
       'R3: Solar-Sparks springen beim Durchschlag auf nahe Gegner.',
       'R4: zwei Golden Eggs starten als kurze versetzte Salve.'
     ],
@@ -204,7 +204,7 @@ export const UPGRADE_DEFINITIONS = [
       '1 Orbit-Ei mit 19 Kontaktschaden.',
       '2 Orbit-Eier mit je 24 Kontaktschaden.',
       '3 Orbit-Eier mit Shell-Trail und je 29 Kontaktschaden.',
-      '4 Orbit-Eier wechseln zwischen innerer und aeusserer Umlaufbahn.'
+      '4 Orbit-Eier wechseln zwischen innerer und äußerer Umlaufbahn.'
     ],
     category: 'orbit',
     rarity: 'rare',
@@ -217,7 +217,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'molotov-egg',
     name: 'Molotov Egg',
-    description: 'Wirft alle 5,7 s eine brennende Flaeche.',
+    description: 'Wirft alle 5,7 s eine brennende Fläche.',
     rankDescriptions: [
       '90 Radius, 10 Schaden pro Tick, 3,0 s Branddauer, 5,7 s Abklingzeit.',
       'R2: 108 Radius, 12 Schaden pro Tick und 3,4 s Branddauer.',
@@ -230,7 +230,7 @@ export const UPGRADE_DEFINITIONS = [
     maxRank: 4,
     minLevel: 2,
     weight: 6,
-    synergy: { with: 'void-nest', description: 'Void Nest zieht Gegner 25% staerker in die Feuerflaeche.' },
+    synergy: { with: 'void-nest', description: 'Void Nest zieht Gegner 25 % stärker in die Feuerfläche.' },
     apply: (_player, scene, rank) => scene.unlockMolotovEgg(rank)
   },
   {
@@ -248,7 +248,7 @@ export const UPGRADE_DEFINITIONS = [
     maxRank: 4,
     minLevel: 2,
     weight: 6,
-    synergy: { with: 'orbit-eggs', description: 'Ein zusaetzliches Ziel und 20% mehr Blitzschaden.' },
+    synergy: { with: 'orbit-eggs', description: 'Ein zusätzliches Ziel und 20 % mehr Blitzschaden.' },
     apply: (_player, scene, rank) => scene.unlockLightningComb(rank)
   },
   {
@@ -256,11 +256,11 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Support Chick',
     description: 'Ein Begleiter startet einen ausbaubaren Projektil- und Debuff-Pfad.',
     rankDescriptions: [
-      '1 Begleiter feuert fuer 17 Schaden.',
+      '1 Begleiter feuert für 17 Schaden.',
       'Der Begleiter feuert eine Zweier-Salve mit 1 Durchschlag.',
-      'Treffer verlangsamen Gegner fuer 0,7 s.',
+      'Treffer verlangsamen Gegner für 0,7 s.',
       'Ein zweiter Begleiter tritt dem Schwarm bei.',
-      'Drei Begleiter feuern schneller und verlangsamen staerker.'
+      'Drei Begleiter feuern schneller und verlangsamen stärker.'
     ],
     category: 'summon',
     rarity: 'rare',
@@ -272,10 +272,10 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'rocket-egg',
     name: 'Rocket Egg',
-    description: 'Zielsuchende Rakete mit 48 Flaechenschaden.',
+    description: 'Zielsuchende Rakete mit 48 Flächenschaden.',
     rankDescriptions: [
       '48 Schaden in 74 Radius, 4,98 s Abklingzeit.',
-      'R2: groesserer Blast, staerkere Trail und besseres Homing.',
+      'R2: größere Explosion, stärkere Spur und bessere Zielsuche.',
       'R3: drei kurze Cluster-Blasts folgen dem Einschlag.',
       'R4: zwei Raketen starten als gestaffelte Salve.'
     ],
@@ -293,9 +293,9 @@ export const UPGRADE_DEFINITIONS = [
     description: 'Zieht Gegner in einer Zone zusammen und verursacht Schaden.',
     rankDescriptions: [
       '110 Radius, 11 Schaden pro Tick, 3,4 s Haltedauer, 6,8 s Abklingzeit.',
-      'R2: groesserer Pull-Radius und 3,8 s stabile Portalphase.',
+      'R2: größerer Sog-Radius und 3,8 s stabile Portalphase.',
       'R3: Sog und Schaden pulsieren 4,2 s in sichtbaren Wellen.',
-      'R4: zwei Singularitaeten kontrollieren den Raum fuer 4,4 s.'
+      'R4: zwei Singularitäten kontrollieren den Raum für 4,4 s.'
     ],
     category: 'active',
     tags: ['area'],
@@ -303,7 +303,7 @@ export const UPGRADE_DEFINITIONS = [
     maxRank: 4,
     minLevel: 3,
     weight: 5,
-    synergy: { with: 'molotov-egg', description: '25% staerkerer Sog haelt Gegner im Feuer.' },
+    synergy: { with: 'molotov-egg', description: '25 % stärkerer Sog hält Gegner im Feuer.' },
     apply: (_player, scene, rank) => scene.unlockVoidNest(rank)
   },
   {
@@ -311,10 +311,10 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Laser Comb',
     description: 'Gerader Piercing-Laser mit 48 Schaden.',
     rankDescriptions: [
-      '48 Schaden, 610 Reichweite und klar lesbare Charge-/Beam-/Nachgluehphase.',
-      'R2: breiterer, heller-oranger Beam mit laengerem Nachgluehen.',
+      '48 Schaden, 610 Reichweite und klar lesbare Lade-, Strahl- und Nachglühphase.',
+      'R2: breiterer, helloranger Strahl mit längerem Nachglühen.',
       'R3: ein goldener paralleler Side-Beam begleitet den Hauptstrahl.',
-      'R4: fast weissgluehender Hauptbeam mit rund 0,58 s Nachentladung.'
+      'R4: fast weißglühender Hauptstrahl mit rund 0,58 s Nachentladung.'
     ],
     category: 'active',
     rarity: 'rare',
@@ -396,7 +396,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'bigger-eggs',
     name: 'Bigger Eggs',
-    description: '+5 Trefferadius und groessere Basis-Eier.',
+    description: '+5 Trefferradius und größere Basis-Eier.',
     category: 'weapon',
     rarity: 'common',
     maxRank: 3,
@@ -408,7 +408,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'swift-shells',
     name: 'Swift Shells',
-    description: '+70 Fluggeschwindigkeit fuer Basis-Eier.',
+    description: '+70 Fluggeschwindigkeit für Basis-Eier.',
     category: 'weapon',
     rarity: 'common',
     maxRank: 3,
@@ -446,7 +446,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'shell-shock',
     name: 'Shell Shock',
-    description: 'Basis-Eier stossen Gegner um 110 Impuls zurueck.',
+    description: 'Basis-Eier stoßen Gegner mit 110 Impuls zurück.',
     category: 'weapon',
     rarity: 'uncommon',
     maxRank: 3,
@@ -472,7 +472,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'ace-deadeye-drill',
     name: 'Deadeye Drill',
-    description: 'Ace erhoeht Krit-Chance und Krit-Schaden seiner Ziel-Eier.',
+    description: 'Ace erhöht Krit-Chance und Krit-Schaden seiner Ziel-Eier.',
     rankDescriptions: [
       '+4% Krit-Chance und +15% Krit-Schaden.',
       'Insgesamt +8% Krit-Chance und +30% Krit-Schaden.',
@@ -509,7 +509,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'artillery-reinforced-breech',
     name: 'Reinforced Breech',
-    description: 'Boombardiers Startgranate erzeugt breitere und haertere Druckwellen.',
+    description: 'Boombardiers Startgranate erzeugt breitere und härtere Druckwellen.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,
@@ -525,7 +525,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'artillery-blast-plating',
     name: 'Blast Plating',
-    description: 'Boombardier erhaelt HP und Panzerung fuer den Nahbereich seiner Explosionen.',
+    description: 'Boombardier erhält HP und Panzerung für den Nahbereich seiner Explosionen.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,
@@ -558,7 +558,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'storm-tailwind-training',
     name: 'Tailwind Training',
-    description: 'Stormcrest bewegt sich schneller und verkuerzt den Startwaffen-Takt.',
+    description: 'Stormcrest bewegt sich schneller und verkürzt den Startwaffen-Takt.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,
@@ -589,7 +589,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-siegebreaker-shell',
     name: 'Siegebreaker Shell',
-    description: 'Blast Shell wird panzerbrechend und loest eine zweite Druckwelle aus.',
+    description: 'Blast Shell wird panzerbrechend und löst eine zweite Druckwelle aus.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
@@ -604,7 +604,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-tempest-crown',
     name: 'Tempest Crown',
-    description: 'Storm Egg wird zum Zwillingsschuss mit drei zusaetzlichen Kettenspruengen.',
+    description: 'Storm Egg wird zum Zwillingsschuss mit drei zusätzlichen Kettensprüngen.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
@@ -632,7 +632,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-thunder-roost',
     name: 'Thunder Roost',
-    description: 'Lightning Comb entlaedt einen farblich klaren Sturm ueber bis zu zehn Ziele.',
+    description: 'Lightning Comb entlädt einen farblich klaren Sturm über bis zu zehn Ziele.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
@@ -658,7 +658,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-broodstorm',
     name: 'Broodstorm Battery',
-    description: 'Rocket Egg startet drei versetzte Raketen mit groesseren Explosionen.',
+    description: 'Rocket Egg startet drei versetzte Raketen mit größeren Explosionen.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
@@ -671,7 +671,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-singularity-nest',
     name: 'Singularity Nest',
-    description: 'Void Nest oeffnet zwei langlebige Singularitaeten mit massivem Sog.',
+    description: 'Void Nest öffnet zwei langlebige Singularitäten mit massivem Sog.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
@@ -684,7 +684,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-phoenix-pan',
     name: 'Phoenix Pan',
-    description: 'Molotov Egg wirft zwei Feuerpfannen und hinterlaesst groessere Brandfelder.',
+    description: 'Molotov Egg wirft zwei Feuerpfannen und hinterlässt größere Brandfelder.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,
