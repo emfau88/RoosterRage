@@ -1,13 +1,14 @@
 import Phaser from 'phaser';
 
 export function findClusterTarget(scene) {
-  if (!scene.enemies.length) {
+  const candidates = scene.getTargetableEnemies();
+  if (!candidates.length) {
     return null;
   }
   let bestEnemy = scene.findNearestEnemy();
   let bestScore = -1;
-  scene.enemies.forEach((enemy) => {
-    const score = scene.enemies.filter((candidate) => Phaser.Math.Distance.Between(
+  candidates.forEach((enemy) => {
+    const score = candidates.filter((candidate) => Phaser.Math.Distance.Between(
       enemy.sprite.x,
       enemy.sprite.y,
       candidate.sprite.x,

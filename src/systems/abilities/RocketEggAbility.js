@@ -16,10 +16,13 @@ export class RocketEggAbility extends TimedAbility {
       return;
     }
     const start = this.scene.player.getMuzzlePosition(36);
+    const availableTargets = this.scene.getTargetableEnemies()
+      .sort((a, b) => Phaser.Math.Distance.Squared(start.x, start.y, a.sprite.x, a.sprite.y)
+        - Phaser.Math.Distance.Squared(start.x, start.y, b.sprite.x, b.sprite.y));
     const targets = this.evolved
-      ? [...this.scene.enemies].filter((enemy) => enemy.sprite.active).slice(0, 3)
+      ? availableTargets.slice(0, 3)
       : this.rank >= 4
-        ? [...this.scene.enemies].filter((enemy) => enemy.sprite.active).slice(0, 2)
+        ? availableTargets.slice(0, 2)
         : [target];
     targets.forEach((rocketTarget, index) => {
       const projectile = new RocketProjectile(

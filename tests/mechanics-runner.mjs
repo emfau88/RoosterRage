@@ -17,8 +17,8 @@ function assert(condition, message, details) {
   }
 }
 
-async function openGame(browser, label, roosterId = 'ace') {
-  const page = await browser.newPage({ viewport: { width: 960, height: 540 } });
+async function openGame(browser, label, roosterId = 'ace', viewport = { width: 960, height: 540 }) {
+  const page = await browser.newPage({ viewport });
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
   page.on('console', (message) => {
@@ -721,6 +721,104 @@ async function testActiveUpgradeAbilities(browser) {
   }
 }
 
+async function inspectTargetAcquisitionGate(browser, label, viewport) {
+  const { page, errors } = await openGame(browser, `target-gate-${label}`, 'ace', viewport);
+  try {
+    const result = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.pauseWaves();
+      api.clearEnemies();
+      api.clearProjectiles();
+      const baseState = api.getState();
+      const initial = api.getTargetAcquisitionState();
+      const bounds = initial.bounds;
+      const centerY = bounds.y + bounds.height / 2;
+      const insideId = api.spawnEnemyType('slime', bounds.x + bounds.width - 36, centerY, {
+        speed: 0,
+        damage: 0,
+        hp: 9999
+      });
+      const outsideIds = [0, 1, 2].map((index) => api.spawnEnemyType(
+        'slime',
+        bounds.x + bounds.width + 72 + index * 8,
+        centerY + index * 8,
+        { speed: 0, damage: 0, hp: 9999 }
+      ));
+      api.triggerPrimaryAttack();
+      api.applyUpgradeById('molotov-egg');
+      api.triggerActiveAbility('molotov-egg');
+      const mixed = api.getTargetAcquisitionState();
+      const molotovTarget = api.getAreaEffectState().molotovTargets[0] ?? null;
+      api.clearEnemies();
+      api.clearProjectiles();
+      const outsideOnlyId = api.spawnEnemyType(
+        'slime',
+        bounds.x + bounds.width + 90,
+        centerY,
+        { speed: 0, damage: 0, hp: 9999 }
+      );
+      const shotsWithOnlyOutsideTarget = api.triggerPrimaryAttack();
+      const outsideOnly = api.getTargetAcquisitionState();
+      return {
+        baseState,
+        initial,
+        insideId,
+        outsideIds,
+        mixed,
+        molotovTarget,
+        outsideOnlyId,
+        shotsWithOnlyOutsideTarget,
+        outsideOnly
+      };
+    });
+    const { baseState, initial, insideId, outsideIds, mixed, molotovTarget, outsideOnly } = result;
+    assert(initial.bounds.width > initial.bounds.visibleWidth * 1.99
+      && initial.bounds.width < initial.bounds.visibleWidth * 2.01
+      && initial.bounds.height > initial.bounds.visibleHeight * 1.99
+      && initial.bounds.height < initial.bounds.visibleHeight * 2.01,
+    `${label}: acquisition rectangle is not exactly camera view plus a half-screen margin per side.`, result);
+    assert(Math.abs(initial.bounds.visibleWidth - baseState.viewport.width / baseState.cameraZoom) < 2
+      && Math.abs(initial.bounds.visibleHeight - baseState.viewport.height / baseState.cameraZoom) < 2,
+    `${label}: acquisition rectangle does not follow the logical camera viewport.`, result);
+    assert(mixed.targetableIds.includes(insideId)
+      && outsideIds.every((id) => !mixed.targetableIds.includes(id)),
+    `${label}: inside/outside targets were not separated at the camera-relative boundary.`, result);
+    assert(mixed.nearestId === insideId
+      && mixed.projectileTargetIds.length >= 1
+      && mixed.projectileTargetIds.every((id) => id === insideId),
+    `${label}: primary fire selected an enemy outside the acquisition rectangle.`, result);
+    assert(molotovTarget
+      && molotovTarget.x < initial.bounds.x + initial.bounds.width,
+    `${label}: cluster targeting preferred an off-screen group outside the acquisition rectangle.`, result);
+    assert(result.shotsWithOnlyOutsideTarget === 0
+      && outsideOnly.nearestId === null
+      && outsideOnly.targetableIds.length === 0,
+    `${label}: a new shot was fired when only an out-of-range enemy existed.`, result);
+    assert(errors.length === 0, `${label}: browser errors during target acquisition test.`, errors);
+    return {
+      label,
+      viewport,
+      cameraZoom: baseState.cameraZoom,
+      visibleWorld: {
+        width: initial.bounds.visibleWidth,
+        height: initial.bounds.visibleHeight
+      },
+      acquisitionWorld: {
+        width: initial.bounds.width,
+        height: initial.bounds.height
+      }
+    };
+  } finally {
+    await page.close();
+  }
+}
+
+async function testTargetAcquisitionGate(browser) {
+  const desktop = await inspectTargetAcquisitionGate(browser, 'desktop', { width: 960, height: 540 });
+  const portrait = await inspectTargetAcquisitionGate(browser, 'portrait-mobile', { width: 390, height: 844 });
+  return { name: 'camera-relative target acquisition', status: 'passed', desktop, portrait };
+}
+
 async function testAreaEffectReadability(browser) {
   const { page, errors } = await openGame(browser, 'area-effect-readability');
   try {
@@ -839,6 +937,7 @@ async function run() {
     results.push(await testEnemyAbilities(browser));
     results.push(await testActiveUpgradeAbilities(browser));
     results.push(await testAreaEffectReadability(browser));
+    results.push(await testTargetAcquisitionGate(browser));
     const report = {
       generatedAt: new Date().toISOString(),
       results

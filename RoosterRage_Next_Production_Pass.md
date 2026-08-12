@@ -4,7 +4,7 @@
 Repository:
 https://github.com/emfau88/RoosterRage
 
-## Umsetzungsstand – 11.08.2026
+## Umsetzungsstand – 12.08.2026
 
 **Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der vollständige
 Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
@@ -12,6 +12,13 @@ Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
 **Aktueller Stand:** Hauptmenü, Horde-/XP-Pass, Enemy-Art-Pass und der bewusst
 fokussierte Champion-Pass sind auf `master`. README, Desktop-/Mobile-Gates und
 der frühere Analytics-Fehler sind auf diesem Stand grün.
+
+- **Kamerarelative Zielerfassung: als isolierter Versuch umgesetzt.** Neue
+  Erstziele liegen höchstens im sichtbaren Kamerafenster plus einer halben
+  Bildschirmgröße Rand je Seite. Das passt sich an Desktop, Mobile-Zoom und
+  Orientierung an; fliegende Projektile, lokale Ketten/Ricochets, Spawns und
+  Schaden bleiben unverändert. Ein eigener Commit macht den Versuch separat
+  rücknehmbar. Details: `docs/TARGET_ACQUISITION_GATE.md`.
 
 - **Phase 1 – Hauptmenü: erledigt.** Default ist jetzt `Spielen` mit einem
   kompakten Rooster-Hero, Challenge/Arena-Block und dominantem `RUN STARTEN`.

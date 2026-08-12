@@ -10,8 +10,7 @@ export class LightningCombAbility extends TimedAbility {
   }
 
   activate(time) {
-    const sorted = [...this.scene.enemies]
-      .filter((enemy) => enemy.sprite.active)
+    const sorted = this.scene.getTargetableEnemies()
       .sort((a, b) => Phaser.Math.Distance.Squared(this.scene.player.sprite.x, this.scene.player.sprite.y, a.sprite.x, a.sprite.y)
         - Phaser.Math.Distance.Squared(this.scene.player.sprite.x, this.scene.player.sprite.y, b.sprite.x, b.sprite.y));
     if (!sorted.length) {

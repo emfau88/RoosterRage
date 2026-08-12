@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { Projectile } from '../entities/Projectile.js';
 import { playEvolutionImpact } from './EvolutionVisuals.js';
 
+const TARGET_ACQUISITION_MARGIN = 0.5;
+
 function getBossDamageMultiplier(enemy, source) {
   if (!enemy.boss) {
     return 1;
@@ -124,8 +126,7 @@ export class CombatSystem {
 
   getShotTargets(count, fallbackTarget) {
     const { scene } = this;
-    const sorted = [...scene.enemies]
-      .filter((enemy) => enemy.sprite.active)
+    const sorted = this.getTargetableEnemies()
       .sort((a, b) => Phaser.Math.Distance.Squared(scene.player.sprite.x, scene.player.sprite.y, a.sprite.x, a.sprite.y)
         - Phaser.Math.Distance.Squared(scene.player.sprite.x, scene.player.sprite.y, b.sprite.x, b.sprite.y));
     if (!sorted.length) {
@@ -145,10 +146,7 @@ export class CombatSystem {
   findNearestEnemyFrom(x, y) {
     let nearest = null;
     let nearestDistance = Infinity;
-    this.scene.enemies.forEach((enemy) => {
-      if (!enemy.sprite.active) {
-        return;
-      }
+    this.getTargetableEnemies().forEach((enemy) => {
       const distance = Phaser.Math.Distance.Squared(x, y, enemy.sprite.x, enemy.sprite.y);
       if (distance < nearestDistance) {
         nearest = enemy;
@@ -156,6 +154,36 @@ export class CombatSystem {
       }
     });
     return nearest;
+  }
+
+  getTargetAcquisitionBounds() {
+    const view = this.scene.cameras.main.worldView;
+    const marginX = view.width * TARGET_ACQUISITION_MARGIN;
+    const marginY = view.height * TARGET_ACQUISITION_MARGIN;
+    return {
+      x: view.x - marginX,
+      y: view.y - marginY,
+      width: view.width + marginX * 2,
+      height: view.height + marginY * 2,
+      visibleX: view.x,
+      visibleY: view.y,
+      visibleWidth: view.width,
+      visibleHeight: view.height,
+      marginScreens: TARGET_ACQUISITION_MARGIN
+    };
+  }
+
+  isEnemyTargetable(enemy, bounds = this.getTargetAcquisitionBounds()) {
+    if (!enemy?.sprite?.active) return false;
+    return enemy.sprite.x >= bounds.x
+      && enemy.sprite.x <= bounds.x + bounds.width
+      && enemy.sprite.y >= bounds.y
+      && enemy.sprite.y <= bounds.y + bounds.height;
+  }
+
+  getTargetableEnemies() {
+    const bounds = this.getTargetAcquisitionBounds();
+    return this.scene.enemies.filter((enemy) => this.isEnemyTargetable(enemy, bounds));
   }
 
   spawnProjectile(angle, target, laneOffset = 0, options = {}) {

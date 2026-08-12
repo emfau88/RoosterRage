@@ -195,6 +195,19 @@ export function installTestApi(scene) {
           animation: enemy.burnOverlay?.anims.currentAnim?.key ?? null
         }))
     }),
+    getTargetAcquisitionState: () => {
+      const bounds = scene.getTargetAcquisitionBounds();
+      const targetable = scene.getTargetableEnemies();
+      return {
+        bounds,
+        targetableIds: targetable.map((enemy) => enemy.id),
+        nearestId: scene.findNearestEnemy()?.id ?? null,
+        activeEnemyIds: scene.enemies.filter((enemy) => enemy.sprite.active).map((enemy) => enemy.id),
+        projectileTargetIds: scene.projectiles
+          .filter((projectile) => projectile.sprite.active)
+          .map((projectile) => projectile.target?.id ?? null)
+      };
+    },
     getEvolutionVisualState: () => ({
       loadedTextures: [
         'evo-thunder-roost-impact',

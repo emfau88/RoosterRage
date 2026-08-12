@@ -361,6 +361,14 @@ export class GameScene extends Phaser.Scene {
     return this.combat.findNearestEnemyFrom(x, y);
   }
 
+  getTargetAcquisitionBounds() {
+    return this.combat.getTargetAcquisitionBounds();
+  }
+
+  getTargetableEnemies() {
+    return this.combat.getTargetableEnemies();
+  }
+
   findNearestXpOrb() {
     return this.playerInput.findNearestXpOrb();
   }
