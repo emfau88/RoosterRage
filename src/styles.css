@@ -3314,3 +3314,245 @@ body,
     width: 52px;
   }
 }
+
+/* P0 mobile legibility: compact labels keep the values stable and unabridged. */
+[data-value-compact] {
+  display: none;
+}
+
+.hud__item [data-value] {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 760px) {
+  .hud__item [data-value] {
+    overflow: visible;
+    white-space: nowrap;
+    text-overflow: clip;
+  }
+
+  .hud__item [data-value-full] {
+    display: none;
+  }
+
+  .hud__item [data-value-compact] {
+    display: block;
+  }
+}
+
+/* Short portrait phones need a dedicated game-first hub composition. The
+   primary action remains visible while the less important copy becomes denser. */
+@media (max-width: 520px) and (max-height: 820px) {
+  .overlay {
+    padding: 4px;
+  }
+
+  .henhouse-panel {
+    width: 100%;
+    height: calc(100dvh - 8px);
+    max-height: calc(100dvh - 8px);
+    padding: 8px;
+  }
+
+  .henhouse-heading {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3px 6px;
+    margin-bottom: 4px;
+  }
+
+  .henhouse-heading h1 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .henhouse-heading > div > small {
+    font-size: 7px;
+  }
+
+  .henhouse-kernels {
+    grid-template-columns: 18px auto;
+    font-size: 8px;
+  }
+
+  .henhouse-kernels img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .henhouse-actions {
+    gap: 4px;
+  }
+
+  .henhouse-actions button {
+    min-height: 25px;
+    padding: 4px 7px;
+    font-size: 8px;
+  }
+
+  .henhouse-nav {
+    gap: 3px;
+    margin-bottom: 4px;
+    padding: 2px;
+  }
+
+  .henhouse-nav button {
+    min-height: 29px;
+    padding: 2px 1px;
+    font-size: 8px;
+  }
+
+  .henhouse-view {
+    overflow: hidden;
+  }
+
+  .henhouse-play-grid {
+    display: flex;
+    height: 100%;
+    min-height: 0;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+  }
+
+  .hub-rooster-hero {
+    min-height: 148px;
+    max-height: 154px;
+    flex: 0 0 154px;
+    grid-template-columns: 35% minmax(0, 1fr);
+  }
+
+  .hub-rooster-hero__copy {
+    padding: 6px 7px;
+  }
+
+  .hub-rooster-hero__copy h2 {
+    margin: 1px 0 2px;
+    font-size: 16px;
+  }
+
+  .hub-rooster-hero__copy > strong {
+    font-size: 9px;
+  }
+
+  .hub-rooster-hero__copy > p {
+    display: block;
+    overflow: hidden;
+    margin: 3px 0 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .hub-rooster-mastery {
+    gap: 5px;
+    font-size: 8px;
+  }
+
+  .hub-rooster-switches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+    margin-top: 4px;
+  }
+
+  .hub-rooster-switch {
+    min-height: 20px;
+    padding: 1px 2px;
+    font-size: 7px;
+  }
+
+  .hub-rooster-hero__badge {
+    right: 5px;
+    bottom: 5px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .hub-run-card {
+    min-height: 0;
+    flex: 1 1 auto;
+    padding: 7px 8px;
+  }
+
+  .hub-run-card h2 {
+    margin: 1px 0 2px;
+    font-size: 17px;
+  }
+
+  .hub-run-card > p {
+    overflow: hidden;
+    margin: 2px 0 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .hub-run-best {
+    gap: 4px;
+    margin: 0 0 4px;
+  }
+
+  .hub-run-best > span {
+    padding: 3px 5px;
+  }
+
+  .hub-run-best strong {
+    margin-top: 0;
+    font-size: 9px;
+  }
+
+  .hub-challenge-list {
+    display: grid;
+    min-height: 0;
+    flex: 1 1 auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    margin-bottom: 4px;
+    overflow: hidden;
+  }
+
+  .hub-challenge-list .challenge-card {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    padding: 5px 7px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .hub-challenge-list .challenge-card strong {
+    font-size: 10px;
+  }
+
+  .hub-challenge-list .challenge-card span {
+    display: -webkit-box;
+    overflow: hidden;
+    margin: 2px 0;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 8px;
+    line-height: 1.2;
+  }
+
+  .hub-challenge-list .challenge-card small {
+    margin-top: 2px;
+    font-size: 8px;
+    line-height: 1.2;
+  }
+
+  .hub-start-button {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    min-height: 43px;
+    margin-top: 0;
+    flex: 0 0 43px;
+    border-radius: 9px;
+  }
+
+  .hub-start-button span {
+    font-size: 14px;
+  }
+
+  .hub-start-button small {
+    display: none;
+  }
+}

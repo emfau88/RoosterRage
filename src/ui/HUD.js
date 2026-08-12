@@ -100,9 +100,9 @@ export class HUD {
         </div>
       </div>
       <div class="hud__metrics">
-        <div class="hud__item" data-time><span data-icon="timer"></span><span><small>RUN</small><strong data-value>00:00</strong></span></div>
-        <div class="hud__item hud__item--wave" data-wave><span data-icon="wave"></span><span><small>WELLE</small><strong data-value>Wave 1/10</strong></span><span class="hud__wave-track"><i data-wave-fill></i></span></div>
-        <div class="hud__item" data-kills><span data-icon="enemy"></span><span><small>JAGD</small><strong data-value>0 Kills</strong></span></div>
+        <div class="hud__item" data-time><span data-icon="timer"></span><span><small>RUN</small><strong data-value><span data-value-full>00:00</span><span data-value-compact aria-hidden="true">00:00</span></strong></span></div>
+        <div class="hud__item hud__item--wave" data-wave><span data-icon="wave"></span><span><small>WELLE</small><strong data-value><span data-value-full>Wave 1/10</span><span data-value-compact aria-hidden="true">1/10</span></strong></span><span class="hud__wave-track"><i data-wave-fill></i></span></div>
+        <div class="hud__item" data-kills><span data-icon="enemy"></span><span><small>JAGD</small><strong data-value><span data-value-full>0 Kills</span><span data-value-compact aria-hidden="true">0</span></strong></span></div>
       </div>
       <div class="hud__boss" data-boss>
         <div class="hud__boss-heading"><strong data-boss-name>BROOD KING</strong><span data-boss-phase>PHASE 1/3</span></div>
@@ -158,9 +158,11 @@ export class HUD {
     const challengeSuffix = state.challenge?.id && state.challenge.id !== 'standard'
       ? ` · ${state.challenge.name}`
       : '';
-    this.root.querySelector('[data-wave] [data-value]').textContent = `Wave ${state.wave}/10${challengeSuffix}`;
-    this.root.querySelector('[data-time] [data-value]').textContent = this.formatTime(state.elapsed);
-    this.root.querySelector('[data-kills] [data-value]').textContent = `${state.kills ?? 0} Kills`;
+    const formattedTime = this.formatTime(state.elapsed);
+    this.setMetricValue('[data-wave]', `Wave ${state.wave}/10${challengeSuffix}`, `${state.wave}/10`);
+    this.setMetricValue('[data-time]', formattedTime, formattedTime);
+    const kills = state.kills ?? 0;
+    this.setMetricValue('[data-kills]', `${kills} ${kills === 1 ? 'Kill' : 'Kills'}`, `${kills}`);
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
     this.root.querySelector('[data-wave-fill]').style.width = `${(state.waveProgress?.percent ?? 0) * 100}%`;
     const bossHud = this.root.querySelector('[data-boss]');
@@ -173,6 +175,16 @@ export class HUD {
       bossHud.querySelector('[data-boss-fill]').style.width = `${Math.max(0, state.boss.hp / state.boss.maxHp) * 100}%`;
     }
     this.renderLoadout(state.loadout);
+  }
+
+  setMetricValue(selector, fullText, compactText = fullText) {
+    const value = this.root.querySelector(`${selector} [data-value]`);
+    const full = value?.querySelector('[data-value-full]');
+    const compact = value?.querySelector('[data-value-compact]');
+    if (!value || !full || !compact) return;
+    if (full.textContent !== fullText) full.textContent = fullText;
+    if (compact.textContent !== compactText) compact.textContent = compactText;
+    if (value.getAttribute('aria-label') !== fullText) value.setAttribute('aria-label', fullText);
   }
 
   showUpgradeChoices(choices, context = {}) {

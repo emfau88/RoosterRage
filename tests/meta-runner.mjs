@@ -164,6 +164,86 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
   }
 }
 
+async function verifyCompactMobileHub(context, serverUrl) {
+  const { page, errors } = await openGame(context, serverUrl, '-compact-mobile');
+  try {
+    await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
+    await page.waitForTimeout(50);
+    const layout = await page.evaluate(() => {
+      const rect = (selector) => {
+        const bounds = document.querySelector(selector).getBoundingClientRect();
+        return {
+          left: bounds.left,
+          right: bounds.right,
+          top: bounds.top,
+          bottom: bounds.bottom,
+          width: bounds.width,
+          height: bounds.height
+        };
+      };
+      const start = document.querySelector('[data-run-start]');
+      const fullscreen = document.querySelector('[data-hub-fullscreen]');
+      const settings = document.querySelector('[data-hub-settings]');
+      const challenges = document.querySelector('.hub-challenge-list');
+      return {
+        viewport: { width: innerWidth, height: innerHeight },
+        panel: rect('.henhouse-panel'),
+        hero: rect('.hub-rooster-hero'),
+        runCard: rect('.hub-run-card'),
+        start: rect('[data-run-start]'),
+        fullscreen: rect('[data-hub-fullscreen]'),
+        settings: rect('[data-hub-settings]'),
+        challenges: {
+          ...rect('.hub-challenge-list'),
+          clientWidth: challenges.clientWidth,
+          scrollWidth: challenges.scrollWidth,
+          clientHeight: challenges.clientHeight,
+          scrollHeight: challenges.scrollHeight,
+          columns: getComputedStyle(challenges).gridTemplateColumns,
+          cards: [...challenges.children].map((card) => {
+            const bounds = card.getBoundingClientRect();
+            return { left: bounds.left, right: bounds.right, top: bounds.top, bottom: bounds.bottom };
+          })
+        },
+        startText: start.textContent.trim(),
+        startVisible: getComputedStyle(start).display !== 'none',
+        fullscreenVisible: getComputedStyle(fullscreen).display !== 'none',
+        settingsVisible: getComputedStyle(settings).display !== 'none',
+        horizontalOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
+      };
+    });
+    assert(layout.viewport.width === 400 && layout.viewport.height === 711,
+      'Compact mobile gate did not use the intended effective viewport.', layout);
+    assert(layout.panel.top >= 0 && layout.panel.bottom <= layout.viewport.height,
+      'Compact hub panel exceeds the effective mobile viewport.', layout);
+    assert(layout.startVisible && layout.startText.includes('RUN STARTEN')
+      && layout.start.top >= layout.panel.top && layout.start.bottom <= layout.viewport.height,
+    'Run start action is not completely reachable without scrolling.', layout);
+    assert(layout.fullscreenVisible && layout.settingsVisible
+      && layout.fullscreen.bottom <= layout.viewport.height
+      && layout.settings.bottom <= layout.viewport.height,
+    'Fullscreen or settings disappeared in compact portrait mode.', layout);
+    assert(layout.hero.height <= 156 && layout.runCard.height > layout.start.height
+      && layout.horizontalOverflow <= 0,
+    'Compact portrait hierarchy is oversized or horizontally clipped.', layout);
+    assert(layout.challenges.scrollWidth <= layout.challenges.clientWidth
+      && layout.challenges.scrollHeight <= layout.challenges.clientHeight
+      && layout.challenges.cards.length === 4
+      && layout.challenges.cards.every((card) => (
+        card.left >= layout.challenges.left
+        && card.right <= layout.challenges.right
+        && card.top >= layout.challenges.top
+        && card.bottom <= layout.challenges.bottom
+      )), 'Compact challenge selector scrolls or clips one of its four cards.', layout.challenges);
+    assert(errors.length === 0, 'Browser errors in compact portrait hub.', errors);
+    await fs.mkdir(artifactDir, { recursive: true });
+    await page.screenshot({ path: path.join(artifactDir, 'henhouse-compact-mobile.png') });
+    return layout;
+  } finally {
+    await page.close();
+  }
+}
+
 async function verifyTenRunsTalentsAndReset(context, serverUrl) {
   const { page, errors } = await openGame(context, serverUrl, '-ten-runs');
   try {
@@ -386,10 +466,22 @@ async function run() {
       await context.close();
     }
   };
+  const inViewport = async (viewport, callback) => {
+    const context = await browser.newContext({ viewport });
+    try {
+      return await callback(context);
+    } finally {
+      await context.close();
+    }
+  };
   try {
     const report = {
       generatedAt: new Date().toISOString(),
       fresh: await inFreshContext((context) => verifyFreshHub(context, serverState.url)),
+      compactMobile: await inViewport(
+        { width: 400, height: 711 },
+        (context) => verifyCompactMobileHub(context, serverState.url)
+      ),
       progression: await inFreshContext((context) => verifyUnlocksAndPersistence(context, serverState.url)),
       tenRuns: await inFreshContext((context) => verifyTenRunsTalentsAndReset(context, serverState.url)),
       migration: await inFreshContext((context) => verifyMigrationAndOldSaves(context, serverState.url)),

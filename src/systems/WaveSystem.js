@@ -2,6 +2,10 @@ import { WAVE_DEFINITIONS } from '../data/waveDefinitions.js';
 import { ENCOUNTER_STANDARDS, ENEMY_ROLE_MATRIX } from '../data/enemyRoleDefinitions.js';
 import { allocateBudgets, SpawnDirector } from './SpawnDirector.js';
 
+const STRANDED_CLEANUP_GRACE_MS = 10000;
+const STRANDED_CLEANUP_MAX_ENEMIES = 3;
+const STRANDED_CLEANUP_ATTEMPTS = 12;
+
 export class WaveSystem {
   constructor(scene) {
     this.scene = scene;
@@ -11,6 +15,8 @@ export class WaveSystem {
     this.spawned = 0;
     this.nextSpawnAt = 0;
     this.waitingForClear = false;
+    this.cleanupCandidateSince = null;
+    this.cleanupRecoveries = 0;
     this.spawnQueue = [];
     this.director = new SpawnDirector(scene);
     this.waves = WAVE_DEFINITIONS.map((wave) => this.hydrateWave(wave));
@@ -83,6 +89,7 @@ export class WaveSystem {
     this.spawned = 0;
     this.nextSpawnAt = 0;
     this.waitingForClear = false;
+    this.resetCleanupWatch();
     this.spawnQueue = this.buildSpawnQueue(this.waves[this.currentWave - 1]);
     this.director.start(this.waves[this.currentWave - 1], this.spawnQueue, 0);
     this.scene.onWaveStarted?.(this.currentWave, this.waves[this.currentWave - 1]);
@@ -102,6 +109,8 @@ export class WaveSystem {
         return;
       }
     }
+
+    this.recoverStrandedEnemies(time);
 
     // The director can spawn its final batch in this same update. The argument
     // describes the pre-spawn frame, so use the live collection before clearing
@@ -127,7 +136,100 @@ export class WaveSystem {
         time + (this.waves[this.currentWave - 1].intermission ?? 1500)
       );
       this.waitingForClear = false;
+      this.resetCleanupWatch();
     }
+  }
+
+  resetCleanupWatch() {
+    this.cleanupCandidateSince = null;
+  }
+
+  getCleanupState() {
+    return {
+      candidateSince: this.cleanupCandidateSince,
+      recoveries: this.cleanupRecoveries,
+      graceMs: STRANDED_CLEANUP_GRACE_MS,
+      maxEnemies: STRANDED_CLEANUP_MAX_ENEMIES
+    };
+  }
+
+  recoverStrandedEnemies(time) {
+    if (!this.waitingForClear) {
+      this.resetCleanupWatch();
+      return 0;
+    }
+
+    const activeEnemies = this.scene.enemies.filter((enemy) => enemy.sprite?.active);
+    const eligible = activeEnemies.length > 0
+      && activeEnemies.length <= STRANDED_CLEANUP_MAX_ENEMIES
+      && activeEnemies.every((enemy) => !enemy.boss);
+    if (!eligible || this.scene.getTargetableEnemies().length > 0) {
+      this.resetCleanupWatch();
+      return 0;
+    }
+
+    if (this.cleanupCandidateSince === null) {
+      this.cleanupCandidateSince = time;
+      return 0;
+    }
+    if (time - this.cleanupCandidateSince < STRANDED_CLEANUP_GRACE_MS) {
+      return 0;
+    }
+
+    let recovered = 0;
+    activeEnemies.forEach((enemy, index) => {
+      const destination = this.findCleanupRecoveryPoint(enemy, index);
+      if (!destination) return;
+      const distance = Math.hypot(
+        enemy.sprite.x - this.scene.player.sprite.x,
+        enemy.sprite.y - this.scene.player.sprite.y
+      );
+      enemy.dashUntil = 0;
+      enemy.knockbackUntil = 0;
+      enemy.sprite.setPosition(destination.x, destination.y);
+      enemy.sprite.body?.reset(destination.x, destination.y);
+      enemy.sprite.setVelocity?.(0, 0);
+      this.scene.telemetry.record('strandedEnemyRecovered', time, {
+        wave: this.currentWave,
+        enemyId: enemy.id,
+        enemyType: enemy.type,
+        distance: Math.round(distance)
+      });
+      recovered += 1;
+    });
+
+    if (recovered > 0) {
+      this.cleanupRecoveries += recovered;
+      this.resetCleanupWatch();
+    } else {
+      this.cleanupCandidateSince = time;
+    }
+    return recovered;
+  }
+
+  findCleanupRecoveryPoint(enemy, index) {
+    const player = this.scene.player.sprite;
+    const bounds = this.scene.getTargetAcquisitionBounds();
+    const distance = Math.max(220, Math.min(330, Math.min(bounds.visibleWidth, bounds.visibleHeight) * 0.7));
+    const seed = ((enemy.id ?? 0) + index + this.cleanupRecoveries) * 2.399963229728653;
+    for (let attempt = 0; attempt < STRANDED_CLEANUP_ATTEMPTS; attempt += 1) {
+      const angle = seed + (attempt / STRANDED_CLEANUP_ATTEMPTS) * Math.PI * 2;
+      const point = this.scene.arena.clampToWorld(
+        player.x + Math.cos(angle) * distance,
+        player.y + Math.sin(angle) * distance,
+        80
+      );
+      const targetable = point.x >= bounds.x
+        && point.x <= bounds.x + bounds.width
+        && point.y >= bounds.y
+        && point.y <= bounds.y + bounds.height;
+      if (targetable
+        && this.scene.arena.isInsidePlayable(point.x, point.y, 50)
+        && !this.scene.arena.overlapsObstacle(point.x, point.y, 42)) {
+        return point;
+      }
+    }
+    return null;
   }
 
   buildSpawnQueue(wave) {

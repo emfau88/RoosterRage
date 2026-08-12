@@ -17,6 +17,13 @@ const maxRunMs = Number(process.env.BALANCE_MAX_MS ?? 570000);
 const roosterId = process.env.BALANCE_ROOSTER ?? 'ace';
 const reportPrefix = process.env.BALANCE_REPORT_PREFIX ?? 'balance';
 const seed = process.env.BALANCE_SEED ?? 'rooster-balance-v1';
+const challengeId = process.env.BALANCE_CHALLENGE ?? 'standard';
+const viewportId = process.env.BALANCE_VIEWPORT ?? 'desktop';
+const viewport = viewportId === 'portrait'
+  ? { width: 390, height: 844 }
+  : viewportId === 'landscape'
+    ? { width: 844, height: 390 }
+    : { width: 960, height: 540 };
 const strict = process.env.BALANCE_STRICT === '1';
 const WAVE_TARGETS = {
   1: { durationMs: 25000, toleranceMs: 10000 },
@@ -104,7 +111,7 @@ function clamp(value, min, max) {
 }
 
 async function runOne(browser, strategy) {
-  const page = await browser.newPage({ viewport: { width: 960, height: 540 } });
+  const page = await browser.newPage({ viewport });
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
   page.on('console', (message) => {
@@ -125,6 +132,15 @@ async function runOne(browser, strategy) {
       const bodyText = await page.locator('body').innerText().catch(() => '');
       throw new Error(`Test API did not become available for ${strategy}.\nErrors: ${JSON.stringify(errors, null, 2)}\nBody: ${bodyText}\n${error.message}`);
     }
+    await page.evaluate((selectedChallenge) => {
+      const api = window.__ROOSTER_TEST__;
+      api.unlockAllMeta();
+      api.selectMetaChallenge(selectedChallenge);
+      api.restart();
+    }, challengeId);
+    await page.waitForFunction((selectedChallenge) => (
+      window.__ROOSTER_TEST__?.getChallengeState().id === selectedChallenge
+    ), challengeId, { timeout: 5000 });
     await page.evaluate(({ selectedStrategy, selectedRooster }) => {
       window.__ROOSTER_TEST__.selectRooster(selectedRooster);
       window.__ROOSTER_TEST__.enableBot(selectedStrategy);
@@ -133,6 +149,8 @@ async function runOne(browser, strategy) {
     const startedAt = Date.now();
     let lastState = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     let frozenPolls = 0;
+    let lastCombatProgressAt = Date.now();
+    let suspectedCombatStall = false;
 
     while (Date.now() - startedAt < maxRunMs) {
       await page.waitForTimeout(500);
@@ -141,6 +159,12 @@ async function runOne(browser, strategy) {
         frozenPolls += 1;
       } else {
         frozenPolls = 0;
+      }
+      const combatProgressed = state.shots !== lastState.shots
+        || state.hits !== lastState.hits
+        || state.kills !== lastState.kills;
+      if (combatProgressed || state.enemies === 0 || state.choosingUpgrade) {
+        lastCombatProgressAt = Date.now();
       }
       lastState = state;
       if (state.gameEnded) {
@@ -165,10 +189,21 @@ async function runOne(browser, strategy) {
           `Game loop appears frozen for strategy ${strategy}; diagnostic artifact written.`
         );
       }
+      if (state.enemies > 0
+        && !state.choosingUpgrade
+        && Date.now() - lastCombatProgressAt >= 30000) {
+        suspectedCombatStall = true;
+        break;
+      }
     }
 
     const finalState = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     const runReport = await page.evaluate(() => window.__ROOSTER_TEST__.getRunReport());
+    const finalDiagnostics = await page.evaluate(() => ({
+      enemies: window.__ROOSTER_TEST__.getEnemySnapshot(),
+      targetAcquisition: window.__ROOSTER_TEST__.getTargetAcquisitionState(),
+      arena: window.__ROOSTER_TEST__.getArenaState()
+    }));
     await page.screenshot({
       path: path.join(artifactDir, `${reportPrefix}-${roosterId}-${strategy}.png`)
     });
@@ -177,6 +212,8 @@ async function runOne(browser, strategy) {
       strategy,
       errors,
       finalState,
+      finalDiagnostics,
+      suspectedCombatStall,
       summary,
       runReport,
       analysis: scoreRun(summary)
@@ -234,6 +271,9 @@ async function run() {
       generatedAt: new Date().toISOString(),
       strict,
       target: {
+        challengeId,
+        viewportId,
+        seed,
         waveDurations: WAVE_TARGETS,
         runDurationMs: [420000, 540000],
         regularChoices: [8, 11],

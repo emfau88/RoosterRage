@@ -6,8 +6,9 @@ https://github.com/emfau88/RoosterRage
 
 ## Umsetzungsstand – 12.08.2026
 
-**Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der vollständige
-Production Gate aus Phase 7 bleibt ein eigener späterer Pass.
+**Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der Messpass aus
+Phase 7 sowie der freigegebene P0-Korrekturpass sind abgeschlossen; die letzte
+subjektive Hardware-Abnahme und die priorisierten P1/P2-Punkte bleiben offen.
 
 **Aktueller Stand:** Hauptmenü, Horde-/XP-Pass, Enemy-Art-Pass und der bewusst
 fokussierte Champion-Pass sind auf `master`. README, Desktop-/Mobile-Gates und
@@ -975,12 +976,23 @@ auszuarbeiten, ergänzt genau ein kontrollierter Champion die Zielpriorität.
 Details: `docs/REWARD_REWORK.md`.
 
 ## Phase 7 – Balance & Production Gate
-**Status: offen; nach dem Enemy-Art-Pass.**
-- echte Runs;
-- Multi-Seed;
-- alle Rooster;
-- Desktop/Mobile;
-- dokumentierter Vergleich vorher/nachher.
+**Status: Mess- und Diagnosepass sowie freigegebener P0-Korrekturpass am
+12.08.2026 abgeschlossen; weitere Anpassungen bis zur Rücksprache pausiert.**
+- [x] sechs unterschiedlich geseedete Echtzeit-Vollruns;
+- [x] alle drei Rooster;
+- [x] Standard, Featherweight und Royal Gauntlet auf Desktop/Mobile abgedeckt;
+- [x] realistischer 75/110/150-Late-Run-Lasttest und zehnminütiger Soak;
+- [x] Mobile-Menü, HUD, Talentnest und Kosmetik sichtbar geprüft;
+- [x] P0-Risiken priorisiert und nach Freigabe korrigiert: kurzer
+  Mobile-Play-Screen mit sichtbarem CTA, stabile Mobile-HUD-Kurzwerte und
+  konservative Restgegner-Sicherung nach zehn Sekunden Kampfstillstand;
+- [x] P0 mit eigenem 400×711-Layout-Gate, HUD-Gate und Mechanics-Schutzfällen
+  automatisiert sowie im effektiven Mobile-Hochformat und Landscape sichtbar
+  abgenommen;
+- [ ] priorisierte P1/P2-Restpunkte erst nach weiterer Freigabe anpassen;
+- [ ] letzte subjektive Abnahme auf realer Mobile-Hardware.
+
+Messwerte, Restrisiken und konkrete Vorschläge: `docs/PHASE_7_PRODUCTION_GATE.md`.
 
 ---
 

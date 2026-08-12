@@ -46,9 +46,26 @@ async function verifyResponsiveHud(browser, serverUrl) {
       await page.evaluate(() => {
         window.__ROOSTER_TEST__.applyUpgradeById('golden-egg');
         window.__ROOSTER_TEST__.applyUpgradeById('max-hp');
+        window.__ROOSTER_TEST__.setHudProbe({ elapsed: 569, kills: 109, wave: 2 });
       });
       await page.waitForTimeout(80);
       const layout = await page.evaluate(() => {
+        const metric = (selector) => {
+          const value = document.querySelector(`${selector} [data-value]`);
+          const full = value.querySelector('[data-value-full]');
+          const compact = value.querySelector('[data-value-compact]');
+          const visible = getComputedStyle(compact).display !== 'none' ? compact : full;
+          return {
+            full: full.textContent,
+            compact: compact.textContent,
+            visible: visible.textContent,
+            fullDisplay: getComputedStyle(full).display,
+            compactDisplay: getComputedStyle(compact).display,
+            clientWidth: value.clientWidth,
+            scrollWidth: value.scrollWidth,
+            ariaLabel: value.getAttribute('aria-label')
+          };
+        };
         const hud = document.querySelector('.hud').getBoundingClientRect();
         const controls = document.querySelector('.hud__controls').getBoundingClientRect();
         const xp = document.querySelector('.hud__xp-row').getBoundingClientRect();
@@ -66,6 +83,16 @@ async function verifyResponsiveHud(browser, serverUrl) {
           open: node.querySelectorAll('.hud__upgrade-icon.is-open').length,
           capacity: node.querySelector('.hud__slot-count')?.textContent ?? ''
         }));
+        const mutations = [];
+        const observer = new MutationObserver((records) => mutations.push(...records));
+        document.querySelectorAll('.hud__item [data-value]').forEach((node) => observer.observe(node, {
+          attributes: true,
+          characterData: true,
+          childList: true,
+          subtree: true
+        }));
+        window.__ROOSTER_TEST__.setHudProbe({ elapsed: 569, kills: 109, wave: 2 });
+        observer.disconnect();
         return {
           hud: { left: hud.left, right: hud.right, top: hud.top, bottom: hud.bottom, height: hud.height },
           controls: { left: controls.left, right: controls.right, top: controls.top, bottom: controls.bottom },
@@ -76,7 +103,13 @@ async function verifyResponsiveHud(browser, serverUrl) {
           hasWaveProgress: Boolean(document.querySelector('[data-wave-fill]')),
           cooldowns,
           rankPips,
-          loadoutRows
+          loadoutRows,
+          metrics: {
+            time: metric('[data-time]'),
+            wave: metric('[data-wave]'),
+            kills: metric('[data-kills]')
+          },
+          stableMetricMutations: mutations.length
         };
       });
       assert(layout.hud.height <= viewport.maxHudHeight,
@@ -107,6 +140,24 @@ async function verifyResponsiveHud(browser, serverUrl) {
         `${viewport.name} loadout should show occupied slots plus only one quiet placeholder.`,
         layout.loadoutRows
       );
+      const expected = viewport.width <= 760
+        ? { time: '09:29', wave: '2/10', kills: '109', compact: true }
+        : { time: '09:29', wave: 'Wave 2/10', kills: '109 Kills', compact: false };
+      assert(layout.metrics.time.visible === expected.time
+        && layout.metrics.wave.visible === expected.wave
+        && layout.metrics.kills.visible === expected.kills,
+      `${viewport.name} HUD did not select the intended metric labels.`, layout.metrics);
+      assert(Object.values(layout.metrics).every((metricValue) => (
+        metricValue.scrollWidth <= metricValue.clientWidth + 1
+        && metricValue.ariaLabel
+      )), `${viewport.name} HUD metric is clipped or lacks an accessible full label.`, layout.metrics);
+      assert(Object.values(layout.metrics).every((metricValue) => (
+        expected.compact
+          ? metricValue.compactDisplay !== 'none' && metricValue.fullDisplay === 'none'
+          : metricValue.compactDisplay === 'none' && metricValue.fullDisplay !== 'none'
+      )), `${viewport.name} HUD uses the wrong responsive metric variant.`, layout.metrics);
+      assert(layout.stableMetricMutations === 0,
+        `${viewport.name} HUD rewrites unchanged metric text.`, layout.stableMetricMutations);
       assert(errors.length === 0, `Browser errors in ${viewport.name} HUD.`, errors);
       results.push({ name: viewport.name, ...layout });
     } finally {

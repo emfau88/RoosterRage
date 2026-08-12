@@ -208,6 +208,34 @@ export function installTestApi(scene) {
           .map((projectile) => projectile.target?.id ?? null)
       };
     },
+    getWaveCleanupState: () => scene.waveSystem.getCleanupState(),
+    forceStrandedEnemyCleanup: (elapsedMs = 10001) => {
+      scene.waveSystem.waitingForClear = true;
+      scene.waveSystem.cleanupCandidateSince = scene.time.now - Math.max(0, Number(elapsedMs));
+      const recovered = scene.waveSystem.recoverStrandedEnemies(scene.time.now);
+      return {
+        recovered,
+        cleanup: scene.waveSystem.getCleanupState(),
+        targetable: scene.getTargetableEnemies().map((enemy) => enemy.id)
+      };
+    },
+    setHudProbe: ({ elapsed, kills, wave } = {}) => {
+      if (Number.isFinite(elapsed)) scene.elapsed = Math.max(0, elapsed);
+      if (Number.isFinite(kills)) scene.debugStats.kills = Math.max(0, Math.round(kills));
+      if (Number.isFinite(wave)) {
+        scene.waveSystem.currentWave = Phaser.Math.Clamp(
+          Math.round(wave),
+          1,
+          scene.waveSystem.totalWaves
+        );
+      }
+      scene.updateHud();
+      return {
+        elapsed: scene.elapsed,
+        kills: scene.debugStats.kills,
+        wave: scene.waveSystem.currentWave
+      };
+    },
     getEvolutionVisualState: () => ({
       loadedTextures: [
         'evo-thunder-roost-impact',
@@ -701,6 +729,7 @@ export function installTestApi(scene) {
       scene.waveSystem.completed = false;
       scene.waveSystem.spawned = 0;
       scene.waveSystem.waitingForClear = false;
+      scene.waveSystem.resetCleanupWatch();
       scene.waveSystem.spawnQueue = scene.waveSystem.buildSpawnQueue(wave);
       scene.waveSystem.director.start(wave, scene.waveSystem.spawnQueue, scene.time.now);
       scene.onWaveStarted?.(index + 1, wave);

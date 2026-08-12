@@ -884,6 +884,69 @@ async function testTargetAcquisitionGate(browser) {
   return { name: 'camera-relative target acquisition', status: 'passed', desktop, portrait };
 }
 
+async function testStrandedEnemyRecovery(browser) {
+  const { page, errors } = await openGame(
+    browser,
+    'stranded-enemy-recovery',
+    'ace',
+    { width: 390, height: 844 }
+  );
+  try {
+    const recovery = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.pauseWaves();
+      api.clearEnemies();
+      api.clearProjectiles();
+      const bounds = api.getTargetAcquisitionState().bounds;
+      const enemyId = api.spawnEnemyType(
+        'slime',
+        bounds.x - 600,
+        bounds.y + bounds.height / 2,
+        { speed: 0, damage: 0, hp: 9999, xpOverride: 0 }
+      );
+      const before = api.getTargetAcquisitionState();
+      const beforeGrace = api.forceStrandedEnemyCleanup(9000);
+      const afterGrace = api.forceStrandedEnemyCleanup(10001);
+      const after = api.getTargetAcquisitionState();
+      return { bounds, enemyId, before, beforeGrace, afterGrace, after };
+    });
+    assert(recovery.enemyId && !recovery.before.targetableIds.includes(recovery.enemyId),
+      'Recovery fixture did not begin outside the camera-relative acquisition bounds.', recovery);
+    assert(recovery.beforeGrace.recovered === 0,
+      'A stranded enemy was moved before the ten-second grace period.', recovery);
+    assert(recovery.afterGrace.recovered === 1
+      && recovery.after.targetableIds.includes(recovery.enemyId)
+      && recovery.afterGrace.cleanup.recoveries === 1,
+    'The final stranded enemy was not restored to the targetable play area.', recovery);
+
+    const crowdGuard = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.clearEnemies();
+      const bounds = api.getTargetAcquisitionState().bounds;
+      for (let index = 0; index < 4; index += 1) {
+        api.spawnEnemyType(
+          'slime',
+          bounds.x - 600 - index * 40,
+          bounds.y + 120 + index * 70,
+          { speed: 0, damage: 0, hp: 9999, xpOverride: 0 }
+        );
+      }
+      return {
+        result: api.forceStrandedEnemyCleanup(20000),
+        state: api.getTargetAcquisitionState()
+      };
+    });
+    assert(crowdGuard.result.recovered === 0
+      && crowdGuard.state.activeEnemyIds.length === 4
+      && crowdGuard.state.targetableIds.length === 0,
+    'Cleanup recovery modified a live group above its conservative three-enemy limit.', crowdGuard);
+    assert(errors.length === 0, 'Browser errors during stranded-enemy recovery test.', errors);
+    return { name: 'stranded enemy recovery', status: 'passed', recovery, crowdGuard };
+  } finally {
+    await page.close();
+  }
+}
+
 async function testAreaEffectReadability(browser) {
   const { page, errors } = await openGame(browser, 'area-effect-readability');
   try {
@@ -1004,6 +1067,7 @@ async function run() {
     results.push(await testActiveUpgradeAbilities(browser));
     results.push(await testAreaEffectReadability(browser));
     results.push(await testTargetAcquisitionGate(browser));
+    results.push(await testStrandedEnemyRecovery(browser));
     const report = {
       generatedAt: new Date().toISOString(),
       results
