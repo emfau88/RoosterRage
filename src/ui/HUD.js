@@ -266,11 +266,30 @@ export class HUD {
       { numeral: 'II', title: 'Erweiterte Instinkte', unlockAt: 3, nodes: talentNodes.filter((talent) => talent.unlockAt >= 3 && talent.unlockAt < 8) },
       { numeral: 'III', title: 'Königsweg', unlockAt: 8, nodes: talentNodes.filter((talent) => talent.unlockAt >= 8) }
     ];
-    const talentTree = talentTiers.map((tier) => `
-      <section class="talent-tier ${tier.unlockAt > (hub.talents?.totalRanks ?? 0) ? 'is-locked' : ''}">
+    const talentBranchMarkup = (index) => index === 0 ? `
+      <div class="talent-tree__branches talent-tree__branches--roots" aria-hidden="true">
+        <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+          <path d="M16.7 0 C16.7 18 33.3 18 33.3 40" />
+          <path d="M50 0 C50 17 33.3 18 33.3 40" />
+          <path d="M50 0 C50 17 66.7 18 66.7 40" />
+          <path d="M83.3 0 C83.3 18 66.7 18 66.7 40" />
+        </svg>
+      </div>
+    ` : `
+      <div class="talent-tree__branches talent-tree__branches--crown" aria-hidden="true">
+        <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+          <path d="M33.3 0 C33.3 20 50 20 50 40" />
+          <path d="M66.7 0 C66.7 20 50 20 50 40" />
+        </svg>
+      </div>
+    `;
+    const talentTree = talentTiers.map((tier, index) => `
+      <section class="talent-tier talent-tier--${index + 1} ${tier.unlockAt > (hub.talents?.totalRanks ?? 0) ? 'is-locked' : ''}"
+        data-talent-tier="${index + 1}">
         <header><span>STUFE ${tier.numeral}</span><strong>${tier.title}</strong><small>${tier.unlockAt === 0 ? 'Sofort verfügbar' : `Ab ${tier.unlockAt} Talent-Rängen`}</small></header>
         <div class="talent-tier__nodes">${tier.nodes.map(talentNodeMarkup).join('')}</div>
       </section>
+      ${index < talentTiers.length - 1 ? talentBranchMarkup(index) : ''}
     `).join('');
     let selectedChallenge = hub.selectedChallenge ?? 'standard';
     const challengeCards = (hub.challenges ?? []).map((challenge) => `
@@ -433,16 +452,37 @@ export class HUD {
       });
       entry.append(button);
       if (meta.cosmetics?.length) {
+        const variant = meta.cosmetics[0];
+        const tint = `#${Math.max(0, variant.tint ?? 0xffffff).toString(16).padStart(6, '0').slice(-6)}`;
         const cosmetics = document.createElement('div');
-        cosmetics.className = 'cosmetic-list';
+        cosmetics.className = 'cosmetic-panel';
         cosmetics.innerHTML = `
-          <button type="button" data-cosmetic="" class="${meta.selectedCosmetic ? '' : 'is-selected'}">Original</button>
-          ${meta.cosmetics.map((cosmetic) => `
-            <button type="button" data-cosmetic="${cosmetic.id}" class="${meta.selectedCosmetic === cosmetic.id ? 'is-selected' : ''}"
-              ${cosmetic.unlocked ? '' : 'disabled'} title="${cosmetic.unlocked ? cosmetic.name : cosmetic.unlockLabel}">
-              ${cosmetic.unlocked ? cosmetic.name : 'Gesperrt'}
-            </button>
-          `).join('')}`;
+          <div class="cosmetic-panel__heading">
+            <span>NUR OPTIK</span>
+            <strong>Keine Werteänderung</strong>
+          </div>
+          <div class="cosmetic-preview" aria-label="Vorschau Original und ${variant.name}">
+            <figure class="${meta.selectedCosmetic ? '' : 'is-selected'}">
+              <span class="cosmetic-preview__image"><img src="${ROOSTER_PORTRAITS[definition.id]}" alt=""><i></i></span>
+              <figcaption>Original</figcaption>
+            </figure>
+            <span class="cosmetic-preview__arrow" aria-hidden="true">→</span>
+            <figure class="${meta.selectedCosmetic === variant.id ? 'is-selected' : ''} ${variant.unlocked ? '' : 'is-locked'}">
+              <span class="cosmetic-preview__image"><img src="${ROOSTER_PORTRAITS[definition.id]}" alt=""><i style="--cosmetic-tint:${tint}"></i></span>
+              <figcaption>${variant.name}${variant.unlocked ? '' : ' · Vorschau'}</figcaption>
+            </figure>
+          </div>
+          <p class="cosmetic-panel__unlock"><b>Freischaltung:</b> ${variant.unlockLabel}</p>
+          <div class="cosmetic-list">
+            <button type="button" data-cosmetic="" class="${meta.selectedCosmetic ? '' : 'is-selected'}"
+              ${meta.unlocked ? '' : 'disabled'}>Original</button>
+            ${meta.cosmetics.map((cosmetic) => `
+              <button type="button" data-cosmetic="${cosmetic.id}" class="${meta.selectedCosmetic === cosmetic.id ? 'is-selected' : ''}"
+                ${cosmetic.unlocked ? '' : 'disabled'} title="${cosmetic.unlocked ? cosmetic.name : cosmetic.unlockLabel}">
+                ${cosmetic.name}${cosmetic.unlocked ? '' : ' · Gesperrt'}
+              </button>
+            `).join('')}
+          </div>`;
         cosmetics.querySelectorAll('[data-cosmetic]').forEach((cosmeticButton) => {
           cosmeticButton.addEventListener('click', () => onCosmeticSelected?.(
             definition.id,

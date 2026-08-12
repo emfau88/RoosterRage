@@ -49,6 +49,15 @@ async function verifyFreshHub(context, serverUrl) {
         enabledChallenges: document.querySelectorAll('.challenge-card:not(:disabled)').length,
         talentNodes: document.querySelectorAll('.talent-node').length,
         talentTiers: document.querySelectorAll('.talent-tier').length,
+        talentBranches: document.querySelectorAll('.talent-tree__branches').length,
+        talentTierNodeCounts: [...document.querySelectorAll('.talent-tier')]
+          .map((tier) => tier.querySelectorAll('.talent-node').length),
+        cosmeticPanels: document.querySelectorAll('.cosmetic-panel').length,
+        cosmeticPreviews: document.querySelectorAll('.cosmetic-preview figure').length,
+        cosmeticClarity: [...document.querySelectorAll('.cosmetic-panel__heading')]
+          .map((heading) => heading.textContent.replace(/\s+/g, ' ').trim()),
+        cosmeticUnlocks: [...document.querySelectorAll('.cosmetic-panel__unlock')]
+          .map((unlock) => unlock.textContent.replace(/\s+/g, ' ').trim()),
         masteryBadges: document.querySelectorAll('.rooster-card__mastery-badge').length,
         archiveSummary: [...document.querySelectorAll('.henhouse-archive-stats small')].map((node) => node.textContent),
         archiveRecords: [...document.querySelectorAll('.henhouse-records .personal-bests > span > small')].map((node) => node.textContent),
@@ -84,11 +93,17 @@ async function verifyFreshHub(context, serverUrl) {
       && snapshot.currencyText.includes('0'),
     'The Phase G hub modules are incomplete.', snapshot);
     assert(snapshot.talentTiers === 3
+      && snapshot.talentBranches === 2
+      && snapshot.talentTierNodeCounts.join(',') === '3,2,1'
       && snapshot.archiveSummary.join(',') === 'Runs,Siege,Kills'
       && snapshot.archiveRecords.join(',') === 'Meiste Kills,Schnellster Sieg,Längster Run'
       && snapshot.archiveDrawers.join(',') === 'Run-Historie,Gegner-Lexikon,EVO-Lexikon'
       && !snapshot.analyticsInArchive,
     'Talent tiers or the simplified archive hierarchy are incomplete.', snapshot);
+    assert(snapshot.cosmeticPanels === 3 && snapshot.cosmeticPreviews === 6
+      && snapshot.cosmeticClarity.every((label) => label.includes('NUR OPTIK') && label.includes('Keine Werteänderung'))
+      && snapshot.cosmeticUnlocks.every((label) => label.startsWith('Freischaltung:')),
+    'Cosmetic effect or unlock presentation is incomplete.', snapshot);
     assert(snapshot.layout.left >= 0 && snapshot.layout.right <= 390 && snapshot.layout.bodyOverflow <= 0,
       'The portrait Hennenhütte overflows horizontally.', snapshot.layout);
     assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight,
@@ -239,6 +254,46 @@ async function verifyCompactMobileHub(context, serverUrl) {
     await fs.mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: path.join(artifactDir, 'henhouse-compact-mobile.png') });
     return layout;
+  } finally {
+    await page.close();
+  }
+}
+
+async function verifyMobileHubTabScrolling(context, serverUrl) {
+  const { page, errors } = await openGame(context, serverUrl, '-mobile-tab-scroll');
+  try {
+    await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
+    const cases = [
+      { tab: 'Hähne', view: 'roosters', target: '.rooster-entry:last-child .cosmetic-list button:last-child', requiresScroll: true },
+      { tab: 'Training', view: 'training', target: '.talent-tier:last-child', requiresScroll: true },
+      { tab: 'Archiv', view: 'archive', target: '.henhouse-drawers details:last-child', requiresScroll: false }
+    ];
+    const results = [];
+    for (const testCase of cases) {
+      await page.getByRole('button', { name: testCase.tab, exact: true }).click();
+      const result = await page.evaluate(({ viewName, targetSelector }) => {
+        const view = document.querySelector(`[data-hub-view="${viewName}"]`);
+        const target = view?.querySelector(targetSelector);
+        if (!view || !target) return null;
+        view.scrollTop = view.scrollHeight;
+        const viewBounds = view.getBoundingClientRect();
+        const targetBounds = target.getBoundingClientRect();
+        return {
+          scrollTop: Math.round(view.scrollTop),
+          maxScroll: view.scrollHeight - view.clientHeight,
+          overflowY: getComputedStyle(view).overflowY,
+          targetVisible: targetBounds.bottom <= viewBounds.bottom + 1
+            && targetBounds.bottom >= viewBounds.top
+        };
+      }, { viewName: testCase.view, targetSelector: testCase.target });
+      assert(result && (!testCase.requiresScroll || result.maxScroll > 0)
+        && result.scrollTop === result.maxScroll && result.overflowY === 'auto'
+        && result.targetVisible,
+      `Mobile hub tab ${testCase.tab} cannot reach its final content.`, result);
+      results.push({ tab: testCase.tab, ...result });
+    }
+    assert(errors.length === 0, 'Browser errors in mobile hub tab scroll gate.', errors);
+    return results;
   } finally {
     await page.close();
   }
@@ -481,6 +536,9 @@ async function run() {
       compactMobile: await inViewport(
         { width: 400, height: 711 },
         (context) => verifyCompactMobileHub(context, serverState.url)
+      ),
+      mobileTabScrolling: await inFreshContext(
+        (context) => verifyMobileHubTabScrolling(context, serverState.url)
       ),
       progression: await inFreshContext((context) => verifyUnlocksAndPersistence(context, serverState.url)),
       tenRuns: await inFreshContext((context) => verifyTenRunsTalentsAndReset(context, serverState.url)),

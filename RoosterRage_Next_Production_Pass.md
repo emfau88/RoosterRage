@@ -7,8 +7,9 @@ https://github.com/emfau88/RoosterRage
 ## Umsetzungsstand – 12.08.2026
 
 **Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der Messpass aus
-Phase 7 sowie die freigegebenen P0-/P1-Korrekturphasen sind abgeschlossen; die
-letzte subjektive Hardware-Abnahme und der priorisierte P2-Punkt bleiben offen.
+Phase 7 sowie die freigegebenen P0-/P1-/P2-Korrekturphasen sind abgeschlossen;
+offen bleiben die letzte subjektive Hardware-Abnahme und der separate
+Outline-/Skin-Asset-Bulk.
 
 **Aktueller Stand:** Hauptmenü, Horde-/XP-Pass, Enemy-Art-Pass und der bewusst
 fokussierte Champion-Pass sind auf `master`. README, Desktop-/Mobile-Gates und
@@ -976,8 +977,8 @@ auszuarbeiten, ergänzt genau ein kontrollierter Champion die Zielpriorität.
 Details: `docs/REWARD_REWORK.md`.
 
 ## Phase 7 – Balance & Production Gate
-**Status: Mess- und Diagnosepass sowie freigegebene P0-/P1-Korrekturphasen am
-12.08.2026 abgeschlossen; P2 ist als nächster Schritt freigegeben.**
+**Status: Mess- und Diagnosepass sowie freigegebene P0-/P1-/P2-
+Korrekturphasen am 12.08.2026 abgeschlossen.**
 - [x] sechs unterschiedlich geseedete Echtzeit-Vollruns;
 - [x] alle drei Rooster;
 - [x] Standard, Featherweight und Royal Gauntlet auf Desktop/Mobile abgedeckt;
@@ -992,8 +993,13 @@ Details: `docs/REWARD_REWORK.md`.
 - [x] P1: Wave-1-XP ohne Budgeterhöhung auf die Segmente `30/44/10/16 %`
   vorgezogen; fünf echte Desktop-/Portrait-Kurzläufe erreichten die erste Wahl
   stabil nach 25,2–31,4 Sekunden, XP-Orbs und Micro-Fodder-Bremse bleiben aktiv;
-- [ ] P2: Talentnest sichtbar verzweigen und Kosmetik-Wirkung/Freischaltweg
-  verständlich erklären;
+- [x] P2: Talentnest ohne Mechanikänderung als responsiven `3 → 2 → 1`-Baum
+  verzweigt; aktuelle Farbvarianten mit Vorher-/Nachher-Vorschau, `Nur Optik ·
+  keine Werteänderung` und exaktem Freischaltweg verständlich erklärt; eigenes
+  Mobile-Gate sichert die Erreichbarkeit der letzten Inhalte in Hähne, Training
+  und Archiv;
+- [ ] separater Outline-/Skin-Asset-Bulk: vollwertige Rooster-Skins benötigen
+  pro Variante ein Portrait und vier Richtungsreihen statt bloßer Farb-Tints;
 - [ ] letzte subjektive Abnahme auf realer Mobile-Hardware.
 
 Messwerte, Restrisiken und konkrete Vorschläge: `docs/PHASE_7_PRODUCTION_GATE.md`.

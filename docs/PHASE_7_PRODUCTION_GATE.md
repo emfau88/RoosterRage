@@ -169,6 +169,8 @@ Empfohlener selektiver Art-Pass:
 
 ### 7. Talentnest
 
+**Status: P2 umgesetzt und auf Desktop/Mobile abgenommen.**
+
 Die drei Stufen sind verständlich, wirken aber auf Mobile wie drei lineare
 Listen. Empfohlen ist ein echter visueller Baum ohne neue Mechanik:
 
@@ -178,7 +180,18 @@ Listen. Empfohlen ist ein echter visueller Baum ohne neue Mechanik:
 - Zusammenführung in Königsinstinkt;
 - auf Mobile vertikaler Stamm mit seitlich versetzten Ästen.
 
+Umgesetzt ist die unveränderte Talentmechanik nun als sichtbarer `3 → 2 → 1`-
+Baum: drei Wurzeln verzweigen über goldene Linien in zwei Instinkte und laufen
+im Königsinstinkt zusammen. Mobile verwendet einen vertikalen Stamm mit
+wechselnd versetzten Knoten. Kosten, Ränge, Boni und Freischaltgrenzen wurden
+nicht verändert. Ein zusätzliches Mobile-Gate prüft, dass Hähne und Talentnest
+bis zum letzten Inhalt scrollen; beim kompakten Archiv bleibt der letzte Inhalt
+auch ohne Scrollweg erreichbar.
+
 ### 8. Rooster-Kosmetik
+
+**Status: P2-Erklärung und Vorschau umgesetzt; eigener Skin-Asset-Bulk bleibt
+bewusst offen.**
 
 `Sunrise Comb`, `Ironclad Plating` und `Violet Arc` sind aktuell reine
 Farb-Tints ohne Wertewirkung. Das wird im Menü nicht erklärt und es fehlt eine
@@ -190,6 +203,12 @@ Freischaltweg. Mittelfristig sind individuelle Skins sinnvoll. Dafür benötigt
 jeder Rooster mindestens Portrait plus vier Richtungsreihen; reine Vollflächen-
 Tints sind für einen hochwertigen Mastery-Reward zu schwach.
 
+Das Menü kennzeichnet jede aktuelle Variante jetzt ausdrücklich mit `NUR
+OPTIK` und `Keine Werteänderung`, zeigt Original und Farbvariante nebeneinander
+und nennt den exakten Freischaltweg. Gesperrte Varianten dürfen als Vorschau
+betrachtet, aber weiterhin nicht gewählt werden. Die Darstellung behauptet
+damit nicht länger, dass die vorhandenen Tints bereits vollwertige Skins sind.
+
 ## Entscheidung vor Anpassungen
 
 Empfohlene Reihenfolge für einen kompakten Korrekturpass:
@@ -197,5 +216,5 @@ Empfohlene Reihenfolge für einen kompakten Korrekturpass:
 1. ~~Mobile Menü + HUD-Zähler;~~ **P0 erledigt**
 2. ~~Restgegner-/Stuck-Sicherung;~~ **P0 erledigt**
 3. ~~Wave-1-XP-Frontload nach weiteren Ace/Boombardier-Runs;~~ **P1 erledigt**
-4. Talentbaum + Kosmetik-Erklärung;
+4. ~~Talentbaum + Kosmetik-Erklärung;~~ **P2 erledigt**
 5. selektiver Outline-/Skin-Asset-Pass als eigener Bulk.

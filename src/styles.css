@@ -3556,3 +3556,240 @@ body,
     display: none;
   }
 }
+
+/* P2 progression clarity: a real 3 -> 2 -> 1 talent silhouette and honest
+   cosmetic previews. Mechanics, talent costs and unlock rules stay untouched. */
+.talent-tree {
+  display: block;
+  margin-top: 12px;
+}
+
+.talent-tier {
+  padding: 12px;
+  border-color: rgba(255, 216, 91, 0.3);
+  background:
+    radial-gradient(circle at 50% 0, rgba(255, 210, 70, 0.09), transparent 48%),
+    linear-gradient(155deg, rgba(55, 40, 15, 0.44), rgba(8, 21, 26, 0.88));
+}
+
+.talent-tier:not(:last-child)::after {
+  content: none;
+}
+
+.talent-tier__nodes {
+  display: grid;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.talent-tier--1 .talent-tier__nodes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.talent-tier--2 .talent-tier__nodes {
+  width: 72%;
+  margin-inline: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.talent-tier--3 .talent-tier__nodes {
+  width: 38%;
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.talent-tree__branches {
+  height: 38px;
+  padding-inline: 12px;
+}
+
+.talent-tree__branches svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.talent-tree__branches path {
+  fill: none;
+  stroke: rgba(255, 216, 91, 0.66);
+  stroke-linecap: round;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 4px rgba(255, 198, 46, 0.28));
+}
+
+.cosmetic-panel {
+  display: grid;
+  gap: 7px;
+  margin-top: 7px;
+  padding: 9px;
+  border: 1px solid rgba(205, 230, 234, 0.14);
+  border-radius: 11px;
+  background: linear-gradient(145deg, rgba(27, 44, 50, 0.94), rgba(9, 20, 25, 0.96));
+}
+
+.cosmetic-panel__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cosmetic-panel__heading span {
+  padding: 3px 6px;
+  border: 1px solid rgba(255, 225, 106, 0.46);
+  border-radius: 999px;
+  color: #ffe16a;
+  font-size: 8px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+.cosmetic-panel__heading strong {
+  color: #e5eeea;
+  font-size: 9px;
+}
+
+.cosmetic-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+}
+
+.cosmetic-preview figure {
+  min-width: 0;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid rgba(211, 231, 232, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.cosmetic-preview figure.is-selected {
+  border-color: #ffe16a;
+  box-shadow: 0 0 10px rgba(255, 207, 53, 0.1);
+}
+
+.cosmetic-preview figure.is-locked {
+  border-style: dashed;
+}
+
+.cosmetic-preview__image {
+  position: relative;
+  display: block;
+  height: 58px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #091419;
+}
+
+.cosmetic-preview__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 27%;
+}
+
+.cosmetic-preview__image i {
+  position: absolute;
+  inset: 0;
+  background: var(--cosmetic-tint, transparent);
+  mix-blend-mode: color;
+  opacity: 0.72;
+}
+
+.cosmetic-preview figcaption {
+  overflow: hidden;
+  margin-top: 4px;
+  color: #dce8e5;
+  font-size: 8px;
+  font-weight: 800;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cosmetic-preview__arrow {
+  color: #ffe16a;
+  font-size: 15px;
+  text-align: center;
+}
+
+.cosmetic-panel__unlock {
+  margin: 0;
+  color: #aebfc0;
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.cosmetic-panel__unlock b {
+  color: #f0d887;
+}
+
+.cosmetic-panel .cosmetic-list {
+  margin-top: 0;
+}
+
+.cosmetic-panel .cosmetic-list button {
+  min-height: 32px;
+  line-height: 1.15;
+}
+
+@media (max-width: 760px) {
+  .talent-tier__nodes,
+  .talent-tier--1 .talent-tier__nodes,
+  .talent-tier--2 .talent-tier__nodes,
+  .talent-tier--3 .talent-tier__nodes {
+    position: relative;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .talent-tier__nodes::before {
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: 50%;
+    width: 1px;
+    background: rgba(255, 216, 91, 0.26);
+    content: "";
+  }
+
+  .talent-tier .talent-node {
+    position: relative;
+    z-index: 1;
+    width: 88%;
+  }
+
+  .talent-tier .talent-node:nth-child(odd) {
+    margin-right: auto;
+  }
+
+  .talent-tier .talent-node:nth-child(even) {
+    margin-left: auto;
+  }
+
+  .talent-tier--3 .talent-node {
+    margin-inline: auto;
+  }
+
+  .talent-tree__branches {
+    position: relative;
+    height: 28px;
+    padding: 0;
+  }
+
+  .talent-tree__branches svg {
+    display: none;
+  }
+
+  .talent-tree__branches::before {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(255, 216, 91, 0.72), rgba(255, 216, 91, 0.34));
+    content: "";
+  }
+}

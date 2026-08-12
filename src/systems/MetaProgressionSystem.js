@@ -519,6 +519,7 @@ export class MetaProgressionSystem {
         cosmetics: COSMETICS.filter((cosmetic) => cosmetic.roosterId === rooster.id).map((cosmetic) => ({
           id: cosmetic.id,
           name: cosmetic.name,
+          tint: cosmetic.tint,
           unlocked: this.state.unlockedCosmetics.includes(cosmetic.id),
           unlockLabel: cosmetic.unlock.label
         }))
