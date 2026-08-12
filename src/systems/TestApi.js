@@ -475,6 +475,16 @@ export function installTestApi(scene) {
       vy: projectile.sprite.body?.velocity.y ?? 0,
       texture: projectile.sprite.texture?.key,
       scale: projectile.sprite.scaleX,
+      source: projectile.source,
+      heavy: projectile.heavy,
+      trailAlpha: projectile.trail.alpha,
+      trailScaleX: projectile.trail.scaleX,
+      trailScaleY: projectile.trail.scaleY,
+      trailOffset: projectile.trailOffset,
+      dangerRadius: projectile.dangerRing.radius,
+      dangerLineWidth: projectile.dangerRing.lineWidth,
+      dangerStrokeAlpha: projectile.dangerRing.strokeAlpha,
+      dangerScale: projectile.dangerRing.scaleX,
       active: projectile.sprite.active
     })),
     getEnemySnapshot: () => scene.enemies.map((enemy) => ({

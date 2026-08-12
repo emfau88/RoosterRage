@@ -549,8 +549,17 @@ async function testEnemyAbilities(browser) {
     assert(spitterTelegraph.enemyTelegraphs >= 1, 'Spitter did not telegraph its shot.', spitterTelegraph);
     assert(spitterTelegraph.enemyProjectiles === 0, 'Spitter fired before its telegraph completed.', spitterTelegraph);
     await page.waitForTimeout(260);
-    const afterSpitter = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    assert(afterSpitter.enemyProjectiles >= 1, 'Spitter did not fire a projectile.', afterSpitter);
+    const afterSpitter = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getState(),
+      projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
+    }));
+    assert(afterSpitter.state.enemyProjectiles >= 1, 'Spitter did not fire a projectile.', afterSpitter);
+    assert(afterSpitter.projectiles.every((projectile) => !projectile.heavy
+      && projectile.dangerLineWidth === 1
+      && projectile.dangerStrokeAlpha <= 0.4
+      && projectile.trailScaleX >= projectile.trailScaleY * 2.5
+      && projectile.trailOffset > 0),
+    'Normal Spitter projectiles do not use the restrained ring and directional trail.', afterSpitter);
 
     await page.evaluate(() => {
       window.__ROOSTER_TEST__.clearEnemies();
@@ -563,8 +572,16 @@ async function testEnemyAbilities(browser) {
     assert(fanTelegraph.enemyProjectiles === 0, 'Fan Spitter fired before its telegraph completed.', fanTelegraph);
     await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-telegraph.png') });
     await page.waitForTimeout(280);
-    const afterFan = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
-    assert(afterFan.enemyProjectiles >= 3, 'Fan Spitter did not fire a fan burst.', afterFan);
+    const afterFan = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getState(),
+      projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
+    }));
+    assert(afterFan.state.enemyProjectiles >= 3, 'Fan Spitter did not fire a fan burst.', afterFan);
+    assert(afterFan.projectiles.every((projectile) => !projectile.heavy
+      && projectile.dangerLineWidth === 1
+      && projectile.dangerStrokeAlpha <= 0.4
+      && projectile.trailScaleX >= projectile.trailScaleY * 2.5),
+    'Fan Spitter projectiles do not preserve the normal-projectile hierarchy.', afterFan);
     await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-projectiles.png') });
 
     await page.evaluate(() => {
@@ -651,9 +668,15 @@ async function testEnemyAbilities(browser) {
     }));
     const bossFireball = bossProjectiles.find((projectile) => projectile.texture === 'boss-fireball');
     assert(bossFireball, 'Boss did not create a visible fireball projectile.', bossProjectiles);
+    assert(bossFireball.heavy
+      && bossFireball.dangerLineWidth === 4
+      && bossFireball.dangerStrokeAlpha >= 0.95
+      && bossFireball.trailOffset === 0,
+    'Boss fireball lost its dominant heavy-projectile warning treatment.', bossFireball);
     assert(bossFireball.vx < -100, 'Boss fireball does not appear to fly toward the player.', bossFireball);
     assert(bossPosition && bossFireball.x < bossPosition.x,
       'Boss fireball should spawn outside the boss and move left toward the player.', { bossFireball, bossPosition });
+    await page.screenshot({ path: path.join(artifactDir, 'boss-fireball-projectile.png') });
     assert(errors.length === 0, 'Browser reported errors during enemy ability test.', errors);
     return {
       name: 'enemy abilities',
@@ -716,6 +739,48 @@ async function testActiveUpgradeAbilities(browser) {
       state.audio
     );
     return { name: 'active upgrade abilities', status: 'passed', inFlight, state };
+  } finally {
+    await page.close();
+  }
+}
+
+async function testMobileProjectileHierarchy(browser) {
+  const { page, errors } = await openGame(
+    browser,
+    'mobile-projectile-hierarchy',
+    'ace',
+    { width: 390, height: 844 }
+  );
+  try {
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.pauseWaves();
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.spawnEnemyType('fan-spitter', 700, 190, { speed: 0, damage: 0, hp: 9999 });
+    });
+    await page.waitForTimeout(370);
+    const result = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getState(),
+      projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
+    }));
+    assert(result.state.cameraZoom <= 0.9,
+      'Mobile projectile hierarchy test did not use the portrait camera zoom.', result);
+    assert(result.projectiles.length >= 3
+      && result.projectiles.every((projectile) => !projectile.heavy
+        && projectile.dangerLineWidth === 1
+        && projectile.dangerStrokeAlpha <= 0.4
+        && projectile.trailScaleX >= projectile.trailScaleY * 2.5),
+    'Mobile fan projectiles lost the restrained ring and directional trail.', result);
+    await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-projectiles-mobile.png') });
+    assert(errors.length === 0, 'Browser errors during mobile projectile visual hierarchy test.', errors);
+    return {
+      name: 'mobile enemy projectile hierarchy',
+      status: 'passed',
+      viewport: result.state.viewport,
+      cameraZoom: result.state.cameraZoom,
+      projectileCount: result.projectiles.length
+    };
   } finally {
     await page.close();
   }
@@ -935,6 +1000,7 @@ async function run() {
     results.push(await testTripleShotTrajectory(browser));
     results.push(await testWaveCuration(browser));
     results.push(await testEnemyAbilities(browser));
+    results.push(await testMobileProjectileHierarchy(browser));
     results.push(await testActiveUpgradeAbilities(browser));
     results.push(await testAreaEffectReadability(browser));
     results.push(await testTargetAcquisitionGate(browser));

@@ -19,6 +19,12 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   Orientierung an; fliegende Projektile, lokale Ketten/Ricochets, Spawns und
   Schaden bleiben unverändert. Ein eigener Commit macht den Versuch separat
   rücknehmbar. Details: `docs/TARGET_ACQUISITION_GATE.md`.
+- **Enemy-Projectile-Hierarchie: erledigt.** Normale bereits fliegende Schüsse
+  nutzen nur noch eine kleine ruhige 1-px-Kontur und einen deutlichen
+  gerichteten Elementfarben-Trail. Pulsierende, kräftige rote Warnringe bleiben
+  schweren Projektilen und Bossangriffen vorbehalten; Charge-, Explosions- und
+  AoE-Telegraphs bleiben dominant. Desktop und 390×844-Mobile sind geprüft.
+  Details: `docs/ENEMY_PROJECTILE_VISUAL_HIERARCHY.md`.
 
 - **Phase 1 – Hauptmenü: erledigt.** Default ist jetzt `Spielen` mit einem
   kompakten Rooster-Hero, Challenge/Arena-Block und dominantem `RUN STARTEN`.

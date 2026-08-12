@@ -15,11 +15,13 @@ export class EnemyProjectile {
     this.life = config.life ?? 2600;
     this.color = config.color ?? 0xa7ff64;
     this.trailColor = config.trailColor ?? this.color;
-    this.trailAlpha = config.trailAlpha ?? 0.28;
     this.pulse = config.pulse ?? false;
     this.heavy = config.heavy ?? false;
+    this.trailAlpha = config.trailAlpha ?? (this.heavy ? 0.44 : 0.4);
     this.warningColor = config.warningColor ?? 0xff4058;
     this.baseScale = config.scale ?? 1;
+    this.projectileRadius = config.radius ?? 7;
+    this.trailOffset = this.heavy ? 0 : (this.projectileRadius + 5) * this.baseScale;
     this.angle = angle;
     this.speed = config.speed ?? 220;
     this.source = config.source ?? 'enemy-projectile';
@@ -28,7 +30,7 @@ export class EnemyProjectile {
 
     this.sprite.enableBody(true, x, y, true, true);
     this.sprite.setTexture(config.texture ?? 'enemy-shot');
-    this.sprite.setCircle(config.radius ?? 7);
+    this.sprite.setCircle(this.projectileRadius);
     this.sprite.setRotation(angle);
     if (config.tint !== false) {
       this.sprite.setTint(this.color);
@@ -38,17 +40,21 @@ export class EnemyProjectile {
     if (config.tint === false) {
       this.sprite.clearTint();
     }
-    this.trail.setPosition(x, y)
-      .setRadius(((config.radius ?? 7) + 6) * this.baseScale)
+    this.trail.setPosition(
+      x - Math.cos(angle) * this.trailOffset,
+      y - Math.sin(angle) * this.trailOffset
+    )
+      .setRadius((this.projectileRadius + 6) * this.baseScale)
       .setFillStyle(this.trailColor, this.trailAlpha)
       .setDepth((config.depth ?? 5) - 1)
-      .setScale(1)
+      .setRotation(angle)
+      .setScale(this.heavy ? 1 : 1.45, this.heavy ? 1 : 0.52)
       .setAlpha(this.trailAlpha)
       .setActive(true)
       .setVisible(true);
     this.dangerRing.setPosition(x, y)
-      .setRadius(((config.radius ?? 7) + (this.heavy ? 9 : 5)) * this.baseScale)
-      .setStrokeStyle(this.heavy ? 4 : 2, this.warningColor, 0.96)
+      .setRadius((this.projectileRadius + (this.heavy ? 9 : 2)) * this.baseScale)
+      .setStrokeStyle(this.heavy ? 4 : 1, this.warningColor, this.heavy ? 0.96 : 0.4)
       .setDepth((config.depth ?? 5) + 1)
       .setScale(1)
       .setActive(true)
@@ -66,13 +72,18 @@ export class EnemyProjectile {
     if (this.pulse) {
       const pulseScale = this.baseScale + Math.sin(this.age * 0.012) * 0.12;
       this.sprite.setScale(pulseScale);
-      this.trail.setScale(1 + Math.sin(this.age * 0.01) * 0.18);
+      if (this.heavy) {
+        this.trail.setScale(1 + Math.sin(this.age * 0.01) * 0.18);
+      }
     }
     this.setVelocity();
-    this.trail.setPosition(this.sprite.x, this.sprite.y);
+    this.trail.setPosition(
+      this.sprite.x - Math.cos(this.angle) * this.trailOffset,
+      this.sprite.y - Math.sin(this.angle) * this.trailOffset
+    );
     this.trail.setAlpha(Math.max(0.08, this.life / 2600) * this.trailAlpha);
     this.dangerRing.setPosition(this.sprite.x, this.sprite.y);
-    this.dangerRing.setScale(1 + Math.sin(this.age * 0.014) * (this.heavy ? 0.13 : 0.08));
+    this.dangerRing.setScale(this.heavy ? 1 + Math.sin(this.age * 0.014) * 0.13 : 1);
     if (this.life <= 0) {
       this.destroy();
     }

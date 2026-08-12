@@ -1,7 +1,7 @@
 export const VISUAL_LANGUAGE = Object.freeze({
   player: { primary: '#fff3b0', secondary: '#5ad7ff', purpose: 'Eigene Angriffe und sichere Interaktion' },
-  enemy: { primary: '#ff5268', secondary: '#c18aff', purpose: 'Gegnerkoerper und gegnerische Projektile' },
-  hazard: { primary: '#ff3048', secondary: '#ff9a3d', purpose: 'Telegraphierte Schadensflaechen und schwere Treffer' },
+  enemy: { primary: '#ff5268', secondary: '#c18aff', purpose: 'Gegnerkoerper sowie Elementfarben normaler Projektile und Trails' },
+  hazard: { primary: '#ff3048', secondary: '#ff9a3d', purpose: 'Dominante Telegraphs, schwere Projektile und grosse Schadensflaechen' },
   pickup: { primary: '#65ef8b', secondary: '#5ad7ff', reward: '#ffd35c', purpose: 'Heilung, Utility und garantierte Belohnung' },
   evolution: { primary: '#ffe16a', secondary: '#ffffff', purpose: 'Vollstaendige EVOs und Bossbelohnungen' }
 });
