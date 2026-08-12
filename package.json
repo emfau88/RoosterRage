@@ -15,6 +15,7 @@
     "test:mechanics": "node tests/mechanics-runner.mjs",
     "test:foundation": "node tests/foundation-runner.mjs",
     "test:pacing": "node tests/pacing-runner.mjs",
+    "test:early-pacing": "node tests/early-pacing-runner.mjs",
     "test:boss": "node tests/boss-runner.mjs",
     "test:boss-matrix": "node tests/boss-build-matrix-runner.mjs",
     "test:evolution": "node tests/evolution-runner.mjs",

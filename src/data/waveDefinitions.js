@@ -7,10 +7,11 @@ function pressureCurve({ opening = 2, pressure = 4, finale = 5, finalePattern = 
   ];
 }
 
-function xpCurve(budget, bossXp = 0) {
+function xpCurve(budget, bossXp = 0, segmentShares = null) {
   return {
     budget,
-    bossXp
+    bossXp,
+    ...(segmentShares ? { segmentShares } : {})
   };
 }
 
@@ -27,7 +28,9 @@ export const WAVE_DEFINITIONS = [
     spawnMinDistance: 300,
     primaryRoles: [],
     pressureCurve: pressureCurve({ opening: 2, pressure: 3, finale: 4 }),
-    xpCurve: xpCurve(90),
+    // Preserve the 90 XP total while moving the first level-up from the
+    // recovery segment to the end of the escalation segment.
+    xpCurve: xpCurve(90, 0, [0.3, 0.44, 0.1, 0.16]),
     composition: [
       { count: 30, enemy: { kind: 'slime' } },
       { count: 18, enemy: { kind: 'kornkrabbler' } }

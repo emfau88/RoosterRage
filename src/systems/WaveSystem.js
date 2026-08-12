@@ -272,11 +272,12 @@ export class WaveSystem {
     }
     const segments = wave.pressureCurve?.length ? wave.pressureCurve : [{ share: 1 }];
     const enemyBudgets = allocateBudgets(queue.length, segments);
-    const shareTotal = segments.reduce((sum, segment) => sum + (segment.share ?? 0), 0) || 1;
+    const xpShares = this.getXpSegmentShares(wave, segments);
+    const shareTotal = xpShares.reduce((sum, share) => sum + share, 0) || 1;
     let offset = 0;
     enemyBudgets.forEach((enemyCount, segmentIndex) => {
       const group = queue.slice(offset, offset + enemyCount);
-      const segmentBudget = budget * ((segments[segmentIndex]?.share ?? 0) / shareTotal);
+      const segmentBudget = budget * ((xpShares[segmentIndex] ?? 0) / shareTotal);
       const weightTotal = group.reduce((sum, enemy) => sum + this.getXpWeight(enemy), 0) || 1;
       group.forEach((enemy) => {
         enemy.xpOverride = segmentBudget * (this.getXpWeight(enemy) / weightTotal);
@@ -284,6 +285,17 @@ export class WaveSystem {
       offset += enemyCount;
     });
     return queue;
+  }
+
+  getXpSegmentShares(wave, segments) {
+    const configured = wave.xpCurve?.segmentShares;
+    if (Array.isArray(configured)
+      && configured.length === segments.length
+      && configured.every((share) => Number.isFinite(share) && share >= 0)
+      && configured.some((share) => share > 0)) {
+      return [...configured];
+    }
+    return segments.map((segment) => Math.max(0, segment.share ?? 0));
   }
 
   getXpWeight(enemy) {
@@ -353,7 +365,10 @@ export class WaveSystem {
         mobileActiveCap: wave.mobileActiveCap,
         primaryRoles: [...(wave.primaryRoles ?? [])],
         pressureCurve: (wave.pressureCurve ?? []).map((segment) => ({ ...segment })),
-        xpCurve: { ...wave.xpCurve },
+        xpCurve: {
+          ...wave.xpCurve,
+          segmentShares: wave.xpCurve?.segmentShares ? [...wave.xpCurve.segmentShares] : null
+        },
         allocatedXp: queue.reduce((sum, enemy) => sum + (enemy.xpOverride ?? 0), 0),
         typeCounts,
         roleCounts,

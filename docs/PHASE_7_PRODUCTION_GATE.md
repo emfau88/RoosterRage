@@ -102,12 +102,21 @@ globale Damage- oder HP-Anpassung.
 
 ### 3. Erstes Upgrade
 
+**Status: P1 umgesetzt und abgenommen.**
+
 Gemessen wurden 21,0 bis 40,3 Sekunden; der Median liegt bei rund 29 Sekunden.
 Stormcrest liegt bereits gut, Ace und Standard-Boombardier teils spürbar spät.
 
 Empfohlene Lösung zur Freigabe: das vorhandene Wave-1-XP-Budget nur zeitlich
 nach vorn verlagern, nicht erhöhen. Frühe XP bleibt als sichtbare Orbs erhalten;
 die Micro-Fodder-XP-Bremse bleibt unverändert.
+
+Umgesetzt wurde eine reine Verteilungsänderung von Welle 1: Das feste Budget
+bleibt bei 90 XP, wird aber mit `30/44/10/16 %` auf die vier Segmente verteilt.
+Alle späteren Wellen, XP-Orbs und die Micro-Fodder-Bremse bleiben unverändert.
+Fünf automatisierte Echtzeit-Kurzläufe mit allen drei Roostern auf Desktop und
+Portrait erreichten die erste Upgrade-Wahl reproduzierbar nach 25,2 bis 31,4
+Sekunden; der Stormcrest-Schutzfall verhindert eine zu frühe Wahl.
 
 ### 4. Mobile HUD
 
@@ -187,6 +196,6 @@ Empfohlene Reihenfolge für einen kompakten Korrekturpass:
 
 1. ~~Mobile Menü + HUD-Zähler;~~ **P0 erledigt**
 2. ~~Restgegner-/Stuck-Sicherung;~~ **P0 erledigt**
-3. Wave-1-XP-Frontload nach weiteren zwei bis drei Ace/Boombardier-Runs;
+3. ~~Wave-1-XP-Frontload nach weiteren Ace/Boombardier-Runs;~~ **P1 erledigt**
 4. Talentbaum + Kosmetik-Erklärung;
 5. selektiver Outline-/Skin-Asset-Pass als eigener Bulk.
