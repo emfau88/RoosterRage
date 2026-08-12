@@ -271,6 +271,29 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
     const results = [];
     for (const testCase of cases) {
       await page.getByRole('button', { name: testCase.tab, exact: true }).click();
+      let touchScrollTop = 0;
+      if (testCase.requiresScroll) {
+        const view = page.locator(`[data-hub-view="${testCase.view}"]`);
+        const bounds = await view.boundingBox();
+        const session = await page.context().newCDPSession(page);
+        const x = Math.round(bounds.x + bounds.width * 0.5);
+        const startY = Math.round(bounds.y + bounds.height * 0.78);
+        const endY = Math.round(bounds.y + bounds.height * 0.28);
+        await session.send('Input.dispatchTouchEvent', {
+          type: 'touchStart',
+          touchPoints: [{ x, y: startY }]
+        });
+        for (let step = 1; step <= 6; step += 1) {
+          await session.send('Input.dispatchTouchEvent', {
+            type: 'touchMove',
+            touchPoints: [{ x, y: Math.round(startY + (endY - startY) * step / 6) }]
+          });
+        }
+        await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        await session.detach();
+        await page.waitForTimeout(120);
+        touchScrollTop = await view.evaluate((element) => Math.round(element.scrollTop));
+      }
       const result = await page.evaluate(({ viewName, targetSelector }) => {
         const view = document.querySelector(`[data-hub-view="${viewName}"]`);
         const target = view?.querySelector(targetSelector);
@@ -290,7 +313,9 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
         && result.scrollTop === result.maxScroll && result.overflowY === 'auto'
         && result.targetVisible,
       `Mobile hub tab ${testCase.tab} cannot reach its final content.`, result);
-      results.push({ tab: testCase.tab, ...result });
+      assert(!testCase.requiresScroll || touchScrollTop > 0,
+        `Mobile hub tab ${testCase.tab} ignores native touch scrolling.`, { touchScrollTop, ...result });
+      results.push({ tab: testCase.tab, touchScrollTop, ...result });
     }
     assert(errors.length === 0, 'Browser errors in mobile hub tab scroll gate.', errors);
     return results;
@@ -529,6 +554,19 @@ async function run() {
       await context.close();
     }
   };
+  const inMobileViewport = async (viewport, callback) => {
+    const context = await browser.newContext({
+      viewport,
+      hasTouch: true,
+      isMobile: true,
+      deviceScaleFactor: 2
+    });
+    try {
+      return await callback(context);
+    } finally {
+      await context.close();
+    }
+  };
   try {
     const report = {
       generatedAt: new Date().toISOString(),
@@ -537,7 +575,8 @@ async function run() {
         { width: 400, height: 711 },
         (context) => verifyCompactMobileHub(context, serverState.url)
       ),
-      mobileTabScrolling: await inFreshContext(
+      mobileTabScrolling: await inMobileViewport(
+        { width: 390, height: 844 },
         (context) => verifyMobileHubTabScrolling(context, serverState.url)
       ),
       progression: await inFreshContext((context) => verifyUnlocksAndPersistence(context, serverState.url)),

@@ -167,6 +167,17 @@ Empfohlener selektiver Art-Pass:
 - VFX und Terrain: keine schwarze Outline; stattdessen Glow beziehungsweise
   Bodenschatten.
 
+Der dauerhafte goldene Bodenkreis des Barnyard Ace wurde entfernt. Ein erster
+Laufzeit-Outline-Prototyp wurde nach sichtbarem Bewegungsjitter verworfen. Alle
+drei Basis-Rooster verwenden nun vereinfachte, direkt gezeichnete
+4-Richtungs-Sheets mit integrierter Kontur, je 16 stabil normierten 256-px-
+Frames und gemeinsamer Fußlinie statt mehrerer versetzter Renderkopien.
+
+Die lange mobile `Hähne`-/`Training`-Ansicht war zwar technisch scrollbar,
+erbte aber die globale Touch-Gestensperre des Phaser-Canvas. HTML-Overlays
+schalten nun gezielt auf `pan-y` mit Momentum-Scrolling; ein nativer
+Touch-Swipe im Mobile-Gate bestätigt 296 px beziehungsweise 170 px Bewegung.
+
 ### 7. Talentnest
 
 **Status: P2 umgesetzt und auf Desktop/Mobile abgenommen.**
@@ -217,4 +228,6 @@ Empfohlene Reihenfolge für einen kompakten Korrekturpass:
 2. ~~Restgegner-/Stuck-Sicherung;~~ **P0 erledigt**
 3. ~~Wave-1-XP-Frontload nach weiteren Ace/Boombardier-Runs;~~ **P1 erledigt**
 4. ~~Talentbaum + Kosmetik-Erklärung;~~ **P2 erledigt**
-5. selektiver Outline-/Skin-Asset-Pass als eigener Bulk.
+5. **P3 teilweise erledigt:** störender Ace-Kreis entfernt und drei neue
+   Basis-Sheets integriert; echte Reward-Skins sowie selektive
+   Gegner-/Pickup-Konturen bleiben offen.

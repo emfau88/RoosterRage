@@ -77,14 +77,9 @@ export class RoosterClassSystem {
     this.markers = [];
     const { x, y } = this.scene.player.sprite;
 
-    if (definition.id === 'ace') {
-      const ring = this.scene.add.circle(x, y + 18, 29, 0xffd35c, 0.05)
-        .setStrokeStyle(2, 0xffd35c, 0.5)
-        .setDepth(5);
-      ring.markerType = 'ace-ring';
-      this.markers.push(ring);
-      return;
-    }
+    // Ace deliberately needs no persistent ground ring. His authored sprite
+    // already carries the class identity without a distracting floor marker.
+    if (definition.id === 'ace') return;
 
     if (definition.id === 'artillery') {
       [-1, 1].forEach((side) => {
@@ -116,11 +111,6 @@ export class RoosterClassSystem {
     const x = player.sprite.x;
     const y = player.sprite.y;
     this.markers.forEach((marker) => {
-      if (marker.markerType === 'ace-ring') {
-        marker.setPosition(x, y + 18);
-        marker.setScale(0.96 + Math.sin(time * 0.004) * 0.05);
-        return;
-      }
       if (marker.markerType === 'artillery-pod') {
         const perpendicular = player.aimAngle + Math.PI / 2;
         marker.setPosition(

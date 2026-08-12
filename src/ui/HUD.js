@@ -198,7 +198,7 @@ export class HUD {
       : context.remaining > 0
         ? `Wähle ein Upgrade. Danach folgen noch ${context.remaining}.`
         : 'Wähle ein Upgrade.';
-    this.overlay.classList.add('is-visible');
+    this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel ${chest ? 'panel--reward' : ''}">
         <h2>${title}</h2>
@@ -328,7 +328,7 @@ export class HUD {
         data-hub-rooster="${definition.id}" ${meta.unlocked ? '' : 'disabled'}
         aria-label="${definition.name} auswählen">${definition.name}</button>`;
     }).join('');
-    this.overlay.classList.add('is-visible');
+    this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel rooster-panel henhouse-panel">
         <div class="henhouse-heading">
@@ -600,7 +600,7 @@ export class HUD {
       <span><strong>${unlockLabels[unlock.type] ?? 'Fortschritt'}</strong>${this.formatSource(unlock.id)}</span>
     `).join('');
     const metaReward = report.metaReward;
-    this.overlay.classList.add('is-visible');
+    this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel run-report">
         <h1>${title}</h1>
@@ -652,7 +652,7 @@ export class HUD {
       music: 'Musik',
       ambience: 'Ambiente'
     };
-    this.overlay.classList.add('is-visible');
+    this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel settings-panel">
         <h2>Einstellungen</h2>
@@ -705,8 +705,13 @@ export class HUD {
   }
 
   hideOverlay() {
-    this.overlay.classList.remove('is-visible');
+    this.setOverlayVisible(false);
     this.overlay.innerHTML = '';
+  }
+
+  setOverlayVisible(visible) {
+    this.overlay.classList.toggle('is-visible', visible);
+    document.documentElement.classList.toggle('has-ui-overlay', visible);
   }
 
   showWaveBanner(wave, config) {

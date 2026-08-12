@@ -8,8 +8,9 @@ https://github.com/emfau88/RoosterRage
 
 **Punkte/Phasen 1–6 umgesetzt und technisch abgenommen.** Der Messpass aus
 Phase 7 sowie die freigegebenen P0-/P1-/P2-Korrekturphasen sind abgeschlossen;
-offen bleiben die letzte subjektive Hardware-Abnahme und der separate
-Outline-/Skin-Asset-Bulk.
+offen bleiben die letzte subjektive Hardware-Abnahme sowie Reward-Skins und
+selektive Gegner-/Pickup-Konturen aus dem laufenden P3-Art-Bulk. Die drei
+Basis-Rooster-Sheets sind bereits erneuert.
 
 **Aktueller Stand:** Hauptmenü, Horde-/XP-Pass, Enemy-Art-Pass und der bewusst
 fokussierte Champion-Pass sind auf `master`. README, Desktop-/Mobile-Gates und
@@ -1000,6 +1001,16 @@ Korrekturphasen am 12.08.2026 abgeschlossen.**
   und Archiv;
 - [ ] separater Outline-/Skin-Asset-Bulk: vollwertige Rooster-Skins benötigen
   pro Variante ein Portrait und vier Richtungsreihen statt bloßer Farb-Tints;
+- [x] P3-Vorstufe: störenden permanenten Ace-Bodenkreis entfernt; jitternder
+  Laufzeit-Outline-Prototyp bewusst verworfen;
+- [x] P3-Basispass: vereinfachte, direkt konturierte 4-Richtungs-Sheets für
+  alle drei spielbaren Rooster erstellt; 16 stabile 256-px-Frames je Sheet,
+  feste Fußlinie und keine nachträglichen Laufzeit-Konturen;
+- [x] Mobile Hub-Nachbesserung: native Touch-Gesten für alle langen
+  Overlay-Ansichten freigegeben und mit echtem Touch-Swipe abgesichert
+  (`Hähne` 296 px, `Training` 170 px Test-Scrollweg);
+- [ ] P3-Rest: Sunrise Comb, Ironclad Plating und Violet Arc als vollwertige
+  Portrait-/4-Richtungs-Skins sowie schwächste Gegner-/Pickup-Konturen.
 - [ ] letzte subjektive Abnahme auf realer Mobile-Hardware.
 
 Messwerte, Restrisiken und konkrete Vorschläge: `docs/PHASE_7_PRODUCTION_GATE.md`.

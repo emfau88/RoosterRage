@@ -11,6 +11,23 @@ body,
   touch-action: none;
 }
 
+/* Phaser owns touch gestures during a run. HTML overlays temporarily restore
+   native vertical pan behavior so long hub/settings/reward content can scroll
+   on phones without making the combat canvas page-scrollable. */
+html.has-ui-overlay,
+html.has-ui-overlay body,
+html.has-ui-overlay #game-root {
+  touch-action: pan-y;
+}
+
+.overlay.is-visible,
+.overlay.is-visible .panel,
+.overlay.is-visible .henhouse-view {
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
 canvas {
   display: block;
   image-rendering: auto;

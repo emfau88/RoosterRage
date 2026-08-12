@@ -389,6 +389,7 @@ export function installTestApi(scene) {
       scale: scene.player.baseScale,
       tint: scene.player.sprite.tintTopLeft,
       markers: scene.roosterClasses.markers.length,
+      markerTypes: scene.roosterClasses.markers.map((marker) => marker.markerType),
       primary: { ...scene.player.primaryAttack },
       primaryEvolution: scene.player.primaryEvolution ? { ...scene.player.primaryEvolution } : null,
       upgradeAffinities: { ...scene.player.upgradeAffinities }

@@ -342,7 +342,8 @@ async function testRoosterClasses(browser) {
       `${result.roosterId} ${direction} movement does not use the true north row.`, state);
     });
   });
-  assert(ace.visual.markers === 1, 'Ace visual identity marker is missing.', ace.visual);
+  assert(ace.visual.markers === 0 && !ace.visual.markerTypes.includes('ace-ring'),
+    'The obsolete Ace ground ring is still active.', ace.visual);
   assert(artillery.visual.markers === 2, 'Artillery visual identity markers are missing.', artillery.visual);
   assert(storm.visual.markers === 3, 'Storm visual identity markers are missing.', storm.visual);
   assert(artillery.visual.upgradeAffinities['rocket-egg'] > 1, 'Artillery rocket affinity is missing.', artillery.visual);
