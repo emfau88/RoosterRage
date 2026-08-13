@@ -9,9 +9,9 @@ const sharedRatings = {
 export const ARENA_DEFINITIONS = [
   {
     id: 'open-yard',
-    name: 'Open Yard',
+    name: 'Harvest Yard',
     topology: 'open',
-    description: 'Breite Ausweichlinien und lange Schussachsen.',
+    description: 'Sonniger Erntehof mit offenen Ausweichlinien und kleinen Obsthainen.',
     bounds: { x: 44, y: 44, width: 1312, height: 812 },
     streaming: {
       axis: 'both',
@@ -30,7 +30,7 @@ export const ARENA_DEFINITIONS = [
   },
   {
     id: 'vertical-run',
-    name: 'Vertical Run',
+    name: 'Feed Alley',
     topology: 'corridor',
     description: 'Engere Seiten, klare Nord-Süd-Linien und durchbrechbare Sperren.',
     bounds: { x: 300, y: 44, width: 800, height: 812 },

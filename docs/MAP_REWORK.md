@@ -59,6 +59,29 @@ fully covered by the asset manifest.
 Before/after whole-map captures are stored in `docs/qa/coop-square-rework/`.
 The visual pass changes no enemy, weapon, wave, XP, reward or camera rules.
 
+### Streaming-map visual production pass (13 August 2026)
+
+The supplied four-map mockup was used as a quality and theme reference rather
+than copied literally. Open Yard is now presented as **Harvest Yard**: calm
+harvest-dirt chunks mix with occasional orchard-floor chunks, apple-grove
+landmarks, barns and wells. Vertical Run is presented as **Feed Alley**: dark
+damp ruts, feed-strewn verges and vertically recycled barn-yard edge strips
+replace the former light road and empty gutters; silos and feed troughs appear
+as sparse landmarks.
+
+Both maps retain their stable IDs, bounded pools, spawn windows, routes,
+destructible cover, balance and camera. Every new visible landmark owns a
+matching solid footprint, while no fake obstacles are baked into the terrain.
+The traversal gate now requires the orchard, silo and feed-trough themes to be
+observed during recycling. Before/after captures are stored in
+`docs/qa/map-theme-pass/`.
+
+New project sources are `arena-ground-orchard.png`,
+`arena-feed-alley-edge.png`, `landmark-orchard.png`, `landmark-silo.png` and
+`landmark-feed-trough.png` beside the replaced farm/road ground sources under
+`art-source/map/`. `scripts/prepare-map-theme-assets.py` deterministically
+prepares the runtime source set before the established WebP optimizer runs.
+
 ## Recycling and safety
 
 Only chunks leaving the active key set are reassigned. Existing visible chunks keep their objects and coordinates, preventing full-window popping at each boundary. Reassignment resets destructible health, texture, body, size, position, and ID. Each landmark owns a separate invisible solid footprint that is enabled, moved, and disabled with the same recycled chunk. Disabled obstacle slots remain outside physics.

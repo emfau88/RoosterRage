@@ -53,9 +53,14 @@ RUNTIME_IMAGES = (
     "map/arena-bale.png",
     "map/arena-wall.png",
     "map/arena-ground-farm.png",
+    "map/arena-ground-orchard.png",
     "map/arena-ground-road.png",
+    "map/arena-feed-alley-edge.png",
     "map/landmark-barn.png",
     "map/landmark-well.png",
+    "map/landmark-orchard.png",
+    "map/landmark-silo.png",
+    "map/landmark-feed-trough.png",
     "map/coop-square-ground.png",
     "map/coop-square-tractor.png",
     "map/coop-square-trough.png",
@@ -103,6 +108,9 @@ RUNTIME_IMAGES = (
 )
 
 RUNTIME_SIZES = {
+    "map/landmark-orchard.png": (288, 256),
+    "map/landmark-silo.png": (208, 256),
+    "map/landmark-feed-trough.png": (256, 160),
     "meta/kernel-currency.png": (64, 64),
     "meta/mastery-ace.png": (96, 96),
     "meta/mastery-artillery.png": (96, 96),

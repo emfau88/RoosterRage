@@ -38,9 +38,11 @@ function validateChunkCoverage(state, expectedPool) {
   assert(landmarkChunks.every((chunk) => (
     chunk.landmarkCollider.width >= 70
       && chunk.landmarkCollider.height >= 50
-      && ['barn', 'well'].includes(chunk.landmarkCollider.kind)
+      && ['barn', 'well', 'orchard', 'silo', 'feed-trough'].includes(chunk.landmarkCollider.kind)
   )), 'A landmark collision footprint is too small or has the wrong type.', landmarkChunks);
-  const landmarkObstacles = activeObstacles.filter((obstacle) => ['barn', 'well'].includes(obstacle.kind));
+  const landmarkObstacles = activeObstacles.filter((obstacle) => (
+    ['barn', 'well', 'orchard', 'silo', 'feed-trough'].includes(obstacle.kind)
+  ));
   assert(landmarkObstacles.length === landmarkChunks.length
     && landmarkObstacles.every((obstacle) => !obstacle.destructible),
   'Landmark colliders are not one-to-one solid bodies.', { landmarkChunks, landmarkObstacles });
@@ -73,6 +75,7 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getArenaState());
     validateChunkCoverage(initial, expectedPool);
     const snapshots = [];
+    const seenLandmarks = new Set(initial.activeChunks.map((chunk) => chunk.landmark).filter(Boolean));
     for (const route of routes) {
       const snapshot = await page.evaluate(({ x, y }) => {
         const api = window.__ROOSTER_TEST__;
@@ -88,6 +91,9 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
         };
       }, route);
       validateChunkCoverage(snapshot.arena, expectedPool);
+      snapshot.arena.activeChunks.forEach((chunk) => {
+        if (chunk.landmark) seenLandmarks.add(chunk.landmark);
+      });
       assert(snapshot.safePoints.every((point) => point.reachable && !point.blocked),
         'Streaming safe-point generation produced invalid geometry.', snapshot);
       assert(snapshot.pickupState.items.every((pickup) => pickup.reachable),
@@ -102,11 +108,19 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
     const finalState = await page.evaluate(() => window.__ROOSTER_TEST__.getArenaState());
     assert(finalState.recycledChunks >= expectedPool,
       'Traversal did not recycle a meaningful number of chunks.', finalState);
+    const expectedThemes = arenaId === 'open-yard'
+      ? ['landmark-orchard']
+      : ['landmark-silo', 'landmark-feed-trough'];
+    assert(expectedThemes.every((texture) => seenLandmarks.has(texture)),
+      'Traversal did not exercise every new themed landmark.', {
+        arenaId, expectedThemes, seenLandmarks: [...seenLandmarks]
+      });
     assert(errors.length === 0, `Browser errors in ${arenaId} traversal.`, errors);
     return {
       arenaId,
       chunkPoolSize: finalState.chunkPoolSize,
       recycledChunks: finalState.recycledChunks,
+      seenLandmarks: [...seenLandmarks],
       routes: snapshots
     };
   } finally {

@@ -145,6 +145,9 @@ export class ArenaSystem {
     const count = (radiusX * 2 + 1) * (radiusY * 2 + 1);
     for (let index = 0; index < count; index += 1) {
       const ground = this.scene.add.image(0, 0, this.streaming.groundTexture).setDepth(-2);
+      const edgeLeft = this.scene.add.image(0, 0, 'arena-feed-alley-edge').setDepth(-1).setVisible(false);
+      const edgeRight = this.scene.add.image(0, 0, 'arena-feed-alley-edge')
+        .setDepth(-1).setFlipX(true).setVisible(false);
       const landmark = this.scene.add.image(0, 0, 'landmark-well').setDepth(1).setVisible(false);
       const landmarkCollider = this.createObstacle({
         id: `stream-${index}-landmark`,
@@ -172,6 +175,8 @@ export class ArenaSystem {
         chunkX: 0,
         chunkY: 0,
         ground,
+        edgeLeft,
+        edgeRight,
         landmark,
         landmarkCollider,
         obstacles: obstacleSlots
@@ -231,21 +236,35 @@ export class ArenaSystem {
     record.key = key;
     record.chunkX = chunkX;
     record.chunkY = chunkY;
-    record.ground.setPosition(centerX, centerY).setDisplaySize(width + 2, height + 2);
+    const groundTexture = this.id === 'open-yard' && hash % 5 === 0
+      ? 'arena-ground-orchard'
+      : this.streaming.groundTexture;
+    record.ground.setTexture(groundTexture)
+      .setPosition(centerX, centerY)
+      .setDisplaySize(width + 2, height + 2);
+    if (this.id === 'vertical-run') {
+      const world = this.playableWorldBounds;
+      const edgeWidth = 300;
+      record.edgeLeft.setPosition(world.x - edgeWidth / 2, centerY)
+        .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
+      record.edgeRight.setPosition(world.x + world.width + edgeWidth / 2, centerY)
+        .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
+    } else {
+      record.edgeLeft.setVisible(false);
+      record.edgeRight.setVisible(false);
+    }
     this.configureLandmark(record, centerX, centerY, hash);
     this.configureChunkObstacles(record, centerX, centerY, hash);
   }
 
   configureLandmark(record, centerX, centerY, hash) {
-    const showBarn = this.id === 'open-yard' && hash % 11 === 0;
-    const showWell = hash % (this.id === 'open-yard' ? 7 : 9) === 0;
-    if (!showBarn && !showWell) {
+    const landmarkConfig = this.getLandmarkConfig(hash);
+    if (!landmarkConfig) {
       record.landmark.setVisible(false);
       this.disableObstacle(record.landmarkCollider);
       return;
     }
-    const texture = showBarn ? 'landmark-barn' : 'landmark-well';
-    const size = showBarn ? 220 : 128;
+    const { texture, size, kind, colliderWidth, colliderHeight, colliderOffsetY } = landmarkConfig;
     const laneOffset = this.id === 'vertical-run' ? 255 : 0;
     const offsetX = laneOffset || ((hash & 1) ? -235 : 235);
     const offsetY = ((hash >>> 3) % 260) - 130;
@@ -255,15 +274,58 @@ export class ArenaSystem {
       .setAlpha(0.9)
       .setVisible(true);
     this.configureObstacle(record.landmarkCollider, {
-      id: `${record.key}-${showBarn ? 'barn' : 'well'}`,
+      id: `${record.key}-${kind}`,
       x: centerX + offsetX,
-      y: centerY + offsetY + (showBarn ? 45 : 18),
-      width: showBarn ? 154 : 76,
-      height: showBarn ? 76 : 54,
-      kind: showBarn ? 'barn' : 'well',
+      y: centerY + offsetY + colliderOffsetY,
+      width: colliderWidth,
+      height: colliderHeight,
+      kind,
       solid: true,
       visible: false
     });
+  }
+
+  getLandmarkConfig(hash) {
+    if (this.id === 'open-yard') {
+      if (hash % 13 === 0) {
+        return {
+          texture: 'landmark-orchard', size: 236, kind: 'orchard',
+          colliderWidth: 178, colliderHeight: 92, colliderOffsetY: 42
+        };
+      }
+      if (hash % 11 === 0) {
+        return {
+          texture: 'landmark-barn', size: 220, kind: 'barn',
+          colliderWidth: 154, colliderHeight: 76, colliderOffsetY: 45
+        };
+      }
+      if (hash % 7 === 0) {
+        return {
+          texture: 'landmark-well', size: 128, kind: 'well',
+          colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
+        };
+      }
+      return null;
+    }
+    if (hash % 4 === 0) {
+      return {
+        texture: 'landmark-silo', size: 222, kind: 'silo',
+        colliderWidth: 116, colliderHeight: 82, colliderOffsetY: 56
+      };
+    }
+    if (hash % 5 === 0) {
+      return {
+        texture: 'landmark-feed-trough', size: 176, kind: 'feed-trough',
+        colliderWidth: 138, colliderHeight: 58, colliderOffsetY: 20
+      };
+    }
+    if (hash % 9 === 0) {
+      return {
+        texture: 'landmark-well', size: 128, kind: 'well',
+        colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
+      };
+    }
+    return null;
   }
 
   configureChunkObstacles(record, centerX, centerY, hash) {
@@ -336,7 +398,7 @@ export class ArenaSystem {
 
   configureObstacle(obstacle, config) {
     const texture = config.texture
-      ?? (config.kind === 'wall' || config.kind === 'barn' || config.kind === 'well'
+      ?? (config.kind === 'wall' || ['barn', 'well', 'orchard', 'silo', 'feed-trough'].includes(config.kind)
         ? 'arena-wall'
         : `arena-${config.kind}`);
     Object.assign(obstacle, config, {
@@ -527,6 +589,8 @@ export class ArenaSystem {
   destroy() {
     this.chunkRecords.forEach((record) => {
       record.ground.destroy();
+      record.edgeLeft.destroy();
+      record.edgeRight.destroy();
       record.landmark.destroy();
     });
     this.title?.destroy();

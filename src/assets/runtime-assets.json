@@ -338,21 +338,39 @@
     },
     {
       "source": "art-source/map/arena-ground-farm.png",
-      "sourceSha256": "404c5234cd5c6cfd3ec2c69bdf3056e6bae8cb2ee87f5880798a93adf9775476",
+      "sourceSha256": "6c6fd44e5416cdce5e262d9f0d7678b142225ead1c8d7c9510981058d66f1560",
       "runtime": "src/assets/map/arena-ground-farm.webp",
-      "runtimeSha256": "5cdc47106277ab123d983b4aea6164a13aee17ce56c0f0ebf809997194c72d91",
-      "width": 1254,
-      "height": 1254,
-      "bytes": 114090
+      "runtimeSha256": "f915bb99b793b1b7d1f8806472437ce5b250ff79172fac8eef2c66ee90d66020",
+      "width": 700,
+      "height": 700,
+      "bytes": 70832
+    },
+    {
+      "source": "art-source/map/arena-ground-orchard.png",
+      "sourceSha256": "05db79e4355e25a35e1c1d55894d896a5937409523964d74e1f286f18ff803ed",
+      "runtime": "src/assets/map/arena-ground-orchard.webp",
+      "runtimeSha256": "545076a3845d3dcbde351fd7c197aa6ab472f32f0c9c76f6ce76f12c31d756e0",
+      "width": 700,
+      "height": 700,
+      "bytes": 89698
     },
     {
       "source": "art-source/map/arena-ground-road.png",
-      "sourceSha256": "dee64736926656c262830d1af85fec39288c16a5e916e5bd02b694c1c7d26224",
+      "sourceSha256": "91af2b45a64379f1be7f982ff4f03a4690fa2465856eae42304171f793253567",
       "runtime": "src/assets/map/arena-ground-road.webp",
-      "runtimeSha256": "bc9007d35f9849f745cb4e47e810c6183600b8f2a09687bd1b1cb6d079cb8863",
-      "width": 1254,
-      "height": 1254,
-      "bytes": 110538
+      "runtimeSha256": "b0136b3351d7bc2fe4630b1bcf0d3c66d7f13bff8f4a7eebf3c8f48f482209e7",
+      "width": 800,
+      "height": 600,
+      "bytes": 125054
+    },
+    {
+      "source": "art-source/map/arena-feed-alley-edge.png",
+      "sourceSha256": "29b2aee24b5a4c8fc7dcdc00323926bb61f075cc40de8783fec8ecbbc6774fed",
+      "runtime": "src/assets/map/arena-feed-alley-edge.webp",
+      "runtimeSha256": "b2980eedeea3891f73a881d4e56b168972d086bc4356746f2a59da83a8f5d494",
+      "width": 300,
+      "height": 600,
+      "bytes": 42412
     },
     {
       "source": "art-source/map/landmark-barn.png",
@@ -371,6 +389,33 @@
       "width": 1254,
       "height": 1254,
       "bytes": 91002
+    },
+    {
+      "source": "art-source/map/landmark-orchard.png",
+      "sourceSha256": "00dd9394054c4cc677de5a648dcd425c694ec7cbb5c607db4ffedec7ebc9ab8f",
+      "runtime": "src/assets/map/landmark-orchard.webp",
+      "runtimeSha256": "b5747da63ffafa650082c1291e441cff808e8e9fadc076279126c24ae6d2421c",
+      "width": 288,
+      "height": 256,
+      "bytes": 23704
+    },
+    {
+      "source": "art-source/map/landmark-silo.png",
+      "sourceSha256": "fedec76ddcda03b64cb490a700eb2382a4eaf015b7853ba614adf244d9c4da28",
+      "runtime": "src/assets/map/landmark-silo.webp",
+      "runtimeSha256": "87562d0b501cc42e016cf73c3111c6a13306b9cb74086ff03c5280705f723a5b",
+      "width": 208,
+      "height": 256,
+      "bytes": 16122
+    },
+    {
+      "source": "art-source/map/landmark-feed-trough.png",
+      "sourceSha256": "98392dcab85b41cd44d186c3aa494401156078a9f94ecbe8437d01fad973d1f0",
+      "runtime": "src/assets/map/landmark-feed-trough.webp",
+      "runtimeSha256": "931a3d0a562190360bb661e61a10383ff0cb07c4f6b3fabe8f98feadfb6ceba2",
+      "width": 256,
+      "height": 160,
+      "bytes": 7716
     },
     {
       "source": "art-source/map/coop-square-ground.png",

@@ -1094,6 +1094,17 @@ Am Ende bitte liefern:
 
 ---
 
+## Map-Themen-Pass – umgesetzt am 13. August 2026
+
+- Coop Square wurde bereits als vollständig eingefriedete Farmarena produziert
+  und auf 1.230 × 810 Einheiten erweitert.
+- Open Yard besitzt nun die hochwertigere **Harvest-Yard**-Präsentation mit
+  ruhigerem Ernteboden, seltenen Obstwiesen und kollidierenden Apfelhainen.
+- Vertical Run besitzt nun die **Feed-Alley**-Präsentation mit schlammiger
+  Futtergasse, gestalteten Randstreifen sowie kollidierenden Silos und Trögen.
+- Streaming, Spawnfenster, zerstörbares Cover, Balance und Mobile-Kamera bleiben
+  unverändert; Vorher-/Nachher-Bilder liegen unter `docs/qa/map-theme-pass/`.
+
 # Produktleitlinie
 
 RoosterRage soll **nicht** versuchen, Survivor.io 1:1 zu kopieren.
