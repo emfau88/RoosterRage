@@ -62,11 +62,10 @@ The visual pass changes no enemy, weapon, wave, XP, reward or camera rules.
 ### Streaming-map visual production pass (13 August 2026)
 
 The supplied four-map mockup was used as a quality and theme reference rather
-than copied literally. Open Yard is now presented as **Harvest Yard**: calm
-harvest-dirt chunks mix with occasional orchard-floor chunks, apple-grove
-landmarks, barns and wells. Vertical Run is presented as **Feed Alley**: dark
-damp ruts, feed-strewn verges and vertically recycled barn-yard edge strips
-replace the former light road and empty gutters; silos and feed troughs appear
+than copied literally. Open Yard is now presented as **Harvest Yard**: warm,
+colorful harvest dirt, frequent apple-grove landmarks, barns and wells. Vertical
+Run is presented as **Feed Alley**: a friendly chestnut farm lane with ruts and
+feed-strewn verges replaces the former light road; silos and feed troughs appear
 as sparse landmarks.
 
 Both maps retain their stable IDs, bounded pools, spawn windows, routes,
@@ -76,11 +75,23 @@ The traversal gate now requires the orchard, silo and feed-trough themes to be
 observed during recycling. Before/after captures are stored in
 `docs/qa/map-theme-pass/`.
 
-New project sources are `arena-ground-orchard.png`,
-`arena-feed-alley-edge.png`, `landmark-orchard.png`, `landmark-silo.png` and
+New project sources are `arena-feed-alley-left.png`,
+`arena-feed-alley-right.png`, `landmark-orchard.png`, `landmark-silo.png` and
 `landmark-feed-trough.png` beside the replaced farm/road ground sources under
 `art-source/map/`. `scripts/prepare-map-theme-assets.py` deterministically
 prepares the runtime source set before the established WebP optimizer runs.
+
+### Streaming-map visual correction (13 August 2026)
+
+- **Harvest Yard:** The ground is warmer and more colorful without switching to
+  visibly different square floor tiles. Apple trees now appear more often and
+  one is guaranteed near the opening position, establishing the orchard theme
+  immediately while keeping the combat floor readable.
+- **Feed Alley:** The playable road and its dark inner borders stay intact. The
+  space beyond them is deliberately raised, non-walkable scenery: red barn and
+  silo roofs on the left; fenced grain fields, metal sheds and farm machinery on
+  the right. This removes the ambiguous mud/stream impression and gives both
+  sides distinct, friendlier silhouettes.
 
 ## Recycling and safety
 

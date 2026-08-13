@@ -338,39 +338,39 @@
     },
     {
       "source": "art-source/map/arena-ground-farm.png",
-      "sourceSha256": "6c6fd44e5416cdce5e262d9f0d7678b142225ead1c8d7c9510981058d66f1560",
+      "sourceSha256": "abbcf8544da8846d0cadc40412fd3194ac15b52da1207420bb294881985357ea",
       "runtime": "src/assets/map/arena-ground-farm.webp",
-      "runtimeSha256": "f915bb99b793b1b7d1f8806472437ce5b250ff79172fac8eef2c66ee90d66020",
+      "runtimeSha256": "55ef40f8d0617013052104d021778a4595f9f684555bb878a18de5fc31259fbd",
       "width": 700,
       "height": 700,
-      "bytes": 70832
-    },
-    {
-      "source": "art-source/map/arena-ground-orchard.png",
-      "sourceSha256": "05db79e4355e25a35e1c1d55894d896a5937409523964d74e1f286f18ff803ed",
-      "runtime": "src/assets/map/arena-ground-orchard.webp",
-      "runtimeSha256": "545076a3845d3dcbde351fd7c197aa6ab472f32f0c9c76f6ce76f12c31d756e0",
-      "width": 700,
-      "height": 700,
-      "bytes": 89698
+      "bytes": 101722
     },
     {
       "source": "art-source/map/arena-ground-road.png",
-      "sourceSha256": "91af2b45a64379f1be7f982ff4f03a4690fa2465856eae42304171f793253567",
+      "sourceSha256": "134ff0edeb2c49f131cc6d65ab0065060a66251cf71e4430e20fd7e4de29a091",
       "runtime": "src/assets/map/arena-ground-road.webp",
-      "runtimeSha256": "b0136b3351d7bc2fe4630b1bcf0d3c66d7f13bff8f4a7eebf3c8f48f482209e7",
+      "runtimeSha256": "3cfc51ca05d932ff8f36a52132f8290c78d51a0cff08458779a93e1a10ad1498",
       "width": 800,
       "height": 600,
-      "bytes": 125054
+      "bytes": 110020
     },
     {
-      "source": "art-source/map/arena-feed-alley-edge.png",
-      "sourceSha256": "29b2aee24b5a4c8fc7dcdc00323926bb61f075cc40de8783fec8ecbbc6774fed",
-      "runtime": "src/assets/map/arena-feed-alley-edge.webp",
-      "runtimeSha256": "b2980eedeea3891f73a881d4e56b168972d086bc4356746f2a59da83a8f5d494",
+      "source": "art-source/map/arena-feed-alley-left.png",
+      "sourceSha256": "9ae6d0f4dd5823252089965ccbce5eb98fd27f6774deb68bb16041109c29d566",
+      "runtime": "src/assets/map/arena-feed-alley-left.webp",
+      "runtimeSha256": "829eb371ab35038633304d12ca10fe6a3883f148192bcc58bf86dc7f4bec4807",
       "width": 300,
       "height": 600,
-      "bytes": 42412
+      "bytes": 53682
+    },
+    {
+      "source": "art-source/map/arena-feed-alley-right.png",
+      "sourceSha256": "7a9b77cebe19447c7a60b239f2be997326048597cc05bc9653e671d91c3c6ca1",
+      "runtime": "src/assets/map/arena-feed-alley-right.webp",
+      "runtimeSha256": "18a55d59b658aa52fb9536767e6bbdf76a6f1aad92e8ea387d68d1daffa40d32",
+      "width": 300,
+      "height": 600,
+      "bytes": 74912
     },
     {
       "source": "art-source/map/landmark-barn.png",

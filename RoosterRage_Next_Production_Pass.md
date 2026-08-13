@@ -25,6 +25,13 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   Flächen-Pass bewusst unverändert. Vorher-/Nachher-Vollkartenbilder liegen in
   `docs/qa/coop-square-rework/`. Details: `docs/MAP_REWORK.md`.
 
+- **Harvest-Yard-/Feed-Alley-Korrektur: umgesetzt am 13.08.2026.** Harvest Yard
+  ist wärmer, farbiger und ohne sichtbare quadratische Bodenthemenwechsel; ein
+  Apfelhain etabliert das Thema direkt am Start. Feed Alley behält Gasse und
+  innere Begrenzungen, nutzt außerhalb davon aber klar erhöhte, asymmetrische
+  Hofkulissen: Scheunen-/Silodächer links, Felder, Schuppen und Hoftechnik
+  rechts. Damit entfällt die missverständliche Matsch-/Flussebene.
+
 - **Kamerarelative Zielerfassung: als isolierter Versuch umgesetzt.** Neue
   Erstziele liegen höchstens im sichtbaren Kamerafenster plus einer halben
   Bildschirmgröße Rand je Seite. Das passt sich an Desktop, Mobile-Zoom und
@@ -1099,9 +1106,11 @@ Am Ende bitte liefern:
 - Coop Square wurde bereits als vollständig eingefriedete Farmarena produziert
   und auf 1.230 × 810 Einheiten erweitert.
 - Open Yard besitzt nun die hochwertigere **Harvest-Yard**-Präsentation mit
-  ruhigerem Ernteboden, seltenen Obstwiesen und kollidierenden Apfelhainen.
-- Vertical Run besitzt nun die **Feed-Alley**-Präsentation mit schlammiger
-  Futtergasse, gestalteten Randstreifen sowie kollidierenden Silos und Trögen.
+  warmem, farbigem Ernteboden und häufigeren kollidierenden Apfelhainen.
+- Vertical Run besitzt nun die **Feed-Alley**-Präsentation mit freundlicherer
+  Futtergasse, dunklen inneren Begrenzungen sowie kollidierenden Silos und
+  Trögen. Dahinter liegen getrennte, nicht begehbare Hofkulissen: links
+  Scheunendächer/Silo, rechts Felder, Schuppen und Hoftechnik.
 - Streaming, Spawnfenster, zerstörbares Cover, Balance und Mobile-Kamera bleiben
   unverändert; Vorher-/Nachher-Bilder liegen unter `docs/qa/map-theme-pass/`.
 

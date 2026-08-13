@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -60,28 +60,31 @@ def crop_prop(sheet, left_ratio, right_ratio, output_name):
 def main():
     parser = ArgumentParser(description="Prepare the Open Yard and Vertical Run theme assets.")
     parser.add_argument("--harvest-ground", required=True)
-    parser.add_argument("--orchard-ground", required=True)
     parser.add_argument("--feed-alley-ground", required=True)
-    parser.add_argument("--feed-alley-edge", required=True)
+    parser.add_argument("--feed-alley-left", required=True)
+    parser.add_argument("--feed-alley-right", required=True)
     parser.add_argument("--props", required=True)
     args = parser.parse_args()
 
     MAP_ROOT.mkdir(parents=True, exist_ok=True)
     with Image.open(args.harvest_ground) as source:
-        make_seamless(source.convert("RGB"), (700, 700)).save(
+        harvest = make_seamless(source.convert("RGB"), (700, 700))
+        harvest = ImageEnhance.Color(harvest).enhance(0.88)
+        harvest = ImageEnhance.Brightness(harvest).enhance(0.95)
+        harvest.save(
             MAP_ROOT / "arena-ground-farm.png", "PNG", optimize=True
-        )
-    with Image.open(args.orchard_ground) as source:
-        make_seamless(source.convert("RGB"), (700, 700)).save(
-            MAP_ROOT / "arena-ground-orchard.png", "PNG", optimize=True
         )
     with Image.open(args.feed_alley_ground) as source:
         make_seamless(source.convert("RGB"), (800, 600)).save(
             MAP_ROOT / "arena-ground-road.png", "PNG", optimize=True
         )
-    with Image.open(args.feed_alley_edge) as source:
+    with Image.open(args.feed_alley_left) as source:
         make_seamless(source.convert("RGB"), (300, 600)).save(
-            MAP_ROOT / "arena-feed-alley-edge.png", "PNG", optimize=True
+            MAP_ROOT / "arena-feed-alley-left.png", "PNG", optimize=True
+        )
+    with Image.open(args.feed_alley_right) as source:
+        make_seamless(source.convert("RGB"), (300, 600)).save(
+            MAP_ROOT / "arena-feed-alley-right.png", "PNG", optimize=True
         )
     with Image.open(args.props) as source:
         sheet = source.convert("RGBA")
