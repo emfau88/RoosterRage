@@ -271,7 +271,10 @@ export class ArenaSystem {
     const { texture, size, kind, colliderWidth, colliderHeight, colliderOffsetY } = landmarkConfig;
     const laneOffset = this.id === 'vertical-run' ? 255 : 0;
     const offsetX = laneOffset || ((hash & 1) ? -235 : 235);
-    const offsetY = ((hash >>> 3) % 260) - 130;
+    // Keep the opening combat lane clear. The guaranteed orchard remains visible
+    // near the player, but its solid trunk footprint must not intercept the first
+    // eastbound primary shot (especially Artillery's slower Blast Shell).
+    const offsetY = isStartChunk ? -150 : ((hash >>> 3) % 260) - 130;
     record.landmark.setTexture(texture)
       .setPosition(centerX + offsetX, centerY + offsetY)
       .setDisplaySize(size, size)
