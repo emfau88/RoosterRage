@@ -57,14 +57,19 @@ export const ARENA_DEFINITIONS = [
     name: 'Coop Square',
     topology: 'compact-square',
     description: 'Kurze Rotationen, hoher Nahbereichswert und vier offene Eckrouten.',
-    bounds: { x: 250, y: 120, width: 900, height: 660 },
+    bounds: { x: 85, y: 45, width: 1230, height: 810 },
     accent: 0xd49a55,
     weaponRatings: { ...sharedRatings, area: 1.2, orbit: 1.2, projectile: 0.9 },
     obstacles: [
-      { id: 'square-nw', x: 445, y: 305, width: 76, height: 76, kind: 'crate', hp: 105 },
-      { id: 'square-ne', x: 955, y: 305, width: 76, height: 76, kind: 'crate', hp: 105 },
-      { id: 'square-sw', x: 445, y: 595, width: 76, height: 76, kind: 'crate', hp: 105 },
-      { id: 'square-se', x: 955, y: 595, width: 76, height: 76, kind: 'crate', hp: 105 }
+      { id: 'square-hay-nw', x: 365, y: 195, width: 116, height: 74, kind: 'bale', texture: 'coop-square-hay-stack', hp: 135 },
+      { id: 'square-hay-se', x: 1035, y: 685, width: 116, height: 74, kind: 'bale', texture: 'coop-square-hay-stack', hp: 135 },
+      { id: 'square-tractor', x: 346, y: 300, width: 138, height: 112, kind: 'tractor', texture: 'coop-square-tractor', solid: true },
+      { id: 'square-trough-west', x: 347, y: 563, width: 118, height: 66, kind: 'trough', texture: 'coop-square-trough', solid: true },
+      { id: 'square-trough-east', x: 1050, y: 425, width: 118, height: 66, kind: 'trough', texture: 'coop-square-trough', solid: true },
+      { id: 'square-crate-north', x: 915, y: 245, width: 68, height: 68, kind: 'crate', hp: 105 },
+      { id: 'square-crate-south', x: 480, y: 650, width: 68, height: 68, kind: 'crate', hp: 105 },
+      { id: 'square-bale-north', x: 515, y: 245, width: 116, height: 74, kind: 'bale', texture: 'coop-square-hay-stack', hp: 135 },
+      { id: 'square-bale-south', x: 885, y: 650, width: 116, height: 74, kind: 'bale', texture: 'coop-square-hay-stack', hp: 135 }
     ]
   }
 ];

@@ -50,6 +50,32 @@ async function verifyArena(browser, serverUrl, arenaId) {
     assert(snapshot.safePoints.every((point) => point.reachable && !point.blocked),
       'Safe point generator produced blocked or unreachable coordinates.', snapshot.safePoints);
     assert(snapshot.catalog.length === 3, 'Arena catalog does not contain all topologies.', snapshot.catalog);
+    if (arenaId === 'square-coop') {
+      assert(snapshot.arena.bounds.x === 85 && snapshot.arena.bounds.y === 45
+        && snapshot.arena.bounds.width === 1230 && snapshot.arena.bounds.height === 810,
+      'Coop Square no longer matches its expanded fence footprint.', snapshot.arena.bounds);
+      const expectedProps = [
+        'square-hay-nw',
+        'square-hay-se',
+        'square-tractor',
+        'square-trough-west',
+        'square-trough-east',
+        'square-crate-north',
+        'square-crate-south',
+        'square-bale-north',
+        'square-bale-south'
+      ];
+      const activeIds = new Set(snapshot.arena.obstacles
+        .filter((obstacle) => obstacle.active)
+        .map((obstacle) => obstacle.id));
+      assert(expectedProps.every((id) => activeIds.has(id)),
+        'Coop Square is missing a farm prop collider.', snapshot.arena.obstacles);
+      assert(snapshot.arena.obstacles.filter((obstacle) => !obstacle.destructible).length === 3,
+        'Coop Square must keep tractor and both troughs as permanent cover.', snapshot.arena.obstacles);
+      assert(snapshot.arena.obstacles.every((obstacle) => (
+        Math.hypot(obstacle.x - 700, obstacle.y - 450) >= 230
+      )), 'Coop Square props intrude into the central combat lane.', snapshot.arena.obstacles);
+    }
     snapshot.catalog.forEach((arena) => {
       const ratings = Object.values(arena.weaponRatings);
       assert(ratings.length >= 5 && Math.min(...ratings) >= 0.8,

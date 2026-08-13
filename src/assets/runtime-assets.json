@@ -373,6 +373,42 @@
       "bytes": 91002
     },
     {
+      "source": "art-source/map/coop-square-ground.png",
+      "sourceSha256": "436e26538c5391ac5fd4f8a479eb781c215d417c927c3c88b7c92472e5cb7491",
+      "runtime": "src/assets/map/coop-square-ground.webp",
+      "runtimeSha256": "82f6c7b13a58f0fbc52dacbae40de00ae995993f5e70c2e5ed8cbee69e909722",
+      "width": 1400,
+      "height": 900,
+      "bytes": 305866
+    },
+    {
+      "source": "art-source/map/coop-square-tractor.png",
+      "sourceSha256": "f85c94c8fb605d2dd556e3a6c11df4a578b859d2c54cec3f02454eea7b8a9641",
+      "runtime": "src/assets/map/coop-square-tractor.webp",
+      "runtimeSha256": "c980a1bf3ea2a8a1f50debf10faafc220e11fe48c25b09ff701a919e99a8e763",
+      "width": 480,
+      "height": 473,
+      "bytes": 41278
+    },
+    {
+      "source": "art-source/map/coop-square-trough.png",
+      "sourceSha256": "da12995bd9287531dfccc033cdd1e07e9ad4afa5593414d616db837d164b545e",
+      "runtime": "src/assets/map/coop-square-trough.webp",
+      "runtimeSha256": "87e447c43c4028c962146b5abc00cb8a93553ff22c75d97055bf575ed7addfc7",
+      "width": 356,
+      "height": 339,
+      "bytes": 21908
+    },
+    {
+      "source": "art-source/map/coop-square-hay-stack.png",
+      "sourceSha256": "2b3148128b1516066db0732eb9a53b2c2326acef38c565512af34d5f5b1d016e",
+      "runtime": "src/assets/map/coop-square-hay-stack.webp",
+      "runtimeSha256": "3f6013168ed3dd8abcaf0c0a051ea4d1a0651dfcb1e4fd1e0727d65168fdf3a4",
+      "width": 422,
+      "height": 325,
+      "bytes": 35034
+    },
+    {
       "source": "art-source/meta/kernel-currency.png",
       "sourceSha256": "68c9ee64df17d0670daf28ce9b61c71c8cd867a849c9b3f8692c5ab695db2219",
       "runtime": "src/assets/meta/kernel-currency.webp",

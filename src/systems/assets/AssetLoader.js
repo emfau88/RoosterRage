@@ -71,6 +71,10 @@ import arenaGroundFarmUrl from '../../assets/map/arena-ground-farm.webp';
 import arenaGroundRoadUrl from '../../assets/map/arena-ground-road.webp';
 import landmarkBarnUrl from '../../assets/map/landmark-barn.webp';
 import landmarkWellUrl from '../../assets/map/landmark-well.webp';
+import coopSquareGroundUrl from '../../assets/map/coop-square-ground.webp';
+import coopSquareTractorUrl from '../../assets/map/coop-square-tractor.webp';
+import coopSquareTroughUrl from '../../assets/map/coop-square-trough.webp';
+import coopSquareHayStackUrl from '../../assets/map/coop-square-hay-stack.webp';
 import {
   getSceneRenderScale,
   getSceneViewport
@@ -189,6 +193,10 @@ export function preloadGameAssets(scene) {
   scene.load.image('arena-ground-road', arenaGroundRoadUrl);
   scene.load.image('landmark-barn', landmarkBarnUrl);
   scene.load.image('landmark-well', landmarkWellUrl);
+  scene.load.image('coop-square-ground', coopSquareGroundUrl);
+  scene.load.image('coop-square-tractor', coopSquareTractorUrl);
+  scene.load.image('coop-square-trough', coopSquareTroughUrl);
+  scene.load.image('coop-square-hay-stack', coopSquareHayStackUrl);
   const audioKeys = new Set();
   Object.entries(audioAssetUrls).forEach(([assetPath, assetUrl]) => {
     const key = assetPath.split('/').at(-1).replace(/\.mp3$/i, '');

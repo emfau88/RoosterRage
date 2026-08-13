@@ -99,7 +99,11 @@ export class GameScene extends Phaser.Scene {
     );
 
     if (!arenaDefinition.streaming) {
-      addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y);
+      const isCoopSquare = arenaDefinition.id === 'square-coop';
+      addArena(this, ARENA_WIDTH, ARENA_HEIGHT, ARENA_RENDER_PADDING_Y, {
+        groundTexture: isCoopSquare ? 'coop-square-ground' : 'arena-ground',
+        cleanPresentation: isCoopSquare
+      });
     }
     this.arena = new ArenaSystem(this, this.challenge.arenaId, ARENA_WIDTH, ARENA_HEIGHT);
 

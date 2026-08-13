@@ -28,7 +28,36 @@ Open Yard and Vertical Run are no longer static rooms. Both use a bounded object
 
 ### Coop Square
 
-- Original 900 × 660 enclosed bounds, four destructible corner crates, and four hard boundary colliders retained.
+- The original enclosed gameplay model and four hard boundary colliders are
+  retained, but the placeholder presentation has been replaced by a bespoke
+  1,400 × 900 farm arena. Its usable footprint was expanded from 900 × 660 to
+  1,230 × 810 after visual review, matching the fence placed farther outward.
+- A high-contrast wheat perimeter, continuous timber fence and four closed gates
+  make the playable boundary readable without the former abstract tint/grid.
+- The center remains deliberately open for horde combat. Nine perimeter props
+  create short rotation decisions: one tractor, two water troughs, four hay
+  stacks and two crates.
+- Tractor and troughs are permanent solid cover; hay and crates remain
+  destructible and preserve the established pickup/drop interaction.
+- Every visible prop has a collider matched to its gameplay footprint. An arena
+  regression gate protects the full prop roster, the three permanent-cover
+  objects and a 230-unit clear radius around the arena center.
+- The enclosure gate additionally drives the player into every fence side with
+  real movement input and samples 80 director spawns. The player remains inside
+  all four colliders and every enemy begins at least 65 units inside the fence.
+
+### Coop Square visual production pass (13 August 2026)
+
+The redesign was derived from the supplied quality mockup but rebuilt for the
+existing RoosterRage camera and HUD. The first 900 × 660 composition was then
+expanded to 1,230 × 810 while keeping the prop layout fixed. ImageGen
+created the coherent background and a matching tractor/trough/hay prop sheet;
+the checked-in preparation script performs deterministic 1,400 × 900 framing,
+chroma removal input splitting and source generation. Runtime WebP files remain
+fully covered by the asset manifest.
+
+Before/after whole-map captures are stored in `docs/qa/coop-square-rework/`.
+The visual pass changes no enemy, weapon, wave, XP, reward or camera rules.
 
 ## Recycling and safety
 

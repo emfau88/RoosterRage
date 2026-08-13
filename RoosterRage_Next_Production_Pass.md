@@ -16,6 +16,15 @@ Basis-Rooster-Sheets sind bereits erneuert.
 fokussierte Champion-Pass sind auf `master`. README, Desktop-/Mobile-Gates und
 der frühere Analytics-Fehler sind auf diesem Stand grün.
 
+- **Coop-Square-Map-Art-Pass: umgesetzt am 13.08.2026.** Die auf 1.230 × 810
+  vergrößerte Challenge-Geometrie besitzt jetzt eine eigenständige, klar
+  eingefasste Farmarena mit Weizenrand, Holzzaun, vier geschlossenen Toren,
+  heller ruhiger Kampfmitte sowie Traktor, Trögen, Heu und Kisten. Alle neun
+  sichtbaren Requisiten haben passende Kollisionskörper; drei bilden permanente
+  Deckung, sechs bleiben zerstörbar. Die Prop-Positionen blieben beim
+  Flächen-Pass bewusst unverändert. Vorher-/Nachher-Vollkartenbilder liegen in
+  `docs/qa/coop-square-rework/`. Details: `docs/MAP_REWORK.md`.
+
 - **Kamerarelative Zielerfassung: als isolierter Versuch umgesetzt.** Neue
   Erstziele liegen höchstens im sichtbaren Kamerafenster plus einer halben
   Bildschirmgröße Rand je Seite. Das passt sich an Desktop, Mobile-Zoom und

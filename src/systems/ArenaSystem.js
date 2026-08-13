@@ -99,9 +99,11 @@ export class ArenaSystem {
     const center = this.getCenter();
     if (!this.streaming) {
       const { x, y, width, height } = definition.bounds;
-      scene.add.rectangle(x + width / 2, y + height / 2, width, height, definition.accent, 0.055)
-        .setStrokeStyle(5, definition.accent, 0.32)
-        .setDepth(1);
+      if (definition.id !== 'square-coop') {
+        scene.add.rectangle(x + width / 2, y + height / 2, width, height, definition.accent, 0.055)
+          .setStrokeStyle(5, definition.accent, 0.32)
+          .setDepth(1);
+      }
     }
     this.title = scene.add.text(center.x - 250, center.y - 380, definition.name.toUpperCase(), {
       color: '#fff4cf',
@@ -110,7 +112,7 @@ export class ArenaSystem {
       fontStyle: 'bold',
       stroke: '#1e1710',
       strokeThickness: 4
-    }).setAlpha(0.52).setDepth(2);
+    }).setAlpha(definition.id === 'square-coop' ? 0 : 0.52).setDepth(2);
   }
 
   createObstacles() {

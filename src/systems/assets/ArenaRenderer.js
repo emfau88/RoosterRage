@@ -14,11 +14,13 @@ export function playSceneFx(scene, key, x, y, options = {}) {
   return sprite;
 }
 
-export function addArena(scene, width, height, renderPaddingY = 0) {
+export function addArena(scene, width, height, renderPaddingY = 0, options = {}) {
   const renderHeight = height + renderPaddingY * 2;
-  scene.add.image(width / 2, height / 2, 'arena-ground')
-    .setDisplaySize(width, renderHeight)
+  const groundTexture = options.groundTexture ?? 'arena-ground';
+  scene.add.image(width / 2, height / 2, groundTexture)
+    .setDisplaySize(width, options.cleanPresentation ? height : renderHeight)
     .setDepth(0);
+  if (options.cleanPresentation) return;
   const grid = scene.add.graphics();
   grid.lineStyle(1, 0x3d4b3f, 0.08);
   for (let x = 0; x <= width; x += 80) {
