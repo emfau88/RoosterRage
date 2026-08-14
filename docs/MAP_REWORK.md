@@ -25,6 +25,9 @@ Open Yard and Vertical Run are no longer static rooms. Both use a bounded object
 - Five reusable 800 × 600 road chunks in a constant 1 × 5 window.
 - Recycled side-wall colliders preserve the north/south corridor.
 - Alternating partial bale gates and side crates create readable blockers without sealing the route.
+- The central lane contains no large opaque landmarks. Architecture, fields and
+  machinery remain outside the playable strip so silhouettes stay readable in
+  dense combat.
 
 ### Coop Square
 
@@ -59,39 +62,38 @@ fully covered by the asset manifest.
 Before/after whole-map captures are stored in `docs/qa/coop-square-rework/`.
 The visual pass changes no enemy, weapon, wave, XP, reward or camera rules.
 
-### Streaming-map visual production pass (13 August 2026)
+### Streaming-map visual production pass and readability correction (14 August 2026)
 
-The supplied four-map mockup was used as a quality and theme reference rather
-than copied literally. Open Yard is now presented as **Harvest Yard**: warm,
-colorful harvest dirt, frequent apple-grove landmarks, barns and wells. Vertical
-Run is presented as **Feed Alley**: a friendly chestnut farm lane with ruts and
-feed-strewn verges replaces the former light road; silos and feed troughs appear
-as sparse landmarks.
+The supplied four-map mockup was used as a theme reference, then deliberately
+scaled back after real combat review. Open Yard is presented as **Harvest
+Yard**: warm, calm harvest dirt with sparse barns and wells. Vertical Run is
+presented as **Feed Alley**: a quiet packed-earth lane framed by clearly raised,
+north-up farm scenery.
 
 Both maps retain their stable IDs, bounded pools, spawn windows, routes,
-destructible cover, balance and camera. Every new visible landmark owns a
-matching solid footprint, while no fake obstacles are baked into the terrain.
-The traversal gate now requires the orchard, silo and feed-trough themes to be
-observed during recycling. Before/after captures are stored in
-`docs/qa/map-theme-pass/`.
+destructible cover, balance and camera. Ground and exterior chunks are never
+randomly flipped or rotated. The traversal gate explicitly protects this fixed
+orientation and verifies that Feed Alley remains free of opaque lane landmarks.
+The original theme captures remain in `docs/qa/map-theme-pass/`; the final
+readability comparisons are in `docs/qa/map-readability-pass/`.
 
-New project sources are `arena-feed-alley-left.png`,
-`arena-feed-alley-right.png`, `landmark-orchard.png`, `landmark-silo.png` and
-`landmark-feed-trough.png` beside the replaced farm/road ground sources under
-`art-source/map/`. `scripts/prepare-map-theme-assets.py` deterministically
-prepares the runtime source set before the established WebP optimizer runs.
+The final Feed Alley sources are `arena-ground-road.png`,
+`arena-feed-alley-left.png` and `arena-feed-alley-right.png` under
+`art-source/map/`. `scripts/prepare-map-theme-assets.py` crops, grades and sizes
+these sources without seam-shifting architectural content before the established
+WebP optimizer runs.
 
-### Streaming-map visual correction (13 August 2026)
+### Final readability correction (14 August 2026)
 
-- **Harvest Yard:** The ground is warmer and more colorful without switching to
-  visibly different square floor tiles. Apple trees now appear more often and
-  one is guaranteed near the opening position, establishing the orchard theme
-  immediately while keeping the combat floor readable.
-- **Feed Alley:** The playable road and its dark inner borders stay intact. The
-  space beyond them is deliberately raised, non-walkable scenery: red barn and
-  silo roofs on the left; fenced grain fields, metal sheds and farm machinery on
-  the right. This removes the ambiguous mud/stream impression and gives both
-  sides distinct, friendlier silhouettes.
+- **Harvest Yard:** A calmer, slightly softened ochre floor replaces the noisier
+  version. Random X/Y flips were removed, so grass and directional details no
+  longer appear sideways or upside down. The combat-obscuring orchard was
+  removed; much rarer barns and wells retain the farm identity.
+- **Feed Alley:** The lane is now broad, bright and low-noise with two restrained
+  north/south wheel tracks. No silo, trough or well can obscure the playable
+  strip. The left exterior is one coherent barn/silo/field scene; the right is a
+  separate field/shed/machinery scene. Both have fixed north-up orientation and
+  darker grading than the combat floor.
 
 ## Recycling and safety
 
@@ -103,16 +105,22 @@ The DEV test adapter translates legacy 1,400 × 900 test coordinates to the stab
 
 ## Assets
 
-Built-in ImageGen mode created four project-bound sources:
+Built-in ImageGen mode created and refined the project-bound map sources:
 
 | Asset | Source | Runtime use |
 | --- | --- | --- |
-| Open Yard farm ground | `art-source/map/arena-ground-farm.png` | repeating 700 × 700 chunks |
-| Vertical Run farm road | `art-source/map/arena-ground-road.png` | repeating 800 × 600 chunks |
+| Harvest Yard ground | `art-source/map/arena-ground-farm.png` | calm repeating 700 × 700 chunks |
+| Feed Alley ground | `art-source/map/arena-ground-road.png` | quiet north/south 800 × 600 lane |
+| Feed Alley left exterior | `art-source/map/arena-feed-alley-left.png` | north-up barn, silo and field scenery |
+| Feed Alley right exterior | `art-source/map/arena-feed-alley-right.png` | north-up field, shed and machinery scenery |
 | Chicken barn | `art-source/map/landmark-barn.png` | sparse Open Yard landmark |
-| Farm well | `art-source/map/landmark-well.png` | sparse Open Yard/road landmark |
+| Farm well | `art-source/map/landmark-well.png` | sparse Open Yard landmark |
 
-The ground prompts requested seamless orthographic ochre farm soil or a north/south packed-earth road, restrained olive grass, low noise, and the existing painted mobile-game palette. The landmark prompts requested one compact orthographic timber chicken barn or stone farm well on flat green chroma key, matching existing crate/bale lighting and outline. Chroma sources are retained beside the alpha PNGs; local key removal produced transparent corners without visible green fringe.
+The final Feed Alley prompts requested a seamless orthographic ochre lane with a
+broad quiet center and two subtle north/south tracks, plus coherent raised farm
+architecture outside each boundary. They explicitly excluded water, mud,
+collage layouts and rotated structures. Local deterministic grading keeps the
+exterior darker and less saturated than the combat surface.
 
 Runtime WebP files are generated by `npm run assets:optimize` and covered by `src/assets/runtime-assets.json`. Existing crate, bale, and wall assets provide all mechanical props; no redundant map prop set was produced.
 
@@ -125,7 +133,7 @@ Runtime WebP files are generated by `npm run assets:optimize` and covered by `sr
 - Vertical Run tested north and south.
 - Open Yard pool stayed at 25 chunks after 125 recycled assignments.
 - Vertical Run pool stayed at five chunks after 15 recycled assignments.
-- No chunk gaps, duplicate keys, stale colliders, blocked safe points, or unreachable pickups. Every visible barn/well is asserted to have exactly one correctly sized solid footprint.
+- No chunk gaps, duplicate keys, stale colliders, blocked safe points, or unreachable pickups. Every visible barn/well is asserted to have exactly one correctly sized solid footprint; every ground and Feed Alley exterior chunk is asserted to remain unflipped.
 
 ### Ten-minute soak
 
@@ -148,7 +156,7 @@ Vertical Run was played northward with real keyboard input on desktop and checke
 
 | Gate | Result |
 | --- | --- |
-| `npm run assets:check` | pass; 46 runtime images current |
+| `npm run assets:check` | pass; 87 runtime images current |
 | `npm run build` | pass |
 | `npm run test:arena` | pass; all three topology and pickup checks |
 | `npm run test:map-streaming` | pass; 129-second-equivalent routes |

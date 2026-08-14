@@ -301,24 +301,8 @@ export class ArenaSystem {
       }
       return null;
     }
-    if (hash % 4 === 0) {
-      return {
-        texture: 'landmark-silo', size: 222, kind: 'silo',
-        colliderWidth: 116, colliderHeight: 82, colliderOffsetY: 56
-      };
-    }
-    if (hash % 5 === 0) {
-      return {
-        texture: 'landmark-feed-trough', size: 176, kind: 'feed-trough',
-        colliderWidth: 138, colliderHeight: 58, colliderOffsetY: 20
-      };
-    }
-    if (hash % 9 === 0) {
-      return {
-        texture: 'landmark-well', size: 128, kind: 'well',
-        colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
-      };
-    }
+    // Feed Alley's large architecture lives outside the playable lane. Keeping
+    // the combat strip free of opaque landmarks preserves silhouettes in hordes.
     return null;
   }
 
@@ -552,6 +536,19 @@ export class ArenaSystem {
         y: record.ground.y,
         width: record.ground.displayWidth,
         height: record.ground.displayHeight,
+        groundTexture: record.ground.texture.key,
+        groundFlipX: record.ground.flipX,
+        groundFlipY: record.ground.flipY,
+        edgeLeft: record.edgeLeft.visible ? {
+          texture: record.edgeLeft.texture.key,
+          flipX: record.edgeLeft.flipX,
+          flipY: record.edgeLeft.flipY
+        } : null,
+        edgeRight: record.edgeRight.visible ? {
+          texture: record.edgeRight.texture.key,
+          flipX: record.edgeRight.flipX,
+          flipY: record.edgeRight.flipY
+        } : null,
         landmark: record.landmark.visible ? record.landmark.texture.key : null,
         landmarkCollider: record.landmarkCollider.sprite.active ? {
           x: record.landmarkCollider.x,

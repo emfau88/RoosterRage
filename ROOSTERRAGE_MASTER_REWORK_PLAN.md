@@ -1637,7 +1637,7 @@ Nur Baseline.
 
 ## PHASE E – Map Topology Rework
 
-**Status: ✅ umgesetzt.** Open Yard nutzt einen konstanten 5×5-Pool aus 700er-Chunks; Vertical Run einen 1×5-Pool aus 600er-Straßensegmenten mit festen Seiten. 131.072 Weltkoordinaten pro Achse erlauben mehr als zwei Minuten Lauf in jede vorgesehene Richtung. Coop Square blieb unverändert geschlossen. Bericht: `docs/MAP_REWORK.md`.
+**Status: ✅ umgesetzt; finaler Lesbarkeitspass am 14.08.2026.** Open Yard nutzt einen konstanten 5×5-Pool aus 700er-Chunks; Vertical Run einen 1×5-Pool aus 600er-Straßensegmenten mit festen Seiten. 131.072 Weltkoordinaten pro Achse erlauben mehr als zwei Minuten Lauf in jede vorgesehene Richtung. Harvest Yard und Feed Alley besitzen nun ruhige Kampfoberflächen ohne zufällige Chunk-Spiegelungen; Feed Alley's große Architektur liegt ausschließlich außerhalb der freien Lane. Coop Square blieb beim Korrekturpass unverändert geschlossen. Bericht und Vergleichsbilder: `docs/MAP_REWORK.md`, `docs/qa/map-readability-pass/`.
 
 ### Aufgaben
 

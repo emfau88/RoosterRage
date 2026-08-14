@@ -347,30 +347,30 @@
     },
     {
       "source": "art-source/map/arena-ground-road.png",
-      "sourceSha256": "134ff0edeb2c49f131cc6d65ab0065060a66251cf71e4430e20fd7e4de29a091",
+      "sourceSha256": "adeb86b7389412fd591a1ee8e4ea39819b05bdb9208b23e3b292a905798e147e",
       "runtime": "src/assets/map/arena-ground-road.webp",
-      "runtimeSha256": "3cfc51ca05d932ff8f36a52132f8290c78d51a0cff08458779a93e1a10ad1498",
+      "runtimeSha256": "007d14d2d90a1d83e285ca4b7278695520051cad6806aae17996760be98a377f",
       "width": 800,
       "height": 600,
-      "bytes": 110020
+      "bytes": 22942
     },
     {
       "source": "art-source/map/arena-feed-alley-left.png",
-      "sourceSha256": "9ae6d0f4dd5823252089965ccbce5eb98fd27f6774deb68bb16041109c29d566",
+      "sourceSha256": "5cbce51f32c0ed964761084c075bc2ef4e8145c40af75add1a35c8ccffadbe36",
       "runtime": "src/assets/map/arena-feed-alley-left.webp",
-      "runtimeSha256": "829eb371ab35038633304d12ca10fe6a3883f148192bcc58bf86dc7f4bec4807",
+      "runtimeSha256": "2e09f455fdedf6697ca6fb4e0b0bd002ee3f182146228d4314c082dc889de175",
       "width": 300,
       "height": 600,
-      "bytes": 53682
+      "bytes": 18508
     },
     {
       "source": "art-source/map/arena-feed-alley-right.png",
-      "sourceSha256": "7a9b77cebe19447c7a60b239f2be997326048597cc05bc9653e671d91c3c6ca1",
+      "sourceSha256": "2b8f219bb91190c4d7bcf9fe17119769371bb2d26169cba8137d24bda4df5678",
       "runtime": "src/assets/map/arena-feed-alley-right.webp",
-      "runtimeSha256": "18a55d59b658aa52fb9536767e6bbdf76a6f1aad92e8ea387d68d1daffa40d32",
+      "runtimeSha256": "b1de749c045e223aa9fad56bb889251d7c379c2e5fb892e00c8f6e811cce3bf0",
       "width": 300,
       "height": 600,
-      "bytes": 74912
+      "bytes": 35782
     },
     {
       "source": "art-source/map/landmark-barn.png",
@@ -389,24 +389,6 @@
       "width": 1254,
       "height": 1254,
       "bytes": 91002
-    },
-    {
-      "source": "art-source/map/landmark-silo.png",
-      "sourceSha256": "fedec76ddcda03b64cb490a700eb2382a4eaf015b7853ba614adf244d9c4da28",
-      "runtime": "src/assets/map/landmark-silo.webp",
-      "runtimeSha256": "87562d0b501cc42e016cf73c3111c6a13306b9cb74086ff03c5280705f723a5b",
-      "width": 208,
-      "height": 256,
-      "bytes": 16122
-    },
-    {
-      "source": "art-source/map/landmark-feed-trough.png",
-      "sourceSha256": "98392dcab85b41cd44d186c3aa494401156078a9f94ecbe8437d01fad973d1f0",
-      "runtime": "src/assets/map/landmark-feed-trough.webp",
-      "runtimeSha256": "931a3d0a562190360bb661e61a10383ff0cb07c4f6b3fabe8f98feadfb6ceba2",
-      "width": 256,
-      "height": 160,
-      "bytes": 7716
     },
     {
       "source": "art-source/map/coop-square-ground.png",

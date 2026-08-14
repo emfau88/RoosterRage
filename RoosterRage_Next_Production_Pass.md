@@ -25,12 +25,13 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   Flächen-Pass bewusst unverändert. Vorher-/Nachher-Vollkartenbilder liegen in
   `docs/qa/coop-square-rework/`. Details: `docs/MAP_REWORK.md`.
 
-- **Harvest-Yard-/Feed-Alley-Korrektur: umgesetzt am 13.08.2026.** Harvest Yard
-  ist wärmer, farbiger und ohne sichtbare quadratische Bodenthemenwechsel; ein
-  Apfelhain etabliert das Thema direkt am Start. Feed Alley behält Gasse und
-  innere Begrenzungen, nutzt außerhalb davon aber klar erhöhte, asymmetrische
-  Hofkulissen: Scheunen-/Silodächer links, Felder, Schuppen und Hoftechnik
-  rechts. Damit entfällt die missverständliche Matsch-/Flussebene.
+- **Finaler Map-Lesbarkeitspass: umgesetzt am 14.08.2026.** Harvest Yard nutzt
+  jetzt einen ruhigeren Ernteboden ohne zufällige Spiegelungen; der störende
+  Apfelhain wurde entfernt, Scheunen und Brunnen sind deutlich seltener. Feed
+  Alley besitzt eine helle, detailarme Kampfspur ohne große Lane-Landmarks sowie
+  fest nordwärts ausgerichtete Außenkulissen: links Scheune/Silo/Feld, rechts
+  Feld/Schuppen/Hoftechnik. Coop Square blieb vollständig unverändert. Finale
+  Vorher-/Nachher-Bilder: `docs/qa/map-readability-pass/`.
 
 - **Kamerarelative Zielerfassung: als isolierter Versuch umgesetzt.** Neue
   Erstziele liegen höchstens im sichtbaren Kamerafenster plus einer halben
@@ -1101,18 +1102,19 @@ Am Ende bitte liefern:
 
 ---
 
-## Map-Themen-Pass – umgesetzt am 13. August 2026
+## Map-Themen- und Lesbarkeitspass – finalisiert am 14. August 2026
 
 - Coop Square wurde bereits als vollständig eingefriedete Farmarena produziert
   und auf 1.230 × 810 Einheiten erweitert.
-- Open Yard besitzt nun die hochwertigere **Harvest-Yard**-Präsentation mit
-  warmem, farbigem Ernteboden und häufigeren kollidierenden Apfelhainen.
-- Vertical Run besitzt nun die **Feed-Alley**-Präsentation mit freundlicherer
-  Futtergasse, dunklen inneren Begrenzungen sowie kollidierenden Silos und
-  Trögen. Dahinter liegen getrennte, nicht begehbare Hofkulissen: links
-  Scheunendächer/Silo, rechts Felder, Schuppen und Hoftechnik.
+- Open Yard besitzt die **Harvest-Yard**-Präsentation mit warmem, ruhigem
+  Ernteboden, fester Bildausrichtung und nur noch seltenen Scheunen/Brunnen.
+- Vertical Run besitzt die **Feed-Alley**-Präsentation mit heller, kontrastarmer
+  Kampfspur und ohne große, sichtblockierende Lane-Landmarks. Die nicht
+  begehbaren Außenkulissen sind kohärent und fest nordwärts orientiert: links
+  Scheune/Silo/Feld, rechts Feld/Schuppen/Hoftechnik.
 - Streaming, Spawnfenster, zerstörbares Cover, Balance und Mobile-Kamera bleiben
-  unverändert; Vorher-/Nachher-Bilder liegen unter `docs/qa/map-theme-pass/`.
+  unverändert. Die Tests schützen zusätzlich vor gedrehten/gespiegelten Chunks.
+  Finale Vorher-/Nachher-Bilder liegen unter `docs/qa/map-readability-pass/`.
 
 # Produktleitlinie
 

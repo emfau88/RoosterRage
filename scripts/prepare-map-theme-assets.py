@@ -47,49 +47,59 @@ def make_seamless(image, size):
     return shifted
 
 
-def crop_prop(sheet, left_ratio, right_ratio, output_name):
-    left = round(sheet.width * left_ratio)
-    right = round(sheet.width * right_ratio)
-    prop = sheet.crop((left, 0, right, sheet.height))
-    alpha_bounds = prop.getchannel("A").getbbox()
-    if not alpha_bounds:
-        raise SystemExit(f"No visible pixels found for {output_name}")
-    prop.crop(alpha_bounds).save(MAP_ROOT / output_name, "PNG", optimize=True)
+def grade_feed_ground(image):
+    image = ImageEnhance.Color(image).enhance(0.76)
+    image = ImageEnhance.Contrast(image).enhance(0.86)
+    return ImageEnhance.Brightness(image).enhance(0.9)
+
+
+def grade_feed_edge(image):
+    image = ImageEnhance.Color(image).enhance(0.72)
+    image = ImageEnhance.Contrast(image).enhance(0.88)
+    return ImageEnhance.Brightness(image).enhance(0.84)
+
+
+def prepare_feed_edge(image, side):
+    # The generated strips are coherent north-up scenes. Crop only the quiet
+    # outer buffer so the retaining wall meets the lane; never seam-shift or
+    # rotate architectural content.
+    margin = round(image.width * 0.1)
+    if side == "left":
+        image = image.crop((0, 0, image.width - margin, image.height))
+    else:
+        image = image.crop((margin, 0, image.width, image.height))
+    return grade_feed_edge(fit_cover(image, (300, 600)))
 
 
 def main():
-    parser = ArgumentParser(description="Prepare the Open Yard and Vertical Run theme assets.")
-    parser.add_argument("--harvest-ground", required=True)
-    parser.add_argument("--feed-alley-ground", required=True)
-    parser.add_argument("--feed-alley-left", required=True)
-    parser.add_argument("--feed-alley-right", required=True)
-    parser.add_argument("--props", required=True)
+    parser = ArgumentParser(description="Prepare readable Harvest Yard and Feed Alley theme assets.")
+    parser.add_argument("--harvest-ground")
+    parser.add_argument("--feed-alley-ground")
+    parser.add_argument("--feed-alley-left")
+    parser.add_argument("--feed-alley-right")
     args = parser.parse_args()
 
     MAP_ROOT.mkdir(parents=True, exist_ok=True)
-    with Image.open(args.harvest_ground) as source:
-        harvest = make_seamless(source.convert("RGB"), (700, 700))
-        harvest = ImageEnhance.Color(harvest).enhance(0.88)
-        harvest = ImageEnhance.Brightness(harvest).enhance(0.95)
-        harvest.save(
-            MAP_ROOT / "arena-ground-farm.png", "PNG", optimize=True
-        )
-    with Image.open(args.feed_alley_ground) as source:
-        make_seamless(source.convert("RGB"), (800, 600)).save(
-            MAP_ROOT / "arena-ground-road.png", "PNG", optimize=True
-        )
-    with Image.open(args.feed_alley_left) as source:
-        make_seamless(source.convert("RGB"), (300, 600)).save(
-            MAP_ROOT / "arena-feed-alley-left.png", "PNG", optimize=True
-        )
-    with Image.open(args.feed_alley_right) as source:
-        make_seamless(source.convert("RGB"), (300, 600)).save(
-            MAP_ROOT / "arena-feed-alley-right.png", "PNG", optimize=True
-        )
-    with Image.open(args.props) as source:
-        sheet = source.convert("RGBA")
-        crop_prop(sheet, 0.405, 0.685, "landmark-silo.png")
-        crop_prop(sheet, 0.685, 1.00, "landmark-feed-trough.png")
+    if args.harvest_ground:
+        with Image.open(args.harvest_ground) as source:
+            harvest = make_seamless(source.convert("RGB"), (700, 700))
+            harvest = ImageEnhance.Color(harvest).enhance(0.88)
+            harvest = ImageEnhance.Brightness(harvest).enhance(0.95)
+            harvest.save(MAP_ROOT / "arena-ground-farm.png", "PNG", optimize=True)
+
+    feed_inputs = (args.feed_alley_ground, args.feed_alley_left, args.feed_alley_right)
+    if any(feed_inputs) and not all(feed_inputs):
+        parser.error("Feed Alley requires ground, left and right inputs together.")
+    if all(feed_inputs):
+        with Image.open(args.feed_alley_ground) as source:
+            ground = grade_feed_ground(fit_cover(source.convert("RGB"), (800, 600)))
+            ground.save(MAP_ROOT / "arena-ground-road.png", "PNG", optimize=True)
+        with Image.open(args.feed_alley_left) as source:
+            left = prepare_feed_edge(source.convert("RGB"), "left")
+            left.save(MAP_ROOT / "arena-feed-alley-left.png", "PNG", optimize=True)
+        with Image.open(args.feed_alley_right) as source:
+            right = prepare_feed_edge(source.convert("RGB"), "right")
+            right.save(MAP_ROOT / "arena-feed-alley-right.png", "PNG", optimize=True)
 
 
 if __name__ == "__main__":

@@ -21,6 +21,16 @@ function validateChunkCoverage(state, expectedPool) {
     'Chunk pool grew, shrank, or left an inactive gap.', state);
   assert(new Set(state.activeChunks.map((chunk) => chunk.key)).size === expectedPool,
     'Chunk keys are duplicated.', state.activeChunks);
+  assert(state.activeChunks.every((chunk) => !chunk.groundFlipX && !chunk.groundFlipY),
+    'Directional ground art was flipped during chunk recycling.', state.activeChunks);
+  if (state.id === 'vertical-run') {
+    assert(state.activeChunks.every((chunk) => (
+      chunk.edgeLeft?.texture === 'arena-feed-alley-left'
+        && chunk.edgeRight?.texture === 'arena-feed-alley-right'
+        && !chunk.edgeLeft.flipX && !chunk.edgeLeft.flipY
+        && !chunk.edgeRight.flipX && !chunk.edgeRight.flipY
+    )), 'Feed Alley exterior scenery changed orientation or texture.', state.activeChunks);
+  }
   const playerX = state.bounds.x + state.bounds.width / 2;
   const playerY = state.bounds.y + state.bounds.height / 2;
   assert(state.activeChunks.some((chunk) => (
@@ -38,10 +48,10 @@ function validateChunkCoverage(state, expectedPool) {
   assert(landmarkChunks.every((chunk) => (
     chunk.landmarkCollider.width >= 70
       && chunk.landmarkCollider.height >= 50
-      && ['barn', 'well', 'orchard', 'silo', 'feed-trough'].includes(chunk.landmarkCollider.kind)
+      && ['barn', 'well'].includes(chunk.landmarkCollider.kind)
   )), 'A landmark collision footprint is too small or has the wrong type.', landmarkChunks);
   const landmarkObstacles = activeObstacles.filter((obstacle) => (
-    ['barn', 'well', 'orchard', 'silo', 'feed-trough'].includes(obstacle.kind)
+    ['barn', 'well'].includes(obstacle.kind)
   ));
   assert(landmarkObstacles.length === landmarkChunks.length
     && landmarkObstacles.every((obstacle) => !obstacle.destructible),
@@ -110,13 +120,15 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
     const finalState = await page.evaluate(() => window.__ROOSTER_TEST__.getArenaState());
     assert(finalState.recycledChunks >= expectedPool,
       'Traversal did not recycle a meaningful number of chunks.', finalState);
-    const expectedThemes = arenaId === 'open-yard'
-      ? ['landmark-barn', 'landmark-well']
-      : ['landmark-silo', 'landmark-feed-trough'];
+    const expectedThemes = arenaId === 'open-yard' ? ['landmark-barn', 'landmark-well'] : [];
     assert(expectedThemes.every((texture) => seenLandmarks.has(texture)),
       'Traversal did not exercise every new themed landmark.', {
         arenaId, expectedThemes, seenLandmarks: [...seenLandmarks]
       });
+    if (arenaId === 'vertical-run') {
+      assert(seenLandmarks.size === 0,
+        'Feed Alley still places large opaque landmarks in the combat lane.', [...seenLandmarks]);
+    }
     assert(errors.length === 0, `Browser errors in ${arenaId} traversal.`, errors);
     return {
       arenaId,
