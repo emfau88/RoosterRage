@@ -24,12 +24,31 @@ function validateChunkCoverage(state, expectedPool) {
   assert(state.activeChunks.every((chunk) => !chunk.groundFlipX && !chunk.groundFlipY),
     'Directional ground art was flipped during chunk recycling.', state.activeChunks);
   if (state.id === 'vertical-run') {
+    const leftTextures = new Set(['arena-feed-alley-left', 'arena-feed-alley-left-v2']);
+    const rightTextures = new Set(['arena-feed-alley-right', 'arena-feed-alley-right-v2']);
     assert(state.activeChunks.every((chunk) => (
-      chunk.edgeLeft?.texture === 'arena-feed-alley-left'
-        && chunk.edgeRight?.texture === 'arena-feed-alley-right'
+      leftTextures.has(chunk.edgeLeft?.texture)
+        && rightTextures.has(chunk.edgeRight?.texture)
         && !chunk.edgeLeft.flipX && !chunk.edgeLeft.flipY
         && !chunk.edgeRight.flipX && !chunk.edgeRight.flipY
     )), 'Feed Alley exterior scenery changed orientation or texture.', state.activeChunks);
+    const destructibleProps = state.obstacles.filter((obstacle) => (
+      obstacle.active && obstacle.destructible
+    ));
+    assert(state.activeChunks.every((chunk) => (
+      destructibleProps.filter((obstacle) => obstacle.id.startsWith(`${chunk.key}-`)).length <= 1
+    )), 'Feed Alley placed more than one destructible obstacle in a chunk.', {
+      destructibleProps,
+      chunks: state.activeChunks
+    });
+    const overlaps = destructibleProps.flatMap((first, firstIndex) => (
+      destructibleProps.slice(firstIndex + 1).filter((second) => (
+        Math.abs(first.x - second.x) < (first.width + second.width) / 2
+          && Math.abs(first.y - second.y) < (first.height + second.height) / 2
+      )).map((second) => [first.id, second.id])
+    ));
+    assert(overlaps.length === 0,
+      'Feed Alley destructible obstacles overlap.', overlaps);
   }
   const playerX = state.bounds.x + state.bounds.width / 2;
   const playerY = state.bounds.y + state.bounds.height / 2;
@@ -88,6 +107,9 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
       'Harvest Yard still contains the removed combat-obscuring orchard landmark.', initial.activeChunks);
     const snapshots = [];
     const seenLandmarks = new Set(initial.activeChunks.map((chunk) => chunk.landmark).filter(Boolean));
+    const seenEdgeTextures = new Set(initial.activeChunks.flatMap((chunk) => (
+      [chunk.edgeLeft?.texture, chunk.edgeRight?.texture].filter(Boolean)
+    )));
     for (const route of routes) {
       const snapshot = await page.evaluate(({ x, y }) => {
         const api = window.__ROOSTER_TEST__;
@@ -105,6 +127,8 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
       validateChunkCoverage(snapshot.arena, expectedPool);
       snapshot.arena.activeChunks.forEach((chunk) => {
         if (chunk.landmark) seenLandmarks.add(chunk.landmark);
+        if (chunk.edgeLeft?.texture) seenEdgeTextures.add(chunk.edgeLeft.texture);
+        if (chunk.edgeRight?.texture) seenEdgeTextures.add(chunk.edgeRight.texture);
       });
       assert(snapshot.safePoints.every((point) => point.reachable && !point.blocked),
         'Streaming safe-point generation produced invalid geometry.', snapshot);
@@ -128,6 +152,17 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
     if (arenaId === 'vertical-run') {
       assert(seenLandmarks.size === 0,
         'Feed Alley still places large opaque landmarks in the combat lane.', [...seenLandmarks]);
+      const expectedEdgeTextures = [
+        'arena-feed-alley-left',
+        'arena-feed-alley-left-v2',
+        'arena-feed-alley-right',
+        'arena-feed-alley-right-v2'
+      ];
+      assert(expectedEdgeTextures.every((texture) => seenEdgeTextures.has(texture)),
+        'Feed Alley traversal did not exercise both scenery variants on each side.', {
+          expectedEdgeTextures,
+          seenEdgeTextures: [...seenEdgeTextures]
+        });
     }
     assert(errors.length === 0, `Browser errors in ${arenaId} traversal.`, errors);
     return {
@@ -135,6 +170,7 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
       chunkPoolSize: finalState.chunkPoolSize,
       recycledChunks: finalState.recycledChunks,
       seenLandmarks: [...seenLandmarks],
+      seenEdgeTextures: [...seenEdgeTextures],
       routes: snapshots
     };
   } finally {
@@ -209,6 +245,47 @@ async function verifySquareRemainsEnclosed(browser, serverUrl) {
   }
 }
 
+async function verifyFeedAlleyResponsiveFraming(browser, serverUrl) {
+  const scenarios = [
+    { id: 'portrait', viewport: { width: 390, height: 844 }, laneWidth: 560, zoom: 0.54 },
+    { id: 'landscape', viewport: { width: 844, height: 390 }, laneWidth: 800, zoom: 1 },
+    { id: 'desktop', viewport: { width: 960, height: 540 }, laneWidth: 800, zoom: 1 }
+  ];
+  const results = [];
+  for (const scenario of scenarios) {
+    const page = await browser.newPage({ viewport: scenario.viewport });
+    try {
+      await page.goto(`${serverUrl}?seed=feed-responsive-${scenario.id}&arena=vertical-run`, {
+        waitUntil: 'domcontentloaded'
+      });
+      await page.waitForFunction(() => window.__ROOSTER_TEST__?.getArenaState);
+      const state = await page.evaluate(() => ({
+        arena: window.__ROOSTER_TEST__.getArenaState(),
+        game: window.__ROOSTER_TEST__.getState()
+      }));
+      assert(state.arena.playableWorldBounds.width === scenario.laneWidth,
+        `${scenario.id}: Feed Alley selected the wrong responsive lane width.`, state);
+      assert(Math.abs(state.game.cameraZoom - scenario.zoom) < 0.001,
+        `${scenario.id}: Feed Alley selected the wrong responsive camera zoom.`, state);
+      const visibleWorldWidth = scenario.viewport.width / state.game.cameraZoom;
+      assert(scenario.id !== 'portrait' || visibleWorldWidth - scenario.laneWidth >= 160,
+        'Portrait Feed Alley does not expose enough exterior scenery.', {
+          ...state,
+          visibleWorldWidth
+        });
+      results.push({
+        id: scenario.id,
+        laneWidth: state.arena.playableWorldBounds.width,
+        cameraZoom: state.game.cameraZoom,
+        visibleWorldWidth
+      });
+    } finally {
+      await page.close();
+    }
+  }
+  return results;
+}
+
 async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
@@ -229,6 +306,7 @@ async function run() {
       { x: start, y: start + distance * 0.5 }
     ], 5);
     const coopSquare = await verifySquareRemainsEnclosed(browser, serverState.url);
+    const feedResponsive = await verifyFeedAlleyResponsiveFraming(browser, serverState.url);
     const report = {
       generatedAt: new Date().toISOString(),
       equivalentRunSeconds: Math.round(distance / 210),
@@ -238,7 +316,8 @@ async function run() {
         bounds: coopSquare.arena.bounds,
         physicalFenceStops: coopSquare.physicalFence.stops,
         spawnSampleSize: coopSquare.spawnSample.spawns.length
-      }
+      },
+      feedResponsive
     };
     await fs.mkdir(artifactDir, { recursive: true });
     await fs.writeFile(

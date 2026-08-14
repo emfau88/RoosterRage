@@ -42,6 +42,8 @@ const ARENA_HEIGHT = 900;
 const ARENA_RENDER_PADDING_Y = 100;
 const PORTRAIT_MOBILE_MAX_WIDTH = 600;
 const PORTRAIT_MOBILE_ZOOM = 0.85;
+const FEED_ALLEY_PORTRAIT_MAX_WIDTH = 520;
+const FEED_ALLEY_PORTRAIT_ZOOM = 0.54;
 
 export class GameScene extends Phaser.Scene {
   constructor() {
@@ -295,6 +297,24 @@ export class GameScene extends Phaser.Scene {
           this.hud.hideOverlay();
           this.physics.resume();
         }
+      },
+      returnToHub ? null : () => this.confirmReturnToHub()
+    );
+    return true;
+  }
+
+  confirmReturnToHub() {
+    if (this.gameEnded || this.isChoosingRooster) return false;
+    this.audio.play('ui-navigate');
+    this.hud.showReturnToHubConfirmation(
+      () => {
+        this.audio.play('ui-confirm');
+        this.isSettingsOpen = false;
+        this.runState.abandonToHub();
+      },
+      () => {
+        this.audio.play('ui-back');
+        this.openSettings();
       }
     );
     return true;
@@ -329,6 +349,12 @@ export class GameScene extends Phaser.Scene {
     if (!isPortraitMobile) {
       this.logicalCameraZoom = 1;
       this.cameras.main.setZoom(renderScale);
+      return;
+    }
+
+    if (this.arena?.id === 'vertical-run' && width <= FEED_ALLEY_PORTRAIT_MAX_WIDTH) {
+      this.logicalCameraZoom = FEED_ALLEY_PORTRAIT_ZOOM;
+      this.cameras.main.setZoom(this.logicalCameraZoom * renderScale);
       return;
     }
 

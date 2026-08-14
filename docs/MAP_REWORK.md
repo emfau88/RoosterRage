@@ -91,9 +91,22 @@ WebP optimizer runs.
   removed; much rarer barns and wells retain the farm identity.
 - **Feed Alley:** The lane is now broad, bright and low-noise with two restrained
   north/south wheel tracks. No silo, trough or well can obscure the playable
-  strip. The left exterior is one coherent barn/silo/field scene; the right is a
-  separate field/shed/machinery scene. Both have fixed north-up orientation and
-  darker grading than the combat floor.
+  strip. A narrow continuous fence sits directly against each lane edge. Beyond
+  it, two deterministic scenery variants alternate per recycled chunk: the left
+  side combines barn, silo, cart, hay and a colorful kitchen garden; the right
+  side combines sheds, orchard, crop rows and harvesting machinery. Both sides
+  keep fixed north-up orientation and remain slightly quieter than the combat
+  floor despite the stronger color accents.
+- **Portrait framing:** Phones up to 520 CSS pixels use a 560-unit physical lane
+  and a moderate 0.54 camera zoom. This is exactly 40% wider than the first
+  mobile prototype and still exposes roughly 81 world units of exterior on each
+  side at 390 × 844 while retaining sharp Retina rendering.
+  Obstacles and wall colliders adapt to the real lane width. Landscape and
+  desktop remain at the original 800-unit corridor and zoom 1.
+- **Obstacle pacing:** Each 600-unit Feed Alley chunk now contains at most one
+  destructible bale or crate, and every fourth deterministic pattern is fully
+  clear. The former two-prop combinations were removed, so props cannot overlap
+  and long north/south movement lines remain open.
 
 ## Recycling and safety
 
@@ -113,6 +126,8 @@ Built-in ImageGen mode created and refined the project-bound map sources:
 | Feed Alley ground | `art-source/map/arena-ground-road.png` | quiet north/south 800 × 600 lane |
 | Feed Alley left exterior | `art-source/map/arena-feed-alley-left.png` | north-up barn, silo and field scenery |
 | Feed Alley right exterior | `art-source/map/arena-feed-alley-right.png` | north-up field, shed and machinery scenery |
+| Feed Alley left exterior B | `art-source/map/arena-feed-alley-left-v2.png` | north-up garden, cart and hay scenery |
+| Feed Alley right exterior B | `art-source/map/arena-feed-alley-right-v2.png` | north-up crops, harvester and storage scenery |
 | Chicken barn | `art-source/map/landmark-barn.png` | sparse Open Yard landmark |
 | Farm well | `art-source/map/landmark-well.png` | sparse Open Yard landmark |
 

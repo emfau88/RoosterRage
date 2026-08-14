@@ -32,6 +32,17 @@ der frühere Analytics-Fehler sind auf diesem Stand grün.
   fest nordwärts ausgerichtete Außenkulissen: links Scheune/Silo/Feld, rechts
   Feld/Schuppen/Hoftechnik. Coop Square blieb vollständig unverändert. Finale
   Vorher-/Nachher-Bilder: `docs/qa/map-readability-pass/`.
+  Feed Alley nutzt auf Hochformat-Handys zusätzlich eine responsive
+  560-Einheiten-Gasse mit moderatem Kamera-Zoom. Das ist 40 % breiter als der
+  erste Mobile-Prototyp; schmale Zäune begrenzen das Kampffeld und dahinter
+  wechseln links wie rechts je zwei farbigere Farm-Dekosegmente. Desktop und
+  Landscape bleiben unverändert. Pro 600er-Abschnitt steht höchstens noch ein
+  Hindernis, jedes vierte Muster ist frei; Überschneidungen sind ausgeschlossen.
+
+- **Sicherer Rückweg ins Hauptmenü: umgesetzt am 14.08.2026.** Während eines
+  Runs führt `Einstellungen → Hauptmenü` über eine Bestätigung zurück zur
+  Hennenhütte. Abbrechen setzt den pausierten Kampf fort; bestätigtes Verlassen
+  beendet den Run ohne Abschlussbelohnung.
 
 - **Kamerarelative Zielerfassung: als isolierter Versuch umgesetzt.** Neue
   Erstziele liegen höchstens im sichtbaren Kamerafenster plus einer halben

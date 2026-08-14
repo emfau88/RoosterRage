@@ -175,10 +175,12 @@ async function verifySettingsAndReport(browser, serverUrl) {
       buttons: document.querySelectorAll('[data-effect]').length,
       visible: document.querySelector('.settings-panel') !== null,
       privacyVisible: document.querySelector('.settings-privacy [data-analytics-toggle]') !== null,
+      returnToHubVisible: document.querySelector('[data-return-hub]') !== null,
       settings: window.__ROOSTER_TEST__.getEffectSettings()
     }));
-    assert(settingsOpen.visible && settingsOpen.buttons === 4 && settingsOpen.privacyVisible,
-      'Settings must expose four effect controls and the privacy toggle.', settingsOpen);
+    assert(settingsOpen.visible && settingsOpen.buttons === 4 && settingsOpen.privacyVisible
+      && settingsOpen.returnToHubVisible,
+    'In-run settings must expose effects, privacy and the main-menu action.', settingsOpen);
     await page.click('[data-effect="damageNumbers"]');
     const toggled = await page.evaluate(() => window.__ROOSTER_TEST__.getEffectSettings());
     assert(toggled.damageNumbers !== settingsOpen.settings.damageNumbers,
@@ -251,6 +253,42 @@ async function verifySettingsAndReport(browser, serverUrl) {
   }
 }
 
+async function verifyReturnToHub(browser, serverUrl) {
+  const { page, errors } = await openGame(browser, serverUrl, { width: 390, height: 844 }, 'return-hub');
+  try {
+    await page.click('[data-settings]');
+    await page.click('[data-return-hub]');
+    const confirmation = await page.evaluate(() => ({
+      visible: document.querySelector('.return-hub-panel') !== null,
+      confirmLabel: document.querySelector('[data-return-confirm]')?.textContent.trim(),
+      cancelLabel: document.querySelector('[data-return-cancel]')?.textContent.trim()
+    }));
+    assert(confirmation.visible
+      && confirmation.confirmLabel === 'Run verlassen'
+      && confirmation.cancelLabel === 'Weiterkämpfen',
+    'Returning to the hub lacks a clear confirmation step.', confirmation);
+
+    await page.click('[data-return-cancel]');
+    assert(await page.locator('.settings-panel').count() === 1,
+      'Cancelling the return-to-hub confirmation did not restore settings.');
+
+    await page.click('[data-return-hub]');
+    await page.click('[data-return-confirm]');
+    await page.waitForSelector('.henhouse-panel');
+    const result = await page.evaluate(() => ({
+      hubVisible: document.querySelector('.henhouse-panel') !== null,
+      runActionHidden: document.querySelector('[data-return-hub]') === null,
+      choosingRooster: window.__ROOSTER_TEST__.getState().choosingRooster
+    }));
+    assert(result.hubVisible && result.runActionHidden && result.choosingRooster,
+      'Confirmed return did not restart safely in the Hennenhütte.', result);
+    assert(errors.length === 0, 'Browser errors in return-to-hub flow.', errors);
+    return { confirmation, result };
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
@@ -259,7 +297,8 @@ async function run() {
     const report = {
       generatedAt: new Date().toISOString(),
       layouts: await verifyResponsiveHud(browser, serverState.url),
-      report: await verifySettingsAndReport(browser, serverState.url)
+      report: await verifySettingsAndReport(browser, serverState.url),
+      returnToHub: await verifyReturnToHub(browser, serverState.url)
     };
     await fs.mkdir(artifactDir, { recursive: true });
     await fs.writeFile(path.join(artifactDir, 'hud-report.json'), JSON.stringify(report, null, 2));
@@ -268,7 +307,8 @@ async function run() {
       layouts: report.layouts.map((layout) => ({ name: layout.name, height: layout.hud.height })),
       sources: report.report.sources,
       deathCause: report.report.deathCause,
-      effectControls: report.report.effectControls
+      effectControls: report.report.effectControls,
+      returnToHub: report.returnToHub.result
     }, null, 2));
   } finally {
     await browser.close();

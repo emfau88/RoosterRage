@@ -356,21 +356,39 @@
     },
     {
       "source": "art-source/map/arena-feed-alley-left.png",
-      "sourceSha256": "5cbce51f32c0ed964761084c075bc2ef4e8145c40af75add1a35c8ccffadbe36",
+      "sourceSha256": "cc3647185627e7a95262bf68b81852207e289a039a4b3bb256d49d073110945c",
       "runtime": "src/assets/map/arena-feed-alley-left.webp",
-      "runtimeSha256": "2e09f455fdedf6697ca6fb4e0b0bd002ee3f182146228d4314c082dc889de175",
+      "runtimeSha256": "67fe47bc46880e1eb4165b9a14d34009eb01209fa0b123cb4409e3d54bc2c800",
       "width": 300,
       "height": 600,
-      "bytes": 18508
+      "bytes": 37098
     },
     {
       "source": "art-source/map/arena-feed-alley-right.png",
-      "sourceSha256": "2b8f219bb91190c4d7bcf9fe17119769371bb2d26169cba8137d24bda4df5678",
+      "sourceSha256": "a3db4f75d4349844380f73b3980a65a810dfa4f218d0d06e2635916ebaff0940",
       "runtime": "src/assets/map/arena-feed-alley-right.webp",
-      "runtimeSha256": "b1de749c045e223aa9fad56bb889251d7c379c2e5fb892e00c8f6e811cce3bf0",
+      "runtimeSha256": "0779845788d170da5dea8084332ca23c281a7e522b88ea1fade23edae52d81e8",
       "width": 300,
       "height": 600,
-      "bytes": 35782
+      "bytes": 56510
+    },
+    {
+      "source": "art-source/map/arena-feed-alley-left-v2.png",
+      "sourceSha256": "7c8e4eb62e4078bdbbb06a0b5a213f2d9818828bd81a84002624a6a266b05212",
+      "runtime": "src/assets/map/arena-feed-alley-left-v2.webp",
+      "runtimeSha256": "850f9afd83d71d174d8914c9ab7aa4dd54a54537e3af01f14f9601d57b552c3b",
+      "width": 300,
+      "height": 600,
+      "bytes": 45800
+    },
+    {
+      "source": "art-source/map/arena-feed-alley-right-v2.png",
+      "sourceSha256": "61785af49b0ee81ce4d01fc922db17d7d756df9692cc39d7cbe256190d3a8f7e",
+      "runtime": "src/assets/map/arena-feed-alley-right-v2.webp",
+      "runtimeSha256": "44f6c2afc802455c2b9700d1b571493762dc0ff5d849a282f4eb0b49cf5a13b5",
+      "width": 300,
+      "height": 600,
+      "bytes": 64156
     },
     {
       "source": "art-source/map/landmark-barn.png",

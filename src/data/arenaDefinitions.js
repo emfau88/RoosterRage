@@ -41,7 +41,13 @@ export const ARENA_DEFINITIONS = [
       start: { x: 65536, y: 65536 },
       activeWindow: { width: 800, height: 1100 },
       chunk: { width: 800, height: 600, radiusX: 0, radiusY: 2 },
-      groundTexture: 'arena-ground-road'
+      groundTexture: 'arena-ground-road',
+      portrait: {
+        maxViewportWidth: 520,
+        worldBounds: { x: 64956, y: 0, width: 1160, height: 131072 },
+        playableBounds: { x: 65256, y: 0, width: 560, height: 131072 },
+        activeWindow: { width: 560, height: 1600 }
+      }
     },
     accent: 0x58b9d8,
     weaponRatings: { ...sharedRatings, pierce: 1.25, projectile: 0.9 },

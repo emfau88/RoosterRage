@@ -54,21 +54,44 @@ def grade_feed_ground(image):
 
 
 def grade_feed_edge(image):
-    image = ImageEnhance.Color(image).enhance(0.72)
-    image = ImageEnhance.Contrast(image).enhance(0.88)
-    return ImageEnhance.Brightness(image).enhance(0.84)
+    image = ImageEnhance.Color(image).enhance(0.9)
+    image = ImageEnhance.Contrast(image).enhance(0.9)
+    return ImageEnhance.Brightness(image).enhance(0.88)
 
 
-def prepare_feed_edge(image, side):
-    # The generated strips are coherent north-up scenes. Crop only the quiet
-    # outer buffer so the retaining wall meets the lane; never seam-shift or
-    # rotate architectural content.
-    margin = round(image.width * 0.1)
+def prepare_feed_edge(image, side, variant=1):
+    # Compose a narrow continuous lane fence with the actual farm scene directly
+    # behind it. Keeping the pieces north-up avoids the rotated collage effect
+    # of the earlier seam-shifted panels.
+    # The two variants use overlapping north/south windows of the same coherent
+    # scene. This keeps the scale readable while alternating different props.
+    top = 0 if variant == 1 else round(image.height * 0.36)
+    bottom = round(image.height * 0.64) if variant == 1 else image.height
     if side == "left":
-        image = image.crop((0, 0, image.width - margin, image.height))
+        decoration_end = round(image.width * 0.64)
+        fence_left = round(image.width * 0.65)
+        fence_right = round(image.width * 0.72)
+        decoration = fit_cover(image.crop((0, top, decoration_end, bottom)), (270, 600))
+        fence = image.crop((fence_left, top, fence_right, bottom)).resize(
+            (30, 600), Image.Resampling.LANCZOS
+        )
+        panel = Image.new("RGB", (300, 600))
+        panel.paste(decoration, (0, 0))
+        panel.paste(fence, (270, 0))
     else:
-        image = image.crop((margin, 0, image.width, image.height))
-    return grade_feed_edge(fit_cover(image, (300, 600)))
+        fence_left = 0
+        fence_right = round(image.width * 0.075)
+        decoration_left = round(image.width * 0.08)
+        fence = image.crop((fence_left, top, fence_right, bottom)).resize(
+            (30, 600), Image.Resampling.LANCZOS
+        )
+        decoration = fit_cover(
+            image.crop((decoration_left, top, image.width, bottom)), (270, 600)
+        )
+        panel = Image.new("RGB", (300, 600))
+        panel.paste(fence, (0, 0))
+        panel.paste(decoration, (30, 0))
+    return grade_feed_edge(panel)
 
 
 def main():
@@ -77,6 +100,8 @@ def main():
     parser.add_argument("--feed-alley-ground")
     parser.add_argument("--feed-alley-left")
     parser.add_argument("--feed-alley-right")
+    parser.add_argument("--feed-alley-left-v2")
+    parser.add_argument("--feed-alley-right-v2")
     args = parser.parse_args()
 
     MAP_ROOT.mkdir(parents=True, exist_ok=True)
@@ -87,19 +112,30 @@ def main():
             harvest = ImageEnhance.Brightness(harvest).enhance(0.95)
             harvest.save(MAP_ROOT / "arena-ground-farm.png", "PNG", optimize=True)
 
-    feed_inputs = (args.feed_alley_ground, args.feed_alley_left, args.feed_alley_right)
-    if any(feed_inputs) and not all(feed_inputs):
-        parser.error("Feed Alley requires ground, left and right inputs together.")
-    if all(feed_inputs):
+    edge_inputs = (args.feed_alley_left, args.feed_alley_right)
+    variant_inputs = (args.feed_alley_left_v2, args.feed_alley_right_v2)
+    if any(edge_inputs) and not all(edge_inputs):
+        parser.error("Feed Alley base scenery requires left and right inputs together.")
+    if any(variant_inputs) and not all(variant_inputs):
+        parser.error("Feed Alley variant scenery requires left and right inputs together.")
+    if args.feed_alley_ground:
         with Image.open(args.feed_alley_ground) as source:
             ground = grade_feed_ground(fit_cover(source.convert("RGB"), (800, 600)))
             ground.save(MAP_ROOT / "arena-ground-road.png", "PNG", optimize=True)
+    if all(edge_inputs):
         with Image.open(args.feed_alley_left) as source:
-            left = prepare_feed_edge(source.convert("RGB"), "left")
+            left = prepare_feed_edge(source.convert("RGB"), "left", 1)
             left.save(MAP_ROOT / "arena-feed-alley-left.png", "PNG", optimize=True)
         with Image.open(args.feed_alley_right) as source:
-            right = prepare_feed_edge(source.convert("RGB"), "right")
+            right = prepare_feed_edge(source.convert("RGB"), "right", 1)
             right.save(MAP_ROOT / "arena-feed-alley-right.png", "PNG", optimize=True)
+    if all(variant_inputs):
+        with Image.open(args.feed_alley_left_v2) as source:
+            left = prepare_feed_edge(source.convert("RGB"), "left", 2)
+            left.save(MAP_ROOT / "arena-feed-alley-left-v2.png", "PNG", optimize=True)
+        with Image.open(args.feed_alley_right_v2) as source:
+            right = prepare_feed_edge(source.convert("RGB"), "right", 2)
+            right.save(MAP_ROOT / "arena-feed-alley-right-v2.png", "PNG", optimize=True)
 
 
 if __name__ == "__main__":

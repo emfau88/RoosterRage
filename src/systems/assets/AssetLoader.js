@@ -71,6 +71,8 @@ import arenaGroundFarmUrl from '../../assets/map/arena-ground-farm.webp';
 import arenaGroundRoadUrl from '../../assets/map/arena-ground-road.webp';
 import arenaFeedAlleyLeftUrl from '../../assets/map/arena-feed-alley-left.webp';
 import arenaFeedAlleyRightUrl from '../../assets/map/arena-feed-alley-right.webp';
+import arenaFeedAlleyLeftV2Url from '../../assets/map/arena-feed-alley-left-v2.webp';
+import arenaFeedAlleyRightV2Url from '../../assets/map/arena-feed-alley-right-v2.webp';
 import landmarkBarnUrl from '../../assets/map/landmark-barn.webp';
 import landmarkWellUrl from '../../assets/map/landmark-well.webp';
 import coopSquareGroundUrl from '../../assets/map/coop-square-ground.webp';
@@ -195,6 +197,8 @@ export function preloadGameAssets(scene) {
   scene.load.image('arena-ground-road', arenaGroundRoadUrl);
   scene.load.image('arena-feed-alley-left', arenaFeedAlleyLeftUrl);
   scene.load.image('arena-feed-alley-right', arenaFeedAlleyRightUrl);
+  scene.load.image('arena-feed-alley-left-v2', arenaFeedAlleyLeftV2Url);
+  scene.load.image('arena-feed-alley-right-v2', arenaFeedAlleyRightV2Url);
   scene.load.image('landmark-barn', landmarkBarnUrl);
   scene.load.image('landmark-well', landmarkWellUrl);
   scene.load.image('coop-square-ground', coopSquareGroundUrl);

@@ -638,7 +638,16 @@ export class HUD {
     this.overlay.querySelector('button').addEventListener('click', this.onRestart);
   }
 
-  showSettings(effectSettings, audioSettings, analyticsSettings, onEffectToggle, onAudioChange, onAnalyticsChange, onClose) {
+  showSettings(
+    effectSettings,
+    audioSettings,
+    analyticsSettings,
+    onEffectToggle,
+    onAudioChange,
+    onAnalyticsChange,
+    onClose,
+    onReturnToHub
+  ) {
     const labels = {
       damageNumbers: 'Schadenszahlen',
       screenShake: 'Bildschirmwackeln',
@@ -679,6 +688,11 @@ export class HUD {
           <span><strong>Anonyme Spielanalyse</strong><small>Erfasst nur Run-Ablauf und Eckdaten. Keine Konten, Cookies oder Werbe-IDs.</small></span>
           <button type="button" data-analytics-toggle aria-pressed="${Boolean(analyticsSettings?.enabled)}">${analyticsSettings?.enabled ? 'AN' : 'AUS'}</button>
         </div>
+        ${onReturnToHub ? `
+          <div class="settings-run-exit">
+            <span><strong>Aktueller Run</strong><small>Kampf verlassen und zur Hennenhütte zurückkehren.</small></span>
+            <button type="button" data-return-hub>Hauptmenü</button>
+          </div>` : ''}
         <button class="settings-close" type="button">Weiter</button>
       </div>`;
     this.overlay.querySelectorAll('[data-effect]').forEach((button) => {
@@ -701,7 +715,24 @@ export class HUD {
       button.setAttribute('aria-pressed', String(state.enabled));
       button.textContent = state.enabled ? 'AN' : 'AUS';
     });
+    this.overlay.querySelector('[data-return-hub]')?.addEventListener('click', () => onReturnToHub?.());
     this.overlay.querySelector('.settings-close').addEventListener('click', () => onClose?.(), { once: true });
+  }
+
+  showReturnToHubConfirmation(onConfirm, onCancel) {
+    this.setOverlayVisible(true);
+    this.overlay.innerHTML = `
+      <div class="panel return-hub-panel" role="dialog" aria-modal="true" aria-labelledby="return-hub-title">
+        <small>AKTUELLER RUN</small>
+        <h2 id="return-hub-title">Zur Hennenhütte?</h2>
+        <p>Der aktuelle Run wird beendet und vergibt keine Abschlussbelohnung.</p>
+        <div class="return-hub-actions">
+          <button type="button" data-return-cancel>Weiterkämpfen</button>
+          <button type="button" class="is-danger" data-return-confirm>Run verlassen</button>
+        </div>
+      </div>`;
+    this.overlay.querySelector('[data-return-cancel]')?.addEventListener('click', () => onCancel?.(), { once: true });
+    this.overlay.querySelector('[data-return-confirm]')?.addEventListener('click', () => onConfirm?.(), { once: true });
   }
 
   hideOverlay() {

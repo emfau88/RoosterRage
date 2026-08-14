@@ -1654,6 +1654,81 @@ canvas {
   font-weight: 800;
 }
 
+.settings-run-exit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 128, 112, 0.28);
+  border-radius: 6px;
+  background: rgba(95, 30, 24, 0.16);
+}
+
+.settings-run-exit span,
+.settings-run-exit small {
+  display: block;
+}
+
+.settings-run-exit small {
+  margin-top: 2px;
+  color: #b9c5c2;
+  font-size: 0.68rem;
+  line-height: 1.25;
+}
+
+.settings-run-exit button,
+.return-hub-actions button {
+  border: 1px solid rgba(255, 173, 147, 0.5);
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: #ffe5d9;
+  background: rgba(114, 38, 29, 0.46);
+  font: 800 0.75rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.return-hub-panel {
+  width: min(390px, 100%);
+  padding: 24px;
+  text-align: center;
+}
+
+.return-hub-panel > small {
+  color: #ffcf70;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.return-hub-panel h2 {
+  margin: 7px 0 8px;
+}
+
+.return-hub-panel p {
+  margin: 0;
+  color: #cbd6d2;
+  line-height: 1.45;
+}
+
+.return-hub-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.return-hub-actions button:first-child {
+  border-color: rgba(255, 211, 92, 0.5);
+  color: #fff0b2;
+  background: rgba(255, 211, 92, 0.1);
+}
+
+.return-hub-actions button.is-danger {
+  border-color: rgba(255, 112, 100, 0.68);
+  background: rgba(132, 38, 31, 0.64);
+}
+
 .hub-rooster-mastery i {
   height: 5px;
   overflow: hidden;

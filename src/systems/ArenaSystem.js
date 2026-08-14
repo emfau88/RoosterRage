@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { ARENA_DEFINITIONS, getArenaDefinition } from '../data/arenaDefinitions.js';
+import { getSceneViewport } from './DisplayResolutionSystem.js';
 
 const SAFE_PADDING = 44;
 
@@ -24,7 +25,7 @@ export class ArenaSystem {
     this.worldWidth = worldWidth;
     this.worldHeight = worldHeight;
     this.definition = getArenaDefinition(requestedId);
-    this.streaming = this.definition.streaming ?? null;
+    this.streaming = this.resolveStreamingConfig(this.definition.streaming);
     this.obstacles = [];
     this.obstacleGroup = scene.physics.add.staticGroup();
     this.chunkRecords = [];
@@ -43,6 +44,22 @@ export class ArenaSystem {
 
   get id() {
     return this.definition.id;
+  }
+
+  resolveStreamingConfig(streaming) {
+    if (!streaming) return null;
+    const { width, height } = getSceneViewport(this.scene);
+    const portrait = streaming.portrait;
+    const usePortrait = portrait
+      && width <= portrait.maxViewportWidth
+      && height > width;
+    if (!usePortrait) return streaming;
+    return {
+      ...streaming,
+      worldBounds: { ...portrait.worldBounds },
+      playableBounds: { ...portrait.playableBounds },
+      activeWindow: { ...portrait.activeWindow }
+    };
   }
 
   get worldBounds() {
@@ -229,24 +246,41 @@ export class ArenaSystem {
   assignChunk(record, chunkX, chunkY, key) {
     const { width, height } = this.streaming.chunk;
     const world = this.playableWorldBounds;
-    const centerX = world.x + chunkX * width + width / 2;
+    const centerX = this.streaming.axis === 'vertical'
+      ? world.x + world.width / 2
+      : world.x + chunkX * width + width / 2;
     const centerY = world.y + chunkY * height + height / 2;
     const hash = chunkHash(chunkX, chunkY, this.id === 'open-yard' ? 17 : 43);
     record.key = key;
     record.chunkX = chunkX;
     record.chunkY = chunkY;
     const groundTexture = this.streaming.groundTexture;
-    record.ground.setTexture(groundTexture)
-      .setPosition(centerX, centerY)
-      .setFlip(false, false)
-      .setDisplaySize(width + 2, height + 2);
+    record.ground.setTexture(groundTexture);
+    const groundWidth = this.id === 'vertical-run' ? world.width : width;
+    if (this.id === 'vertical-run' && groundWidth < record.ground.frame.realWidth) {
+      const cropX = (record.ground.frame.realWidth - groundWidth) / 2;
+      record.ground.setCrop(cropX, 0, groundWidth, record.ground.frame.realHeight);
+    }
+    record.ground.setPosition(centerX, centerY)
+      .setFlip(false, false);
+    if (this.id === 'vertical-run' && groundWidth < record.ground.frame.realWidth) {
+      record.ground.setScale(
+        (groundWidth + 2) / groundWidth,
+        (height + 2) / record.ground.frame.realHeight
+      );
+    } else {
+      record.ground.setDisplaySize(groundWidth + 2, height + 2);
+    }
     if (this.id === 'vertical-run') {
       const world = this.playableWorldBounds;
       const edgeWidth = 300;
-      record.edgeLeft.setPosition(world.x - edgeWidth / 2, centerY)
+      const useVariant = Math.abs(chunkY) % 2 === 1;
+      record.edgeLeft.setTexture(useVariant ? 'arena-feed-alley-left-v2' : 'arena-feed-alley-left')
+        .setPosition(world.x - edgeWidth / 2, centerY)
         .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
-      record.edgeRight.setPosition(world.x + world.width + edgeWidth / 2, centerY)
+      record.edgeRight.setTexture(useVariant ? 'arena-feed-alley-right-v2' : 'arena-feed-alley-right')
+        .setPosition(world.x + world.width + edgeWidth / 2, centerY)
         .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
     } else {
@@ -310,24 +344,39 @@ export class ArenaSystem {
     const slots = record.obstacles;
     if (this.id === 'vertical-run') {
       const world = this.playableWorldBounds;
-      this.configureObstacle(slots[0], {
-        id: `${record.key}-gate`,
-        x: centerX + ((hash & 1) ? -150 : 150),
-        y: centerY + ((hash >>> 2) % 180) - 90,
-        width: 148,
-        height: 52,
-        kind: 'bale',
-        hp: 130
-      });
-      this.configureObstacle(slots[1], {
-        id: `${record.key}-crate`,
-        x: centerX + ((hash & 2) ? -270 : 270),
-        y: centerY + ((hash >>> 5) % 220) - 110,
-        width: 68,
-        height: 68,
-        kind: 'crate',
-        hp: 95
-      });
+      const gateOffset = Math.min(150, world.width / 2 - 110);
+      const crateOffset = Math.min(270, world.width / 2 - 80);
+      const propPattern = hash % 4;
+      const propY = centerY + ((hash >>> 2) % 260) - 130;
+      // Feed Alley needs long readable movement lines. A chunk carries at most
+      // one destructible prop and every fourth pattern is completely clear.
+      // This also makes overlapping bale/crate placements impossible.
+      if (propPattern === 0) {
+        this.disableObstacle(slots[0]);
+        this.disableObstacle(slots[1]);
+      } else if (propPattern <= 2) {
+        this.configureObstacle(slots[0], {
+          id: `${record.key}-gate`,
+          x: centerX + ((hash & 1) ? -gateOffset : gateOffset),
+          y: propY,
+          width: 148,
+          height: 52,
+          kind: 'bale',
+          hp: 130
+        });
+        this.disableObstacle(slots[1]);
+      } else {
+        this.disableObstacle(slots[0]);
+        this.configureObstacle(slots[1], {
+          id: `${record.key}-crate`,
+          x: centerX + ((hash & 2) ? -crateOffset : crateOffset),
+          y: propY,
+          width: 68,
+          height: 68,
+          kind: 'crate',
+          hp: 95
+        });
+      }
       this.configureObstacle(slots[2], {
         id: `${record.key}-left-wall`,
         x: world.x + 20,
