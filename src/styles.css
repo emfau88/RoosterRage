@@ -3972,3 +3972,360 @@ body,
     content: "";
   }
 }
+
+/* Mobile combat HUD: one lightweight tactical row plus occupied loadout only. */
+[data-hp-compact] {
+  display: none;
+}
+
+.settings-glyph {
+  display: flex;
+  width: 16px;
+  height: 18px;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4px;
+  border: 0;
+  border-radius: 0;
+  font-size: 0;
+}
+
+.settings-glyph i {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: #f4f7f2;
+  box-shadow: 0 0 5px rgba(98, 221, 255, 0.24);
+}
+
+@media (max-width: 760px) {
+  .hud {
+    top: calc(6px + env(safe-area-inset-top));
+    left: calc(6px + env(safe-area-inset-left));
+    width: calc(100vw - 54px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    grid-template-columns: minmax(122px, 0.78fr) minmax(0, 1.22fr);
+    grid-template-areas:
+      "identity metrics"
+      "loadout loadout";
+    gap: 4px 5px;
+  }
+
+  .hud__identity {
+    height: 46px;
+    min-height: 46px;
+    border-color: color-mix(in srgb, var(--rooster-accent) 36%, transparent);
+    border-radius: 11px;
+    background:
+      linear-gradient(105deg, color-mix(in srgb, var(--rooster-accent) 13%, transparent), transparent 54%),
+      rgba(5, 14, 19, 0.38);
+    box-shadow: inset 2px 0 color-mix(in srgb, var(--rooster-accent) 74%, transparent), 0 3px 12px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(5px) saturate(1.08);
+  }
+
+  .hud__avatar-shell {
+    flex-basis: 42px;
+    width: 42px;
+  }
+
+  .hud__vitals {
+    padding: 4px 6px 4px 1px;
+  }
+
+  .hud__identity-heading {
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 3px;
+  }
+
+  .hud__identity-heading small {
+    display: none;
+  }
+
+  .hud__identity-heading strong {
+    max-width: 68px;
+    font-size: 9px;
+  }
+
+  .hud__identity-heading b {
+    overflow: hidden;
+    font-size: 7px;
+    line-height: 1;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+
+  .hud__identity-heading b [data-hp-full] {
+    display: none;
+  }
+
+  .hud__identity-heading b [data-hp-compact] {
+    display: inline;
+  }
+
+  .hud__health {
+    height: 6px;
+  }
+
+  .hud__xp-row {
+    gap: 0;
+    margin-top: 3px;
+  }
+
+  .hud__xp-row .ui-icon {
+    display: none;
+  }
+
+  .hud__xp-row .hud__bar-track {
+    height: 3px;
+    border-width: 0;
+  }
+
+  .hud__metrics {
+    box-sizing: border-box;
+    height: 46px;
+    min-width: 0;
+    overflow: hidden;
+    grid-template-columns: 0.92fr 1fr 0.72fr;
+    gap: 0;
+    border: 1px solid rgba(207, 234, 239, 0.18);
+    border-radius: 11px;
+    background: rgba(5, 14, 19, 0.34);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.055), 0 3px 12px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(5px) saturate(1.08);
+  }
+
+  .hud__item {
+    justify-content: center;
+    height: 44px;
+    min-height: 44px;
+    gap: 2px;
+    padding: 4px 2px 7px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .hud__item + .hud__item {
+    border-left: 1px solid rgba(207, 234, 239, 0.1);
+  }
+
+  .hud__item > .ui-icon {
+    width: 15px;
+    height: 15px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+  }
+
+  .hud__item small {
+    display: none;
+  }
+
+  .hud__item strong {
+    margin-top: 0;
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .hud__item--wave {
+    padding-bottom: 8px;
+  }
+
+  .hud__wave-track {
+    right: 5px;
+    bottom: 4px;
+    left: 5px;
+    height: 2px;
+  }
+
+  .hud__boss.is-visible {
+    grid-area: metrics;
+    box-sizing: border-box;
+    width: 100%;
+    height: 46px;
+    margin: 0;
+    padding: 7px 8px;
+    border-radius: 11px;
+    background: linear-gradient(90deg, rgba(88, 10, 27, 0.64), rgba(20, 7, 15, 0.62), rgba(88, 10, 27, 0.64));
+    backdrop-filter: blur(5px) saturate(1.08);
+  }
+
+  .hud.has-boss .hud__metrics {
+    display: none;
+  }
+
+  .hud__boss-heading {
+    margin-bottom: 4px;
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .hud__boss-track {
+    height: 6px;
+  }
+
+  .hud__loadout {
+    position: static;
+    display: flex;
+    grid-area: loadout;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 23px;
+    padding: 2px 4px;
+    border-color: rgba(207, 234, 239, 0.14);
+    border-radius: 7px;
+    background: rgba(5, 14, 19, 0.28);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+
+  .hud__upgrades {
+    gap: 3px;
+    min-height: 19px;
+  }
+
+  .hud__upgrade-icon {
+    width: 21px;
+    height: 21px;
+    background-color: rgba(13, 27, 33, 0.62);
+  }
+
+  .hud__upgrades--passive .hud__upgrade-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hud__slot-count,
+  .hud__upgrade-icon.is-open {
+    display: none;
+  }
+
+  .hud__controls {
+    top: calc(6px + env(safe-area-inset-top));
+    right: calc(6px + env(safe-area-inset-right));
+  }
+
+  .hud__icon-button {
+    width: 36px;
+    height: 36px;
+    border-color: rgba(207, 234, 239, 0.18);
+    border-radius: 10px;
+    background: rgba(5, 14, 19, 0.36);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(5px);
+  }
+
+  .hud__controls [data-fullscreen] {
+    display: none;
+  }
+
+  .settings-glyph {
+    display: flex;
+    width: 15px;
+    height: 17px;
+    align-items: stretch;
+    justify-content: center;
+    gap: 4px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .settings-glyph i {
+    display: block;
+    width: 3px;
+    border-radius: 2px;
+    background: #f4f7f2;
+    box-shadow: 0 0 5px rgba(98, 221, 255, 0.24);
+  }
+
+  .wave-banner {
+    top: calc(83px + env(safe-area-inset-top));
+  }
+}
+
+@media (max-width: 760px), (max-height: 480px) and (max-width: 1000px) {
+  .joystick {
+    border-color: rgba(161, 230, 247, 0.2);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(118, 220, 241, 0.07) 0 35%, transparent 37%),
+      rgba(5, 14, 19, 0.2);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025), 0 5px 16px rgba(0, 0, 0, 0.12);
+    opacity: 0.56;
+    transition: opacity 150ms ease, border-color 150ms ease, background 150ms ease;
+  }
+
+  .joystick.is-active {
+    border-color: rgba(161, 230, 247, 0.38);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(118, 220, 241, 0.12) 0 35%, transparent 37%),
+      rgba(5, 14, 19, 0.34);
+    opacity: 0.88;
+  }
+
+  .joystick__nub {
+    background: radial-gradient(circle at 35% 30%, rgba(246, 255, 255, 0.92), rgba(124, 205, 222, 0.78) 72%, rgba(71, 120, 134, 0.72));
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-height: 480px) and (min-width: 600px) and (max-width: 1000px) {
+  .hud {
+    top: calc(6px + env(safe-area-inset-top));
+    left: calc(6px + env(safe-area-inset-left));
+    width: calc(100vw - 54px - env(safe-area-inset-left) - env(safe-area-inset-right));
+  }
+
+  .hud__identity {
+    border-color: color-mix(in srgb, var(--rooster-accent) 36%, transparent);
+    background:
+      linear-gradient(105deg, color-mix(in srgb, var(--rooster-accent) 13%, transparent), transparent 54%),
+      rgba(5, 14, 19, 0.38);
+    box-shadow: inset 2px 0 color-mix(in srgb, var(--rooster-accent) 74%, transparent), 0 3px 12px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(5px) saturate(1.08);
+  }
+
+  .hud__metrics {
+    height: 50px;
+    overflow: hidden;
+    gap: 0;
+    border: 1px solid rgba(207, 234, 239, 0.18);
+    border-radius: 11px;
+    background: rgba(5, 14, 19, 0.34);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.055), 0 3px 12px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(5px) saturate(1.08);
+  }
+
+  .hud__item {
+    height: 48px;
+    min-height: 48px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .hud__item + .hud__item {
+    border-left: 1px solid rgba(207, 234, 239, 0.1);
+  }
+
+  .hud__loadout {
+    border-color: rgba(207, 234, 239, 0.14);
+    background: rgba(5, 14, 19, 0.28);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4px);
+  }
+
+  .hud__controls [data-fullscreen] {
+    display: none;
+  }
+
+  .hud__controls {
+    top: calc(6px + env(safe-area-inset-top));
+    right: calc(6px + env(safe-area-inset-right));
+  }
+
+  .hud__icon-button {
+    width: 36px;
+    height: 36px;
+  }
+}

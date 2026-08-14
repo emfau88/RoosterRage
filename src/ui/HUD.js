@@ -112,7 +112,7 @@ export class HUD {
         <div class="hud__vitals">
           <div class="hud__identity-heading" data-level>
             <span><small>ROOSTER</small><strong data-value>Level 1</strong></span>
-            <b data-hp-value>100 / 100 HP</b>
+            <b data-hp-value aria-label="100 / 100 HP"><span data-hp-full>100 / 100 HP</span><span data-hp-compact aria-hidden="true">100/100</span></b>
           </div>
           <div class="hud__health" data-hp><i data-hp-fill></i></div>
           <div class="hud__xp-row"><span data-icon="xp"></span><div class="hud__bar-track"><div class="hud__bar-fill" data-xp></div></div></div>
@@ -132,8 +132,8 @@ export class HUD {
         <div class="hud__upgrades hud__upgrades--passive" data-passive-loadout></div>
       </div>
       <div class="hud__controls">
-        <button class="hud__icon-button" type="button" data-settings title="Einstellungen" aria-label="Einstellungen">
-          <span class="settings-glyph" aria-hidden="true">SET</span>
+        <button class="hud__icon-button" type="button" data-settings title="Pause und Einstellungen" aria-label="Pause und Einstellungen">
+          <span class="settings-glyph" aria-hidden="true"><i></i><i></i></span>
         </button>
         <button class="hud__icon-button" type="button" data-fullscreen title="Fullscreen" aria-label="Fullscreen">
           <span class="fullscreen-glyph" aria-hidden="true"></span>
@@ -173,7 +173,11 @@ export class HUD {
     hp.classList.toggle('is-warning', hpRatio <= 0.55 && hpRatio > 0.25);
     hp.classList.toggle('is-danger', hpRatio <= 0.25);
     hp.querySelector('[data-hp-fill]').style.width = `${hpRatio * 100}%`;
-    this.root.querySelector('[data-hp-value]').textContent = `${Math.ceil(state.hp)} / ${state.maxHp} HP`;
+    const hpValue = this.root.querySelector('[data-hp-value]');
+    const hpText = `${Math.ceil(state.hp)} / ${state.maxHp} HP`;
+    hpValue.querySelector('[data-hp-full]').textContent = hpText;
+    hpValue.querySelector('[data-hp-compact]').textContent = `${Math.ceil(state.hp)}/${state.maxHp}`;
+    hpValue.setAttribute('aria-label', hpText);
     const challengeSuffix = state.challenge?.id && state.challenge.id !== 'standard'
       ? ` · ${state.challenge.name}`
       : '';
@@ -185,6 +189,7 @@ export class HUD {
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
     this.root.querySelector('[data-wave-fill]').style.width = `${(state.waveProgress?.percent ?? 0) * 100}%`;
     const bossHud = this.root.querySelector('[data-boss]');
+    this.root.classList.toggle('has-boss', Boolean(state.boss));
     bossHud.classList.toggle('is-visible', Boolean(state.boss));
     if (state.boss) {
       bossHud.querySelector('[data-boss-name]').textContent = state.boss.name;
@@ -707,6 +712,9 @@ export class HUD {
             <button type="button" data-effect="${key}" aria-pressed="${effectSettings[key]}">
               <span>${label}</span><strong>${effectSettings[key] ? 'AN' : 'AUS'}</strong>
             </button>`).join('')}
+          <button type="button" data-settings-fullscreen>
+            <span>Fullscreen</span><strong>WECHSELN</strong>
+          </button>
         </div>
         <h3>Audio</h3>
         <div class="settings-list settings-list--audio">
@@ -737,6 +745,7 @@ export class HUD {
         button.querySelector('strong').textContent = next[button.dataset.effect] ? 'AN' : 'AUS';
       });
     });
+    this.overlay.querySelector('[data-settings-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
     this.overlay.querySelectorAll('[data-audio-volume]').forEach((input) => {
       input.addEventListener('input', () => {
         const next = onAudioChange?.(input.dataset.audioVolume, Number(input.value)) ?? audioSettings;
@@ -798,6 +807,7 @@ export class HUD {
   setJoystick(vector) {
     const x = 34 + vector.x * 28;
     const y = 34 + vector.y * 28;
+    this.joystick.classList.toggle('is-active', Math.hypot(vector.x, vector.y) > 0.04);
     this.nub.style.transform = `translate(${x - 34}px, ${y - 34}px)`;
   }
 
@@ -858,10 +868,10 @@ export class HUD {
 
   renderLoadoutRow(container, entries, capacity, kind) {
     container.innerHTML = '';
-    container.classList.toggle('is-empty', capacity === 0);
+    container.classList.toggle('is-empty', entries.length === 0);
     container.dataset.kind = kind;
     container.setAttribute('aria-label', `${kind === 'active' ? 'Aktive Fähigkeiten' : 'Passive Verbesserungen'}: ${entries.length} von ${capacity}`);
-    const visibleSlots = Math.min(capacity, Math.max(1, entries.length + (entries.length < capacity ? 1 : 0)));
+    const visibleSlots = Math.min(capacity, entries.length);
     for (let index = 0; index < visibleSlots; index += 1) {
       const entry = entries[index];
       const icon = document.createElement('span');

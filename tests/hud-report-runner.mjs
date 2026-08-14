@@ -36,7 +36,7 @@ async function openGame(browser, serverUrl, viewport, suffix) {
 async function verifyResponsiveHud(browser, serverUrl) {
   const viewports = [
     { name: 'desktop', width: 960, height: 540, maxHudHeight: 180 },
-    { name: 'portrait', width: 390, height: 844, maxHudHeight: 125 },
+    { name: 'portrait', width: 390, height: 844, maxHudHeight: 82 },
     { name: 'landscape', width: 844, height: 390, maxHudHeight: 90 }
   ];
   const results = [];
@@ -134,10 +134,10 @@ async function verifyResponsiveHud(browser, serverUrl) {
       );
       assert(
         layout.loadoutRows.length === 2
-        && layout.loadoutRows.every((row) => row.open <= 1 && /^\d\/\d$/.test(row.capacity))
-        && layout.loadoutRows[0].icons === 3
-        && layout.loadoutRows[1].icons === 2,
-        `${viewport.name} loadout should show occupied slots plus only one quiet placeholder.`,
+        && layout.loadoutRows.every((row) => row.open === 0 && /^\d\/\d$/.test(row.capacity))
+        && layout.loadoutRows[0].icons === 2
+        && layout.loadoutRows[1].icons === 1,
+        `${viewport.name} loadout should show occupied slots without empty placeholders.`,
         layout.loadoutRows
       );
       const expected = viewport.width <= 760
@@ -175,12 +175,14 @@ async function verifySettingsAndReport(browser, serverUrl) {
       buttons: document.querySelectorAll('[data-effect]').length,
       visible: document.querySelector('.settings-panel') !== null,
       privacyVisible: document.querySelector('.settings-privacy [data-analytics-toggle]') !== null,
+      fullscreenVisible: document.querySelector('[data-settings-fullscreen]') !== null,
       returnToHubVisible: document.querySelector('[data-return-hub]') !== null,
       settings: window.__ROOSTER_TEST__.getEffectSettings()
     }));
     assert(settingsOpen.visible && settingsOpen.buttons === 4 && settingsOpen.privacyVisible
+      && settingsOpen.fullscreenVisible
       && settingsOpen.returnToHubVisible,
-    'In-run settings must expose effects, privacy and the main-menu action.', settingsOpen);
+    'In-run settings must expose effects, fullscreen, privacy and the main-menu action.', settingsOpen);
     await page.click('[data-effect="damageNumbers"]');
     const toggled = await page.evaluate(() => window.__ROOSTER_TEST__.getEffectSettings());
     assert(toggled.damageNumbers !== settingsOpen.settings.damageNumbers,
