@@ -324,6 +324,118 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
   }
 }
 
+async function verifyTalentPreviewFlow(context, serverUrl) {
+  const { page, errors } = await openGame(context, serverUrl, '-talent-preview');
+  try {
+    await page.evaluate(() => {
+      window.__ROOSTER_TEST__.resetMetaProgress();
+      window.__ROOSTER_TEST__.grantMetaKernels(12);
+    });
+    await page.getByRole('button', { name: 'Training', exact: true }).click();
+    await fs.mkdir(artifactDir, { recursive: true });
+    await page.screenshot({ path: path.join(artifactDir, 'talent-tree-mobile.png') });
+    await page.locator('[data-talent="sturdy-nest"]').click();
+    await page.locator('[data-talent-detail]:not([hidden])').waitFor();
+    const preview = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getMetaState(),
+      enabledNodes: [...document.querySelectorAll('[data-talent]')].filter((node) => !node.disabled).length,
+      name: document.querySelector('[data-talent-detail-name]')?.textContent,
+      description: document.querySelector('[data-talent-detail-description]')?.textContent,
+      current: document.querySelector('[data-talent-current]')?.textContent,
+      next: document.querySelector('[data-talent-next]')?.textContent,
+      max: document.querySelector('[data-talent-max]')?.textContent,
+      action: document.querySelector('[data-talent-purchase]')?.textContent,
+      actionDisabled: document.querySelector('[data-talent-purchase]')?.disabled
+    }));
+    assert(Object.keys(preview.state.talentRanks).length === 0 && preview.enabledNodes === 6,
+      'Opening a talent preview bought a rank or left locked talents uninspectable.', preview);
+    assert(preview.name === 'Stabiles Nest' && preview.description.includes('+2 % maximale HP')
+      && preview.current === '0 %' && preview.next === '+2 %' && preview.max === '+6 %'
+      && preview.action.includes('12 Körner') && !preview.actionDisabled,
+    'The talent preview does not explain current, next and maximum effects before purchase.', preview);
+
+    await page.locator('[data-talent-purchase]').click();
+    await page.waitForFunction(() => (
+      window.__ROOSTER_TEST__.getMetaState().talentRanks['sturdy-nest'] === 1
+      && document.querySelector('[data-talent-detail]:not([hidden])')
+    ));
+    const purchased = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getMetaState(),
+      current: document.querySelector('[data-talent-current]')?.textContent,
+      next: document.querySelector('[data-talent-next]')?.textContent,
+      actionDisabled: document.querySelector('[data-talent-purchase]')?.disabled,
+      status: document.querySelector('[data-talent-detail-status]')?.textContent
+    }));
+    assert(purchased.state.kernels === 0 && purchased.current === '+2 %' && purchased.next === '+4 %'
+      && purchased.actionDisabled && purchased.status.includes('22 Körner'),
+    'The explicit purchase did not refresh the same talent preview and balance.', purchased);
+
+    await page.locator('.talent-inspector__close').click();
+    await page.locator('[data-talent="wide-wings"]').click();
+    const locked = await page.evaluate(() => ({
+      name: document.querySelector('[data-talent-detail-name]')?.textContent,
+      description: document.querySelector('[data-talent-detail-description]')?.textContent,
+      status: document.querySelector('[data-talent-detail-status]')?.textContent,
+      actionDisabled: document.querySelector('[data-talent-purchase]')?.disabled
+    }));
+    assert(locked.name === 'Weite Schwingen' && locked.description.includes('XP-Magnetradius')
+      && locked.status.includes('3 Talent-Ränge benötigt') && locked.actionDisabled,
+    'Locked talents cannot be inspected and planned safely.', locked);
+    assert(errors.length === 0, 'Browser errors in the talent preview flow.', errors);
+    await page.waitForTimeout(220);
+    await page.screenshot({ path: path.join(artifactDir, 'talent-preview-mobile.png') });
+    return { preview, purchased, locked };
+  } finally {
+    await page.close();
+  }
+}
+
+async function verifyCompactTalentLayout(context, serverUrl) {
+  const { page, errors } = await openGame(context, serverUrl, '-talent-compact');
+  try {
+    await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
+    await page.getByRole('button', { name: 'Training', exact: true }).click();
+    const layout = await page.evaluate(() => {
+      const view = document.querySelector('[data-hub-view="training"]');
+      const tree = document.querySelector('.talent-tree');
+      const treeBounds = tree.getBoundingClientRect();
+      const frameBounds = document.querySelector('.talent-node__frame').getBoundingClientRect();
+      const nodeBounds = [...document.querySelectorAll('.talent-node')].map((node) => {
+        const bounds = node.getBoundingClientRect();
+        return { left: bounds.left, right: bounds.right };
+      });
+      const result = {
+        overflowY: getComputedStyle(view).overflowY,
+        maxScroll: view.scrollHeight - view.clientHeight,
+        horizontalOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        tree: { left: treeBounds.left, right: treeBounds.right },
+        frame: { width: frameBounds.width, height: frameBounds.height },
+        nodes: nodeBounds,
+        nodeCounts: [...document.querySelectorAll('.talent-tier')]
+          .map((tier) => tier.querySelectorAll('.talent-node').length)
+      };
+      view.scrollTop = view.scrollHeight;
+      const viewBounds = view.getBoundingClientRect();
+      const lastTierBounds = document.querySelector('.talent-tier:last-of-type').getBoundingClientRect();
+      result.reachesLastTier = lastTierBounds.bottom <= viewBounds.bottom + 1;
+      return result;
+    });
+    assert(layout.overflowY === 'auto' && layout.maxScroll > 0 && layout.reachesLastTier,
+      'The compact-height talent view cannot scroll through the final tier.', layout);
+    assert(layout.horizontalOverflow <= 0 && layout.tree.left >= 0 && layout.tree.right <= 400
+      && layout.nodes.every((node) => node.left >= layout.tree.left - 1 && node.right <= layout.tree.right + 1)
+      && layout.frame.width >= 56 && layout.frame.height >= 56
+      && layout.nodeCounts.join(',') === '3,2,1',
+    'The compact-height talent tree clips nodes or loses its 3-2-1 hierarchy.', layout);
+    assert(errors.length === 0, 'Browser errors in compact talent layout.', errors);
+    await fs.mkdir(artifactDir, { recursive: true });
+    await page.screenshot({ path: path.join(artifactDir, 'talent-tree-compact.png') });
+    return layout;
+  } finally {
+    await page.close();
+  }
+}
+
 async function verifyTenRunsTalentsAndReset(context, serverUrl) {
   const { page, errors } = await openGame(context, serverUrl, '-ten-runs');
   try {
@@ -575,10 +687,15 @@ async function run() {
         { width: 400, height: 711 },
         (context) => verifyCompactMobileHub(context, serverState.url)
       ),
+      compactTalent: await inViewport(
+        { width: 400, height: 711 },
+        (context) => verifyCompactTalentLayout(context, serverState.url)
+      ),
       mobileTabScrolling: await inMobileViewport(
         { width: 390, height: 844 },
         (context) => verifyMobileHubTabScrolling(context, serverState.url)
       ),
+      talentPreview: await inFreshContext((context) => verifyTalentPreviewFlow(context, serverState.url)),
       progression: await inFreshContext((context) => verifyUnlocksAndPersistence(context, serverState.url)),
       tenRuns: await inFreshContext((context) => verifyTenRunsTalentsAndReset(context, serverState.url)),
       migration: await inFreshContext((context) => verifyMigrationAndOldSaves(context, serverState.url)),

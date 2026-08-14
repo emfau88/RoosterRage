@@ -100,7 +100,7 @@ export class HUD {
     this.onSettings = onSettings;
     this.onAnalyticsConsent = onAnalyticsConsent;
     this.onTalentPurchased = onTalentPurchased;
-    this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play' };
+    this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play', talentId: null };
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     document.documentElement.style.setProperty('--ui-icon-columns', `${ICON_COLUMNS * 100}%`);
     document.documentElement.style.setProperty('--ui-icon-rows', `${ICON_ROWS * 100}%`);
@@ -273,44 +273,49 @@ export class HUD {
     const progress = hub.progress ?? { totalRuns: 0, victories: 0, totalKills: 0 };
     const bests = hub.bests ?? { highestKills: 0, longestRunMs: 0, fastestVictoryMs: null };
     const currency = hub.currency ?? { kernels: 0, lifetimeKernels: 0 };
+    const talentNodes = hub.talents?.nodes ?? [];
+    const talentTotalRanks = hub.talents?.totalRanks ?? 0;
+    const formatTalentValue = (talent, rank) => {
+      const value = (talent.effect?.perRank ?? 0) * rank;
+      const formatted = Number.isInteger(value) ? `${value}` : `${value}`.replace('.', ',');
+      const prefix = value > 0 ? '+' : '';
+      return `${prefix}${formatted}${talent.effect?.unit ? ` ${talent.effect.unit}` : ''}`;
+    };
     const talentNodeMarkup = (talent) => `
       <button type="button" data-talent="${talent.id}"
         class="talent-node ${talent.complete ? 'is-complete' : ''} ${talent.unlocked ? '' : 'is-locked'} ${talent.affordable ? 'is-affordable' : ''}"
-        ${talent.affordable ? '' : 'disabled'}
-        title="${talent.unlocked ? talent.description : talent.unlockLabel}">
-        <span class="talent-node__icon" data-talent-icon="${talent.icon}"></span>
-        <span><strong>${talent.name}</strong><small>${talent.description}</small></span>
-        <em>Rang ${talent.rank}/${talent.maxRank}</em>
-        <b>${talent.complete ? 'MAXIMAL' : talent.unlocked ? `${talent.nextCost} Körner · VERBESSERN` : talent.unlockLabel}</b>
+        aria-pressed="false"
+        aria-label="${talent.name}, ${talent.description} Rang ${talent.rank} von ${talent.maxRank}. ${talent.unlocked ? 'Details öffnen' : talent.unlockLabel}">
+        <span class="talent-node__frame">
+          <span class="talent-node__icon" data-talent-icon="${talent.icon}"></span>
+          <em>${talent.rank}/${talent.maxRank}</em>
+          ${talent.unlocked ? '' : '<i aria-hidden="true"></i>'}
+        </span>
+        <span class="talent-node__copy">
+          <strong>${talent.name}</strong>
+          <small>${talent.description.replace(' pro Rang.', '/Rang').replace('.', '')}</small>
+        </span>
+        <b>${talent.complete ? 'MAX' : talent.unlocked ? `${talent.nextCost} Körner` : 'Gesperrt'}</b>
       </button>
     `;
-    const talentNodes = hub.talents?.nodes ?? [];
     const talentTiers = [
       { numeral: 'I', title: 'Nestfundament', unlockAt: 0, nodes: talentNodes.filter((talent) => talent.unlockAt < 3) },
       { numeral: 'II', title: 'Erweiterte Instinkte', unlockAt: 3, nodes: talentNodes.filter((talent) => talent.unlockAt >= 3 && talent.unlockAt < 8) },
       { numeral: 'III', title: 'Königsweg', unlockAt: 8, nodes: talentNodes.filter((talent) => talent.unlockAt >= 8) }
     ];
-    const talentBranchMarkup = (index) => index === 0 ? `
-      <div class="talent-tree__branches talent-tree__branches--roots" aria-hidden="true">
-        <svg viewBox="0 0 100 40" preserveAspectRatio="none">
-          <path d="M16.7 0 C16.7 18 33.3 18 33.3 40" />
-          <path d="M50 0 C50 17 33.3 18 33.3 40" />
-          <path d="M50 0 C50 17 66.7 18 66.7 40" />
-          <path d="M83.3 0 C83.3 18 66.7 18 66.7 40" />
-        </svg>
-      </div>
-    ` : `
-      <div class="talent-tree__branches talent-tree__branches--crown" aria-hidden="true">
-        <svg viewBox="0 0 100 40" preserveAspectRatio="none">
-          <path d="M33.3 0 C33.3 20 50 20 50 40" />
-          <path d="M66.7 0 C66.7 20 50 20 50 40" />
-        </svg>
+    const talentBranchMarkup = (index) => `
+      <div class="talent-tree__branches talent-tree__branches--${index === 0 ? 'roots' : 'crown'}" aria-hidden="true">
+        <span></span>
       </div>
     `;
     const talentTree = talentTiers.map((tier, index) => `
       <section class="talent-tier talent-tier--${index + 1} ${tier.unlockAt > (hub.talents?.totalRanks ?? 0) ? 'is-locked' : ''}"
         data-talent-tier="${index + 1}">
-        <header><span>STUFE ${tier.numeral}</span><strong>${tier.title}</strong><small>${tier.unlockAt === 0 ? 'Sofort verfügbar' : `Ab ${tier.unlockAt} Talent-Rängen`}</small></header>
+        <header>
+          <span>${tier.numeral}</span>
+          <div><small>STUFE ${tier.numeral}</small><strong>${tier.title}</strong></div>
+          <em>${tier.unlockAt === 0 || talentTotalRanks >= tier.unlockAt ? 'Freigeschaltet' : `${tier.unlockAt - talentTotalRanks} Ränge fehlen`}</em>
+        </header>
         <div class="talent-tier__nodes">${tier.nodes.map(talentNodeMarkup).join('')}</div>
       </section>
       ${index < talentTiers.length - 1 ? talentBranchMarkup(index) : ''}
@@ -419,8 +424,36 @@ export class HUD {
           <div class="rooster-list"></div>
         </section>
         <section class="henhouse-view" data-hub-view="training" hidden>
-          <div class="henhouse-section-heading"><span><small>DAUERHAFT</small><h2>Talentnest</h2></span><p>${hub.talents?.totalRanks ?? 0} Ränge · ${currency.lifetimeKernels} Körner insgesamt verdient</p></div>
+          <div class="henhouse-section-heading talent-heading">
+            <span><small>DAUERHAFT</small><h2>Talentnest</h2></span>
+            <div class="talent-summary" aria-label="Talentfortschritt">
+              <span><small>INVESTIERT</small><strong>${talentTotalRanks}</strong><em>Ränge</em></span>
+              <span><small>VERDIENT</small><strong>${currency.lifetimeKernels}</strong><em>Körner</em></span>
+            </div>
+          </div>
+          <p class="talent-intro">Wähle ein Talent, um Wirkung, nächsten Rang und Kosten vor dem Verbessern zu prüfen.</p>
           <div class="talent-tree" aria-label="Talentfortschritt">${talentTree}</div>
+          <div class="talent-inspector-layer" data-talent-detail hidden>
+            <button type="button" class="talent-inspector__scrim" data-talent-close tabindex="-1" aria-label="Talentdetails schließen"></button>
+            <section class="talent-inspector" role="dialog" aria-modal="true" aria-labelledby="talent-detail-name">
+              <span class="talent-inspector__handle" aria-hidden="true"></span>
+              <button type="button" class="talent-inspector__close" data-talent-close aria-label="Talentdetails schließen">×</button>
+              <header>
+                <span class="talent-inspector__icon-frame"><span data-talent-detail-icon></span></span>
+                <span><small data-talent-detail-tier></small><h3 id="talent-detail-name" data-talent-detail-name></h3><em data-talent-detail-rank></em></span>
+              </header>
+              <p data-talent-detail-description></p>
+              <div class="talent-inspector__values">
+                <span><small>AKTUELL</small><strong data-talent-current></strong></span>
+                <i aria-hidden="true">→</i>
+                <span><small>NÄCHSTER RANG</small><strong data-talent-next></strong></span>
+                <span><small>MAXIMAL</small><strong data-talent-max></strong></span>
+              </div>
+              <p class="talent-inspector__status" data-talent-detail-status></p>
+              <button type="button" class="talent-inspector__purchase" data-talent-purchase></button>
+              <small class="talent-inspector__hint">Auswahl = Vorschau. Nur der Button verbessert das Talent.</small>
+            </section>
+          </div>
         </section>
         <section class="henhouse-view" data-hub-view="archive" hidden>
           <div class="henhouse-section-heading"><span><small>FORTSCHRITT</small><h2>Archiv</h2></span><p>Bestwerte, letzte Runs und entdeckte Gegner/EVOs.</p></div>
@@ -440,9 +473,92 @@ export class HUD {
     `;
     const list = this.overlay.querySelector('.rooster-list');
     this.overlay.querySelectorAll('[data-talent-icon]').forEach((icon) => this.setIcon(icon, icon.dataset.talentIcon));
+    const talentDetail = this.overlay.querySelector('[data-talent-detail]');
+    const talentPurchase = this.overlay.querySelector('[data-talent-purchase]');
+    let talentReturnFocus = null;
+    const closeTalentDetail = () => {
+      if (!talentDetail) return;
+      this.hubSelection.talentId = null;
+      if (talentDetail.hidden) return;
+      talentDetail.hidden = true;
+      this.overlay.querySelectorAll('[data-talent]').forEach((button) => {
+        button.classList.remove('is-selected');
+        button.setAttribute('aria-pressed', 'false');
+      });
+      talentReturnFocus?.focus({ preventScroll: true });
+      talentReturnFocus = null;
+    };
+    const openTalentDetail = (talentId, focusDialog = true) => {
+      const talent = talentNodes.find((candidate) => candidate.id === talentId);
+      if (!talent || !talentDetail || !talentPurchase) return;
+      const tierIndex = talentTiers.findIndex((tier) => tier.nodes.some((candidate) => candidate.id === talent.id));
+      const selectedButton = this.overlay.querySelector(`[data-talent="${talent.id}"]`);
+      talentReturnFocus = selectedButton;
+      this.hubSelection.talentId = talent.id;
+      this.overlay.querySelectorAll('[data-talent]').forEach((button) => {
+        const selected = button.dataset.talent === talent.id;
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', `${selected}`);
+      });
+      this.setIcon(talentDetail.querySelector('[data-talent-detail-icon]'), talent.icon);
+      talentDetail.querySelector('[data-talent-detail-tier]').textContent = `STUFE ${talentTiers[tierIndex]?.numeral ?? 'I'} · ${talent.effect?.label ?? 'Dauerhafter Bonus'}`;
+      talentDetail.querySelector('[data-talent-detail-name]').textContent = talent.name;
+      talentDetail.querySelector('[data-talent-detail-rank]').textContent = `Rang ${talent.rank}/${talent.maxRank}`;
+      talentDetail.querySelector('[data-talent-detail-description]').textContent = talent.description;
+      talentDetail.querySelector('[data-talent-current]').textContent = formatTalentValue(talent, talent.rank);
+      talentDetail.querySelector('[data-talent-next]').textContent = talent.complete
+        ? 'MAX'
+        : formatTalentValue(talent, talent.rank + 1);
+      talentDetail.querySelector('[data-talent-max]').textContent = formatTalentValue(talent, talent.maxRank);
+      const status = talentDetail.querySelector('[data-talent-detail-status]');
+      talentPurchase.dataset.talentPurchase = talent.id;
+      talentPurchase.disabled = talent.complete || !talent.unlocked || !talent.affordable;
+      talentPurchase.classList.toggle('is-ready', talent.affordable);
+      if (talent.complete) {
+        status.textContent = 'Dieses Talent ist vollständig ausgebaut.';
+        talentPurchase.textContent = 'Maximal ausgebaut';
+      } else if (!talent.unlocked) {
+        status.textContent = `Gesperrt · ${talent.unlockLabel}. Wirkung und Maximalwert kannst du trotzdem schon planen.`;
+        talentPurchase.textContent = talent.unlockLabel;
+      } else if (!talent.affordable) {
+        const missingKernels = Math.max(0, talent.nextCost - currency.kernels);
+        status.textContent = `Dir fehlen ${missingKernels} Körner für den nächsten Rang.`;
+        talentPurchase.textContent = `${talent.nextCost} Körner benötigt`;
+      } else {
+        status.textContent = `${currency.kernels} Körner verfügbar · danach bleiben ${currency.kernels - talent.nextCost}.`;
+        talentPurchase.textContent = `Für ${talent.nextCost} Körner verbessern`;
+      }
+      talentDetail.hidden = false;
+      if (focusDialog) {
+        requestAnimationFrame(() => talentDetail.querySelector('.talent-inspector__close')?.focus({ preventScroll: true }));
+      }
+    };
     this.overlay.querySelectorAll('[data-talent]').forEach((button) => {
-      button.addEventListener('click', () => this.onTalentPurchased?.(button.dataset.talent));
+      button.addEventListener('click', () => openTalentDetail(button.dataset.talent));
     });
+    this.overlay.querySelectorAll('[data-talent-close]').forEach((button) => {
+      button.addEventListener('click', closeTalentDetail);
+    });
+    talentPurchase?.addEventListener('click', () => {
+      if (!talentPurchase.disabled) this.onTalentPurchased?.(talentPurchase.dataset.talentPurchase);
+    });
+    this.overlay.onkeydown = (event) => {
+      if (!talentDetail?.isConnected || talentDetail.hidden) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeTalentDetail();
+      } else if (event.key === 'Tab') {
+        const focusable = [...talentDetail.querySelectorAll('button:not(:disabled)')]
+          .filter((button) => button.tabIndex >= 0);
+        if (!focusable.length) return;
+        const activeIndex = focusable.indexOf(document.activeElement);
+        const nextIndex = event.shiftKey
+          ? (activeIndex <= 0 ? focusable.length - 1 : activeIndex - 1)
+          : (activeIndex >= focusable.length - 1 ? 0 : activeIndex + 1);
+        event.preventDefault();
+        focusable[nextIndex].focus();
+      }
+    };
     this.overlay.querySelector('[data-hub-settings]')?.addEventListener('click', () => this.onSettings?.());
     this.overlay.querySelector('[data-hub-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
     definitions.forEach((definition) => {
@@ -572,6 +688,7 @@ export class HUD {
     };
     const switchHubView = (view) => {
       const target = this.overlay.querySelector(`[data-hub-view="${view}"]`) ? view : 'play';
+      if (target !== 'training') closeTalentDetail();
       this.hubSelection.view = target;
       this.overlay.querySelectorAll('[data-hub-view]').forEach((section) => {
         const active = section.dataset.hubView === target;
@@ -605,6 +722,9 @@ export class HUD {
     updateSelectedRooster();
     updateChallenge();
     switchHubView(this.hubSelection.view);
+    if (this.hubSelection.view === 'training' && this.hubSelection.talentId) {
+      openTalentDetail(this.hubSelection.talentId, false);
+    }
   }
 
   showEndScreen(title, message, report = {}) {

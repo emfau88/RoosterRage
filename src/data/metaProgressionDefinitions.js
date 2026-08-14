@@ -23,6 +23,7 @@ export const TALENT_DEFINITIONS = Object.freeze([
     maxRank: 3,
     costs: [12, 22, 36],
     description: '+2 % maximale HP pro Rang.',
+    effect: { label: 'Maximale HP', perRank: 2, unit: '%' },
     unlockAt: 0
   },
   {
@@ -32,6 +33,7 @@ export const TALENT_DEFINITIONS = Object.freeze([
     maxRank: 3,
     costs: [12, 22, 36],
     description: '+1,5 % Bewegungstempo pro Rang.',
+    effect: { label: 'Bewegungstempo', perRank: 1.5, unit: '%' },
     unlockAt: 0
   },
   {
@@ -41,6 +43,7 @@ export const TALENT_DEFINITIONS = Object.freeze([
     maxRank: 3,
     costs: [12, 22, 36],
     description: '+2 % Startwaffen-Schaden pro Rang.',
+    effect: { label: 'Startwaffen-Schaden', perRank: 2, unit: '%' },
     unlockAt: 0
   },
   {
@@ -50,6 +53,7 @@ export const TALENT_DEFINITIONS = Object.freeze([
     maxRank: 2,
     costs: [35, 55],
     description: '+6 % XP-Magnetradius pro Rang.',
+    effect: { label: 'XP-Magnetradius', perRank: 6, unit: '%' },
     unlockAt: 3
   },
   {
@@ -59,6 +63,7 @@ export const TALENT_DEFINITIONS = Object.freeze([
     maxRank: 1,
     costs: [65],
     description: '+1 Reroll pro Run.',
+    effect: { label: 'Rerolls pro Run', perRank: 1, unit: '' },
     unlockAt: 5
   },
   {
@@ -68,6 +73,7 @@ export const TALENT_DEFINITIONS = Object.freeze([
     maxRank: 1,
     costs: [90],
     description: '+1 % kritische Trefferchance.',
+    effect: { label: 'Kritische Trefferchance', perRank: 1, unit: '%' },
     unlockAt: 8
   }
 ]);
@@ -79,4 +85,3 @@ export const MASTERY_KERNEL_REWARDS = Object.freeze({
   4: 30,
   5: 45
 });
-
