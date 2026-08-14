@@ -254,13 +254,19 @@ async function run() {
     const landscapeJoystick = await landscapePage.locator('.joystick').evaluate(
       (element) => getComputedStyle(element).display
     );
-    await landscapePage.locator('[data-fullscreen]').click();
-    await landscapePage.waitForTimeout(100);
+    const landscapeFullscreen = await landscapePage.locator('[data-fullscreen]').evaluate(
+      (element) => getComputedStyle(element).display
+    );
+    const landscapeSettings = await landscapePage.locator('[data-settings]').evaluate(
+      (element) => getComputedStyle(element).display
+    );
     await landscapePage.screenshot({ path: path.join(artifactDir, 'rooster-smoke-mobile-landscape.png') });
     assert(landscapeErrors.length === 0, 'Landscape browser reported page errors.', landscapeErrors);
     assert(landscapeCanvas?.width >= 830 && landscapeCanvas?.height >= 380, 'Landscape canvas does not fill the viewport.', landscapeCanvas);
     assert(landscapeHud?.height <= 90, 'Landscape HUD obscures too much of the arena.', landscapeHud);
     assert(landscapeJoystick !== 'none', 'Landscape joystick is not visible.', { landscapeJoystick });
+    assert(landscapeFullscreen === 'none' && landscapeSettings !== 'none',
+      'Landscape HUD does not preserve the intended compact controls.', { landscapeFullscreen, landscapeSettings });
     assert(landscapeState.cameraZoom === 1, 'Landscape camera should use the default zoom.', landscapeState);
     await landscapeContext.close();
 
