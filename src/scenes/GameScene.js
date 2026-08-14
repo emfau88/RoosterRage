@@ -176,7 +176,7 @@ export class GameScene extends Phaser.Scene {
     this.runState = new RunStateSystem(this);
     this.hud = new HUD(
       (upgrade) => this.chooseUpgrade(upgrade),
-      () => this.scene.restart(),
+      () => this.scene.restart({}),
       () => this.toggleFullscreen(),
       (roosterId, selectedChallenge) => this.startRunFromHub(roosterId, selectedChallenge),
       () => this.rerollUpgradeChoices(),

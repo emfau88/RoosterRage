@@ -68,8 +68,10 @@ async function run() {
       ttk,
       summary: state.telemetry
     });
-    assert(state.telemetry.chestsFound === 1 && state.telemetry.chestChoices === 1,
-      'Boss reward lane did not resolve.', state.telemetry);
+    assert(state.telemetry.chestsFound === 1
+      && state.telemetry.chestChoices === 0
+      && encounterEvents.filter((event) => event.type === 'royalVictoryRewardClaimed').length === 1,
+    'Final royal chest did not resolve as the victory payout.', state.telemetry);
     assert(state.telemetry.enemiesSpawned >= 13, 'Boss phases did not spawn their intended capped adds.', state.telemetry);
     assert(state.telemetry.maxEnemiesAlive <= 7, 'Boss encounter exceeded boss plus six simultaneous adds.', state.telemetry);
     const sequenceStarts = encounterEvents.filter((event) => event.type === 'bossSequenceStepStarted');

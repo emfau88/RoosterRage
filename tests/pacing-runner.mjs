@@ -100,10 +100,9 @@ async function run() {
       && retention.after.choices.length === retention.before.choices.length,
     'Long-run event retention discarded early progression metrics.', retention);
 
-    await page.evaluate(() => window.__ROOSTER_TEST__.restart());
-    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster);
+    await page.evaluate(() => window.__ROOSTER_TEST__.restart({ challengeId: 'standard', roosterId: 'ace' }));
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster === false);
     await page.evaluate(() => {
-      window.__ROOSTER_TEST__.selectRooster('ace');
       window.__ROOSTER_TEST__.clearEnemies();
       window.__ROOSTER_TEST__.clearProjectiles();
       window.__ROOSTER_TEST__.startWave(10);
@@ -117,13 +116,27 @@ async function run() {
     await page.waitForTimeout(1400);
     await page.evaluate((id) => window.__ROOSTER_TEST__.damageEnemyById(id, 999999), bossSpawn.boss.id);
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getPickupState().items
-      .some((pickup) => pickup.kind === 'royal-chest'));
+      .some((pickup) => pickup.kind === 'royal-chest' && pickup.victoryReward));
     await page.evaluate(() => window.__ROOSTER_TEST__.collectPickup('royal-chest'));
-    await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().choosingUpgrade);
-    await resolveSelections(page);
     await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().gameEnded);
     const bossCompletion = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(bossCompletion.telemetry.outcome === 'victory', 'Boss kill did not complete the run.', bossCompletion);
+    assert(!bossCompletion.choosingUpgrade
+      && bossCompletion.telemetry.chestsFound === 1
+      && bossCompletion.telemetry.chestChoices === 0,
+    'Final royal chest still opened a useless post-run combat upgrade.', bossCompletion);
+    await page.click('.restart-button');
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster);
+    const returnedToHub = await page.evaluate(() => ({
+      state: window.__ROOSTER_TEST__.getState(),
+      hubVisible: document.querySelector('.henhouse-panel') !== null,
+      reportVisible: document.querySelector('.run-report') !== null
+    }));
+    assert(returnedToHub.hubVisible
+      && !returnedToHub.reportVisible
+      && returnedToHub.state.choosingRooster
+      && !returnedToHub.state.gameEnded,
+    'Victory report restarted the completed run instead of returning to the Hennenhütte.', returnedToHub);
     assert(errors.length === 0, 'Browser reported errors during pacing test.', errors);
 
     const report = {
@@ -142,7 +155,8 @@ async function run() {
         kills: bossCompletion.telemetry.kills,
         chestsFound: bossCompletion.telemetry.chestsFound,
         chestsChosen: bossCompletion.telemetry.chestChoices
-      }
+      },
+      returnedToHub
     };
     await fs.mkdir(artifactDir, { recursive: true });
     await fs.writeFile(path.join(artifactDir, 'pacing-report.json'), JSON.stringify(report, null, 2));

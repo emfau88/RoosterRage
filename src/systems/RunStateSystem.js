@@ -241,7 +241,7 @@ export class RunStateSystem {
     this.scene.physics.pause();
     this.scene.telemetry.finish(this.scene.time.now, 'abandoned');
     this.scene.productAnalytics.finishRun(this.getRunReport());
-    this.scene.scene.restart();
+    this.scene.scene.restart({});
     return true;
   }
 

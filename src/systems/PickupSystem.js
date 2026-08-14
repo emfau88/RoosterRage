@@ -38,7 +38,10 @@ export class PickupSystem {
 
   onEnemyKilled(enemy) {
     if (enemy.boss) {
-      this.spawn('royal-chest', enemy.sprite.x, enemy.sprite.y, { guaranteed: true });
+      this.spawn('royal-chest', enemy.sprite.x, enemy.sprite.y, {
+        guaranteed: true,
+        victoryReward: true
+      });
     } else if (enemy.champion) {
       this.spawn('golden-chest', enemy.sprite.x, enemy.sprite.y, { guaranteed: true });
     } else if (enemy.elite) {
@@ -98,6 +101,7 @@ export class PickupSystem {
     }
     const pickup = new Pickup(this.scene, kind, point.x, point.y);
     pickup.guaranteed = options.guaranteed ?? false;
+    pickup.victoryReward = options.victoryReward ?? false;
     this.items.push(pickup);
     this.group.add(pickup.sprite);
     this.spawned[kind] += 1;
@@ -141,6 +145,15 @@ export class PickupSystem {
       this.openingChests.add(pickup);
       pickup.playChestOpening(() => {
         this.openingChests.delete(pickup);
+        if (kind === 'royal-chest' && pickup.victoryReward) {
+          scene.telemetry.addChestFound(scene.time.now, scene.waveSystem.currentWave, 'victory');
+          scene.telemetry.record('royalVictoryRewardClaimed', scene.time.now, {
+            wave: scene.waveSystem.currentWave
+          });
+          pickup.destroy();
+          scene.victory();
+          return;
+        }
         scene.runState.startChestReward(CHEST_REWARDS[kind]);
         pickup.destroy();
       });
@@ -215,6 +228,7 @@ export class PickupSystem {
         y: pickup.sprite.y,
         active: pickup.sprite.active,
         opening: pickup.opening,
+        victoryReward: pickup.victoryReward ?? false,
         texture: pickup.sprite.texture.key,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight),

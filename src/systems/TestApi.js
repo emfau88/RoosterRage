@@ -354,6 +354,7 @@ export function installTestApi(scene) {
       'bossProjectilesCleared',
       'bossAddsCleared',
       'bossAddPulse',
+      'royalVictoryRewardClaimed',
       'deathExplosionTelegraphed',
       'pickupSpawned'
     ]),
@@ -885,7 +886,7 @@ export function installTestApi(scene) {
         pools: scene.objectPools.getStats()
       };
     },
-    restart: () => scene.scene.restart(),
+    restart: (data = {}) => scene.scene.restart(data),
     getTelemetry: () => scene.telemetry.getSummary(scene.time.now),
     exerciseTelemetryRetention: (count = 6200) => {
       const before = scene.telemetry.getSummary(scene.time.now).progression;
