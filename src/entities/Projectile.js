@@ -44,7 +44,14 @@ export class Projectile {
     this.chainRadius = options.chainRadius ?? 0;
     this.chainDamageRatio = options.chainDamageRatio ?? 0;
     this.visualRank = options.visualRank ?? 0;
+    this.fireVisualRank = options.fireVisualRank ?? 0;
     this.criticalVisual = options.criticalVisual ?? false;
+    this.spritePulseX = options.spritePulseX ?? 0;
+    this.spritePulseY = options.spritePulseY ?? 0;
+    this.spritePulseMs = options.spritePulseMs ?? 260;
+    this.spritePulsePhase = options.spritePulsePhase
+      ?? ((x * 0.037 + y * 0.019 + targetOffset * 0.11) % (Math.PI * 2));
+    this.spriteFlickerAlpha = options.spriteFlickerAlpha ?? 0;
     this.trailBaseAlpha = options.trailAlpha ?? 0.18;
     this.trailPulse = options.trailPulse ?? 0;
     this.trailPulseMs = options.trailPulseMs ?? 320;
@@ -62,7 +69,9 @@ export class Projectile {
     this.sprite.setTexture(options.texture ?? (isFireEgg ? 'fire-egg' : 'egg'));
     this.sprite.setCircle(options.bodyRadius ?? (9 + (scene.player?.projectileSizeBonus ?? 0) * 0.45));
     this.sprite.setRotation(angle);
-    this.sprite.setScale((options.scale ?? (isFireEgg ? 1.18 : 1)) + (scene.player?.projectileSizeBonus ?? 0) * 0.018);
+    this.spriteBaseScale = (options.scale ?? (isFireEgg ? 1.18 : 1))
+      + (scene.player?.projectileSizeBonus ?? 0) * 0.018;
+    this.sprite.setScale(this.spriteBaseScale).setAlpha(1);
     this.sprite.setDepth(5);
     if (options.tint == null) {
       this.sprite.clearTint();
@@ -117,6 +126,16 @@ export class Projectile {
       this.trail.setScale(1 + pulse * this.trailPulse);
       this.trail.setAlpha(Math.min(1, this.trailBaseAlpha * (1 + pulse * 0.16)));
     }
+    if (this.spritePulseX > 0 || this.spritePulseY > 0 || this.spriteFlickerAlpha > 0) {
+      const phase = (this.scene.time.now / this.spritePulseMs) * Math.PI * 2
+        + this.spritePulsePhase;
+      const pulse = Math.sin(phase);
+      this.sprite.setScale(
+        this.spriteBaseScale * (1 + pulse * this.spritePulseX),
+        this.spriteBaseScale * (1 + pulse * this.spritePulseY)
+      );
+      this.sprite.setAlpha(1 - ((pulse + 1) * 0.5) * this.spriteFlickerAlpha);
+    }
     this.drawLineTrail();
     if (this.life <= 0) {
       this.destroy();
@@ -165,6 +184,7 @@ export class Projectile {
     this.target = null;
     this.hitEnemies.clear();
     this.sprite.setVelocity(0, 0);
+    this.sprite.setAlpha(1);
     this.sprite.disableBody(true, true);
     this.trail.setActive(false).setVisible(false);
     this.lineTrail?.clear().setActive(false).setVisible(false);

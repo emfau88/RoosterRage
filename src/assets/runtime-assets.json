@@ -94,6 +94,15 @@
       "bytes": 594
     },
     {
+      "source": "art-source/projectiles/fire-egg-r3.png",
+      "sourceSha256": "57c270daf5a8bce8f7ddf068bb97c05de58e8585d30ff65828c12c367f035361",
+      "runtime": "src/assets/projectiles/fire-egg-r3.webp",
+      "runtimeSha256": "405f226eaa9796967eab71a9afb9ad1f7e3e0fea30ab32b79b6ad1e1864b0d00",
+      "width": 26,
+      "height": 26,
+      "bytes": 698
+    },
+    {
       "source": "art-source/projectiles/heavy-egg.png",
       "sourceSha256": "5561f0ce3cb3a51fa851bbaa42f4b54bdd98c52ffbc50e8b5c169a21a42d5bc0",
       "runtime": "src/assets/projectiles/heavy-egg.webp",

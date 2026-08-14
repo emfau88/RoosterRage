@@ -28,6 +28,7 @@ import supportChickOrbUrl from '../../assets/companions/support-chick-orb.webp';
 import evoChickSquadronCompanionUrl from '../../assets/companions/evo-chick-squadron-companion.webp';
 import eggUrl from '../../assets/projectiles/egg.webp';
 import fireEggUrl from '../../assets/projectiles/fire-egg.webp';
+import fireEggR3Url from '../../assets/projectiles/fire-egg-r3.webp';
 import heavyEggUrl from '../../assets/projectiles/heavy-egg.webp';
 import stormEggUrl from '../../assets/projectiles/storm-egg.webp';
 import goldenEggUrl from '../../assets/projectiles/golden-egg.webp';
@@ -157,6 +158,7 @@ export function preloadGameAssets(scene) {
   scene.load.image('evo-chick-squadron-companion', evoChickSquadronCompanionUrl);
   scene.load.image('egg', eggUrl);
   scene.load.image('fire-egg', fireEggUrl);
+  scene.load.image('fire-egg-r3', fireEggR3Url);
   scene.load.image('heavy-egg', heavyEggUrl);
   scene.load.image('storm-egg', stormEggUrl);
   scene.load.image('golden-egg', goldenEggUrl);

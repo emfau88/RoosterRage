@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { Projectile } from '../entities/Projectile.js';
+import { getFireEggVisual } from '../data/fireEggVisuals.js';
 import { playEvolutionImpact } from './EvolutionVisuals.js';
 
 const TARGET_ACQUISITION_MARGIN = 0.5;
@@ -43,6 +44,9 @@ export class CombatSystem {
     scene.player.aimAt(baseAngle);
     const primary = scene.player.primaryAttack ?? {};
     const evolution = scene.player.primaryEvolution;
+    const fireEggVisual = !evolution && scene.player.fireEggs
+      ? getFireEggVisual(scene.player.getUpgradeRank('fire-eggs'))
+      : null;
     const source = evolution?.id ?? (scene.player.fireEggs ? 'fire-eggs' : 'base-egg');
     this.primaryAttackSequence += 1;
     const pattern = this.getShotPattern();
@@ -61,7 +65,9 @@ export class CombatSystem {
       );
       const isAce = scene.player.roosterId === 'ace';
       const visualScale = evolution?.projectileScale
-        ?? (primary.scale ?? 1) * (evolution?.scaleMultiplier ?? 1);
+        ?? (primary.scale ?? 1)
+          * (evolution?.scaleMultiplier ?? 1)
+          * (fireEggVisual?.scaleMultiplier ?? 1);
       const lineTrailLength = evolution?.lineTrailLength ?? primary.lineTrailLength ?? 0;
       this.spawnProjectile(angle, shotTarget, shot.laneOffset, {
         damage: Math.round(scene.player.projectileDamage * (evolution?.damageMultiplier ?? 1)),
@@ -70,12 +76,12 @@ export class CombatSystem {
         maxTurnRate: primary.homingTurnRate ?? shot.maxTurnRate ?? 0.08,
         targetOffset: 0,
         laneOffset: shot.laneOffset,
-        texture: evolution?.texture ?? (scene.player.fireEggs ? undefined : primary.texture),
+        texture: evolution?.texture ?? fireEggVisual?.texture ?? primary.texture,
         speed: (primary.speed ?? 520) + scene.player.projectileSpeedBonus + (evolution?.speedBonus ?? 0),
         scale: visualScale * (isAce && forceCritical ? 1.1 : 1),
         tint: isAce && forceCritical
           ? 0xffffff
-          : evolution?.tint ?? (scene.player.fireEggs ? null : primary.tint),
+          : evolution?.tint ?? (fireEggVisual ? null : primary.tint),
         hitRadius: (primary.hitRadius ?? 24) + (evolution?.hitRadiusBonus ?? 0),
         bodyRadius: primary.bodyRadius,
         trailRadius: evolution?.trailRadius ?? primary.trailRadius,
@@ -87,8 +93,8 @@ export class CombatSystem {
         lineTrailLength: lineTrailLength + (isAce && forceCritical && lineTrailLength > 0 ? 6 : 0),
         lineTrailWidth: (evolution?.lineTrailWidth ?? primary.lineTrailWidth ?? 1)
           + (isAce && forceCritical && lineTrailLength > 0 ? 0.5 : 0),
-        lineTrailColor: scene.player.fireEggs
-          ? 0xff6a28
+        lineTrailColor: fireEggVisual
+          ? fireEggVisual.lineTrailColor
           : forceCritical ? 0xfff2a0 : evolution?.lineTrailColor ?? primary.lineTrailColor,
         lineTrailAlpha: Math.min(
           0.2,
@@ -96,6 +102,11 @@ export class CombatSystem {
             + (isAce && forceCritical && lineTrailLength > 0 ? 0.08 : 0)
         ),
         visualRank: evolution?.visualRank ?? primary.visualRank ?? primary.rank,
+        fireVisualRank: fireEggVisual?.fireVisualRank ?? 0,
+        spritePulseX: fireEggVisual?.spritePulseX ?? 0,
+        spritePulseY: fireEggVisual?.spritePulseY ?? 0,
+        spritePulseMs: fireEggVisual?.spritePulseMs ?? 260,
+        spriteFlickerAlpha: fireEggVisual?.spriteFlickerAlpha ?? 0,
         criticalVisual: isAce && forceCritical,
         pierce: evolution ? Math.max(scene.player.projectilePierce, evolution.pierce ?? 0) : undefined,
         ricochet: evolution ? Math.max(scene.player.projectileRicochets, evolution.ricochet ?? 0) : undefined,

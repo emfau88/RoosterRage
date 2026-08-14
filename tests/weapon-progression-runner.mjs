@@ -82,6 +82,9 @@ function validateDefinitions() {
     const evolution = UPGRADE_DEFINITIONS.find((upgrade) => upgrade.id === weapon.evolution);
     assert(evolution?.evolution?.base === weapon.base, `${weapon.id} has no matching EVO recipe.`, evolution);
   }
+  const fireEggs = UPGRADE_DEFINITIONS.find((upgrade) => upgrade.id === 'fire-eggs');
+  assert(fireEggs?.maxRank === 3, 'Fire Eggs must expose all three ranks.', fireEggs);
+  assert(fireEggs.rankDescriptions?.length === 3, 'Fire Eggs does not describe every rank.', fireEggs);
 }
 
 async function openWeapon(browser, serverUrl, weapon) {
@@ -351,6 +354,92 @@ async function testWeapon(browser, serverUrl, weapon) {
   }
 }
 
+async function testFireEggProgression(browser, serverUrl) {
+  const { page, errors } = await openWeapon(browser, serverUrl, { rooster: 'ace' });
+  const expectations = {
+    1: {
+      texture: 'fire-egg', baseScale: 1, pulseX: 0.008, pulseY: 0.024,
+      pulseMs: 270, flicker: 0.018
+    },
+    2: {
+      texture: 'fire-egg', baseScale: 1.12, pulseX: 0.014, pulseY: 0.04,
+      pulseMs: 235, flicker: 0.028
+    },
+    3: {
+      texture: 'fire-egg-r3', baseScale: 1.1, pulseX: 0.02, pulseY: 0.055,
+      pulseMs: 205, flicker: 0.04
+    }
+  };
+  const stages = [];
+  try {
+    for (let rank = 1; rank <= 3; rank += 1) {
+      const applied = await page.evaluate(() => window.__ROOSTER_TEST__.applyUpgradeById('fire-eggs'));
+      assert(applied, `Could not apply Fire Eggs R${rank}.`);
+      await page.evaluate((shotCount) => {
+        const api = window.__ROOSTER_TEST__;
+        api.clearEnemies();
+        api.clearProjectiles();
+        api.movePlayer(700, 450);
+        api.setShotCount(shotCount);
+        api.spawnEnemyType('slime', 1040, 450, {
+          hp: 9999,
+          speed: 0,
+          damage: 0,
+          xpOverride: 0
+        });
+        api.triggerPrimaryAttack(0);
+      }, rank);
+      await page.waitForTimeout(35);
+      const samples = [];
+      for (let sampleIndex = 0; sampleIndex < 5; sampleIndex += 1) {
+        samples.push(await page.evaluate(() => window.__ROOSTER_TEST__.getProjectileSnapshot()
+          .filter((projectile) => projectile.active && projectile.source === 'fire-eggs')));
+        if (sampleIndex < 4) await page.waitForTimeout(20);
+      }
+      const projectiles = samples[0];
+      const expected = expectations[rank];
+      assert(projectiles.length === rank, `Fire Eggs R${rank} has the wrong salvo size.`, {
+        expected: rank,
+        projectiles
+      });
+      assert(projectiles.every((projectile) => (
+        projectile.texture === expected.texture
+        && projectile.fireVisualRank === rank
+        && Math.abs(projectile.spriteBaseScale - expected.baseScale) < 0.001
+        && Math.abs(projectile.spritePulseX - expected.pulseX) < 0.001
+        && Math.abs(projectile.spritePulseY - expected.pulseY) < 0.001
+        && projectile.spritePulseMs === expected.pulseMs
+        && Math.abs(projectile.spriteFlickerAlpha - expected.flicker) < 0.001
+        && projectile.trailVisible === false
+        && projectile.lineTrailVisible === false
+      )), `Fire Eggs R${rank} has the wrong visual profile.`, { expected, projectiles });
+      const firstProjectileScaleSamples = samples
+        .map((sample) => sample[0]?.scaleY)
+        .filter(Number.isFinite);
+      const uniqueScaleSamples = new Set(firstProjectileScaleSamples.map((value) => value.toFixed(4)));
+      const largestStep = Math.max(...firstProjectileScaleSamples.slice(1).map((value, index) => (
+        Math.abs(value - firstProjectileScaleSamples[index])
+      )));
+      assert(uniqueScaleSamples.size >= 3, `Fire Eggs R${rank} does not animate continuously.`, {
+        firstProjectileScaleSamples
+      });
+      assert(largestStep < 0.08, `Fire Eggs R${rank} flicker changes too abruptly.`, {
+        largestStep,
+        firstProjectileScaleSamples
+      });
+      const screenshot = `fire-eggs-r${rank}.png`;
+      await page.screenshot({ path: path.join(artifactDir, screenshot) });
+      const state = await page.evaluate(() => window.__ROOSTER_TEST__.getPlayerStats());
+      assert(state.upgradeRanks['fire-eggs'] === rank, `Fire Eggs R${rank} rank state mismatch.`, state);
+      stages.push({ rank, screenshot, projectiles, scaleSamples: firstProjectileScaleSamples });
+    }
+    assert(errors.length === 0, 'Browser errors while testing Fire Eggs.', errors);
+    return { id: 'fire-eggs', stages };
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   validateDefinitions();
   await fs.mkdir(artifactDir, { recursive: true });
@@ -362,6 +451,7 @@ async function run() {
     for (const weapon of weapons) {
       results.push(await testWeapon(browser, serverState.url, weapon));
     }
+    results.push(await testFireEggProgression(browser, serverState.url));
     const report = { generatedAt: new Date().toISOString(), results };
     await fs.writeFile(path.join(artifactDir, 'report.json'), JSON.stringify(report, null, 2));
     console.log('Weapon progression gate passed.');

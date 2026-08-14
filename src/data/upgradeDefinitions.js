@@ -45,6 +45,11 @@ export const UPGRADE_DEFINITIONS = [
     id: 'fire-eggs',
     name: 'Fire Eggs',
     description: '+10 Schaden pro Ei und feurige Projektile.',
+    rankDescriptions: [
+      'R1: +10 Schaden; kompakte Fire Eggs brennen mit ruhigem, fließendem Flackern.',
+      'R2: insgesamt +20 Schaden; größere Flammen pulsieren sichtbar intensiver.',
+      'R3: insgesamt +30 Schaden; weißglühende Fire Eggs mit kräftiger, flüssiger Flammenbewegung.'
+    ],
     category: 'weapon',
     rarity: 'common',
     maxRank: 3,
