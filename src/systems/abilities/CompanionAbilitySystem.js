@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { OrbitEgg } from '../../entities/OrbitEgg.js';
+import { getOrbitVisualProfile, OrbitEgg } from '../../entities/OrbitEgg.js';
 import { SupportChicken } from '../../entities/SupportChicken.js';
 
 export class CompanionAbilitySystem {
@@ -20,6 +20,40 @@ export class CompanionAbilitySystem {
     for (let index = 0; index < count; index += 1) {
       this.scene.orbitEggs.push(new OrbitEgg(this.scene, index, count, rank, evolved));
     }
+    this.showOrbitUpgradeFx(rank, evolved);
+  }
+
+  showOrbitUpgradeFx(rank, evolved) {
+    const profile = getOrbitVisualProfile(rank, evolved);
+    profile.radii.forEach((radius, index) => {
+      const ring = this.scene.add.circle(
+        this.scene.player.sprite.x,
+        this.scene.player.sprite.y,
+        18,
+        profile.color,
+        0.06
+      ).setStrokeStyle(evolved ? 4 : 1.5 + rank * 0.45, profile.color, evolved ? 0.9 : 0.72)
+        .setDepth(8)
+        .setAlpha(0);
+      this.scene.tweens.addCounter({
+        from: 18,
+        to: radius,
+        duration: evolved ? 440 : 300 + rank * 28,
+        delay: index * 70,
+        ease: 'Quad.Out',
+        onUpdate: (tween) => {
+          const currentRadius = tween.getValue();
+          const progress = (currentRadius - 18) / Math.max(1, radius - 18);
+          ring.setRadius(currentRadius).setAlpha(Math.min(0.82, progress * 2.4));
+        },
+        onComplete: () => this.scene.tweens.add({
+          targets: ring,
+          alpha: 0,
+          duration: 130,
+          onComplete: () => ring.destroy()
+        })
+      });
+    });
   }
 
   setSupportChickenRank(rank) {

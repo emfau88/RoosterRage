@@ -201,10 +201,10 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Orbit Eggs',
     description: 'Ein Ei kreist um den Hahn und verursacht 19 Kontaktschaden.',
     rankDescriptions: [
-      '1 Orbit-Ei mit 19 Kontaktschaden.',
-      '2 Orbit-Eier mit je 24 Kontaktschaden.',
-      '3 Orbit-Eier mit Shell-Trail und je 29 Kontaktschaden.',
-      '4 Orbit-Eier wechseln zwischen innerer und äußerer Umlaufbahn.'
+      '1 größeres Orbit-Ei kreist mit 80er Radius und verursacht 19 Kontaktschaden.',
+      '2 größere Orbit-Eier kreisen mit 90er Radius und verursachen je 24 Kontaktschaden.',
+      '3 goldleuchtende Orbit-Eier kreisen mit 100er Radius und verursachen je 29 Kontaktschaden.',
+      '4 goldene Orbit-Eier kreisen paarweise auf 104er und 130er Umlaufbahnen.'
     ],
     category: 'orbit',
     rarity: 'rare',
@@ -645,7 +645,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-shell-halo',
     name: 'Shell Halo',
-    description: 'Sechs geladene Orbit-Eier springen nach Kontakt auf ein zweites Ziel.',
+    description: 'Sechs geladene Orbit-Eier atmen zwischen zwei großen Umlaufbahnen und springen auf ein zweites Ziel.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,

@@ -252,6 +252,24 @@ export function installTestApi(scene) {
       supportTextures: scene.supportChickens.map((chick) => chick.sprite.texture?.key),
       voidZoneTextures: scene.voidZones.map((zone) => zone.portal.texture?.key)
     }),
+    getOrbitVisualState: () => scene.orbitEggs.map((egg) => ({
+      index: egg.index,
+      rank: egg.rank,
+      evolved: egg.evolved,
+      texture: egg.sprite.texture?.key,
+      ringIndex: egg.ringIndex,
+      baseRadius: egg.baseRadius,
+      radius: egg.radius,
+      scale: egg.profile.scale,
+      displayWidth: egg.sprite.displayWidth,
+      glowRadius: egg.glow.radius,
+      auraRadius: egg.aura.radius,
+      breathSamples: egg.evolved
+        ? [0, 1200, 3200, 4400, 8000].map((offset) => (
+          egg.getBreathOffset(egg.breathStartedAt + offset)
+        ))
+        : []
+    })),
     triggerPrimaryAttack: () => {
       scene.lastShotAt = -Infinity;
       scene.combat.autoShoot(scene.time.now);

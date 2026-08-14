@@ -144,10 +144,21 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   await page.waitForTimeout(visualDelay);
   const projectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getProjectileSnapshot()
     .filter((projectile) => projectile.active));
+  const orbitVisuals = weapon.id === 'orbit-eggs'
+    ? await page.evaluate(() => window.__ROOSTER_TEST__.getOrbitVisualState())
+    : [];
   const screenshot = `${weapon.id}-${stage}.png`;
-  await page.screenshot({ path: path.join(artifactDir, screenshot) });
+  let upgradeScreenshot;
   let impactScreenshot;
   let remainingDelay = 1050 - visualDelay;
+  if (weapon.id === 'orbit-eggs') {
+    upgradeScreenshot = `${weapon.id}-${stage}-upgrade.png`;
+    await page.screenshot({ path: path.join(artifactDir, upgradeScreenshot) });
+    const steadyStateDelay = 520;
+    await page.waitForTimeout(steadyStateDelay);
+    remainingDelay -= steadyStateDelay;
+  }
+  await page.screenshot({ path: path.join(artifactDir, screenshot) });
   if (weapon.id === 'golden-egg') {
     const impactDelay = 285;
     await page.waitForTimeout(impactDelay);
@@ -203,18 +214,64 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       { expected, matchingProjectiles }
     );
   }
+  if (weapon.id === 'orbit-eggs') {
+    const visualExpectations = {
+      r1: { count: 1, texture: 'egg', radii: [80], perRing: [1], scale: 1.25 },
+      r2: { count: 2, texture: 'egg', radii: [90], perRing: [2], scale: 1.34 },
+      r3: { count: 3, texture: 'egg', radii: [100], perRing: [3], scale: 1.43 },
+      r4: { count: 4, texture: 'egg', radii: [104, 130], perRing: [2, 2], scale: 1.54 },
+      evo: {
+        count: 6,
+        texture: 'evo-shell-halo-projectile',
+        radii: [116, 146],
+        perRing: [3, 3],
+        scale: 1.08,
+        breathAmount: 16
+      }
+    };
+    const expected = visualExpectations[stage];
+    assert(orbitVisuals.length === expected.count, `Orbit Eggs ${stage} has the wrong count.`, {
+      expected,
+      orbitVisuals
+    });
+    expected.radii.forEach((radius, ringIndex) => {
+      const ring = orbitVisuals.filter((egg) => egg.ringIndex === ringIndex);
+      assert(ring.length === expected.perRing[ringIndex], `Orbit Eggs ${stage} has the wrong ring split.`, {
+        expected,
+        ringIndex,
+        orbitVisuals
+      });
+      assert(ring.every((egg) => (
+        egg.texture === expected.texture
+        && egg.baseRadius === radius
+        && Math.abs(egg.scale - expected.scale) < 0.001
+        && egg.radius >= radius - 0.01
+        && egg.radius <= radius + (expected.breathAmount ?? 0) + 0.01
+      )), `Orbit Eggs ${stage} has the wrong visual profile.`, { expected, ring });
+    });
+    if (stage === 'evo') {
+      assert(
+        JSON.stringify(orbitVisuals[0].breathSamples) === JSON.stringify([0, 16, 16, 0, 0]),
+        'Shell Halo did not expand, hold, contract and rest at the expected radii.',
+        orbitVisuals[0]
+      );
+    }
+  }
   return {
     stage,
     rank: entry.rank,
     damage,
     screenshot,
+    upgradeScreenshot,
     impactScreenshot,
     ability: weapon.primary ? after.player.primary : after.abilities[
       weapon.id === 'orbit-eggs' ? 'orbitEggs'
         : weapon.id === 'support-chick' ? 'supportChick'
           : weapon.id.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())
     ],
-    visuals: weapon.id === 'golden-egg' ? projectiles : undefined,
+    visuals: weapon.id === 'golden-egg'
+      ? projectiles
+      : weapon.id === 'orbit-eggs' ? orbitVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
   };
 }
@@ -232,7 +289,7 @@ async function testWeapon(browser, serverUrl, weapon) {
     for (let rank = 2; rank <= weapon.normalRanks; rank += 1) {
       const applied = await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.id);
       assert(applied, `Could not advance ${weapon.id} to rank ${rank}.`, { rank });
-      if (weapon.id === 'golden-egg' && rank < weapon.normalRanks) {
+      if (['golden-egg', 'orbit-eggs'].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
       }
     }
