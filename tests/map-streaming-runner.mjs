@@ -74,26 +74,8 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
   try {
     const initial = await page.evaluate(() => window.__ROOSTER_TEST__.getArenaState());
     validateChunkCoverage(initial, expectedPool);
-    if (arenaId === 'open-yard') {
-      const openingOrchard = initial.activeChunks.find((chunk) => chunk.landmark === 'landmark-orchard');
-      const collider = openingOrchard?.landmarkCollider;
-      const shotLane = {
-        left: 65536,
-        right: 65796,
-        top: 65500,
-        bottom: 65572
-      };
-      const overlapsOpeningShotLane = collider
-        && collider.x + collider.width / 2 >= shotLane.left
-        && collider.x - collider.width / 2 <= shotLane.right
-        && collider.y + collider.height / 2 >= shotLane.top
-        && collider.y - collider.height / 2 <= shotLane.bottom;
-      assert(openingOrchard && collider && !overlapsOpeningShotLane,
-        'The guaranteed opening orchard blocks the initial eastbound combat lane.', {
-          openingOrchard,
-          shotLane
-        });
-    }
+    assert(!initial.activeChunks.some((chunk) => chunk.landmark === 'landmark-orchard'),
+      'Harvest Yard still contains the removed combat-obscuring orchard landmark.', initial.activeChunks);
     const snapshots = [];
     const seenLandmarks = new Set(initial.activeChunks.map((chunk) => chunk.landmark).filter(Boolean));
     for (const route of routes) {
@@ -129,7 +111,7 @@ async function traverse(browser, serverUrl, arenaId, routes, expectedPool) {
     assert(finalState.recycledChunks >= expectedPool,
       'Traversal did not recycle a meaningful number of chunks.', finalState);
     const expectedThemes = arenaId === 'open-yard'
-      ? ['landmark-orchard']
+      ? ['landmark-barn', 'landmark-well']
       : ['landmark-silo', 'landmark-feed-trough'];
     assert(expectedThemes.every((texture) => seenLandmarks.has(texture)),
       'Traversal did not exercise every new themed landmark.', {

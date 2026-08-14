@@ -235,34 +235,30 @@ export class ArenaSystem {
     record.key = key;
     record.chunkX = chunkX;
     record.chunkY = chunkY;
-    const startChunkX = Math.floor((this.streaming.start.x - world.x) / width);
-    const startChunkY = Math.floor((this.streaming.start.y - world.y) / height);
-    const isStartChunk = chunkX === startChunkX && chunkY === startChunkY;
     const groundTexture = this.streaming.groundTexture;
     record.ground.setTexture(groundTexture)
       .setPosition(centerX, centerY)
-      .setFlipX(this.id === 'open-yard' && Boolean(hash & 1))
-      .setFlipY(Boolean(hash & 2))
+      .setFlip(false, false)
       .setDisplaySize(width + 2, height + 2);
     if (this.id === 'vertical-run') {
       const world = this.playableWorldBounds;
       const edgeWidth = 300;
       record.edgeLeft.setPosition(world.x - edgeWidth / 2, centerY)
-        .setFlipY(Boolean(hash & 4))
+        .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
       record.edgeRight.setPosition(world.x + world.width + edgeWidth / 2, centerY)
-        .setFlipY(Boolean(hash & 8))
+        .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
     } else {
       record.edgeLeft.setVisible(false);
       record.edgeRight.setVisible(false);
     }
-    this.configureLandmark(record, centerX, centerY, hash, isStartChunk);
+    this.configureLandmark(record, centerX, centerY, hash);
     this.configureChunkObstacles(record, centerX, centerY, hash);
   }
 
-  configureLandmark(record, centerX, centerY, hash, isStartChunk = false) {
-    const landmarkConfig = this.getLandmarkConfig(hash, isStartChunk);
+  configureLandmark(record, centerX, centerY, hash) {
+    const landmarkConfig = this.getLandmarkConfig(hash);
     if (!landmarkConfig) {
       record.landmark.setVisible(false);
       this.disableObstacle(record.landmarkCollider);
@@ -271,10 +267,7 @@ export class ArenaSystem {
     const { texture, size, kind, colliderWidth, colliderHeight, colliderOffsetY } = landmarkConfig;
     const laneOffset = this.id === 'vertical-run' ? 255 : 0;
     const offsetX = laneOffset || ((hash & 1) ? -235 : 235);
-    // Keep the opening combat lane clear. The guaranteed orchard remains visible
-    // near the player, but its solid trunk footprint must not intercept the first
-    // eastbound primary shot (especially Artillery's slower Blast Shell).
-    const offsetY = isStartChunk ? -150 : ((hash >>> 3) % 260) - 130;
+    const offsetY = ((hash >>> 3) % 260) - 130;
     record.landmark.setTexture(texture)
       .setPosition(centerX + offsetX, centerY + offsetY)
       .setDisplaySize(size, size)
@@ -292,21 +285,15 @@ export class ArenaSystem {
     });
   }
 
-  getLandmarkConfig(hash, isStartChunk = false) {
+  getLandmarkConfig(hash) {
     if (this.id === 'open-yard') {
-      if (isStartChunk || hash % 9 === 0) {
-        return {
-          texture: 'landmark-orchard', size: 236, kind: 'orchard',
-          colliderWidth: 178, colliderHeight: 92, colliderOffsetY: 42
-        };
-      }
-      if (hash % 11 === 0) {
+      if (hash % 23 === 0) {
         return {
           texture: 'landmark-barn', size: 220, kind: 'barn',
           colliderWidth: 154, colliderHeight: 76, colliderOffsetY: 45
         };
       }
-      if (hash % 7 === 0) {
+      if (hash % 17 === 0) {
         return {
           texture: 'landmark-well', size: 128, kind: 'well',
           colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18

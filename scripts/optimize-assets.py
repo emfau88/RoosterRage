@@ -58,7 +58,6 @@ RUNTIME_IMAGES = (
     "map/arena-feed-alley-right.png",
     "map/landmark-barn.png",
     "map/landmark-well.png",
-    "map/landmark-orchard.png",
     "map/landmark-silo.png",
     "map/landmark-feed-trough.png",
     "map/coop-square-ground.png",

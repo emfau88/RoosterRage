@@ -88,7 +88,6 @@ def main():
         )
     with Image.open(args.props) as source:
         sheet = source.convert("RGBA")
-        crop_prop(sheet, 0.00, 0.405, "landmark-orchard.png")
         crop_prop(sheet, 0.405, 0.685, "landmark-silo.png")
         crop_prop(sheet, 0.685, 1.00, "landmark-feed-trough.png")
 

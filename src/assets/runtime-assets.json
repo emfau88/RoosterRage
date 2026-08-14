@@ -338,12 +338,12 @@
     },
     {
       "source": "art-source/map/arena-ground-farm.png",
-      "sourceSha256": "abbcf8544da8846d0cadc40412fd3194ac15b52da1207420bb294881985357ea",
+      "sourceSha256": "9e9b792f58a42562807cd1fc85bcd2c18e9c57cd9e3162c3c2d7786bdbf42137",
       "runtime": "src/assets/map/arena-ground-farm.webp",
-      "runtimeSha256": "55ef40f8d0617013052104d021778a4595f9f684555bb878a18de5fc31259fbd",
+      "runtimeSha256": "f4d91860d159eade2707155a4d04a70137432afe8c9b894a18cc519169a1000e",
       "width": 700,
       "height": 700,
-      "bytes": 101722
+      "bytes": 72032
     },
     {
       "source": "art-source/map/arena-ground-road.png",
@@ -389,15 +389,6 @@
       "width": 1254,
       "height": 1254,
       "bytes": 91002
-    },
-    {
-      "source": "art-source/map/landmark-orchard.png",
-      "sourceSha256": "00dd9394054c4cc677de5a648dcd425c694ec7cbb5c607db4ffedec7ebc9ab8f",
-      "runtime": "src/assets/map/landmark-orchard.webp",
-      "runtimeSha256": "b5747da63ffafa650082c1291e441cff808e8e9fadc076279126c24ae6d2421c",
-      "width": 288,
-      "height": 256,
-      "bytes": 23704
     },
     {
       "source": "art-source/map/landmark-silo.png",

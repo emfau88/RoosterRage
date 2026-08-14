@@ -73,7 +73,6 @@ import arenaFeedAlleyLeftUrl from '../../assets/map/arena-feed-alley-left.webp';
 import arenaFeedAlleyRightUrl from '../../assets/map/arena-feed-alley-right.webp';
 import landmarkBarnUrl from '../../assets/map/landmark-barn.webp';
 import landmarkWellUrl from '../../assets/map/landmark-well.webp';
-import landmarkOrchardUrl from '../../assets/map/landmark-orchard.webp';
 import landmarkSiloUrl from '../../assets/map/landmark-silo.webp';
 import landmarkFeedTroughUrl from '../../assets/map/landmark-feed-trough.webp';
 import coopSquareGroundUrl from '../../assets/map/coop-square-ground.webp';
@@ -200,7 +199,6 @@ export function preloadGameAssets(scene) {
   scene.load.image('arena-feed-alley-right', arenaFeedAlleyRightUrl);
   scene.load.image('landmark-barn', landmarkBarnUrl);
   scene.load.image('landmark-well', landmarkWellUrl);
-  scene.load.image('landmark-orchard', landmarkOrchardUrl);
   scene.load.image('landmark-silo', landmarkSiloUrl);
   scene.load.image('landmark-feed-trough', landmarkFeedTroughUrl);
   scene.load.image('coop-square-ground', coopSquareGroundUrl);
