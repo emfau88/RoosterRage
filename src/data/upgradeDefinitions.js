@@ -1,3 +1,5 @@
+import { applyTargetEggVisual } from './targetEggVisuals.js';
+
 export const UPGRADE_DEFINITIONS = [
   {
     id: 'heal',
@@ -58,9 +60,9 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Target Egg',
     description: 'Entwickelt Aces Startwaffe von R1 bis R4.',
     rankDescriptions: [
-      'R2 Twin Lock: Jeder 2. Angriff markiert und feuert ein zweites Ziel-Ei.',
-      'R3 Deadeye Shell: Jeder vierte Angriff ist ein Krit mit Pierce und zusätzlichem Ricochet.',
-      'R4 Hunter Array: Dauerhafte Doppelsalve, stärkere Zielerfassung und goldene Trails.'
+      'R2 Twin Lock: Größere, hellere Ziel-Eier; jeder 2. Angriff feuert eine Zwillingssalve.',
+      'R3 Deadeye Shell: Größere Gold-Eier; jeder 4. Angriff wird zum hellen Pierce-Ricochet-Krit.',
+      'R4 Hunter Array: Dauerhafte Doppelsalve aus großen tiefgoldenen Eiern mit dünner Goldfährte.'
     ],
     category: 'weapon',
     rarity: 'uncommon',
@@ -76,6 +78,7 @@ export const UPGRADE_DEFINITIONS = [
     condition: (player) => player.roosterId === 'ace',
     apply: (player, _scene, rank) => {
       player.primaryAttack.rank = rank + 1;
+      applyTargetEggVisual(player.primaryAttack, rank + 1);
       if (rank === 1) {
         player.primaryAttack.twinCadence = 2;
         player.primaryAttack.homingTurnRate = (player.primaryAttack.homingTurnRate ?? 0.08) + 0.02;
@@ -86,9 +89,6 @@ export const UPGRADE_DEFINITIONS = [
       } else {
         player.primaryAttack.minimumShots = 2;
         player.primaryAttack.homingTurnRate = (player.primaryAttack.homingTurnRate ?? 0.08) + 0.025;
-        player.primaryAttack.trailRadius = Math.max(13, player.primaryAttack.trailRadius ?? 8);
-        player.primaryAttack.trailAlpha = Math.max(0.38, player.primaryAttack.trailAlpha ?? 0.2);
-        player.primaryAttack.trailColor = 0xffd35c;
       }
     }
   },

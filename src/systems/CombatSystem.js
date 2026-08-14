@@ -55,6 +55,14 @@ export class CombatSystem {
         shotTarget.sprite.x,
         shotTarget.sprite.y
       );
+      const forceCritical = Boolean(
+        primary.deadeyeCadence
+        && this.primaryAttackSequence % primary.deadeyeCadence === 0
+      );
+      const isAce = scene.player.roosterId === 'ace';
+      const visualScale = evolution?.projectileScale
+        ?? (primary.scale ?? 1) * (evolution?.scaleMultiplier ?? 1);
+      const lineTrailLength = evolution?.lineTrailLength ?? primary.lineTrailLength ?? 0;
       this.spawnProjectile(angle, shotTarget, shot.laneOffset, {
         damage: Math.round(scene.player.projectileDamage * (evolution?.damageMultiplier ?? 1)),
         source,
@@ -64,12 +72,31 @@ export class CombatSystem {
         laneOffset: shot.laneOffset,
         texture: evolution?.texture ?? (scene.player.fireEggs ? undefined : primary.texture),
         speed: (primary.speed ?? 520) + scene.player.projectileSpeedBonus + (evolution?.speedBonus ?? 0),
-        scale: (primary.scale ?? 1) * (evolution?.scaleMultiplier ?? 1),
+        scale: visualScale * (isAce && forceCritical ? 1.1 : 1),
+        tint: isAce && forceCritical
+          ? 0xffffff
+          : evolution?.tint ?? (scene.player.fireEggs ? null : primary.tint),
         hitRadius: (primary.hitRadius ?? 24) + (evolution?.hitRadiusBonus ?? 0),
         bodyRadius: primary.bodyRadius,
-        trailRadius: primary.trailRadius,
+        trailRadius: evolution?.trailRadius ?? primary.trailRadius,
         trailColor: evolution?.trailColor ?? (scene.player.fireEggs ? 0xff6a28 : primary.trailColor),
         trailAlpha: evolution?.trailAlpha ?? primary.trailAlpha,
+        trailPulse: evolution?.trailPulse ?? primary.trailPulse,
+        trailPulseMs: evolution?.trailPulseMs ?? primary.trailPulseMs,
+        trailVisible: evolution?.trailVisible ?? primary.trailVisible,
+        lineTrailLength: lineTrailLength + (isAce && forceCritical && lineTrailLength > 0 ? 6 : 0),
+        lineTrailWidth: (evolution?.lineTrailWidth ?? primary.lineTrailWidth ?? 1)
+          + (isAce && forceCritical && lineTrailLength > 0 ? 0.5 : 0),
+        lineTrailColor: scene.player.fireEggs
+          ? 0xff6a28
+          : forceCritical ? 0xfff2a0 : evolution?.lineTrailColor ?? primary.lineTrailColor,
+        lineTrailAlpha: Math.min(
+          0.2,
+          (evolution?.lineTrailAlpha ?? primary.lineTrailAlpha ?? 0)
+            + (isAce && forceCritical && lineTrailLength > 0 ? 0.08 : 0)
+        ),
+        visualRank: evolution?.visualRank ?? primary.visualRank ?? primary.rank,
+        criticalVisual: isAce && forceCritical,
         pierce: evolution ? Math.max(scene.player.projectilePierce, evolution.pierce ?? 0) : undefined,
         ricochet: evolution ? Math.max(scene.player.projectileRicochets, evolution.ricochet ?? 0) : undefined,
         splashRadius: (primary.splashRadius ?? 0) * (evolution?.splashRadiusMultiplier ?? 1),
@@ -79,15 +106,14 @@ export class CombatSystem {
         shrapnelDamageRatio: primary.shrapnelDamageRatio ?? 0,
         criticalPierceBonus: primary.criticalPierceBonus ?? 0,
         criticalRicochetBonus: primary.criticalRicochetBonus ?? 0,
-        forceCritical: Boolean(
-          primary.deadeyeCadence
-          && this.primaryAttackSequence % primary.deadeyeCadence === 0
-        ),
+        forceCritical,
         chainCount: (primary.chainCount ?? 0) + (evolution?.chainCountBonus ?? 0),
         chainRadius: (primary.chainRadius ?? 0) + (evolution?.chainRadiusBonus ?? 0),
         chainDamageRatio: evolution?.chainDamageRatio ?? primary.chainDamageRatio
       });
-      scene.showShotFeedback(angle, shot.laneOffset);
+      if (evolution?.muzzleFlash ?? primary.muzzleFlash ?? true) {
+        scene.showShotFeedback(angle, shot.laneOffset);
+      }
     });
     scene.lastShotAt = time;
     scene.audio.play(`egg-launch-${scene.player.roosterId}`);

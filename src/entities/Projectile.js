@@ -44,10 +44,16 @@ export class Projectile {
     this.chainRadius = options.chainRadius ?? 0;
     this.chainDamageRatio = options.chainDamageRatio ?? 0;
     this.visualRank = options.visualRank ?? 0;
+    this.criticalVisual = options.criticalVisual ?? false;
     this.trailBaseAlpha = options.trailAlpha ?? 0.18;
     this.trailPulse = options.trailPulse ?? 0;
     this.trailPulseMs = options.trailPulseMs ?? 320;
     this.trailPhase = options.trailPhase ?? 0;
+    this.trailVisible = options.trailVisible ?? true;
+    this.lineTrailLength = options.lineTrailLength ?? 0;
+    this.lineTrailWidth = options.lineTrailWidth ?? 1;
+    this.lineTrailColor = options.lineTrailColor ?? 0xffd35c;
+    this.lineTrailAlpha = options.lineTrailAlpha ?? 0;
     this.hitEnemies.clear();
     this.hitRadius = (options.hitRadius ?? 24) + (scene.player?.projectileSizeBonus ?? 0);
     this.destroyed = false;
@@ -58,11 +64,27 @@ export class Projectile {
     this.sprite.setRotation(angle);
     this.sprite.setScale((options.scale ?? (isFireEgg ? 1.18 : 1)) + (scene.player?.projectileSizeBonus ?? 0) * 0.018);
     this.sprite.setDepth(5);
-    this.sprite.clearTint();
+    if (options.tint == null) {
+      this.sprite.clearTint();
+    } else {
+      this.sprite.setTint(options.tint);
+    }
     this.trail.setPosition(x, y);
     this.trail.setRadius(options.trailRadius ?? (isFireEgg ? 10 : 8));
     this.trail.setFillStyle(options.trailColor ?? (isFireEgg ? 0xff6a28 : 0xfffbef), this.trailBaseAlpha);
-    this.trail.setScale(1).setAlpha(this.trailBaseAlpha).setVisible(true).setActive(true);
+    this.trail.setBlendMode(Phaser.BlendModes.NORMAL)
+      .setRotation(0)
+      .setScale(1)
+      .setAlpha(this.trailBaseAlpha)
+      .setVisible(this.trailVisible)
+      .setActive(this.trailVisible);
+    if (this.lineTrailLength > 0) {
+      this.lineTrail ??= scene.add.graphics().setDepth(4).setBlendMode(Phaser.BlendModes.ADD);
+      this.lineTrail.setVisible(true).setActive(true);
+      this.drawLineTrail();
+    } else if (this.lineTrail) {
+      this.lineTrail.clear().setVisible(false).setActive(false);
+    }
     this.setVelocity(angle);
     return this;
   }
@@ -86,13 +108,16 @@ export class Projectile {
       this.sprite.rotation = this.currentAngle;
       this.setVelocity(this.currentAngle);
     }
-    this.trail.setPosition(this.sprite.x, this.sprite.y);
-    if (this.trailPulse > 0) {
+    if (this.trailVisible) {
+      this.trail.setPosition(this.sprite.x, this.sprite.y);
+    }
+    if (this.trailVisible && this.trailPulse > 0) {
       const phase = (this.scene.time.now / this.trailPulseMs) * Math.PI * 2 + this.trailPhase;
       const pulse = Math.sin(phase);
       this.trail.setScale(1 + pulse * this.trailPulse);
       this.trail.setAlpha(Math.min(1, this.trailBaseAlpha * (1 + pulse * 0.16)));
     }
+    this.drawLineTrail();
     if (this.life <= 0) {
       this.destroy();
     }
@@ -103,6 +128,29 @@ export class Projectile {
       return;
     }
     this.scene.physics.velocityFromRotation(angle, this.speed, this.sprite.body.velocity);
+  }
+
+  drawLineTrail() {
+    if (!this.lineTrail?.active || this.lineTrailLength <= 0) {
+      return;
+    }
+    const rearOffset = this.sprite.displayWidth * 0.22;
+    const cos = Math.cos(this.currentAngle);
+    const sin = Math.sin(this.currentAngle);
+    const distances = [rearOffset, rearOffset + this.lineTrailLength * 0.44,
+      rearOffset + this.lineTrailLength * 0.76, rearOffset + this.lineTrailLength];
+    const widths = [this.lineTrailWidth, this.lineTrailWidth * 0.72, this.lineTrailWidth * 0.45];
+    const alphas = [this.lineTrailAlpha, this.lineTrailAlpha * 0.55, this.lineTrailAlpha * 0.24];
+    this.lineTrail.clear();
+    for (let index = 0; index < 3; index += 1) {
+      this.lineTrail.lineStyle(widths[index], this.lineTrailColor, alphas[index]);
+      this.lineTrail.lineBetween(
+        this.sprite.x - cos * distances[index],
+        this.sprite.y - sin * distances[index],
+        this.sprite.x - cos * distances[index + 1],
+        this.sprite.y - sin * distances[index + 1]
+      );
+    }
   }
 
   destroy() {
@@ -119,10 +167,12 @@ export class Projectile {
     this.sprite.setVelocity(0, 0);
     this.sprite.disableBody(true, true);
     this.trail.setActive(false).setVisible(false);
+    this.lineTrail?.clear().setActive(false).setVisible(false);
   }
 
   dispose() {
     this.trail.destroy();
+    this.lineTrail?.destroy();
     this.sprite.destroy();
   }
 }

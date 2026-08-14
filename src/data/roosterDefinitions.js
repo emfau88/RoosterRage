@@ -1,3 +1,5 @@
+import { SUNSHOT_ARRAY_VISUAL, TARGET_EGG_VISUALS } from './targetEggVisuals.js';
+
 export const ROOSTER_DEFINITIONS = [
   {
     id: 'ace',
@@ -18,8 +20,7 @@ export const ROOSTER_DEFINITIONS = [
       name: 'Target Egg',
       speed: 520,
       homingTurnRate: 0.1,
-      trailColor: 0xfffbef,
-      trailAlpha: 0.2
+      ...TARGET_EGG_VISUALS[1]
     },
     primaryEvolution: {
       id: 'evo-sunshot-array',
@@ -35,7 +36,8 @@ export const ROOSTER_DEFINITIONS = [
       hitRadiusBonus: 5,
       scaleMultiplier: 1.08,
       trailColor: 0xffe16a,
-      trailAlpha: 0.42
+      trailAlpha: 0.42,
+      ...SUNSHOT_ARRAY_VISUAL
     },
     classPassives: ['ace-deadeye-drill', 'ace-guidance-fins'],
     archetypes: [

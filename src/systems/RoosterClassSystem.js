@@ -60,15 +60,17 @@ export class RoosterClassSystem {
       return false;
     }
     this.scene.player.primaryEvolution = { ...evolution };
-    const halo = this.scene.add.circle(
-      this.scene.player.sprite.x,
-      this.scene.player.sprite.y,
-      35,
-      evolution.trailColor,
-      0.08
-    ).setStrokeStyle(3, evolution.trailColor, 0.84).setDepth(7);
-    halo.markerType = 'primary-evolution';
-    this.markers.push(halo);
+    if (this.selected.id !== 'ace') {
+      const halo = this.scene.add.circle(
+        this.scene.player.sprite.x,
+        this.scene.player.sprite.y,
+        35,
+        evolution.trailColor,
+        0.08
+      ).setStrokeStyle(3, evolution.trailColor, 0.84).setDepth(7);
+      halo.markerType = 'primary-evolution';
+      this.markers.push(halo);
+    }
     return true;
   }
 

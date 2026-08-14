@@ -270,7 +270,10 @@ export function installTestApi(scene) {
         ))
         : []
     })),
-    triggerPrimaryAttack: () => {
+    triggerPrimaryAttack: (sequence = null) => {
+      if (Number.isFinite(sequence)) {
+        scene.combat.primaryAttackSequence = sequence;
+      }
       scene.lastShotAt = -Infinity;
       scene.combat.autoShoot(scene.time.now);
       return scene.projectiles.length;
@@ -507,8 +510,15 @@ export function installTestApi(scene) {
       displayWidth: projectile.sprite.displayWidth,
       source: projectile.source,
       visualRank: projectile.visualRank,
+      criticalVisual: projectile.criticalVisual,
+      tint: projectile.sprite.tintTopLeft,
       trailRadius: projectile.trail.radius,
       trailAlpha: projectile.trail.alpha,
+      trailVisible: projectile.trail.visible,
+      lineTrailLength: projectile.lineTrailLength,
+      lineTrailWidth: projectile.lineTrailWidth,
+      lineTrailAlpha: projectile.lineTrailAlpha,
+      lineTrailVisible: projectile.lineTrail?.visible ?? false,
       splashRadius: projectile.splashRadius,
       secondaryBlastRatio: projectile.secondaryBlastRatio,
       chainRemaining: projectile.chainRemaining,
