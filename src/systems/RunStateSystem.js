@@ -25,6 +25,7 @@ export class RunStateSystem {
       definitions,
       {
         ...this.scene.meta.getHubState(definitions),
+        standardArenaId: this.scene.challenge.requestedArenaId,
         analytics: this.scene.productAnalytics.getState()
       },
       (roosterId, cosmeticId, challengeId) => {
