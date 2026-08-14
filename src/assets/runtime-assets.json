@@ -121,6 +121,33 @@
       "bytes": 824
     },
     {
+      "source": "art-source/projectiles/golden-egg-r2.png",
+      "sourceSha256": "e66e93461c48e148e45be7bed69daaafc671791e3ff3f3bfb0a5a7aad08a7c11",
+      "runtime": "src/assets/projectiles/golden-egg-r2.webp",
+      "runtimeSha256": "bcc5dde9f31a92b3db4c35e97828858aa149d5b5d9e7829035ca74736e85f88d",
+      "width": 34,
+      "height": 34,
+      "bytes": 1036
+    },
+    {
+      "source": "art-source/projectiles/golden-egg-r3.png",
+      "sourceSha256": "3ceb63ce3958d4da3aacb4351f60534d7291e128572e06ba8de4c247b54a977b",
+      "runtime": "src/assets/projectiles/golden-egg-r3.webp",
+      "runtimeSha256": "75341cb1e2b8864622cb61d7114e6dfb36daa06d48b97d0c8a0d74710598fc0c",
+      "width": 36,
+      "height": 36,
+      "bytes": 1250
+    },
+    {
+      "source": "art-source/projectiles/golden-egg-r4.png",
+      "sourceSha256": "12478fd4eb69b9018c3a0469ffb628e039e801e44e3c8dd80ceac33e2ecd8240",
+      "runtime": "src/assets/projectiles/golden-egg-r4.webp",
+      "runtimeSha256": "1fadd9cf4bc365f9ed682f901f19ef133843487b29de25682f0246958cc43d13",
+      "width": 40,
+      "height": 40,
+      "bytes": 1182
+    },
+    {
       "source": "art-source/projectiles/molotov-egg.png",
       "sourceSha256": "7bc598e7adb80ce70dca4830eb03c17dd057541b8eac58a0271a72825a0b148f",
       "runtime": "src/assets/projectiles/molotov-egg.webp",

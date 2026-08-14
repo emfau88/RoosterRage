@@ -187,7 +187,7 @@ export const UPGRADE_DEFINITIONS = [
       '60 Schaden, 3 Durchschläge, 4,55 s Abklingzeit.',
       'R2: größeres Ei, breiterer Treffer und stärkere Goldspur.',
       'R3: Solar-Sparks springen beim Durchschlag auf nahe Gegner.',
-      'R4: zwei Golden Eggs starten als kurze versetzte Salve.'
+      'R4: zwei Golden Eggs starten versetzt auf verschiedene Ziele.'
     ],
     category: 'active',
     rarity: 'rare',

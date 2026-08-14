@@ -317,6 +317,7 @@ export class CombatSystem {
   }
 
   applyPrimaryImpact(projectile, hitEnemy, damage, x, y) {
+    this.showGoldenEggImpact(projectile, x, y);
     if (projectile.splashRadius > 0 && projectile.splashDamageRatio > 0) {
       const splashDamage = Math.max(1, Math.round(damage * projectile.splashDamageRatio));
       const ring = this.scene.add.circle(x, y, projectile.splashRadius, 0xff6a28, 0.12)
@@ -432,10 +433,15 @@ export class CombatSystem {
       const targetX = nextTarget.sprite.x;
       const targetY = nextTarget.sprite.y;
       projectile.hitEnemies.add(nextTarget.id);
+      const solarChain = projectile.source === 'golden-egg';
       const bolt = this.scene.add.graphics().setDepth(12);
-      bolt.lineStyle(5, 0xeefcff, 0.78);
+      bolt.lineStyle(solarChain ? 6 : 5, solarChain ? 0xfff3b0 : 0xeefcff, 0.78);
       bolt.lineBetween(originX, originY, targetX, targetY);
-      bolt.lineStyle(2, projectile.source === 'evo-tempest-crown' ? 0xcaa8ff : 0x5ad7ff, 1);
+      bolt.lineStyle(
+        solarChain ? 3 : 2,
+        solarChain ? 0xffa62b : projectile.source === 'evo-tempest-crown' ? 0xcaa8ff : 0x5ad7ff,
+        1
+      );
       bolt.lineBetween(originX, originY, targetX, targetY);
       this.scene.tweens.add({
         targets: bolt,
@@ -447,12 +453,40 @@ export class CombatSystem {
       this.damageEnemy(nextTarget, chainDamage, targetX, targetY, {
         source: `${projectile.source}:chain`
       });
+      if (solarChain) {
+        this.showGoldenEggImpact(projectile, targetX, targetY, 0.72);
+      }
       originX = targetX;
       originY = targetY;
       chainDamage = Math.max(1, Math.round(chainDamage * 0.9));
       remaining -= 1;
     }
     projectile.chainRemaining = remaining;
+  }
+
+  showGoldenEggImpact(projectile, x, y, scale = 1) {
+    if (projectile.source !== 'golden-egg') return;
+    const rank = Math.max(1, Math.min(4, projectile.visualRank || 1));
+    const color = rank >= 4 ? 0xffef9f : rank >= 3 ? 0xffad2f : 0xffd35c;
+    const ring = this.scene.add.circle(x, y, (9 + rank * 3) * scale, color, 0.12)
+      .setStrokeStyle((1.5 + rank * 0.65) * scale, 0xfff4c4, 0.82)
+      .setDepth(10);
+    this.scene.tweens.add({
+      targets: ring,
+      alpha: 0,
+      scale: 1.55 + rank * 0.08,
+      duration: 105 + rank * 22,
+      ease: 'Quad.Out',
+      onComplete: () => ring.destroy()
+    });
+    if (rank >= 2) {
+      this.scene.playFx('fx-laser-impact', x, y, {
+        scale: (0.13 + rank * 0.035) * scale,
+        alpha: 0.58 + rank * 0.06,
+        rotation: rank * 0.19,
+        depth: 11
+      });
+    }
   }
 
   redirectRicochet(projectile, hitEnemy) {

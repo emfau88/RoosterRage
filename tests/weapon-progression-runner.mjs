@@ -113,7 +113,9 @@ async function spawnTargetsAndTrigger(page, weapon) {
     api.movePlayer(700, 450);
     for (let index = 0; index < 14; index += 1) {
       const angle = (Math.PI * 2 * index) / 14;
-      const radius = index < 6 ? 82 : 145 + (index % 3) * 34;
+      const nearRadius = id === 'golden-egg' ? 170 : 82;
+      const farRadius = id === 'golden-egg' ? 245 : 145;
+      const radius = index < 6 ? nearRadius : farRadius + (index % 3) * 34;
       api.spawnEnemyType(
         'slime',
         700 + Math.cos(angle) * radius,
@@ -140,9 +142,20 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
           : weapon.id === 'molotov-egg' ? 520
             : 180;
   await page.waitForTimeout(visualDelay);
+  const projectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getProjectileSnapshot()
+    .filter((projectile) => projectile.active));
   const screenshot = `${weapon.id}-${stage}.png`;
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
-  await page.waitForTimeout(1050 - visualDelay);
+  let impactScreenshot;
+  let remainingDelay = 1050 - visualDelay;
+  if (weapon.id === 'golden-egg') {
+    const impactDelay = 285;
+    await page.waitForTimeout(impactDelay);
+    impactScreenshot = `${weapon.id}-${stage}-impact.png`;
+    await page.screenshot({ path: path.join(artifactDir, impactScreenshot) });
+    remainingDelay -= impactDelay;
+  }
+  await page.waitForTimeout(remainingDelay);
   const after = await page.evaluate(() => ({
     telemetry: window.__ROOSTER_TEST__.getTelemetry(),
     loadout: window.__ROOSTER_TEST__.getLoadout(),
@@ -166,16 +179,42 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     after: damageAfter,
     state: after.state
   });
+  if (weapon.id === 'golden-egg') {
+    const visualExpectations = {
+      r1: { texture: 'golden-egg', count: 1, displayWidth: 40.64, trailRadius: 16 },
+      r2: { texture: 'golden-egg-r2', count: 1, displayWidth: 47.26, trailRadius: 19 },
+      r3: { texture: 'golden-egg-r3', count: 1, displayWidth: 54.36, trailRadius: 23 },
+      r4: { texture: 'golden-egg-r4', count: 2, displayWidth: 65.2, trailRadius: 28 },
+      evo: { texture: 'evo-solar-scramble-projectile', count: 3, displayWidth: 68.4, trailRadius: 29 }
+    };
+    const expected = visualExpectations[stage];
+    const matchingProjectiles = projectiles.filter((projectile) => projectile.texture === expected.texture);
+    assert(
+      matchingProjectiles.length === expected.count,
+      `Golden Egg ${stage} did not use its expected projectile texture.`,
+      { expected, projectiles }
+    );
+    assert(
+      matchingProjectiles.every((projectile) => (
+        Math.abs(projectile.displayWidth - expected.displayWidth) < 0.01
+        && projectile.trailRadius === expected.trailRadius
+      )),
+      `Golden Egg ${stage} did not use its expected visual size and trail.`,
+      { expected, matchingProjectiles }
+    );
+  }
   return {
     stage,
     rank: entry.rank,
     damage,
     screenshot,
+    impactScreenshot,
     ability: weapon.primary ? after.player.primary : after.abilities[
       weapon.id === 'orbit-eggs' ? 'orbitEggs'
         : weapon.id === 'support-chick' ? 'supportChick'
           : weapon.id.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())
     ],
+    visuals: weapon.id === 'golden-egg' ? projectiles : undefined,
     peakObjects: after.telemetry.peakObjects
   };
 }
@@ -189,10 +228,13 @@ async function testWeapon(browser, serverUrl, weapon) {
     }
     const r1 = await captureStage(page, weapon, 'r1', 1, weapon.source);
 
-    const remainingPicks = weapon.primary ? weapon.normalRanks - 1 : weapon.normalRanks - 1;
-    for (let index = 0; index < remainingPicks; index += 1) {
+    const intermediate = [];
+    for (let rank = 2; rank <= weapon.normalRanks; rank += 1) {
       const applied = await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.id);
-      assert(applied, `Could not advance ${weapon.id} to its final normal rank.`, { index });
+      assert(applied, `Could not advance ${weapon.id} to rank ${rank}.`, { rank });
+      if (weapon.id === 'golden-egg' && rank < weapon.normalRanks) {
+        intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
+      }
     }
     const final = await captureStage(
       page,
@@ -208,7 +250,7 @@ async function testWeapon(browser, serverUrl, weapon) {
     await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.evolution);
     const evolved = await captureStage(page, weapon, 'evo', 'EVO', weapon.evolution);
     assert(errors.length === 0, `Browser errors while testing ${weapon.id}.`, errors);
-    return { id: weapon.id, r1, final, evolved };
+    return { id: weapon.id, r1, intermediate, final, evolved };
   } finally {
     await page.close();
   }
