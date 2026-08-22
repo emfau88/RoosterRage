@@ -22,6 +22,8 @@ export class CombatSystem {
   constructor(scene) {
     this.scene = scene;
     this.primaryAttackSequence = 0;
+    this.modifierVisuals = new Set();
+    this.recentModifierImpacts = [];
   }
 
   autoShoot(time) {
@@ -253,6 +255,10 @@ export class CombatSystem {
         ...options,
         speed: options.speed ?? 520 + scene.player.projectileSpeedBonus,
         ricochet: options.ricochet ?? scene.player.projectileRicochets,
+        pierceVisualRank: options.pierceVisualRank
+          ?? scene.player.getUpgradeRank('piercing-eggs'),
+        ricochetVisualRank: options.ricochetVisualRank
+          ?? scene.player.getUpgradeRank('ricochet-eggs'),
         canCrit: options.canCrit ?? true,
         knockbackRank: options.knockbackRank ?? scene.player.projectileKnockback
         }
@@ -350,11 +356,25 @@ export class CombatSystem {
     this.applyPrimaryImpact(projectile, enemy, damage, hitX, hitY);
     if (projectile.knockbackRank > 0 && enemy.sprite.active) {
       enemy.applyKnockback(projectile.currentAngle, 80 + projectile.knockbackRank * 30);
+      this.showModifierImpact(
+        'shell-shock',
+        hitX,
+        hitY,
+        projectile.currentAngle,
+        projectile.knockbackRank
+      );
     }
     if (projectile.slowMs > 0 && enemy.sprite.active) {
       enemy.applySlow(projectile.slowRatio, projectile.slowMs);
     }
     if (projectile.pierceRemaining > 0) {
+      this.showModifierImpact(
+        'pierce',
+        hitX,
+        hitY,
+        projectile.currentAngle,
+        Math.max(1, projectile.pierceVisualRank)
+      );
       projectile.pierceRemaining -= 1;
     } else if (projectile.ricochetRemaining > 0 && this.redirectRicochet(projectile, enemy)) {
       projectile.ricochetRemaining -= 1;
@@ -660,7 +680,78 @@ export class CombatSystem {
     projectile.currentAngle = projectile.baseAngle;
     projectile.sprite.rotation = projectile.currentAngle;
     projectile.setVelocity(projectile.currentAngle);
+    this.showModifierImpact(
+      'ricochet',
+      hitEnemy.sprite.x,
+      hitEnemy.sprite.y,
+      projectile.currentAngle,
+      Math.max(1, projectile.ricochetVisualRank)
+    );
     return true;
+  }
+
+  showModifierImpact(type, x, y, angle, rank = 1) {
+    const visualRank = Math.max(1, Math.min(3, rank));
+    const graphic = this.scene.add.graphics({ x, y })
+      .setDepth(14)
+      .setRotation(angle)
+      .setBlendMode(Phaser.BlendModes.ADD);
+
+    if (type === 'pierce') {
+      const length = 17 + visualRank * 5;
+      graphic.lineStyle(3 + visualRank * 0.45, 0x8deeff, 0.54);
+      graphic.lineBetween(-length * 0.46, 0, length, 0);
+      graphic.lineStyle(1.1 + visualRank * 0.25, 0xf4ffff, 0.96);
+      graphic.lineBetween(-length * 0.62, 0, length * 1.12, 0);
+      if (visualRank >= 2) {
+        graphic.lineStyle(1.1, 0xa9f5ff, 0.52);
+        graphic.lineBetween(-length * 0.2, -4, length * 0.62, -4);
+        graphic.lineBetween(-length * 0.2, 4, length * 0.62, 4);
+      }
+    } else if (type === 'ricochet') {
+      const length = 15 + visualRank * 5;
+      graphic.lineStyle(3.2 + visualRank * 0.35, 0xffb24a, 0.58);
+      graphic.lineBetween(-length * 0.65, 0, length * 0.72, 0);
+      graphic.lineStyle(1.35 + visualRank * 0.18, 0xffffcf, 0.96);
+      graphic.lineBetween(-length * 0.72, 0, length, 0);
+      graphic.lineBetween(length, 0, length * 0.48, -7 - visualRank);
+      graphic.lineBetween(length, 0, length * 0.48, 7 + visualRank);
+    } else {
+      const length = 17 + visualRank * 6;
+      [-0.38, 0, 0.38].forEach((offset, index) => {
+        const rayAngle = offset;
+        const inner = index === 1 ? 7 : 10;
+        const outer = index === 1 ? length * 1.12 : length;
+        graphic.lineStyle(
+          index === 1 ? 2.2 + visualRank * 0.35 : 1.4 + visualRank * 0.24,
+          index === 1 ? 0xffffe5 : 0xffcf72,
+          index === 1 ? 0.9 : 0.62
+        );
+        graphic.lineBetween(
+          Math.cos(rayAngle) * inner,
+          Math.sin(rayAngle) * inner,
+          Math.cos(rayAngle) * outer,
+          Math.sin(rayAngle) * outer
+        );
+      });
+    }
+
+    const entry = { type, rank: visualRank, graphic };
+    this.modifierVisuals.add(entry);
+    this.recentModifierImpacts.push({ type, rank: visualRank, at: this.scene.time.now });
+    this.recentModifierImpacts = this.recentModifierImpacts.slice(-12);
+    this.scene.tweens.add({
+      targets: graphic,
+      alpha: 0,
+      scaleX: type === 'shell-shock' ? 1.48 : 1.24,
+      scaleY: type === 'shell-shock' ? 1.32 : 1.12,
+      duration: type === 'shell-shock' ? 175 : 145,
+      ease: 'Cubic.Out',
+      onComplete: () => {
+        this.modifierVisuals.delete(entry);
+        graphic.destroy();
+      }
+    });
   }
 
   damageEnemy(enemy, damage, x = enemy.sprite.x, y = enemy.sprite.y, options = {}) {

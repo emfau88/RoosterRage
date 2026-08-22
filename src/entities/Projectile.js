@@ -27,6 +27,8 @@ export class Projectile {
     this.speed = options.speed ?? 520;
     this.pierceRemaining = options.pierce ?? (scene.player?.projectilePierce ?? 0);
     this.ricochetRemaining = options.ricochet ?? 0;
+    this.pierceVisualRank = options.pierceVisualRank ?? 0;
+    this.ricochetVisualRank = options.ricochetVisualRank ?? 0;
     this.canCrit = options.canCrit ?? false;
     this.forceCritical = options.forceCritical ?? false;
     this.knockbackRank = options.knockbackRank ?? 0;

@@ -148,7 +148,8 @@ async function spawnTargetsAndTrigger(page, weapon, stage) {
 async function captureStage(page, weapon, stage, expectedRank, source) {
   const before = await spawnTargetsAndTrigger(page, weapon, stage);
   const visualDelay = weapon.primary ? 45
-    : ['lightning-comb', 'laser-comb'].includes(weapon.id) ? 55
+    : weapon.id === 'lightning-comb' ? 25
+      : weapon.id === 'laser-comb' ? 55
       : weapon.id === 'golden-egg' ? 90
         : weapon.id === 'rocket-egg' ? 360
           : weapon.id === 'molotov-egg' ? 520
@@ -158,6 +159,9 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     .filter((projectile) => projectile.active));
   const orbitVisuals = weapon.id === 'orbit-eggs'
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getOrbitVisualState())
+    : [];
+  const lightningVisuals = weapon.id === 'lightning-comb'
+    ? await page.evaluate(() => window.__ROOSTER_TEST__.getLightningVisualState())
     : [];
   const screenshot = `${weapon.id}-${stage}.png`;
   let upgradeScreenshot;
@@ -282,6 +286,34 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       && projectile.chainLife === expected.chain[2]
     )), `Storm Egg ${stage} has the wrong visual profile.`, { expected, projectiles });
   }
+  if (weapon.id === 'lightning-comb') {
+    const visualExpectations = {
+      r1: { rank: 1, life: 145, main: 3, branches: 0, layers: 6, widths: [4, 1.35], impactScale: 0.34 },
+      r2: { rank: 2, life: 165, main: 4, branches: 4, layers: 8, widths: [5, 1.7], impactScale: 0.4 },
+      r3: { rank: 3, life: 190, main: 5, branches: 6, layers: 12, widths: [6.2, 2.15], impactScale: 0.47 },
+      r4: { rank: 4, life: 220, main: 6, branches: 7, layers: 14, widths: [7.4, 2.65], impactScale: 0.55 },
+      evo: { rank: 'EVO', life: 245, main: 10, branches: 10, layers: 20, widths: [9, 3.2], impactScale: 0.62 }
+    };
+    const expected = visualExpectations[stage];
+    assert(lightningVisuals.length === 1, `Lightning Comb ${stage} has no active visual.`, {
+      expected,
+      lightningVisuals
+    });
+    const visual = lightningVisuals[0];
+    assert(
+      visual.rank === expected.rank
+      && visual.life === expected.life
+      && visual.mainSegmentCount === expected.main
+      && visual.branchSegmentCount === expected.branches
+      && visual.layerCount === expected.layers
+      && Math.abs(visual.outerWidth - expected.widths[0]) < 0.001
+      && Math.abs(visual.coreWidth - expected.widths[1]) < 0.001
+      && Math.abs(visual.impactScale - expected.impactScale) < 0.001
+      && visual.fluidFlicker,
+      `Lightning Comb ${stage} has the wrong layered visual profile.`,
+      { expected, visual }
+    );
+  }
   await page.waitForTimeout(remainingDelay);
   const after = await page.evaluate(() => ({
     telemetry: window.__ROOSTER_TEST__.getTelemetry(),
@@ -392,7 +424,8 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       'golden-egg'
     ].includes(weapon.id)
       ? projectiles
-      : weapon.id === 'orbit-eggs' ? orbitVisuals : undefined,
+      : weapon.id === 'orbit-eggs' ? orbitVisuals
+        : weapon.id === 'lightning-comb' ? lightningVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
   };
 }
@@ -415,7 +448,8 @@ async function testWeapon(browser, serverUrl, weapon) {
         'primary-artillery-rank',
         'primary-storm-rank',
         'golden-egg',
-        'orbit-eggs'
+        'orbit-eggs',
+        'lightning-comb'
       ].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
       }
@@ -526,6 +560,56 @@ async function testFireEggProgression(browser, serverUrl) {
   }
 }
 
+async function testModifierFeedback(browser, serverUrl) {
+  const { page, errors } = await openWeapon(browser, serverUrl, { rooster: 'ace' });
+  try {
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.movePlayer(700, 450);
+      api.applyUpgradeById('piercing-eggs');
+      api.applyUpgradeById('ricochet-eggs');
+      api.applyUpgradeById('shell-shock');
+      api.spawnEnemyType('slime', 820, 450, { hp: 9999, speed: 0, damage: 0, xpOverride: 0 });
+      api.spawnEnemyType('slime', 880, 450, { hp: 9999, speed: 0, damage: 0, xpOverride: 0 });
+      api.spawnEnemyType('slime', 940, 450, { hp: 9999, speed: 0, damage: 0, xpOverride: 0 });
+      api.triggerPrimaryAttack();
+    });
+    let active = { active: [], recent: [] };
+    for (let attempt = 0; attempt < 60; attempt += 1) {
+      await page.waitForTimeout(20);
+      active = await page.evaluate(() => window.__ROOSTER_TEST__.getModifierVisualState());
+      if (
+        active.active.some((impact) => impact.type === 'pierce')
+        && active.active.some((impact) => impact.type === 'shell-shock')
+      ) {
+        break;
+      }
+    }
+    const screenshot = 'modifier-feedback-stacked.png';
+    await page.screenshot({ path: path.join(artifactDir, screenshot) });
+    await page.waitForTimeout(420);
+    const settled = await page.evaluate(() => window.__ROOSTER_TEST__.getModifierVisualState());
+    const types = new Set(settled.recent.map((impact) => impact.type));
+    assert(
+      active.active.some((impact) => impact.type === 'pierce')
+      && active.active.some((impact) => impact.type === 'shell-shock'),
+      'Pierce and Shell Shock did not stack on the first impact.',
+      active
+    );
+    assert(
+      ['pierce', 'ricochet', 'shell-shock'].every((type) => types.has(type)),
+      'Not every projectile modifier emitted its own impact feedback.',
+      settled
+    );
+    assert(errors.length === 0, 'Browser errors while testing modifier feedback.', errors);
+    return { id: 'modifier-feedback', screenshot, active, recent: settled.recent };
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   validateDefinitions();
   await fs.mkdir(artifactDir, { recursive: true });
@@ -538,6 +622,7 @@ async function run() {
       results.push(await testWeapon(browser, serverState.url, weapon));
     }
     results.push(await testFireEggProgression(browser, serverState.url));
+    results.push(await testModifierFeedback(browser, serverState.url));
     const report = { generatedAt: new Date().toISOString(), results };
     await fs.writeFile(path.join(artifactDir, 'report.json'), JSON.stringify(report, null, 2));
     console.log('Weapon progression gate passed.');

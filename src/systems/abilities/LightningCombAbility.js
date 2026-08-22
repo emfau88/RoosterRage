@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { LightningBolt } from '../../entities/LightningBolt.js';
+import { getLightningVisual, LightningBolt } from '../../entities/LightningBolt.js';
 import { TimedAbility } from './TimedAbility.js';
 import { playEvolutionImpact } from '../EvolutionVisuals.js';
 
@@ -28,12 +28,14 @@ export class LightningCombAbility extends TimedAbility {
       this.evolved
     ));
     this.scene.audio.play('lightning');
+    const visual = getLightningVisual(this.rank, this.evolved);
     targets.forEach((enemy) => {
       if (this.evolved) {
         playEvolutionImpact(this.scene, 'evo-thunder-roost', enemy.sprite.x, enemy.sprite.y + 10);
       } else {
         this.scene.playFx('fx-lightning-impact', enemy.sprite.x, enemy.sprite.y + 10, {
-          scale: 0.38 + this.rank * 0.04,
+          scale: visual.impactScale,
+          alpha: 0.76 + this.rank * 0.045,
           depth: 12
         });
       }

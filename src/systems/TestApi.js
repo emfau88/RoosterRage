@@ -538,6 +538,8 @@ export function installTestApi(scene) {
       impactStyle: projectile.impactStyle,
       pierceRemaining: projectile.pierceRemaining,
       ricochetRemaining: projectile.ricochetRemaining,
+      pierceVisualRank: projectile.pierceVisualRank,
+      ricochetVisualRank: projectile.ricochetVisualRank,
       forceCritical: projectile.forceCritical,
       criticalPierceBonus: projectile.criticalPierceBonus,
       criticalRicochetBonus: projectile.criticalRicochetBonus,
@@ -545,6 +547,26 @@ export function installTestApi(scene) {
       slowRatio: projectile.slowRatio,
       active: projectile.sprite.active
     })),
+    getLightningVisualState: () => scene.lightningBolts.filter((bolt) => bolt.active).map((bolt) => ({
+      rank: bolt.visualRank,
+      life: bolt.life,
+      age: bolt.age,
+      mainSegmentCount: bolt.mainSegmentCount,
+      branchSegmentCount: bolt.branchSegmentCount,
+      layerCount: bolt.segments.length * 2,
+      outerWidth: bolt.visual.outerWidth,
+      coreWidth: bolt.visual.coreWidth,
+      impactScale: bolt.visual.impactScale,
+      fluidFlicker: true
+    })),
+    getModifierVisualState: () => ({
+      active: [...scene.combat.modifierVisuals].map((entry) => ({
+        type: entry.type,
+        rank: entry.rank,
+        alpha: entry.graphic.alpha
+      })),
+      recent: scene.combat.recentModifierImpacts.slice()
+    }),
     getEnemyProjectileSnapshot: () => scene.enemyProjectiles.map((projectile) => ({
       x: projectile.sprite.x,
       y: projectile.sprite.y,
