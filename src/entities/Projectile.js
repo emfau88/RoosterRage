@@ -43,6 +43,12 @@ export class Projectile {
     this.chainRemaining = options.chainCount ?? 0;
     this.chainRadius = options.chainRadius ?? 0;
     this.chainDamageRatio = options.chainDamageRatio ?? 0;
+    this.chainOuterWidth = options.chainOuterWidth ?? 5;
+    this.chainInnerWidth = options.chainInnerWidth ?? 2;
+    this.chainOuterColor = options.chainOuterColor ?? 0xeefcff;
+    this.chainInnerColor = options.chainInnerColor ?? 0x5ad7ff;
+    this.chainLife = options.chainLife ?? 150;
+    this.impactStyle = options.impactStyle ?? null;
     this.visualRank = options.visualRank ?? 0;
     this.fireVisualRank = options.fireVisualRank ?? 0;
     this.criticalVisual = options.criticalVisual ?? false;

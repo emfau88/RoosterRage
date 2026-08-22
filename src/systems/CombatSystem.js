@@ -103,10 +103,14 @@ export class CombatSystem {
         ),
         visualRank: evolution?.visualRank ?? primary.visualRank ?? primary.rank,
         fireVisualRank: fireEggVisual?.fireVisualRank ?? 0,
-        spritePulseX: fireEggVisual?.spritePulseX ?? 0,
-        spritePulseY: fireEggVisual?.spritePulseY ?? 0,
-        spritePulseMs: fireEggVisual?.spritePulseMs ?? 260,
-        spriteFlickerAlpha: fireEggVisual?.spriteFlickerAlpha ?? 0,
+        spritePulseX: evolution?.spritePulseX
+          ?? fireEggVisual?.spritePulseX ?? primary.spritePulseX ?? 0,
+        spritePulseY: evolution?.spritePulseY
+          ?? fireEggVisual?.spritePulseY ?? primary.spritePulseY ?? 0,
+        spritePulseMs: evolution?.spritePulseMs
+          ?? fireEggVisual?.spritePulseMs ?? primary.spritePulseMs ?? 260,
+        spriteFlickerAlpha: evolution?.spriteFlickerAlpha
+          ?? fireEggVisual?.spriteFlickerAlpha ?? primary.spriteFlickerAlpha ?? 0,
         criticalVisual: isAce && forceCritical,
         pierce: evolution ? Math.max(scene.player.projectilePierce, evolution.pierce ?? 0) : undefined,
         ricochet: evolution ? Math.max(scene.player.projectileRicochets, evolution.ricochet ?? 0) : undefined,
@@ -120,7 +124,13 @@ export class CombatSystem {
         forceCritical,
         chainCount: (primary.chainCount ?? 0) + (evolution?.chainCountBonus ?? 0),
         chainRadius: (primary.chainRadius ?? 0) + (evolution?.chainRadiusBonus ?? 0),
-        chainDamageRatio: evolution?.chainDamageRatio ?? primary.chainDamageRatio
+        chainDamageRatio: evolution?.chainDamageRatio ?? primary.chainDamageRatio,
+        chainOuterWidth: evolution?.chainOuterWidth ?? primary.chainOuterWidth,
+        chainInnerWidth: evolution?.chainInnerWidth ?? primary.chainInnerWidth,
+        chainOuterColor: evolution?.chainOuterColor ?? primary.chainOuterColor,
+        chainInnerColor: evolution?.chainInnerColor ?? primary.chainInnerColor,
+        chainLife: evolution?.chainLife ?? primary.chainLife,
+        impactStyle: evolution?.impactStyle ?? primary.impactStyle
       });
       if (evolution?.muzzleFlash ?? primary.muzzleFlash ?? true) {
         scene.showShotFeedback(angle, shot.laneOffset);
@@ -357,16 +367,20 @@ export class CombatSystem {
     this.showGoldenEggImpact(projectile, x, y);
     if (projectile.splashRadius > 0 && projectile.splashDamageRatio > 0) {
       const splashDamage = Math.max(1, Math.round(damage * projectile.splashDamageRatio));
-      const ring = this.scene.add.circle(x, y, projectile.splashRadius, 0xff6a28, 0.12)
-        .setStrokeStyle(3, 0xffd35c, 0.78)
-        .setDepth(8);
-      this.scene.tweens.add({
-        targets: ring,
-        alpha: 0,
-        scale: 1.3,
-        duration: 190,
-        onComplete: () => ring.destroy()
-      });
+      if (projectile.impactStyle?.startsWith('blast-shell')) {
+        this.showBlastShellImpact(projectile, x, y, projectile.splashRadius);
+      } else {
+        const ring = this.scene.add.circle(x, y, projectile.splashRadius, 0xff6a28, 0.12)
+          .setStrokeStyle(3, 0xffd35c, 0.78)
+          .setDepth(8);
+        this.scene.tweens.add({
+          targets: ring,
+          alpha: 0,
+          scale: 1.3,
+          duration: 190,
+          onComplete: () => ring.destroy()
+        });
+      }
       [...this.scene.enemies].forEach((candidate) => {
         if (
           candidate !== hitEnemy
@@ -383,16 +397,20 @@ export class CombatSystem {
     if (projectile.secondaryBlastRatio > 0) {
       const radius = Math.max(80, projectile.splashRadius * 1.28);
       const secondaryDamage = Math.max(1, Math.round(damage * projectile.secondaryBlastRatio));
-      const wave = this.scene.add.circle(x, y, radius * 0.48, 0xffd35c, 0.08)
-        .setStrokeStyle(4, 0xfff3b0, 0.82)
-        .setDepth(9);
-      this.scene.tweens.add({
-        targets: wave,
-        alpha: 0,
-        scale: 2.05,
-        duration: 260,
-        onComplete: () => wave.destroy()
-      });
+      if (projectile.impactStyle?.startsWith('blast-shell')) {
+        this.showBlastShellImpact(projectile, x, y, radius, { secondary: true });
+      } else {
+        const wave = this.scene.add.circle(x, y, radius * 0.48, 0xffd35c, 0.08)
+          .setStrokeStyle(4, 0xfff3b0, 0.82)
+          .setDepth(9);
+        this.scene.tweens.add({
+          targets: wave,
+          alpha: 0,
+          scale: 2.05,
+          duration: 260,
+          onComplete: () => wave.destroy()
+        });
+      }
       [...this.scene.enemies].forEach((candidate) => {
         if (
           candidate.sprite.active
@@ -412,16 +430,38 @@ export class CombatSystem {
         const angle = (Math.PI * 2 * index) / projectile.shrapnelCount;
         const burstX = x + Math.cos(angle) * radius * 0.48;
         const burstY = y + Math.sin(angle) * radius * 0.48;
-        const burst = this.scene.add.circle(burstX, burstY, 12, 0xffd35c, 0.34)
-          .setStrokeStyle(2, 0xfff3b0, 0.86)
-          .setDepth(9);
-        this.scene.tweens.add({
-          targets: burst,
-          alpha: 0,
-          scale: 1.8,
-          duration: 180,
-          onComplete: () => burst.destroy()
-        });
+        if (projectile.impactStyle?.startsWith('blast-shell')) {
+          const fragment = this.scene.add.graphics({ x, y }).setDepth(11);
+          fragment.lineStyle(4, 0xffcf6a, 0.72);
+          fragment.lineBetween(0, 0, burstX - x, burstY - y);
+          fragment.lineStyle(1.5, 0xffffdf, 0.95);
+          fragment.lineBetween(0, 0, burstX - x, burstY - y);
+          this.scene.tweens.add({
+            targets: fragment,
+            alpha: 0,
+            scaleX: 1.12,
+            scaleY: 1.12,
+            duration: 145,
+            ease: 'Quad.Out',
+            onComplete: () => fragment.destroy()
+          });
+          this.scene.playFx('fx-rocket-explosion', burstX, burstY, {
+            scale: 0.19,
+            alpha: 0.72,
+            depth: 10
+          });
+        } else {
+          const burst = this.scene.add.circle(burstX, burstY, 12, 0xffd35c, 0.34)
+            .setStrokeStyle(2, 0xfff3b0, 0.86)
+            .setDepth(9);
+          this.scene.tweens.add({
+            targets: burst,
+            alpha: 0,
+            scale: 1.8,
+            duration: 180,
+            onComplete: () => burst.destroy()
+          });
+        }
         const candidate = this.scene.enemies
           .filter((enemy) => enemy.sprite.active && enemy !== hitEnemy)
           .sort((a, b) => Phaser.Math.Distance.Squared(burstX, burstY, a.sprite.x, a.sprite.y)
@@ -472,18 +512,22 @@ export class CombatSystem {
       projectile.hitEnemies.add(nextTarget.id);
       const solarChain = projectile.source === 'golden-egg';
       const bolt = this.scene.add.graphics().setDepth(12);
-      bolt.lineStyle(solarChain ? 6 : 5, solarChain ? 0xfff3b0 : 0xeefcff, 0.78);
+      bolt.lineStyle(
+        solarChain ? 6 : projectile.chainOuterWidth,
+        solarChain ? 0xfff3b0 : projectile.chainOuterColor,
+        0.78
+      );
       bolt.lineBetween(originX, originY, targetX, targetY);
       bolt.lineStyle(
-        solarChain ? 3 : 2,
-        solarChain ? 0xffa62b : projectile.source === 'evo-tempest-crown' ? 0xcaa8ff : 0x5ad7ff,
+        solarChain ? 3 : projectile.chainInnerWidth,
+        solarChain ? 0xffa62b : projectile.chainInnerColor,
         1
       );
       bolt.lineBetween(originX, originY, targetX, targetY);
       this.scene.tweens.add({
         targets: bolt,
         alpha: 0,
-        duration: 150,
+        duration: solarChain ? 150 : projectile.chainLife,
         onComplete: () => bolt.destroy()
       });
       this.scene.audio.play('lightning-chain', { cooldown: 90 });
@@ -492,6 +536,15 @@ export class CombatSystem {
       });
       if (solarChain) {
         this.showGoldenEggImpact(projectile, targetX, targetY, 0.72);
+      } else {
+        const rank = projectile.visualRank === 'EVO'
+          ? 5
+          : Math.max(1, Math.min(4, Number(projectile.visualRank) || 1));
+        this.scene.playFx('fx-lightning-impact', targetX, targetY + 6, {
+          scale: 0.13 + rank * 0.025,
+          alpha: 0.48 + rank * 0.06,
+          depth: 11
+        });
       }
       originX = targetX;
       originY = targetY;
@@ -499,6 +552,58 @@ export class CombatSystem {
       remaining -= 1;
     }
     projectile.chainRemaining = remaining;
+  }
+
+  showBlastShellImpact(projectile, x, y, radius, { secondary = false } = {}) {
+    const evolution = projectile.impactStyle === 'blast-shell-evo';
+    const rank = evolution ? 5 : Math.max(1, Math.min(4, Number(projectile.visualRank) || 1));
+    const color = evolution ? 0xfff0a3 : rank >= 4 ? 0xffd35c : 0xffa044;
+    const coreColor = evolution || rank >= 3 ? 0xffffdf : 0xffe2b8;
+
+    if (!secondary && !evolution) {
+      this.scene.playFx('fx-rocket-explosion', x, y, {
+        scale: 0.24 + rank * 0.075,
+        alpha: 0.68 + rank * 0.055,
+        depth: 10
+      });
+    }
+
+    const rayCount = secondary ? 8 : 5 + rank;
+    const rays = this.scene.add.graphics({ x, y }).setDepth(11);
+    const innerRadius = secondary ? radius * 0.26 : 8 + rank * 2;
+    const outerRadius = secondary ? radius * 0.64 : 24 + rank * 7;
+    rays.lineStyle(secondary ? 2 : 1.4 + rank * 0.25, coreColor, secondary ? 0.52 : 0.82);
+    for (let index = 0; index < rayCount; index += 1) {
+      const angle = (Math.PI * 2 * index) / rayCount + rank * 0.17;
+      rays.lineBetween(
+        Math.cos(angle) * innerRadius,
+        Math.sin(angle) * innerRadius,
+        Math.cos(angle) * outerRadius,
+        Math.sin(angle) * outerRadius
+      );
+    }
+    this.scene.tweens.add({
+      targets: rays,
+      alpha: 0,
+      scaleX: secondary ? 1.18 : 1.08 + rank * 0.025,
+      scaleY: secondary ? 1.18 : 1.08 + rank * 0.025,
+      duration: secondary ? 255 : 135 + rank * 13,
+      ease: 'Quad.Out',
+      onComplete: () => rays.destroy()
+    });
+
+    const shock = this.scene.add.circle(x, y, Math.max(12, radius * 0.46), color, 0)
+      .setStrokeStyle(secondary ? 3 : 1.4 + rank * 0.42, coreColor, secondary ? 0.62 : 0.8)
+      .setDepth(9);
+    shock.setScale(secondary ? 0.52 : 0.68);
+    this.scene.tweens.add({
+      targets: shock,
+      alpha: 0,
+      scale: secondary ? 2.05 : 1.45 + rank * 0.08,
+      duration: secondary ? 270 : 165 + rank * 15,
+      ease: 'Cubic.Out',
+      onComplete: () => shock.destroy()
+    });
   }
 
   showGoldenEggImpact(projectile, x, y, scale = 1) {

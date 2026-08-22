@@ -1,4 +1,5 @@
 import { applyTargetEggVisual } from './targetEggVisuals.js';
+import { applyBlastShellVisual, applyStormEggVisual } from './primaryWeaponVisuals.js';
 
 export const UPGRADE_DEFINITIONS = [
   {
@@ -120,18 +121,15 @@ export const UPGRADE_DEFINITIONS = [
     condition: (player) => player.roosterId === 'artillery',
     apply: (player, _scene, rank) => {
       player.primaryAttack.rank = rank + 1;
+      applyBlastShellVisual(player.primaryAttack, rank + 1);
       if (rank === 1) {
-        player.primaryAttack.scale = (player.primaryAttack.scale ?? 1) * 1.12;
         player.primaryAttack.splashRadius = (player.primaryAttack.splashRadius ?? 56) + 12;
-        player.primaryAttack.trailRadius = (player.primaryAttack.trailRadius ?? 10) + 3;
       } else if (rank === 2) {
         player.primaryAttack.shrapnelCount = 4;
         player.primaryAttack.shrapnelDamageRatio = 0.22;
       } else {
-        player.primaryAttack.scale = (player.primaryAttack.scale ?? 1) * 1.16;
         player.primaryAttack.splashRadius = (player.primaryAttack.splashRadius ?? 68) + 16;
         player.primaryAttack.secondaryBlastRatio = Math.max(0.28, player.primaryAttack.secondaryBlastRatio ?? 0);
-        player.primaryAttack.trailAlpha = Math.max(0.42, player.primaryAttack.trailAlpha ?? 0.24);
       }
     }
   },
@@ -158,6 +156,7 @@ export const UPGRADE_DEFINITIONS = [
     condition: (player) => player.roosterId === 'storm',
     apply: (player, _scene, rank) => {
       player.primaryAttack.rank = rank + 1;
+      applyStormEggVisual(player.primaryAttack, rank + 1);
       if (rank === 1) {
         player.primaryAttack.chainCount = (player.primaryAttack.chainCount ?? 1) + 1;
         player.primaryAttack.chainRadius = (player.primaryAttack.chainRadius ?? 190) + 35;
@@ -166,9 +165,6 @@ export const UPGRADE_DEFINITIONS = [
       } else {
         player.primaryAttack.chainCount = Math.max(3, player.primaryAttack.chainCount ?? 0);
         player.primaryAttack.chainRadius = (player.primaryAttack.chainRadius ?? 225) + 55;
-        player.primaryAttack.trailRadius = Math.max(13, player.primaryAttack.trailRadius ?? 8);
-        player.primaryAttack.trailAlpha = Math.max(0.48, player.primaryAttack.trailAlpha ?? 0.3);
-        player.primaryAttack.trailColor = 0x9ff7ff;
       }
     }
   },

@@ -1,4 +1,5 @@
 import { SUNSHOT_ARRAY_VISUAL, TARGET_EGG_VISUALS } from './targetEggVisuals.js';
+import { BLAST_SHELL_VISUALS, STORM_EGG_VISUALS } from './primaryWeaponVisuals.js';
 
 export const ROOSTER_DEFINITIONS = [
   {
@@ -102,22 +103,19 @@ export const ROOSTER_DEFINITIONS = [
     },
     primary: {
       name: 'Blast Shell',
-      texture: 'heavy-egg',
       speed: 410,
       homingTurnRate: 0.055,
-      scale: 1.34,
       hitRadius: 30,
       bodyRadius: 12,
-      trailRadius: 12,
-      trailColor: 0xff8a35,
-      trailAlpha: 0.28,
       splashRadius: 64,
-      splashDamageRatio: 0.55
+      splashDamageRatio: 0.55,
+      ...BLAST_SHELL_VISUALS[1]
     },
     primaryEvolution: {
       id: 'evo-siegebreaker-shell',
       name: 'Siegebreaker Shell',
       texture: 'evo-siegebreaker-shell-projectile',
+      tint: 0xffffff,
       passive: 'artillery-reinforced-breech',
       description: 'Eine panzerbrechende Granate durchschlägt ihr Ziel und erzeugt eine massive Doppelwelle.',
       damageMultiplier: 1.18,
@@ -127,9 +125,20 @@ export const ROOSTER_DEFINITIONS = [
       splashDamageRatio: 0.88,
       secondaryBlastRatio: 0.45,
       hitRadiusBonus: 8,
-      scaleMultiplier: 1.22,
+      projectileScale: 1.68,
       trailColor: 0xffd35c,
-      trailAlpha: 0.46
+      trailAlpha: 0.46,
+      trailVisible: false,
+      lineTrailLength: 28,
+      lineTrailWidth: 3.4,
+      lineTrailColor: 0xffef9f,
+      lineTrailAlpha: 0.23,
+      spritePulseX: 0.012,
+      spritePulseY: 0.022,
+      spritePulseMs: 255,
+      spriteFlickerAlpha: 0.02,
+      impactStyle: 'blast-shell-evo',
+      visualRank: 'EVO'
     },
     classPassives: ['artillery-reinforced-breech', 'artillery-blast-plating'],
     archetypes: [
@@ -193,22 +202,19 @@ export const ROOSTER_DEFINITIONS = [
     },
     primary: {
       name: 'Storm Egg',
-      texture: 'storm-egg',
       speed: 650,
       homingTurnRate: 0.12,
-      scale: 0.94,
       hitRadius: 22,
-      trailRadius: 10,
-      trailColor: 0x5ad7ff,
-      trailAlpha: 0.32,
       chainCount: 1,
       chainRadius: 190,
-      chainDamageRatio: 0.6
+      chainDamageRatio: 0.6,
+      ...STORM_EGG_VISUALS[1]
     },
     primaryEvolution: {
       id: 'evo-tempest-crown',
       name: 'Tempest Crown',
       texture: 'evo-tempest-crown-projectile',
+      tint: 0xffffff,
       passive: 'storm-static-plumage',
       description: 'Zwillings-Sturmeier jagen als weit springende Blitze durch den Schwarm.',
       minimumShots: 2,
@@ -218,9 +224,24 @@ export const ROOSTER_DEFINITIONS = [
       chainRadiusBonus: 95,
       chainDamageRatio: 0.78,
       hitRadiusBonus: 3,
-      scaleMultiplier: 1.05,
+      projectileScale: 1.18,
       trailColor: 0xcaa8ff,
-      trailAlpha: 0.48
+      trailAlpha: 0.48,
+      trailVisible: false,
+      lineTrailLength: 22,
+      lineTrailWidth: 2.2,
+      lineTrailColor: 0xcaa8ff,
+      lineTrailAlpha: 0.21,
+      spritePulseX: 0.03,
+      spritePulseY: 0.055,
+      spritePulseMs: 180,
+      spriteFlickerAlpha: 0.035,
+      chainOuterWidth: 7,
+      chainInnerWidth: 3,
+      chainOuterColor: 0xffffff,
+      chainInnerColor: 0xcaa8ff,
+      chainLife: 190,
+      visualRank: 'EVO'
     },
     classPassives: ['storm-static-plumage', 'storm-tailwind-training'],
     archetypes: [

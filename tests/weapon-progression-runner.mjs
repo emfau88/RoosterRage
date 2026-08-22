@@ -116,7 +116,12 @@ async function spawnTargetsAndTrigger(page, weapon, stage) {
     api.movePlayer(700, 450);
     for (let index = 0; index < 14; index += 1) {
       const angle = (Math.PI * 2 * index) / 14;
-      const showcaseProjectile = ['primary-ace-rank', 'golden-egg'].includes(id);
+      const showcaseProjectile = [
+        'primary-ace-rank',
+        'primary-artillery-rank',
+        'primary-storm-rank',
+        'golden-egg'
+      ].includes(id);
       const nearRadius = showcaseProjectile ? 170 : 82;
       const farRadius = showcaseProjectile ? 245 : 145;
       const radius = index < 6 ? nearRadius : farRadius + (index % 3) * 34;
@@ -166,8 +171,8 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     remainingDelay -= steadyStateDelay;
   }
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
-  if (weapon.id === 'golden-egg') {
-    const impactDelay = 285;
+  if (['golden-egg', 'primary-artillery-rank', 'primary-storm-rank'].includes(weapon.id)) {
+    const impactDelay = weapon.id === 'primary-storm-rank' ? 185 : 285;
     await page.waitForTimeout(impactDelay);
     impactScreenshot = `${weapon.id}-${stage}-impact.png`;
     await page.screenshot({ path: path.join(artifactDir, impactScreenshot) });
@@ -206,6 +211,76 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       && projectile.tint === expected.tint
       && projectile.criticalVisual === expected.critical
     )), `Target Egg ${stage} has the wrong visual profile.`, { expected, projectiles });
+  }
+  if (weapon.id === 'primary-artillery-rank') {
+    const visualExpectations = {
+      r1: { count: 1, texture: 'heavy-egg', rank: 1, scale: 1.34, tint: 0xffffff, line: [10, 1.8, 0.1], impact: 'blast-shell' },
+      r2: { count: 1, texture: 'heavy-egg', rank: 2, scale: 1.5, tint: 0xffe2b8, line: [14, 2.2, 0.13], impact: 'blast-shell' },
+      r3: { count: 1, texture: 'heavy-egg', rank: 3, scale: 1.58, tint: 0xffc975, line: [18, 2.5, 0.16], impact: 'blast-shell' },
+      r4: { count: 1, texture: 'heavy-egg', rank: 4, scale: 1.74, tint: 0xfff1c4, line: [24, 3, 0.2], impact: 'blast-shell' },
+      evo: {
+        count: 1,
+        texture: 'evo-siegebreaker-shell-projectile',
+        rank: 'EVO',
+        scale: 1.68,
+        tint: 0xffffff,
+        line: [28, 3.4, 0.2],
+        impact: 'blast-shell-evo'
+      }
+    };
+    const expected = visualExpectations[stage];
+    assert(projectiles.length === expected.count, `Blast Shell ${stage} has the wrong salvo size.`, {
+      expected,
+      projectiles
+    });
+    assert(projectiles.every((projectile) => (
+      projectile.texture === expected.texture
+      && projectile.visualRank === expected.rank
+      && Math.abs(projectile.spriteBaseScale - expected.scale) < 0.001
+      && projectile.trailVisible === false
+      && projectile.lineTrailVisible
+      && projectile.lineTrailLength === expected.line[0]
+      && Math.abs(projectile.lineTrailWidth - expected.line[1]) < 0.001
+      && Math.abs(projectile.lineTrailAlpha - expected.line[2]) < 0.001
+      && projectile.tint === expected.tint
+      && projectile.impactStyle === expected.impact
+    )), `Blast Shell ${stage} has the wrong visual profile.`, { expected, projectiles });
+  }
+  if (weapon.id === 'primary-storm-rank') {
+    const visualExpectations = {
+      r1: { count: 1, texture: 'storm-egg', rank: 1, scale: 0.94, tint: 0xffffff, line: [8, 1, 0.08], chain: [4, 1.6, 125] },
+      r2: { count: 1, texture: 'storm-egg', rank: 2, scale: 1.04, tint: 0xe9ffff, line: [11, 1.2, 0.11], chain: [4.5, 1.8, 140] },
+      r3: { count: 2, texture: 'storm-egg', rank: 3, scale: 1.12, tint: 0xcffbff, line: [14, 1.45, 0.14], chain: [5, 2.2, 155] },
+      r4: { count: 2, texture: 'storm-egg', rank: 4, scale: 1.22, tint: 0xf5ffff, line: [18, 1.8, 0.18], chain: [6, 2.6, 175] },
+      evo: {
+        count: 2,
+        texture: 'evo-tempest-crown-projectile',
+        rank: 'EVO',
+        scale: 1.18,
+        tint: 0xffffff,
+        line: [22, 2.2, 0.2],
+        chain: [7, 3, 190]
+      }
+    };
+    const expected = visualExpectations[stage];
+    assert(projectiles.length === expected.count, `Storm Egg ${stage} has the wrong salvo size.`, {
+      expected,
+      projectiles
+    });
+    assert(projectiles.every((projectile) => (
+      projectile.texture === expected.texture
+      && projectile.visualRank === expected.rank
+      && Math.abs(projectile.spriteBaseScale - expected.scale) < 0.001
+      && projectile.trailVisible === false
+      && projectile.lineTrailVisible
+      && projectile.lineTrailLength === expected.line[0]
+      && Math.abs(projectile.lineTrailWidth - expected.line[1]) < 0.001
+      && Math.abs(projectile.lineTrailAlpha - expected.line[2]) < 0.001
+      && projectile.tint === expected.tint
+      && Math.abs(projectile.chainOuterWidth - expected.chain[0]) < 0.001
+      && Math.abs(projectile.chainInnerWidth - expected.chain[1]) < 0.001
+      && projectile.chainLife === expected.chain[2]
+    )), `Storm Egg ${stage} has the wrong visual profile.`, { expected, projectiles });
   }
   await page.waitForTimeout(remainingDelay);
   const after = await page.evaluate(() => ({
@@ -310,7 +385,12 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
         : weapon.id === 'support-chick' ? 'supportChick'
           : weapon.id.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())
     ],
-    visuals: ['primary-ace-rank', 'golden-egg'].includes(weapon.id)
+    visuals: [
+      'primary-ace-rank',
+      'primary-artillery-rank',
+      'primary-storm-rank',
+      'golden-egg'
+    ].includes(weapon.id)
       ? projectiles
       : weapon.id === 'orbit-eggs' ? orbitVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
@@ -330,7 +410,13 @@ async function testWeapon(browser, serverUrl, weapon) {
     for (let rank = 2; rank <= weapon.normalRanks; rank += 1) {
       const applied = await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), weapon.id);
       assert(applied, `Could not advance ${weapon.id} to rank ${rank}.`, { rank });
-      if (['primary-ace-rank', 'golden-egg', 'orbit-eggs'].includes(weapon.id) && rank < weapon.normalRanks) {
+      if ([
+        'primary-ace-rank',
+        'primary-artillery-rank',
+        'primary-storm-rank',
+        'golden-egg',
+        'orbit-eggs'
+      ].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
       }
     }
