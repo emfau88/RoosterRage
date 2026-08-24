@@ -7,9 +7,9 @@ import kernelCurrencyUrl from '../assets/meta/kernel-currency.webp';
 import masteryAceUrl from '../assets/meta/mastery-ace.webp';
 import masteryArtilleryUrl from '../assets/meta/mastery-artillery.webp';
 import masteryStormUrl from '../assets/meta/mastery-storm.webp';
-import harvestYardPreviewUrl from '../../docs/qa/map-readability-pass/harvest-yard-after.png';
-import feedAlleyPreviewUrl from '../../docs/qa/map-readability-pass/feed-alley-after.png';
-import coopSquarePreviewUrl from '../../docs/qa/coop-square-rework/coop-square-after.png';
+import harvestYardPreviewUrl from '../assets/map/previews/arena-preview-open-yard.webp';
+import feedAlleyPreviewUrl from '../assets/map/previews/arena-preview-vertical-run.webp';
+import coopSquarePreviewUrl from '../assets/map/previews/arena-preview-square-coop.webp';
 import { getArenaDefinition } from '../data/arenaDefinitions.js';
 
 const ROOSTER_PORTRAITS = {
@@ -27,15 +27,18 @@ const MASTERY_BADGES = {
 const ARENA_PREVIEWS = {
   'open-yard': {
     url: harvestYardPreviewUrl,
-    layout: 'Weit & offen'
+    layout: 'Weit & offen',
+    scope: 'UNENDLICHER HOF'
   },
   'vertical-run': {
     url: feedAlleyPreviewUrl,
-    layout: 'Nord-Süd-Gang'
+    layout: 'Nord-Süd-Gang',
+    scope: 'ENDLOSER KORRIDOR'
   },
   'square-coop': {
     url: coopSquarePreviewUrl,
-    layout: 'Kompaktes Karree'
+    layout: 'Kompaktes Karree',
+    scope: 'GESAMTE ARENA'
   }
 };
 
@@ -357,12 +360,8 @@ export class HUD {
         <button class="challenge-card ${challenge.id === selectedChallenge ? 'is-selected' : ''} ${challenge.unlocked ? '' : 'is-locked'}"
           type="button" data-challenge="${challenge.id}" data-arena="${arena.id}" ${challenge.unlocked ? '' : 'disabled'}
           aria-label="${challenge.name}, Arena ${arena.name}">
-          <span class="challenge-card__preview">
-            <img src="${preview.url}" alt="" loading="eager">
-            <span class="challenge-card__arena">${arena.name}</span>
-            <em>${preview.layout}</em>
-          </span>
           <span class="challenge-card__copy">
+            <em>${arena.name} · ${preview.layout}</em>
             <strong>${challenge.name}</strong>
             <span class="challenge-card__description">${challenge.description}</span>
             <small>${status}</small>
@@ -435,7 +434,15 @@ export class HUD {
               </div>
             </article>
             <article class="hub-run-card">
-              <small data-run-arena>OPEN YARD</small>
+              <div class="hub-arena-showcase" data-arena-showcase>
+                <img data-arena-preview alt="" loading="eager">
+                <span class="hub-arena-showcase__shade"></span>
+                <span class="hub-arena-showcase__identity">
+                  <small data-run-scope></small>
+                  <strong data-run-arena>OPEN YARD</strong>
+                  <em data-run-layout></em>
+                </span>
+              </div>
               <h2 data-run-challenge>STANDARD RUN</h2>
               <p data-run-description></p>
               <div class="hub-run-best"><span><small>BESTE JAGD</small><strong>${bests.highestKills} Kills</strong></span><span data-run-reward></span></div>
@@ -703,7 +710,15 @@ export class HUD {
       const challenge = (hub.challenges ?? []).find((candidate) => candidate.id === selectedChallenge)
         ?? hub.challenges?.[0];
       if (!challenge) return;
-      this.overlay.querySelector('[data-run-arena]').textContent = getArenaDefinition(challenge.arenaId ?? standardArenaId).name.toUpperCase();
+      const arena = getArenaDefinition(challenge.arenaId ?? standardArenaId);
+      const preview = ARENA_PREVIEWS[arena.id] ?? ARENA_PREVIEWS['open-yard'];
+      const previewImage = this.overlay.querySelector('[data-arena-preview]');
+      previewImage.src = preview.url;
+      previewImage.alt = `${arena.name} Übersicht`;
+      this.overlay.querySelector('[data-arena-showcase]').dataset.arena = arena.id;
+      this.overlay.querySelector('[data-run-arena]').textContent = arena.name.toUpperCase();
+      this.overlay.querySelector('[data-run-layout]').textContent = preview.layout;
+      this.overlay.querySelector('[data-run-scope]').textContent = preview.scope;
       this.overlay.querySelector('[data-run-challenge]').textContent = challenge.name.toUpperCase();
       this.overlay.querySelector('[data-run-description]').textContent = challenge.description;
       this.overlay.querySelector('[data-run-reward]').innerHTML = `<small>BELOHNUNG</small><strong>${challenge.firstClearClaimed ? 'Erstsieg geschafft' : `+${challenge.firstClearReward} Körner`}</strong>`;

@@ -625,6 +625,33 @@
       "bytes": 35034
     },
     {
+      "source": "art-source/map/previews/arena-preview-open-yard.png",
+      "sourceSha256": "326f6bdda9d44fe250175c5b057d91927edfc0d12ea0ac525c22218dc5ce40a3",
+      "runtime": "src/assets/map/previews/arena-preview-open-yard.webp",
+      "runtimeSha256": "6a8c03a4c693d22be78855f05611300e3bf0f4a5dad1ed18b5d58b4cf96cd1a7",
+      "width": 1400,
+      "height": 900,
+      "bytes": 149614
+    },
+    {
+      "source": "art-source/map/previews/arena-preview-vertical-run.png",
+      "sourceSha256": "d700c3578a54a88a301e960842a7a54c4d2ed41ef157fdd1da02337bdc8bc065",
+      "runtime": "src/assets/map/previews/arena-preview-vertical-run.webp",
+      "runtimeSha256": "615cec077284ee682897a9575d68e441c9440e5ce4db159d65cd8e48c22feb1d",
+      "width": 1400,
+      "height": 900,
+      "bytes": 153922
+    },
+    {
+      "source": "art-source/map/previews/arena-preview-square-coop.png",
+      "sourceSha256": "3243f231542c25a873c2d893dd2c2e14bd3de8cd5fde9341ec9e750976298a02",
+      "runtime": "src/assets/map/previews/arena-preview-square-coop.webp",
+      "runtimeSha256": "2347d2a465aad0b48de1d892bb08a103356f4e4d839c26d8eed990d8f922061a",
+      "width": 1400,
+      "height": 900,
+      "bytes": 282018
+    },
+    {
       "source": "art-source/meta/kernel-currency.png",
       "sourceSha256": "68c9ee64df17d0670daf28ce9b61c71c8cd867a849c9b3f8692c5ab695db2219",
       "runtime": "src/assets/meta/kernel-currency.webp",

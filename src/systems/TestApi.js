@@ -837,6 +837,26 @@ export function installTestApi(scene) {
       scene.xpOrbs = [];
       return true;
     },
+    prepareArenaPreview: () => {
+      scene.waveSystem.paused = true;
+      scene.cameras.main.stopFollow();
+      let center = scene.arena.getCenter();
+      scene.player.sprite.body?.stop();
+      [
+        scene.player.sprite,
+        scene.player.hpBarBack,
+        scene.player.hpBarFill,
+        scene.player.hpBarBorder,
+        scene.arena.title
+      ].forEach((object) => object?.setVisible(false));
+      scene.cameras.main.centerOn(center.x, center.y);
+      scene.arena.update(true);
+      return {
+        arenaId: scene.arena.id,
+        center,
+        viewport: getSceneViewport(scene)
+      };
+    },
     clearProjectiles: () => {
       scene.projectiles.forEach((projectile) => projectile.destroy());
       scene.projectiles = [];

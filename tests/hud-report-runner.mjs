@@ -218,6 +218,65 @@ async function verifyShortMobileHubScrolling(browser, serverUrl) {
   }
 }
 
+async function verifyArenaPresentation(browser, serverUrl) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  try {
+    await page.goto(`${serverUrl}?seed=arena-presentation&profile=average`, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('[data-arena-preview]');
+    await page.locator('[data-arena-preview]').evaluate((image) => image.complete
+      ? undefined
+      : new Promise((resolve, reject) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', reject, { once: true });
+      }));
+    const layout = await page.evaluate(() => {
+      const view = document.querySelector('[data-hub-view="play"]');
+      const showcase = document.querySelector('[data-arena-showcase]');
+      const preview = document.querySelector('[data-arena-preview]');
+      const start = document.querySelector('[data-run-start]');
+      const panel = document.querySelector('.henhouse-panel');
+      const previewRect = preview.getBoundingClientRect();
+      const startRect = start.getBoundingClientRect();
+      const panelRect = panel.getBoundingClientRect();
+      return {
+        arena: showcase.dataset.arena,
+        naturalWidth: preview.naturalWidth,
+        naturalHeight: preview.naturalHeight,
+        objectFit: getComputedStyle(preview).objectFit,
+        previewWidth: previewRect.width,
+        previewHeight: previewRect.height,
+        playClientHeight: view.clientHeight,
+        playScrollHeight: view.scrollHeight,
+        startInsidePanel: startRect.bottom <= panelRect.bottom + 1
+      };
+    });
+    assert(
+      layout.arena === 'open-yard'
+      && layout.naturalWidth === 1400
+      && layout.naturalHeight === 900
+      && layout.objectFit === 'contain'
+      && layout.previewWidth >= 300
+      && layout.previewHeight >= 120,
+      'The mobile hub must show the selected arena as a large, uncropped overview.',
+      layout
+    );
+    assert(
+      layout.playScrollHeight <= layout.playClientHeight + 1 && layout.startInsidePanel,
+      'The arena overview must not push the primary start action outside the mobile hub.',
+      layout
+    );
+    assert(errors.length === 0, 'Browser errors in arena presentation.', errors);
+    return layout;
+  } finally {
+    await page.close();
+  }
+}
+
 async function verifySettingsAndReport(browser, serverUrl) {
   const { page, errors } = await openGame(browser, serverUrl, { width: 390, height: 844 }, 'report');
   try {
@@ -350,6 +409,7 @@ async function run() {
     const report = {
       generatedAt: new Date().toISOString(),
       layouts: await verifyResponsiveHud(browser, serverState.url),
+      arenaPresentation: await verifyArenaPresentation(browser, serverState.url),
       shortMobileHub: await verifyShortMobileHubScrolling(browser, serverState.url),
       report: await verifySettingsAndReport(browser, serverState.url),
       returnToHub: await verifyReturnToHub(browser, serverState.url)

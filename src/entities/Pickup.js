@@ -40,10 +40,6 @@ export class Pickup {
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
     this.sprite.setCircle(this.chest ? 18 : 14);
     this.sprite.entity = this;
-    this.glow = scene.add.circle(x, y, this.chest ? 28 + (this.chest.scale - 1.22) * 22 : 22,
-      this.chest?.glow ?? 0xffe588, this.chest ? 0.12 : 0.09)
-      .setStrokeStyle(this.kind === 'royal-chest' ? 4 : 2, this.chest?.glow ?? 0xffffff, 0.62)
-      .setDepth(3);
     this.tierMarker = null;
     if (kind === 'golden-chest' || kind === 'royal-chest') {
       const royal = kind === 'royal-chest';
@@ -66,7 +62,6 @@ export class Pickup {
     if (!this.sprite.active || this.opening) return;
     const bob = Math.sin((time - this.spawnedAt) * 0.005) * 4;
     this.sprite.y = this.baseY + bob;
-    this.glow.setPosition(this.sprite.x, this.sprite.y).setScale(1 + Math.sin(time * 0.006) * 0.08);
     if (this.tierMarker) {
       this.tierMarker
         .setPosition(this.sprite.x, this.sprite.y - (this.kind === 'royal-chest' ? 40 : 35))
@@ -113,10 +108,7 @@ export class Pickup {
     this.baseY = this.sprite.y;
     this.sprite.body?.stop();
     if (this.sprite.body) this.sprite.body.enable = false;
-    this.scene.tweens.killTweensOf([this.sprite, this.glow]);
-    this.glow.setPosition(this.sprite.x, this.sprite.y)
-      .setFillStyle(this.chest.glow, 0.16)
-      .setStrokeStyle(this.kind === 'royal-chest' ? 4 : 3, this.chest.burst, 0.88);
+    this.scene.tweens.killTweensOf(this.sprite);
 
     const chestScale = this.chest.scale;
 
@@ -222,12 +214,11 @@ export class Pickup {
     this.destroyed = true;
     this.timers.forEach((timer) => timer.remove(false));
     this.timers = [];
-    this.scene.tweens.killTweensOf([this.sprite, this.glow, ...this.transientFx]);
+    this.scene.tweens.killTweensOf([this.sprite, ...this.transientFx]);
     this.transientFx.forEach((fx) => {
       if (fx?.active) fx.destroy();
     });
     this.transientFx = [];
-    if (this.glow?.active) this.glow.destroy();
     if (this.tierMarker?.active) this.tierMarker.destroy();
     if (this.sprite?.active) this.sprite.destroy();
   }

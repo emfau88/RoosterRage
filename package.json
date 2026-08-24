@@ -8,6 +8,7 @@
     "build": "vite build",
     "assets:optimize": "python scripts/optimize-assets.py",
     "assets:check": "node scripts/check-assets.mjs",
+    "maps:capture-previews": "node scripts/capture-arena-previews.mjs",
     "pretest:production": "npm run build",
     "test:production": "node tests/production-gate.mjs",
     "test:smoke": "node tests/rooster-smoke.mjs",

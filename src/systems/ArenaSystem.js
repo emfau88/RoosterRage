@@ -321,13 +321,13 @@ export class ArenaSystem {
 
   getLandmarkConfig(hash) {
     if (this.id === 'open-yard') {
-      if (hash % 23 === 0) {
+      if (hash % 19 === 0) {
         return {
           texture: 'landmark-barn', size: 220, kind: 'barn',
           colliderWidth: 154, colliderHeight: 76, colliderOffsetY: 45
         };
       }
-      if (hash % 17 === 0) {
+      if (hash % 11 === 0) {
         return {
           texture: 'landmark-well', size: 128, kind: 'well',
           colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
@@ -346,18 +346,17 @@ export class ArenaSystem {
       const world = this.playableWorldBounds;
       const gateOffset = Math.min(150, world.width / 2 - 110);
       const crateOffset = Math.min(270, world.width / 2 - 80);
-      const propPattern = hash % 4;
+      const propPattern = hash % 6;
       const propY = centerY + ((hash >>> 2) % 260) - 130;
-      // Feed Alley needs long readable movement lines. A chunk carries at most
-      // one destructible prop and every fourth pattern is completely clear.
-      // This also makes overlapping bale/crate placements impossible.
+      // Feed Alley keeps a readable central escape route while alternating
+      // clear stretches and varied single-prop side pressure.
       if (propPattern === 0) {
         this.disableObstacle(slots[0]);
         this.disableObstacle(slots[1]);
       } else if (propPattern <= 2) {
         this.configureObstacle(slots[0], {
           id: `${record.key}-gate`,
-          x: centerX + ((hash & 1) ? -gateOffset : gateOffset),
+          x: centerX + (propPattern === 1 ? -gateOffset : gateOffset),
           y: propY,
           width: 148,
           height: 52,
@@ -365,17 +364,28 @@ export class ArenaSystem {
           hp: 130
         });
         this.disableObstacle(slots[1]);
-      } else {
+      } else if (propPattern <= 4) {
         this.disableObstacle(slots[0]);
         this.configureObstacle(slots[1], {
           id: `${record.key}-crate`,
-          x: centerX + ((hash & 2) ? -crateOffset : crateOffset),
+          x: centerX + (propPattern === 3 ? -crateOffset : crateOffset),
           y: propY,
           width: 68,
           height: 68,
           kind: 'crate',
           hp: 95
         });
+      } else {
+        this.configureObstacle(slots[0], {
+          id: `${record.key}-shoulder-bale`,
+          x: centerX + ((hash & 1) ? -gateOffset - 45 : gateOffset + 45),
+          y: propY,
+          width: 118,
+          height: 52,
+          kind: 'bale',
+          hp: 125
+        });
+        this.disableObstacle(slots[1]);
       }
       this.configureObstacle(slots[2], {
         id: `${record.key}-left-wall`,
@@ -397,30 +407,52 @@ export class ArenaSystem {
       });
       return;
     }
-    this.configureObstacle(slots[0], {
-      id: `${record.key}-prop-a`,
-      x: centerX + ((hash & 1) ? -260 : 260),
-      y: centerY + ((hash & 2) ? -210 : 210),
-      width: (hash & 4) ? 118 : 68,
-      height: (hash & 4) ? 52 : 68,
-      kind: (hash & 4) ? 'bale' : 'crate',
-      hp: (hash & 4) ? 125 : 90
-    });
-    if (hash % 3 === 0) {
+    slots.forEach((slot) => this.disableObstacle(slot));
+    const pattern = (hash >>> 5) % 6;
+    const side = (hash & 1) ? -1 : 1;
+    const configureOpenProp = (slot, suffix, x, y, kind = 'crate') => {
+      const bale = kind === 'bale';
+      this.configureObstacle(slot, {
+        id: `${record.key}-${suffix}`,
+        x: centerX + x,
+        y: centerY + y,
+        width: bale ? 118 : 68,
+        height: bale ? 52 : 68,
+        kind,
+        hp: bale ? 125 : 90
+      });
+    };
+    if (pattern === 0) {
+      configureOpenProp(slots[0], 'lone-crate', side * 265, -205, 'crate');
+    } else if (pattern === 1) {
+      configureOpenProp(slots[0], 'hay-north', -245, -215, 'bale');
+      configureOpenProp(slots[1], 'hay-south', 245, 215, 'bale');
+    } else if (pattern === 2) {
+      configureOpenProp(slots[0], 'mixed-bale', side * 270, 185, 'bale');
+      configureOpenProp(slots[1], 'mixed-crate', -side * 185, -245, 'crate');
+    } else if (pattern === 3) {
+      configureOpenProp(slots[0], 'crate-north', -250, -195, 'crate');
+      configureOpenProp(slots[1], 'crate-south', 250, 195, 'crate');
+      configureOpenProp(slots[2], 'hay-east', 285, -165, 'bale');
+    } else if (pattern === 4) {
+      configureOpenProp(slots[0], 'hay-pocket-a', side * 270, -180, 'bale');
+      configureOpenProp(slots[1], 'hay-pocket-b', side * 245, 35, 'bale');
+      configureOpenProp(slots[2], 'pocket-crate', side * 280, 225, 'crate');
+    } else {
+      configureOpenProp(slots[0], 'wide-bale', -side * 285, 205, 'bale');
+      configureOpenProp(slots[1], 'wide-crate', side * 285, -205, 'crate');
+    }
+    if (record.landmark.visible && pattern !== 0) {
       this.configureObstacle(slots[1], {
-        id: `${record.key}-prop-b`,
-        x: centerX + ((hash & 8) ? -110 : 110),
-        y: centerY + ((hash & 16) ? -270 : 270),
+        id: `${record.key}-landmark-crate`,
+        x: centerX - side * 120,
+        y: centerY + ((hash & 16) ? -260 : 260),
         width: 68,
         height: 68,
         kind: 'crate',
         hp: 90
       });
-    } else {
-      this.disableObstacle(slots[1]);
     }
-    this.disableObstacle(slots[2]);
-    this.disableObstacle(slots[3]);
   }
 
   configureObstacle(obstacle, config) {
