@@ -120,7 +120,8 @@ async function spawnTargetsAndTrigger(page, weapon, stage) {
         'primary-ace-rank',
         'primary-artillery-rank',
         'primary-storm-rank',
-        'golden-egg'
+        'golden-egg',
+        'rocket-egg'
       ].includes(id);
       const nearRadius = showcaseProjectile ? 170 : 82;
       const farRadius = showcaseProjectile ? 245 : 145;
@@ -151,8 +152,8 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     : weapon.id === 'lightning-comb' ? 25
       : weapon.id === 'laser-comb' ? 55
       : weapon.id === 'golden-egg' ? 90
-        : weapon.id === 'rocket-egg' ? 360
-          : weapon.id === 'molotov-egg' ? 520
+        : weapon.id === 'rocket-egg' ? 60
+          : weapon.id === 'molotov-egg' ? 300
             : 180;
   await page.waitForTimeout(visualDelay);
   const projectiles = await page.evaluate(() => window.__ROOSTER_TEST__.getProjectileSnapshot()
@@ -166,7 +167,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   const lightningVisuals = weapon.id === 'lightning-comb'
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getLightningVisualState())
     : [];
-  const areaAtFlight = ['molotov-egg', 'void-nest'].includes(weapon.id)
+  const areaAtFlight = ['molotov-egg', 'rocket-egg', 'void-nest'].includes(weapon.id)
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState())
     : null;
   const screenshot = `${weapon.id}-${stage}.png`;
@@ -175,6 +176,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   let fieldScreenshot;
   let supportMotion;
   let molotovVisuals;
+  let rocketVisuals;
   let voidVisuals;
   let remainingDelay = 1050 - visualDelay;
   if (weapon.id === 'orbit-eggs') {
@@ -244,7 +246,9 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       expected,
       areaAtFlight
     });
-    await page.waitForTimeout(430);
+    await page.waitForFunction((fieldCount) => (
+      window.__ROOSTER_TEST__.getAreaEffectState().hazards.length >= fieldCount
+    ), expected.fields, { timeout: 1800 });
     const fieldState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(fieldState.hazards.length === expected.fields
       && fieldState.hazards.every((zone) => (
@@ -270,6 +274,49 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     })), `Molotov ${stage} emitters jittered between samples.`, { fieldState, motionState });
     molotovVisuals = { flight: areaAtFlight.molotovFlights, field: fieldState.hazards };
     remainingDelay -= 490;
+  }
+  if (weapon.id === 'rocket-egg') {
+    const visualExpectations = {
+      r1: { count: 1, texture: 'rocket-egg-r1', impact: 'rocket-impact-r1', size: [48, 30], trail: 40, damage: 48, radius: 82 },
+      r2: { count: 1, texture: 'rocket-egg-r2', impact: 'rocket-impact-r2', size: [56, 34], trail: 46, damage: 64, radius: 100 },
+      r3: { count: 1, texture: 'rocket-egg-r3', impact: 'rocket-impact-r3', size: [66, 42], trail: 52, damage: 80, radius: 118 },
+      r4: { count: 2, texture: 'rocket-egg-r4', impact: 'rocket-impact-r4', size: [72, 44], trail: 58, damage: 96, radius: 132 },
+      evo: { count: 3, texture: 'rocket-egg-evo', impact: 'rocket-impact-evo', size: [84, 52], trail: 70, damage: 112, radius: 158 }
+    };
+    const expected = visualExpectations[stage];
+    assert(areaAtFlight.rocketFlights.length === 1
+      && areaAtFlight.rocketFlights[0].texture === expected.texture,
+    `Rocket Egg ${stage} did not begin with its dedicated lead rocket.`, { expected, areaAtFlight });
+    await page.waitForFunction((flightCount) => (
+      window.__ROOSTER_TEST__.getAreaEffectState().rocketFlights.length >= flightCount
+    ), expected.count, { timeout: 700 });
+    const flightState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(flightState.rocketFlights.length === expected.count
+      && flightState.rocketFlights.every((flight) => (
+        flight.texture === expected.texture
+        && Math.abs(flight.width - expected.size[0]) < 0.01
+        && Math.abs(flight.height - expected.size[1]) < 0.01
+        && flight.trailTexture === 'rocket-exhaust'
+        && Math.abs(flight.trailWidth - expected.trail) < 0.01
+        && flight.damage === expected.damage
+        && flight.radius === expected.radius
+      )), `Rocket Egg ${stage} has the wrong staged flight profile.`, { expected, flightState });
+    await page.waitForFunction((impactTexture) => (
+      window.__ROOSTER_TEST__.getAreaEffectState().rocketImpacts
+        .some((impact) => impact.texture === impactTexture)
+    ), expected.impact, { timeout: 1400 });
+    const impactState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(impactState.rocketImpacts.some((impact) => (
+      impact.texture === expected.impact
+      && impact.width > impact.height * 1.5
+    )), `Rocket Egg ${stage} did not use its perspective-correct impact asset.`, {
+      expected,
+      impactState
+    });
+    impactScreenshot = `${weapon.id}-${stage}-impact.png`;
+    await page.screenshot({ path: path.join(artifactDir, impactScreenshot) });
+    rocketVisuals = { flight: flightState.rocketFlights, impact: impactState.rocketImpacts };
+    remainingDelay -= 240;
   }
   if (weapon.id === 'void-nest') {
     const visualExpectations = {
@@ -459,7 +506,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       { expected, visual }
     );
   }
-  await page.waitForTimeout(remainingDelay);
+  await page.waitForTimeout(Math.max(0, remainingDelay));
   const after = await page.evaluate(() => ({
     telemetry: window.__ROOSTER_TEST__.getTelemetry(),
     loadout: window.__ROOSTER_TEST__.getLoadout(),
@@ -574,6 +621,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       : weapon.id === 'orbit-eggs' ? orbitVisuals
         : weapon.id === 'support-chick' ? supportVisuals
           : weapon.id === 'molotov-egg' ? molotovVisuals
+            : weapon.id === 'rocket-egg' ? rocketVisuals
             : weapon.id === 'void-nest' ? voidVisuals
           : weapon.id === 'lightning-comb' ? lightningVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
@@ -602,6 +650,7 @@ async function testWeapon(browser, serverUrl, weapon) {
         'lightning-comb',
         'support-chick',
         'molotov-egg',
+        'rocket-egg',
         'void-nest'
       ].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));

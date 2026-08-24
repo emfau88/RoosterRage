@@ -32,6 +32,12 @@ import molotovFlameLargeUrl from '../../assets/fx/molotov-modular/molotov-flame-
 import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.webp';
 import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
 import molotovSmokeUrl from '../../assets/fx/molotov-modular/molotov-smoke.webp';
+import rocketImpactR1Url from '../../assets/fx/rocket-modular/rocket-impact-r1.webp';
+import rocketImpactR2Url from '../../assets/fx/rocket-modular/rocket-impact-r2.webp';
+import rocketImpactR3Url from '../../assets/fx/rocket-modular/rocket-impact-r3.webp';
+import rocketImpactR4Url from '../../assets/fx/rocket-modular/rocket-impact-r4.webp';
+import rocketImpactEvoUrl from '../../assets/fx/rocket-modular/rocket-impact-evo.webp';
+import rocketExhaustUrl from '../../assets/fx/rocket-modular/rocket-exhaust.webp';
 import enemyBurnOverlaySheetUrl from '../../assets/fx/enemy-burn-overlay-sheet.webp';
 import arenaGroundUrl from '../../assets/map/arena-ground.webp';
 import supportChickR1SheetUrl from '../../assets/companions/support-chick-r1-sheet.webp';
@@ -54,13 +60,16 @@ import molotovEggR2Url from '../../assets/projectiles/molotov-modular/molotov-eg
 import molotovEggR3Url from '../../assets/projectiles/molotov-modular/molotov-egg-r3.webp';
 import molotovEggR4Url from '../../assets/projectiles/molotov-modular/molotov-egg-r4.webp';
 import molotovEggEvoUrl from '../../assets/projectiles/molotov-modular/molotov-egg-evo.webp';
-import rocketEggUrl from '../../assets/projectiles/rocket-egg.webp';
+import rocketEggR1Url from '../../assets/projectiles/rocket-modular/rocket-egg-r1.webp';
+import rocketEggR2Url from '../../assets/projectiles/rocket-modular/rocket-egg-r2.webp';
+import rocketEggR3Url from '../../assets/projectiles/rocket-modular/rocket-egg-r3.webp';
+import rocketEggR4Url from '../../assets/projectiles/rocket-modular/rocket-egg-r4.webp';
+import rocketEggEvoUrl from '../../assets/projectiles/rocket-modular/rocket-egg-evo.webp';
 import evoSunshotArrayProjectileUrl from '../../assets/projectiles/evolutions/evo-sunshot-array-projectile.webp';
 import evoSiegebreakerShellProjectileUrl from '../../assets/projectiles/evolutions/evo-siegebreaker-shell-projectile.webp';
 import evoTempestCrownProjectileUrl from '../../assets/projectiles/evolutions/evo-tempest-crown-projectile.webp';
 import evoSolarScrambleProjectileUrl from '../../assets/projectiles/evolutions/evo-solar-scramble-projectile.webp';
 import evoPhoenixPanProjectileUrl from '../../assets/projectiles/evolutions/evo-phoenix-pan-projectile.webp';
-import evoBroodstormProjectileUrl from '../../assets/projectiles/evolutions/evo-broodstorm-projectile.webp';
 import evoShellHaloProjectileUrl from '../../assets/projectiles/evolutions/evo-shell-halo-projectile.webp';
 import evoChickSquadronProjectileUrl from '../../assets/projectiles/evolutions/evo-chick-squadron-projectile.webp';
 import evoSunshotArrayImpactUrl from '../../assets/fx/evolutions/evo-sunshot-array-impact.webp';
@@ -68,7 +77,6 @@ import evoSiegebreakerShellImpactUrl from '../../assets/fx/evolutions/evo-siegeb
 import evoTempestCrownImpactUrl from '../../assets/fx/evolutions/evo-tempest-crown-impact.webp';
 import evoSolarScrambleImpactUrl from '../../assets/fx/evolutions/evo-solar-scramble-impact.webp';
 import evoPhoenixPanImpactUrl from '../../assets/fx/evolutions/evo-phoenix-pan-impact.webp';
-import evoBroodstormImpactUrl from '../../assets/fx/evolutions/evo-broodstorm-impact.webp';
 import evoThunderRoostImpactUrl from '../../assets/fx/evolutions/evo-thunder-roost-impact.webp';
 import evoShellHaloImpactUrl from '../../assets/fx/evolutions/evo-shell-halo-impact.webp';
 import evoSingularityNestZoneUrl from '../../assets/fx/evolutions/evo-singularity-nest-zone.webp';
@@ -182,6 +190,14 @@ export function preloadGameAssets(scene) {
     ['molotov-ignition', molotovIgnitionUrl],
     ['molotov-smoke', molotovSmokeUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));
+  [
+    ['rocket-impact-r1', rocketImpactR1Url],
+    ['rocket-impact-r2', rocketImpactR2Url],
+    ['rocket-impact-r3', rocketImpactR3Url],
+    ['rocket-impact-r4', rocketImpactR4Url],
+    ['rocket-impact-evo', rocketImpactEvoUrl],
+    ['rocket-exhaust', rocketExhaustUrl]
+  ].forEach(([key, url]) => scene.load.image(key, url));
   scene.load.spritesheet('enemy-burn-overlay-sheet', enemyBurnOverlaySheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('arena-ground', arenaGroundUrl);
   [
@@ -211,13 +227,18 @@ export function preloadGameAssets(scene) {
     ['molotov-egg-r4', molotovEggR4Url],
     ['molotov-egg-evo', molotovEggEvoUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));
-  scene.load.image('rocket-egg', rocketEggUrl);
+  [
+    ['rocket-egg-r1', rocketEggR1Url],
+    ['rocket-egg-r2', rocketEggR2Url],
+    ['rocket-egg-r3', rocketEggR3Url],
+    ['rocket-egg-r4', rocketEggR4Url],
+    ['rocket-egg-evo', rocketEggEvoUrl]
+  ].forEach(([key, url]) => scene.load.image(key, url));
   scene.load.image('evo-sunshot-array-projectile', evoSunshotArrayProjectileUrl);
   scene.load.image('evo-siegebreaker-shell-projectile', evoSiegebreakerShellProjectileUrl);
   scene.load.image('evo-tempest-crown-projectile', evoTempestCrownProjectileUrl);
   scene.load.image('evo-solar-scramble-projectile', evoSolarScrambleProjectileUrl);
   scene.load.image('evo-phoenix-pan-projectile', evoPhoenixPanProjectileUrl);
-  scene.load.image('evo-broodstorm-projectile', evoBroodstormProjectileUrl);
   scene.load.image('evo-shell-halo-projectile', evoShellHaloProjectileUrl);
   scene.load.image('evo-chick-squadron-projectile', evoChickSquadronProjectileUrl);
   scene.load.image('evo-sunshot-array-impact', evoSunshotArrayImpactUrl);
@@ -225,7 +246,6 @@ export function preloadGameAssets(scene) {
   scene.load.image('evo-tempest-crown-impact', evoTempestCrownImpactUrl);
   scene.load.image('evo-solar-scramble-impact', evoSolarScrambleImpactUrl);
   scene.load.image('evo-phoenix-pan-impact', evoPhoenixPanImpactUrl);
-  scene.load.image('evo-broodstorm-impact', evoBroodstormImpactUrl);
   scene.load.image('evo-thunder-roost-impact', evoThunderRoostImpactUrl);
   scene.load.image('evo-shell-halo-impact', evoShellHaloImpactUrl);
   scene.load.image('evo-singularity-nest-zone', evoSingularityNestZoneUrl);

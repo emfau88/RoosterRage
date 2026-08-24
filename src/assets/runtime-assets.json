@@ -274,6 +274,51 @@
       "bytes": 1074
     },
     {
+      "source": "art-source/projectiles/rocket-modular/rocket-egg-r1.png",
+      "sourceSha256": "5e00b989c83f11622a2e507d778ee8cf7ddedc7117a0d8b6589b8eaf500e8e53",
+      "runtime": "src/assets/projectiles/rocket-modular/rocket-egg-r1.webp",
+      "runtimeSha256": "ad16807e29de2726577cdf327770fb2d6f3634b732f529b47e23955fcf4f0eea",
+      "width": 256,
+      "height": 160,
+      "bytes": 7000
+    },
+    {
+      "source": "art-source/projectiles/rocket-modular/rocket-egg-r2.png",
+      "sourceSha256": "d94280048f9cfdc0c7f7b6911014ef412d727ed7fbedf905dcc29fe224a1a8e8",
+      "runtime": "src/assets/projectiles/rocket-modular/rocket-egg-r2.webp",
+      "runtimeSha256": "5dcda914670252c3821ee14defbf90d936cd03619f1abea673cd134e0737abee",
+      "width": 256,
+      "height": 160,
+      "bytes": 6136
+    },
+    {
+      "source": "art-source/projectiles/rocket-modular/rocket-egg-r3.png",
+      "sourceSha256": "64f62075dccb4365af74d303a2015593c9f0845ae579069ace70e01fd5cb6e5f",
+      "runtime": "src/assets/projectiles/rocket-modular/rocket-egg-r3.webp",
+      "runtimeSha256": "bd42a86ea5b5c57916d0f580c9230eb400a9e2bdde3728fd9fac707ce2d1f181",
+      "width": 256,
+      "height": 160,
+      "bytes": 11784
+    },
+    {
+      "source": "art-source/projectiles/rocket-modular/rocket-egg-r4.png",
+      "sourceSha256": "cd2118a9ef0febab6aedfa22bc2308bf4c22d1dc9ec61ae61a105a5b5bb7a316",
+      "runtime": "src/assets/projectiles/rocket-modular/rocket-egg-r4.webp",
+      "runtimeSha256": "00c9d29616e330cb53f0990d1b6b1d348d39fd503e63c996748a19de6e07e068",
+      "width": 256,
+      "height": 160,
+      "bytes": 10936
+    },
+    {
+      "source": "art-source/projectiles/rocket-modular/rocket-egg-evo.png",
+      "sourceSha256": "603cce085e0d91c9ed8c54ffcf04cfe8e1b0ce3d27ec0a6859883fe50007aa33",
+      "runtime": "src/assets/projectiles/rocket-modular/rocket-egg-evo.webp",
+      "runtimeSha256": "a6f85b656a74d70c5109e7c93beab8cffa618d9f5c796b90d62dd136ed002122",
+      "width": 256,
+      "height": 160,
+      "bytes": 13124
+    },
+    {
       "source": "art-source/projectiles/evolutions/evo-sunshot-array-projectile.png",
       "sourceSha256": "451f76d78303e36d1c61f41a771ab2f8e30e83c91e4448f75a78c0b78a4b2184",
       "runtime": "src/assets/projectiles/evolutions/evo-sunshot-array-projectile.webp",
@@ -902,6 +947,60 @@
       "width": 192,
       "height": 192,
       "bytes": 5888
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-impact-r1.png",
+      "sourceSha256": "50e6d2eaf0c89cd62eadc7f41b4e133769a0504f94d920de4947a14a14b96a98",
+      "runtime": "src/assets/fx/rocket-modular/rocket-impact-r1.webp",
+      "runtimeSha256": "edd9a381be3e14482c30ceae1a11922e75f796d7b6219b2caa9b3639b8084b6c",
+      "width": 384,
+      "height": 256,
+      "bytes": 13238
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-impact-r2.png",
+      "sourceSha256": "cbfb610f62fb5acdae56ec209ad029d3b2fffb7eaa436d63b818888edd92aec5",
+      "runtime": "src/assets/fx/rocket-modular/rocket-impact-r2.webp",
+      "runtimeSha256": "01274acb0e1eac7dae7a7ca652ec8062c2d29a51bb5318922adce2601bbd268e",
+      "width": 384,
+      "height": 256,
+      "bytes": 12510
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-impact-r3.png",
+      "sourceSha256": "ef4e3bbf21cbbb4aa647edf93b14f0743d805df7b1099dfe86b5214a0fed0821",
+      "runtime": "src/assets/fx/rocket-modular/rocket-impact-r3.webp",
+      "runtimeSha256": "30340adbdf00f669b3ae5756034979e549e135919130fda0f84a1919a9b851be",
+      "width": 384,
+      "height": 256,
+      "bytes": 22922
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-impact-r4.png",
+      "sourceSha256": "c50e4ed30f87e31ee51c1d391e2e73d3fc082f1cb6315277c4870b0fbdf03d91",
+      "runtime": "src/assets/fx/rocket-modular/rocket-impact-r4.webp",
+      "runtimeSha256": "73d6af4eda0b3c97c63b8737c8e2adfff4437bbd50635b276ee4b1e42da59f14",
+      "width": 384,
+      "height": 256,
+      "bytes": 26458
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-impact-evo.png",
+      "sourceSha256": "9faa4b1a71d6218181b884c98db050dca77ec537486e0a437a1a12b6c0f3aa81",
+      "runtime": "src/assets/fx/rocket-modular/rocket-impact-evo.webp",
+      "runtimeSha256": "b558cf3d694f7cc685f32ce63dde42113033a2d52be93c56c4bde4b70c53ce7f",
+      "width": 384,
+      "height": 256,
+      "bytes": 29496
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-exhaust.png",
+      "sourceSha256": "d28565cbaed92b3aa3841bcdace82b723f2b654cf1e56aabf40cc838ddc9e2d4",
+      "runtime": "src/assets/fx/rocket-modular/rocket-exhaust.webp",
+      "runtimeSha256": "383a3a57e88f890ba4bccd7fbd9023f67fac26cde74b1d50839e6f20b290c444",
+      "width": 256,
+      "height": 128,
+      "bytes": 2772
     },
     {
       "source": "art-source/fx/enemy-burn-overlay-sheet.png",

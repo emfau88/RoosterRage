@@ -275,10 +275,10 @@ export const UPGRADE_DEFINITIONS = [
     name: 'Rocket Egg',
     description: 'Zielsuchende Rakete mit 48 Flächenschaden.',
     rankDescriptions: [
-      '48 Schaden in 74 Radius, 4,98 s Abklingzeit.',
-      'R2: größere Explosion, stärkere Spur und bessere Zielsuche.',
-      'R3: drei kurze Cluster-Blasts folgen dem Einschlag.',
-      'R4: zwei Raketen starten als gestaffelte Salve.'
+      '48 Schaden in 82 Radius mit kompakter Eierschalen-Rakete.',
+      'R2: 64 Schaden in 100 Radius, verstärkte Rakete und bessere Zielsuche.',
+      'R3: 80 Schaden in 118 Radius; drei gestaffelte Cluster-Blasts folgen.',
+      'R4: zwei schwere Raketen treffen mit je 96 Schaden in 132 Radius.'
     ],
     category: 'active',
     rarity: 'rare',
@@ -659,7 +659,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-broodstorm',
     name: 'Broodstorm Battery',
-    description: 'Rocket Egg startet drei versetzte Raketen mit größeren Explosionen.',
+    description: 'Drei versetzte Broodstorm-Raketen verursachen je 112 Schaden in 158 Radius.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,

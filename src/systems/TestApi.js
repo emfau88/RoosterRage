@@ -161,6 +161,27 @@ export function installTestApi(scene) {
     }),
     getAreaEffectState: () => ({
       molotovProjectiles: scene.molotovProjectiles.filter((projectile) => projectile.active).length,
+      rocketFlights: scene.rocketProjectiles.filter((projectile) => projectile.active).map((projectile) => ({
+        rank: projectile.rank,
+        evolved: projectile.evolved,
+        damage: projectile.damage,
+        radius: projectile.radius,
+        texture: projectile.sprite.texture?.key,
+        width: projectile.sprite.displayWidth,
+        height: projectile.sprite.displayHeight,
+        trailTexture: projectile.trail.texture?.key,
+        trailWidth: projectile.trail.displayWidth,
+        trailAlpha: projectile.trail.alpha,
+        rotation: projectile.sprite.rotation
+      })),
+      rocketImpacts: [...scene.rocketEgg.activeImpactVisuals]
+        .filter((impact) => impact.active)
+        .map((impact) => ({
+          texture: impact.texture?.key,
+          width: impact.displayWidth,
+          height: impact.displayHeight,
+          alpha: impact.alpha
+        })),
       molotovFlights: scene.molotovProjectiles.filter((projectile) => projectile.active).map((projectile) => ({
         rank: projectile.rank,
         evolved: projectile.evolved,
@@ -279,6 +300,8 @@ export function installTestApi(scene) {
         'evo-singularity-nest-zone',
         'molotov-egg-evo',
         'molotov-ground-evo',
+        'rocket-egg-evo',
+        'rocket-impact-evo',
         'evo-dawn-laser-emitter',
         'evo-dawn-laser-impact',
         'support-chick-evo-sheet',
