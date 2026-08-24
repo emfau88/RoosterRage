@@ -110,8 +110,7 @@ import coopSquareTractorUrl from '../../assets/map/coop-square-tractor.webp';
 import coopSquareTroughUrl from '../../assets/map/coop-square-trough.webp';
 import coopSquareHayStackUrl from '../../assets/map/coop-square-hay-stack.webp';
 import {
-  getSceneRenderScale,
-  getSceneViewport
+  getSceneRenderScale
 } from '../DisplayResolutionSystem.js';
 
 const audioAssetUrls = import.meta.glob('../../assets/audio/**/*.mp3', {
@@ -122,35 +121,44 @@ const audioAssetUrls = import.meta.glob('../../assets/audio/**/*.mp3', {
 
 export function preloadGameAssets(scene) {
   document.body.dataset.roosterLoadState = 'loading';
-  const viewport = getSceneViewport(scene);
   scene.cameras.main.setZoom(getSceneRenderScale(scene));
-  const centerX = viewport.width / 2;
-  const centerY = viewport.height / 2;
-  const progressTrack = scene.add.rectangle(centerX, centerY + 24, 280, 8, 0x2b3a3f, 1);
-  const progressBar = scene.add.rectangle(centerX - 140, centerY + 24, 280, 8, 0xffc94a, 1)
-    .setOrigin(0, 0.5)
-    .setScale(0, 1);
-  const progressLabel = scene.add.text(centerX, centerY - 12, 'Arena wird geladen ...', {
-    fontFamily: 'Arial',
-    fontSize: '18px',
-    color: '#f6f0dd'
-  }).setOrigin(0.5);
-  const loadingUi = [progressTrack, progressBar, progressLabel];
+  const loadingUi = document.querySelector('#boot-loader');
+  const progressTrack = loadingUi?.querySelector('.boot-loader__track');
+  const progressBar = loadingUi?.querySelector('[data-boot-loader-fill]');
+  const progressLabel = loadingUi?.querySelector('[data-boot-loader-message]');
+  const progressPercent = loadingUi?.querySelector('[data-boot-loader-percent]');
+  const loadingMessages = [
+    [0.22, 'Die Eier werden scharf gemacht …'],
+    [0.48, 'Der Stall wird kampfbereit gegackert …'],
+    [0.74, 'Die Horde zählt schon rückwärts …'],
+    [0.94, 'Letzte Feder festziehen …'],
+    [1, 'Hahn im Anschlag!']
+  ];
   scene.assetLoadErrors = [];
-  scene.load.on('progress', (progress) => progressBar.setScale(progress, 1));
+  scene.load.on('progress', (progress) => {
+    const percent = Math.round(progress * 100);
+    progressBar?.style.setProperty('width', `${percent}%`);
+    progressTrack?.setAttribute('aria-valuenow', String(percent));
+    if (progressPercent) progressPercent.textContent = `${percent} %`;
+    if (progressLabel && scene.assetLoadErrors.length === 0) {
+      progressLabel.textContent = loadingMessages.find(([threshold]) => progress <= threshold)?.[1]
+        ?? loadingMessages.at(-1)[1];
+    }
+  });
   scene.load.on('loaderror', (file) => {
     scene.assetLoadErrors.push(file.key);
     document.body.dataset.roosterLoadState = 'error';
-    progressLabel.setText(`Asset konnte nicht geladen werden: ${file.key}`);
-    progressLabel.setColor('#ff7878');
+    loadingUi?.classList.add('has-error');
+    if (progressLabel) progressLabel.textContent = `„${file.key}“ wollte nicht schlüpfen.`;
   });
   scene.load.once('complete', () => {
     if (scene.assetLoadErrors.length === 0) {
       document.body.dataset.roosterLoadState = 'loaded';
-      loadingUi.forEach((item) => item.destroy());
+      loadingUi?.classList.add('is-complete');
+      window.setTimeout(() => loadingUi?.remove(), 260);
     } else {
-      progressBar.setFillStyle(0xff5c5c);
-      progressLabel.setText('Ladefehler. Bitte Seite neu laden.');
+      progressBar?.style.setProperty('width', '100%');
+      if (progressLabel) progressLabel.textContent = 'Ladefehler. Bitte die Seite neu laden.';
     }
   });
 

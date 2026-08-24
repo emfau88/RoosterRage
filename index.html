@@ -12,6 +12,17 @@
     <meta property="og:image" content="%BASE_URL%marketing/rooster-rage-key-art-master.png" />
   </head>
   <body>
+    <div id="boot-loader" class="boot-loader" role="status" aria-live="polite" aria-label="Rooster Rage wird geladen">
+      <div class="boot-loader__card">
+        <small>ROOSTER RAGE</small>
+        <h1>Der Hahn lädt durch.</h1>
+        <p data-boot-loader-message>Die Eier werden scharf gemacht …</p>
+        <div class="boot-loader__track" role="progressbar" aria-label="Spielfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span data-boot-loader-fill></span>
+        </div>
+        <strong data-boot-loader-percent>0 %</strong>
+      </div>
+    </div>
     <div id="game-root"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -33,6 +33,122 @@ canvas {
   image-rendering: auto;
 }
 
+.boot-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  display: grid;
+  padding:
+    calc(18px + env(safe-area-inset-top))
+    calc(18px + env(safe-area-inset-right))
+    calc(18px + env(safe-area-inset-bottom))
+    calc(18px + env(safe-area-inset-left));
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 198, 66, 0.12), transparent 32%),
+    #172226;
+  color: #fff6d7;
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+.boot-loader.is-complete {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.boot-loader__card {
+  box-sizing: border-box;
+  width: min(440px, 100%);
+  padding: clamp(22px, 5vw, 34px);
+  border: 1px solid rgba(255, 216, 91, 0.38);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(255, 196, 62, 0.13), transparent 35%),
+    linear-gradient(145deg, rgba(35, 49, 48, 0.98), rgba(7, 17, 22, 0.98));
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38), inset 0 1px rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.boot-loader__card > small {
+  color: #ffd75e;
+  font-size: clamp(8px, 2.2vw, 10px);
+  font-weight: 950;
+  letter-spacing: 0.22em;
+}
+
+.boot-loader__card h1 {
+  margin: 7px 0 6px;
+  font-size: clamp(24px, 7vw, 36px);
+  line-height: 1.05;
+}
+
+.boot-loader__card p {
+  min-height: 1.5em;
+  margin: 0 0 18px;
+  color: #dce5df;
+  font-size: clamp(12px, 3.5vw, 15px);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.boot-loader__track {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 229, 145, 0.24);
+  border-radius: 999px;
+  background: rgba(2, 9, 12, 0.72);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.48);
+}
+
+.boot-loader__track > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ef9f28, #ffe36b 62%, #fff5b2);
+  box-shadow: 0 0 16px rgba(255, 211, 80, 0.52);
+  transition: width 100ms linear;
+}
+
+.boot-loader__card > strong {
+  display: block;
+  margin-top: 8px;
+  color: #f8dfa0;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+.boot-loader.has-error .boot-loader__track > span {
+  background: #ff6767;
+  box-shadow: 0 0 14px rgba(255, 80, 80, 0.45);
+}
+
+.boot-loader.has-error .boot-loader__card p {
+  color: #ffabab;
+}
+
+@media (max-width: 360px), (max-height: 520px) {
+  .boot-loader__card {
+    padding: 20px 18px;
+    border-radius: 14px;
+  }
+
+  .boot-loader__card p {
+    margin-bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-loader,
+  .boot-loader__track > span {
+    transition: none;
+  }
+}
+
 .hud {
   position: fixed;
   top: 0;
@@ -2202,6 +2318,21 @@ canvas {
   .hub-run-card {
     min-height: 0;
     padding: 9px;
+  }
+
+  .hub-arena-showcase {
+    height: 96px;
+    border-radius: 8px;
+  }
+
+  .hub-arena-showcase__identity {
+    right: 7px;
+    bottom: 6px;
+    left: 7px;
+  }
+
+  .hub-arena-showcase__identity strong {
+    font-size: 13px;
   }
 
   .hub-run-best {
