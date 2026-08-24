@@ -360,6 +360,10 @@ export class HUD {
         <button class="challenge-card ${challenge.id === selectedChallenge ? 'is-selected' : ''} ${challenge.unlocked ? '' : 'is-locked'}"
           type="button" data-challenge="${challenge.id}" data-arena="${arena.id}" ${challenge.unlocked ? '' : 'disabled'}
           aria-label="${challenge.name}, Arena ${arena.name}">
+          <span class="challenge-card__visual" aria-hidden="true">
+            <img src="${preview.url}" alt="">
+            <i></i>
+          </span>
           <span class="challenge-card__copy">
             <em>${arena.name} · ${preview.layout}</em>
             <strong>${challenge.name}</strong>
@@ -418,6 +422,31 @@ export class HUD {
         </nav>
         <section class="henhouse-view is-active" data-hub-view="play">
           <div class="henhouse-play-grid">
+            <article class="hub-run-card">
+              <div class="hub-run-spotlight">
+                <div class="hub-arena-showcase" data-arena-showcase>
+                  <img data-arena-preview alt="" loading="eager">
+                  <span class="hub-arena-showcase__shade"></span>
+                  <span class="hub-arena-showcase__identity">
+                    <small data-run-scope></small>
+                    <strong data-run-arena>OPEN YARD</strong>
+                    <em data-run-layout></em>
+                  </span>
+                </div>
+                <div class="hub-run-summary">
+                  <small>RUN VORBEREITEN</small>
+                  <h2 data-run-challenge>STANDARD RUN</h2>
+                  <p data-run-description></p>
+                  <div class="hub-run-best">
+                    <span><small>WELLEN</small><strong>10</strong></span>
+                    <span><small>BESTE JAGD</small><strong>${bests.highestKills} Kills</strong></span>
+                    <span data-run-reward></span>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-mode-heading"><small>EXPEDITION WÄHLEN</small><span>Jeder Modus verändert Hof und Druck.</span></div>
+              <div class="challenge-list hub-challenge-list">${challengeCards}</div>
+            </article>
             <article class="hub-rooster-hero">
               <div class="hub-rooster-hero__portrait">
                 <img data-hero-portrait alt="Ausgewählter Rooster">
@@ -430,23 +459,8 @@ export class HUD {
                 <strong data-hero-role></strong>
                 <p data-hero-description></p>
                 <div class="hub-rooster-mastery"><span data-hero-mastery></span><i><b data-hero-progress></b></i></div>
-                <div class="hub-rooster-switches">${roosterSwitches}</div>
               </div>
-            </article>
-            <article class="hub-run-card">
-              <div class="hub-arena-showcase" data-arena-showcase>
-                <img data-arena-preview alt="" loading="eager">
-                <span class="hub-arena-showcase__shade"></span>
-                <span class="hub-arena-showcase__identity">
-                  <small data-run-scope></small>
-                  <strong data-run-arena>OPEN YARD</strong>
-                  <em data-run-layout></em>
-                </span>
-              </div>
-              <h2 data-run-challenge>STANDARD RUN</h2>
-              <p data-run-description></p>
-              <div class="hub-run-best"><span><small>BESTE JAGD</small><strong>${bests.highestKills} Kills</strong></span><span data-run-reward></span></div>
-              <div class="challenge-list hub-challenge-list">${challengeCards}</div>
+              <div class="hub-rooster-switches">${roosterSwitches}</div>
               <button type="button" class="hub-start-button" data-run-start><span>RUN STARTEN</span><small>Hof betreten</small></button>
             </article>
           </div>
