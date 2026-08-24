@@ -167,6 +167,57 @@ async function verifyResponsiveHud(browser, serverUrl) {
   return results;
 }
 
+async function verifyShortMobileHubScrolling(browser, serverUrl) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 700 } });
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.stack ?? error.message));
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  try {
+    await page.goto(`${serverUrl}?seed=short-mobile-hub&profile=average`, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.henhouse-panel');
+    await page.click('[data-hub-tab="roosters"]');
+    const roosters = page.locator('[data-hub-view="roosters"]');
+    const before = await roosters.evaluate((element) => ({
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+      scrollTop: element.scrollTop,
+      overflowX: getComputedStyle(element).overflowX,
+      overflowY: getComputedStyle(element).overflowY
+    }));
+    await roosters.hover();
+    await page.mouse.wheel(0, 500);
+    await page.waitForTimeout(100);
+    const after = await roosters.evaluate((element) => ({ scrollTop: element.scrollTop }));
+    assert(
+      before.scrollHeight > before.clientHeight
+      && before.overflowX === 'hidden'
+      && before.overflowY === 'auto'
+      && after.scrollTop > 0,
+      'Short mobile rooster view must retain native vertical scrolling.',
+      { before, after }
+    );
+    const secondaryViews = {};
+    for (const view of ['training', 'archive']) {
+      await page.click(`[data-hub-tab="${view}"]`);
+      secondaryViews[view] = await page.locator(`[data-hub-view="${view}"]`).evaluate((element) => ({
+        overflowX: getComputedStyle(element).overflowX,
+        overflowY: getComputedStyle(element).overflowY
+      }));
+    }
+    assert(
+      Object.values(secondaryViews).every((view) => view.overflowX === 'hidden' && view.overflowY === 'auto'),
+      'Short mobile secondary hub views must remain vertically scrollable.',
+      secondaryViews
+    );
+    assert(errors.length === 0, 'Browser errors in short mobile hub scrolling.', errors);
+    return { before, after, secondaryViews };
+  } finally {
+    await page.close();
+  }
+}
+
 async function verifySettingsAndReport(browser, serverUrl) {
   const { page, errors } = await openGame(browser, serverUrl, { width: 390, height: 844 }, 'report');
   try {
@@ -299,6 +350,7 @@ async function run() {
     const report = {
       generatedAt: new Date().toISOString(),
       layouts: await verifyResponsiveHud(browser, serverState.url),
+      shortMobileHub: await verifyShortMobileHubScrolling(browser, serverState.url),
       report: await verifySettingsAndReport(browser, serverState.url),
       returnToHub: await verifyReturnToHub(browser, serverState.url)
     };

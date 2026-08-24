@@ -3371,22 +3371,38 @@ html.has-ui-overlay .upgrade-confirmation {
 @media (max-width: 760px) {
   .upgrade-confirmation {
     top: calc(68px + env(safe-area-inset-top));
-    width: min(350px, calc(100vw - 16px));
-    min-height: 62px;
-    padding: 7px 9px;
+    box-sizing: border-box;
+    width: min(312px, calc(100vw - 22px));
+    min-height: 54px;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
   }
 
   .upgrade-confirmation__icon {
-    width: 42px;
-    height: 42px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .upgrade-confirmation__copy small {
+    font-size: 7px;
+    letter-spacing: 0.14em;
   }
 
   .upgrade-confirmation__copy strong {
-    font-size: 14px;
+    font-size: 12.5px;
+  }
+
+  .upgrade-confirmation__copy b {
+    font-size: 8px;
+  }
+
+  .upgrade-confirmation__copy em {
+    font-size: 9px;
   }
 
   .upgrade-confirmation .upgrade-button__changes > span {
-    font-size: 8px;
+    font-size: 7px;
   }
 }
 
@@ -3449,16 +3465,40 @@ html.has-ui-overlay .upgrade-confirmation {
   .multi-kill {
     top: calc(66px + env(safe-area-inset-top));
     right: calc(8px + env(safe-area-inset-right));
-    padding: 5px 7px;
+    gap: 5px;
+    padding: 4px 6px;
+    border-radius: 7px;
+    box-shadow: 0 7px 17px rgba(0, 0, 0, 0.34), 0 0 10px color-mix(in srgb, var(--multi-kill-color) 22%, transparent);
   }
 
   .multi-kill strong {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .multi-kill span {
-    max-width: 112px;
-    font-size: 8px;
+    max-width: 104px;
+    font-size: 7.5px;
+    letter-spacing: 0.07em;
+  }
+}
+
+@media (max-width: 389px) {
+  .upgrade-confirmation {
+    width: min(286px, calc(100vw - 18px));
+    min-height: 50px;
+  }
+
+  .upgrade-confirmation__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .upgrade-confirmation__copy strong {
+    font-size: 12px;
+  }
+
+  .multi-kill {
+    right: calc(6px + env(safe-area-inset-right));
   }
 }
 
@@ -3852,8 +3892,13 @@ html.has-ui-overlay .upgrade-confirmation {
     font-size: 8px;
   }
 
-  .henhouse-view {
+  .henhouse-view[data-hub-view="play"] {
     overflow: hidden;
+  }
+
+  .henhouse-view:not([data-hub-view="play"]) {
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .henhouse-play-grid {

@@ -233,6 +233,29 @@ async function testUpgradeOffers(browser) {
       mobileConfirmationBounds
     );
     await page.screenshot({ path: path.join(artifactDir, 'upgrade-confirmation-mobile-phase-6.png') });
+    await page.waitForTimeout(1200);
+    const mobileConfirmationHeld = await page.evaluate(() => (
+      window.__ROOSTER_TEST__.getUpgradeFeedbackState().hud.visible
+    ));
+    assert(mobileConfirmationHeld, 'Mobile upgrade confirmation should remain readable beyond 1.4 seconds.');
+    await page.waitForTimeout(1050);
+    const mobileConfirmationDismissed = await page.evaluate(() => (
+      window.__ROOSTER_TEST__.getUpgradeFeedbackState().hud.visible
+    ));
+    assert(!mobileConfirmationDismissed, 'Mobile upgrade confirmation should dismiss after its extended hold.');
+    await page.setViewportSize({ width: 360, height: 740 });
+    await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), spectacle.id);
+    await page.waitForTimeout(220);
+    const narrowConfirmationBounds = await page.locator('.upgrade-confirmation').boundingBox();
+    assert(
+      narrowConfirmationBounds
+      && narrowConfirmationBounds.x >= 0
+      && narrowConfirmationBounds.x + narrowConfirmationBounds.width <= 360
+      && narrowConfirmationBounds.width <= 287,
+      'Upgrade confirmation should use the narrow mobile layout.',
+      narrowConfirmationBounds
+    );
+    await page.screenshot({ path: path.join(artifactDir, 'upgrade-confirmation-narrow-phase-6.png') });
     const guaranteeAfter = await page.evaluate(() => window.__ROOSTER_TEST__.shouldGuaranteeSpectacle());
     assert(!guaranteeAfter, 'Spectacle guarantee should stop after choosing a spectacle upgrade.');
     assert(errors.length === 0, 'Browser reported errors during upgrade offer test.', errors);
@@ -1128,7 +1151,12 @@ async function testAreaEffectReadability(browser) {
 }
 
 async function testHordeCombatFeedback(browser) {
-  const { page, errors } = await openGame(browser, 'horde-combat-feedback');
+  const { page, errors } = await openGame(
+    browser,
+    'horde-combat-feedback',
+    'ace',
+    { width: 390, height: 844 }
+  );
   try {
     const immediate = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
@@ -1177,6 +1205,16 @@ async function testHordeCombatFeedback(browser) {
       'Transient horde feedback did not clean itself up.',
       settled
     );
+    await page.waitForTimeout(600);
+    const mobileBannerHeld = await page.evaluate(() => (
+      window.__ROOSTER_TEST__.getCombatFeedbackState().hud.visible
+    ));
+    assert(mobileBannerHeld, 'Mobile multi-kill feedback should remain visible beyond one second.');
+    await page.waitForTimeout(500);
+    const mobileBannerDismissed = await page.evaluate(() => (
+      window.__ROOSTER_TEST__.getCombatFeedbackState().hud.visible
+    ));
+    assert(!mobileBannerDismissed, 'Mobile multi-kill feedback should dismiss after its extended hold.');
     assert(errors.length === 0, 'Browser reported errors during horde feedback test.', errors);
     return { name: 'horde combat feedback', status: 'passed', immediate, settled };
   } finally {

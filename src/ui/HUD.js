@@ -1106,10 +1106,11 @@ export class HUD {
       ?? upgrade.baseWeaponId
       ?? upgrade.slotKey
       ?? upgrade.id;
+    const displayDuration = window.matchMedia('(max-width: 760px)').matches ? 2400 : 1750;
     this.recentUpgrade = {
       id: upgrade.id,
       key,
-      until: performance.now() + 1900
+      until: performance.now() + displayDuration + 150
     };
     window.clearTimeout(this.upgradeConfirmationTimeout);
     this.upgradeConfirmation.className = `upgrade-confirmation upgrade-confirmation--${upgrade.momentTone ?? upgrade.upgradeMoment ?? 'new'}`;
@@ -1131,7 +1132,7 @@ export class HUD {
     this.upgradeConfirmation.classList.add('is-visible');
     this.upgradeConfirmationTimeout = window.setTimeout(() => {
       this.upgradeConfirmation.classList.remove('is-visible');
-    }, 1750);
+    }, displayDuration);
   }
 
   getUpgradeFeedbackState() {
@@ -1161,10 +1162,16 @@ export class HUD {
     killMetric?.classList.remove('is-kill-burst');
     void killMetric?.offsetWidth;
     killMetric?.classList.add('is-kill-burst');
+    this.scheduleMultiKillHide();
+  }
+
+  scheduleMultiKillHide() {
+    window.clearTimeout(this.multiKillTimeout);
+    const displayDuration = window.matchMedia('(max-width: 760px)').matches ? 1600 : 1050;
     this.multiKillTimeout = window.setTimeout(() => {
-      this.multiKill.classList.remove('is-visible');
-      killMetric?.classList.remove('is-kill-burst');
-    }, 1050);
+      this.multiKill?.classList.remove('is-visible');
+      this.root.querySelector('[data-kills]')?.classList.remove('is-kill-burst');
+    }, displayDuration);
   }
 
   getMultiKillState() {
@@ -1177,7 +1184,12 @@ export class HUD {
 
   updateMultiKillCount(count) {
     const value = this.multiKill?.querySelector('strong');
-    if (value) value.textContent = `${count}×`;
+    if (value) {
+      value.textContent = `${count}×`;
+      if (this.multiKill.classList.contains('is-visible')) {
+        this.scheduleMultiKillHide();
+      }
+    }
   }
 
   iconIdFromLabel(label) {
