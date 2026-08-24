@@ -410,8 +410,14 @@ export class HUD {
             <span class="henhouse-kernels"><img src="${kernelCurrencyUrl}" alt=""><strong>${currency.kernels}</strong> Körner</span>
           </div>
           <div class="henhouse-actions">
-            <button type="button" class="henhouse-settings" data-hub-fullscreen>Fullscreen</button>
-            <button type="button" class="henhouse-settings" data-hub-settings>Einstellungen</button>
+            <button type="button" class="henhouse-settings" data-hub-fullscreen title="Fullscreen" aria-label="Fullscreen umschalten">
+              <span class="henhouse-action__icon fullscreen-glyph" aria-hidden="true"></span>
+              <span class="henhouse-action__label">Fullscreen</span>
+            </button>
+            <button type="button" class="henhouse-settings" data-hub-settings title="Einstellungen" aria-label="Einstellungen öffnen">
+              <span class="henhouse-action__icon settings-glyph" aria-hidden="true"><i></i><i></i></span>
+              <span class="henhouse-action__label">Einstellungen</span>
+            </button>
           </div>
         </div>
         <nav class="henhouse-nav" aria-label="Hennenhütte Bereiche">

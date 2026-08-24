@@ -160,6 +160,10 @@ async function run() {
     });
     await mobilePage.goto(url, { waitUntil: 'domcontentloaded' });
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState);
+    const mobileHubFullscreen = await mobilePage.locator('[data-hub-fullscreen]').isVisible();
+    const mobileHubSettings = await mobilePage.locator('[data-hub-settings]').isVisible();
+    assert(mobileHubFullscreen && mobileHubSettings,
+      'Portrait hub must expose fullscreen and settings controls.', { mobileHubFullscreen, mobileHubSettings });
     await mobilePage.locator('[data-hub-tab="roosters"]').click();
     await mobilePage.locator('.rooster-card--storm').scrollIntoViewIfNeeded();
     await mobilePage.screenshot({ path: path.join(artifactDir, 'rooster-class-selection-mobile.png') });
@@ -192,6 +196,8 @@ async function run() {
     const joystickDisplay = await mobilePage.locator('.joystick').evaluate(
       (element) => getComputedStyle(element).display
     );
+    const mobileFullscreen = await mobilePage.locator('[data-fullscreen]').isVisible();
+    const mobileSettings = await mobilePage.locator('[data-settings]').isVisible();
     await mobilePage.screenshot({ path: path.join(artifactDir, 'rooster-smoke-mobile.png') });
     assert(mobileErrors.length === 0, 'Mobile browser reported console/page errors.', mobileErrors);
     assert(!mobileState.lastError && mobileState.frames > 30, 'Mobile game loop did not start cleanly.', mobileState);
@@ -206,6 +212,8 @@ async function run() {
       { mobileCanvas, mobileCanvasBacking }
     );
     assert(joystickDisplay !== 'none', 'Mobile joystick is not visible.', { joystickDisplay });
+    assert(mobileFullscreen && mobileSettings,
+      'Portrait HUD must expose fullscreen and settings controls.', { mobileFullscreen, mobileSettings });
     assert(mobileState.cameraZoom <= 0.9, 'Portrait camera is not zoomed out enough.', mobileState);
     assert(mobileHud?.height <= 125, 'Portrait HUD obscures too much of the arena.', mobileHud);
     assert(
@@ -265,8 +273,8 @@ async function run() {
     assert(landscapeCanvas?.width >= 830 && landscapeCanvas?.height >= 380, 'Landscape canvas does not fill the viewport.', landscapeCanvas);
     assert(landscapeHud?.height <= 90, 'Landscape HUD obscures too much of the arena.', landscapeHud);
     assert(landscapeJoystick !== 'none', 'Landscape joystick is not visible.', { landscapeJoystick });
-    assert(landscapeFullscreen === 'none' && landscapeSettings !== 'none',
-      'Landscape HUD does not preserve the intended compact controls.', { landscapeFullscreen, landscapeSettings });
+    assert(landscapeFullscreen !== 'none' && landscapeSettings !== 'none',
+      'Landscape HUD must expose fullscreen and settings controls.', { landscapeFullscreen, landscapeSettings });
     assert(landscapeState.cameraZoom === 1, 'Landscape camera should use the default zoom.', landscapeState);
     await landscapeContext.close();
 

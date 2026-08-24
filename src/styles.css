@@ -1255,7 +1255,11 @@ canvas {
 }
 
 .henhouse-settings {
+  display: inline-flex;
   align-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   border: 1px solid rgba(255, 229, 136, 0.55);
   border-radius: 999px;
   padding: 0.55rem 0.85rem;
@@ -1264,6 +1268,10 @@ canvas {
   font: 700 0.78rem/1 system-ui, sans-serif;
   letter-spacing: 0.04em;
   cursor: pointer;
+}
+
+.henhouse-action__icon {
+  display: none;
 }
 
 .settings-volume {
@@ -5383,7 +5391,12 @@ html.has-ui-overlay .upgrade-confirmation {
   }
 
   .hud__controls [data-fullscreen] {
-    display: none;
+    display: grid;
+  }
+
+  .hud__controls {
+    flex-direction: column;
+    gap: 4px;
   }
 
   .settings-glyph {
@@ -5483,7 +5496,7 @@ html.has-ui-overlay .upgrade-confirmation {
   }
 
   .hud__controls [data-fullscreen] {
-    display: none;
+    display: grid;
   }
 
   .hud__controls {
@@ -5776,14 +5789,31 @@ html.has-ui-overlay .upgrade-confirmation {
     grid-row: 1;
   }
 
-  .henhouse-actions [data-hub-fullscreen] {
+  .henhouse-actions button {
+    width: 32px;
+    height: 32px;
+    min-height: 31px;
+    padding: 0;
+    border-radius: 9px;
+    font-size: 0;
+  }
+
+  .henhouse-action__label {
     display: none;
   }
 
-  .henhouse-actions button {
-    min-height: 31px;
-    padding: 5px 8px;
-    font-size: 7px;
+  .henhouse-action__icon {
+    display: flex;
+  }
+
+  .henhouse-actions .fullscreen-glyph {
+    width: 17px;
+    height: 17px;
+  }
+
+  .henhouse-actions .settings-glyph {
+    width: 15px;
+    height: 17px;
   }
 
   .henhouse-kernels {
