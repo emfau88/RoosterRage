@@ -23,6 +23,12 @@ RUNTIME_IMAGES = (
     "characters/rooster-storm-portrait.png",
     "companions/support-chick-orb.png",
     "companions/evo-chick-squadron-companion.png",
+    "companions/support-chick-sheets/support-chick-r1-sheet.png",
+    "companions/support-chick-sheets/support-chick-r2-sheet.png",
+    "companions/support-chick-sheets/support-chick-r3-sheet.png",
+    "companions/support-chick-sheets/support-chick-r4-sheet.png",
+    "companions/support-chick-sheets/support-chick-r5-sheet.png",
+    "companions/support-chick-sheets/support-chick-evo-sheet.png",
     "projectiles/egg.png",
     "projectiles/fire-egg.png",
     "projectiles/fire-egg-r3.png",
@@ -145,6 +151,12 @@ RUNTIME_SIZES = {
 # Animation sheets must retain their cell grid. Unlike individual sprites they
 # are resized as one canvas and are never cropped to visible pixels.
 RUNTIME_SHEET_SIZES = {
+    "companions/support-chick-sheets/support-chick-r1-sheet.png": (1024, 1024),
+    "companions/support-chick-sheets/support-chick-r2-sheet.png": (1024, 1024),
+    "companions/support-chick-sheets/support-chick-r3-sheet.png": (1024, 1024),
+    "companions/support-chick-sheets/support-chick-r4-sheet.png": (1024, 1024),
+    "companions/support-chick-sheets/support-chick-r5-sheet.png": (1024, 1024),
+    "companions/support-chick-sheets/support-chick-evo-sheet.png": (1024, 1024),
     "enemies/animations/enemy-kornkrabbler-run.png": (1024, 1024),
     "enemies/animations/enemy-runner-run.png": (1024, 1024),
     "enemies/animations/enemy-elite-runner-run.png": (1024, 1024),
@@ -179,7 +191,10 @@ BULK_2_ICONS = (
 
 
 def target_for(relative_source):
-    return (RUNTIME_ROOT / relative_source).with_suffix(".webp")
+    runtime_name = relative_source
+    if relative_source.startswith("companions/support-chick-sheets/"):
+        runtime_name = "companions/" + Path(relative_source).name
+    return (RUNTIME_ROOT / runtime_name).with_suffix(".webp")
 
 
 def digest(path):

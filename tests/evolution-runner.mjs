@@ -19,7 +19,7 @@ const recipes = [
   { id: 'evo-singularity-nest', base: 'void-nest', rank: 4, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones', textures: ['evo-singularity-nest-zone'], activeTextures: 'voidZoneTextures' },
   { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 4, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones' },
   { id: 'evo-dawn-laser', base: 'laser-comb', rank: 4, passive: 'swift-shells', ability: 'laserComb', textures: ['evo-dawn-laser-emitter', 'evo-dawn-laser-impact'] },
-  { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4, textures: ['evo-chick-squadron-companion', 'evo-chick-squadron-projectile', 'evo-chick-squadron-impact'], activeTextures: 'supportTextures' }
+  { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4, textures: ['support-chick-evo-sheet', 'evo-chick-squadron-projectile', 'evo-chick-squadron-impact'], activeTextures: 'supportTextures' }
 ];
 
 function assert(condition, message, details) {

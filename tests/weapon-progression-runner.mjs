@@ -160,12 +160,16 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   const orbitVisuals = weapon.id === 'orbit-eggs'
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getOrbitVisualState())
     : [];
+  const supportVisuals = weapon.id === 'support-chick'
+    ? await page.evaluate(() => window.__ROOSTER_TEST__.getSupportVisualState())
+    : [];
   const lightningVisuals = weapon.id === 'lightning-comb'
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getLightningVisualState())
     : [];
   const screenshot = `${weapon.id}-${stage}.png`;
   let upgradeScreenshot;
   let impactScreenshot;
+  let supportMotion;
   let remainingDelay = 1050 - visualDelay;
   if (weapon.id === 'orbit-eggs') {
     upgradeScreenshot = `${weapon.id}-${stage}-upgrade.png`;
@@ -174,7 +178,72 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     await page.waitForTimeout(steadyStateDelay);
     remainingDelay -= steadyStateDelay;
   }
+  if (weapon.id === 'support-chick') {
+    const visualExpectations = {
+      r1: { count: 1, texture: 'support-chick-r1-sheet', rank: 1, scale: 0.225 },
+      r2: { count: 1, texture: 'support-chick-r2-sheet', rank: 2, scale: 0.225 },
+      r3: { count: 1, texture: 'support-chick-r3-sheet', rank: 3, scale: 0.225 },
+      r4: { count: 2, texture: 'support-chick-r4-sheet', rank: 4, scale: 0.225 },
+      r5: { count: 3, texture: 'support-chick-r5-sheet', rank: 5, scale: 0.225 },
+      evo: { count: 4, texture: 'support-chick-evo-sheet', rank: 5, scale: 0.248 }
+    };
+    const expected = visualExpectations[stage];
+    assert(supportVisuals.length === expected.count, `Support Chick ${stage} has the wrong squad size.`, {
+      expected,
+      supportVisuals
+    });
+    assert(supportVisuals.every((chick) => (
+      chick.texture === expected.texture
+      && chick.rank === expected.rank
+      && chick.evolved === (stage === 'evo')
+      && chick.textureSize.width === 1024
+      && chick.textureSize.height === 1024
+      && chick.frameSize.width === 256
+      && chick.frameSize.height === 256
+      && chick.frameTotal === 17
+      && Math.abs(chick.scale - expected.scale) < 0.001
+      && chick.rotation === 0
+      && chick.distanceToPlayer >= 25
+      && chick.distanceToPlayer <= 100
+      && chick.targetError < 10
+      && chick.animation?.includes('-walk-')
+      && chick.shadow.visible
+      && chick.shadow.alpha <= 0.25
+    )), `Support Chick ${stage} has the wrong grounded follower profile.`, {
+      expected,
+      supportVisuals
+    });
+    const formationPositions = new Set(supportVisuals.map((chick) => (
+      `${chick.target.x.toFixed(1)},${chick.target.y.toFixed(1)}`
+    )));
+    assert(formationPositions.size === expected.count, `Support Chick ${stage} formation overlaps.`, supportVisuals);
+  }
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
+  if (weapon.id === 'support-chick') {
+    const beforeMotion = supportVisuals.map(({ x, y }) => ({ x, y }));
+    await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.previewRoosterDirection('east');
+      api.movePlayer(820, 450);
+    });
+    await page.waitForTimeout(90);
+    const duringMotion = await page.evaluate(() => window.__ROOSTER_TEST__.getSupportVisualState());
+    assert(duringMotion.every((chick, index) => (
+      Math.hypot(
+        chick.x - beforeMotion[index].x,
+        chick.y - beforeMotion[index].y
+      ) > 12
+      && chick.animationPlaying
+      && chick.animation?.includes('-walk-')
+      && chick.targetError > 1
+      && chick.targetError < 100
+    )), `Support Chick ${stage} did not visibly run into its new formation.`, {
+      beforeMotion,
+      duringMotion
+    });
+    supportMotion = { before: beforeMotion, during: duringMotion };
+    remainingDelay -= 90;
+  }
   if (['golden-egg', 'primary-artillery-rank', 'primary-storm-rank'].includes(weapon.id)) {
     const impactDelay = weapon.id === 'primary-storm-rank' ? 185 : 285;
     await page.waitForTimeout(impactDelay);
@@ -412,6 +481,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     screenshot,
     upgradeScreenshot,
     impactScreenshot,
+    supportMotion,
     ability: weapon.primary ? after.player.primary : after.abilities[
       weapon.id === 'orbit-eggs' ? 'orbitEggs'
         : weapon.id === 'support-chick' ? 'supportChick'
@@ -425,7 +495,8 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     ].includes(weapon.id)
       ? projectiles
       : weapon.id === 'orbit-eggs' ? orbitVisuals
-        : weapon.id === 'lightning-comb' ? lightningVisuals : undefined,
+        : weapon.id === 'support-chick' ? supportVisuals
+          : weapon.id === 'lightning-comb' ? lightningVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
   };
 }
@@ -449,7 +520,8 @@ async function testWeapon(browser, serverUrl, weapon) {
         'primary-storm-rank',
         'golden-egg',
         'orbit-eggs',
-        'lightning-comb'
+        'lightning-comb',
+        'support-chick'
       ].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
       }

@@ -1,5 +1,29 @@
 import Phaser from 'phaser';
 
+const FORMATIONS = {
+  1: [{ side: 0, back: 46 }],
+  2: [{ side: -27, back: 45 }, { side: 27, back: 45 }],
+  3: [{ side: -44, back: 42 }, { side: 0, back: 65 }, { side: 44, back: 42 }],
+  4: [
+    { side: -50, back: 42 },
+    { side: -17, back: 65 },
+    { side: 17, back: 65 },
+    { side: 50, back: 42 }
+  ]
+};
+
+const DIRECTION_VECTORS = {
+  south: { x: 0, y: 1 },
+  north: { x: 0, y: -1 },
+  east: { x: 1, y: 0 },
+  west: { x: -1, y: 0 }
+};
+
+export function getSupportChickTexture(rank, evolved = false) {
+  return evolved ? 'support-chick-evo-sheet'
+    : 'support-chick-r' + Phaser.Math.Clamp(rank, 1, 5) + '-sheet';
+}
+
 export class SupportChicken {
   constructor(scene, index, count, rank, evolved = false) {
     this.scene = scene;
@@ -7,7 +31,8 @@ export class SupportChicken {
     this.count = count;
     this.rank = rank;
     this.evolved = evolved;
-    this.angle = (Math.PI * 2 * index) / count;
+    this.textureKey = getSupportChickTexture(rank, evolved);
+    this.formationSlot = FORMATIONS[count]?.[index] ?? FORMATIONS[1][0];
     this.nextShotAt = scene.time.now + 350 + index * 220;
     this.fireRate = evolved ? 540 : Math.max(720, 1450 - rank * 125);
     this.damage = (evolved ? 19 : 12) + rank * 5;
@@ -16,35 +41,85 @@ export class SupportChicken {
     this.slowRatio = evolved ? 0.68 : rank >= 5 ? 0.78 : rank >= 3 ? 0.86 : 1;
     this.slowMs = evolved ? 1200 : rank >= 5 ? 950 : rank >= 3 ? 700 : 0;
     this.ricochet = evolved || rank >= 5 ? 1 : 0;
+    this.lastDirection = scene.player.lastMoveDirection ?? 'south';
 
-    this.sprite = scene.add.sprite(
-      scene.player.sprite.x,
-      scene.player.sprite.y,
-      evolved ? 'evo-chick-squadron-companion' : 'support-chick'
-    );
-    this.sprite.setDisplaySize(evolved ? 44 : 36, evolved ? 44 : 36);
-    this.sprite.setDepth(8);
+    const start = this.getFormationTarget();
+    this.shadow = scene.add.ellipse(start.x, start.y + 14, evolved ? 34 : 30, 11, 0x261913, 1)
+      .setAlpha(0.24)
+      .setDepth(4);
+    this.sprite = scene.add.sprite(start.x, start.y, this.textureKey, 0)
+      .setScale(evolved ? 0.248 : 0.225)
+      .setDepth(5);
+    this.sprite.play(this.textureKey + '-walk-' + this.lastDirection);
+  }
+
+  getFormationTarget() {
+    const direction = DIRECTION_VECTORS[this.scene.player.lastMoveDirection]
+      ?? DIRECTION_VECTORS.south;
+    const behind = { x: -direction.x, y: -direction.y };
+    const side = { x: -direction.y, y: direction.x };
+    return {
+      x: this.scene.player.sprite.x
+        + behind.x * this.formationSlot.back
+        + side.x * this.formationSlot.side,
+      y: this.scene.player.sprite.y
+        + behind.y * this.formationSlot.back
+        + side.y * this.formationSlot.side
+        + 5
+    };
   }
 
   update(delta) {
-    if (!this.sprite.active) {
-      return;
-    }
-    this.angle += delta * 0.0018;
-    const radius = 52 + this.rank * 4;
-    const x = this.scene.player.sprite.x + Math.cos(this.angle) * radius;
-    const y = this.scene.player.sprite.y + Math.sin(this.angle) * radius + 24;
-    this.sprite.setPosition(x, y);
-    this.sprite.setRotation(Math.sin(this.angle * 1.4) * 0.08);
+    if (!this.sprite.active) return;
 
-    if (this.scene.time.now < this.nextShotAt) {
-      return;
+    const targetPosition = this.getFormationTarget();
+    const dx = targetPosition.x - this.sprite.x;
+    const dy = targetPosition.y - this.sprite.y;
+    const distance = Math.hypot(dx, dy);
+    if (distance > 220) {
+      this.sprite.setPosition(targetPosition.x, targetPosition.y);
+    } else {
+      const followStrength = 1 - Math.exp(-delta * (this.evolved ? 0.018 : 0.015));
+      this.sprite.setPosition(
+        Phaser.Math.Linear(this.sprite.x, targetPosition.x, followStrength),
+        Phaser.Math.Linear(this.sprite.y, targetPosition.y, followStrength)
+      );
     }
-    const target = this.scene.findNearestEnemyFrom(x, y);
+    this.updateWalkAnimation(dx, dy, distance);
+    this.shadow.setPosition(this.sprite.x, this.sprite.y + 14);
+    const inFront = this.sprite.y >= this.scene.player.sprite.y;
+    this.shadow.setDepth(inFront ? 6.1 : 4.1);
+    this.sprite.setDepth(inFront ? 6.2 : 5);
+
+    if (this.scene.time.now < this.nextShotAt) return;
+    const target = this.scene.findNearestEnemyFrom(this.sprite.x, this.sprite.y);
     if (!target) {
       this.nextShotAt = this.scene.time.now + 400;
       return;
     }
+    this.fireAt(target);
+  }
+
+  updateWalkAnimation(dx, dy, distance) {
+    if (distance > 1.35) {
+      if (Math.abs(dx) > Math.abs(dy)) {
+        this.lastDirection = dx < 0 ? 'west' : 'east';
+      } else {
+        this.lastDirection = dy < 0 ? 'north' : 'south';
+      }
+      this.sprite.play(this.textureKey + '-walk-' + this.lastDirection, true);
+      return;
+    }
+    if (this.sprite.anims.isPlaying) {
+      this.sprite.anims.stop();
+      const rowStart = { south: 0, west: 4, east: 8, north: 12 }[this.lastDirection] ?? 0;
+      this.sprite.setFrame(rowStart);
+    }
+  }
+
+  fireAt(target) {
+    const x = this.sprite.x;
+    const y = this.sprite.y - 7;
     const baseAngle = Phaser.Math.Angle.Between(x, y, target.sprite.x, target.sprite.y);
     for (let shot = 0; shot < this.salvoCount; shot += 1) {
       const offset = this.salvoCount === 1 ? 0 : (shot === 0 ? -0.065 : 0.065);
@@ -74,8 +149,7 @@ export class SupportChicken {
   }
 
   destroy() {
-    if (this.sprite.active) {
-      this.sprite.destroy();
-    }
+    if (this.sprite.active) this.sprite.destroy();
+    if (this.shadow.active) this.shadow.destroy();
   }
 }

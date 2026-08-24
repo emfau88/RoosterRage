@@ -79,6 +79,25 @@ export function createGameAnimations(scene) {
     });
   });
 
+  [1, 2, 3, 4, 5, 'evo'].forEach((rank) => {
+    const texture = `support-chick-${rank === 'evo' ? 'evo' : `r${rank}`}-sheet`;
+    [
+      ['south', 0],
+      ['west', 4],
+      ['east', 8],
+      ['north', 12]
+    ].forEach(([direction, start]) => {
+      const key = `${texture}-walk-${direction}`;
+      if (scene.anims.exists(key)) return;
+      scene.anims.create({
+        key,
+        frames: scene.anims.generateFrameNumbers(texture, { start, end: start + 3 }),
+        frameRate: rank === 'evo' ? 12 : 9 + Math.min(3, Number(rank) || 1),
+        repeat: -1
+      });
+    });
+  });
+
   [
     ['fx-void-open', 12, 14, 9],
     ['fx-void-collapse', 14, 15, 6]

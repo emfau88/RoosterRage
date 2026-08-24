@@ -76,6 +76,60 @@
       "bytes": 4938
     },
     {
+      "source": "art-source/companions/support-chick-sheets/support-chick-r1-sheet.png",
+      "sourceSha256": "58b5c90bdc61dc66148db0af6088e79d245c4f41f68c2c78c006710bec7ea97a",
+      "runtime": "src/assets/companions/support-chick-r1-sheet.webp",
+      "runtimeSha256": "a02f69879ec56601274c9f8b0519265deafa0858c4eab12af51c9c41248a9ee3",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 150622
+    },
+    {
+      "source": "art-source/companions/support-chick-sheets/support-chick-r2-sheet.png",
+      "sourceSha256": "64c18cb783ff46b00ba341c8b098a417bad10dec5f0b7b2d55e5edfb672bf0ce",
+      "runtime": "src/assets/companions/support-chick-r2-sheet.webp",
+      "runtimeSha256": "3683a8001287e64131d5e3952078a1f11d54881695c9f1813a5f5f2340c08028",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 151742
+    },
+    {
+      "source": "art-source/companions/support-chick-sheets/support-chick-r3-sheet.png",
+      "sourceSha256": "d2ddaafc9f3fc4fe3130e6bd5842bf6937cffd855f9d39b8b1eef037a3787af5",
+      "runtime": "src/assets/companions/support-chick-r3-sheet.webp",
+      "runtimeSha256": "b9d9cf2b6c322e863cee027a21d0bedbffb5c622f66453eb70fa9ca87e371071",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 155264
+    },
+    {
+      "source": "art-source/companions/support-chick-sheets/support-chick-r4-sheet.png",
+      "sourceSha256": "82b543dc73ce031223029503b41839ccfc9b5c44371ebd6500ea6e402a976aed",
+      "runtime": "src/assets/companions/support-chick-r4-sheet.webp",
+      "runtimeSha256": "ca8a8acb92cb2b796685cf8da8dc3322467b8d0bb6efab8e4653c6abfac2fd9a",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 166086
+    },
+    {
+      "source": "art-source/companions/support-chick-sheets/support-chick-r5-sheet.png",
+      "sourceSha256": "e7e6046b30ad1e3f9c61b4a56973967912ba34d80456bb95e56c71adcc3f7e8e",
+      "runtime": "src/assets/companions/support-chick-r5-sheet.webp",
+      "runtimeSha256": "3e5154ed804a1f84fc7bc78caadd92d55e249bf3397ef0345f0f7a90ad859dd8",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 176942
+    },
+    {
+      "source": "art-source/companions/support-chick-sheets/support-chick-evo-sheet.png",
+      "sourceSha256": "b3e5e1fbe7a4d7065fd144db2b58c087d4da1a1c13b43d7374b68cdc7f0e6b1e",
+      "runtime": "src/assets/companions/support-chick-evo-sheet.webp",
+      "runtimeSha256": "c70adc5a47ba4e8a231a0f98301c2ea1dbed349fbb72d8286aa9f228a88779bb",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 192990
+    },
+    {
       "source": "art-source/projectiles/egg.png",
       "sourceSha256": "e2a89d9f861232261f2fe8ab6282c239394ffe1fbb6082342768a254eea80dbc",
       "runtime": "src/assets/projectiles/egg.webp",

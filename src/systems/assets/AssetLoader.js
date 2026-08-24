@@ -24,8 +24,12 @@ import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
 import molotovV2SheetUrl from '../../assets/fx/molotov-v2-sheet.webp';
 import enemyBurnOverlaySheetUrl from '../../assets/fx/enemy-burn-overlay-sheet.webp';
 import arenaGroundUrl from '../../assets/map/arena-ground.webp';
-import supportChickOrbUrl from '../../assets/companions/support-chick-orb.webp';
-import evoChickSquadronCompanionUrl from '../../assets/companions/evo-chick-squadron-companion.webp';
+import supportChickR1SheetUrl from '../../assets/companions/support-chick-r1-sheet.webp';
+import supportChickR2SheetUrl from '../../assets/companions/support-chick-r2-sheet.webp';
+import supportChickR3SheetUrl from '../../assets/companions/support-chick-r3-sheet.webp';
+import supportChickR4SheetUrl from '../../assets/companions/support-chick-r4-sheet.webp';
+import supportChickR5SheetUrl from '../../assets/companions/support-chick-r5-sheet.webp';
+import supportChickEvoSheetUrl from '../../assets/companions/support-chick-evo-sheet.webp';
 import eggUrl from '../../assets/projectiles/egg.webp';
 import fireEggUrl from '../../assets/projectiles/fire-egg.webp';
 import fireEggR3Url from '../../assets/projectiles/fire-egg-r3.webp';
@@ -154,8 +158,17 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('molotov-v2-sheet', molotovV2SheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-burn-overlay-sheet', enemyBurnOverlaySheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('arena-ground', arenaGroundUrl);
-  scene.load.image('support-chick', supportChickOrbUrl);
-  scene.load.image('evo-chick-squadron-companion', evoChickSquadronCompanionUrl);
+  [
+    ['support-chick-r1-sheet', supportChickR1SheetUrl],
+    ['support-chick-r2-sheet', supportChickR2SheetUrl],
+    ['support-chick-r3-sheet', supportChickR3SheetUrl],
+    ['support-chick-r4-sheet', supportChickR4SheetUrl],
+    ['support-chick-r5-sheet', supportChickR5SheetUrl],
+    ['support-chick-evo-sheet', supportChickEvoSheetUrl]
+  ].forEach(([key, url]) => scene.load.spritesheet(key, url, {
+    frameWidth: 256,
+    frameHeight: 256
+  }));
   scene.load.image('egg', eggUrl);
   scene.load.image('fire-egg', fireEggUrl);
   scene.load.image('fire-egg-r3', fireEggR3Url);

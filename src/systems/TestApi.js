@@ -244,7 +244,7 @@ export function installTestApi(scene) {
         'evo-singularity-nest-zone',
         'evo-dawn-laser-emitter',
         'evo-dawn-laser-impact',
-        'evo-chick-squadron-companion',
+        'support-chick-evo-sheet',
         'evo-chick-squadron-projectile',
         'evo-chick-squadron-impact'
       ].filter((key) => scene.textures.exists(key)),
@@ -270,6 +270,53 @@ export function installTestApi(scene) {
         ))
         : []
     })),
+    getSupportVisualState: () => scene.supportChickens.map((chick) => {
+      const target = chick.getFormationTarget();
+      return {
+        index: chick.index,
+        count: chick.count,
+        rank: chick.rank,
+        evolved: chick.evolved,
+        texture: chick.sprite.texture?.key,
+        textureSize: {
+          width: chick.sprite.texture?.source?.[0]?.width ?? 0,
+          height: chick.sprite.texture?.source?.[0]?.height ?? 0
+        },
+        frameSize: {
+          width: chick.sprite.frame?.width ?? 0,
+          height: chick.sprite.frame?.height ?? 0
+        },
+        frameTotal: chick.sprite.texture?.frameTotal ?? 0,
+        frame: Number(chick.sprite.frame?.name ?? -1),
+        animation: chick.sprite.anims.currentAnim?.key ?? null,
+        animationPlaying: chick.sprite.anims.isPlaying,
+        direction: chick.lastDirection,
+        x: chick.sprite.x,
+        y: chick.sprite.y,
+        scale: chick.sprite.scaleX,
+        rotation: chick.sprite.rotation,
+        distanceToPlayer: Phaser.Math.Distance.Between(
+          chick.sprite.x,
+          chick.sprite.y,
+          scene.player.sprite.x,
+          scene.player.sprite.y
+        ),
+        formation: { ...chick.formationSlot },
+        target,
+        targetError: Phaser.Math.Distance.Between(
+          chick.sprite.x,
+          chick.sprite.y,
+          target.x,
+          target.y
+        ),
+        shadow: {
+          width: chick.shadow.displayWidth,
+          height: chick.shadow.displayHeight,
+          alpha: chick.shadow.alpha,
+          visible: chick.shadow.visible
+        }
+      };
+    }),
     triggerPrimaryAttack: (sequence = null) => {
       if (Number.isFinite(sequence)) {
         scene.combat.primaryAttackSequence = sequence;
