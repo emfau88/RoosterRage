@@ -166,7 +166,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   const lightningVisuals = weapon.id === 'lightning-comb'
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getLightningVisualState())
     : [];
-  const areaAtFlight = weapon.id === 'molotov-egg'
+  const areaAtFlight = ['molotov-egg', 'void-nest'].includes(weapon.id)
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState())
     : null;
   const screenshot = `${weapon.id}-${stage}.png`;
@@ -175,6 +175,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   let fieldScreenshot;
   let supportMotion;
   let molotovVisuals;
+  let voidVisuals;
   let remainingDelay = 1050 - visualDelay;
   if (weapon.id === 'orbit-eggs') {
     upgradeScreenshot = `${weapon.id}-${stage}-upgrade.png`;
@@ -269,6 +270,30 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     })), `Molotov ${stage} emitters jittered between samples.`, { fieldState, motionState });
     molotovVisuals = { flight: areaAtFlight.molotovFlights, field: fieldState.hazards };
     remainingDelay -= 490;
+  }
+  if (weapon.id === 'void-nest') {
+    const visualExpectations = {
+      r1: { zones: 1, radius: 132, life: 4200, motes: 5 },
+      r2: { zones: 1, radius: 150, life: 4800, motes: 6 },
+      r3: { zones: 1, radius: 170, life: 5400, motes: 7 },
+      r4: { zones: 2, radius: 178, life: 6000, motes: 8 },
+      evo: { zones: 2, radius: 225, life: 7200, motes: 10 }
+    };
+    const expected = visualExpectations[stage];
+    assert(areaAtFlight.voids.length === expected.zones
+      && areaAtFlight.voids.every((zone) => (
+        zone.radius === expected.radius
+        && zone.maxLife === expected.life
+        && zone.moteCount === expected.motes
+        && zone.fieldWidth > zone.fieldHeight * 1.55
+        && zone.portalWidth > zone.portalHeight * 1.55
+        && zone.pullSamples.outer < zone.pullSamples.middle
+        && zone.pullSamples.middle < zone.pullSamples.inner
+      )), `Void Nest ${stage} has the wrong perspective or distance-scaled pull profile.`, {
+      expected,
+      areaAtFlight
+    });
+    voidVisuals = areaAtFlight.voids;
   }
   if (weapon.id === 'support-chick') {
     const beforeMotion = supportVisuals.map(({ x, y }) => ({ x, y }));
@@ -549,6 +574,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       : weapon.id === 'orbit-eggs' ? orbitVisuals
         : weapon.id === 'support-chick' ? supportVisuals
           : weapon.id === 'molotov-egg' ? molotovVisuals
+            : weapon.id === 'void-nest' ? voidVisuals
           : weapon.id === 'lightning-comb' ? lightningVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
   };
@@ -575,7 +601,8 @@ async function testWeapon(browser, serverUrl, weapon) {
         'orbit-eggs',
         'lightning-comb',
         'support-chick',
-        'molotov-egg'
+        'molotov-egg',
+        'void-nest'
       ].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
       }

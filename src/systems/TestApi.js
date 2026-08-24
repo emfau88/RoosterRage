@@ -200,11 +200,25 @@ export function installTestApi(scene) {
       voids: scene.voidZones.filter((zone) => zone.active).map((zone) => ({
         rank: zone.rank,
         evolved: zone.evolved,
+        radius: zone.radius,
+        damage: zone.damage,
         life: zone.life,
         maxLife: zone.maxLife,
         collapsing: zone.collapsing,
         alpha: zone.portal.alpha,
-        frame: Number(zone.portal.frame?.name ?? -1)
+        frame: Number(zone.portal.frame?.name ?? -1),
+        portalWidth: zone.portal.displayWidth,
+        portalHeight: zone.portal.displayHeight,
+        fieldWidth: zone.outer.displayWidth,
+        fieldHeight: zone.outer.displayHeight,
+        pullOuter: zone.pullOuter,
+        pullInner: zone.pullInner,
+        pullSamples: {
+          outer: zone.getPullSpeed(zone.radius * 0.9),
+          middle: zone.getPullSpeed(zone.radius * 0.5),
+          inner: zone.getPullSpeed(zone.radius * 0.15)
+        },
+        moteCount: zone.motes.length
       })),
       laserVisuals: scene.laserComb.activeVisuals.size,
       burningEnemies: scene.enemies.filter((enemy) => enemy.sprite.active && enemy.burnUntil > scene.time.now)

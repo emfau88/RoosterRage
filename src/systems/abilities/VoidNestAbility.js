@@ -14,7 +14,7 @@ export class VoidNestAbility extends TimedAbility {
       this.nextAt = time + 900;
       return;
     }
-    const ring = this.scene.add.circle(target.x, target.y, 32, 0x9b5cff, 0.24)
+    const ring = this.scene.add.ellipse(target.x, target.y, 64, 38, 0x9b5cff, 0.2)
       .setStrokeStyle(3, 0xc9a8ff, 0.82)
       .setDepth(8);
     this.scene.tweens.add({
@@ -25,12 +25,13 @@ export class VoidNestAbility extends TimedAbility {
       onComplete: () => ring.destroy()
     });
     this.scene.playFx('fx-void-portal', target.x, target.y, {
-      scale: 0.52 + this.rank * 0.08,
+      scaleX: 0.52 + this.rank * 0.08,
+      scaleY: (0.52 + this.rank * 0.08) * 0.6,
       depth: 6,
       alpha: 0.88
     });
     this.scene.audio.play('void-open');
-    const offsets = this.evolved ? [-78, 78] : this.rank >= 4 ? [-58, 58] : [0];
+    const offsets = this.evolved ? [-92, 92] : this.rank >= 4 ? [-68, 68] : [0];
     offsets.forEach((offset) => {
       const zone = new VoidZone(this.scene, target.x + offset, target.y, this.rank, this.evolved);
       this.lastSynergyActive = zone.synergyActive;

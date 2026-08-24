@@ -970,8 +970,13 @@ async function testAreaEffectReadability(browser) {
     const charge = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(charge.laserVisuals >= 1, 'Laser charge visual did not start.', charge);
     assert(charge.molotovProjectiles === 1, 'Rank-one Molotov should launch one projectile.', charge);
-    assert(charge.voids[0]?.maxLife === 3400 && charge.voids[0]?.alpha >= 0.5,
-      'Void Nest did not start its stable 3.4 second presentation.', charge);
+    assert(charge.voids[0]?.maxLife === 4200
+      && charge.voids[0]?.radius === 132
+      && charge.voids[0]?.alpha >= 0.5
+      && charge.voids[0]?.portalWidth > charge.voids[0]?.portalHeight * 1.55
+      && charge.voids[0]?.pullSamples.outer < charge.voids[0]?.pullSamples.middle
+      && charge.voids[0]?.pullSamples.middle < charge.voids[0]?.pullSamples.inner,
+    'Void Nest did not start its perspective-correct 4.2 second pull presentation.', charge);
 
     await page.waitForTimeout(210);
     const beam = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
