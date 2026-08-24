@@ -220,6 +220,51 @@
       "bytes": 1018
     },
     {
+      "source": "art-source/projectiles/molotov-modular/molotov-egg-r1.png",
+      "sourceSha256": "042d34bca12d41aee7a254b27003b26dae25588f6cf7904a4a059695ffd61cff",
+      "runtime": "src/assets/projectiles/molotov-modular/molotov-egg-r1.webp",
+      "runtimeSha256": "3485ef999a027a1dcb4809d460e23e3c4f769e454f6a988cc137db07a583697a",
+      "width": 128,
+      "height": 128,
+      "bytes": 4442
+    },
+    {
+      "source": "art-source/projectiles/molotov-modular/molotov-egg-r2.png",
+      "sourceSha256": "e128e4e487d0559d357976c22b22b8a467d9ed13d47d47e4b083326eb54e3f1e",
+      "runtime": "src/assets/projectiles/molotov-modular/molotov-egg-r2.webp",
+      "runtimeSha256": "8a32bdec8f5358fd13bbbfbfb1c9c0a29379b170f90a5e914d48c8c38c000ffd",
+      "width": 128,
+      "height": 128,
+      "bytes": 5198
+    },
+    {
+      "source": "art-source/projectiles/molotov-modular/molotov-egg-r3.png",
+      "sourceSha256": "bbb5b4449a26f71cb9fd555bcda648053a24ccefef078ca12de0703fb53abd0c",
+      "runtime": "src/assets/projectiles/molotov-modular/molotov-egg-r3.webp",
+      "runtimeSha256": "168eed02e77984c8a26c1fcb12d3f23f034dd627c923c389fea7a20cf73cf966",
+      "width": 128,
+      "height": 128,
+      "bytes": 6032
+    },
+    {
+      "source": "art-source/projectiles/molotov-modular/molotov-egg-r4.png",
+      "sourceSha256": "e643638b2987ce98ccda44f8db40f3241154460f73d2febb148523162d1056d7",
+      "runtime": "src/assets/projectiles/molotov-modular/molotov-egg-r4.webp",
+      "runtimeSha256": "de3b0eb8a8620a3748ee88bafc3e3b89cee720796b03a3f60fb5312fb369e52b",
+      "width": 128,
+      "height": 128,
+      "bytes": 5966
+    },
+    {
+      "source": "art-source/projectiles/molotov-modular/molotov-egg-evo.png",
+      "sourceSha256": "ca0538ef5b7346f69a69b2cc52fb5ad79a4b253c717e7144e77baae757d53e46",
+      "runtime": "src/assets/projectiles/molotov-modular/molotov-egg-evo.webp",
+      "runtimeSha256": "04cedef2ca9d9e3a3caef9e794ed8438b3cacc8daf637fd310d7d779972c7a4c",
+      "width": 128,
+      "height": 128,
+      "bytes": 6292
+    },
+    {
       "source": "art-source/projectiles/rocket-egg.png",
       "sourceSha256": "08470413c66fa0e5e6c120f7e4957601923d5333702276214cf89f8003c5d36e",
       "runtime": "src/assets/projectiles/rocket-egg.webp",
@@ -758,6 +803,105 @@
       "width": 1024,
       "height": 1024,
       "bytes": 269876
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-ground-r1.png",
+      "sourceSha256": "592b816a5a414365010055ac12fdd02096af6f56e69b6aef386306f0de3d6cce",
+      "runtime": "src/assets/fx/molotov-modular/molotov-ground-r1.webp",
+      "runtimeSha256": "5d28f6eb5d61fe22eec2411eb01ce75f4934161cddb514692c20b9f140360ad6",
+      "width": 512,
+      "height": 256,
+      "bytes": 18086
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-ground-r2.png",
+      "sourceSha256": "42c4bb3779177d9b7559fd5af8c8456abffb1c22ccac52efa47fca9a11119bd3",
+      "runtime": "src/assets/fx/molotov-modular/molotov-ground-r2.webp",
+      "runtimeSha256": "da12e3ed1ac72360eb08a55b78ed3a0d2e72a2c9049ad78ef95a9a889a084a90",
+      "width": 512,
+      "height": 256,
+      "bytes": 23626
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-ground-r3.png",
+      "sourceSha256": "adfba4bbc54461127d6313d0aec2b43f76c4e41c126ba2f0ea0717d28b8a5bfb",
+      "runtime": "src/assets/fx/molotov-modular/molotov-ground-r3.webp",
+      "runtimeSha256": "2a5543d14529b91c0fc00ee794d817e251588c92fdd58822b53c27bdb0eb0af6",
+      "width": 512,
+      "height": 256,
+      "bytes": 24276
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-ground-r4.png",
+      "sourceSha256": "900ce81ae674a0821a8d85f9d84eef16c48bedea56f4af5b9a74ce350def2382",
+      "runtime": "src/assets/fx/molotov-modular/molotov-ground-r4.webp",
+      "runtimeSha256": "985afa21d8e99e8d1989805c95dd46230721b9ac9d3c39783aa42965d5a3f5b4",
+      "width": 512,
+      "height": 256,
+      "bytes": 21178
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-ground-evo.png",
+      "sourceSha256": "ac2f10bfaa548f7560ab6800c305eacca7adebf6fd3cdf227cb8f73d0af29a9b",
+      "runtime": "src/assets/fx/molotov-modular/molotov-ground-evo.webp",
+      "runtimeSha256": "7cdc324976116ddd2cae1e3dc59a56f4a9ede8b5104ac9b7749e230b92e86c6b",
+      "width": 512,
+      "height": 256,
+      "bytes": 26278
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-flame-small.png",
+      "sourceSha256": "9ad3c4c53f6855fd723f93eab39e336b2a47825567fd900a215880178d9a4e3a",
+      "runtime": "src/assets/fx/molotov-modular/molotov-flame-small.webp",
+      "runtimeSha256": "1c9bd572d821108e2e63f78fd054b00539ea3dc6d75520c4cb8389c862c93a6e",
+      "width": 128,
+      "height": 128,
+      "bytes": 3236
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-flame-medium.png",
+      "sourceSha256": "597221cc6111fdaa04d63c4c98d203d7eaecc75b2d32af1aa3f453448f576646",
+      "runtime": "src/assets/fx/molotov-modular/molotov-flame-medium.webp",
+      "runtimeSha256": "e08d3a0af48a05efdeb8977381f114f05db3a716c8e414c74c9af34538f66d6b",
+      "width": 128,
+      "height": 128,
+      "bytes": 4940
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-flame-large.png",
+      "sourceSha256": "a827335db5e6284f2e7f3d7d17741272dd18e309c9d3312c038f6f8ffffa3ec6",
+      "runtime": "src/assets/fx/molotov-modular/molotov-flame-large.webp",
+      "runtimeSha256": "ecae5ddfa1ef3c806b8a69ded795f0873c347d9d300a533d4eb07be3a2224d2f",
+      "width": 128,
+      "height": 128,
+      "bytes": 5716
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-embers.png",
+      "sourceSha256": "08cd8fa7a129fa2947aff354a5206f15e21ac35ff376af1d51cd73437f239342",
+      "runtime": "src/assets/fx/molotov-modular/molotov-embers.webp",
+      "runtimeSha256": "db81cb86221582c37bf2382aee8f88cb18c164c35687cf20120043c6c464239f",
+      "width": 128,
+      "height": 128,
+      "bytes": 2798
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-ignition.png",
+      "sourceSha256": "c8d521f5ff21b4dba18adb7a52ebd5e925084a52f090814b4cb1a824c91b2c56",
+      "runtime": "src/assets/fx/molotov-modular/molotov-ignition.webp",
+      "runtimeSha256": "858d70266dbae0f3902a6f6cce8c556ad1bb783d9e2a5732ce6c0f86b9a3edec",
+      "width": 192,
+      "height": 192,
+      "bytes": 9082
+    },
+    {
+      "source": "art-source/fx/molotov-modular/molotov-smoke.png",
+      "sourceSha256": "9c03f129c63f39b6bc0453e6506c83cedd94da869c77d3481ad291387a56aea9",
+      "runtime": "src/assets/fx/molotov-modular/molotov-smoke.webp",
+      "runtimeSha256": "50ff8039dc45092777b3936f8cd1ce85e10da97b8fc4572c59bcfe60ff1f3ac6",
+      "width": 192,
+      "height": 192,
+      "bytes": 5888
     },
     {
       "source": "art-source/fx/enemy-burn-overlay-sheet.png",

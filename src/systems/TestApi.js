@@ -161,6 +161,16 @@ export function installTestApi(scene) {
     }),
     getAreaEffectState: () => ({
       molotovProjectiles: scene.molotovProjectiles.filter((projectile) => projectile.active).length,
+      molotovFlights: scene.molotovProjectiles.filter((projectile) => projectile.active).map((projectile) => ({
+        rank: projectile.rank,
+        evolved: projectile.evolved,
+        texture: projectile.sprite.texture?.key,
+        width: projectile.sprite.displayWidth,
+        height: projectile.sprite.displayHeight,
+        trailTexture: projectile.trail.texture?.key,
+        trailWidth: projectile.trail.displayWidth,
+        rotation: projectile.sprite.rotation
+      })),
       molotovTargets: scene.molotovProjectiles.filter((projectile) => projectile.active).map((projectile) => ({
         x: projectile.target.x,
         y: projectile.target.y
@@ -173,8 +183,19 @@ export function installTestApi(scene) {
         life: zone.life,
         maxLife: zone.maxLife,
         extinguishing: zone.extinguishing,
-        texture: zone.fireSprite.texture?.key,
-        animation: zone.fireSprite.anims.currentAnim?.key ?? null
+        texture: zone.groundSprite.texture?.key,
+        animation: null,
+        groundWidth: zone.groundSprite.displayWidth,
+        groundHeight: zone.groundSprite.displayHeight,
+        flameCount: zone.flames.length,
+        flameTextures: zone.flames.map((flame) => flame.sprite.texture?.key),
+        flamePositions: zone.flames.map((flame) => ({
+          x: flame.sprite.x,
+          y: flame.sprite.y,
+          rotation: flame.sprite.rotation,
+          scaleX: flame.sprite.scaleX,
+          scaleY: flame.sprite.scaleY
+        }))
       })),
       voids: scene.voidZones.filter((zone) => zone.active).map((zone) => ({
         rank: zone.rank,
@@ -242,6 +263,8 @@ export function installTestApi(scene) {
         'evo-shell-halo-projectile',
         'evo-shell-halo-impact',
         'evo-singularity-nest-zone',
+        'molotov-egg-evo',
+        'molotov-ground-evo',
         'evo-dawn-laser-emitter',
         'evo-dawn-laser-impact',
         'support-chick-evo-sheet',

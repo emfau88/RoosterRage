@@ -111,20 +111,6 @@ export function createGameAnimations(scene) {
     });
   });
 
-  [
-    ['molotov-v2-impact', 0, 3, 12, 0],
-    ['molotov-v2-loop', 4, 11, 10, -1],
-    ['molotov-v2-extinguish', 12, 15, 9, 0]
-  ].forEach(([key, start, end, frameRate, repeat]) => {
-    if (scene.anims.exists(key)) return;
-    scene.anims.create({
-      key,
-      frames: scene.anims.generateFrameNumbers('molotov-v2-sheet', { start, end }),
-      frameRate,
-      repeat
-    });
-  });
-
   if (!scene.anims.exists('enemy-burn-overlay-loop')) {
     scene.anims.create({
       key: 'enemy-burn-overlay-loop',

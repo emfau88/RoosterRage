@@ -166,10 +166,15 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   const lightningVisuals = weapon.id === 'lightning-comb'
     ? await page.evaluate(() => window.__ROOSTER_TEST__.getLightningVisualState())
     : [];
+  const areaAtFlight = weapon.id === 'molotov-egg'
+    ? await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState())
+    : null;
   const screenshot = `${weapon.id}-${stage}.png`;
   let upgradeScreenshot;
   let impactScreenshot;
+  let fieldScreenshot;
   let supportMotion;
+  let molotovVisuals;
   let remainingDelay = 1050 - visualDelay;
   if (weapon.id === 'orbit-eggs') {
     upgradeScreenshot = `${weapon.id}-${stage}-upgrade.png`;
@@ -219,6 +224,52 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     assert(formationPositions.size === expected.count, `Support Chick ${stage} formation overlaps.`, supportVisuals);
   }
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
+  if (weapon.id === 'molotov-egg') {
+    const visualExpectations = {
+      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, ground: 'molotov-ground-r1', flames: 3, radius: 90 },
+      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, ground: 'molotov-ground-r2', flames: 5, radius: 108 },
+      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, ground: 'molotov-ground-r3', flames: 7, radius: 124 },
+      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, ground: 'molotov-ground-r4', flames: 6, radius: 112 },
+      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, ground: 'molotov-ground-evo', flames: 9, radius: 136 }
+    };
+    const expected = visualExpectations[stage];
+    assert(areaAtFlight.molotovFlights.length === expected.count
+      && areaAtFlight.molotovFlights.every((flight) => (
+        flight.texture === expected.texture
+        && Math.abs(flight.width - expected.size) < 0.01
+        && Math.abs(flight.height - expected.size) < 0.01
+        && flight.trailTexture === 'molotov-embers'
+      )), `Molotov ${stage} has the wrong modular flight presentation.`, {
+      expected,
+      areaAtFlight
+    });
+    await page.waitForTimeout(430);
+    const fieldState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(fieldState.hazards.length === expected.fields
+      && fieldState.hazards.every((zone) => (
+        zone.texture === expected.ground
+        && zone.flameCount === expected.flames
+        && zone.radius === expected.radius
+        && zone.groundWidth > zone.groundHeight * 1.5
+        && zone.flameTextures.every((texture) => texture.startsWith('molotov-flame-'))
+      )), `Molotov ${stage} has the wrong perspective-correct ground field.`, {
+      expected,
+      fieldState
+    });
+    fieldScreenshot = `${weapon.id}-${stage}-field.png`;
+    await page.screenshot({ path: path.join(artifactDir, fieldScreenshot) });
+    await page.waitForTimeout(60);
+    const motionState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    assert(fieldState.hazards.every((zone, zoneIndex) => zone.flamePositions.every((flame, index) => {
+      const after = motionState.hazards[zoneIndex].flamePositions[index];
+      return flame.x === after.x
+        && flame.y === after.y
+        && Math.abs(flame.scaleX - after.scaleX) < 0.04
+        && Math.abs(flame.scaleY - after.scaleY) < 0.08;
+    })), `Molotov ${stage} emitters jittered between samples.`, { fieldState, motionState });
+    molotovVisuals = { flight: areaAtFlight.molotovFlights, field: fieldState.hazards };
+    remainingDelay -= 490;
+  }
   if (weapon.id === 'support-chick') {
     const beforeMotion = supportVisuals.map(({ x, y }) => ({ x, y }));
     await page.evaluate(() => {
@@ -481,6 +532,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     screenshot,
     upgradeScreenshot,
     impactScreenshot,
+    fieldScreenshot,
     supportMotion,
     ability: weapon.primary ? after.player.primary : after.abilities[
       weapon.id === 'orbit-eggs' ? 'orbitEggs'
@@ -496,6 +548,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       ? projectiles
       : weapon.id === 'orbit-eggs' ? orbitVisuals
         : weapon.id === 'support-chick' ? supportVisuals
+          : weapon.id === 'molotov-egg' ? molotovVisuals
           : weapon.id === 'lightning-comb' ? lightningVisuals : undefined,
     peakObjects: after.telemetry.peakObjects
   };
@@ -521,7 +574,8 @@ async function testWeapon(browser, serverUrl, weapon) {
         'golden-egg',
         'orbit-eggs',
         'lightning-comb',
-        'support-chick'
+        'support-chick',
+        'molotov-egg'
       ].includes(weapon.id) && rank < weapon.normalRanks) {
         intermediate.push(await captureStage(page, weapon, `r${rank}`, rank, weapon.source));
       }

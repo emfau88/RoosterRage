@@ -3,7 +3,6 @@ import { HazardZone } from '../../entities/HazardZone.js';
 import { MolotovEggProjectile } from '../../entities/MolotovEggProjectile.js';
 import { TimedAbility } from './TimedAbility.js';
 import { findClusterTarget } from './abilityUtils.js';
-import { playEvolutionImpact } from '../EvolutionVisuals.js';
 
 export class MolotovEggAbility extends TimedAbility {
   constructor(scene) {
@@ -50,38 +49,34 @@ export class MolotovEggAbility extends TimedAbility {
 
   createImpact(x, y, rank = this.rank, evolved = this.evolved) {
     this.scene.audio.play('molotov-impact');
-    if (evolved) {
-      playEvolutionImpact(this.scene, 'evo-phoenix-pan', x, y, {
-        diameter: Math.min(126, 96 + rank * 6),
-        depth: 8
-      });
-    } else {
-      const impact = this.scene.add.sprite(x, y, 'molotov-v2-sheet', 0)
-        .setScale(0.72 + rank * 0.07)
-        .setDepth(8)
-        .play('molotov-v2-impact');
-      impact.once('animationcomplete', () => impact.destroy());
-      this.scene.time.delayedCall(650, () => {
-        if (impact.active) impact.destroy();
-      });
-    }
-    const flash = this.scene.add.circle(x, y, 18, 0xffd35c, 0.72).setDepth(8);
-    const ring = this.scene.add.circle(x, y, 54 + rank * 10, 0xff6a28, 0.16)
-      .setStrokeStyle(4, 0xffd35c, 0.82)
-      .setDepth(7);
+    const ignitionScale = evolved ? 0.74 : 0.48 + rank * 0.055;
+    const ignition = this.scene.add.image(x, y, 'molotov-ignition')
+      .setScale(ignitionScale * 0.45)
+      .setBlendMode(Phaser.BlendModes.ADD)
+      .setDepth(8);
+    const embersScale = evolved ? 1.12 : 0.68 + rank * 0.08;
+    const embers = this.scene.add.image(x, y, 'molotov-embers')
+      .setScale(embersScale)
+      .setBlendMode(Phaser.BlendModes.ADD)
+      .setAlpha(evolved ? 0.7 : 0.5)
+      .setDepth(7.8);
     this.scene.tweens.add({
-      targets: flash,
+      targets: ignition,
       alpha: 0,
-      scale: 3,
-      duration: 180,
-      onComplete: () => flash.destroy()
+      scaleX: ignitionScale,
+      scaleY: ignitionScale,
+      duration: evolved ? 260 : 220,
+      ease: 'Quad.Out',
+      onComplete: () => ignition.destroy()
     });
     this.scene.tweens.add({
-      targets: ring,
+      targets: embers,
       alpha: 0,
-      scale: 1.5,
-      duration: 260,
-      onComplete: () => ring.destroy()
+      scaleX: embersScale * 1.24,
+      scaleY: embersScale * 0.96,
+      duration: evolved ? 360 : 300,
+      ease: 'Sine.Out',
+      onComplete: () => embers.destroy()
     });
     this.scene.hazardZones.push(new HazardZone(this.scene, x, y, rank, evolved));
   }

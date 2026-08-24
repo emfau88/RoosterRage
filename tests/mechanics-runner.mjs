@@ -983,9 +983,12 @@ async function testAreaEffectReadability(browser) {
     assert(settled.laserVisuals === 0, 'Laser visuals outlived their bounded afterglow.', settled);
     assert(settled.hazards[0]?.maxLife === 3000
       && settled.hazards[0]?.radius === 90
-      && settled.hazards[0]?.texture === 'molotov-v2-sheet'
-      && settled.hazards[0]?.animation === 'molotov-v2-loop',
-    'Molotov did not enter the dedicated rank-one ground-fire loop.', settled);
+      && settled.hazards[0]?.texture === 'molotov-ground-r1'
+      && settled.hazards[0]?.animation === null
+      && settled.hazards[0]?.flameCount === 3
+      && Math.abs(settled.hazards[0]?.groundWidth - 187.2) < 0.01
+      && Math.abs(settled.hazards[0]?.groundHeight - 117) < 0.01,
+    'Molotov did not enter the modular rank-one ground-fire presentation.', settled);
     assert(settled.voids[0]?.frame === 14 && settled.voids[0]?.alpha >= 0.5,
       'Void Nest did not hold its readable portal frame.', settled);
     assert(settled.burningEnemies[0]?.overlay === 'enemy-burn-overlay-sheet'
@@ -994,7 +997,23 @@ async function testAreaEffectReadability(browser) {
     'Molotov contact did not apply the three-second animated burn status.', settled);
     await page.screenshot({ path: path.join(artifactDir, 'aoe-readability-runtime.png') });
 
-    await page.waitForTimeout(1450);
+    await page.waitForTimeout(80);
+    const settledMotion = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
+    const beforeFlames = settled.hazards[0].flamePositions;
+    const afterFlames = settledMotion.hazards[0].flamePositions;
+    assert(beforeFlames.every((flame, index) => (
+      flame.x === afterFlames[index].x
+      && flame.y === afterFlames[index].y
+      && Math.abs(flame.scaleX - afterFlames[index].scaleX) < 0.04
+      && Math.abs(flame.scaleY - afterFlames[index].scaleY) < 0.08
+    )) && beforeFlames.some((flame, index) => (
+      Math.abs(flame.scaleY - afterFlames[index].scaleY) > 0.001
+    )), 'Molotov flame emitters jittered or failed to animate continuously.', {
+      beforeFlames,
+      afterFlames
+    });
+
+    await page.waitForTimeout(1370);
     const sustained = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(sustained.hazards.length === 1 && sustained.voids.length === 1,
       'Area effects vanished before their new readable hold windows.', sustained);
@@ -1015,7 +1034,12 @@ async function testAreaEffectReadability(browser) {
     await page.waitForTimeout(720);
     const rankFour = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(rankFour.hazards.length === 2
-      && rankFour.hazards.every((zone) => zone.maxLife === 4000 && zone.radius === 112),
+      && rankFour.hazards.every((zone) => (
+        zone.maxLife === 4000
+        && zone.radius === 112
+        && zone.texture === 'molotov-ground-r4'
+        && zone.flameCount === 6
+      )),
     'Rank-four Molotov did not create two compact four-second fields.', rankFour);
     await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
@@ -1044,6 +1068,7 @@ async function testAreaEffectReadability(browser) {
       charge,
       beam,
       settled,
+      settledMotion,
       sustained,
       rankFour,
       predictiveAim

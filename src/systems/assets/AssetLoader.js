@@ -21,7 +21,17 @@ import enemyEliteBruteStompUrl from '../../assets/enemies/animations/enemy-elite
 import enemyEliteSpitterPulseUrl from '../../assets/enemies/animations/enemy-elite-spitter-pulse.webp';
 import enemyEliteSpitterRunUrl from '../../assets/enemies/animations/enemy-elite-spitter-run.webp';
 import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
-import molotovV2SheetUrl from '../../assets/fx/molotov-v2-sheet.webp';
+import molotovGroundR1Url from '../../assets/fx/molotov-modular/molotov-ground-r1.webp';
+import molotovGroundR2Url from '../../assets/fx/molotov-modular/molotov-ground-r2.webp';
+import molotovGroundR3Url from '../../assets/fx/molotov-modular/molotov-ground-r3.webp';
+import molotovGroundR4Url from '../../assets/fx/molotov-modular/molotov-ground-r4.webp';
+import molotovGroundEvoUrl from '../../assets/fx/molotov-modular/molotov-ground-evo.webp';
+import molotovFlameSmallUrl from '../../assets/fx/molotov-modular/molotov-flame-small.webp';
+import molotovFlameMediumUrl from '../../assets/fx/molotov-modular/molotov-flame-medium.webp';
+import molotovFlameLargeUrl from '../../assets/fx/molotov-modular/molotov-flame-large.webp';
+import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.webp';
+import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
+import molotovSmokeUrl from '../../assets/fx/molotov-modular/molotov-smoke.webp';
 import enemyBurnOverlaySheetUrl from '../../assets/fx/enemy-burn-overlay-sheet.webp';
 import arenaGroundUrl from '../../assets/map/arena-ground.webp';
 import supportChickR1SheetUrl from '../../assets/companions/support-chick-r1-sheet.webp';
@@ -39,7 +49,11 @@ import goldenEggUrl from '../../assets/projectiles/golden-egg.webp';
 import goldenEggR2Url from '../../assets/projectiles/golden-egg-r2.webp';
 import goldenEggR3Url from '../../assets/projectiles/golden-egg-r3.webp';
 import goldenEggR4Url from '../../assets/projectiles/golden-egg-r4.webp';
-import molotovEggUrl from '../../assets/projectiles/molotov-egg.webp';
+import molotovEggR1Url from '../../assets/projectiles/molotov-modular/molotov-egg-r1.webp';
+import molotovEggR2Url from '../../assets/projectiles/molotov-modular/molotov-egg-r2.webp';
+import molotovEggR3Url from '../../assets/projectiles/molotov-modular/molotov-egg-r3.webp';
+import molotovEggR4Url from '../../assets/projectiles/molotov-modular/molotov-egg-r4.webp';
+import molotovEggEvoUrl from '../../assets/projectiles/molotov-modular/molotov-egg-evo.webp';
 import rocketEggUrl from '../../assets/projectiles/rocket-egg.webp';
 import evoSunshotArrayProjectileUrl from '../../assets/projectiles/evolutions/evo-sunshot-array-projectile.webp';
 import evoSiegebreakerShellProjectileUrl from '../../assets/projectiles/evolutions/evo-siegebreaker-shell-projectile.webp';
@@ -155,7 +169,19 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-elite-spitter-pulse', enemyEliteSpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-run', enemyEliteSpitterRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('fx-atlas-v1', fxAtlasUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('molotov-v2-sheet', molotovV2SheetUrl, { frameWidth: 256, frameHeight: 256 });
+  [
+    ['molotov-ground-r1', molotovGroundR1Url],
+    ['molotov-ground-r2', molotovGroundR2Url],
+    ['molotov-ground-r3', molotovGroundR3Url],
+    ['molotov-ground-r4', molotovGroundR4Url],
+    ['molotov-ground-evo', molotovGroundEvoUrl],
+    ['molotov-flame-small', molotovFlameSmallUrl],
+    ['molotov-flame-medium', molotovFlameMediumUrl],
+    ['molotov-flame-large', molotovFlameLargeUrl],
+    ['molotov-embers', molotovEmbersUrl],
+    ['molotov-ignition', molotovIgnitionUrl],
+    ['molotov-smoke', molotovSmokeUrl]
+  ].forEach(([key, url]) => scene.load.image(key, url));
   scene.load.spritesheet('enemy-burn-overlay-sheet', enemyBurnOverlaySheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('arena-ground', arenaGroundUrl);
   [
@@ -178,7 +204,13 @@ export function preloadGameAssets(scene) {
   scene.load.image('golden-egg-r2', goldenEggR2Url);
   scene.load.image('golden-egg-r3', goldenEggR3Url);
   scene.load.image('golden-egg-r4', goldenEggR4Url);
-  scene.load.image('molotov-egg', molotovEggUrl);
+  [
+    ['molotov-egg-r1', molotovEggR1Url],
+    ['molotov-egg-r2', molotovEggR2Url],
+    ['molotov-egg-r3', molotovEggR3Url],
+    ['molotov-egg-r4', molotovEggR4Url],
+    ['molotov-egg-evo', molotovEggEvoUrl]
+  ].forEach(([key, url]) => scene.load.image(key, url));
   scene.load.image('rocket-egg', rocketEggUrl);
   scene.load.image('evo-sunshot-array-projectile', evoSunshotArrayProjectileUrl);
   scene.load.image('evo-siegebreaker-shell-projectile', evoSiegebreakerShellProjectileUrl);
