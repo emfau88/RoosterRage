@@ -1127,6 +1127,63 @@ async function testAreaEffectReadability(browser) {
   }
 }
 
+async function testHordeCombatFeedback(browser) {
+  const { page, errors } = await openGame(browser, 'horde-combat-feedback');
+  try {
+    const immediate = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.movePlayer(700, 450);
+      for (let index = 0; index < 50; index += 1) {
+        const angle = (index / 50) * Math.PI * 2;
+        const ring = index % 3;
+        api.spawnEnemyType('slime',
+          700 + Math.cos(angle) * (125 + ring * 42),
+          450 + Math.sin(angle) * (72 + ring * 28),
+          { speed: 0, damage: 0, hp: 12, xpOverride: 0 });
+      }
+      const ids = api.getEnemySnapshot().map((enemy) => enemy.id);
+      ids.forEach((id) => api.damageEnemyById(id, 999, 'rocket-egg'));
+      return api.getCombatFeedbackState();
+    });
+    assert(
+      immediate.killChain.count === 50
+      && immediate.lastMultiKill?.threshold === 15
+      && immediate.lastMultiKill?.count === 50
+      && immediate.lastDeathFeedback?.profile === 'explosive'
+      && immediate.lastDeathFeedback?.style === 'blast'
+      && immediate.hud.visible
+      && immediate.hud.count === '50×'
+      && immediate.hud.label === 'ROOSTER RAMPAGE',
+      'A mass kill should bundle into one escalating horde event.',
+      immediate
+    );
+    assert(
+      immediate.activeHitVisuals <= immediate.limits.hits
+      && immediate.activeDamageTexts <= immediate.limits.damageTexts
+      && immediate.activeDeathEchoes <= immediate.limits.deathEchoes,
+      'Horde feedback exceeded its visual safety caps.',
+      immediate
+    );
+    await page.waitForTimeout(120);
+    await page.screenshot({ path: path.join(artifactDir, 'horde-feedback-rocket.png') });
+    await page.waitForTimeout(480);
+    const settled = await page.evaluate(() => window.__ROOSTER_TEST__.getCombatFeedbackState());
+    assert(
+      settled.activeHitVisuals === 0
+      && settled.activeDamageTexts === 0
+      && settled.activeDeathEchoes === 0,
+      'Transient horde feedback did not clean itself up.',
+      settled
+    );
+    assert(errors.length === 0, 'Browser reported errors during horde feedback test.', errors);
+    return { name: 'horde combat feedback', status: 'passed', immediate, settled };
+  } finally {
+    await page.close();
+  }
+}
+
 async function run() {
   await fs.mkdir(artifactDir, { recursive: true });
   const { server, url } = await ensureTestServer();
@@ -1145,6 +1202,7 @@ async function run() {
     results.push(await testMobileProjectileHierarchy(browser));
     results.push(await testActiveUpgradeAbilities(browser));
     results.push(await testAreaEffectReadability(browser));
+    results.push(await testHordeCombatFeedback(browser));
     results.push(await testTargetAcquisitionGate(browser));
     results.push(await testStrandedEnemyRecovery(browser));
     const report = {

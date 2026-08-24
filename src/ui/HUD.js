@@ -102,6 +102,7 @@ export class HUD {
     this.onTalentPurchased = onTalentPurchased;
     this.recentUpgrade = null;
     this.upgradeConfirmationTimeout = null;
+    this.multiKillTimeout = null;
     this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play', talentId: null };
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     document.documentElement.style.setProperty('--ui-icon-columns', `${ICON_COLUMNS * 100}%`);
@@ -160,7 +161,17 @@ export class HUD {
     this.upgradeConfirmation = document.createElement('div');
     this.upgradeConfirmation.className = 'upgrade-confirmation';
 
-    document.body.append(this.root, this.overlay, this.joystick, this.waveBanner, this.upgradeConfirmation);
+    this.multiKill = document.createElement('div');
+    this.multiKill.className = 'multi-kill';
+
+    document.body.append(
+      this.root,
+      this.overlay,
+      this.joystick,
+      this.waveBanner,
+      this.upgradeConfirmation,
+      this.multiKill
+    );
   }
 
   update(state) {
@@ -1135,6 +1146,40 @@ export class HUD {
     };
   }
 
+  showMultiKill(event, color = 0xffd35c) {
+    if (!event || !this.multiKill) {
+      return;
+    }
+    window.clearTimeout(this.multiKillTimeout);
+    const cssColor = `#${Number(color).toString(16).padStart(6, '0')}`;
+    this.multiKill.style.setProperty('--multi-kill-color', cssColor);
+    this.multiKill.innerHTML = `<strong>${event.count}×</strong><span>${event.label}</span>`;
+    this.multiKill.classList.remove('is-visible');
+    void this.multiKill.offsetWidth;
+    this.multiKill.classList.add('is-visible');
+    const killMetric = this.root.querySelector('[data-kills]');
+    killMetric?.classList.remove('is-kill-burst');
+    void killMetric?.offsetWidth;
+    killMetric?.classList.add('is-kill-burst');
+    this.multiKillTimeout = window.setTimeout(() => {
+      this.multiKill.classList.remove('is-visible');
+      killMetric?.classList.remove('is-kill-burst');
+    }, 1050);
+  }
+
+  getMultiKillState() {
+    return {
+      visible: this.multiKill?.classList.contains('is-visible') ?? false,
+      count: this.multiKill?.querySelector('strong')?.textContent ?? null,
+      label: this.multiKill?.querySelector('span')?.textContent ?? null
+    };
+  }
+
+  updateMultiKillCount(count) {
+    const value = this.multiKill?.querySelector('strong');
+    if (value) value.textContent = `${count}×`;
+  }
+
   iconIdFromLabel(label) {
     const clean = label.replace(/\s+\d+$/, '');
     return ICON_IDS_BY_NAME[clean] ?? null;
@@ -1158,9 +1203,11 @@ export class HUD {
   destroy() {
     window.clearTimeout(this.waveBannerTimeout);
     window.clearTimeout(this.upgradeConfirmationTimeout);
+    window.clearTimeout(this.multiKillTimeout);
     this.root.remove();
     this.overlay.remove();
     this.upgradeConfirmation.remove();
+    this.multiKill.remove();
     this.joystick.remove();
     this.waveBanner.remove();
   }

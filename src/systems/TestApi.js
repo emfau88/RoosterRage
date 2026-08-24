@@ -743,6 +743,10 @@ export function installTestApi(scene) {
       world: scene.lastUpgradeFeedback ? { ...scene.lastUpgradeFeedback } : null,
       hud: scene.hud.getUpgradeFeedbackState()
     }),
+    getCombatFeedbackState: () => ({
+      ...scene.combatFeedback.getState(),
+      hud: scene.hud.getMultiKillState()
+    }),
     getUpgradeChoices: () => scene.upgradeSystem.getChoices(3, scene.player).map((upgrade) => upgrade.id),
     getUpgradeChoiceDetails: () => scene.upgradeSystem.getChoices(3, scene.player).map((upgrade) => ({
       id: upgrade.id,
@@ -947,12 +951,12 @@ export function installTestApi(scene) {
       }
       return scene.entities.getXpState();
     },
-    damageEnemyById: (id, amount) => {
+    damageEnemyById: (id, amount, source = 'test-api') => {
       const enemy = scene.enemies.find((item) => item.id === id);
       if (!enemy) {
         return false;
       }
-      scene.damageEnemy(enemy, amount, enemy.sprite.x, enemy.sprite.y, { source: 'test-api' });
+      scene.damageEnemy(enemy, amount, enemy.sprite.x, enemy.sprite.y, { source });
       return true;
     },
     forceSpawnEnemy: (x = scene.player.sprite.x + 170, y = scene.player.sprite.y) => {

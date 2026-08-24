@@ -782,6 +782,7 @@ export class GameScene extends Phaser.Scene {
     this.scale.off(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
     this.playerInput?.destroy();
     this.roosterClasses?.destroy();
+    this.combatFeedback?.destroy();
     this.audio?.destroy();
     removeTestApi();
     this.hud?.destroy();

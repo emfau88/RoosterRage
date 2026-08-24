@@ -80,10 +80,14 @@ export class Enemy {
     this.hpBarYOffset = config.hpBarYOffset ?? 30;
     this.showHpBar = config.showHpBar ?? true;
     this.baseTint = config.tint ?? null;
+    this.statusBaseTint = this.elite && config.eliteTint !== false ? 0xfff2a6 : this.baseTint;
+    this.baseRenderScale = config.scale ?? 0.24;
+    this.hitReactionToken = 0;
+    this.slowUntil = 0;
 
     this.sprite.enableBody(true, x, y, true, true);
     this.sprite.setTexture(config.texture ?? 'enemy-slime');
-    this.sprite.setScale(config.scale ?? 0.24);
+    this.sprite.setScale(this.baseRenderScale);
     this.sprite.setCircle(config.radius ?? 28, config.bodyOffsetX ?? 100, config.bodyOffsetY ?? 118);
     this.sprite.setDepth(4);
     this.sprite.clearTint();
@@ -239,17 +243,28 @@ export class Enemy {
     this.scene.enemyAttacks.updateEnemy(this, player);
   }
 
-  takeDamage(amount) {
+  takeDamage(amount, feedback = {}) {
     this.hp -= amount;
     const healthRatio = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
     this.hpBarFill.scaleX = healthRatio;
     this.sprite.setAlpha(1);
-    this.sprite.setTintFill(0xffffff);
+    this.sprite.setTintFill(feedback.flashColor ?? 0xffffff);
+    this.hitReactionToken += 1;
+    const reactionToken = this.hitReactionToken;
+    const strong = feedback.strong ?? false;
+    this.sprite.setScale(
+      this.baseRenderScale * (strong ? 1.08 : 1.035),
+      this.baseRenderScale * (strong ? 0.86 : 0.94)
+    );
     const activationId = this.activationId;
-    this.scene.time.delayedCall(65, () => {
-      if (this.sprite.active && this.activationId === activationId) {
-        this.sprite.clearTint();
-        if (this.baseTint) this.sprite.setTint(this.baseTint);
+    this.scene.time.delayedCall(strong ? 92 : 68, () => {
+      if (
+        this.sprite.active
+        && this.activationId === activationId
+        && this.hitReactionToken === reactionToken
+      ) {
+        this.sprite.setScale(this.baseRenderScale);
+        this.restoreStatusTint();
         this.sprite.setAlpha(1);
       }
     });
@@ -272,15 +287,28 @@ export class Enemy {
 
   applySlow(ratio, duration) {
     const activationId = this.activationId;
+    this.slowUntil = Math.max(this.slowUntil, this.scene.time.now + duration);
     this.speed = Math.min(this.speed, this.baseSpeed * ratio);
     this.sprite.setTint(0x8deaff);
     this.scene.time.delayedCall(duration, () => {
-      if (this.sprite.active && this.activationId === activationId) {
+      if (
+        this.sprite.active
+        && this.activationId === activationId
+        && this.scene.time.now >= this.slowUntil
+      ) {
         this.speed = this.baseSpeed;
-        this.sprite.clearTint();
-        if (this.baseTint) this.sprite.setTint(this.baseTint);
+        this.restoreStatusTint();
       }
     });
+  }
+
+  restoreStatusTint() {
+    this.sprite.clearTint();
+    if (this.scene.time.now < this.slowUntil) {
+      this.sprite.setTint(0x8deaff);
+    } else if (this.statusBaseTint) {
+      this.sprite.setTint(this.statusBaseTint);
+    }
   }
 
   applyBurn(duration = 3000, damage = 3) {
@@ -351,9 +379,11 @@ export class Enemy {
 
   deactivate() {
     this.clearBurn();
+    this.slowUntil = 0;
+    this.hitReactionToken += 1;
     this.sprite.stop();
     this.sprite.clearTint();
-    this.sprite.setAlpha(1).setVelocity(0, 0);
+    this.sprite.setAlpha(1).setScale(this.baseRenderScale).setVelocity(0, 0);
     this.sprite.disableBody(true, true);
     this.hpBarBack.setActive(false).setVisible(false);
     this.hpBarFill.setActive(false).setVisible(false);

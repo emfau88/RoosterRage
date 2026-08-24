@@ -122,6 +122,7 @@ export class EntitySystem {
 
   killEnemy(enemy, source = 'base-egg') {
     this.scene.enemies = this.scene.enemies.filter((item) => item !== enemy);
+    this.scene.combatFeedback.showEnemyDeath(enemy, source);
     if (enemy.type === 'boss') {
       this.scene.clearEnemyProjectiles();
     }
@@ -138,6 +139,7 @@ export class EntitySystem {
       : enemy.xpValue;
     this.spawnXp(enemy.sprite.x, enemy.sprite.y, xpDrop);
     this.scene.debugStats.kills += 1;
+    this.scene.combatFeedback.recordKill(enemy, source);
     this.scene.telemetry.addKill(
       this.scene.time.now,
       this.scene.waveSystem.currentWave,

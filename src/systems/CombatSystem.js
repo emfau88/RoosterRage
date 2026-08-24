@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { Projectile } from '../entities/Projectile.js';
 import { getFireEggVisual } from '../data/fireEggVisuals.js';
+import { getCombatFeedbackProfile } from '../data/combatFeedbackProfiles.js';
 import { playEvolutionImpact } from './EvolutionVisuals.js';
 
 const TARGET_ACQUISITION_MARGIN = 0.5;
@@ -773,10 +774,14 @@ export class CombatSystem {
       return false;
     }
     const source = options.source ?? 'base-egg';
+    const feedbackProfile = getCombatFeedbackProfile(source);
     const bossMultiplier = getBossDamageMultiplier(enemy, source);
     const adjustedDamage = Math.max(1, Math.round(damage * bossMultiplier));
     const appliedDamage = enemy.mitigateDamage?.(adjustedDamage) ?? adjustedDamage;
-    if (!options.quiet) scene.showHitFeedback(x, y, appliedDamage, enemy, options);
+    const hpBefore = Math.max(0, enemy.hp);
+    const effective = Math.min(hpBefore, appliedDamage);
+    const overkill = Math.max(0, appliedDamage - hpBefore);
+    if (!options.quiet) scene.showHitFeedback(x, y, effective, enemy, options);
     if ([
       'evo-sunshot-array',
       'evo-siegebreaker-shell',
@@ -796,9 +801,6 @@ export class CombatSystem {
     }
     scene.debugStats.hits += 1;
     scene.debugStats.lastHitAt = scene.time.now;
-    const hpBefore = Math.max(0, enemy.hp);
-    const effective = Math.min(hpBefore, appliedDamage);
-    const overkill = Math.max(0, appliedDamage - hpBefore);
     scene.telemetry.addHit(scene.time.now, scene.waveSystem.currentWave, source);
     scene.telemetry.addDamageDealt({
       amount: appliedDamage,
@@ -810,7 +812,11 @@ export class CombatSystem {
       time: scene.time.now,
       wave: scene.waveSystem.currentWave
     });
-    if (enemy.takeDamage(appliedDamage)) {
+    if (enemy.takeDamage(appliedDamage, {
+      flashColor: feedbackProfile.flash,
+      profile: feedbackProfile.id,
+      strong: Boolean(options.heavy || options.critical || appliedDamage >= enemy.maxHp * 0.32)
+    })) {
       scene.killEnemy(enemy, source);
       return true;
     }
