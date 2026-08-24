@@ -100,6 +100,8 @@ export class HUD {
     this.onSettings = onSettings;
     this.onAnalyticsConsent = onAnalyticsConsent;
     this.onTalentPurchased = onTalentPurchased;
+    this.recentUpgrade = null;
+    this.upgradeConfirmationTimeout = null;
     this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play', talentId: null };
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
     document.documentElement.style.setProperty('--ui-icon-columns', `${ICON_COLUMNS * 100}%`);
@@ -155,7 +157,10 @@ export class HUD {
     this.waveBanner = document.createElement('div');
     this.waveBanner.className = 'wave-banner';
 
-    document.body.append(this.root, this.overlay, this.joystick, this.waveBanner);
+    this.upgradeConfirmation = document.createElement('div');
+    this.upgradeConfirmation.className = 'upgrade-confirmation';
+
+    document.body.append(this.root, this.overlay, this.joystick, this.waveBanner, this.upgradeConfirmation);
   }
 
   update(state) {
@@ -227,6 +232,13 @@ export class HUD {
       <div class="panel ${chest ? 'panel--reward' : ''}">
         <h2>${title}</h2>
         <p>${subtitle}</p>
+        ${context.recentChoice ? `
+          <div class="upgrade-selection-receipt">
+            <span>✓ ZULETZT GEWÄHLT</span>
+            <strong>${context.recentChoice.name} ${context.recentChoice.evolution ? 'EVO' : `R${context.recentChoice.nextRank ?? 1}`}</strong>
+            <em>${context.recentChoice.momentTitle ?? context.recentChoice.name}</em>
+          </div>
+        ` : ''}
         <div class="upgrade-list"></div>
         ${context.canReroll ? '<button class="reroll-button" type="button">Reroll (1)</button>' : ''}
       </div>
@@ -247,6 +259,8 @@ export class HUD {
           </span>
           ${this.renderRankPips(choice.rankProgress)}
           <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
+          <span class="upgrade-button__milestone">${choice.momentTitle ?? choice.name}</span>
+          ${this.renderChangeItems(choice.changeItems)}
           <span class="upgrade-button__reward upgrade-button__reward--${choice.upgradeMoment ?? 'new'}">${
             choice.upgradeMoment === 'rank-up' ? 'Rangaufstieg'
               : choice.upgradeMoment === 'evolution' ? 'EVO bereit'
@@ -1000,8 +1014,17 @@ export class HUD {
         icon.classList.add('is-open');
         icon.title = `Freier ${kind === 'active' ? 'Active' : 'Passive'}-Slot`;
       } else {
+        const recentKey = this.recentUpgrade?.key;
+        const recentActive = this.recentUpgrade && performance.now() < this.recentUpgrade.until;
+        const matchesRecent = recentActive && (
+          entry.id === recentKey
+          || entry.sourceId === recentKey
+          || entry.rankUpgradeId === recentKey
+          || entry.evolutionId === this.recentUpgrade.id
+        );
         icon.title = `${entry.name} ${entry.rank === 'EVO' ? 'EVO' : `Rang ${entry.rank}`}`;
         icon.classList.toggle('is-evolved', entry.evolved);
+        icon.classList.toggle('is-recent-upgrade', Boolean(matchesRecent));
         this.setIcon(icon, entry.evolutionId ?? entry.sourceId);
         const rank = document.createElement('small');
         rank.textContent = entry.rank === 'EVO' ? 'E' : entry.rank;
@@ -1049,6 +1072,69 @@ export class HUD {
     return `<span class="upgrade-button__rank-pips" aria-label="Rang ${progress.next} von ${progress.max}">${pips}</span>`;
   }
 
+  renderChangeItems(items) {
+    if (!items?.length) {
+      return '';
+    }
+    return `<span class="upgrade-button__changes">${items
+      .slice(0, 3)
+      .map((item) => `<span>${item}</span>`)
+      .join('')}</span>`;
+  }
+
+  showUpgradeConfirmation(upgrade) {
+    if (!upgrade || !this.upgradeConfirmation) {
+      return;
+    }
+    const rank = upgrade.evolution
+      ? 'EVO'
+      : upgrade.consumable
+        ? 'SOFORT'
+        : `R${upgrade.nextRank ?? 1}`;
+    const key = upgrade.evolution?.base
+      ?? upgrade.baseWeaponId
+      ?? upgrade.slotKey
+      ?? upgrade.id;
+    this.recentUpgrade = {
+      id: upgrade.id,
+      key,
+      until: performance.now() + 1900
+    };
+    window.clearTimeout(this.upgradeConfirmationTimeout);
+    this.upgradeConfirmation.className = `upgrade-confirmation upgrade-confirmation--${upgrade.momentTone ?? upgrade.upgradeMoment ?? 'new'}`;
+    this.upgradeConfirmation.innerHTML = `
+      <span class="upgrade-confirmation__icon" data-confirmation-icon></span>
+      <span class="upgrade-confirmation__copy">
+        <small>${upgrade.evolution ? 'EVOLUTION AKTIV' : upgrade.upgradeMoment === 'new' ? 'NEUE FÄHIGKEIT' : 'UPGRADE AKTIV'}</small>
+        <span><strong>${upgrade.name}</strong><b>${rank}</b></span>
+        <em>${upgrade.momentTitle ?? upgrade.name}</em>
+        ${this.renderChangeItems(upgrade.changeItems)}
+      </span>
+    `;
+    this.setIcon(
+      this.upgradeConfirmation.querySelector('[data-confirmation-icon]'),
+      upgrade.evolution ? upgrade.id : upgrade.id
+    );
+    // Reflow restarts the entrance animation when upgrades are selected in quick succession.
+    void this.upgradeConfirmation.offsetWidth;
+    this.upgradeConfirmation.classList.add('is-visible');
+    this.upgradeConfirmationTimeout = window.setTimeout(() => {
+      this.upgradeConfirmation.classList.remove('is-visible');
+    }, 1750);
+  }
+
+  getUpgradeFeedbackState() {
+    return {
+      visible: this.upgradeConfirmation?.classList.contains('is-visible') ?? false,
+      title: this.upgradeConfirmation?.querySelector('strong')?.textContent ?? null,
+      rank: this.upgradeConfirmation?.querySelector('b')?.textContent ?? null,
+      milestone: this.upgradeConfirmation?.querySelector('em')?.textContent ?? null,
+      changes: [...(this.upgradeConfirmation?.querySelectorAll('.upgrade-button__changes span') ?? [])]
+        .map((item) => item.textContent),
+      recent: this.recentUpgrade ? { ...this.recentUpgrade } : null
+    };
+  }
+
   iconIdFromLabel(label) {
     const clean = label.replace(/\s+\d+$/, '');
     return ICON_IDS_BY_NAME[clean] ?? null;
@@ -1071,8 +1157,10 @@ export class HUD {
 
   destroy() {
     window.clearTimeout(this.waveBannerTimeout);
+    window.clearTimeout(this.upgradeConfirmationTimeout);
     this.root.remove();
     this.overlay.remove();
+    this.upgradeConfirmation.remove();
     this.joystick.remove();
     this.waveBanner.remove();
   }

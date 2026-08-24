@@ -1,4 +1,5 @@
 import { UPGRADE_DEFINITIONS } from '../data/upgradeDefinitions.js';
+import { getUpgradePresentation } from '../data/upgradePresentation.js';
 import { RandomSystem } from './RandomSystem.js';
 
 const SPECTACLE_CATEGORIES = ['active', 'orbit', 'area', 'summon'];
@@ -186,6 +187,7 @@ export class UpgradeSystem {
     const deltaDescription = rankDescription
       ? rankDescription.replace(/^R\d+\s*([^:]*):\s*/, (_match, label) => label ? `${label}: ` : '')
       : upgrade.description;
+    const presentation = getUpgradePresentation(upgrade, internalNextRank ?? nextRank);
     return {
       ...upgrade,
       description: deltaDescription,
@@ -193,6 +195,9 @@ export class UpgradeSystem {
       nextRank,
       displayMaxRank,
       upgradeMoment,
+      momentTitle: presentation.title,
+      changeItems: presentation.changes,
+      momentTone: presentation.tone,
       rankDeltaLabel: upgrade.evolution
         ? 'EVO'
         : upgrade.consumable

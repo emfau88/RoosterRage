@@ -15,6 +15,7 @@ export class RunStateSystem {
     this.currentSelection = null;
     this.upgradeStartedAt = 0;
     this.rerollsRemaining = 1;
+    this.lastUpgradeReceipt = null;
   }
 
   startRoosterSelection(definitions) {
@@ -101,6 +102,7 @@ export class RunStateSystem {
       this.currentSelection = null;
       this.pendingUpgradeChoices = null;
       scene.hud.hideOverlay();
+      this.lastUpgradeReceipt = null;
       scene.physics.resume();
       return;
     }
@@ -119,8 +121,10 @@ export class RunStateSystem {
       type: this.currentSelection.type,
       kind: this.currentSelection.kind,
       remaining: this.pendingLevelUps + this.rewardQueue.length,
-      canReroll: this.rerollsRemaining > 0
+      canReroll: this.rerollsRemaining > 0,
+      recentChoice: this.lastUpgradeReceipt
     });
+    this.lastUpgradeReceipt = null;
   }
 
   rerollUpgradeChoices() {
@@ -159,6 +163,9 @@ export class RunStateSystem {
     const selection = this.currentSelection;
     const pauseMs = this.upgradeStartedAt ? scene.time.now - this.upgradeStartedAt : 0;
     scene.player.applyUpgrade(upgrade, scene);
+    scene.playUpgradeFeedback(upgrade);
+    scene.hud.showUpgradeConfirmation(upgrade);
+    this.lastUpgradeReceipt = upgrade;
     if (upgrade.category !== 'evolution') scene.audio.play('upgrade-select');
     scene.telemetry.addUpgradeChoice(
       scene.time.now,

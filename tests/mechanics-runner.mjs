@@ -144,8 +144,15 @@ async function testUpgradeOffers(browser) {
     assert(choices.some((choice) => spectacleCategories.has(choice.category)), 'Early offer contains no spectacle upgrade.', choices);
     assert(choices.every((choice) => choice.rankLabel && /Rang|Sofort/.test(choice.rankLabel)), 'Cards need rank labels.', choices);
     assert(choices.every((choice) => /\d/.test(choice.description)), 'Cards should communicate concrete numeric effects.', choices);
+    assert(choices.every((choice) => choice.momentTitle), 'Cards need a named upgrade milestone.', choices);
+    assert(choices.every((choice) => choice.changeItems?.length > 0), 'Cards need scan-friendly change facts.', choices);
     assert(!availableAtFullHp.includes('heal'), 'Heal should not be offered at full HP.', availableAtFullHp);
     assert(choices.some((choice) => choice.id === 'primary-ace-rank'), 'R2 start-weapon progress should be guaranteed at level 2.', choices);
+    assert(
+      choices.find((choice) => choice.id === 'primary-ace-rank')?.momentTitle === 'TWIN LOCK',
+      'The first Target Egg rank-up should be presented as Twin Lock.',
+      choices
+    );
 
     const startWeaponCadence = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
@@ -197,11 +204,48 @@ async function testUpgradeOffers(browser) {
     await page.screenshot({ path: path.join(artifactDir, 'upgrade-cards-phase-5.png') });
 
     const spectacle = choices.find((choice) => spectacleCategories.has(choice.category));
+    await page.evaluate(() => {
+      document.documentElement.classList.remove('has-ui-overlay');
+      document.querySelector('.overlay')?.classList.remove('is-visible');
+    });
     await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), spectacle.id);
+    const feedback = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeFeedbackState());
+    assert(
+      feedback.hud.visible
+      && feedback.hud.title
+      && feedback.hud.milestone
+      && feedback.hud.changes.length > 0
+      && feedback.world?.milestone,
+      'Selected upgrades need HUD and in-world confirmation.',
+      feedback
+    );
+    await page.waitForTimeout(220);
+    await page.screenshot({ path: path.join(artifactDir, 'upgrade-confirmation-phase-6.png') });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), spectacle.id);
+    await page.waitForTimeout(220);
+    const mobileConfirmationBounds = await page.locator('.upgrade-confirmation').boundingBox();
+    assert(
+      mobileConfirmationBounds
+      && mobileConfirmationBounds.x >= 0
+      && mobileConfirmationBounds.x + mobileConfirmationBounds.width <= 390,
+      'Upgrade confirmation should stay inside the portrait viewport.',
+      mobileConfirmationBounds
+    );
+    await page.screenshot({ path: path.join(artifactDir, 'upgrade-confirmation-mobile-phase-6.png') });
     const guaranteeAfter = await page.evaluate(() => window.__ROOSTER_TEST__.shouldGuaranteeSpectacle());
     assert(!guaranteeAfter, 'Spectacle guarantee should stop after choosing a spectacle upgrade.');
     assert(errors.length === 0, 'Browser reported errors during upgrade offer test.', errors);
-    return { name: 'upgrade offers', status: 'passed', choices, spectacle: spectacle.id, startWeaponCadence, deadeyeCadence };
+    return {
+      name: 'upgrade offers',
+      status: 'passed',
+      choices,
+      spectacle: spectacle.id,
+      feedback,
+      mobileConfirmationBounds,
+      startWeaponCadence,
+      deadeyeCadence
+    };
   } finally {
     await page.close();
   }

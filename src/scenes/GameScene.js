@@ -661,6 +661,78 @@ export class GameScene extends Phaser.Scene {
     this.telemetry.record('waveCompleted', this.time.now, { wave });
   }
 
+  playUpgradeFeedback(upgrade) {
+    if (!upgrade || !this.player?.sprite?.active) {
+      return;
+    }
+    (this.upgradeFeedbackVisuals ?? []).forEach((visual) => {
+      this.tweens.killTweensOf(visual);
+      visual.destroy();
+    });
+    const evolved = Boolean(upgrade.evolution || upgrade.upgradeMoment === 'evolution');
+    const passive = upgrade.category === 'passive' || [
+      'utility', 'defense', 'mobility'
+    ].includes(upgrade.category);
+    const color = evolved ? 0xd58cff : passive ? 0x8ff0a8 : 0xffd35c;
+    const x = this.player.sprite.x;
+    const y = this.player.sprite.y + 13;
+    const pulse = this.add.ellipse(x, y, 54, 22, color, 0.16)
+      .setStrokeStyle(evolved ? 4 : 3, color, 0.92)
+      .setDepth(16);
+    const core = this.add.ellipse(x, y, 36, 14, 0xffffff, 0.18)
+      .setStrokeStyle(2, 0xffffff, 0.72)
+      .setDepth(16);
+    this.tweens.add({
+      targets: pulse,
+      displayWidth: evolved ? 190 : 150,
+      displayHeight: evolved ? 76 : 58,
+      alpha: 0,
+      duration: evolved ? 720 : 560,
+      ease: 'Cubic.Out',
+      onComplete: () => pulse.destroy()
+    });
+    this.tweens.add({
+      targets: core,
+      displayWidth: evolved ? 118 : 92,
+      displayHeight: evolved ? 46 : 36,
+      alpha: 0,
+      duration: evolved ? 520 : 410,
+      delay: 70,
+      ease: 'Quad.Out',
+      onComplete: () => core.destroy()
+    });
+    const rank = evolved ? 'EVO' : upgrade.consumable ? '' : `R${upgrade.nextRank ?? 1}`;
+    const label = [rank, upgrade.momentTitle ?? upgrade.name].filter(Boolean).join(' · ');
+    const text = this.add.text(x, this.player.sprite.y - 42, label, {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: evolved ? '16px' : '13px',
+      fontStyle: 'bold',
+      color: evolved ? '#f1ceff' : passive ? '#c8ffd2' : '#fff0a8',
+      stroke: '#111b1e',
+      strokeThickness: 4,
+      align: 'center'
+    }).setOrigin(0.5).setDepth(30);
+    this.upgradeFeedbackVisuals = [pulse, core, text];
+    this.tweens.add({
+      targets: text,
+      y: text.y - 24,
+      alpha: 0,
+      duration: evolved ? 1450 : 1150,
+      delay: 240,
+      ease: 'Cubic.Out',
+      onComplete: () => text.destroy()
+    });
+    this.lastUpgradeFeedback = {
+      id: upgrade.id,
+      rank: rank || 'SOFORT',
+      milestone: upgrade.momentTitle ?? upgrade.name,
+      changes: [...(upgrade.changeItems ?? [])],
+      color,
+      evolved,
+      at: this.time.now
+    };
+  }
+
   getTelemetrySample() {
     const nearestEnemy = this.findNearestEnemy();
     const nearestEnemyDistance = nearestEnemy

@@ -732,10 +732,17 @@ export function installTestApi(scene) {
       if (!upgrade) {
         return false;
       }
+      const presented = scene.upgradeSystem.presentUpgrade(upgrade, scene.player);
       scene.player.applyUpgrade(upgrade, scene);
+      scene.playUpgradeFeedback(presented);
+      scene.hud.showUpgradeConfirmation(presented);
       scene.updateHud();
       return true;
     },
+    getUpgradeFeedbackState: () => ({
+      world: scene.lastUpgradeFeedback ? { ...scene.lastUpgradeFeedback } : null,
+      hud: scene.hud.getUpgradeFeedbackState()
+    }),
     getUpgradeChoices: () => scene.upgradeSystem.getChoices(3, scene.player).map((upgrade) => upgrade.id),
     getUpgradeChoiceDetails: () => scene.upgradeSystem.getChoices(3, scene.player).map((upgrade) => ({
       id: upgrade.id,
@@ -743,7 +750,9 @@ export function installTestApi(scene) {
       rarity: upgrade.rarity,
       nextRank: upgrade.nextRank,
       rankLabel: upgrade.rankLabel,
-      description: upgrade.description
+      description: upgrade.description,
+      momentTitle: upgrade.momentTitle,
+      changeItems: upgrade.changeItems
     })),
     previewUpgradeOverlay: () => {
       const choices = scene.upgradeSystem.getChoices(3, scene.player);
