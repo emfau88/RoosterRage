@@ -317,15 +317,17 @@ export class Enemy {
     this.burnDamage = Math.max(this.burnDamage ?? 0, damage);
     this.nextBurnTickAt = Math.max(this.nextBurnTickAt ?? 0, now + 650);
     if (!this.burnOverlay?.active) {
-      this.burnOverlay = this.scene.add.sprite(
+      this.burnOverlay = this.scene.add.ellipse(
         this.sprite.x,
-        this.sprite.y,
-        'enemy-burn-overlay-sheet',
-        0
+        this.sprite.y + 2,
+        32,
+        12,
+        0xff6b28,
+        0.12
       )
-        .setAlpha(0.78)
-        .setDepth(6)
-        .play('enemy-burn-overlay-loop');
+        .setStrokeStyle(1, 0xffc45a, 0.38)
+        .setDepth(5.8);
+      this.burnOverlayKind = 'ground-glow';
     }
     this.updateBurnOverlay();
   }
@@ -352,11 +354,11 @@ export class Enemy {
 
   updateBurnOverlay() {
     if (!this.burnOverlay?.active) return;
-    const size = Math.max(54, Math.min(150, this.sprite.displayWidth * 1.22));
+    const size = Math.max(28, Math.min(82, this.sprite.displayWidth * 0.72));
     this.burnOverlay
-      .setPosition(this.sprite.x, this.sprite.y + 2)
-      .setDisplaySize(size, size)
-      .setAlpha(0.72 + Math.sin(this.scene.time.now * 0.012) * 0.08);
+      .setPosition(this.sprite.x, this.sprite.y + this.sprite.displayHeight * 0.18)
+      .setDisplaySize(size, size * 0.34)
+      .setAlpha(0.1 + Math.sin(this.scene.time.now * 0.006) * 0.025);
   }
 
   clearBurn() {
@@ -365,6 +367,7 @@ export class Enemy {
     this.nextBurnTickAt = 0;
     this.burnOverlay?.destroy();
     this.burnOverlay = null;
+    this.burnOverlayKind = null;
   }
 
   destroy() {

@@ -21,24 +21,14 @@ import enemyEliteBruteStompUrl from '../../assets/enemies/animations/enemy-elite
 import enemyEliteSpitterPulseUrl from '../../assets/enemies/animations/enemy-elite-spitter-pulse.webp';
 import enemyEliteSpitterRunUrl from '../../assets/enemies/animations/enemy-elite-spitter-run.webp';
 import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
-import molotovGroundR1Url from '../../assets/fx/molotov-modular/molotov-ground-r1.webp';
-import molotovGroundR2Url from '../../assets/fx/molotov-modular/molotov-ground-r2.webp';
-import molotovGroundR3Url from '../../assets/fx/molotov-modular/molotov-ground-r3.webp';
-import molotovGroundR4Url from '../../assets/fx/molotov-modular/molotov-ground-r4.webp';
-import molotovGroundEvoUrl from '../../assets/fx/molotov-modular/molotov-ground-evo.webp';
-import molotovFlameSmallUrl from '../../assets/fx/molotov-modular/molotov-flame-small.webp';
-import molotovFlameMediumUrl from '../../assets/fx/molotov-modular/molotov-flame-medium.webp';
-import molotovFlameLargeUrl from '../../assets/fx/molotov-modular/molotov-flame-large.webp';
 import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.webp';
 import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
-import molotovSmokeUrl from '../../assets/fx/molotov-modular/molotov-smoke.webp';
 import rocketImpactR1Url from '../../assets/fx/rocket-modular/rocket-impact-r1.webp';
 import rocketImpactR2Url from '../../assets/fx/rocket-modular/rocket-impact-r2.webp';
 import rocketImpactR3Url from '../../assets/fx/rocket-modular/rocket-impact-r3.webp';
 import rocketImpactR4Url from '../../assets/fx/rocket-modular/rocket-impact-r4.webp';
 import rocketImpactEvoUrl from '../../assets/fx/rocket-modular/rocket-impact-evo.webp';
 import rocketExhaustUrl from '../../assets/fx/rocket-modular/rocket-exhaust.webp';
-import enemyBurnOverlaySheetUrl from '../../assets/fx/enemy-burn-overlay-sheet.webp';
 import arenaGroundUrl from '../../assets/map/arena-ground.webp';
 import supportChickR1SheetUrl from '../../assets/companions/support-chick-r1-sheet.webp';
 import supportChickR2SheetUrl from '../../assets/companions/support-chick-r2-sheet.webp';
@@ -79,7 +69,6 @@ import evoSolarScrambleImpactUrl from '../../assets/fx/evolutions/evo-solar-scra
 import evoPhoenixPanImpactUrl from '../../assets/fx/evolutions/evo-phoenix-pan-impact.webp';
 import evoThunderRoostImpactUrl from '../../assets/fx/evolutions/evo-thunder-roost-impact.webp';
 import evoShellHaloImpactUrl from '../../assets/fx/evolutions/evo-shell-halo-impact.webp';
-import evoSingularityNestZoneUrl from '../../assets/fx/evolutions/evo-singularity-nest-zone.webp';
 import evoDawnLaserEmitterUrl from '../../assets/fx/evolutions/evo-dawn-laser-emitter.webp';
 import evoDawnLaserImpactUrl from '../../assets/fx/evolutions/evo-dawn-laser-impact.webp';
 import evoChickSquadronImpactUrl from '../../assets/fx/evolutions/evo-chick-squadron-impact.webp';
@@ -186,17 +175,8 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-elite-spitter-run', enemyEliteSpitterRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('fx-atlas-v1', fxAtlasUrl, { frameWidth: 256, frameHeight: 256 });
   [
-    ['molotov-ground-r1', molotovGroundR1Url],
-    ['molotov-ground-r2', molotovGroundR2Url],
-    ['molotov-ground-r3', molotovGroundR3Url],
-    ['molotov-ground-r4', molotovGroundR4Url],
-    ['molotov-ground-evo', molotovGroundEvoUrl],
-    ['molotov-flame-small', molotovFlameSmallUrl],
-    ['molotov-flame-medium', molotovFlameMediumUrl],
-    ['molotov-flame-large', molotovFlameLargeUrl],
     ['molotov-embers', molotovEmbersUrl],
-    ['molotov-ignition', molotovIgnitionUrl],
-    ['molotov-smoke', molotovSmokeUrl]
+    ['molotov-ignition', molotovIgnitionUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));
   [
     ['rocket-impact-r1', rocketImpactR1Url],
@@ -206,7 +186,6 @@ export function preloadGameAssets(scene) {
     ['rocket-impact-evo', rocketImpactEvoUrl],
     ['rocket-exhaust', rocketExhaustUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));
-  scene.load.spritesheet('enemy-burn-overlay-sheet', enemyBurnOverlaySheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('arena-ground', arenaGroundUrl);
   [
     ['support-chick-r1-sheet', supportChickR1SheetUrl],
@@ -256,7 +235,6 @@ export function preloadGameAssets(scene) {
   scene.load.image('evo-phoenix-pan-impact', evoPhoenixPanImpactUrl);
   scene.load.image('evo-thunder-roost-impact', evoThunderRoostImpactUrl);
   scene.load.image('evo-shell-halo-impact', evoShellHaloImpactUrl);
-  scene.load.image('evo-singularity-nest-zone', evoSingularityNestZoneUrl);
   scene.load.image('evo-dawn-laser-emitter', evoDawnLaserEmitterUrl);
   scene.load.image('evo-dawn-laser-impact', evoDawnLaserImpactUrl);
   scene.load.image('evo-chick-squadron-impact', evoChickSquadronImpactUrl);

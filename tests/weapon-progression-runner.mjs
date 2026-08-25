@@ -229,11 +229,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
   if (weapon.id === 'molotov-egg') {
     const visualExpectations = {
-      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, ground: 'molotov-ground-r1', flames: 3, radius: 90 },
-      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, ground: 'molotov-ground-r2', flames: 5, radius: 108 },
-      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, ground: 'molotov-ground-r3', flames: 7, radius: 124 },
-      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, ground: 'molotov-ground-r4', flames: 6, radius: 112 },
-      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, ground: 'molotov-ground-evo', flames: 9, radius: 136 }
+      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, detail: 1 },
+      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, detail: 2 },
+      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, detail: 3 },
+      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, detail: 3 },
+      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, detail: 4 }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.molotovFlights.length === expected.count
@@ -252,11 +252,15 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     const fieldState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(fieldState.hazards.length === expected.fields
       && fieldState.hazards.every((zone) => (
-        zone.texture === expected.ground
-        && zone.flameCount === expected.flames
+        zone.renderStyle === 'simple-burn-field'
+        && zone.texture === null
+        && zone.flameCount === 0
+        && zone.lobeCount === expected.detail
+        && zone.heatSpotCount === expected.detail
         && zone.radius === expected.radius
         && zone.groundWidth > zone.groundHeight * 1.5
-        && zone.flameTextures.every((texture) => texture.startsWith('molotov-flame-'))
+        && zone.rimAlpha <= 0.6
+        && zone.emberAlpha <= 0.3
       )), `Molotov ${stage} has the wrong perspective-correct ground field.`, {
       expected,
       fieldState
@@ -265,13 +269,13 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     await page.screenshot({ path: path.join(artifactDir, fieldScreenshot) });
     await page.waitForTimeout(60);
     const motionState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
-    assert(fieldState.hazards.every((zone, zoneIndex) => zone.flamePositions.every((flame, index) => {
-      const after = motionState.hazards[zoneIndex].flamePositions[index];
-      return flame.x === after.x
-        && flame.y === after.y
-        && Math.abs(flame.scaleX - after.scaleX) < 0.04
-        && Math.abs(flame.scaleY - after.scaleY) < 0.08;
-    })), `Molotov ${stage} emitters jittered between samples.`, { fieldState, motionState });
+    assert(fieldState.hazards.every((zone, zoneIndex) => {
+      const after = motionState.hazards[zoneIndex];
+      return Math.abs(zone.groundWidth - after.groundWidth) < 4
+        && Math.abs(zone.groundHeight - after.groundHeight) < 3
+        && after.rimAlpha <= 0.6
+        && after.emberAlpha <= 0.3;
+    }), `Molotov ${stage} ground field moved or flickered between samples.`, { fieldState, motionState });
     molotovVisuals = { flight: areaAtFlight.molotovFlights, field: fieldState.hazards };
     remainingDelay -= 490;
   }
@@ -320,20 +324,24 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   }
   if (weapon.id === 'void-nest') {
     const visualExpectations = {
-      r1: { zones: 1, radius: 132, life: 4200, motes: 5 },
-      r2: { zones: 1, radius: 150, life: 4800, motes: 6 },
-      r3: { zones: 1, radius: 170, life: 5400, motes: 7 },
-      r4: { zones: 2, radius: 178, life: 6000, motes: 8 },
-      evo: { zones: 2, radius: 225, life: 7200, motes: 10 }
+      r1: { zones: 1, radius: 132, life: 4200, motes: 4, rings: 0 },
+      r2: { zones: 1, radius: 150, life: 4800, motes: 5, rings: 1 },
+      r3: { zones: 1, radius: 170, life: 5400, motes: 6, rings: 1 },
+      r4: { zones: 1, radius: 190, life: 6000, motes: 7, rings: 2 },
+      evo: { zones: 1, radius: 225, life: 7200, motes: 8, rings: 2 }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.voids.length === expected.zones
       && areaAtFlight.voids.every((zone) => (
-        zone.radius === expected.radius
+        zone.renderStyle === 'gravity-field'
+        && zone.radius === expected.radius
         && zone.maxLife === expected.life
         && zone.moteCount === expected.motes
+        && zone.accentRingCount === expected.rings
         && zone.fieldWidth > zone.fieldHeight * 1.55
         && zone.portalWidth > zone.portalHeight * 1.55
+        && zone.portalWidth < zone.fieldWidth * 0.4
+        && zone.coreWidth < zone.fieldWidth * 0.25
         && zone.pullSamples.outer < zone.pullSamples.middle
         && zone.pullSamples.middle < zone.pullSamples.inner
       )), `Void Nest ${stage} has the wrong perspective or distance-scaled pull profile.`, {

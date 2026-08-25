@@ -16,8 +16,8 @@ const recipes = [
   { id: 'evo-thunder-roost', base: 'lightning-comb', rank: 4, passive: 'critical-yolk', ability: 'lightningComb', textures: ['evo-thunder-roost-impact'] },
   { id: 'evo-shell-halo', base: 'orbit-eggs', rank: 4, passive: 'armor', ability: 'orbitEggs', count: 6, textures: ['evo-shell-halo-projectile', 'evo-shell-halo-impact'], activeTextures: 'orbitTextures' },
   { id: 'evo-broodstorm', base: 'rocket-egg', rank: 4, passive: 'bigger-eggs', ability: 'rocketEgg', textures: ['rocket-egg-evo', 'rocket-impact-evo'] },
-  { id: 'evo-singularity-nest', base: 'void-nest', rank: 4, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones', textures: ['evo-singularity-nest-zone'], activeTextures: 'voidZoneTextures' },
-  { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 4, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones', textures: ['molotov-egg-evo', 'molotov-ground-evo'] },
+  { id: 'evo-singularity-nest', base: 'void-nest', rank: 4, passive: 'xp-magnet', ability: 'voidNest', zones: 'voidZones', zoneCount: 1, style: 'gravity-field' },
+  { id: 'evo-phoenix-pan', base: 'molotov-egg', rank: 4, passive: 'regen', ability: 'molotovEgg', zones: 'hazardZones', zoneCount: 2, textures: ['molotov-egg-evo'] },
   { id: 'evo-dawn-laser', base: 'laser-comb', rank: 4, passive: 'swift-shells', ability: 'laserComb', textures: ['evo-dawn-laser-emitter', 'evo-dawn-laser-impact'] },
   { id: 'evo-chick-squadron', base: 'support-chick', rank: 5, passive: 'faster-eggs', ability: 'supportChick', count: 4, textures: ['support-chick-evo-sheet', 'evo-chick-squadron-projectile', 'evo-chick-squadron-impact'], activeTextures: 'supportTextures' }
 ];
@@ -137,7 +137,12 @@ async function testRecipe(browser, serverUrl, recipe) {
         `${recipe.id} did not create ${recipe.count} companions.`, result);
     }
     if (recipe.zones) {
-      assert(result.state[recipe.zones] >= 2, `${recipe.id} did not create two zones.`, result);
+      assert(result.state[recipe.zones] >= recipe.zoneCount,
+        `${recipe.id} did not create ${recipe.zoneCount} zone(s).`, result);
+    }
+    if (recipe.style) {
+      assert(result.visuals.voidZoneStyles.every((style) => style === recipe.style),
+        `${recipe.id} did not use its code-native gravity-field presentation.`, result.visuals);
     }
     if (recipe.textures) {
       assert(recipe.textures.every((texture) => result.visuals.loadedTextures.includes(texture)),

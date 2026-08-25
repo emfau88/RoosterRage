@@ -1039,8 +1039,10 @@ async function testAreaEffectReadability(browser) {
     assert(charge.molotovProjectiles === 1, 'Rank-one Molotov should launch one projectile.', charge);
     assert(charge.voids[0]?.maxLife === 4200
       && charge.voids[0]?.radius === 132
-      && charge.voids[0]?.alpha >= 0.5
+      && charge.voids[0]?.renderStyle === 'gravity-field'
+      && charge.voids[0]?.alpha >= 0.3
       && charge.voids[0]?.portalWidth > charge.voids[0]?.portalHeight * 1.55
+      && charge.voids[0]?.portalWidth < charge.voids[0]?.fieldWidth * 0.4
       && charge.voids[0]?.pullSamples.outer < charge.voids[0]?.pullSamples.middle
       && charge.voids[0]?.pullSamples.middle < charge.voids[0]?.pullSamples.inner,
     'Void Nest did not start its perspective-correct 4.2 second pull presentation.', charge);
@@ -1055,35 +1057,31 @@ async function testAreaEffectReadability(browser) {
     assert(settled.laserVisuals === 0, 'Laser visuals outlived their bounded afterglow.', settled);
     assert(settled.hazards[0]?.maxLife === 3000
       && settled.hazards[0]?.radius === 90
-      && settled.hazards[0]?.texture === 'molotov-ground-r1'
+      && settled.hazards[0]?.renderStyle === 'simple-burn-field'
+      && settled.hazards[0]?.texture === null
       && settled.hazards[0]?.animation === null
-      && settled.hazards[0]?.flameCount === 3
-      && Math.abs(settled.hazards[0]?.groundWidth - 187.2) < 0.01
-      && Math.abs(settled.hazards[0]?.groundHeight - 117) < 0.01,
-    'Molotov did not enter the modular rank-one ground-fire presentation.', settled);
-    assert(settled.voids[0]?.frame === 14 && settled.voids[0]?.alpha >= 0.5,
-      'Void Nest did not hold its readable portal frame.', settled);
-    assert(settled.burningEnemies[0]?.overlay === 'enemy-burn-overlay-sheet'
-      && settled.burningEnemies[0]?.animation === 'enemy-burn-overlay-loop'
+      && settled.hazards[0]?.flameCount === 0
+      && settled.hazards[0]?.lobeCount === 1
+      && settled.hazards[0]?.heatSpotCount === 1
+      && Math.abs(settled.hazards[0]?.groundWidth - 181.8) < 3
+      && Math.abs(settled.hazards[0]?.groundHeight - 100.8) < 2,
+    'Molotov did not enter the simple rank-one ground-fire presentation.', settled);
+    assert(settled.voids[0]?.frame === -1 && settled.voids[0]?.alpha >= 0.3,
+      'Void Nest did not hold its compact gravity core.', settled);
+    assert(settled.burningEnemies[0]?.overlay === null
+      && settled.burningEnemies[0]?.animation === null
+      && settled.burningEnemies[0]?.overlayKind === 'ground-glow'
       && settled.burningEnemies[0]?.remainingMs > 2500,
-    'Molotov contact did not apply the three-second animated burn status.', settled);
+    'Molotov contact did not apply the subtle three-second burn status.', settled);
     await page.screenshot({ path: path.join(artifactDir, 'aoe-readability-runtime.png') });
 
     await page.waitForTimeout(80);
     const settledMotion = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
-    const beforeFlames = settled.hazards[0].flamePositions;
-    const afterFlames = settledMotion.hazards[0].flamePositions;
-    assert(beforeFlames.every((flame, index) => (
-      flame.x === afterFlames[index].x
-      && flame.y === afterFlames[index].y
-      && Math.abs(flame.scaleX - afterFlames[index].scaleX) < 0.04
-      && Math.abs(flame.scaleY - afterFlames[index].scaleY) < 0.08
-    )) && beforeFlames.some((flame, index) => (
-      Math.abs(flame.scaleY - afterFlames[index].scaleY) > 0.001
-    )), 'Molotov flame emitters jittered or failed to animate continuously.', {
-      beforeFlames,
-      afterFlames
-    });
+    assert(Math.abs(settled.hazards[0].groundWidth - settledMotion.hazards[0].groundWidth) < 4
+      && Math.abs(settled.hazards[0].groundHeight - settledMotion.hazards[0].groundHeight) < 3
+      && settledMotion.hazards[0].rimAlpha <= 0.6
+      && settledMotion.hazards[0].emberAlpha <= 0.3,
+    'Molotov ground field moved or flickered between samples.', { settled, settledMotion });
 
     await page.waitForTimeout(1370);
     const sustained = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
@@ -1109,8 +1107,9 @@ async function testAreaEffectReadability(browser) {
       && rankFour.hazards.every((zone) => (
         zone.maxLife === 4000
         && zone.radius === 112
-        && zone.texture === 'molotov-ground-r4'
-        && zone.flameCount === 6
+        && zone.renderStyle === 'simple-burn-field'
+        && zone.texture === null
+        && zone.flameCount === 0
       )),
     'Rank-four Molotov did not create two compact four-second fields.', rankFour);
     await page.evaluate(() => {

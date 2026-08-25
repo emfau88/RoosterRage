@@ -111,14 +111,6 @@ export function createGameAnimations(scene) {
     });
   });
 
-  if (!scene.anims.exists('enemy-burn-overlay-loop')) {
-    scene.anims.create({
-      key: 'enemy-burn-overlay-loop',
-      frames: scene.anims.generateFrameNumbers('enemy-burn-overlay-sheet', { start: 0, end: 7 }),
-      frameRate: 10,
-      repeat: -1
-    });
-  }
   enemyAnimations.forEach(([key, texture, start, end, frameRate]) => {
     if (scene.anims.exists(key)) {
       return;

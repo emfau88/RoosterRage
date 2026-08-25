@@ -9,7 +9,7 @@ export class MolotovEggProjectile {
     this.target = new Phaser.Math.Vector2(targetX, targetY);
     this.rank = rank;
     this.evolved = evolved;
-    this.duration = Math.max(620, 920 - rank * 70);
+    this.duration = evolved ? 440 : Math.max(470, 690 - rank * 55);
     this.age = 0;
     this.active = true;
     this.textureKey = evolved ? 'molotov-egg-evo' : `molotov-egg-r${rank}`;

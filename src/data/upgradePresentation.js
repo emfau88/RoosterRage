@@ -68,7 +68,7 @@ const MOMENTS = {
     { title: 'VOID NEST', changes: ['132 Radius', '4,2 s Sog'] },
     { title: 'DEEPER GRAVITY', changes: ['132 → 150 Radius', 'Stärkerer Sog'] },
     { title: 'DARK CORE', changes: ['150 → 170 Radius', '5,4 s Dauer'] },
-    { title: 'TWIN SINGULARITY', changes: ['1 → 2 Nester', '6,0 s Kontrolle'] }
+    { title: 'EVENT HORIZON', changes: ['170 → 190 Radius', '6,0 s Kontrolle'] }
   ],
   'laser-comb': [
     { title: 'COMB BEAM', changes: ['48 Schaden', '610 Reichweite'] },
@@ -98,7 +98,7 @@ const EVOLUTION_MOMENTS = {
   'evo-thunder-roost': ['THUNDER ROOST', ['Bis zu 10 Ziele', 'Sturm-Endsequenz']],
   'evo-shell-halo': ['SHELL HALO', ['6 Orbit-Eier', '2 atmende Umlaufbahnen']],
   'evo-broodstorm': ['BROODSTORM', ['3 schwere Raketen', '112 Schaden · 158 Radius']],
-  'evo-singularity-nest': ['SINGULARITY NEST', ['2 Singularitäten', '225 Radius · 7,2 s']],
+  'evo-singularity-nest': ['SINGULARITY NEST', ['1 gewaltiger Schwerkern', '225 Radius · 7,2 s']],
   'evo-phoenix-pan': ['PHOENIX PAN', ['2 Feuerpfannen', 'Größere Brandfelder']],
   'evo-dawn-laser': ['DAWN PRISM', ['3 Prismastrahlen', 'Breites Wirkungsband']],
   'evo-chick-squadron': ['CHICK SQUADRON', ['4 Support Chicks', 'Schnelle Doppelsalven']]

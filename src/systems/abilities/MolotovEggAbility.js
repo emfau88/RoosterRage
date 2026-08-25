@@ -18,13 +18,13 @@ export class MolotovEggAbility extends TimedAbility {
     const rank = this.rank;
     const evolved = this.evolved;
     const start = this.scene.player.getMuzzlePosition(28);
-    const flightMs = Math.max(620, 920 - rank * 70);
+    const flightMs = evolved ? 440 : Math.max(470, 690 - rank * 55);
     const lead = new Phaser.Math.Vector2(target.velocityX, target.velocityY)
-      .scale((flightMs / 1000) * 0.72);
+      .scale((flightMs / 1000) * 0.9);
     if (lead.length() > 110) lead.setLength(110);
     const predicted = new Phaser.Math.Vector2(target.x, target.y).add(lead);
     const aimAngle = Phaser.Math.Angle.Between(start.x, start.y, predicted.x, predicted.y);
-    const offsets = evolved ? [-68, 68] : rank >= 4 ? [-56, 56] : [0];
+    const offsets = evolved ? [-112, 112] : rank >= 4 ? [-92, 92] : [0];
     offsets.forEach((offset, index) => {
       const targetX = predicted.x - Math.sin(aimAngle) * offset;
       const targetY = predicted.y + Math.cos(aimAngle) * offset;
@@ -42,7 +42,7 @@ export class MolotovEggAbility extends TimedAbility {
         this.scene.audio.play('egg-launch-artillery', { volume: 0.14, cooldown: 160 });
       };
       if (index === 0) launch();
-      else this.scene.time.delayedCall(250, launch);
+      else this.scene.time.delayedCall(180, launch);
     });
     this.nextAt = time + (evolved ? 3900 : Math.max(3200, 6400 - rank * 700));
   }

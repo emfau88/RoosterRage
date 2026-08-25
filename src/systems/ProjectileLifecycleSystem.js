@@ -16,9 +16,16 @@ export class ProjectileLifecycleSystem {
   }
 
   update(delta) {
+    this.scene.pendingVoidPulls = new Map();
     COLLECTIONS.forEach(({ key }) => {
       this.scene[key].forEach((item) => item.update(delta));
     });
+    this.scene.pendingVoidPulls.forEach(({ enemy, x, y }) => {
+      if (!enemy.sprite.active) return;
+      enemy.sprite.x += x;
+      enemy.sprite.y += y;
+    });
+    this.scene.pendingVoidPulls = null;
   }
 
   cleanup() {

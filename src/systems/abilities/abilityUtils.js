@@ -19,12 +19,20 @@ export function findClusterTarget(scene) {
       bestEnemy = enemy;
     }
   });
-  return bestEnemy ? {
-    x: bestEnemy.sprite.x,
-    y: bestEnemy.sprite.y,
-    velocityX: bestEnemy.sprite.body?.velocity.x ?? 0,
-    velocityY: bestEnemy.sprite.body?.velocity.y ?? 0
-  } : null;
+  if (!bestEnemy) return null;
+  const cluster = candidates.filter((candidate) => Phaser.Math.Distance.Between(
+    bestEnemy.sprite.x,
+    bestEnemy.sprite.y,
+    candidate.sprite.x,
+    candidate.sprite.y
+  ) < 150);
+  const divisor = Math.max(1, cluster.length);
+  return cluster.reduce((target, enemy) => ({
+    x: target.x + enemy.sprite.x / divisor,
+    y: target.y + enemy.sprite.y / divisor,
+    velocityX: target.velocityX + (enemy.sprite.body?.velocity.x ?? 0) / divisor,
+    velocityY: target.velocityY + (enemy.sprite.body?.velocity.y ?? 0) / divisor
+  }), { x: 0, y: 0, velocityX: 0, velocityY: 0 });
 }
 
 export function distanceToSegment(px, py, ax, ay, bx, by) {

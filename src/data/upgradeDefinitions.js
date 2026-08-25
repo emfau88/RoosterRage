@@ -296,7 +296,7 @@ export const UPGRADE_DEFINITIONS = [
       '132 Radius, 11 Schaden pro Tick und 4,2 s Sog: außen sanft, am Kern stark.',
       'R2: 150 Radius, stärkerer Sog und 4,8 s stabile Portalphase.',
       'R3: 170 Radius, kräftiger Nahsog und 5,4 s Wirkungsdauer.',
-      'R4: zwei große Singularitäten kontrollieren den Raum für 6 s.'
+      'R4: eine große Singularität kontrolliert einen weiten Raum für 6 s.'
     ],
     category: 'active',
     tags: ['area'],
@@ -672,7 +672,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'evo-singularity-nest',
     name: 'Singularity Nest',
-    description: 'Void Nest öffnet zwei gewaltige Singularitäten mit 225 Radius, massivem Nahsog und 7,2 s Dauer.',
+    description: 'Void Nest öffnet eine gewaltige Singularität mit 225 Radius, massivem Nahsog und 7,2 s Dauer.',
     category: 'evolution',
     rarity: 'evolution',
     maxRank: 1,

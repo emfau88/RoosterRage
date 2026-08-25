@@ -197,6 +197,7 @@ export function installTestApi(scene) {
         y: projectile.target.y
       })),
       hazards: scene.hazardZones.filter((zone) => zone.active).map((zone) => ({
+        renderStyle: zone.renderStyle,
         rank: zone.rank,
         evolved: zone.evolved,
         radius: zone.radius,
@@ -204,10 +205,14 @@ export function installTestApi(scene) {
         life: zone.life,
         maxLife: zone.maxLife,
         extinguishing: zone.extinguishing,
-        texture: zone.groundSprite.texture?.key,
+        texture: zone.groundSprite.texture?.key ?? null,
         animation: null,
         groundWidth: zone.groundSprite.displayWidth,
         groundHeight: zone.groundSprite.displayHeight,
+        lobeCount: zone.lobes.length,
+        heatSpotCount: zone.heatSpots.length,
+        rimAlpha: zone.rim.alpha,
+        emberAlpha: zone.embers.alpha,
         flameCount: zone.flames.length,
         flameTextures: zone.flames.map((flame) => flame.sprite.texture?.key),
         flamePositions: zone.flames.map((flame) => ({
@@ -219,6 +224,7 @@ export function installTestApi(scene) {
         }))
       })),
       voids: scene.voidZones.filter((zone) => zone.active).map((zone) => ({
+        renderStyle: zone.renderStyle,
         rank: zone.rank,
         evolved: zone.evolved,
         radius: zone.radius,
@@ -232,6 +238,8 @@ export function installTestApi(scene) {
         portalHeight: zone.portal.displayHeight,
         fieldWidth: zone.outer.displayWidth,
         fieldHeight: zone.outer.displayHeight,
+        coreWidth: zone.core.displayWidth,
+        coreHeight: zone.core.displayHeight,
         pullOuter: zone.pullOuter,
         pullInner: zone.pullInner,
         pullSamples: {
@@ -239,7 +247,8 @@ export function installTestApi(scene) {
           middle: zone.getPullSpeed(zone.radius * 0.5),
           inner: zone.getPullSpeed(zone.radius * 0.15)
         },
-        moteCount: zone.motes.length
+        moteCount: zone.motes.length,
+        accentRingCount: zone.accentRings.length
       })),
       laserVisuals: scene.laserComb.activeVisuals.size,
       burningEnemies: scene.enemies.filter((enemy) => enemy.sprite.active && enemy.burnUntil > scene.time.now)
@@ -248,7 +257,8 @@ export function installTestApi(scene) {
           remainingMs: enemy.burnUntil - scene.time.now,
           damage: enemy.burnDamage,
           overlay: enemy.burnOverlay?.texture?.key ?? null,
-          animation: enemy.burnOverlay?.anims.currentAnim?.key ?? null
+          animation: enemy.burnOverlay?.anims?.currentAnim?.key ?? null,
+          overlayKind: enemy.burnOverlayKind ?? null
         }))
     }),
     getTargetAcquisitionState: () => {
@@ -297,9 +307,7 @@ export function installTestApi(scene) {
         'evo-thunder-roost-impact',
         'evo-shell-halo-projectile',
         'evo-shell-halo-impact',
-        'evo-singularity-nest-zone',
         'molotov-egg-evo',
-        'molotov-ground-evo',
         'rocket-egg-evo',
         'rocket-impact-evo',
         'evo-dawn-laser-emitter',
@@ -310,7 +318,8 @@ export function installTestApi(scene) {
       ].filter((key) => scene.textures.exists(key)),
       orbitTextures: scene.orbitEggs.map((egg) => egg.sprite.texture?.key),
       supportTextures: scene.supportChickens.map((chick) => chick.sprite.texture?.key),
-      voidZoneTextures: scene.voidZones.map((zone) => zone.portal.texture?.key)
+      voidZoneTextures: [],
+      voidZoneStyles: scene.voidZones.map((zone) => zone.renderStyle)
     }),
     getOrbitVisualState: () => scene.orbitEggs.map((egg) => ({
       index: egg.index,

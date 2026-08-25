@@ -2,30 +2,26 @@ import Phaser from 'phaser';
 
 const EXTINGUISH_MS = 440;
 const RANK_CONFIG = {
-  1: { radius: 90, damage: 10, life: 3000, flameCount: 3 },
-  2: { radius: 108, damage: 12, life: 3400, flameCount: 5 },
-  3: { radius: 124, damage: 14, life: 3800, flameCount: 7 },
-  4: { radius: 112, damage: 16, life: 4000, flameCount: 6 }
+  1: { radius: 90, damage: 10, life: 3000, lobes: 1, heatSpots: 1, ground: 0x3d130d, rim: 0xff6235 },
+  2: { radius: 108, damage: 12, life: 3400, lobes: 2, heatSpots: 2, ground: 0x49170d, rim: 0xff7138 },
+  3: { radius: 124, damage: 14, life: 3800, lobes: 3, heatSpots: 3, ground: 0x551a0b, rim: 0xff843d },
+  4: { radius: 112, damage: 16, life: 4000, lobes: 3, heatSpots: 3, ground: 0x5b1c0a, rim: 0xff9141 }
 };
-const EVOLVED_CONFIG = { radius: 136, damage: 22, life: 4500, flameCount: 9 };
-
-const FLAME_LAYOUT = [
-  { x: -0.43, y: 0.08, texture: 'molotov-flame-small', size: 0.86, phase: 0.2 },
-  { x: 0, y: -0.12, texture: 'molotov-flame-medium', size: 0.82, phase: 2.1 },
-  { x: 0.43, y: 0.1, texture: 'molotov-flame-small', size: 0.9, phase: 4.2 },
-  { x: -0.22, y: -0.27, texture: 'molotov-flame-small', size: 0.76, phase: 1.1 },
-  { x: 0.22, y: 0.27, texture: 'molotov-flame-medium', size: 0.72, phase: 3.4 },
-  { x: -0.53, y: 0.3, texture: 'molotov-flame-medium', size: 0.68, phase: 5.2 },
-  { x: 0.52, y: -0.25, texture: 'molotov-flame-small', size: 0.74, phase: 2.8 },
-  { x: 0, y: 0.32, texture: 'molotov-flame-large', size: 0.64, phase: 0.8 },
-  { x: 0, y: -0.38, texture: 'molotov-flame-medium', size: 0.7, phase: 4.8 }
+const EVOLVED_CONFIG = {
+  radius: 136, damage: 22, life: 4500, lobes: 4, heatSpots: 4, ground: 0x682006, rim: 0xffc45a
+};
+const LOBE_LAYOUT = [
+  { x: -0.2, y: -0.04, width: 1.25, height: 0.68, rotation: -0.08 },
+  { x: 0.24, y: 0.04, width: 1.1, height: 0.62, rotation: 0.1 },
+  { x: -0.03, y: 0.18, width: 0.92, height: 0.5, rotation: -0.04 },
+  { x: 0.04, y: -0.18, width: 0.78, height: 0.44, rotation: 0.05 }
 ];
-
-const BASE_FLAME_SIZE = {
-  'molotov-flame-small': 34,
-  'molotov-flame-medium': 42,
-  'molotov-flame-large': 49
-};
+const HEAT_LAYOUT = [
+  { x: -0.24, y: 0.03, width: 0.32, phase: 0.2 },
+  { x: 0.25, y: -0.08, width: 0.27, phase: 2.1 },
+  { x: 0.02, y: 0.18, width: 0.23, phase: 4.3 },
+  { x: 0.04, y: -0.2, width: 0.2, phase: 5.4 }
+];
 
 export class HazardZone {
   constructor(scene, x, y, rank, evolved = false) {
@@ -34,6 +30,7 @@ export class HazardZone {
     this.y = y;
     this.rank = rank;
     this.evolved = evolved;
+    this.renderStyle = 'simple-burn-field';
     const config = evolved ? EVOLVED_CONFIG : RANK_CONFIG[rank] ?? RANK_CONFIG[1];
     this.radius = config.radius;
     this.damage = config.damage;
@@ -41,104 +38,75 @@ export class HazardZone {
     this.life = config.life;
     this.maxLife = this.life;
     this.nextTickAt = 0;
-    this.nextPulseFxAt = 0;
     this.age = 0;
+    this.tickFlash = 0;
     this.active = true;
     this.extinguishing = false;
-    this.groundTexture = evolved ? 'molotov-ground-evo' : `molotov-ground-r${rank}`;
+    this.flames = [];
+    this.smoke = null;
+    this.glow = null;
 
-    this.glow = scene.add.ellipse(
-      x,
-      y + 2,
-      this.radius * 1.9,
-      this.radius * 1.08,
-      evolved ? 0xffb43c : 0xff6828,
-      evolved ? 0.075 : 0.05
-    ).setDepth(3);
-    this.groundSprite = scene.add.image(x, y, this.groundTexture)
-      .setDisplaySize(this.radius * 2.08, this.radius * 1.3)
-      .setDepth(3.1)
-      .setAlpha(0.96);
+    const groundColor = config.ground;
+    const rimColor = config.rim;
+    this.groundSprite = scene.add.ellipse(x, y, this.radius * 2.02, this.radius * 1.12,
+      groundColor, 1).setDepth(3.05);
+    this.lobes = LOBE_LAYOUT.slice(0, config.lobes).map((lobe, index) => (
+      scene.add.ellipse(x + this.radius * lobe.x, y + this.radius * lobe.y,
+        this.radius * lobe.width, this.radius * lobe.height,
+        index % 2 === 0 ? groundColor : evolved ? 0x8a2d08 : 0x6a200d, 1)
+        .setRotation(lobe.rotation).setDepth(3.06 + index * 0.01)
+    ));
+    this.rim = scene.add.ellipse(x, y, this.radius * 1.9, this.radius * 1.03, rimColor, 0)
+      .setStrokeStyle(evolved ? 2.2 : 1.5, rimColor, 1)
+      .setDepth(3.2);
     this.embers = scene.add.image(x, y, 'molotov-embers')
-      .setDisplaySize(this.radius * 1.5, this.radius * 0.82)
+      .setDisplaySize(this.radius * 1.42, this.radius * 0.76)
       .setBlendMode(Phaser.BlendModes.ADD)
-      .setAlpha(evolved ? 0.22 : 0.13)
+      .setAlpha(evolved ? 0.18 : 0.11)
       .setDepth(3.3);
-    this.flames = FLAME_LAYOUT.slice(0, config.flameCount).map((placement, index) => {
-      const size = BASE_FLAME_SIZE[placement.texture]
-        * placement.size
-        * (1 + Math.max(0, rank - 1) * 0.035)
-        * (evolved ? 1.08 : 1);
-      const flame = scene.add.image(
-        x + placement.x * this.radius,
-        y + placement.y * this.radius * 0.58,
-        placement.texture
-      )
-        .setScale(size / 128)
-        .setOrigin(0.5, 0.82)
-        .setDepth(4 + placement.y * 0.1)
-        .setAlpha(0);
-      if (evolved && index % 3 === 1) flame.setTint(0xfff1b5);
-      return {
-        sprite: flame,
-        phase: placement.phase,
-        baseScale: size / 128,
-        baseRotation: (index % 2 === 0 ? -1 : 1) * 0.018
-      };
-    });
-    this.smoke = scene.add.image(x, y - 8, 'molotov-smoke')
-      .setDisplaySize(this.radius * 1.15, this.radius * 0.72)
-      .setAlpha(0)
-      .setDepth(4.5);
-    this.smokeBaseScaleX = this.smoke.scaleX;
-    this.smokeBaseScaleY = this.smoke.scaleY;
+    this.heatSpots = HEAT_LAYOUT.slice(0, config.heatSpots).map((spot, index) => ({
+      sprite: scene.add.ellipse(
+        x + this.radius * spot.x,
+        y + this.radius * spot.y,
+        this.radius * spot.width,
+        this.radius * spot.width * 0.42,
+        evolved ? 0xffd46a : index === 0 ? 0xff8a3d : 0xffb04a,
+        1
+      ).setBlendMode(Phaser.BlendModes.ADD).setDepth(3.35),
+      phase: spot.phase
+    }));
   }
 
   update(delta) {
     if (!this.active) return;
     this.age += delta;
     this.life -= delta;
+    this.tickFlash = Math.max(0, this.tickFlash - delta / 180);
     if (!this.extinguishing && this.life <= EXTINGUISH_MS) this.extinguishing = true;
-
     if (!this.extinguishing && this.scene.time.now >= this.nextTickAt) {
       this.nextTickAt = this.scene.time.now + this.tickMs;
+      this.tickFlash = 1;
       this.applyDamageTick();
-      if (this.rank >= 3 && this.scene.time.now >= this.nextPulseFxAt) {
-        this.nextPulseFxAt = this.scene.time.now + this.tickMs * 2;
-        this.showDamagePulse();
-      }
     }
 
-    const fadeIn = Phaser.Math.Clamp(this.age / 180, 0, 1);
-    const extinguishFade = this.extinguishing
-      ? Phaser.Math.Clamp(this.life / EXTINGUISH_MS, 0, 1)
-      : 1;
-    const visibility = fadeIn * extinguishFade;
-    this.groundSprite.setAlpha(this.extinguishing ? 0.34 + extinguishFade * 0.62 : 0.96);
-    this.glow.setAlpha((this.evolved ? 0.075 : 0.05) * visibility);
-    this.embers.setAlpha((this.evolved ? 0.22 : 0.13)
-      * visibility
-      * (0.9 + Math.sin(this.age * 0.0031) * 0.1));
-    this.flames.forEach((flame) => {
-      const sway = Math.sin(this.age * 0.0027 + flame.phase);
-      const lick = Math.sin(this.age * 0.0041 + flame.phase * 1.7);
-      flame.sprite
-        .setScale(
-          flame.baseScale * (1 + sway * 0.035),
-          flame.baseScale * (1 + lick * 0.09)
-        )
-        .setRotation(flame.baseRotation + sway * 0.035)
-        .setAlpha(visibility * (0.88 + lick * 0.055));
+    const fadeIn = Phaser.Math.Clamp(this.age / 160, 0, 1);
+    const fadeOut = this.extinguishing ? Phaser.Math.Clamp(this.life / EXTINGUISH_MS, 0, 1) : 1;
+    const visibility = fadeIn * fadeOut;
+    const breathe = 1 + Math.sin(this.age * 0.0026) * 0.012;
+    this.groundSprite.setScale(breathe).setAlpha(visibility * (this.evolved ? 0.28 : 0.23));
+    this.lobes.forEach((lobe, index) => {
+      lobe.setAlpha(visibility * (this.evolved ? 0.17 + index * 0.01 : 0.13 + index * 0.01));
     });
-    if (this.extinguishing) {
-      const extinguishProgress = 1 - extinguishFade;
-      this.smoke
-        .setAlpha(Math.sin(extinguishProgress * Math.PI) * 0.34)
-        .setScale(
-          this.smokeBaseScaleX * (0.86 + extinguishProgress * 0.18),
-          this.smokeBaseScaleY * (0.86 + extinguishProgress * 0.18)
-        );
-    }
+    this.rim.setScale(1 + this.tickFlash * 0.018)
+      .setAlpha(visibility * ((this.evolved ? 0.48 : 0.34) + this.tickFlash * 0.12));
+    this.embers.setScale(1 + Math.sin(this.age * 0.0022) * 0.018)
+      .setAlpha(visibility * ((this.evolved ? 0.18 : 0.11) + this.tickFlash * 0.08));
+    this.heatSpots.forEach((spot, index) => {
+      const glow = Math.sin(this.age * 0.0018 + spot.phase) * 0.015;
+      spot.sprite
+        .setScale(1 + glow)
+        .setAlpha(visibility * ((this.evolved ? 0.18 : 0.11) + index * 0.012 + this.tickFlash * 0.08));
+    });
     if (this.life <= 0) this.destroy();
   }
 
@@ -150,35 +118,21 @@ export class HazardZone {
       this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, {
         source: this.evolved ? 'evo-phoenix-pan' : 'molotov-egg'
       });
-      if (enemy.sprite.active) {
-        enemy.applyBurn(3000, Math.max(2, Math.round(this.damage * 0.25)));
-      }
+      if (enemy.sprite.active) enemy.applyBurn(3000, Math.max(2, Math.round(this.damage * 0.25)));
     });
   }
 
   showDamagePulse() {
-    const pulse = this.scene.add.image(this.x, this.y, 'molotov-embers')
-      .setDisplaySize(this.radius * 1.15, this.radius * 0.64)
-      .setBlendMode(Phaser.BlendModes.ADD)
-      .setAlpha(this.evolved ? 0.34 : 0.24)
-      .setDepth(4.4);
-    this.scene.tweens.add({
-      targets: pulse,
-      alpha: 0,
-      scale: 1.22,
-      duration: 320,
-      ease: 'Sine.Out',
-      onComplete: () => pulse.destroy()
-    });
+    this.tickFlash = 1;
   }
 
   destroy() {
     if (!this.active) return;
     this.active = false;
-    this.glow.destroy();
     this.groundSprite.destroy();
+    this.lobes.forEach((lobe) => lobe.destroy());
+    this.rim.destroy();
     this.embers.destroy();
-    this.flames.forEach((flame) => flame.sprite.destroy());
-    this.smoke.destroy();
+    this.heatSpots.forEach((spot) => spot.sprite.destroy());
   }
 }
