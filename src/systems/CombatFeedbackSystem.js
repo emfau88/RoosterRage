@@ -1,5 +1,10 @@
 import Phaser from 'phaser';
 import { getCombatFeedbackProfile, getMultiKillTier } from '../data/combatFeedbackProfiles.js';
+import { getSceneViewport } from './DisplayResolutionSystem.js';
+
+const DEATH_BURST_LIMIT = 24;
+const PRIORITY_DEATH_BURST_LIMIT = 28;
+const DEATH_BURST_WINDOW_MS = 140;
 
 export class CombatFeedbackSystem {
   constructor(scene) {
@@ -12,6 +17,8 @@ export class CombatFeedbackSystem {
     this.activeDeathEchoes = new Set();
     this.hitBurstWindowAt = -Infinity;
     this.hitBurstsByProfile = new Map();
+    this.deathBurstWindowAt = -Infinity;
+    this.deathsInBurstWindow = 0;
     this.killChain = { count: 0, lastAt: -Infinity, announced: 0, source: null };
     this.lastMultiKill = null;
   }
@@ -98,12 +105,75 @@ export class CombatFeedbackSystem {
   }
 
   showEnemyDeath(enemy, source = 'base-egg') {
-    if (!enemy?.sprite?.active || this.activeDeathEchoes.size >= 18) {
+    const profile = getCombatFeedbackProfile(source);
+    if (!enemy?.sprite?.active) {
       return null;
     }
-    const profile = getCombatFeedbackProfile(source);
-    this.lastDeathFeedback = { source, profile: profile.id, style: profile.death, at: this.scene.time.now };
+    const now = this.scene.time.now;
+    if (now - this.deathBurstWindowAt > DEATH_BURST_WINDOW_MS) {
+      this.deathBurstWindowAt = now;
+      this.deathsInBurstWindow = 0;
+    }
+    this.deathsInBurstWindow += 1;
+    const priority = Boolean(enemy.boss || enemy.elite || enemy.champion);
+    const detail = priority || this.deathsInBurstWindow <= 6
+      ? 'full'
+      : this.deathsInBurstWindow <= 16
+        ? 'reduced'
+        : 'compact';
+    const aggregateSample = detail !== 'compact' || this.deathsInBurstWindow % 3 === 0;
+    const burstLimit = priority ? PRIORITY_DEATH_BURST_LIMIT : DEATH_BURST_LIMIT;
+    const canRender = aggregateSample && this.activeDeathEchoes.size < burstLimit;
+    const weight = this.getDeathWeight(enemy);
+    const particleCount = canRender ? this.getDeathParticleCount(weight, detail) : 0;
+    this.lastDeathFeedback = {
+      source,
+      profile: profile.id,
+      style: profile.death,
+      detail,
+      intensity: weight.id,
+      particleCount,
+      rendered: canRender,
+      at: now
+    };
+    if (!canRender) {
+      return null;
+    }
+
     const sprite = enemy.sprite;
+    const record = { visuals: new Set(), cleanupTimer: null };
+    this.activeDeathEchoes.add(record);
+    const playerSprite = this.scene.player?.sprite;
+    const impactAngle = playerSprite?.active
+      ? Phaser.Math.Angle.Between(playerSprite.x, playerSprite.y, sprite.x, sprite.y)
+      : ((enemy.id ?? 0) % 12) / 12 * Math.PI * 2;
+    const duration = Math.round(weight.duration * (detail === 'full' ? 1 : detail === 'reduced' ? 0.86 : 0.72));
+    const bodyDuration = Math.min(
+      duration,
+      weight.id === 'boss'
+        ? 600
+        : weight.id === 'elite'
+          ? 320
+          : weight.id === 'heavy'
+            ? 220
+            : weight.id === 'fodder'
+              ? 145
+              : 160
+    );
+
+    this.createDeathGroundPulse(record, sprite, profile, weight, duration, detail);
+    this.createDeathParticles(
+      record,
+      sprite.x,
+      sprite.y,
+      impactAngle,
+      profile,
+      particleCount,
+      weight,
+      duration,
+      enemy.id ?? 0
+    );
+
     const echo = this.scene.add.image(
       sprite.x,
       sprite.y,
@@ -114,76 +184,227 @@ export class CombatFeedbackSystem {
       .setFlipX(sprite.flipX)
       .setRotation(sprite.rotation)
       .setDepth(8)
-      .setAlpha(0.9);
-    const eliteScale = enemy.boss ? 1.1 : enemy.elite || enemy.champion ? 1.04 : 1;
-    const angle = Phaser.Math.Angle.Between(
-      this.scene.player.sprite.x,
-      this.scene.player.sprite.y,
-      sprite.x,
-      sprite.y
-    );
-    const target = {
-      x: echo.x,
-      y: echo.y - 8,
-      scaleX: echo.scaleX * 0.72,
-      scaleY: echo.scaleY * 0.72,
-      rotation: echo.rotation,
-      duration: 230
-    };
-    if (profile.death === 'blast') {
-      target.x += Math.cos(angle) * 28 * eliteScale;
-      target.y += Math.sin(angle) * 16 - 8;
-      target.rotation += (enemy.id % 2 ? 0.24 : -0.24);
-      target.scaleX = echo.scaleX * 0.58;
-      target.scaleY = echo.scaleY * 0.58;
-      target.duration = 270;
-      echo.setTint(profile.flash);
-    } else if (profile.death === 'burn') {
-      target.y -= 22;
-      target.scaleX = echo.scaleX * 0.78;
-      target.scaleY = echo.scaleY * 1.04;
-      target.duration = 300;
-      echo.setTint(0xff8b39);
-    } else if (profile.death === 'shock') {
-      target.x += enemy.id % 2 ? 9 : -9;
-      target.scaleX = echo.scaleX * 1.08;
-      target.scaleY = echo.scaleY * 0.58;
-      target.duration = 190;
-      echo.setTint(0xbdf8ff);
-    } else if (profile.death === 'collapse') {
-      target.scaleX = echo.scaleX * 0.08;
-      target.scaleY = echo.scaleY * 0.08;
-      target.rotation += 0.32;
-      target.duration = 260;
-      echo.setTint(0x8f57d8);
-    } else if (profile.death === 'sear') {
-      target.scaleX = echo.scaleX * 0.12;
-      target.scaleY = echo.scaleY * 1.08;
-      target.duration = 210;
-      echo.setTint(0xffcf8a);
-    } else {
-      target.scaleX = echo.scaleX * 1.12;
-      target.scaleY = echo.scaleY * 0.42;
-      target.duration = 210;
-      echo.setTint(profile.flash);
-    }
-    this.activeDeathEchoes.add(echo);
+      .setAlpha(0.96)
+      .setTintFill(profile.flash);
+    this.addDeathVisual(record, echo);
+    const recoil = (profile.death === 'blast' ? 15 : 8) * weight.scale;
+    const turn = ((enemy.id ?? 0) % 2 ? 1 : -1) * (profile.death === 'blast' ? 0.16 : 0.07);
+    const originalScaleX = echo.scaleX;
+    const originalScaleY = echo.scaleY;
     this.scene.tweens.add({
       targets: echo,
-      x: target.x,
-      y: target.y,
-      scaleX: target.scaleX,
-      scaleY: target.scaleY,
-      rotation: target.rotation,
-      alpha: 0,
-      duration: target.duration,
-      ease: profile.death === 'blast' ? 'Quad.Out' : 'Cubic.In',
+      x: echo.x + Math.cos(impactAngle) * recoil,
+      y: echo.y + Math.sin(impactAngle) * recoil * 0.45 - 3 * weight.scale,
+      scaleX: originalScaleX * 1.04,
+      scaleY: originalScaleY * 0.96,
+      rotation: echo.rotation + turn,
+      duration: Math.min(90, Math.round(bodyDuration * 0.34)),
+      ease: 'Quad.Out',
       onComplete: () => {
-        this.activeDeathEchoes.delete(echo);
-        echo.destroy();
+        if (!echo.active) return;
+        echo.setTintFill(profile.color);
+        const collapse = profile.death === 'collapse' ? 0.16 : profile.death === 'sear' ? 0.48 : 0.72;
+        this.scene.tweens.add({
+          targets: echo,
+          y: echo.y - (profile.death === 'burn' ? 14 : 3),
+          scaleX: originalScaleX * collapse,
+          scaleY: originalScaleY * collapse,
+          rotation: echo.rotation + (profile.death === 'collapse' ? 0.42 : turn),
+          alpha: 0,
+          duration: Math.max(90, bodyDuration - Math.min(90, Math.round(bodyDuration * 0.34))),
+          ease: profile.death === 'collapse' ? 'Cubic.In' : 'Quad.Out'
+        });
       }
     });
+
+    record.cleanupTimer = this.scene.time.delayedCall(duration + 80, () => this.destroyDeathBurst(record));
     return echo;
+  }
+
+  getDeathWeight(enemy) {
+    if (enemy.boss) return { id: 'boss', scale: 2.1, particles: 2.35, duration: 950 };
+    if (enemy.elite || enemy.champion) return { id: 'elite', scale: 1.45, particles: 1.65, duration: 520 };
+    if (enemy.type === 'brute' || enemy.type === 'summoner') {
+      return { id: 'heavy', scale: 1.22, particles: 1.3, duration: 380 };
+    }
+    if (enemy.microFodder) return { id: 'fodder', scale: 0.72, particles: 0.62, duration: 210 };
+    return { id: 'normal', scale: 1, particles: 1, duration: 290 };
+  }
+
+  getDeathParticleCount(weight, detail) {
+    const detailCount = detail === 'full' ? 11 : detail === 'reduced' ? 7 : 4;
+    const viewport = getSceneViewport(this.scene);
+    const mobileScale = Math.min(viewport.width, viewport.height) <= 600 ? 0.8 : 1;
+    return Phaser.Math.Clamp(Math.round(detailCount * weight.particles * mobileScale), 3, 30);
+  }
+
+  addDeathVisual(record, visual) {
+    record.visuals.add(visual);
+    return visual;
+  }
+
+  createDeathGroundPulse(record, sprite, profile, weight, duration, detail) {
+    const y = sprite.y + sprite.displayHeight * 0.28;
+    const width = Math.max(26, sprite.displayWidth * 0.62) * weight.scale;
+    const shadow = this.addDeathVisual(record, this.scene.add.ellipse(
+      sprite.x,
+      y,
+      width,
+      Math.max(8, width * 0.28),
+      0x160e18,
+      0.3
+    ).setDepth(3));
+    this.scene.tweens.add({
+      targets: shadow,
+      alpha: 0,
+      scaleX: 1.28,
+      scaleY: 0.7,
+      duration: Math.min(duration, 330),
+      ease: 'Quad.Out'
+    });
+
+    const ring = this.addDeathVisual(record, this.scene.add.ellipse(
+      sprite.x,
+      y,
+      Math.max(18, width * 0.44),
+      Math.max(6, width * 0.13),
+      profile.color,
+      detail === 'compact' ? 0.12 : 0.2
+    )
+      .setStrokeStyle(detail === 'full' ? 2 : 1, profile.flash, 0.7)
+      .setBlendMode(Phaser.BlendModes.ADD)
+      .setDepth(7));
+    this.scene.tweens.add({
+      targets: ring,
+      alpha: 0,
+      scaleX: profile.death === 'blast' ? 3.1 : 2.25,
+      scaleY: profile.death === 'blast' ? 2.2 : 1.72,
+      duration: Math.min(duration, profile.death === 'blast' ? 290 : 230),
+      ease: 'Cubic.Out'
+    });
+
+    const core = this.addDeathVisual(record, this.scene.add.circle(
+      sprite.x,
+      sprite.y,
+      Math.max(7, Math.min(18, sprite.displayWidth * 0.14)) * weight.scale,
+      profile.flash,
+      detail === 'compact' ? 0.48 : 0.68
+    )
+      .setBlendMode(Phaser.BlendModes.ADD)
+      .setDepth(9)
+      .setScale(0.48));
+    this.scene.tweens.add({
+      targets: core,
+      alpha: 0,
+      scale: profile.death === 'blast' ? 2.9 : 2.35,
+      duration: profile.death === 'shock' ? 105 : 155,
+      ease: 'Quad.Out'
+    });
+  }
+
+  createDeathParticles(record, x, y, impactAngle, profile, count, weight, duration, seed) {
+    const config = profile.deathFx;
+    for (let index = 0; index < count; index += 1) {
+      const randomA = this.seededDeathValue(seed, index, 17);
+      const randomB = this.seededDeathValue(seed, index, 43);
+      const randomC = this.seededDeathValue(seed, index, 79);
+      const color = config.colors[index % config.colors.length];
+      const size = (3.2 + randomB * 4.2) * weight.scale;
+      const shape = config.shape === 'shard' && index % 4 === 0 ? 'ember' : config.shape;
+      const particle = this.createDeathParticleShape(shape, x, y, size, color);
+      this.addDeathVisual(record, particle);
+      const life = Math.round(duration * (0.68 + randomC * 0.34));
+      const progress = { value: 0 };
+      const spreadAngle = impactAngle + (randomA - 0.5) * config.spread;
+      const speed = config.speed * weight.scale * (0.62 + randomB * 0.68);
+      const velocityX = Math.cos(spreadAngle) * speed;
+      const velocityY = Math.sin(spreadAngle) * speed - (18 + randomC * 42) * weight.scale;
+      const startRotation = spreadAngle + randomC;
+      const rotationSpeed = (randomA - 0.5) * 9;
+      const startRadius = (9 + randomB * 18) * weight.scale;
+      const orbitAngle = randomA * Math.PI * 2;
+      let originX = x + Math.cos(orbitAngle) * (3 + randomC * 5) * weight.scale;
+      let originY = y + Math.sin(orbitAngle) * (2 + randomC * 3) * weight.scale;
+      particle.setRotation(startRotation);
+      if (profile.death === 'collapse') {
+        originX = x + Math.cos(orbitAngle) * startRadius;
+        originY = y + Math.sin(orbitAngle) * startRadius * 0.58;
+      }
+      particle.setPosition(originX, originY);
+      this.scene.tweens.add({
+        targets: progress,
+        value: 1,
+        duration: life,
+        ease: 'Linear',
+        onUpdate: () => {
+          if (!particle.active) return;
+          const t = progress.value;
+          if (profile.death === 'collapse') {
+            const radius = startRadius * (1 - t);
+            const angle = orbitAngle + t * 2.8;
+            particle.setPosition(
+              x + Math.cos(angle) * radius,
+              y + Math.sin(angle) * radius * 0.58
+            );
+          } else {
+            const seconds = t * life / 1000;
+            particle.setPosition(
+              originX + velocityX * seconds,
+              originY + velocityY * seconds + 0.5 * config.gravity * seconds * seconds
+            );
+          }
+          particle.setRotation(startRotation + rotationSpeed * t);
+          particle.setAlpha(Math.min(1, (1 - t) * 1.65));
+          particle.setScale(1 - t * 0.38);
+        }
+      });
+    }
+  }
+
+  createDeathParticleShape(shape, x, y, size, color) {
+    if (shape === 'feather') {
+      return this.scene.add.ellipse(x, y, size * 2.05, size * 0.72, color, 0.94)
+        .setStrokeStyle(1, 0x4b2b1d, 0.42)
+        .setDepth(10);
+    }
+    if (shape === 'spark') {
+      return this.scene.add.rectangle(x, y, size * 0.5, size * 2.8, color, 0.96)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setDepth(10);
+    }
+    if (shape === 'ember') {
+      return this.scene.add.circle(x, y, size * 0.62, color, 0.94)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setDepth(10);
+    }
+    return this.scene.add.triangle(
+      x,
+      y,
+      -size,
+      size * 0.72,
+      0,
+      -size,
+      size,
+      size * 0.72,
+      color,
+      0.94
+    ).setDepth(10);
+  }
+
+  seededDeathValue(seed, index, salt) {
+    const value = Math.sin((seed + 1) * 91.731 + (index + 1) * 47.117 + salt * 13.37) * 43758.5453;
+    return value - Math.floor(value);
+  }
+
+  destroyDeathBurst(record) {
+    if (!this.activeDeathEchoes.has(record)) return;
+    record.cleanupTimer?.remove(false);
+    record.visuals.forEach((visual) => {
+      this.scene.tweens.killTweensOf(visual);
+      visual.destroy();
+    });
+    record.visuals.clear();
+    this.activeDeathEchoes.delete(record);
   }
 
   recordKill(enemy, source = 'base-egg') {
@@ -247,7 +468,8 @@ export class CombatFeedbackSystem {
       killChain: { ...this.killChain },
       lastMultiKill: this.lastMultiKill ? { ...this.lastMultiKill } : null,
       lastDeathFeedback: this.lastDeathFeedback ? { ...this.lastDeathFeedback } : null,
-      limits: { hits: 12, damageTexts: 6, deathEchoes: 18, areaBurstsPerWindow: 4 }
+      deathBurstWindow: this.deathsInBurstWindow,
+      limits: { hits: 12, damageTexts: 6, deathEchoes: DEATH_BURST_LIMIT, priorityDeathEchoes: PRIORITY_DEATH_BURST_LIMIT, areaBurstsPerWindow: 4 }
     };
   }
 
@@ -385,9 +607,10 @@ export class CombatFeedbackSystem {
   }
 
   destroy() {
-    [this.activeHitVisuals, this.activeDamageTexts, this.activeDeathEchoes].forEach((collection) => {
+    [this.activeHitVisuals, this.activeDamageTexts].forEach((collection) => {
       collection.forEach((visual) => visual.destroy());
       collection.clear();
     });
+    [...this.activeDeathEchoes].forEach((record) => this.destroyDeathBurst(record));
   }
 }

@@ -1160,6 +1160,7 @@ async function testHordeCombatFeedback(browser) {
   try {
     const immediate = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
+      api.resumeIfUpgradeOpen();
       api.clearEnemies();
       api.clearProjectiles();
       api.movePlayer(700, 450);
@@ -1181,6 +1182,9 @@ async function testHordeCombatFeedback(browser) {
       && immediate.lastMultiKill?.count === 50
       && immediate.lastDeathFeedback?.profile === 'explosive'
       && immediate.lastDeathFeedback?.style === 'blast'
+      && immediate.lastDeathFeedback?.detail === 'compact'
+      && immediate.lastDeathFeedback?.intensity === 'normal'
+      && immediate.deathBurstWindow === 50
       && immediate.hud.visible
       && immediate.hud.count === '50×'
       && immediate.hud.label === 'ROOSTER RAMPAGE',
@@ -1190,7 +1194,7 @@ async function testHordeCombatFeedback(browser) {
     assert(
       immediate.activeHitVisuals <= immediate.limits.hits
       && immediate.activeDamageTexts <= immediate.limits.damageTexts
-      && immediate.activeDeathEchoes <= immediate.limits.deathEchoes,
+      && immediate.activeDeathEchoes === immediate.limits.deathEchoes,
       'Horde feedback exceeded its visual safety caps.',
       immediate
     );
