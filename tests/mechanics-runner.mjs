@@ -1062,7 +1062,9 @@ async function testAreaEffectReadability(browser) {
       && settled.hazards[0]?.animation === null
       && settled.hazards[0]?.flameCount === 0
       && settled.hazards[0]?.lobeCount === 1
-      && settled.hazards[0]?.heatSpotCount === 1
+      && settled.hazards[0]?.heatSpotCount === 2
+      && settled.hazards[0]?.heatSpotTextures.every((texture) => texture === 'molotov-ground-flame-orange')
+      && settled.hazards[0]?.heatSpotAnimations.every((animation) => animation === 'molotov-ground-flame-orange-loop')
       && Math.abs(settled.hazards[0]?.groundWidth - 181.8) < 3
       && Math.abs(settled.hazards[0]?.groundHeight - 100.8) < 2,
     'Molotov did not enter the simple rank-one ground-fire presentation.', settled);
@@ -1110,6 +1112,8 @@ async function testAreaEffectReadability(browser) {
         && zone.renderStyle === 'simple-burn-field'
         && zone.texture === null
         && zone.flameCount === 0
+        && zone.heatSpotTextures.every((texture) => texture === 'molotov-ground-flame-blue')
+        && zone.heatSpotAnimations.every((animation) => animation === 'molotov-ground-flame-blue-loop')
       )),
     'Rank-four Molotov did not create two compact four-second fields.', rankFour);
     await page.evaluate(() => {

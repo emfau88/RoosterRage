@@ -2,13 +2,13 @@ import Phaser from 'phaser';
 
 const EXTINGUISH_MS = 440;
 const RANK_CONFIG = {
-  1: { radius: 90, damage: 10, life: 3000, lobes: 1, heatSpots: 1, ground: 0x3d130d, rim: 0xff6235 },
-  2: { radius: 108, damage: 12, life: 3400, lobes: 2, heatSpots: 2, ground: 0x49170d, rim: 0xff7138 },
-  3: { radius: 124, damage: 14, life: 3800, lobes: 3, heatSpots: 3, ground: 0x551a0b, rim: 0xff843d },
-  4: { radius: 112, damage: 16, life: 4000, lobes: 3, heatSpots: 3, ground: 0x5b1c0a, rim: 0xff9141 }
+  1: { radius: 90, damage: 10, life: 3000, lobes: 1, fireIslands: 2, ground: 0x3d130d, rim: 0xff6235 },
+  2: { radius: 108, damage: 12, life: 3400, lobes: 2, fireIslands: 3, ground: 0x49170d, rim: 0xff7138 },
+  3: { radius: 124, damage: 14, life: 3800, lobes: 3, fireIslands: 4, ground: 0x551a0b, rim: 0xff843d },
+  4: { radius: 112, damage: 16, life: 4000, lobes: 3, fireIslands: 4, ground: 0x5b1c0a, rim: 0xff9141 }
 };
 const EVOLVED_CONFIG = {
-  radius: 136, damage: 22, life: 4500, lobes: 4, heatSpots: 4, ground: 0x682006, rim: 0xffc45a
+  radius: 136, damage: 22, life: 4500, lobes: 4, fireIslands: 5, ground: 0x682006, rim: 0xffc45a
 };
 const LOBE_LAYOUT = [
   { x: -0.2, y: -0.04, width: 1.25, height: 0.68, rotation: -0.08 },
@@ -17,11 +17,25 @@ const LOBE_LAYOUT = [
   { x: 0.04, y: -0.18, width: 0.78, height: 0.44, rotation: 0.05 }
 ];
 const HEAT_LAYOUT = [
-  { x: -0.24, y: 0.03, width: 0.32, phase: 0.2 },
-  { x: 0.25, y: -0.08, width: 0.27, phase: 2.1 },
-  { x: 0.02, y: 0.18, width: 0.23, phase: 4.3 },
-  { x: 0.04, y: -0.2, width: 0.2, phase: 5.4 }
+  { x: -0.24, y: 0.03, width: 0.5, phase: 0.2 },
+  { x: 0.25, y: -0.08, width: 0.44, phase: 2.1 },
+  { x: 0.02, y: 0.18, width: 0.38, phase: 4.3 },
+  { x: 0.04, y: -0.2, width: 0.34, phase: 5.4 },
+  { x: 0.4, y: 0.13, width: 0.3, phase: 3.2 }
 ];
+const ORANGE_FLAME = 'molotov-ground-flame-orange';
+const BLUE_FLAME = 'molotov-ground-flame-blue';
+
+function getFlameVisual(rank, evolved, index) {
+  if (evolved) {
+    const texture = index === 0 ? ORANGE_FLAME : BLUE_FLAME;
+    return { texture, animation: `${texture}-loop`, tint: index === 0 ? 0xffd36b : 0xffffff };
+  }
+  if (rank >= 4) return { texture: BLUE_FLAME, animation: `${BLUE_FLAME}-loop`, tint: 0xffffff };
+  if (rank === 3) return { texture: ORANGE_FLAME, animation: `${ORANGE_FLAME}-loop`, tint: 0xfff0ca };
+  if (rank === 2) return { texture: ORANGE_FLAME, animation: `${ORANGE_FLAME}-loop`, tint: 0xffd9a0 };
+  return { texture: ORANGE_FLAME, animation: `${ORANGE_FLAME}-loop`, tint: 0xffffff };
+}
 
 export class HazardZone {
   constructor(scene, x, y, rank, evolved = false) {
@@ -64,17 +78,28 @@ export class HazardZone {
       .setBlendMode(Phaser.BlendModes.ADD)
       .setAlpha(evolved ? 0.18 : 0.11)
       .setDepth(3.3);
-    this.heatSpots = HEAT_LAYOUT.slice(0, config.heatSpots).map((spot, index) => ({
-      sprite: scene.add.ellipse(
+    this.heatSpots = HEAT_LAYOUT.slice(0, config.fireIslands).map((spot, index) => {
+      const visual = getFlameVisual(rank, evolved, index);
+      const sprite = scene.add.sprite(
         x + this.radius * spot.x,
         y + this.radius * spot.y,
-        this.radius * spot.width,
-        this.radius * spot.width * 0.42,
-        evolved ? 0xffd46a : index === 0 ? 0xff8a3d : 0xffb04a,
-        1
-      ).setBlendMode(Phaser.BlendModes.ADD).setDepth(3.35),
-      phase: spot.phase
-    }));
+        visual.texture,
+        (index * 3) % 12
+      )
+        .setDisplaySize(this.radius * spot.width, this.radius * spot.width * 0.62)
+        .setOrigin(0.5, 0.72)
+        .setFlipX(index % 2 === 1)
+        .setTint(visual.tint)
+        .setAlpha(0)
+        .setDepth(3.35 + spot.y * 0.1)
+        .play({ key: visual.animation, startFrame: (index * 3) % 12 });
+      return {
+        sprite,
+        phase: spot.phase,
+        baseScaleX: sprite.scaleX,
+        baseScaleY: sprite.scaleY
+      };
+    });
   }
 
   update(delta) {
@@ -104,8 +129,8 @@ export class HazardZone {
     this.heatSpots.forEach((spot, index) => {
       const glow = Math.sin(this.age * 0.0018 + spot.phase) * 0.015;
       spot.sprite
-        .setScale(1 + glow)
-        .setAlpha(visibility * ((this.evolved ? 0.18 : 0.11) + index * 0.012 + this.tickFlash * 0.08));
+        .setScale(spot.baseScaleX * (1 + glow), spot.baseScaleY * (1 + glow * 0.7))
+        .setAlpha(visibility * ((this.evolved ? 0.88 : 0.78) + index * 0.012 + this.tickFlash * 0.06));
     });
     if (this.life <= 0) this.destroy();
   }

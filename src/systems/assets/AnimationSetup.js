@@ -141,4 +141,16 @@ export function createGameAnimations(scene) {
       });
     });
   });
+  [
+    ['molotov-ground-flame-orange-loop', 'molotov-ground-flame-orange'],
+    ['molotov-ground-flame-blue-loop', 'molotov-ground-flame-blue']
+  ].forEach(([key, texture]) => {
+    if (scene.anims.exists(key)) return;
+    scene.anims.create({
+      key,
+      frames: scene.anims.generateFrameNumbers(texture, { start: 0, end: 11 }),
+      frameRate: 14,
+      repeat: -1
+    });
+  });
 }

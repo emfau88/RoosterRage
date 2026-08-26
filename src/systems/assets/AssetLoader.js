@@ -23,6 +23,8 @@ import enemyEliteSpitterRunUrl from '../../assets/enemies/animations/enemy-elite
 import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
 import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.webp';
 import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
+import molotovGroundFlameOrangeUrl from '../../assets/fx/molotov-modular/molotov-ground-flame-orange.png';
+import molotovGroundFlameBlueUrl from '../../assets/fx/molotov-modular/molotov-ground-flame-blue.png';
 import rocketImpactR1Url from '../../assets/fx/rocket-modular/rocket-impact-r1.webp';
 import rocketImpactR2Url from '../../assets/fx/rocket-modular/rocket-impact-r2.webp';
 import rocketImpactR3Url from '../../assets/fx/rocket-modular/rocket-impact-r3.webp';
@@ -178,6 +180,13 @@ export function preloadGameAssets(scene) {
     ['molotov-embers', molotovEmbersUrl],
     ['molotov-ignition', molotovIgnitionUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));
+  [
+    ['molotov-ground-flame-orange', molotovGroundFlameOrangeUrl],
+    ['molotov-ground-flame-blue', molotovGroundFlameBlueUrl]
+  ].forEach(([key, url]) => scene.load.spritesheet(key, url, {
+    frameWidth: 256,
+    frameHeight: 256
+  }));
   [
     ['rocket-impact-r1', rocketImpactR1Url],
     ['rocket-impact-r2', rocketImpactR2Url],

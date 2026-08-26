@@ -229,11 +229,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
   if (weapon.id === 'molotov-egg') {
     const visualExpectations = {
-      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, detail: 1 },
-      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, detail: 2 },
-      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, detail: 3 },
-      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, detail: 3 },
-      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, detail: 4 }
+      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, lobes: 1, flames: 2, flamePalette: ['molotov-ground-flame-orange'] },
+      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, lobes: 2, flames: 3, flamePalette: ['molotov-ground-flame-orange'] },
+      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, lobes: 3, flames: 4, flamePalette: ['molotov-ground-flame-orange'] },
+      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, lobes: 3, flames: 4, flamePalette: ['molotov-ground-flame-blue'] },
+      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, lobes: 4, flames: 5, flamePalette: ['molotov-ground-flame-orange', 'molotov-ground-flame-blue'] }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.molotovFlights.length === expected.count
@@ -255,8 +255,13 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
         zone.renderStyle === 'simple-burn-field'
         && zone.texture === null
         && zone.flameCount === 0
-        && zone.lobeCount === expected.detail
-        && zone.heatSpotCount === expected.detail
+        && zone.lobeCount === expected.lobes
+        && zone.heatSpotCount === expected.flames
+        && expected.flamePalette.every((texture) => zone.heatSpotTextures.includes(texture))
+        && zone.heatSpotTextures.every((texture) => expected.flamePalette.includes(texture))
+        && zone.heatSpotAnimations.every((animation, index) => (
+          animation === `${zone.heatSpotTextures[index]}-loop`
+        ))
         && zone.radius === expected.radius
         && zone.groundWidth > zone.groundHeight * 1.5
         && zone.rimAlpha <= 0.6
