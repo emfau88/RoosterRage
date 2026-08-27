@@ -45,7 +45,7 @@ async function verifyFreshHub(context, serverUrl) {
       return {
         title: document.querySelector('.henhouse-panel h1')?.textContent,
         roosterCards: document.querySelectorAll('.rooster-card').length,
-        enabledRoosters: document.querySelectorAll('.rooster-card:not(:disabled)').length,
+        enabledRoosters: document.querySelectorAll('.rooster-card[data-unlocked="true"]').length,
         challengeCards: document.querySelectorAll('.challenge-card').length,
         enabledChallenges: document.querySelectorAll('.challenge-card[data-unlocked="true"]').length,
         talentNodes: document.querySelectorAll('.talent-node').length,
@@ -155,7 +155,7 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
     const persisted = await page.evaluate(() => ({
       state: window.__ROOSTER_TEST__.getMetaState(),
-      enabledRoosters: document.querySelectorAll('.rooster-card:not(:disabled)').length,
+      enabledRoosters: document.querySelectorAll('.rooster-card[data-unlocked="true"]').length,
       enabledChallenges: document.querySelectorAll('.challenge-card[data-unlocked="true"]').length,
       historyRows: document.querySelectorAll('.history-list li').length,
       selected: window.__ROOSTER_TEST__.selectMetaCosmetic('ace', 'ace-sunrise')
@@ -269,9 +269,47 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
   const { page, errors } = await openGame(context, serverUrl, '-mobile-tab-scroll');
   try {
     await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
+    const swipeCarousel = async (direction) => {
+      const spotlight = page.locator('.hub-run-spotlight');
+      const bounds = await spotlight.boundingBox();
+      const session = await page.context().newCDPSession(page);
+      const startX = Math.round(bounds.x + bounds.width * (direction > 0 ? 0.78 : 0.22));
+      const endX = Math.round(bounds.x + bounds.width * (direction > 0 ? 0.22 : 0.78));
+      const y = Math.round(bounds.y + bounds.height * 0.38);
+      await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: startX, y }] });
+      for (let step = 1; step <= 5; step += 1) {
+        await session.send('Input.dispatchTouchEvent', {
+          type: 'touchMove',
+          touchPoints: [{ x: Math.round(startX + (endX - startX) * step / 5), y }]
+        });
+      }
+      await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await session.detach();
+      await page.waitForTimeout(80);
+    };
+    const readCarousel = () => page.evaluate(() => ({
+      arena: document.querySelector('[data-arena-showcase]')?.dataset.arena,
+      status: document.querySelector('[data-arena-carousel-status]')?.textContent,
+      selectedDot: [...document.querySelectorAll('[data-arena-carousel-slide]')]
+        .findIndex((dot) => dot.classList.contains('is-selected')),
+      dots: document.querySelectorAll('[data-arena-carousel-slide]').length
+    }));
+    const carousel = [await readCarousel()];
+    await swipeCarousel(1);
+    carousel.push(await readCarousel());
+    await swipeCarousel(1);
+    carousel.push(await readCarousel());
+    await swipeCarousel(-1);
+    carousel.push(await readCarousel());
+    assert(carousel.map((state) => state.arena).join(',')
+      === 'open-yard,vertical-run,square-coop,vertical-run'
+      && carousel.every((state) => state.dots === 3)
+      && carousel.map((state) => state.selectedDot).join(',') === '0,1,2,1'
+      && carousel.every((state, index) => state.status.startsWith(`${state.selectedDot + 1} / 3`)),
+    'The mobile map carousel cannot be discovered or swiped reliably.', carousel);
     const cases = [
       { tab: 'Hähne', view: 'roosters', target: '.rooster-entry:last-child .rooster-card', requiresScroll: true },
-      { tab: 'Talente', view: 'training', target: '.talent-tier--2', requiresScroll: true },
+      { tab: 'Talente', view: 'training', target: '.talent-tier:last-child', requiresScroll: true },
       { tab: 'Archiv', view: 'archive', target: '.henhouse-drawers details:last-child', requiresScroll: false }
     ];
     const results = [];
@@ -324,7 +362,7 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
       results.push({ tab: testCase.tab, touchScrollTop, ...result });
     }
     assert(errors.length === 0, 'Browser errors in mobile hub tab scroll gate.', errors);
-    return results;
+    return { carousel, tabs: results };
   } finally {
     await page.close();
   }
@@ -408,7 +446,7 @@ async function verifyCompactTalentLayout(context, serverUrl) {
       const frameBounds = document.querySelector('.talent-node__frame').getBoundingClientRect();
       const nodeBounds = [...document.querySelectorAll('.talent-node')].map((node) => {
         const bounds = node.getBoundingClientRect();
-        return { left: bounds.left, right: bounds.right, visible: bounds.width > 0 && bounds.height > 0 };
+        return { left: bounds.left, right: bounds.right };
       });
       const result = {
         overflowY: getComputedStyle(view).overflowY,
@@ -429,8 +467,7 @@ async function verifyCompactTalentLayout(context, serverUrl) {
     assert(layout.overflowY === 'auto' && layout.maxScroll > 0 && layout.reachesLastTier,
       'The compact-height talent view cannot scroll through the final tier.', layout);
     assert(layout.horizontalOverflow <= 0 && layout.tree.left >= 0 && layout.tree.right <= 400
-      && layout.nodes.filter((node) => node.visible)
-        .every((node) => node.left >= layout.tree.left - 1 && node.right <= layout.tree.right + 1)
+      && layout.nodes.every((node) => node.left >= layout.tree.left - 1 && node.right <= layout.tree.right + 1)
       && layout.frame.width >= 56 && layout.frame.height >= 56
       && layout.nodeCounts.join(',') === '3,2,1',
     'The compact-height talent tree clips nodes or loses its 3-2-1 hierarchy.', layout);

@@ -350,6 +350,14 @@ export class HUD {
     `).join('');
     let selectedChallenge = hub.selectedChallenge ?? 'standard';
     const standardArenaId = hub.standardArenaId ?? 'open-yard';
+    const arenaCarouselChallenges = [];
+    const carouselArenaIds = new Set();
+    (hub.challenges ?? []).forEach((challenge) => {
+      const arenaId = challenge.arenaId ?? standardArenaId;
+      if (carouselArenaIds.has(arenaId)) return;
+      carouselArenaIds.add(arenaId);
+      arenaCarouselChallenges.push(challenge);
+    });
     const challengeCards = (hub.challenges ?? []).map((challenge) => {
       const arena = getArenaDefinition(challenge.arenaId ?? standardArenaId);
       const preview = ARENA_PREVIEWS[arena.id] ?? ARENA_PREVIEWS['open-yard'];
@@ -372,6 +380,11 @@ export class HUD {
           </span>
         </button>
       `;
+    }).join('');
+    const arenaCarouselDots = arenaCarouselChallenges.map((challenge, index) => {
+      const arena = getArenaDefinition(challenge.arenaId ?? standardArenaId);
+      return `<button type="button" data-arena-carousel-slide="${challenge.id}"
+        aria-label="Map ${index + 1}: ${arena.name}"><span></span></button>`;
     }).join('');
     const historyRows = (hub.history ?? []).length
       ? hub.history.map((run) => `
@@ -432,7 +445,7 @@ export class HUD {
         <section class="henhouse-view is-active" data-hub-view="play">
           <div class="henhouse-play-grid">
             <article class="hub-run-card">
-              <div class="hub-run-spotlight">
+              <div class="hub-run-spotlight" aria-label="Map-Vorschau, horizontal wischbar">
                 <div class="hub-arena-showcase" data-arena-showcase>
                   <img data-arena-preview alt="" loading="eager">
                   <span class="hub-arena-showcase__shade"></span>
@@ -451,6 +464,14 @@ export class HUD {
                     <span><small>BESTE JAGD</small><strong>${bests.highestKills} Kills</strong></span>
                     <span data-run-reward></span>
                   </div>
+                </div>
+                <div class="hub-arena-carousel-controls" aria-label="Maps durchblättern">
+                  <button type="button" class="hub-arena-carousel-arrow is-previous" data-arena-carousel-previous aria-label="Vorherige Map">‹</button>
+                  <div class="hub-arena-carousel-progress">
+                    <small data-arena-carousel-status>1 / ${arenaCarouselChallenges.length} · WISCHEN</small>
+                    <span>${arenaCarouselDots}</span>
+                  </div>
+                  <button type="button" class="hub-arena-carousel-arrow is-next" data-arena-carousel-next aria-label="Nächste Map">›</button>
                 </div>
               </div>
               <div class="hub-mode-heading"><small>EXPEDITION WÄHLEN</small><span>Jeder Modus verändert Hof und Druck.</span></div>
@@ -632,7 +653,8 @@ export class HUD {
       const button = document.createElement('button');
       button.className = `rooster-card rooster-card--${definition.id} ${definition.id === selectedRoosterId ? 'is-selected' : ''} ${meta.unlocked ? '' : 'is-locked'}`;
       button.type = 'button';
-      button.disabled = !meta.unlocked;
+      button.dataset.unlocked = `${meta.unlocked}`;
+      if (!meta.unlocked) button.setAttribute('aria-label', `${definition.name} Vorschau, gesperrt: ${meta.unlockLabel}`);
       button.innerHTML = `
         <span class="rooster-card__portrait">
           <img class="rooster-card__portrait-image" src="${ROOSTER_PORTRAITS[definition.id]}" alt="${definition.name} Portrait">
@@ -646,6 +668,12 @@ export class HUD {
             <img class="rooster-card__mastery-badge ${mastery.badgeUnlocked ? '' : 'is-locked'}"
               src="${MASTERY_BADGES[definition.id]}" alt="${definition.name} Mastery-Wappen">
           </span>
+        </span>
+        <span class="rooster-card__compact-copy">
+          <small>${meta.unlocked ? 'VERFÜGBAR' : 'GESPERRT · VORSCHAU'}</small>
+          <strong>${definition.name}</strong>
+          <span>${definition.role}</span>
+          <em>${meta.unlocked ? 'Antippen zum Spielen' : `Freischaltung: ${meta.unlockLabel}`}</em>
         </span>
         <span class="rooster-card__stats">
           <span>HP ${definition.stats.maxHp}</span>
@@ -662,6 +690,12 @@ export class HUD {
       `;
       this.setIcon(button.querySelector('[data-rooster-icon]'), definition.icon);
       button.addEventListener('click', () => {
+        if (!meta.unlocked) {
+          this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
+            candidate.classList.toggle('is-selected', candidate === button)
+          ));
+          return;
+        }
         selectedRoosterId = definition.id;
         this.hubSelection.roosterId = definition.id;
         updateSelectedRooster();
@@ -769,6 +803,33 @@ export class HUD {
       this.overlay.querySelectorAll('[data-challenge]').forEach((candidate) => (
         candidate.classList.toggle('is-selected', candidate.dataset.challenge === challenge.id)
       ));
+      const carouselIndex = Math.max(0, arenaCarouselChallenges.findIndex((candidate) => (
+        (candidate.arenaId ?? standardArenaId) === arena.id
+      )));
+      const carouselStatus = this.overlay.querySelector('[data-arena-carousel-status]');
+      if (carouselStatus) carouselStatus.textContent = `${carouselIndex + 1} / ${arenaCarouselChallenges.length} · WISCHEN`;
+      this.overlay.querySelectorAll('[data-arena-carousel-slide]').forEach((dot, index) => {
+        const active = index === carouselIndex;
+        dot.classList.toggle('is-selected', active);
+        if (active) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+      this.overlay.querySelector('.hub-run-spotlight')?.style.setProperty('--carousel-index', carouselIndex);
+    };
+    const selectCarouselIndex = (index) => {
+      if (!arenaCarouselChallenges.length) return;
+      const normalizedIndex = (index + arenaCarouselChallenges.length) % arenaCarouselChallenges.length;
+      selectedChallenge = arenaCarouselChallenges[normalizedIndex].id;
+      this.hubSelection.challengeId = selectedChallenge;
+      updateChallenge();
+    };
+    const moveCarousel = (direction) => {
+      const currentChallenge = (hub.challenges ?? []).find((candidate) => candidate.id === selectedChallenge);
+      const currentArenaId = currentChallenge?.arenaId ?? standardArenaId;
+      const currentIndex = Math.max(0, arenaCarouselChallenges.findIndex((candidate) => (
+        (candidate.arenaId ?? standardArenaId) === currentArenaId
+      )));
+      selectCarouselIndex(currentIndex + direction);
     };
     const switchHubView = (view) => {
       const target = this.overlay.querySelector(`[data-hub-view="${view}"]`) ? view : 'play';
@@ -827,6 +888,29 @@ export class HUD {
         this.hubSelection.challengeId = selectedChallenge;
         updateChallenge();
       });
+    });
+    this.overlay.querySelector('[data-arena-carousel-previous]')?.addEventListener('click', () => moveCarousel(-1));
+    this.overlay.querySelector('[data-arena-carousel-next]')?.addEventListener('click', () => moveCarousel(1));
+    this.overlay.querySelectorAll('[data-arena-carousel-slide]').forEach((button, index) => {
+      button.addEventListener('click', () => selectCarouselIndex(index));
+    });
+    const arenaSpotlight = this.overlay.querySelector('.hub-run-spotlight');
+    let carouselSwipeStart = null;
+    arenaSpotlight?.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0 || event.target.closest('button')) return;
+      carouselSwipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+    });
+    arenaSpotlight?.addEventListener('pointerup', (event) => {
+      if (!carouselSwipeStart || carouselSwipeStart.pointerId !== event.pointerId) return;
+      const deltaX = event.clientX - carouselSwipeStart.x;
+      const deltaY = event.clientY - carouselSwipeStart.y;
+      carouselSwipeStart = null;
+      if (Math.abs(deltaX) >= 44 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+        moveCarousel(deltaX < 0 ? 1 : -1);
+      }
+    });
+    arenaSpotlight?.addEventListener('pointercancel', () => {
+      carouselSwipeStart = null;
     });
     this.overlay.querySelector('[data-run-start]')?.addEventListener('click', () => (
       this.overlay.querySelector('[data-run-start]').disabled
