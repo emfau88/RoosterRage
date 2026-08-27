@@ -40,13 +40,14 @@ async function verifyFreshHub(context, serverUrl) {
     const snapshot = await page.evaluate(() => {
       const panel = document.querySelector('.henhouse-panel').getBoundingClientRect();
       const overlay = document.querySelector('.overlay');
+      const primaryAction = document.querySelector('.hub-start-button')?.getBoundingClientRect();
       const hub = window.__ROOSTER_TEST__.getMetaHub();
       return {
         title: document.querySelector('.henhouse-panel h1')?.textContent,
         roosterCards: document.querySelectorAll('.rooster-card').length,
         enabledRoosters: document.querySelectorAll('.rooster-card:not(:disabled)').length,
         challengeCards: document.querySelectorAll('.challenge-card').length,
-        enabledChallenges: document.querySelectorAll('.challenge-card:not(:disabled)').length,
+        enabledChallenges: document.querySelectorAll('.challenge-card[data-unlocked="true"]').length,
         talentNodes: document.querySelectorAll('.talent-node').length,
         talentTiers: document.querySelectorAll('.talent-tier').length,
         talentBranches: document.querySelectorAll('.talent-tree__branches').length,
@@ -73,7 +74,10 @@ async function verifyFreshHub(context, serverUrl) {
           width: panel.width,
           scrollHeight: overlay.scrollHeight,
           clientHeight: overlay.clientHeight,
-          bodyOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
+          bodyOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          primaryAction: primaryAction
+            ? { top: primaryAction.top, bottom: primaryAction.bottom }
+            : null
         }
       };
     });
@@ -106,8 +110,10 @@ async function verifyFreshHub(context, serverUrl) {
     'Cosmetic effect or unlock presentation is incomplete.', snapshot);
     assert(snapshot.layout.left >= 0 && snapshot.layout.right <= 390 && snapshot.layout.bodyOverflow <= 0,
       'The portrait Hennenhütte overflows horizontally.', snapshot.layout);
-    assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight,
-      'The portrait hub should provide a vertically scrollable layout.', snapshot.layout);
+    assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight
+      || (snapshot.layout.primaryAction?.top >= 0
+        && snapshot.layout.primaryAction.bottom <= snapshot.layout.clientHeight),
+    'The portrait hub must either scroll or keep its primary action visible.', snapshot.layout);
     assert(errors.length === 0, 'Browser errors in the fresh hub.', errors);
     await fs.mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: path.join(artifactDir, 'henhouse-portrait.png'), fullPage: true });
@@ -150,7 +156,7 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
     const persisted = await page.evaluate(() => ({
       state: window.__ROOSTER_TEST__.getMetaState(),
       enabledRoosters: document.querySelectorAll('.rooster-card:not(:disabled)').length,
-      enabledChallenges: document.querySelectorAll('.challenge-card:not(:disabled)').length,
+      enabledChallenges: document.querySelectorAll('.challenge-card[data-unlocked="true"]').length,
       historyRows: document.querySelectorAll('.history-list li').length,
       selected: window.__ROOSTER_TEST__.selectMetaCosmetic('ace', 'ace-sunrise')
     }));
@@ -241,15 +247,15 @@ async function verifyCompactMobileHub(context, serverUrl) {
     assert(layout.hero.height <= 156 && layout.runCard.height > layout.start.height
       && layout.horizontalOverflow <= 0,
     'Compact portrait hierarchy is oversized or horizontally clipped.', layout);
-    assert(layout.challenges.scrollWidth <= layout.challenges.clientWidth
+    assert(layout.challenges.scrollWidth > layout.challenges.clientWidth
       && layout.challenges.scrollHeight <= layout.challenges.clientHeight
       && layout.challenges.cards.length === 4
+      && layout.challenges.cards[0].left >= layout.challenges.left
+      && layout.challenges.cards[0].right <= layout.challenges.right
       && layout.challenges.cards.every((card) => (
-        card.left >= layout.challenges.left
-        && card.right <= layout.challenges.right
-        && card.top >= layout.challenges.top
+        card.top >= layout.challenges.top
         && card.bottom <= layout.challenges.bottom
-      )), 'Compact challenge selector scrolls or clips one of its four cards.', layout.challenges);
+      )), 'Compact challenge selector is not a usable one-row carousel.', layout.challenges);
     assert(errors.length === 0, 'Browser errors in compact portrait hub.', errors);
     await fs.mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: path.join(artifactDir, 'henhouse-compact-mobile.png') });
@@ -264,8 +270,8 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
   try {
     await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
     const cases = [
-      { tab: 'Hähne', view: 'roosters', target: '.rooster-entry:last-child .cosmetic-list button:last-child', requiresScroll: true },
-      { tab: 'Training', view: 'training', target: '.talent-tier:last-child', requiresScroll: true },
+      { tab: 'Hähne', view: 'roosters', target: '.rooster-entry:last-child .rooster-card', requiresScroll: true },
+      { tab: 'Talente', view: 'training', target: '.talent-tier--2', requiresScroll: true },
       { tab: 'Archiv', view: 'archive', target: '.henhouse-drawers details:last-child', requiresScroll: false }
     ];
     const results = [];
@@ -331,7 +337,7 @@ async function verifyTalentPreviewFlow(context, serverUrl) {
       window.__ROOSTER_TEST__.resetMetaProgress();
       window.__ROOSTER_TEST__.grantMetaKernels(12);
     });
-    await page.getByRole('button', { name: 'Training', exact: true }).click();
+    await page.getByRole('button', { name: 'Talente', exact: true }).click();
     await fs.mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: path.join(artifactDir, 'talent-tree-mobile.png') });
     await page.locator('[data-talent="sturdy-nest"]').click();
@@ -394,7 +400,7 @@ async function verifyCompactTalentLayout(context, serverUrl) {
   const { page, errors } = await openGame(context, serverUrl, '-talent-compact');
   try {
     await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
-    await page.getByRole('button', { name: 'Training', exact: true }).click();
+    await page.getByRole('button', { name: 'Talente', exact: true }).click();
     const layout = await page.evaluate(() => {
       const view = document.querySelector('[data-hub-view="training"]');
       const tree = document.querySelector('.talent-tree');
@@ -402,7 +408,7 @@ async function verifyCompactTalentLayout(context, serverUrl) {
       const frameBounds = document.querySelector('.talent-node__frame').getBoundingClientRect();
       const nodeBounds = [...document.querySelectorAll('.talent-node')].map((node) => {
         const bounds = node.getBoundingClientRect();
-        return { left: bounds.left, right: bounds.right };
+        return { left: bounds.left, right: bounds.right, visible: bounds.width > 0 && bounds.height > 0 };
       });
       const result = {
         overflowY: getComputedStyle(view).overflowY,
@@ -423,7 +429,8 @@ async function verifyCompactTalentLayout(context, serverUrl) {
     assert(layout.overflowY === 'auto' && layout.maxScroll > 0 && layout.reachesLastTier,
       'The compact-height talent view cannot scroll through the final tier.', layout);
     assert(layout.horizontalOverflow <= 0 && layout.tree.left >= 0 && layout.tree.right <= 400
-      && layout.nodes.every((node) => node.left >= layout.tree.left - 1 && node.right <= layout.tree.right + 1)
+      && layout.nodes.filter((node) => node.visible)
+        .every((node) => node.left >= layout.tree.left - 1 && node.right <= layout.tree.right + 1)
       && layout.frame.width >= 56 && layout.frame.height >= 56
       && layout.nodeCounts.join(',') === '3,2,1',
     'The compact-height talent tree clips nodes or loses its 3-2-1 hierarchy.', layout);

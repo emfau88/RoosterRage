@@ -652,6 +652,33 @@
       "bytes": 282018
     },
     {
+      "source": "art-source/map/posters/arena-poster-open-yard.png",
+      "sourceSha256": "25aa9d08fcf8805b73e53ec10180e284d6d16fbd02dcaa00d319e94f7c5bb24b",
+      "runtime": "src/assets/map/posters/arena-poster-open-yard.webp",
+      "runtimeSha256": "b4fa46603f18ab9adc250bae5c394ef3e0c67cfd80dcae38e7327076d7e25894",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 326112
+    },
+    {
+      "source": "art-source/map/posters/arena-poster-vertical-run.png",
+      "sourceSha256": "e8db86c225d6367387fc1b30cb6544d6b2dd1278dae0f6267d90e4a116273f32",
+      "runtime": "src/assets/map/posters/arena-poster-vertical-run.webp",
+      "runtimeSha256": "c84d57505baa8e35363a65748595a10f43fe38e0a6c85af7798f39b5e8faae99",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 395210
+    },
+    {
+      "source": "art-source/map/posters/arena-poster-square-coop.png",
+      "sourceSha256": "ba62784465bf264ac933a6536fe0212107f00c8a2f38a26da7e5a1d96d7d0f39",
+      "runtime": "src/assets/map/posters/arena-poster-square-coop.webp",
+      "runtimeSha256": "a25f0c839b13a814094a22e35b96834f926dbdaffbf762e875f6bb08b026e503",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 339348
+    },
+    {
       "source": "art-source/meta/kernel-currency.png",
       "sourceSha256": "68c9ee64df17d0670daf28ce9b61c71c8cd867a849c9b3f8692c5ab695db2219",
       "runtime": "src/assets/meta/kernel-currency.webp",

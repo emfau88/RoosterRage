@@ -7,9 +7,9 @@ import kernelCurrencyUrl from '../assets/meta/kernel-currency.webp';
 import masteryAceUrl from '../assets/meta/mastery-ace.webp';
 import masteryArtilleryUrl from '../assets/meta/mastery-artillery.webp';
 import masteryStormUrl from '../assets/meta/mastery-storm.webp';
-import harvestYardPreviewUrl from '../assets/map/previews/arena-preview-open-yard.webp';
-import feedAlleyPreviewUrl from '../assets/map/previews/arena-preview-vertical-run.webp';
-import coopSquarePreviewUrl from '../assets/map/previews/arena-preview-square-coop.webp';
+import harvestYardPosterUrl from '../assets/map/posters/arena-poster-open-yard.webp';
+import feedAlleyPosterUrl from '../assets/map/posters/arena-poster-vertical-run.webp';
+import coopSquarePosterUrl from '../assets/map/posters/arena-poster-square-coop.webp';
 import { getArenaDefinition } from '../data/arenaDefinitions.js';
 
 const ROOSTER_PORTRAITS = {
@@ -26,17 +26,17 @@ const MASTERY_BADGES = {
 
 const ARENA_PREVIEWS = {
   'open-yard': {
-    url: harvestYardPreviewUrl,
+    url: harvestYardPosterUrl,
     layout: 'Weit & offen',
     scope: 'UNENDLICHER HOF'
   },
   'vertical-run': {
-    url: feedAlleyPreviewUrl,
+    url: feedAlleyPosterUrl,
     layout: 'Nord-Süd-Gang',
     scope: 'ENDLOSER KORRIDOR'
   },
   'square-coop': {
-    url: coopSquarePreviewUrl,
+    url: coopSquarePosterUrl,
     layout: 'Kompaktes Karree',
     scope: 'GESAMTE ARENA'
   }
@@ -358,7 +358,7 @@ export class HUD {
         : `Gesperrt: ${challenge.unlockLabel}`;
       return `
         <button class="challenge-card ${challenge.id === selectedChallenge ? 'is-selected' : ''} ${challenge.unlocked ? '' : 'is-locked'}"
-          type="button" data-challenge="${challenge.id}" data-arena="${arena.id}" ${challenge.unlocked ? '' : 'disabled'}
+          type="button" data-challenge="${challenge.id}" data-arena="${arena.id}" data-unlocked="${challenge.unlocked}"
           aria-label="${challenge.name}, Arena ${arena.name}">
           <span class="challenge-card__visual" aria-hidden="true">
             <img src="${preview.url}" alt="">
@@ -378,6 +378,9 @@ export class HUD {
         <li><strong>${run.roosterName}</strong><span>${run.outcome === 'victory' ? 'Sieg' : 'Niederlage'} · ${run.kills} Kills · +${run.kernels ?? 0} Körner · ${this.formatDuration(run.elapsedMs)}</span></li>
       `).join('')
       : '<li><span>Noch kein Run gespeichert.</span></li>';
+    const historyToggle = (hub.history ?? []).length > 3
+      ? '<button type="button" class="history-toggle" data-history-toggle aria-expanded="false">Alle Runs anzeigen</button>'
+      : '';
     const enemyRows = (hub.lexicon?.enemies ?? []).map((enemy) => `
       <li class="${enemy.seen ? '' : 'is-undiscovered'}"><strong>${enemy.id.replaceAll('-', ' ')}</strong><span>${enemy.purpose} · ${enemy.counterplay}</span></li>
     `).join('');
@@ -423,7 +426,7 @@ export class HUD {
         <nav class="henhouse-nav" aria-label="Hennenhütte Bereiche">
           <button type="button" data-hub-tab="play" class="is-selected">Spielen</button>
           <button type="button" data-hub-tab="roosters">Hähne</button>
-          <button type="button" data-hub-tab="training">Training</button>
+          <button type="button" data-hub-tab="training"><span class="hub-nav-label--desktop">Training</span><span class="hub-nav-label--mobile">Talente</span></button>
           <button type="button" data-hub-tab="archive">Archiv</button>
         </nav>
         <section class="henhouse-view is-active" data-hub-view="play">
@@ -466,10 +469,16 @@ export class HUD {
                 <p data-hero-description></p>
                 <div class="hub-rooster-mastery"><span data-hero-mastery></span><i><b data-hero-progress></b></i></div>
               </div>
-              <div class="hub-rooster-switches">${roosterSwitches}</div>
+              <div class="hub-rooster-switches hub-rooster-switches--desktop">${roosterSwitches}</div>
+              <button type="button" class="hub-rooster-change" data-rooster-picker-open aria-expanded="false">Ändern</button>
               <button type="button" class="hub-start-button" data-run-start><span>RUN STARTEN</span><small>Hof betreten</small></button>
             </article>
           </div>
+          <button type="button" class="hub-rooster-picker__scrim" data-rooster-picker-close aria-label="Rooster-Auswahl schließen" hidden></button>
+          <aside class="hub-rooster-picker" data-rooster-picker aria-label="Rooster wählen" hidden>
+            <header><span><small>DEIN ROOSTER</small><strong>Rooster wählen</strong></span><button type="button" data-rooster-picker-close aria-label="Rooster-Auswahl schließen">×</button></header>
+            <div class="hub-rooster-switches hub-rooster-switches--mobile">${roosterSwitches}</div>
+          </aside>
         </section>
         <section class="henhouse-view" data-hub-view="roosters" hidden>
           <div class="henhouse-section-heading"><span><small>ROOSTER</small><h2>Hähne</h2></span><p>Stats, Mastery, Kosmetik und Freischaltungen.</p></div>
@@ -516,7 +525,7 @@ export class HUD {
           </div>
           <div class="henhouse-records"><small>REKORDE</small><div class="personal-bests"><span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span><span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span><span><small>Längster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span></div></div>
           <div class="henhouse-drawers">
-            <details open><summary>Run-Historie</summary><ul class="history-list">${historyRows}</ul></details>
+            <details open><summary>Run-Historie</summary><ul class="history-list">${historyRows}</ul>${historyToggle}</details>
             <details><summary>Gegner-Lexikon</summary><ul class="lexicon-list">${enemyRows}</ul></details>
             <details><summary>EVO-Lexikon</summary><ul class="lexicon-list">${evoRows}</ul></details>
           </div>
@@ -668,6 +677,7 @@ export class HUD {
           <div class="cosmetic-panel__heading">
             <span>NUR OPTIK</span>
             <strong>Keine Werteänderung</strong>
+            <button type="button" class="cosmetic-panel__toggle" data-cosmetic-toggle aria-expanded="false">Anzeigen</button>
           </div>
           <div class="cosmetic-preview" aria-label="Vorschau Original und ${variant.name}">
             <figure class="${meta.selectedCosmetic ? '' : 'is-selected'}">
@@ -697,6 +707,12 @@ export class HUD {
             cosmeticButton.dataset.cosmetic || null,
             selectedChallenge
           ));
+        });
+        cosmetics.querySelector('[data-cosmetic-toggle]')?.addEventListener('click', (event) => {
+          const expanded = event.currentTarget.getAttribute('aria-expanded') === 'true';
+          event.currentTarget.setAttribute('aria-expanded', `${!expanded}`);
+          cosmetics.classList.toggle('is-expanded', !expanded);
+          event.currentTarget.textContent = expanded ? 'Anzeigen' : 'Schließen';
         });
         entry.append(cosmetics);
       }
@@ -734,14 +750,22 @@ export class HUD {
       const preview = ARENA_PREVIEWS[arena.id] ?? ARENA_PREVIEWS['open-yard'];
       const previewImage = this.overlay.querySelector('[data-arena-preview]');
       previewImage.src = preview.url;
-      previewImage.alt = `${arena.name} Übersicht`;
+      previewImage.alt = `${arena.name} Arena-Poster`;
       this.overlay.querySelector('[data-arena-showcase]').dataset.arena = arena.id;
+      const henhousePanel = this.overlay.querySelector('.henhouse-panel');
+      henhousePanel.dataset.arena = arena.id;
+      henhousePanel.style.setProperty('--hub-poster', `url("${preview.url}")`);
       this.overlay.querySelector('[data-run-arena]').textContent = arena.name.toUpperCase();
       this.overlay.querySelector('[data-run-layout]').textContent = preview.layout;
       this.overlay.querySelector('[data-run-scope]').textContent = preview.scope;
       this.overlay.querySelector('[data-run-challenge]').textContent = challenge.name.toUpperCase();
       this.overlay.querySelector('[data-run-description]').textContent = challenge.description;
       this.overlay.querySelector('[data-run-reward]').innerHTML = `<small>BELOHNUNG</small><strong>${challenge.firstClearClaimed ? 'Erstsieg geschafft' : `+${challenge.firstClearReward} Körner`}</strong>`;
+      const startButton = this.overlay.querySelector('[data-run-start]');
+      startButton.disabled = !challenge.unlocked;
+      startButton.classList.toggle('is-locked', !challenge.unlocked);
+      startButton.querySelector('span').textContent = challenge.unlocked ? 'RUN STARTEN' : 'NOCH GESPERRT';
+      startButton.querySelector('small').textContent = challenge.unlocked ? 'Hof betreten' : challenge.unlockLabel;
       this.overlay.querySelectorAll('[data-challenge]').forEach((candidate) => (
         candidate.classList.toggle('is-selected', candidate.dataset.challenge === challenge.id)
       ));
@@ -749,6 +773,7 @@ export class HUD {
     const switchHubView = (view) => {
       const target = this.overlay.querySelector(`[data-hub-view="${view}"]`) ? view : 'play';
       if (target !== 'training') closeTalentDetail();
+      if (target !== 'play') closeRoosterPicker();
       this.hubSelection.view = target;
       this.overlay.querySelectorAll('[data-hub-view]').forEach((section) => {
         const active = section.dataset.hubView === target;
@@ -759,6 +784,26 @@ export class HUD {
         button.classList.toggle('is-selected', button.dataset.hubTab === target)
       ));
     };
+    const roosterPicker = this.overlay.querySelector('[data-rooster-picker]');
+    const roosterPickerScrim = this.overlay.querySelector('.hub-rooster-picker__scrim');
+    const roosterPickerTrigger = this.overlay.querySelector('[data-rooster-picker-open]');
+    const closeRoosterPicker = () => {
+      if (!roosterPicker || !roosterPickerScrim) return;
+      roosterPicker.hidden = true;
+      roosterPickerScrim.hidden = true;
+      roosterPickerTrigger?.setAttribute('aria-expanded', 'false');
+    };
+    const openRoosterPicker = () => {
+      if (!roosterPicker || !roosterPickerScrim) return;
+      roosterPicker.hidden = false;
+      roosterPickerScrim.hidden = false;
+      roosterPickerTrigger?.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => roosterPicker.querySelector('.hub-rooster-switch.is-selected')?.focus({ preventScroll: true }));
+    };
+    roosterPickerTrigger?.addEventListener('click', openRoosterPicker);
+    this.overlay.querySelectorAll('[data-rooster-picker-close]').forEach((button) => {
+      button.addEventListener('click', closeRoosterPicker);
+    });
     this.overlay.querySelectorAll('[data-hub-tab]').forEach((button) => {
       button.addEventListener('click', () => switchHubView(button.dataset.hubTab));
     });
@@ -767,7 +812,14 @@ export class HUD {
         selectedRoosterId = button.dataset.hubRooster;
         this.hubSelection.roosterId = selectedRoosterId;
         updateSelectedRooster();
+        closeRoosterPicker();
       });
+    });
+    this.overlay.querySelector('[data-history-toggle]')?.addEventListener('click', (event) => {
+      const expanded = event.currentTarget.getAttribute('aria-expanded') === 'true';
+      event.currentTarget.setAttribute('aria-expanded', `${!expanded}`);
+      event.currentTarget.closest('details')?.classList.toggle('is-history-expanded', !expanded);
+      event.currentTarget.textContent = expanded ? 'Alle Runs anzeigen' : 'Weniger anzeigen';
     });
     this.overlay.querySelectorAll('[data-challenge]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -777,7 +829,9 @@ export class HUD {
       });
     });
     this.overlay.querySelector('[data-run-start]')?.addEventListener('click', () => (
-      this.onRoosterSelected?.(selectedRoosterId, selectedChallenge)
+      this.overlay.querySelector('[data-run-start]').disabled
+        ? null
+        : this.onRoosterSelected?.(selectedRoosterId, selectedChallenge)
     ));
     updateSelectedRooster();
     updateChallenge();
