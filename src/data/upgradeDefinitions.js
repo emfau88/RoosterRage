@@ -101,7 +101,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'primary-artillery-rank',
     name: 'Blast Shell',
-    description: 'Entwickelt Boombardiers Startwaffe von R1 bis R4.',
+    description: 'Entwickelt Bummberts Startwaffe von R1 bis R4.',
     rankDescriptions: [
       'R2 Heavy Load: Größere Granate, stärkere Spur und breiterer Explosionsradius.',
       'R3 Shrapnel Yolk: Der Einschlag erzeugt vier kurze Mini-Blasts.',
@@ -136,7 +136,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'primary-storm-rank',
     name: 'Storm Egg',
-    description: 'Entwickelt Stormcrests Startwaffe von R1 bis R4.',
+    description: 'Entwickelt Blitzkamms Startwaffe von R1 bis R4.',
     rankDescriptions: [
       'R2 Static Fork: Ein zusätzlicher, weiter reichender Kettensprung.',
       'R3 Arc Pair: Jeder Angriff feuert zwei versetzte elektrische Impulse.',
@@ -510,7 +510,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'artillery-reinforced-breech',
     name: 'Reinforced Breech',
-    description: 'Boombardiers Startgranate erzeugt breitere und härtere Druckwellen.',
+    description: 'Bummberts Startgranate erzeugt breitere und härtere Druckwellen.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,
@@ -526,7 +526,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'artillery-blast-plating',
     name: 'Blast Plating',
-    description: 'Boombardier erhält HP und Panzerung für den Nahbereich seiner Explosionen.',
+    description: 'Bummbert erhält HP und Panzerung für den Nahbereich seiner Explosionen.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,
@@ -542,7 +542,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'storm-static-plumage',
     name: 'Static Plumage',
-    description: 'Stormcrests Start-Eier springen weiter durch dichte Gruppen.',
+    description: 'Blitzkamms Start-Eier springen weiter durch dichte Gruppen.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,
@@ -559,7 +559,7 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'storm-tailwind-training',
     name: 'Tailwind Training',
-    description: 'Stormcrest bewegt sich schneller und verkürzt den Startwaffen-Takt.',
+    description: 'Blitzkamm bewegt sich schneller und verkürzt den Startwaffen-Takt.',
     category: 'passive',
     rarity: 'uncommon',
     maxRank: 3,

@@ -368,8 +368,8 @@ async function testRoosterClasses(browser) {
   assert(artillery.enemies.filter((enemy) => enemy.hp < 999).length >= 2, 'Artillery primary did not deal splash damage.', artillery.enemies);
   assert(storm.enemies.filter((enemy) => enemy.hp < 999).length >= 2, 'Storm primary did not chain to another target.', storm.enemies);
   assert(ace.visual.texture === 'rooster-ace-walk', 'Ace is not using its own sprite sheet.', ace.visual);
-  assert(artillery.visual.texture === 'rooster-artillery-walk', 'Boombardier is not using its own sprite sheet.', artillery.visual);
-  assert(storm.visual.texture === 'rooster-storm-walk', 'Stormcrest is not using its own sprite sheet.', storm.visual);
+  assert(artillery.visual.texture === 'rooster-artillery-walk', 'Bummbert is not using its own sprite sheet.', artillery.visual);
+  assert(storm.visual.texture === 'rooster-storm-walk', 'Blitzkamm is not using its own sprite sheet.', storm.visual);
   assert(new Set([ace.visual.texture, artillery.visual.texture, storm.visual.texture]).size === 3,
     'Rooster classes must not share a player texture.', { ace: ace.visual, artillery: artillery.visual, storm: storm.visual });
   [ace, artillery, storm].forEach((result) => {
@@ -409,10 +409,12 @@ async function testRoosterClasses(browser) {
       `${result.roosterId} ${direction} movement does not use the true north row.`, state);
     });
   });
-  assert(ace.visual.markers === 0 && !ace.visual.markerTypes.includes('ace-ring'),
-    'The obsolete Ace ground ring is still active.', ace.visual);
-  assert(artillery.visual.markers === 2, 'Artillery visual identity markers are missing.', artillery.visual);
-  assert(storm.visual.markers === 3, 'Storm visual identity markers are missing.', storm.visual);
+  assert([ace, artillery, storm].every((result) => result.visual.markers === 0),
+    'A rooster still has a distracting persistent class marker.', {
+      ace: ace.visual,
+      artillery: artillery.visual,
+      storm: storm.visual
+    });
   assert(artillery.visual.upgradeAffinities['rocket-egg'] > 1, 'Artillery rocket affinity is missing.', artillery.visual);
   assert(storm.visual.upgradeAffinities['lightning-comb'] > 1, 'Storm lightning affinity is missing.', storm.visual);
   return { name: 'rooster classes', status: 'passed', ace, artillery, storm };

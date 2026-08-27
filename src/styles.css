@@ -2997,6 +2997,46 @@ body,
   transform: translateY(-3px);
 }
 
+.rooster-card__choose {
+  display: none;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 225, 106, 0.5);
+  border-radius: 11px;
+  background: linear-gradient(135deg, #ffe16a, #f19a32);
+  color: #25180b;
+  font: inherit;
+  font-weight: 950;
+  letter-spacing: 0.045em;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+.rooster-card.is-selected + .rooster-card__choose {
+  display: flex;
+}
+
+.rooster-card__choose small {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+.rooster-card__choose:disabled {
+  border-color: rgba(190, 205, 207, 0.18);
+  background: rgba(255, 255, 255, 0.045);
+  color: #87999c;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .rooster-card--artillery {
   --class-accent: #ff8138;
   --class-glow: rgba(255, 101, 35, 0.2);
@@ -6619,6 +6659,14 @@ html.has-ui-overlay .upgrade-confirmation {
 
   .rooster-card.is-selected {
     padding: 0 14px 15px;
+  }
+
+  .rooster-card__choose {
+    position: sticky;
+    bottom: 4px;
+    z-index: 4;
+    min-height: 56px;
+    margin-top: -4px;
   }
 
   .rooster-card.is-selected .rooster-card__portrait {

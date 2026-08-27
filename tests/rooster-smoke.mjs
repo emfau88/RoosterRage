@@ -19,6 +19,7 @@ function assert(condition, message, details) {
 async function startRunFromHub(page, rooster = 'ace') {
   await page.locator('[data-hub-tab="roosters"]').click();
   await page.locator(`.rooster-card--${rooster}`).click();
+  await page.locator(`.rooster-card--${rooster} + .rooster-card__choose`).click();
   const startButton = page.locator('[data-run-start]');
   await startButton.scrollIntoViewIfNeeded();
   await startButton.click();
@@ -168,6 +169,7 @@ async function run() {
     await mobilePage.locator('.rooster-card--storm').scrollIntoViewIfNeeded();
     await mobilePage.screenshot({ path: path.join(artifactDir, 'rooster-class-selection-mobile.png') });
     await mobilePage.locator('.rooster-card--ace').click();
+    await mobilePage.locator('.rooster-card--ace + .rooster-card__choose').click();
     await mobilePage.locator('[data-run-start]').click();
     await mobilePage.waitForFunction(() => window.__ROOSTER_TEST__?.getState().frames > 30);
     const mobileState = await mobilePage.evaluate(() => window.__ROOSTER_TEST__.getState());

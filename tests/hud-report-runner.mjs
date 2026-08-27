@@ -142,7 +142,7 @@ async function verifyResponsiveHud(browser, serverUrl) {
       );
       const expected = viewport.width <= 760
         ? { time: '09:29', wave: '2/10', kills: '109', compact: true }
-        : { time: '09:29', wave: 'Wave 2/10', kills: '109 Kills', compact: false };
+        : { time: '09:29', wave: 'Welle 2/10', kills: '109 Abschüsse', compact: false };
       assert(layout.metrics.time.visible === expected.time
         && layout.metrics.wave.visible === expected.wave
         && layout.metrics.kills.visible === expected.kills,
@@ -257,12 +257,12 @@ async function verifyArenaPresentation(browser, serverUrl) {
     });
     assert(
       layout.arena === 'open-yard'
-      && layout.naturalWidth === 1400
-      && layout.naturalHeight === 900
-      && layout.objectFit === 'contain'
+      && layout.naturalWidth === 1536
+      && layout.naturalHeight === 1024
+      && layout.objectFit === 'cover'
       && layout.previewWidth >= 300
       && layout.previewHeight >= 120,
-      'The mobile hub must show the selected arena as a large, uncropped overview.',
+      'The mobile hub must show the selected arena as a large poster composition.',
       layout
     );
     assert(
@@ -341,10 +341,10 @@ async function verifySettingsAndReport(browser, serverUrl) {
     assert(result.report.deathCause === 'contact:slime', 'Run report lost the lethal source.', result.report);
     assert(result.tableRows.length === result.report.combatSources.slice(0, 10).length,
       'Rendered source table differs from telemetry source data.', result);
-    assert(['Quelle', 'Schaden', 'Share', 'Treffer', 'Kills', 'Overkill', 'Aktiv']
+    assert(['Quelle', 'Schaden', 'Anteil', 'Treffer', 'Abschüsse', 'Overkill', 'Aktiv']
       .every((heading) => result.tableHeaders.includes(heading)),
     'Run report does not expose every required combat metric.', result.tableHeaders);
-    assert(result.summaryText.includes('Barnyard Ace') && result.buildText.includes('Target Egg'),
+    assert(result.summaryText.includes('Eier-Ass') && result.buildText.includes('Target Egg'),
       'Run report does not identify rooster and build.', result);
     assert(result.panel.left >= 0 && result.panel.right <= 390 && result.panel.height <= 812,
       'Run report does not fit the portrait viewport.', result.panel);

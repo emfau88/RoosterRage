@@ -126,8 +126,8 @@ export class HUD {
       </div>
       <div class="hud__metrics">
         <div class="hud__item" data-time><span data-icon="timer"></span><span><small>RUN</small><strong data-value><span data-value-full>00:00</span><span data-value-compact aria-hidden="true">00:00</span></strong></span></div>
-        <div class="hud__item hud__item--wave" data-wave><span data-icon="wave"></span><span><small>WELLE</small><strong data-value><span data-value-full>Wave 1/10</span><span data-value-compact aria-hidden="true">1/10</span></strong></span><span class="hud__wave-track"><i data-wave-fill></i></span></div>
-        <div class="hud__item" data-kills><span data-icon="enemy"></span><span><small>JAGD</small><strong data-value><span data-value-full>0 Kills</span><span data-value-compact aria-hidden="true">0</span></strong></span></div>
+        <div class="hud__item hud__item--wave" data-wave><span data-icon="wave"></span><span><small>WELLE</small><strong data-value><span data-value-full>Welle 1/10</span><span data-value-compact aria-hidden="true">1/10</span></strong></span><span class="hud__wave-track"><i data-wave-fill></i></span></div>
+        <div class="hud__item" data-kills><span data-icon="enemy"></span><span><small>JAGD</small><strong data-value><span data-value-full>0 Abschüsse</span><span data-value-compact aria-hidden="true">0</span></strong></span></div>
       </div>
       <div class="hud__boss" data-boss>
         <div class="hud__boss-heading"><strong data-boss-name>BROOD KING</strong><span data-boss-phase>PHASE 1/3</span></div>
@@ -141,7 +141,7 @@ export class HUD {
         <button class="hud__icon-button" type="button" data-settings title="Pause und Einstellungen" aria-label="Pause und Einstellungen">
           <span class="settings-glyph" aria-hidden="true"><i></i><i></i></span>
         </button>
-        <button class="hud__icon-button" type="button" data-fullscreen title="Fullscreen" aria-label="Fullscreen">
+        <button class="hud__icon-button" type="button" data-fullscreen title="Vollbild" aria-label="Vollbild umschalten">
           <span class="fullscreen-glyph" aria-hidden="true"></span>
         </button>
       </div>
@@ -184,7 +184,7 @@ export class HUD {
       this.roosterId = state.roosterId;
       const avatar = this.root.querySelector('[data-rooster-avatar]');
       avatar.src = ROOSTER_PORTRAITS[state.roosterId];
-      avatar.alt = `${state.roosterName ?? state.roosterId} Portrait`;
+      avatar.alt = `${state.roosterName ?? state.roosterId} Porträt`;
       this.root.querySelector('[data-identity]').dataset.rooster = state.roosterId;
     }
     const hpRatio = Math.max(0, Math.min(1, state.hp / state.maxHp));
@@ -201,10 +201,10 @@ export class HUD {
       ? ` · ${state.challenge.name}`
       : '';
     const formattedTime = this.formatTime(state.elapsed);
-    this.setMetricValue('[data-wave]', `Wave ${state.wave}/10${challengeSuffix}`, `${state.wave}/10`);
+    this.setMetricValue('[data-wave]', `Welle ${state.wave}/10${challengeSuffix}`, `${state.wave}/10`);
     this.setMetricValue('[data-time]', formattedTime, formattedTime);
     const kills = state.kills ?? 0;
-    this.setMetricValue('[data-kills]', `${kills} ${kills === 1 ? 'Kill' : 'Kills'}`, `${kills}`);
+    this.setMetricValue('[data-kills]', `${kills} ${kills === 1 ? 'Abschuss' : 'Abschüsse'}`, `${kills}`);
     this.root.querySelector('[data-xp]').style.width = `${state.xpPercent * 100}%`;
     this.root.querySelector('[data-wave-fill]').style.width = `${(state.waveProgress?.percent ?? 0) * 100}%`;
     const bossHud = this.root.querySelector('[data-boss]');
@@ -388,7 +388,7 @@ export class HUD {
     }).join('');
     const historyRows = (hub.history ?? []).length
       ? hub.history.map((run) => `
-        <li><strong>${run.roosterName}</strong><span>${run.outcome === 'victory' ? 'Sieg' : 'Niederlage'} · ${run.kills} Kills · +${run.kernels ?? 0} Körner · ${this.formatDuration(run.elapsedMs)}</span></li>
+        <li><strong>${run.roosterName}</strong><span>${run.outcome === 'victory' ? 'Sieg' : 'Niederlage'} · ${run.kills} Abschüsse · +${run.kernels ?? 0} Körner · ${this.formatDuration(run.elapsedMs)}</span></li>
       `).join('')
       : '<li><span>Noch kein Run gespeichert.</span></li>';
     const historyToggle = (hub.history ?? []).length > 3
@@ -426,9 +426,9 @@ export class HUD {
             <span class="henhouse-kernels"><img src="${kernelCurrencyUrl}" alt=""><strong>${currency.kernels}</strong> Körner</span>
           </div>
           <div class="henhouse-actions">
-            <button type="button" class="henhouse-settings" data-hub-fullscreen title="Fullscreen" aria-label="Fullscreen umschalten">
+            <button type="button" class="henhouse-settings" data-hub-fullscreen title="Vollbild" aria-label="Vollbild umschalten">
               <span class="henhouse-action__icon fullscreen-glyph" aria-hidden="true"></span>
-              <span class="henhouse-action__label">Fullscreen</span>
+              <span class="henhouse-action__label">Vollbild</span>
             </button>
             <button type="button" class="henhouse-settings" data-hub-settings title="Einstellungen" aria-label="Einstellungen öffnen">
               <span class="henhouse-action__icon settings-glyph" aria-hidden="true"><i></i><i></i></span>
@@ -461,7 +461,7 @@ export class HUD {
                   <p data-run-description></p>
                   <div class="hub-run-best">
                     <span><small>WELLEN</small><strong>10</strong></span>
-                    <span><small>BESTE JAGD</small><strong>${bests.highestKills} Kills</strong></span>
+                    <span><small>BESTE JAGD</small><strong>${bests.highestKills} Abschüsse</strong></span>
                     <span data-run-reward></span>
                   </div>
                 </div>
@@ -481,7 +481,7 @@ export class HUD {
               <div class="hub-rooster-hero__portrait">
                 <img data-hero-portrait alt="Ausgewählter Rooster">
                 <span class="hub-rooster-hero__shade"></span>
-                <img data-hero-mastery-badge class="hub-rooster-hero__badge" alt="Mastery-Wappen">
+                <img data-hero-mastery-badge class="hub-rooster-hero__badge" alt="Meisterschafts-Wappen">
               </div>
               <div class="hub-rooster-hero__copy">
                 <small>DEIN ROOSTER</small>
@@ -502,7 +502,7 @@ export class HUD {
           </aside>
         </section>
         <section class="henhouse-view" data-hub-view="roosters" hidden>
-          <div class="henhouse-section-heading"><span><small>ROOSTER</small><h2>Hähne</h2></span><p>Stats, Mastery, Kosmetik und Freischaltungen.</p></div>
+          <div class="henhouse-section-heading"><span><small>HÄHNE</small><h2>Hähne</h2></span><p>Werte, Meisterschaft, Kosmetik und Freischaltungen.</p></div>
           <div class="rooster-list"></div>
         </section>
         <section class="henhouse-view" data-hub-view="training" hidden>
@@ -542,9 +542,9 @@ export class HUD {
           <div class="henhouse-archive-stats">
             <span><small>Runs</small><strong>${progress.totalRuns}</strong></span>
             <span><small>Siege</small><strong>${progress.victories}</strong></span>
-            <span><small>Kills</small><strong>${progress.totalKills}</strong></span>
+            <span><small>Abschüsse</small><strong>${progress.totalKills}</strong></span>
           </div>
-          <div class="henhouse-records"><small>REKORDE</small><div class="personal-bests"><span><small>Meiste Kills</small><strong>${bests.highestKills}</strong></span><span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span><span><small>Längster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span></div></div>
+          <div class="henhouse-records"><small>REKORDE</small><div class="personal-bests"><span><small>Meiste Abschüsse</small><strong>${bests.highestKills}</strong></span><span><small>Schnellster Sieg</small><strong>${bests.fastestVictoryMs === null ? '–' : this.formatDuration(bests.fastestVictoryMs)}</strong></span><span><small>Längster Run</small><strong>${this.formatDuration(bests.longestRunMs)}</strong></span></div></div>
           <div class="henhouse-drawers">
             <details open><summary>Run-Historie</summary><ul class="history-list">${historyRows}</ul>${historyToggle}</details>
             <details><summary>Gegner-Lexikon</summary><ul class="lexicon-list">${enemyRows}</ul></details>
@@ -654,10 +654,16 @@ export class HUD {
       button.className = `rooster-card rooster-card--${definition.id} ${definition.id === selectedRoosterId ? 'is-selected' : ''} ${meta.unlocked ? '' : 'is-locked'}`;
       button.type = 'button';
       button.dataset.unlocked = `${meta.unlocked}`;
-      if (!meta.unlocked) button.setAttribute('aria-label', `${definition.name} Vorschau, gesperrt: ${meta.unlockLabel}`);
+      button.setAttribute('aria-expanded', `${definition.id === selectedRoosterId}`);
+      button.setAttribute(
+        'aria-label',
+        meta.unlocked
+          ? `${definition.name}: Details anzeigen`
+          : `${definition.name}: Vorschau anzeigen, gesperrt: ${meta.unlockLabel}`
+      );
       button.innerHTML = `
         <span class="rooster-card__portrait">
-          <img class="rooster-card__portrait-image" src="${ROOSTER_PORTRAITS[definition.id]}" alt="${definition.name} Portrait">
+          <img class="rooster-card__portrait-image" src="${ROOSTER_PORTRAITS[definition.id]}" alt="${definition.name} Porträt">
           <span class="rooster-card__portrait-shade"></span>
           <span class="rooster-card__header">
             <span class="rooster-card__icon" data-rooster-icon></span>
@@ -666,14 +672,14 @@ export class HUD {
             <small>${definition.role}</small>
             </span>
             <img class="rooster-card__mastery-badge ${mastery.badgeUnlocked ? '' : 'is-locked'}"
-              src="${MASTERY_BADGES[definition.id]}" alt="${definition.name} Mastery-Wappen">
+              src="${MASTERY_BADGES[definition.id]}" alt="${definition.name} Meisterschafts-Wappen">
           </span>
         </span>
         <span class="rooster-card__compact-copy">
           <small>${meta.unlocked ? 'VERFÜGBAR' : 'GESPERRT · VORSCHAU'}</small>
           <strong>${definition.name}</strong>
           <span>${definition.role}</span>
-          <em>${meta.unlocked ? 'Antippen zum Spielen' : `Freischaltung: ${meta.unlockLabel}`}</em>
+          <em>${meta.unlocked ? 'Antippen für Details' : `Freischaltung: ${meta.unlockLabel}`}</em>
         </span>
         <span class="rooster-card__stats">
           <span>HP ${definition.stats.maxHp}</span>
@@ -683,25 +689,35 @@ export class HUD {
         <span class="rooster-card__primary">${definition.primary.name}: ${definition.description}</span>
         <span class="rooster-card__passive">${definition.passive}</span>
         <span class="rooster-card__mastery">
-          <span><strong>Mastery ${mastery.level}/${mastery.maxLevel}</strong><small>${mastery.nextTarget === null ? `${mastery.xp} XP · MAX` : `${mastery.xp}/${mastery.nextTarget} XP`}</small></span>
+          <span><strong>Meisterschaft ${mastery.level}/${mastery.maxLevel}</strong><small>${mastery.nextTarget === null ? `${mastery.xp} XP · MAX` : `${mastery.xp}/${mastery.nextTarget} XP`}</small></span>
           <i><b style="width:${Math.round(mastery.progress * 100)}%"></b></i>
         </span>
         <span class="rooster-card__progress">${meta.unlocked ? `${meta.runs} Runs · ${meta.wins} Siege` : `Gesperrt: ${meta.unlockLabel}`}</span>
       `;
       this.setIcon(button.querySelector('[data-rooster-icon]'), definition.icon);
       button.addEventListener('click', () => {
-        if (!meta.unlocked) {
-          this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
-            candidate.classList.toggle('is-selected', candidate === button)
-          ));
-          return;
-        }
+        this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => {
+          const expanded = candidate === button;
+          candidate.classList.toggle('is-selected', expanded);
+          candidate.setAttribute('aria-expanded', `${expanded}`);
+        });
+      });
+      entry.append(button);
+      const chooseButton = document.createElement('button');
+      chooseButton.className = 'rooster-card__choose';
+      chooseButton.type = 'button';
+      chooseButton.disabled = !meta.unlocked;
+      chooseButton.innerHTML = meta.unlocked
+        ? `<span>MIT ${definition.name.toUpperCase()} SPIELEN</span><small>Auswahl bestätigen</small>`
+        : `<span>NOCH GESPERRT</span><small>${meta.unlockLabel}</small>`;
+      chooseButton.addEventListener('click', () => {
+        if (!meta.unlocked) return;
         selectedRoosterId = definition.id;
         this.hubSelection.roosterId = definition.id;
         updateSelectedRooster();
         switchHubView('play');
       });
-      entry.append(button);
+      entry.append(chooseButton);
       if (meta.cosmetics?.length) {
         const variant = meta.cosmetics[0];
         const tint = `#${Math.max(0, variant.tint ?? 0xffffff).toString(16).padStart(6, '0').slice(-6)}`;
@@ -759,21 +775,24 @@ export class HUD {
       const mastery = meta.mastery ?? { level: 1, maxLevel: 5, progress: 0 };
       const portrait = this.overlay.querySelector('[data-hero-portrait]');
       portrait.src = ROOSTER_PORTRAITS[definition.id];
-      portrait.alt = `${definition.name} Portrait`;
+      portrait.alt = `${definition.name} Porträt`;
       const badge = this.overlay.querySelector('[data-hero-mastery-badge]');
       badge.src = MASTERY_BADGES[definition.id];
-      badge.alt = `${definition.name} Mastery-Wappen`;
+      badge.alt = `${definition.name} Meisterschafts-Wappen`;
       badge.classList.toggle('is-locked', !mastery.badgeUnlocked);
       this.overlay.querySelector('[data-hero-name]').textContent = definition.name;
       this.overlay.querySelector('[data-hero-role]').textContent = definition.role;
       this.overlay.querySelector('[data-hero-description]').textContent = `${definition.primary.name}: ${definition.description}`;
-      this.overlay.querySelector('[data-hero-mastery]').textContent = `Mastery ${mastery.level}/${mastery.maxLevel}`;
+      this.overlay.querySelector('[data-hero-mastery]').textContent = `Meisterschaft ${mastery.level}/${mastery.maxLevel}`;
       this.overlay.querySelector('[data-hero-progress]').style.width = `${Math.round(mastery.progress * 100)}%`;
       this.overlay.querySelectorAll('[data-hub-rooster]').forEach((candidate) => (
         candidate.classList.toggle('is-selected', candidate.dataset.hubRooster === definition.id)
       ));
       this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
         candidate.classList.toggle('is-selected', candidate.classList.contains(`rooster-card--${definition.id}`))
+      ));
+      this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
+        candidate.setAttribute('aria-expanded', `${candidate.classList.contains('is-selected')}`)
       ));
     };
     const updateChallenge = () => {
@@ -951,7 +970,7 @@ export class HUD {
       rooster: 'Rooster',
       challenge: 'Challenge',
       cosmetic: 'Kosmetik',
-      mastery: 'Mastery',
+      mastery: 'Meisterschaft',
       'first-clear': 'Erstsieg'
     };
     const unlocks = (report.newUnlocks ?? []).map((unlock) => `
@@ -968,7 +987,7 @@ export class HUD {
           <span><small>Arena</small><strong>${report.arena?.name ?? 'Unbekannt'}</strong></span>
           <span><small>Modus</small><strong>${report.challenge?.name ?? 'Standard Run'}</strong></span>
           <span><small>Zeit</small><strong>${this.formatDuration(report.elapsedMs ?? 0)}</strong></span>
-          <span><small>Kills</small><strong>${report.kills ?? 0}</strong></span>
+          <span><small>Abschüsse</small><strong>${report.kills ?? 0}</strong></span>
           <span><small>Treffer</small><strong>${report.shots ? `${Math.round(Math.min(1, report.hits / report.shots) * 100)}%` : '–'}</strong></span>
           <span><small>Peak</small><strong>${report.maxEnemiesAlive ?? 0}</strong></span>
           <span><small>Todesursache</small><strong>${this.formatSource(report.deathCause ?? '–')}</strong></span>
@@ -979,13 +998,13 @@ export class HUD {
         <p class="run-report__evos"><strong>EVO:</strong> ${evos}</p>
         ${metaReward ? `<div class="run-report__meta-reward">
           <img src="${kernelCurrencyUrl}" alt="Körner">
-          <span><strong>+${metaReward.earnedKernels} Körner</strong><small>Run ${metaReward.runKernels}${metaReward.firstClearKernels ? ` · Erstsieg ${metaReward.firstClearKernels}` : ''}${metaReward.masteryKernels ? ` · Mastery ${metaReward.masteryKernels}` : ''} · Bestand ${metaReward.balance}</small></span>
-          <b>Mastery ${metaReward.masteryLevel} · +${metaReward.masteryXp} XP</b>
+          <span><strong>+${metaReward.earnedKernels} Körner</strong><small>Run ${metaReward.runKernels}${metaReward.firstClearKernels ? ` · Erstsieg ${metaReward.firstClearKernels}` : ''}${metaReward.masteryKernels ? ` · Meisterschaft ${metaReward.masteryKernels}` : ''} · Bestand ${metaReward.balance}</small></span>
+          <b>Meisterschaft ${metaReward.masteryLevel} · +${metaReward.masteryXp} XP</b>
         </div>` : ''}
         ${unlocks ? `<div class="run-report__unlocks"><h2>Neu freigeschaltet</h2>${unlocks}</div>` : ''}
         <div class="run-report__table-wrap">
           <table>
-            <thead><tr><th>Quelle</th><th>Schaden</th><th>Share</th><th>Treffer</th><th>Kills</th><th>Overkill</th><th>Aktiv</th></tr></thead>
+            <thead><tr><th>Quelle</th><th>Schaden</th><th>Anteil</th><th>Treffer</th><th>Abschüsse</th><th>Overkill</th><th>Aktiv</th></tr></thead>
             <tbody>${sourceRows}</tbody>
           </table>
         </div>
@@ -1031,7 +1050,7 @@ export class HUD {
               <span>${label}</span><strong>${effectSettings[key] ? 'AN' : 'AUS'}</strong>
             </button>`).join('')}
           <button type="button" data-settings-fullscreen>
-            <span>Fullscreen</span><strong>WECHSELN</strong>
+            <span>Vollbild</span><strong>WECHSELN</strong>
           </button>
         </div>
         <h3>Audio</h3>
@@ -1108,7 +1127,7 @@ export class HUD {
   }
 
   showWaveBanner(wave, config) {
-    this.showEncounterBanner(`Wave ${wave}: ${config.name}`, config.intent ?? '', config.bossWave ? 'boss' : 'wave');
+    this.showEncounterBanner(`Welle ${wave}: ${config.name}`, config.intent ?? '', config.bossWave ? 'boss' : 'wave');
   }
 
   showEncounterBanner(title, subtitle = '', tier = 'elite') {

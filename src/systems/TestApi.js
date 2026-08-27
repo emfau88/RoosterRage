@@ -584,7 +584,7 @@ export function installTestApi(scene) {
       outcome: 'victory',
       kills: 180,
       elapsedMs: 480000,
-      rooster: { id: 'ace', name: 'Barnyard Ace' },
+      rooster: { id: 'ace', name: 'Eier-Ass' },
       arena: { id: 'open-yard', name: 'Open Yard' },
       challenge: { id: 'standard', name: 'Standard Run' },
       build: { active: [], passive: [], evolutions: [] },

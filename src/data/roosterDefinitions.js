@@ -4,8 +4,8 @@ import { BLAST_SHELL_VISUALS, STORM_EGG_VISUALS } from './primaryWeaponVisuals.j
 export const ROOSTER_DEFINITIONS = [
   {
     id: 'ace',
-    name: 'Barnyard Ace',
-    shortName: 'Ace',
+    name: 'Eier-Ass',
+    shortName: 'Eier-Ass',
     role: 'Präziser Allrounder',
     icon: 'golden-egg',
     description: 'Zielsuchende Eier und eine eingebaute Chance auf kritische Treffer.',
@@ -88,8 +88,8 @@ export const ROOSTER_DEFINITIONS = [
   },
   {
     id: 'artillery',
-    name: 'Boombardier',
-    shortName: 'Boom',
+    name: 'Bummbert',
+    shortName: 'Bumm',
     role: 'Schwerer Flächenschaden',
     icon: 'rocket-egg',
     description: 'Langsame, schwere Eier explodieren beim Einschlag.',
@@ -187,8 +187,8 @@ export const ROOSTER_DEFINITIONS = [
   },
   {
     id: 'storm',
-    name: 'Stormcrest',
-    shortName: 'Storm',
+    name: 'Blitzkamm',
+    shortName: 'Blitz',
     role: 'Schneller Kettenangriff',
     icon: 'lightning-comb',
     description: 'Sehr schnelle Sturm-Eier entladen sich auf ein nahes zweites Ziel.',

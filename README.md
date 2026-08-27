@@ -6,7 +6,7 @@
 
 ### [Rooster Rage jetzt im Browser spielen](https://emfau88.github.io/RoosterRage/)
 
-Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Wähle Barnyard Ace, Boombardier oder Stormcrest, entwickle absurde Ei-Waffen und überlebe zehn eskalierende Wellen bis zum dreiphasigen Brood King.
+Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Wähle Eier-Ass, Bummbert oder Blitzkamm, entwickle absurde Ei-Waffen und überlebe zehn eskalierende Wellen bis zum dreiphasigen Brood King.
 
 > **Projektstatus:** Der vollständige Zehn-Wellen-Loop, alle drei Rooster, Waffenränge und EVOs, drei Arenen, Meta-Fortschritt sowie der aktuelle Kampf-, VFX- und Run-Preparation-Polish sind umgesetzt. Das Multi-Seed-/Real-Run-Production-Gate mit sechs Echtzeit-Vollruns und die automatisierten Production-Gates sind abgeschlossen. Die GitHub-Pages-Version bleibt eine öffentliche Testfassung; als Nächstes stehen subjektive Abnahmen auf realer Mobile-Hardware sowie weiteres Balance- und Präsentations-Feintuning an.
 
@@ -22,8 +22,8 @@ Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Wähle Barny
 - Feste Wave-/Segment-XP-Budgets: Hordenmenge und Levelgeschwindigkeit sind getrennt steuerbar
 - Sichtbare, magnetische XP-Orbs mit verlustfreier Bündelung: maximal 72 auf Desktop und 48 auf Mobile
 - Heal-, Magnet- und Bomb-Pickups an strategischen Wave-Momenten statt an schnell steigenden Killzahlen
-- Lokale Bestwerte, Challenges, Mastery, Talentnest, Kosmetik, Run-History, Gegnerlexikon und entdeckte EVO-Rezepte
-- Mobile-Hochformat als primäres Layout, eine kompakte Landscape-Sicherheitsdarstellung sowie vollständige Desktop- und Fullscreen-Unterstützung
+- Lokale Bestwerte, Herausforderungen, Meisterschaft, Talentnest, Kosmetik, Run-Historie, Gegnerlexikon und entdeckte EVO-Rezepte
+- Mobile-Hochformat als primäres Layout, eine kompakte Querformat-Sicherheitsdarstellung sowie vollständige Desktop- und Vollbild-Unterstützung
 - Keine Werbung, Energie, Gacha- oder Pay-to-Win-Systeme
 
 ## Gameplay
@@ -38,7 +38,7 @@ Der Charakter greift automatisch an. Bewegung, Positionierung, Upgrade-Auswahl u
 - **Desktop:** WASD oder Pfeiltasten
 - **Touch:** Auf der linken Bildschirmseite ziehen; der virtuelle Joystick folgt der Berührung
 - **Interface:** Rooster-, Challenge- und Upgrade-Auswahl per Touch, Maus oder Pointer
-- **Komfort:** Fullscreen sowie getrennte Einstellungen für Audio, Damage Numbers, Screen Shake, Flash und Vibration
+- **Komfort:** Vollbild sowie getrennte Einstellungen für Audio, Schadenszahlen, Bildschirmwackeln, Aufblitzen und Vibration
 
 ## Lokal starten
 

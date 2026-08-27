@@ -20,7 +20,7 @@ export class RoosterClassSystem {
     this.selected = definition;
     this.applyStats(definition);
     this.scene.loadout.initializeStartWeapon(definition);
-    this.createVisualIdentity(definition);
+    this.clearVisualIdentity();
     this.scene.telemetry.summary.roosterId = definition.id;
     this.scene.telemetry.record('roosterSelected', this.scene.time.now, { roosterId: definition.id });
     return true;
@@ -74,35 +74,9 @@ export class RoosterClassSystem {
     return true;
   }
 
-  createVisualIdentity(definition) {
+  clearVisualIdentity() {
     this.markers.forEach((marker) => marker.destroy());
     this.markers = [];
-    const { x, y } = this.scene.player.sprite;
-
-    // Ace deliberately needs no persistent ground ring. His authored sprite
-    // already carries the class identity without a distracting floor marker.
-    if (definition.id === 'ace') return;
-
-    if (definition.id === 'artillery') {
-      [-1, 1].forEach((side) => {
-        const pod = this.scene.add.circle(x, y, 9, 0x5a2118, 1)
-          .setStrokeStyle(3, 0xffa53b, 0.92)
-          .setDepth(5);
-        pod.markerType = 'artillery-pod';
-        pod.side = side;
-        this.markers.push(pod);
-      });
-      return;
-    }
-
-    for (let index = 0; index < 3; index += 1) {
-      const spark = this.scene.add.rectangle(x, y, 7, 13, 0x9ff7ff, 0.9)
-        .setStrokeStyle(1, 0xffffff, 0.9)
-        .setDepth(8);
-      spark.markerType = 'storm-spark';
-      spark.index = index;
-      this.markers.push(spark);
-    }
   }
 
   update(time) {
@@ -113,24 +87,11 @@ export class RoosterClassSystem {
     const x = player.sprite.x;
     const y = player.sprite.y;
     this.markers.forEach((marker) => {
-      if (marker.markerType === 'artillery-pod') {
-        const perpendicular = player.aimAngle + Math.PI / 2;
-        marker.setPosition(
-          x + Math.cos(perpendicular) * marker.side * 24,
-          y + Math.sin(perpendicular) * marker.side * 24 + 6
-        );
-        return;
-      }
       if (marker.markerType === 'primary-evolution') {
         marker.setPosition(x, y + 5);
         marker.setScale(0.94 + Math.sin(time * 0.005) * 0.08);
         marker.setAlpha(0.52 + Math.sin(time * 0.004) * 0.18);
-        return;
       }
-      const angle = time * 0.0032 + (Math.PI * 2 * marker.index) / 3;
-      marker.setPosition(x + Math.cos(angle) * 31, y + Math.sin(angle) * 25);
-      marker.setRotation(angle + Math.PI / 4);
-      marker.setAlpha(0.58 + Math.sin(time * 0.012 + marker.index) * 0.28);
     });
   }
 

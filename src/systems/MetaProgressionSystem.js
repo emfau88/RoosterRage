@@ -33,14 +33,14 @@ const COSMETICS = [
     roosterId: 'artillery',
     name: 'Ironclad Plating',
     tint: 0xc7d9e5,
-    unlock: { type: 'roosterWins', roosterId: 'artillery', target: 1, label: 'Mit Boombardier gewinnen' }
+    unlock: { type: 'roosterWins', roosterId: 'artillery', target: 1, label: 'Mit Bummbert gewinnen' }
   },
   {
     id: 'storm-violet',
     roosterId: 'storm',
     name: 'Violet Arc',
     tint: 0xd3a8ff,
-    unlock: { type: 'roosterWins', roosterId: 'storm', target: 1, label: 'Mit Stormcrest gewinnen' }
+    unlock: { type: 'roosterWins', roosterId: 'storm', target: 1, label: 'Mit Blitzkamm gewinnen' }
   }
 ];
 

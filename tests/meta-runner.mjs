@@ -99,8 +99,8 @@ async function verifyFreshHub(context, serverUrl) {
     assert(snapshot.talentTiers === 3
       && snapshot.talentBranches === 2
       && snapshot.talentTierNodeCounts.join(',') === '3,2,1'
-      && snapshot.archiveSummary.join(',') === 'Runs,Siege,Kills'
-      && snapshot.archiveRecords.join(',') === 'Meiste Kills,Schnellster Sieg,Längster Run'
+      && snapshot.archiveSummary.join(',') === 'Runs,Siege,Abschüsse'
+      && snapshot.archiveRecords.join(',') === 'Meiste Abschüsse,Schnellster Sieg,Längster Run'
       && snapshot.archiveDrawers.join(',') === 'Run-Historie,Gegner-Lexikon,EVO-Lexikon'
       && !snapshot.analyticsInArchive,
     'Talent tiers or the simplified archive hierarchy are incomplete.', snapshot);
@@ -165,6 +165,23 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
     assert(persisted.enabledRoosters === 3 && persisted.enabledChallenges === 4
       && persisted.historyRows === 1 && persisted.selected,
     'The unlocked hub did not render the persisted state.', persisted);
+
+    await page.getByRole('button', { name: 'Hähne', exact: true }).click();
+    await page.locator('.rooster-card--artillery').click();
+    const preview = await page.evaluate(() => ({
+      activeView: document.querySelector('.henhouse-view.is-active')?.dataset.hubView,
+      expanded: document.querySelector('.rooster-card--artillery')?.classList.contains('is-selected'),
+      committedName: document.querySelector('[data-hero-name]')?.textContent
+    }));
+    assert(preview.activeView === 'roosters' && preview.expanded && preview.committedName === 'Eier-Ass',
+      'Opening rooster details must not commit the preview or leave the rooster view.', preview);
+    await page.locator('.rooster-card--artillery + .rooster-card__choose').click();
+    const confirmed = await page.evaluate(() => ({
+      activeView: document.querySelector('.henhouse-view.is-active')?.dataset.hubView,
+      committedName: document.querySelector('[data-hero-name]')?.textContent
+    }));
+    assert(confirmed.activeView === 'play' && confirmed.committedName === 'Bummbert',
+      'The explicit rooster action did not confirm the preview and return to play.', confirmed);
 
     await page.reload({ waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
@@ -492,7 +509,7 @@ async function verifyTenRunsTalentsAndReset(context, serverUrl) {
         api.recordMetaRun({
           kills: 120 + index * 8,
           elapsedMs: 510000 - index * 3500,
-          rooster: { id: 'ace', name: 'Barnyard Ace' },
+          rooster: { id: 'ace', name: 'Eier-Ass' },
           challenge: { id: challengeId, name: challengeId },
           build: { active: [], passive: [], evolutions: [] }
         });
