@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: two isolated top-down rooster FOOT PAD cutouts for a north-facing game character
+Input images: style reference only for golden-orange scales, black claws and dark-brown outlines. Do not copy their wrong south-facing orientation. Do not include their cream cuffs or shins.
+Scene/backdrop: completely flat pure chroma green #00FF00 RGB.
+Primary request: Draw EXACTLY TWO separate bird feet seen from directly above, both pointing NORTH / toward the TOP of the canvas. Each component is FOOT ONLY: a compact golden-orange central foot pad/ankle socket with THREE main toes spreading upward toward 12 o'clock. The black claw tips are at the upper ends of those three toes. Add ONE much shorter rear toe pointing downward toward 6 o'clock with its black claw. No shin and no feather cuff.
+Composition: 1536x1024 landscape. One foot centered in the LEFT half at x380, one counterpart centered in the RIGHT half at x1150. Each foot about 300px wide by 300px high, fully isolated with wide gutters. Rotate neither component: top of canvas is the direction the rooster is walking.
+Style: exact warm golden-orange cel shading, scale texture, crisp dark-brown outline and glossy black claws of the references; professional 2D game cutout.
+Constraints: exactly two components, no body, no leg/shin, no cream feathers, no wing, no tail, no text, labels, ground, shadows, frames, checkerboard, or other objects.
+Avoid: three claws at the bottom, toes pointing south, front-facing foot, long vertical leg, feather cuff, upside-down anatomy, human feet.

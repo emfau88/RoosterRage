@@ -1,0 +1,90 @@
+{
+  "frameSize": 256,
+  "currentGameScale": 0.25,
+  "comparison": [
+    {
+      "direction": "south",
+      "legacyFrame": 0,
+      "legacyVisiblePx": [
+        180,
+        213
+      ],
+      "newVisiblePx": [
+        145,
+        213
+      ],
+      "legacyAtGameScale": [
+        45.0,
+        53.25
+      ],
+      "newAtGameScale": [
+        36.25,
+        53.25
+      ],
+      "heightMatchScale": 0.25
+    },
+    {
+      "direction": "west",
+      "legacyFrame": 4,
+      "legacyVisiblePx": [
+        181,
+        215
+      ],
+      "newVisiblePx": [
+        152,
+        214
+      ],
+      "legacyAtGameScale": [
+        45.25,
+        53.75
+      ],
+      "newAtGameScale": [
+        38.0,
+        53.5
+      ],
+      "heightMatchScale": 0.2512
+    },
+    {
+      "direction": "east",
+      "legacyFrame": 8,
+      "legacyVisiblePx": [
+        166,
+        215
+      ],
+      "newVisiblePx": [
+        152,
+        214
+      ],
+      "legacyAtGameScale": [
+        41.5,
+        53.75
+      ],
+      "newAtGameScale": [
+        38.0,
+        53.5
+      ],
+      "heightMatchScale": 0.2512
+    },
+    {
+      "direction": "north",
+      "legacyFrame": 12,
+      "legacyVisiblePx": [
+        168,
+        217
+      ],
+      "newVisiblePx": [
+        145,
+        217
+      ],
+      "legacyAtGameScale": [
+        42.0,
+        54.25
+      ],
+      "newAtGameScale": [
+        36.25,
+        54.25
+      ],
+      "heightMatchScale": 0.25
+    }
+  ]
+}

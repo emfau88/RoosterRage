@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "frameSize": 256,
+  "eastDerivedFrom": "west-mirrored",
+  "directions": {
+    "south": {
+      "source": "south-parts-alpha-v2.png",
+      "sourceSha256": "57b815aefcb24bada7f781950b33b8db9af172b7a2cbe14e8a5255563a7d9d52",
+      "parts": {
+        "body": {
+          "width": 392,
+          "height": 613,
+          "sourceRect": [
+            99,
+            33,
+            392,
+            613
+          ],
+          "sha256": "0412e7dab9b0ec8b35a0229d6ec9eddd4a8f3540b070ad56d3cb923787c3a6a7"
+        },
+        "wing-left": {
+          "width": 198,
+          "height": 387,
+          "sourceRect": [
+            640,
+            175,
+            198,
+            387
+          ],
+          "sha256": "df3adf3544cf41eb083250b1d4a9688c760ff123ab782d53da5da3300a57a17c"
+        },
+        "wing-right": {
+          "width": 199,
+          "height": 387,
+          "sourceRect": [
+            1109,
+            175,
+            199,
+            387
+          ],
+          "sha256": "17e9bb03d4b3479cca307ed872a6d1576d1734fb2c20fcbf4c219d8d2ec3a625"
+        },
+        "foot-left": {
+          "width": 212,
+          "height": 272,
+          "sourceRect": [
+            157,
+            668,
+            212,
+            272
+          ],
+          "sha256": "106af6d7a9047aaa334cbcdb37e3e02d8b97512c77049ccbd66154aadeaf94c4"
+        },
+        "foot-right": {
+          "width": 203,
+          "height": 272,
+          "sourceRect": [
+            672,
+            668,
+            203,
+            272
+          ],
+          "sha256": "015e37318ac10f5252670ed1bee5129cbc4e87566e1621073ba7e9795c1cb17a"
+        },
+        "action-wing": {
+          "width": 310,
+          "height": 256,
+          "sourceRect": [
+            1064,
+            661,
+            310,
+            256
+          ],
+          "sha256": "4b7a3a3cdcb3e13a3524a362f1f5fce6d3164d07aa43b649873d7db8733afac6"
+        }
+      }
+    },
+    "west": {
+      "source": "west-parts-alpha-v1.png",
+      "sourceSha256": "439ae115a7d723abed6a9affc84bf63ac6c32929d9c0db66c624b4642cfec860",
+      "parts": {
+        "body": {
+          "width": 319,
+          "height": 577,
+          "sourceRect": [
+            151,
+            38,
+            319,
+            577
+          ],
+          "sha256": "a9826bd181ce77fc28c23c832327015d537b66c1e4aa823a87a1ae0ba816706b"
+        },
+        "wing-near": {
+          "width": 200,
+          "height": 407,
+          "sourceRect": [
+            704,
+            143,
+            200,
+            407
+          ],
+          "sha256": "cfd69b5651cec223f47afd00a617e7ccff6d8e1595a9c9f43f7cb5ca979df1ca"
+        },
+        "wing-far": {
+          "width": 164,
+          "height": 351,
+          "sourceRect": [
+            1124,
+            174,
+            164,
+            351
+          ],
+          "sha256": "90e623e2bca6d32cb5d2d8fa233dfeb0644808bcf34b95835f8bab270dc8f312"
+        },
+        "foot-near": {
+          "width": 238,
+          "height": 246,
+          "sourceRect": [
+            137,
+            670,
+            238,
+            246
+          ],
+          "sha256": "dbc0a7b5ce1c58ea6605e10ac7aa3279af93ee81c909e5779d6d11abdb073c24"
+        },
+        "foot-far": {
+          "width": 193,
+          "height": 222,
+          "sourceRect": [
+            607,
+            692,
+            193,
+            222
+          ],
+          "sha256": "d0c11a61903ac79551e3abc6136714fdbb6d3c8943bc98ec5068d8d937c109d8"
+        },
+        "tail": {
+          "width": 321,
+          "height": 233,
+          "sourceRect": [
+            1069,
+            680,
+            321,
+            233
+          ],
+          "sha256": "30fa8f3a238bccdefa81c96c4acae78d5c346725be7d5f5489e793f7248c4f76"
+        }
+      }
+    },
+    "north": {
+      "source": "north-parts-alpha-v1.png",
+      "sourceSha256": "931d85725399532a654483fc77bbf7fbce42d41274cba52dcb7d107a583702da",
+      "parts": {
+        "body": {
+          "width": 369,
+          "height": 562,
+          "sourceRect": [
+            118,
+            33,
+            369,
+            562
+          ],
+          "sha256": "96d421b2618296f631991368b5af513ace8b70275755a76c61766c838cc07e73"
+        },
+        "wing-left": {
+          "width": 189,
+          "height": 374,
+          "sourceRect": [
+            650,
+            152,
+            189,
+            374
+          ],
+          "sha256": "210ab8c448f22f281b3f121936ef92176ae4c0af7d396554cbf4bd8be5eb78a1"
+        },
+        "wing-right": {
+          "width": 189,
+          "height": 374,
+          "sourceRect": [
+            1136,
+            153,
+            189,
+            374
+          ],
+          "sha256": "7384390518091dd7b8dc300fa15849977ddcceffb4a6523dc09157c6c83c5cfa"
+        },
+        "tail": {
+          "width": 241,
+          "height": 277,
+          "sourceRect": [
+            1075,
+            662,
+            241,
+            277
+          ],
+          "sha256": "0514fa8dfce8464f4947713ed3ee66d79de9cc90242be176713927887864430a"
+        },
+        "leg-left": {
+          "width": 403,
+          "height": 477,
+          "source": "north-complete-legs-alpha-v1.png",
+          "sourceRect": [
+            156,
+            273,
+            403,
+            477
+          ],
+          "sha256": "670fbad4f0af109fb417b57bcbbe54ed8122a0bbcdf2971829e73e5f1f1a4caa"
+        },
+        "leg-right": {
+          "width": 407,
+          "height": 476,
+          "source": "north-complete-legs-alpha-v1.png",
+          "sourceRect": [
+            960,
+            274,
+            407,
+            476
+          ],
+          "sha256": "e91aa6f51b83aab567026345dafee0fefe8309c008f08eff75c43ba79b910b82"
+        }
+      }
+    }
+  }
+}

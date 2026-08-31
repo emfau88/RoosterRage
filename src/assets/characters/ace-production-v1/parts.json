@@ -1,0 +1,74 @@
+{
+  "version": 2,
+  "direction": "south",
+  "frameSize": 256,
+  "source": "generated/south-parts-alpha-v2.png",
+  "parts": {
+    "body": {
+      "width": 392,
+      "height": 613,
+      "sourceRect": [
+        99,
+        33,
+        392,
+        613
+      ],
+      "sha256": "0412e7dab9b0ec8b35a0229d6ec9eddd4a8f3540b070ad56d3cb923787c3a6a7"
+    },
+    "wing-left": {
+      "width": 198,
+      "height": 387,
+      "sourceRect": [
+        640,
+        175,
+        198,
+        387
+      ],
+      "sha256": "df3adf3544cf41eb083250b1d4a9688c760ff123ab782d53da5da3300a57a17c"
+    },
+    "wing-right": {
+      "width": 199,
+      "height": 387,
+      "sourceRect": [
+        1109,
+        175,
+        199,
+        387
+      ],
+      "sha256": "17e9bb03d4b3479cca307ed872a6d1576d1734fb2c20fcbf4c219d8d2ec3a625"
+    },
+    "foot-left": {
+      "width": 212,
+      "height": 272,
+      "sourceRect": [
+        157,
+        668,
+        212,
+        272
+      ],
+      "sha256": "106af6d7a9047aaa334cbcdb37e3e02d8b97512c77049ccbd66154aadeaf94c4"
+    },
+    "foot-right": {
+      "width": 203,
+      "height": 272,
+      "sourceRect": [
+        672,
+        668,
+        203,
+        272
+      ],
+      "sha256": "015e37318ac10f5252670ed1bee5129cbc4e87566e1621073ba7e9795c1cb17a"
+    },
+    "wing-throw": {
+      "width": 310,
+      "height": 256,
+      "sourceRect": [
+        1064,
+        661,
+        310,
+        256
+      ],
+      "sha256": "4b7a3a3cdcb3e13a3524a362f1f5fce6d3164d07aa43b649873d7db8733afac6"
+    }
+  }
+}

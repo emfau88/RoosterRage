@@ -1,4 +1,7 @@
-import roosterAceWalkSheetUrl from '../../assets/characters/rooster-ace-walk-v2.webp';
+import roosterAceLegacyWalkSheetUrl from '../../assets/characters/rooster-ace-walk-v2.webp';
+import roosterAceNextWalkSheetUrl from '../../assets/characters/ace-next/rooster-ace-next-walk.webp';
+import roosterAceNextIdleSheetUrl from '../../assets/characters/ace-next/rooster-ace-next-idle.webp';
+import { USE_NEXT_ACE_VISUAL } from '../../config/aceVisual.js';
 import roosterArtilleryWalkSheetUrl from '../../assets/characters/rooster-artillery-walk-v3.webp';
 import roosterStormWalkSheetUrl from '../../assets/characters/rooster-storm-walk-v3.webp';
 import enemySlimeUrl from '../../assets/enemy-slime.webp';
@@ -153,7 +156,9 @@ export function preloadGameAssets(scene) {
     }
   });
 
-  scene.load.spritesheet('rooster-ace-walk', roosterAceWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('rooster-ace-walk', USE_NEXT_ACE_VISUAL ? roosterAceNextWalkSheetUrl : roosterAceLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('rooster-ace-walk-legacy', roosterAceLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('rooster-ace-idle', roosterAceNextIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('rooster-artillery-walk', roosterArtilleryWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('rooster-storm-walk', roosterStormWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('enemy-slime', enemySlimeUrl);

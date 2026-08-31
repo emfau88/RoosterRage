@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Rooster Rage · Ace Vier-Richtungs-Test</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">ROOSTER RAGE / ISOLIERTER CHARAKTERTEST</p>
+          <h1>Ace · Lauf und Idle</h1>
+          <p class="intro">Vier Blickrichtungen, ein konsistenter Körper. Noch nicht ins Spiel eingebunden.</p>
+        </div>
+        <div class="legend"><span><i class="walk-dot"></i>Laufen</span><span><i class="idle-dot"></i>Idle</span></div>
+      </header>
+
+      <section class="controls" aria-label="Vorschau steuern">
+        <div class="modes" role="group" aria-label="Animation" style="display:flex;gap:3px">
+          <button id="idle-mode" aria-pressed="true">Idle ansehen</button>
+          <button id="run-toggle" aria-pressed="false">Laufen ansehen</button>
+        </div>
+        <div class="directions" role="group" aria-label="Blickrichtung">
+          <button data-direction="north">↑ Nord</button>
+          <button data-direction="west">← West</button>
+          <button data-direction="south" aria-pressed="true">↓ Süd</button>
+          <button data-direction="east">Ost →</button>
+        </div>
+        <button id="tour-toggle" aria-pressed="false">Vier Richtungen automatisch</button>
+        <label>Darstellung
+          <select id="scale">
+            <option value="0.25">Spielgröße · 25 %</option>
+            <option value="0.65">Kompakt · 65 %</option>
+            <option value="1" selected>Prüfgröße · 100 %</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="stage-wrap">
+        <canvas id="stage" width="960" height="540" tabindex="0" role="application"
+          aria-label="Ace auf schwarzem Hintergrund. Mit WASD oder Pfeiltasten bewegen."></canvas>
+        <div class="stage-chrome" aria-hidden="true"><span>ACE / REVISION 02</span><span id="mode-label">SÜD · IDLE</span></div>
+      </section>
+
+      <div class="status-row">
+        <p id="load-status" role="status">Grafiken werden geladen …</p>
+        <p><kbd>WASD</kbd> / <kbd>↑←↓→</kbd> bewegen · Loslassen zeigt Idle · <kbd>R</kbd> wechselt Idle/Laufen · <kbd>1–4</kbd> wählt die Richtung</p>
+      </div>
+      <footer>Eigenständige Abnahmevorschau. Ost verwendet die exakt gespiegelte Westansicht. Die alten Spielsprites und die Spiellogik bleiben unverändert.</footer>
+    </main>
+    <script type="module" src="/src/ace-preview/main.js"></script>
+  </body>
+</html>

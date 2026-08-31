@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { USE_NEXT_ACE_VISUAL } from '../config/aceVisual.js';
 
 export class Player {
   constructor(scene, x, y) {
@@ -192,6 +193,12 @@ export class Player {
 
   updateAnimation(velocity) {
     if (velocity.lengthSq() < 0.01) {
+      const roosterId = this.roosterId ?? 'ace';
+      this.sprite.setFlipX(this.shouldFlipHorizontal(this.lastMoveDirection));
+      if (roosterId === 'ace' && USE_NEXT_ACE_VISUAL) {
+        this.sprite.play(`rooster-ace-idle-${this.lastMoveDirection}`, true);
+        return;
+      }
       this.sprite.anims.stop();
       const frameByDirection = {
         south: 0,
@@ -199,7 +206,6 @@ export class Player {
         east: 4,
         north: 12
       };
-      this.sprite.setFlipX(this.shouldFlipHorizontal(this.lastMoveDirection));
       this.sprite.setFrame(frameByDirection[this.lastMoveDirection]);
       return;
     }
@@ -217,6 +223,11 @@ export class Player {
     const moving = velocity.lengthSq() >= 0.01;
     const now = this.scene.time.now;
     if (!moving) {
+      if ((this.roosterId ?? 'ace') === 'ace' && USE_NEXT_ACE_VISUAL) {
+        this.sprite.setScale(this.baseScale);
+        this.sprite.setAngle(0);
+        return;
+      }
       const idle = Math.sin(now * 0.0042);
       this.sprite.setScale(
         this.baseScale * (1 + idle * 0.012),

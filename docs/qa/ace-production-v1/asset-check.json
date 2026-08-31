@@ -1,0 +1,37 @@
+{
+  "clips": [
+    {
+      "clip": "walk",
+      "frames": 24,
+      "minimumMarginPx": 8
+    },
+    {
+      "clip": "idle",
+      "frames": 24,
+      "minimumMarginPx": 17
+    },
+    {
+      "clip": "shot",
+      "frames": 13,
+      "minimumMarginPx": 17
+    },
+    {
+      "clip": "hurt",
+      "frames": 12,
+      "minimumMarginPx": 17
+    },
+    {
+      "clip": "walk-shot",
+      "frames": 24,
+      "minimumMarginPx": 8
+    },
+    {
+      "clip": "walk-hurt",
+      "frames": 24,
+      "minimumMarginPx": 8
+    }
+  ],
+  "artworkParts": 6,
+  "frameSize": 256,
+  "sourcePartIdentity": "Same immutable parts in every frame"
+}

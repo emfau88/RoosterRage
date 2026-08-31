@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rooster Rage · Ace Animationsstudio</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div><p class="eyebrow">ROOSTER RAGE / CHARACTER DEVELOPMENT</p><h1>Ace in Bewegung<span>Revision 02 / Südansicht</span></h1></div>
+        <a href="/" class="game-link">Zum unveränderten Spiel ↗</a>
+      </header>
+      <p class="intro">Größerer Kopf, schmalere Schultern und Taille. Die neue Silhouette lässt sich im Stand, beim Laufen und in echter Spielgröße vergleichen.</p>
+      <section class="toolbar" aria-label="Animationssteuerung">
+        <div class="segments"><button id="walk" aria-pressed="true">Laufen</button><button id="idle" aria-pressed="false">Idle</button></div>
+        <button id="shot">Schuss ↗</button><button id="hurt">Treffer</button>
+        <button id="pause">Pause</button><button id="step">Einzelbild →</button>
+        <label>Tempo <select id="speed"><option value="0.25">¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option><option value="1.5">1½×</option></select></label>
+        <label>Boden <select id="background"><option value="yard">Hof</option><option value="dark">Dunkel</option><option value="light">Hell</option></select></label>
+        <label class="check"><input id="guides" type="checkbox" /> Bezugspunkte</label>
+      </section>
+      <p id="load-status" role="status">Grafiken werden geladen …</p>
+      <section class="comparison" aria-label="Direkter Animationsvergleich">
+        <article><div class="card-title"><h2>Im Spiel</h2><span>BESTAND</span></div><canvas id="legacy" width="320" height="284" aria-label="Bisheriger Ace mit vier Laufbildern"></canvas><div class="small-view"><canvas id="legacy-small" width="96" height="84" aria-label="Bisheriger Ace in Spielgröße"></canvas><p>64 px Frame<br><span>4 Bilder · 10 FPS</span></p></div></article>
+        <article><div class="card-title"><h2>Chat-Prototyp</h2><span>REFERENZ</span></div><canvas id="chat" width="320" height="284" aria-label="South-Walk aus dem geteilten Chat"></canvas><div class="small-view"><canvas id="chat-small" width="96" height="84" aria-label="Chat-Prototyp in Spielgröße"></canvas><p>64 px Frame<br><span>8 Bilder · 10 FPS</span></p></div></article>
+        <article class="new"><div class="card-title"><h2>Schlanker Ace</h2><span>REVISION 02</span></div><canvas id="rig" width="320" height="284" aria-label="Neuer Ace aus wiederverwendbaren Körperteilen"></canvas><div class="small-view"><canvas id="rig-small" width="96" height="84" aria-label="Neuer Ace in Spielgröße"></canvas><p>64 px Frame<br><span>Kontinuierliche Bewegung</span></p></div></article>
+      </section>
+      <section class="timeline" aria-label="Laufzyklus prüfen"><label for="phase">Zyklus</label><input id="phase" type="range" min="0" max="23" value="0" /><output id="frame-label">01 / 24</output><span id="animation-status">Laufen</span></section>
+      <section class="playtest">
+        <div class="section-title"><div><p class="eyebrow">PHASER / ECHTE SPIELGRÖSSE</p><h2>Bewegen und gleichzeitig feuern</h2></div><div><button id="auto-fire" aria-pressed="false">Dauerfeuer</button><button id="reset-player">Zurücksetzen</button></div></div>
+        <p class="hint">Testfeld anklicken: WASD / Pfeiltasten bewegen · Leertaste schießt · H testet einen Treffer. Mobil: Zielposition antippen. Die Steuerung oben pausiert nur den Vergleich. Blickrichtung bleibt in diesem Test bewusst Süden.</p>
+        <div id="playfield" tabindex="0" role="application" aria-label="Spielbarer Ace-Prototyp, Südansicht"></div>
+        <p id="play-status" role="status">Spieltest startet …</p>
+      </section>
+      <footer><strong>Abgegrenzter Prototyp.</strong> Der normale Spielstand und die anderen Charaktere bleiben unverändert. Weitere Blickrichtungen sind noch nicht produziert. Schuss und Treffer im Vergleich betreffen nur den neuen Aufbau; beim Bestand wird die vorhandene Trefferreaktion gezeigt.</footer>
+    </main>
+    <script type="module" src="/src/character-lab/main.js"></script>
+  </body>
+</html>

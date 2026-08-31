@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
+    "build:character-lab": "vite build --config vite.character-lab.config.js",
+    "test:character-lab": "node --test tests/ace-prototype.test.mjs tests/ace-four-direction.test.mjs",
+    "assets:ace-preview": "python scripts/prepare-ace-four-direction.py && node scripts/export-ace-four-direction.mjs && python scripts/render-ace-four-direction.py",
     "assets:optimize": "python scripts/optimize-assets.py",
     "assets:check": "node scripts/check-assets.mjs",
     "maps:capture-previews": "node scripts/capture-arena-previews.mjs",

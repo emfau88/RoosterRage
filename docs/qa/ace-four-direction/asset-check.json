@@ -1,0 +1,125 @@
+{
+  "clips": [
+    {
+      "direction": "south",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 9,
+      "widthRangePx": [
+        144,
+        145
+      ],
+      "heightRangePx": [
+        211,
+        224
+      ]
+    },
+    {
+      "direction": "south",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 17,
+      "widthRangePx": [
+        143,
+        146
+      ],
+      "heightRangePx": [
+        211,
+        214
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 13,
+      "widthRangePx": [
+        151,
+        152
+      ],
+      "heightRangePx": [
+        208,
+        220
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 16,
+      "widthRangePx": [
+        150,
+        152
+      ],
+      "heightRangePx": [
+        213,
+        215
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 15,
+      "widthRangePx": [
+        144,
+        145
+      ],
+      "heightRangePx": [
+        216,
+        224
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 17,
+      "widthRangePx": [
+        144,
+        146
+      ],
+      "heightRangePx": [
+        215,
+        218
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 13,
+      "widthRangePx": [
+        151,
+        152
+      ],
+      "heightRangePx": [
+        208,
+        220
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 16,
+      "widthRangePx": [
+        150,
+        152
+      ],
+      "heightRangePx": [
+        213,
+        215
+      ]
+    }
+  ],
+  "frameSize": 256,
+  "directions": [
+    "south",
+    "west",
+    "north",
+    "east"
+  ],
+  "eastMirrorsWest": true,
+  "sourcePartIdentity": "Same immutable direction parts in every frame"
+}

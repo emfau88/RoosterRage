@@ -1,0 +1,38 @@
+Use case: precise-object-edit
+Asset type: two isolated, complete rear-view rooster leg-and-foot cutouts for a polished 2D top-down game character
+
+Reference usage:
+- Image 1 is the authoritative turnaround. Follow the FOOT ORIENTATION and silhouette of the character labeled “NORTH (BACK)” in the lower-left.
+- Image 2 is the existing Ace north component sheet. Match its cream feather cuff, golden-orange scales, dark-brown outline, cel shading, line weight and rendering quality.
+- Image 3 supplies the approved compact rear-facing foot idea. Use only its low, sideways-spreading rear-view foot orientation; redraw the whole leg and foot as one continuous asset.
+
+Primary request:
+Draw EXACTLY TWO separate complete north-facing leg-and-foot components, a left counterpart and a right counterpart. Each component must be one newly drawn, uninterrupted object from the cream feathered thigh cuff at the top, through a proportionate golden-orange scaled lower leg, into a compact rear-view foot at the bottom.
+
+Anatomy and continuity requirements:
+- Each leg must have the same overall visible leg-and-foot height and visual mass as Ace’s south and side legs.
+- The cream cuff belongs at the very top and overlaps the scaled shin naturally.
+- The orange scale pattern and outer contour must flow continuously from shin into foot.
+- There must be NO assembly seam, black horizontal line, crack, gap, offset, doubled outline or abrupt shading change at the ankle.
+- The forward toes point away from the viewer, underneath the body, and are therefore mostly hidden.
+- Do NOT show the south-facing three-toe fan or three claws aimed toward the viewer.
+- Show only a low rear heel/ankle and small lateral toe/claw hints spreading subtly outward: the left foot toward screen-left and the right foot toward screen-right.
+- Both feet rest flat on the same horizontal ground level. No ground or shadow should be drawn.
+
+Composition:
+- 1536×1024 landscape.
+- Completely flat pure chroma green background #00FF00 RGB.
+- Put the complete LEFT component centered in the left half and the complete RIGHT component centered in the right half.
+- Each component should be approximately 240–300 px wide and 430–500 px high, with large green gutters and no overlap.
+- The top cuff and bottom foot must be fully visible with generous clearance from all canvas edges.
+
+Style:
+- Match Ace’s existing warm cream feathers, brighter gold-orange leg palette, crisp dark-brown outline, restrained cel shading and professional game-sprite polish.
+- Clean readable forms at small in-game scale.
+
+Constraints:
+- Exactly two components only.
+- No body, head, wing, arm, tail, belt, armor, text, labels, frames, arrows, floor, shadow, checkerboard or props.
+
+Avoid:
+south-facing toes; front-view toe fan; upward hand-like toes; human feet; long exposed thigh; detached foot; visible joint seam; black crack; misaligned ankle; mismatched left/right scale; cropped cuff or cropped claw.

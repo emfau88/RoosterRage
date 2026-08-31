@@ -1,0 +1,15 @@
+Use case: precise-object-edit
+Asset type: two isolated north-facing rear-view rooster foot cutouts for a 2D top-down game
+Input images: Image 1 is the user's authoritative anatomy/orientation reference. Copy the FOOT SILHOUETTE specifically from the character labeled "NORTH (BACK)" in the lower-left: low, flat feet under the tail, viewed from behind, with the forward toes pointing away from the viewer and therefore mostly hidden. Image 2 is Ace Revision 02 and supplies the exact brighter gold-orange palette, crisp dark-brown outline, cel shading and scale texture.
+Scene/backdrop: completely flat pure chroma green #00FF00 RGB.
+Primary request: Draw EXACTLY TWO separate compact rear-view feet, left and right counterparts, for Ace facing NORTH. They must read like the feet in Image 1's NORTH (BACK) pose:
+- very short, low and horizontally grounded;
+- no long visible shin and no large cream cuff;
+- the forward toes point away from the viewer, underneath the body/tail, so there is NO front-facing three-toe fan;
+- show mainly the rear of each ankle/hock and a small flattened orange side silhouette;
+- any claw tips are tiny, lateral or largely hidden, never three black claws aimed toward the viewer;
+- left foot extends subtly to screen-left and right foot subtly to screen-right, as in the reference.
+Composition: 1536x1024 landscape. Place one complete foot centered in the LEFT half and one in the RIGHT half, each approximately 300px wide by 150px high, isolated with huge green gutters. The attachment/top edge is centered so each can tuck beneath a tail and body.
+Style: match Image 2's golden-orange scales, warm restrained cel shading, clean dark-brown outline and game-sprite polish.
+Constraints: exactly two components only; no leg above the hock, no body, no tail, no wing, no text, labels, frames, ground, shadows, checkerboard, or props.
+Avoid: downward/south-facing toes, visible front toe fan, long vertical shin, foot sole, toes bent upward on the canvas like a hand, upside-down leg, human foot.

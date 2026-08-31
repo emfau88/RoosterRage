@@ -1,0 +1,73 @@
+{
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "direction": "south",
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "physics": {
+    "radius": 58,
+    "offset": [
+      70,
+      86
+    ]
+  },
+  "shadowBaked": false,
+  "clips": {
+    "walk": {
+      "file": "ace-south-walk.webp",
+      "frameCount": 24,
+      "columns": 8,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1,
+      "projectileSpawn": "external gameplay event"
+    },
+    "idle": {
+      "file": "ace-south-idle.webp",
+      "frameCount": 24,
+      "columns": 8,
+      "durationMs": 2400,
+      "frameRate": 10.0,
+      "repeat": -1,
+      "projectileSpawn": "external gameplay event"
+    },
+    "shot": {
+      "file": "ace-south-shot.webp",
+      "frameCount": 13,
+      "columns": 8,
+      "durationMs": 260,
+      "frameRate": 50.0,
+      "repeat": 0,
+      "projectileSpawn": "external gameplay event"
+    },
+    "hurt": {
+      "file": "ace-south-hurt.webp",
+      "frameCount": 12,
+      "columns": 8,
+      "durationMs": 240,
+      "frameRate": 50.0,
+      "repeat": 0,
+      "projectileSpawn": "external gameplay event"
+    },
+    "walk-shot": {
+      "file": "ace-south-walk-shot.webp",
+      "frameCount": 24,
+      "columns": 8,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1,
+      "projectileSpawn": "external gameplay event"
+    },
+    "walk-hurt": {
+      "file": "ace-south-walk-hurt.webp",
+      "frameCount": 24,
+      "columns": 8,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1,
+      "projectileSpawn": "external gameplay event"
+    }
+  }
+}

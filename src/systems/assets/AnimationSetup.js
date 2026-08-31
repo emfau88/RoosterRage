@@ -1,3 +1,9 @@
+import {
+  ACE_NEXT_IDLE_FRAME_RATE,
+  ACE_NEXT_WALK_FRAME_RATE,
+  USE_NEXT_ACE_VISUAL
+} from '../../config/aceVisual.js';
+
 export function createGameAnimations(scene) {
   const roosterTextures = ['ace', 'artillery', 'storm'];
   // A single clean side row is mirrored at runtime. Besides making direction
@@ -12,11 +18,26 @@ export function createGameAnimations(scene) {
       scene.anims.create({
         key,
         frames: scene.anims.generateFrameNumbers(`rooster-${roosterId}-walk`, { start, end: start + 3 }),
-        frameRate: roosterId === 'artillery' ? 8 : roosterId === 'storm' ? 12 : 10,
+        frameRate: roosterId === 'ace' && USE_NEXT_ACE_VISUAL
+          ? ACE_NEXT_WALK_FRAME_RATE
+          : roosterId === 'artillery' ? 8 : roosterId === 'storm' ? 12 : 10,
         repeat: -1
       });
     });
   });
+
+  if (USE_NEXT_ACE_VISUAL) {
+    [['south', 0], ['west', 8], ['east', 8], ['north', 24]].forEach(([direction, start]) => {
+      const key = `rooster-ace-idle-${direction}`;
+      if (scene.anims.exists(key)) return;
+      scene.anims.create({
+        key,
+        frames: scene.anims.generateFrameNumbers('rooster-ace-idle', { start, end: start + 7 }),
+        frameRate: ACE_NEXT_IDLE_FRAME_RATE,
+        repeat: -1
+      });
+    });
+  }
 
   const fxAnimations = [
     ['fx-molotov-fire', 0, 3, 9],
