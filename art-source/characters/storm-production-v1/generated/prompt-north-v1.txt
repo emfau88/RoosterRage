@@ -1,0 +1,21 @@
+Create a production character-parts sheet for Blitzkamm, the fast storm rooster from the first two reference images, rendered at the same polished game-art level and clean-outline language as the upgraded Ace and Bummbert turnarounds in the remaining references.
+
+Canvas and layout requirements:
+- Exactly 1536 x 1024 pixels, landscape.
+- Solid pure chroma green background (#00FF00), completely flat and uniform. No shadows, floor, labels, dividers, scenery, particles, glow, lightning, text, or border.
+- Arrange exactly six separate components in a clean 3-column by 2-row layout. Keep every component fully inside its own cell with generous green clearance and absolutely no overlap or touching between cells.
+- Top-left: complete NORTH-facing main body from the back of the swept blue crest to the lower blue armored torso, with no wings/arms, no legs/feet and no tail. Straight-on back view, centered, vertical, neutral pose. Show the back of the white neck feathers, deep blue scarf, streamlined shoulder straps and waist armor.
+- Top-middle: complete left hanging wing/arm seen from behind, with silver-blue bracer and feather hand, detached and isolated.
+- Top-right: complete right hanging wing/arm seen from behind, with silver-blue bracer and feather hand, detached and isolated.
+- Bottom-left: complete left leg from upper blue-feathered thigh through the light shin to the entire rear view of the yellow foot and heel, detached as one seamless piece.
+- Bottom-middle: complete right leg from upper blue-feathered thigh through the light shin to the entire rear view of the yellow foot and heel, detached as one seamless piece.
+- Bottom-right: streamlined layered cobalt/cyan rooster tail seen from behind, detached and isolated, designed to attach at the low rump/butt area.
+
+Character design requirements:
+- Preserve Blitzkamm's identity through color and equipment: tall swept electric-blue crest viewed from behind, white neck feathers, vivid cobalt body plumage, deep blue scarf, streamlined blue-and-silver bracers/armor, pale wind motifs and layered blue tail.
+- He is lean, quick and athletic, with a clearly taller-than-wide silhouette, compact shoulders, visible waist and long agile legs. Avoid a bulky torso, oversized head or squat chibi proportions.
+- Arms hang outside and over the thigh layer. Legs must be complete unbroken assets that connect seamlessly below the torso.
+- NORTH anatomy must be unambiguous: show compact heel/back-foot forms while the long front toes point away toward the top/north and are mostly hidden. Never show a front-facing downward toe fan. No eyes, beak, chest emblem or front face may be visible.
+- Thick, consistent near-black outer contour around every component and crisp dark internal linework. Smooth anti-aliased edges, saturated blue/cyan materials, controlled highlights and small professional details that remain readable when reduced to roughly 55 pixels tall.
+- Match the upgraded Ace and Bummbert's illustrative finish and outline clarity while preserving Blitzkamm's lighter, faster class identity.
+- Orthographic NORTH/back orientation only. No three-quarter angle, no perspective tilt, no cropped parts, no duplicate characters and no assembled full character.

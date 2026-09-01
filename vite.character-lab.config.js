@@ -6,7 +6,12 @@ export default mergeConfig(gameConfig, {
   build: {
     outDir: 'test-results/character-lab-build',
     rolldownOptions: {
-      input: { game: 'index.html', characterLab: 'character-lab.html', acePreview: 'ace-preview.html' }
+      input: {
+        game: 'index.html',
+        characterLab: 'character-lab.html',
+        acePreview: 'ace-preview.html',
+        roosterPreview: 'rooster-preview.html'
+      }
     }
   }
 });

@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "frameSize": 256,
+  "eastDerivedFrom": "west-mirrored",
+  "directions": {
+    "south": {
+      "parts": {
+        "body": {
+          "width": 406,
+          "height": 489,
+          "source": "south-parts-alpha-v1.png",
+          "sourceRect": [
+            106,
+            18,
+            406,
+            489
+          ],
+          "sha256": "89def35c238f16134bd297e81f62154450b6a598f3d9b5a3e77626d4502612e6"
+        },
+        "wing-left": {
+          "width": 193,
+          "height": 388,
+          "source": "south-parts-alpha-v1.png",
+          "sourceRect": [
+            618,
+            94,
+            193,
+            388
+          ],
+          "sha256": "9c03b5c3b281561c75b2ebf824e2a3ca2b8bd92daf9237ac9871e8bc1dd6b254"
+        },
+        "wing-right": {
+          "width": 193,
+          "height": 388,
+          "source": "south-parts-alpha-v1.png",
+          "sourceRect": [
+            1106,
+            94,
+            193,
+            388
+          ],
+          "sha256": "334c906395efea57e105e0bb91326bec93a989d1d6cf7c156328da15932a2664"
+        },
+        "leg-left": {
+          "width": 232,
+          "height": 418,
+          "source": "south-parts-alpha-v1.png",
+          "sourceRect": [
+            149,
+            544,
+            232,
+            418
+          ],
+          "sha256": "30c539cf3bc65b4f409f8931fdc73a3f25c3fbb2e1c16e80ce0944ad1baa90e2"
+        },
+        "leg-right": {
+          "width": 226,
+          "height": 418,
+          "source": "south-parts-alpha-v1.png",
+          "sourceRect": [
+            664,
+            544,
+            226,
+            418
+          ],
+          "sha256": "7f9007d481cdc3fa418023310a32d5385d2698081a664152ca95dc7e77c0c66a"
+        },
+        "action-wing": {
+          "width": 304,
+          "height": 290,
+          "source": "south-parts-alpha-v1.png",
+          "sourceRect": [
+            1055,
+            560,
+            304,
+            290
+          ],
+          "sha256": "3be246957b0054e127972cc7185a78b5717c6251921034d2ceb790db54b6d8bb"
+        }
+      }
+    },
+    "west": {
+      "parts": {
+        "body": {
+          "width": 354,
+          "height": 517,
+          "source": "west-parts-alpha-v1.png",
+          "sourceRect": [
+            131,
+            12,
+            354,
+            517
+          ],
+          "sha256": "ad4070d64fd78528cbe491dd9d2efa0cca6285b1b32b5ce637d5c244007b2612"
+        },
+        "wing-near": {
+          "width": 258,
+          "height": 439,
+          "source": "west-parts-alpha-v1.png",
+          "sourceRect": [
+            638,
+            85,
+            258,
+            439
+          ],
+          "sha256": "08c2efe1e1d0efdb29262a1ed374ba441f66aad13b9dbcfa51a241bb8012fa8e"
+        },
+        "wing-far": {
+          "width": 244,
+          "height": 442,
+          "source": "west-parts-alpha-v1.png",
+          "sourceRect": [
+            1085,
+            85,
+            244,
+            442
+          ],
+          "sha256": "fa41375cb4b83356c225e12a411dff6a14cee7a30c424664657921a006b4cfc0"
+        },
+        "leg-near": {
+          "width": 264,
+          "height": 383,
+          "source": "west-parts-alpha-v1.png",
+          "sourceRect": [
+            139,
+            560,
+            264,
+            383
+          ],
+          "sha256": "7d6e3608ec6dc9dd4c97a71e4f486913e7b50b4607aa62b19755efe32c106f85"
+        },
+        "leg-far": {
+          "width": 265,
+          "height": 385,
+          "source": "west-parts-alpha-v1.png",
+          "sourceRect": [
+            640,
+            558,
+            265,
+            385
+          ],
+          "sha256": "4925eeaf9545b6473cd3b7f8a3f417a402d04c5900678d6cdf9946c375d07d97"
+        },
+        "tail": {
+          "width": 319,
+          "height": 361,
+          "source": "west-parts-alpha-v1.png",
+          "sourceRect": [
+            1073,
+            580,
+            319,
+            361
+          ],
+          "sha256": "ef4d7141e7c1ced0afa033686d75d06d06940252da15e56bacb117674dd6b615"
+        }
+      }
+    },
+    "north": {
+      "parts": {
+        "body": {
+          "width": 415,
+          "height": 490,
+          "source": "north-parts-alpha-v1.png",
+          "sourceRect": [
+            97,
+            16,
+            415,
+            490
+          ],
+          "sha256": "f457648eb6bb0541dea32dd6a3855f3438131fc3245f581912487599e163a518"
+        },
+        "wing-left": {
+          "width": 189,
+          "height": 415,
+          "source": "north-parts-alpha-v1.png",
+          "sourceRect": [
+            633,
+            98,
+            189,
+            415
+          ],
+          "sha256": "efc027c6f5502587ee061ed3e79f026fa6cf2687f2b3bb123ecf7128ff52f47f"
+        },
+        "wing-right": {
+          "width": 193,
+          "height": 414,
+          "source": "north-parts-alpha-v1.png",
+          "sourceRect": [
+            1148,
+            98,
+            193,
+            414
+          ],
+          "sha256": "bfddca5e3355cd29a30b26ceb128aab3dc1cf4614981906c09412de2596a692f"
+        },
+        "tail": {
+          "width": 335,
+          "height": 358,
+          "source": "north-parts-alpha-v1.png",
+          "sourceRect": [
+            1045,
+            598,
+            335,
+            358
+          ],
+          "sha256": "da723d65708863b9ea81d8fe8cccc54b20437844c941dda0ac704dc089c3a474"
+        },
+        "leg-left": {
+          "width": 303,
+          "height": 778,
+          "source": "north-legs-alpha-v2.png",
+          "sourceRect": [
+            250,
+            128,
+            303,
+            778
+          ],
+          "sha256": "4361df1308c4d369a4522f48e3fd6874540758d3662d3121ba07d930f469b22c"
+        },
+        "leg-right": {
+          "width": 301,
+          "height": 778,
+          "source": "north-legs-alpha-v2.png",
+          "sourceRect": [
+            976,
+            128,
+            301,
+            778
+          ],
+          "sha256": "fe3bfcfdb5b030d32eeaeaa4a32dcc01963a2bc6ea01e2a155e9e6522dddd4ea"
+        }
+      }
+    }
+  }
+}

@@ -1,98 +1,68 @@
 # Audit: Überarbeitung der spielbaren Charaktere
 
-Stand: 31.08.2026
+Stand: 01.09.2026
 
-## Ursprüngliches Ziel
+## Ergebnis
 
-Die drei spielbaren Charaktere Ace, Artillery und Storm sollen optisch auf ein einheitliches, hochwertiges Niveau gebracht und im normalen Spiel vollständig ersetzt werden. Dazu gehören konsistente Ansichten, Laufbewegung, Lesbarkeit in Spielgröße, passende Porträts und eine abgesicherte Integration.
+Alle drei spielbaren Charaktere besitzen jetzt einen neuen, kontrolliert aufgebauten Vier-Richtungs-Rig mit klaren Außenlinien, stabiler Identität zwischen den Frames sowie getrennten Lauf- und Idle-Animationen. Die neuen Lauf-Sheets sind im Spiel Standard. Die bisherigen produktiven Sheets bleiben unverändert im Repository und können per URL-Parameter sofort wieder aktiviert werden.
 
-## Tatsächlicher Stand
+| Charakter | Silhouette | Walk | Idle | Richtungen | Spielintegration | Legacy |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ace | beweglicher Allrounder | 4 Frames, 520 ms | 8 Frames, 2800 ms | Süd, West, gespiegelt Ost, Nord | aktiv | erhalten |
+| Bummbert | stämmig, schwer gepanzert | 4 Frames, 650 ms | 8 Frames, 3200 ms | Süd, West, gespiegelt Ost, Nord | aktiv | erhalten |
+| Blitzkamm | schlank, schnell, agil | 4 Frames, 440 ms | 8 Frames, 2400 ms | Süd, gespiegelt West, Ost, Nord | aktiv | erhalten |
 
-Der geteilte Chat und die vorhandenen Spielgrafiken wurden geprüft. Für Ace existiert ein kontrolliert neu aufgebauter Prototyp der Südansicht. Er verwendet sechs unveränderte Bildteile und kann Laufen, Idle, Schuss und Treffer kombinieren. Nach dem Feedback zur zu breiten ersten Fassung wurde Ace mit größerem Kopf, engeren Schultern, kleinerem Rumpf und sichtbaren Beinen neu gezeichnet.
+## Visuelle Regeln
 
-Dieser Stand lebt ausschließlich im separaten `character-lab`. Der normale Spieleinstieg lädt weiterhin:
+- Jeder Frame verwendet dieselben unveränderten Körperteile seiner Richtung. Bewegung entsteht ausschließlich durch kontrollierte Translation, Rotation und Skalierung.
+- Beine werden als vollständige Teile von Schenkel bis Fuß verwendet. Dadurch entstehen keine Risse zwischen Unterschenkel und Fuß.
+- In der Seitenansicht liegt der nahe Arm vor dem nahen Bein und verdeckt den Schenkel anatomisch korrekt.
+- In der Nordansicht liegen die Armwurzeln hinter dem Rumpf. Von hinten sind nur die seitlich herabhängenden Bereiche sichtbar; die Arme wirken nicht auf dem Rücken befestigt.
+- Seitliche Schwanzfedern beginnen am tiefen Rumpf/Po-Bereich.
+- Die Nordfüße zeigen ihre Fersen-/Rückseite und keinen nach Süden gerichteten Zehenfächer.
+- Die Lauf-Atlanten verwenden 256 × 256 Pixel pro Frame und vier Frames je Richtung. Idle verwendet acht Frames je Richtung.
 
-- `rooster-ace-walk-v2.webp`
-- `rooster-artillery-walk-v3.webp`
-- `rooster-storm-walk-v3.webp`
+## Größen und Klassenlesbarkeit
 
-Die produktiven Dateien `AssetLoader.js`, `AnimationSetup.js`, `Player.js`, die Charakterdefinitionen und die Porträts wurden nicht auf die neue Grafik umgestellt.
+Die bestehenden Spielskalierungen bleiben erhalten:
 
-## Produktionsmatrix
+- Ace: `0.25`
+- Bummbert: `0.275`
+- Blitzkamm: `0.235`
 
-Das Spiel benötigt pro Charakter drei gezeichnete Richtungsgrundlagen: Süd, West und Nord. Ost wird aus der Westansicht gespiegelt. Das ergibt neun Richtungsgrundlagen für drei Charaktere.
+Bummbert bleibt dadurch sichtbar größer und schwerer, ohne breiter als hoch zu werden. Blitzkamm besitzt bei ähnlicher Höhe die schmalste Silhouette und den schnellsten Gang. Kollision, HP, Geschwindigkeit, Waffenursprung und Klassenmechanik wurden nicht verändert.
 
-| Charakter | Süd | West/Ost | Nord | Porträt | Normales Spiel |
-| --- | --- | --- | --- | --- | --- |
-| Ace | Prototyp Revision 02 | West erstellt, Ost gespiegelt | Prototyp erstellt | alt | nicht integriert |
-| Artillery | fehlt | fehlt | fehlt | alt | nicht integriert |
-| Storm | fehlt | fehlt | fehlt | alt | nicht integriert |
+## Rückfalloptionen
 
-### Messbarer Fortschritt
+- Alle neuen Figuren zurücksetzen: `?roosterVisual=legacy`
+- Nur Ace: `?aceVisual=legacy`
+- Nur Bummbert: `?artilleryVisual=legacy`
+- Nur Blitzkamm: `?stormVisual=legacy`
 
-- Referenz- und Technikprüfung: abgeschlossen.
-- Gezeichnete Richtungsgrundlagen: **3 von 9** als Prototyp, rund 33 %.
-- Vollständige Charaktere: **0 von 3**.
-- Neue Porträts: **0 von 3**.
-- Produktive Integration: **0 von 3**.
-- Isolierte technische QA: Ace Süd besteht drei Sampler-Tests und einen separaten Phaser-Spieltest.
-- QA im vollständigen Spiel: noch nicht begonnen.
+Die unveränderten Legacy-Sheets liegen weiterhin unter:
 
-Über den Gesamtauftrag betrachtet liegt der Stand nach der Vier-Richtungs-Vorschau ungefähr bei **30 %**. Ace kann isoliert in alle Richtungen laufen und idlen, ist aber noch nicht abgenommen oder produktiv integriert; Artillery und Storm fehlen weiterhin.
+- `src/assets/characters/rooster-ace-walk-v2.webp`
+- `src/assets/characters/rooster-artillery-walk-v3.webp`
+- `src/assets/characters/rooster-storm-walk-v3.webp`
 
-## Was am Ace-Prototyp bereits funktioniert
+## Abnahme und Reproduzierbarkeit
 
-- Ein konsistenter Körper statt voneinander abweichender, vollständig neu generierter Frames.
-- Überarbeitete schlankere Silhouette nach Nutzerfeedback.
-- Gemeinsamer Pose-Sampler für Browservergleich, Phaser-Rig und Offline-Export.
-- Lauf, Idle, Schuss, Treffer und kombinierte Prüfansichten.
-- Weiterlaufende Füße während Schuss und Treffer; Gameplay-Ereignisse hängen nicht vom Animationsende ab.
-- Transparente PNG/WebP-Exporte, GIF-Prüfdateien und Randprüfung ohne abgeschnittene Konturen.
-- Der reguläre Produktions-Build bleibt unverändert lauffähig.
+Die isolierte Vorschau `rooster-preview.html` zeigt Bummbert und Blitzkamm auf schwarzem Hintergrund. Beide lassen sich per Figur-, Richtungs- und Modusschalter sowie über WASD/Pfeiltasten testen. Ace bleibt zusätzlich über `ace-preview.html` isoliert prüfbar.
 
-## Was noch zu tun ist
+Alle Quellprompts, Chroma-Master, Alpha-Master, Einzelteile, Pose-Daten, Lauf-/Idle-Exporte, Runtime-Atlanten und QA-GIFs sind eingecheckt. Die Assets lassen sich über folgende Befehle reproduzieren:
 
-### 1. Verbindlicher Stilstandard
+- `npm run assets:ace-preview`
+- `npm run assets:artillery-preview`
+- `npm run assets:storm-preview`
+- `npm run assets:next-roosters`
 
-Vor weiterer Serienproduktion müssen alle drei Charaktere in einer gemeinsamen neutralen Südansicht verglichen werden. Ace soll der bewegliche Allrounder bleiben, Artillery darf massiger sein, Storm muss am leichtesten und schnellsten wirken. Kopfgröße, Schulterbreite, Körperhöhe, Bodenlinie, Strichstärke, Beleuchtung, Farbsättigung und Detaildichte brauchen feste Grenzen. So wird die beanstandete breite Silhouette nicht bei den anderen Figuren wiederholt.
+## Verifikation
 
-### 2. Ace abnehmen und integrieren
+- Charakter-Rigtests: 11/11 bestanden.
+- Vollständiger Mechanics-Test einschließlich Klassenwechsel und Richtungen: bestanden.
+- Asset-Gate: 132 Runtime-Dateien aktuell.
+- Produktions-Build und Produktions-Gate: bestanden; Test-API wird im Build nicht ausgeliefert.
+- Isolierte Browser-Vorschau: Bummbert und Blitzkamm ohne Warnungen oder Fehler geladen.
+- Legacy-Gesamtrückfall: im lokalen Spiel visuell geprüft.
 
-- Lauf und Idle in der isolierten Vier-Richtungs-Vorschau abnehmen.
-- Danach Schuss und Treffer für alle Richtungen ergänzen.
-- Bewegungsrichtung und unabhängige Zielrichtung im echten Kampfsystem lösen.
-- Neue Auswahl-/HUD-Porträtgrafik im selben Design erstellen.
-- Erst danach die alten Ace-Assets im normalen Spiel ersetzen.
-
-### 3. Artillery und Storm produzieren
-
-- Je einen verbindlichen Master im gemeinsamen Stil erstellen.
-- Je Süd, West/Ost und Nord als konsistente Teile oder verlässlich kontrollierte Sheets produzieren.
-- Klassensilhouetten erhalten: Artillery schwer und robust, Storm schlank und schnell, ohne Ace-Körper lediglich umzufärben.
-- Lauf- und Aktionsreaktionen auf ihr Spieltempo abstimmen.
-- Porträts ersetzen.
-
-### 4. Produktive Integration
-
-- AssetLoader und AnimationSetup auf die finalen Dateien umstellen.
-- Player-Visualisierung so erweitern, dass Aktionen die Bewegung nicht blockieren.
-- Skalierung, Ursprung, Kollisionskörper, HP-Leiste, Schatten, Tiefensortierung und horizontales Spiegeln pro Charakter prüfen.
-- Alte Dateien erst nach erfolgreicher Migration entfernen oder als Rückfallversion behalten.
-
-### 5. Vollständige QA
-
-- Alle drei Charaktere in Auswahl, Arena, Koop und unterschiedlichen Hintergründen prüfen.
-- Stand, vier Bewegungsrichtungen, diagonale Bewegung, Schuss während Bewegung, Treffer, Tod/Second Wind und Klassenwechsel prüfen.
-- 64-Pixel-Lesbarkeit, Flimmern, Konturdrift, Zubehörseite und Bodenkontakt frameweise kontrollieren.
-- Performance und Speicherverbrauch auf Desktop und schmalem Viewport messen.
-- Standard-Build, Produktions-Gates und Browser-Smoke-Tests ausführen.
-
-## Empfohlene Reihenfolge
-
-1. Gemeinsames Silhouettenblatt der drei Charaktere in Südansicht erstellen.
-2. Ace-Turnaround Süd/West/Nord abschließen und in echter Spielgröße abnehmen.
-3. Ace vollständig integrieren und den technischen Weg im normalen Spiel absichern.
-4. Artillery und Storm mit derselben Pipeline umsetzen.
-5. Porträts, Gesamtvergleich und vollständige QA abschließen.
-
-Die Chat-Turnaround-Vorlage darf nicht ungeprüft übernommen werden: In der dortigen Acht-Richtungs-Fassung zeigen NW und NE dieselbe Rückseite. Für das Spiel genügen drei sauber gezeichnete Richtungsgrundlagen; das ist effizienter und passt zur bestehenden Spiegelungslogik.
+Die vorhandenen Porträts bleiben vorerst bestehen. Sie sind bereits hochauflösend, passen zu den Klassenfarben und beeinflussen die Bewegungsqualität nicht. Ein späterer Porträtabgleich ist eine eigenständige kosmetische Runde und blockiert die fertige Spielfigurenmigration nicht.

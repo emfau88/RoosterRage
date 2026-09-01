@@ -1,0 +1,21 @@
+button[aria-pressed="true"] {
+  background: var(--preview-accent, #d4b354);
+  border-color: var(--preview-accent, #e3c568);
+  color: #101716;
+}
+
+.stage-chrome span:last-child {
+  color: var(--preview-accent, #b99f55);
+}
+
+@media (max-width: 820px) {
+  .characters,
+  .modes {
+    flex: 1;
+  }
+
+  .characters button,
+  .modes button {
+    flex: 1;
+  }
+}

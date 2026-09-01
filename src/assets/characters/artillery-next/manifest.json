@@ -1,0 +1,38 @@
+{
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "rows": {
+    "south": 0,
+    "west": 1,
+    "east": 2,
+    "north": 3
+  },
+  "clips": {
+    "walk": {
+      "file": "rooster-artillery-next-walk.webp",
+      "columns": 4,
+      "sampledFrames": [
+        0,
+        6,
+        12,
+        18
+      ],
+      "durationMs": 650
+    },
+    "idle": {
+      "file": "rooster-artillery-next-idle.webp",
+      "columns": 8,
+      "sampledFrames": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21
+      ],
+      "durationMs": 3200
+    }
+  }
+}

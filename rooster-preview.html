@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Rooster Rage · Bummbert & Blitzkamm Test</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">ROOSTER RAGE / ISOLIERTER CHARAKTERTEST</p>
+          <h1>Bummbert & Blitzkamm · Lauf und Idle</h1>
+          <p class="intro">Neue Vier-Richtungs-Figuren auf schwarzem Hintergrund, unabhängig vom Spiel testbar.</p>
+        </div>
+        <div class="legend"><span><i class="walk-dot"></i>Laufen</span><span><i class="idle-dot"></i>Idle</span></div>
+      </header>
+
+      <section class="controls" aria-label="Vorschau steuern">
+        <div class="characters" role="group" aria-label="Charakter" style="display:flex;gap:3px">
+          <button data-character="artillery" aria-pressed="true">Bummbert</button>
+          <button data-character="storm">Blitzkamm</button>
+        </div>
+        <div class="modes" role="group" aria-label="Animation" style="display:flex;gap:3px">
+          <button id="idle-mode" aria-pressed="true">Idle ansehen</button>
+          <button id="run-toggle" aria-pressed="false">Laufen ansehen</button>
+        </div>
+        <div class="directions" role="group" aria-label="Blickrichtung">
+          <button data-direction="north">↑ Nord</button>
+          <button data-direction="west">← West</button>
+          <button data-direction="south" aria-pressed="true">↓ Süd</button>
+          <button data-direction="east">Ost →</button>
+        </div>
+        <button id="tour-toggle" aria-pressed="false">Vier Richtungen automatisch</button>
+        <label>Darstellung
+          <select id="scale">
+            <option value="game">Spielgröße</option>
+            <option value="0.65">Kompakt · 65 %</option>
+            <option value="1" selected>Prüfgröße · 100 %</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="stage-wrap">
+        <canvas id="stage" width="960" height="540" tabindex="0" role="application"
+          aria-label="Bummbert oder Blitzkamm auf schwarzem Hintergrund. Mit WASD oder Pfeiltasten bewegen."></canvas>
+        <div class="stage-chrome" aria-hidden="true"><span id="character-label">BUMMBERT / NEXT</span><span id="mode-label">SÜD · IDLE</span></div>
+      </section>
+
+      <div class="status-row">
+        <p id="load-status" role="status">Grafiken werden geladen …</p>
+        <p><kbd>WASD</kbd> / <kbd>↑←↓→</kbd> bewegen · Loslassen zeigt Idle · <kbd>R</kbd> wechselt Idle/Laufen · <kbd>1–4</kbd> Richtung · <kbd>Q</kbd> Figur</p>
+      </div>
+      <footer>Eigenständige Abnahmevorschau. Beide Figuren besitzen vollständige Walk- und Idle-Zyklen. Die bisherigen Spielsprites bleiben als Legacy-Rollback erhalten.</footer>
+    </main>
+    <script type="module" src="/src/rooster-preview/main.js"></script>
+  </body>
+</html>

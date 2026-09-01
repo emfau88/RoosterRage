@@ -1,0 +1,20 @@
+Create a production character-parts sheet for Bummbert, the heavy artillery rooster from the first two reference images, rendered at the same polished game-art level and clean-outline language as the upgraded Ace turnaround in the third reference image.
+
+Canvas and layout requirements:
+- Exactly 1536 x 1024 pixels, landscape.
+- Solid pure chroma green background (#00FF00), completely flat and uniform. No shadows, floor, labels, dividers, scenery, particles, glow, text, or border.
+- Arrange exactly six separate components in a clean 3-column by 2-row layout. Keep every component fully inside its own cell with generous green clearance and absolutely no overlap or touching between cells.
+- Top-left: complete WEST-facing main body from comb to lower armored torso, with no wings/arms, no legs/feet, and no tail. Strict left-facing side view, centered, vertical, neutral pose.
+- Top-middle: complete near-side hanging wing/arm with bronze bracer and clenched feather hand, detached and isolated.
+- Top-right: complete far-side hanging wing/arm with bronze bracer and clenched feather hand, detached and isolated.
+- Bottom-left: complete near-side leg from upper orange feathered thigh through armored shin to the full yellow-orange rooster foot and toes, detached as one seamless piece and pointing left.
+- Bottom-middle: complete far-side leg from upper orange feathered thigh through armored shin to the full yellow-orange rooster foot and toes, detached as one seamless piece and pointing left.
+- Bottom-right: compact layered dark-brown and orange rooster tail, detached and isolated, designed to attach at the low rump/butt area rather than the middle of the back.
+
+Character design requirements:
+- Preserve Bummbert's identity: cream-white face, red comb and wattles, orange body plumage, dark brown and burnished bronze siege armor, layered shoulder plate language, rivets, leather belt, large circular buckle, armored bracers, stern eyebrow and heavy compact build.
+- He is deliberately stocky, heavy, and powerful, but the assembled silhouette must remain clearly taller than it is wide. Avoid a spherical body, enormous shoulder width, or tiny legs.
+- Use a readable heroic game sprite silhouette: visible waist, arm hanging outside and in front of the thigh, and long enough complete legs to connect naturally under the torso.
+- Thick, consistent near-black outer contour around every component and crisp dark internal linework. Smooth anti-aliased edges, rich copper/orange materials, controlled highlights, and small professional details that remain readable when reduced to roughly 60 pixels tall.
+- Match the upgraded Ace's illustrative finish and outline clarity, while keeping Bummbert visibly heavier and more armored.
+- Strict orthographic WEST/left profile only. No three-quarter angle, no perspective tilt, no cropped parts, no duplicate characters, and no assembled full character.

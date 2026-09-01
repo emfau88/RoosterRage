@@ -1,0 +1,19 @@
+Create a correction asset sheet containing exactly two seamless complete NORTH-facing legs for Bummbert, the heavy armored rooster shown in the first reference image. Use the anatomy of the NORTH (BACK) stance in the second reference image: the viewer sees the backs of the legs and heels while the toes point away toward the top/north of the image and are mostly hidden by the feet. The third reference shows the required clean outlined production style.
+
+Canvas and layout:
+- Exactly 1536 x 1024 pixels, landscape.
+- Solid pure chroma green background (#00FF00), perfectly flat. No shadow, floor, text, dividers, scenery, glow, particles, or border.
+- Exactly two detached components with wide separation: complete LEFT leg centered in the left half and complete RIGHT leg centered in the right half.
+- Each component must be a single unbroken asset from the broad upper orange feathered thigh, through the bronze armored shin, ankle and heel, to the entire rear view of the foot.
+- Both components must be fully visible with generous green clearance and no cropping.
+
+Critical NORTH foot anatomy:
+- Both legs are viewed perfectly from behind as Bummbert walks away from the viewer toward the top of the canvas.
+- Show a compact rounded heel/back-foot silhouette at the bottom. The long front toes point away toward the top/north and therefore sit behind/above the ankle rather than fanning down toward the viewer.
+- Do not show three long toes, claws, or toenails pointing toward the bottom/viewer. Do not create front-facing feet.
+- Keep the feet planted and readable, similar to the NORTH/BACK rooster foot orientation in the turnaround reference, but preserve Bummbert's orange-gold colors and bronze shin armor.
+
+Style and consistency:
+- Match Bummbert's orange plumage, burnished dark bronze armor, gold trim and heavy stocky construction from the first reference.
+- Thick consistent near-black outer contour, crisp internal linework, smooth anti-aliased edges, controlled warm highlights, and detail readable at roughly 60 pixels character height.
+- The left and right legs must match in length, scale, perspective and armor design. No body, wings, tail, head, loose objects, duplicate legs, or assembled character.
