@@ -376,18 +376,20 @@ async function testRoosterClasses(browser) {
   assert(new Set([ace.visual.texture, artillery.visual.texture, storm.visual.texture]).size === 3,
     'Rooster classes must not share a player texture.', { ace: ace.visual, artillery: artillery.visual, storm: storm.visual });
   [ace, artillery, storm].forEach((result) => {
-    const expectedTextureWidth = result.visual.texture.endsWith('-idle') ? 2048 : 1024;
-    assert(result.visual.textureSize.width === expectedTextureWidth && result.visual.textureSize.height === 1024,
+    const walkFrames = result.directions.west.textureSize.width / 256;
+    assert(Number.isInteger(walkFrames) && [4, 8].includes(walkFrames)
+      && result.visual.textureSize.width % 256 === 0
+      && result.visual.textureSize.height === 1024,
       `${result.roosterId} sprite sheet has the wrong production dimensions.`, result.visual);
     assert(result.visual.frameSize.width === 256 && result.visual.frameSize.height === 256
-      && result.visual.frameTotal >= 16,
-    `${result.roosterId} sprite sheet does not expose the expected 4x4 frame grid.`, result.visual);
+      && result.visual.frameTotal >= walkFrames * 4,
+    `${result.roosterId} sprite sheet does not expose the expected four-direction frame grid.`, result.visual);
     const authoredEast = result.roosterId === 'storm';
     assert(result.directions.west.flipX === authoredEast
       && result.directions.east.flipX === !authoredEast,
       `${result.roosterId} horizontal directions are not true mirrored counterparts.`, result.directions);
-    assert(result.directions.west.frame >= 4 && result.directions.west.frame <= 7
-      && result.directions.east.frame >= 4 && result.directions.east.frame <= 7,
+    assert(result.directions.west.frame >= walkFrames && result.directions.west.frame < walkFrames * 2
+      && result.directions.east.frame >= walkFrames && result.directions.east.frame < walkFrames * 2,
     `${result.roosterId} did not stay on the clean canonical side-animation row.`, result.directions);
     assert(result.directions.west.displayScale.x === result.visual.scale
       && result.directions.west.displayScale.y === result.visual.scale
@@ -404,12 +406,12 @@ async function testRoosterClasses(browser) {
       });
     ['southWest', 'southEast', 'south'].forEach((direction) => {
       const state = result.directions[direction];
-      assert(state.frame >= 0 && state.frame <= 3 && state.flipX === false,
+      assert(state.frame >= 0 && state.frame < walkFrames && state.flipX === false,
       `${result.roosterId} ${direction} movement does not use the true south row.`, state);
     });
     ['northWest', 'northEast', 'north'].forEach((direction) => {
       const state = result.directions[direction];
-      assert(state.frame >= 12 && state.frame <= 15 && state.flipX === false,
+      assert(state.frame >= walkFrames * 3 && state.frame < walkFrames * 4 && state.flipX === false,
       `${result.roosterId} ${direction} movement does not use the true north row.`, state);
     });
   });

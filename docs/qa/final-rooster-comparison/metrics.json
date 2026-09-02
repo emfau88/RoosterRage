@@ -1,0 +1,539 @@
+{
+  "ace": {
+    "legacy": {
+      "south": {
+        "sourceWidthRange": [
+          172,
+          180
+        ],
+        "sourceHeightRange": [
+          213,
+          215
+        ],
+        "gameVisibleWidthRange": [
+          43.0,
+          45.0
+        ],
+        "gameVisibleHeightRange": [
+          53.2,
+          53.8
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          177,
+          182
+        ],
+        "sourceHeightRange": [
+          213,
+          215
+        ],
+        "gameVisibleWidthRange": [
+          44.2,
+          45.5
+        ],
+        "gameVisibleHeightRange": [
+          53.2,
+          53.8
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          165,
+          168
+        ],
+        "sourceHeightRange": [
+          216,
+          218
+        ],
+        "gameVisibleWidthRange": [
+          41.2,
+          42.0
+        ],
+        "gameVisibleHeightRange": [
+          54.0,
+          54.5
+        ],
+        "walkFrames": 4
+      }
+    },
+    "next": {
+      "south": {
+        "sourceWidthRange": [
+          144,
+          145
+        ],
+        "sourceHeightRange": [
+          213,
+          224
+        ],
+        "gameVisibleWidthRange": [
+          36.0,
+          36.2
+        ],
+        "gameVisibleHeightRange": [
+          53.2,
+          56.0
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          151,
+          152
+        ],
+        "sourceHeightRange": [
+          208,
+          220
+        ],
+        "gameVisibleWidthRange": [
+          37.8,
+          38.0
+        ],
+        "gameVisibleHeightRange": [
+          52.0,
+          55.0
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          145,
+          145
+        ],
+        "sourceHeightRange": [
+          217,
+          224
+        ],
+        "gameVisibleWidthRange": [
+          36.2,
+          36.2
+        ],
+        "gameVisibleHeightRange": [
+          54.2,
+          56.0
+        ],
+        "walkFrames": 4
+      }
+    },
+    "gameplay": {
+      "south": {
+        "sourceWidthRange": [
+          155,
+          174
+        ],
+        "sourceHeightRange": [
+          221,
+          221
+        ],
+        "gameVisibleWidthRange": [
+          38.8,
+          43.5
+        ],
+        "gameVisibleHeightRange": [
+          55.2,
+          55.2
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          168,
+          168
+        ],
+        "sourceHeightRange": [
+          210,
+          221
+        ],
+        "gameVisibleWidthRange": [
+          42.0,
+          42.0
+        ],
+        "gameVisibleHeightRange": [
+          52.5,
+          55.2
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          165,
+          181
+        ],
+        "sourceHeightRange": [
+          224,
+          225
+        ],
+        "gameVisibleWidthRange": [
+          41.2,
+          45.2
+        ],
+        "gameVisibleHeightRange": [
+          56.0,
+          56.2
+        ],
+        "walkFrames": 4
+      }
+    }
+  },
+  "artillery": {
+    "legacy": {
+      "south": {
+        "sourceWidthRange": [
+          161,
+          165
+        ],
+        "sourceHeightRange": [
+          192,
+          194
+        ],
+        "gameVisibleWidthRange": [
+          44.3,
+          45.4
+        ],
+        "gameVisibleHeightRange": [
+          52.8,
+          53.4
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          164,
+          170
+        ],
+        "sourceHeightRange": [
+          179,
+          180
+        ],
+        "gameVisibleWidthRange": [
+          45.1,
+          46.8
+        ],
+        "gameVisibleHeightRange": [
+          49.2,
+          49.5
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          167,
+          171
+        ],
+        "sourceHeightRange": [
+          165,
+          166
+        ],
+        "gameVisibleWidthRange": [
+          45.9,
+          47.0
+        ],
+        "gameVisibleHeightRange": [
+          45.4,
+          45.7
+        ],
+        "walkFrames": 4
+      }
+    },
+    "next": {
+      "south": {
+        "sourceWidthRange": [
+          140,
+          140
+        ],
+        "sourceHeightRange": [
+          203,
+          212
+        ],
+        "gameVisibleWidthRange": [
+          38.5,
+          38.5
+        ],
+        "gameVisibleHeightRange": [
+          55.8,
+          58.3
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          147,
+          149
+        ],
+        "sourceHeightRange": [
+          206,
+          212
+        ],
+        "gameVisibleWidthRange": [
+          40.4,
+          41.0
+        ],
+        "gameVisibleHeightRange": [
+          56.7,
+          58.3
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          126,
+          128
+        ],
+        "sourceHeightRange": [
+          199,
+          207
+        ],
+        "gameVisibleWidthRange": [
+          34.7,
+          35.2
+        ],
+        "gameVisibleHeightRange": [
+          54.7,
+          56.9
+        ],
+        "walkFrames": 4
+      }
+    },
+    "gameplay": {
+      "south": {
+        "sourceWidthRange": [
+          141,
+          147
+        ],
+        "sourceHeightRange": [
+          189,
+          195
+        ],
+        "gameVisibleWidthRange": [
+          38.8,
+          40.4
+        ],
+        "gameVisibleHeightRange": [
+          52.0,
+          53.6
+        ],
+        "walkFrames": 8
+      },
+      "east": {
+        "sourceWidthRange": [
+          151,
+          160
+        ],
+        "sourceHeightRange": [
+          202,
+          209
+        ],
+        "gameVisibleWidthRange": [
+          41.5,
+          44.0
+        ],
+        "gameVisibleHeightRange": [
+          55.6,
+          57.5
+        ],
+        "walkFrames": 8
+      },
+      "north": {
+        "sourceWidthRange": [
+          145,
+          146
+        ],
+        "sourceHeightRange": [
+          198,
+          204
+        ],
+        "gameVisibleWidthRange": [
+          39.9,
+          40.2
+        ],
+        "gameVisibleHeightRange": [
+          54.5,
+          56.1
+        ],
+        "walkFrames": 8
+      }
+    }
+  },
+  "storm": {
+    "legacy": {
+      "south": {
+        "sourceWidthRange": [
+          152,
+          154
+        ],
+        "sourceHeightRange": [
+          213,
+          215
+        ],
+        "gameVisibleWidthRange": [
+          35.7,
+          36.2
+        ],
+        "gameVisibleHeightRange": [
+          50.1,
+          50.5
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          164,
+          170
+        ],
+        "sourceHeightRange": [
+          189,
+          192
+        ],
+        "gameVisibleWidthRange": [
+          38.5,
+          39.9
+        ],
+        "gameVisibleHeightRange": [
+          44.4,
+          45.1
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          139,
+          139
+        ],
+        "sourceHeightRange": [
+          206,
+          207
+        ],
+        "gameVisibleWidthRange": [
+          32.7,
+          32.7
+        ],
+        "gameVisibleHeightRange": [
+          48.4,
+          48.6
+        ],
+        "walkFrames": 4
+      }
+    },
+    "next": {
+      "south": {
+        "sourceWidthRange": [
+          100,
+          103
+        ],
+        "sourceHeightRange": [
+          206,
+          217
+        ],
+        "gameVisibleWidthRange": [
+          23.5,
+          24.2
+        ],
+        "gameVisibleHeightRange": [
+          48.4,
+          51.0
+        ],
+        "walkFrames": 4
+      },
+      "east": {
+        "sourceWidthRange": [
+          114,
+          114
+        ],
+        "sourceHeightRange": [
+          201,
+          207
+        ],
+        "gameVisibleWidthRange": [
+          26.8,
+          26.8
+        ],
+        "gameVisibleHeightRange": [
+          47.2,
+          48.6
+        ],
+        "walkFrames": 4
+      },
+      "north": {
+        "sourceWidthRange": [
+          97,
+          98
+        ],
+        "sourceHeightRange": [
+          203,
+          211
+        ],
+        "gameVisibleWidthRange": [
+          22.8,
+          23.0
+        ],
+        "gameVisibleHeightRange": [
+          47.7,
+          49.6
+        ],
+        "walkFrames": 4
+      }
+    },
+    "gameplay": {
+      "south": {
+        "sourceWidthRange": [
+          96,
+          110
+        ],
+        "sourceHeightRange": [
+          201,
+          207
+        ],
+        "gameVisibleWidthRange": [
+          22.6,
+          25.8
+        ],
+        "gameVisibleHeightRange": [
+          47.2,
+          48.6
+        ],
+        "walkFrames": 8
+      },
+      "east": {
+        "sourceWidthRange": [
+          121,
+          122
+        ],
+        "sourceHeightRange": [
+          191,
+          199
+        ],
+        "gameVisibleWidthRange": [
+          28.4,
+          28.7
+        ],
+        "gameVisibleHeightRange": [
+          44.9,
+          46.8
+        ],
+        "walkFrames": 8
+      },
+      "north": {
+        "sourceWidthRange": [
+          90,
+          108
+        ],
+        "sourceHeightRange": [
+          202,
+          208
+        ],
+        "gameVisibleWidthRange": [
+          21.1,
+          25.4
+        ],
+        "gameVisibleHeightRange": [
+          47.5,
+          48.9
+        ],
+        "walkFrames": 8
+      }
+    }
+  }
+}

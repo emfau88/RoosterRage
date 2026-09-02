@@ -1,16 +1,34 @@
 import roosterAceLegacyWalkSheetUrl from '../../assets/characters/rooster-ace-walk-v2.webp';
 import roosterAceNextWalkSheetUrl from '../../assets/characters/ace-next/rooster-ace-next-walk.webp';
 import roosterAceNextIdleSheetUrl from '../../assets/characters/ace-next/rooster-ace-next-idle.webp';
+import roosterAceGameplayWalkSheetUrl from '../../assets/characters/ace-gameplay/rooster-ace-gameplay-walk.webp';
+import roosterAceGameplayIdleSheetUrl from '../../assets/characters/ace-gameplay/rooster-ace-gameplay-idle.webp';
+import roosterAceFinalWalkSheetUrl from '../../assets/characters/ace-final/rooster-ace-final-walk.webp';
+import roosterAceFinalIdleSheetUrl from '../../assets/characters/ace-final/rooster-ace-final-idle.webp';
 import roosterArtilleryLegacyWalkSheetUrl from '../../assets/characters/rooster-artillery-walk-v3.webp';
 import roosterArtilleryNextWalkSheetUrl from '../../assets/characters/artillery-next/rooster-artillery-next-walk.webp';
 import roosterArtilleryNextIdleSheetUrl from '../../assets/characters/artillery-next/rooster-artillery-next-idle.webp';
+import roosterArtilleryGameplayWalkSheetUrl from '../../assets/characters/artillery-gameplay/rooster-artillery-gameplay-walk.webp';
+import roosterArtilleryGameplayIdleSheetUrl from '../../assets/characters/artillery-gameplay/rooster-artillery-gameplay-idle.webp';
+import roosterArtilleryFinalWalkSheetUrl from '../../assets/characters/artillery-final/rooster-artillery-final-walk.webp';
+import roosterArtilleryFinalIdleSheetUrl from '../../assets/characters/artillery-final/rooster-artillery-final-idle.webp';
 import roosterStormLegacyWalkSheetUrl from '../../assets/characters/rooster-storm-walk-v3.webp';
 import roosterStormNextWalkSheetUrl from '../../assets/characters/storm-next/rooster-storm-next-walk.webp';
 import roosterStormNextIdleSheetUrl from '../../assets/characters/storm-next/rooster-storm-next-idle.webp';
+import roosterStormGameplayWalkSheetUrl from '../../assets/characters/storm-gameplay/rooster-storm-gameplay-walk.webp';
+import roosterStormGameplayIdleSheetUrl from '../../assets/characters/storm-gameplay/rooster-storm-gameplay-idle.webp';
+import roosterStormFinalWalkSheetUrl from '../../assets/characters/storm-final/rooster-storm-final-walk.webp';
+import roosterStormFinalIdleSheetUrl from '../../assets/characters/storm-final/rooster-storm-final-idle.webp';
 import {
   USE_NEXT_ACE_VISUAL,
+  USE_GAMEPLAY_ACE_VISUAL,
+  USE_FINAL_ACE_VISUAL,
   USE_NEXT_ARTILLERY_VISUAL,
-  USE_NEXT_STORM_VISUAL
+  USE_GAMEPLAY_ARTILLERY_VISUAL,
+  USE_FINAL_ARTILLERY_VISUAL,
+  USE_NEXT_STORM_VISUAL,
+  USE_GAMEPLAY_STORM_VISUAL,
+  USE_FINAL_STORM_VISUAL
 } from '../../config/aceVisual.js';
 import enemySlimeUrl from '../../assets/enemy-slime.webp';
 import enemySlimeWobbleUrl from '../../assets/enemies/animations/enemy-slime-wobble.webp';
@@ -164,15 +182,45 @@ export function preloadGameAssets(scene) {
     }
   });
 
-  scene.load.spritesheet('rooster-ace-walk', USE_NEXT_ACE_VISUAL ? roosterAceNextWalkSheetUrl : roosterAceLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  const aceWalkSheetUrl = USE_FINAL_ACE_VISUAL
+    ? roosterAceFinalWalkSheetUrl
+    : USE_GAMEPLAY_ACE_VISUAL
+    ? roosterAceGameplayWalkSheetUrl
+    : USE_NEXT_ACE_VISUAL ? roosterAceNextWalkSheetUrl : roosterAceLegacyWalkSheetUrl;
+  const aceIdleSheetUrl = USE_FINAL_ACE_VISUAL
+    ? roosterAceFinalIdleSheetUrl
+    : USE_GAMEPLAY_ACE_VISUAL
+    ? roosterAceGameplayIdleSheetUrl
+    : roosterAceNextIdleSheetUrl;
+  scene.load.spritesheet('rooster-ace-walk', aceWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('rooster-ace-walk-legacy', roosterAceLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('rooster-ace-idle', roosterAceNextIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('rooster-artillery-walk', USE_NEXT_ARTILLERY_VISUAL ? roosterArtilleryNextWalkSheetUrl : roosterArtilleryLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('rooster-ace-idle', aceIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  const artilleryWalkSheetUrl = USE_FINAL_ARTILLERY_VISUAL
+    ? roosterArtilleryFinalWalkSheetUrl
+    : USE_GAMEPLAY_ARTILLERY_VISUAL
+    ? roosterArtilleryGameplayWalkSheetUrl
+    : USE_NEXT_ARTILLERY_VISUAL ? roosterArtilleryNextWalkSheetUrl : roosterArtilleryLegacyWalkSheetUrl;
+  const artilleryIdleSheetUrl = USE_FINAL_ARTILLERY_VISUAL
+    ? roosterArtilleryFinalIdleSheetUrl
+    : USE_GAMEPLAY_ARTILLERY_VISUAL
+    ? roosterArtilleryGameplayIdleSheetUrl
+    : roosterArtilleryNextIdleSheetUrl;
+  scene.load.spritesheet('rooster-artillery-walk', artilleryWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('rooster-artillery-walk-legacy', roosterArtilleryLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('rooster-artillery-idle', roosterArtilleryNextIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('rooster-storm-walk', USE_NEXT_STORM_VISUAL ? roosterStormNextWalkSheetUrl : roosterStormLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('rooster-artillery-idle', artilleryIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  const stormWalkSheetUrl = USE_FINAL_STORM_VISUAL
+    ? roosterStormFinalWalkSheetUrl
+    : USE_GAMEPLAY_STORM_VISUAL
+    ? roosterStormGameplayWalkSheetUrl
+    : USE_NEXT_STORM_VISUAL ? roosterStormNextWalkSheetUrl : roosterStormLegacyWalkSheetUrl;
+  const stormIdleSheetUrl = USE_FINAL_STORM_VISUAL
+    ? roosterStormFinalIdleSheetUrl
+    : USE_GAMEPLAY_STORM_VISUAL
+    ? roosterStormGameplayIdleSheetUrl
+    : roosterStormNextIdleSheetUrl;
+  scene.load.spritesheet('rooster-storm-walk', stormWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('rooster-storm-walk-legacy', roosterStormLegacyWalkSheetUrl, { frameWidth: 256, frameHeight: 256 });
-  scene.load.spritesheet('rooster-storm-idle', roosterStormNextIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('rooster-storm-idle', stormIdleSheetUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.image('enemy-slime', enemySlimeUrl);
   scene.load.spritesheet('enemy-slime-wobble', enemySlimeWobbleUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-kornkrabbler-run', enemyKornkrabblerRunUrl, { frameWidth: 256, frameHeight: 256 });

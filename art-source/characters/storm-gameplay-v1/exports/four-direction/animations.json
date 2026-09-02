@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 8,
+  "westDerivedFrom": "east-mirrored",
+  "clips": {
+    "south-walk": {
+      "file": "storm-south-walk.webp",
+      "frameCount": 24,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1
+    },
+    "south-idle": {
+      "file": "storm-south-idle.webp",
+      "frameCount": 24,
+      "durationMs": 2400,
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    "west-walk": {
+      "file": "storm-west-walk.webp",
+      "frameCount": 24,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1
+    },
+    "west-idle": {
+      "file": "storm-west-idle.webp",
+      "frameCount": 24,
+      "durationMs": 2400,
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    "north-walk": {
+      "file": "storm-north-walk.webp",
+      "frameCount": 24,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1
+    },
+    "north-idle": {
+      "file": "storm-north-idle.webp",
+      "frameCount": 24,
+      "durationMs": 2400,
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    "east-walk": {
+      "file": "storm-east-walk.webp",
+      "frameCount": 24,
+      "durationMs": 480,
+      "frameRate": 50.0,
+      "repeat": -1
+    },
+    "east-idle": {
+      "file": "storm-east-idle.webp",
+      "frameCount": 24,
+      "durationMs": 2400,
+      "frameRate": 10.0,
+      "repeat": -1
+    }
+  }
+}

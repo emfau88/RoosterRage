@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoosterRage – Korrekturentwürfe</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #050505; color: #f4ead8; }
+      main { width: min(1500px, 96vw); margin: 0 auto; padding: 30px 0 64px; }
+      header { display: flex; gap: 20px; align-items: end; justify-content: space-between; margin-bottom: 28px; }
+      h1 { margin: 0; font-size: clamp(26px, 4vw, 48px); letter-spacing: -.035em; }
+      p { color: #bdb4a4; line-height: 1.5; margin: 8px 0 0; }
+      .status { color: #f6b94b; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; }
+      section { margin-top: 42px; }
+      h2 { margin: 0 0 14px; font-size: 26px; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+      article { min-width: 0; border: 1px solid #2e2921; border-radius: 14px; overflow: hidden; background: #0a0908; }
+      article.proposal { border-color: #9f6d22; box-shadow: inset 0 0 0 1px #5c3e18; }
+      .label { display: flex; justify-content: space-between; gap: 8px; padding: 12px 14px; border-bottom: 1px solid #25211c; font-weight: 700; }
+      .label span { color: #a69b89; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+      .stage { min-height: 390px; display: grid; place-items: center; padding: 14px; background: #000; }
+      .stage img { display: block; max-width: 100%; max-height: 440px; object-fit: contain; }
+      .proposal .stage img { max-height: 500px; }
+      .directions { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 4px; }
+      .directions img { width: 100%; }
+      .note { padding: 12px 14px 15px; min-height: 68px; color: #bdb4a4; font-size: 13px; line-height: 1.45; }
+      @media (max-width: 950px) { .grid { grid-template-columns: 1fr; } .stage { min-height: 300px; } header { align-items: start; flex-direction: column; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <div class="status">Statische Freigabestufe · noch nicht im Spiel</div>
+          <h1>Proportionen und Anatomie</h1>
+          <p>Original, derzeitige Next-Gen-Fassung und der korrigierte Masterentwurf im direkten Vergleich.</p>
+        </div>
+        <p>Schwarzer Hintergrund · identische neutrale Pose</p>
+      </header>
+
+      <section>
+        <h2>Bummbert</h2>
+        <div class="grid">
+          <article>
+            <div class="label">Original <span>v3</span></div>
+            <div class="stage"><img src="/docs/qa/rooster-correction-proposals/bummbert-original-turnaround.png" alt="Bummbert Original" /></div>
+            <div class="note">Kompakte, schwere Grundsilhouette mit kurzen Beinen.</div>
+          </article>
+          <article>
+            <div class="label">Aktuell <span>Next-Gen</span></div>
+            <div class="stage"><img src="/docs/qa/artillery-four-direction/artillery-four-directions-neutral.png" alt="Bummbert aktuell" /></div>
+            <div class="note">Höherer Detailgrad, aber zu lange Beine und getrennte Nord-Layer.</div>
+          </article>
+          <article class="proposal">
+            <div class="label">Korrekturentwurf <span>v1</span></div>
+            <div class="stage directions">
+              <img src="/docs/qa/rooster-correction-proposals/bummbert-south-concept-v1.png" alt="Bummbert Süd" />
+              <img src="/docs/qa/rooster-correction-proposals/bummbert-west-concept-v1.png" alt="Bummbert West" />
+              <img src="/docs/qa/rooster-correction-proposals/bummbert-north-concept-v1.png" alt="Bummbert Nord" />
+            </div>
+            <div class="note">Kürzere Beine, breiterer Rumpf, gleichgerichtete Seitenfüße und ein zusammenhängender Rückenaufbau.</div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Blitzkamm</h2>
+        <div class="grid">
+          <article>
+            <div class="label">Original <span>v3</span></div>
+            <div class="stage"><img src="/docs/qa/rooster-correction-proposals/blitzkamm-original-turnaround.png" alt="Blitzkamm Original" /></div>
+            <div class="note">Kompakte, agile Grundform.</div>
+          </article>
+          <article>
+            <div class="label">Aktuell <span>Next-Gen</span></div>
+            <div class="stage"><img src="/docs/qa/storm-four-direction/storm-four-directions-neutral.png" alt="Blitzkamm aktuell" /></div>
+            <div class="note">Frontfüße stehen nach innen; Seitenfüße sind nicht einheitlich ausgerichtet.</div>
+          </article>
+          <article class="proposal">
+            <div class="label">Korrekturentwurf <span>v1</span></div>
+            <div class="stage directions">
+              <img src="/docs/qa/rooster-correction-proposals/blitzkamm-south-concept-v1.png" alt="Blitzkamm Süd" />
+              <img src="/docs/qa/rooster-correction-proposals/blitzkamm-east-concept-v1.png" alt="Blitzkamm Ost" />
+              <img src="/docs/qa/rooster-correction-proposals/blitzkamm-north-concept-v1.png" alt="Blitzkamm Nord" />
+            </div>
+            <div class="note">Gerade, stabile Frontstellung und zwei eindeutig nach Osten gerichtete Seitenfüße.</div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

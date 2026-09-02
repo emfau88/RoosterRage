@@ -8,14 +8,22 @@ button[aria-pressed="true"] {
   color: var(--preview-accent, #b99f55);
 }
 
+.preview-links { display: flex; flex-wrap: wrap; gap: 7px; justify-content: flex-end; }
+.preview-links a { border: 1px solid #4a473c; border-radius: 7px; padding: 10px 12px; background: #191a16; color: #f0eadf; font-size: 12px; text-decoration: none; }
+.preview-links a:first-child { border-color: #d49c31; background: #bf8121; color: #130f08; font-weight: 800; }
+
 @media (max-width: 820px) {
   .characters,
-  .modes {
+  .modes,
+  .variants {
     flex: 1;
   }
 
   .characters button,
-  .modes button {
+  .modes button,
+  .variants button {
     flex: 1;
   }
+
+  .preview-links { justify-content: start; }
 }

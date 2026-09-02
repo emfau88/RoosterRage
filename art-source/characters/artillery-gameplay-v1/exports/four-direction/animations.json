@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 8,
+  "eastDerivedFrom": "west-mirrored",
+  "clips": {
+    "south-walk": {
+      "file": "artillery-south-walk.webp",
+      "frameCount": 24,
+      "durationMs": 650,
+      "frameRate": 36.92307692307692,
+      "repeat": -1
+    },
+    "south-idle": {
+      "file": "artillery-south-idle.webp",
+      "frameCount": 24,
+      "durationMs": 3200,
+      "frameRate": 7.5,
+      "repeat": -1
+    },
+    "west-walk": {
+      "file": "artillery-west-walk.webp",
+      "frameCount": 24,
+      "durationMs": 650,
+      "frameRate": 36.92307692307692,
+      "repeat": -1
+    },
+    "west-idle": {
+      "file": "artillery-west-idle.webp",
+      "frameCount": 24,
+      "durationMs": 3200,
+      "frameRate": 7.5,
+      "repeat": -1
+    },
+    "north-walk": {
+      "file": "artillery-north-walk.webp",
+      "frameCount": 24,
+      "durationMs": 650,
+      "frameRate": 36.92307692307692,
+      "repeat": -1
+    },
+    "north-idle": {
+      "file": "artillery-north-idle.webp",
+      "frameCount": 24,
+      "durationMs": 3200,
+      "frameRate": 7.5,
+      "repeat": -1
+    },
+    "east-walk": {
+      "file": "artillery-east-walk.webp",
+      "frameCount": 24,
+      "durationMs": 650,
+      "frameRate": 36.92307692307692,
+      "repeat": -1
+    },
+    "east-idle": {
+      "file": "artillery-east-idle.webp",
+      "frameCount": 24,
+      "durationMs": 3200,
+      "frameRate": 7.5,
+      "repeat": -1
+    }
+  }
+}

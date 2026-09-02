@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "rows": {
+    "south": 0,
+    "west": 1,
+    "east": 2,
+    "north": 3
+  },
+  "clips": {
+    "walk": {
+      "file": "rooster-ace-final-walk.webp",
+      "columns": 8,
+      "sampledFrames": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21
+      ],
+      "durationMs": 520
+    },
+    "idle": {
+      "file": "rooster-ace-final-idle.webp",
+      "columns": 8,
+      "sampledFrames": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21
+      ],
+      "durationMs": 2800
+    }
+  }
+}

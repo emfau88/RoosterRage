@@ -7,10 +7,18 @@ import {
   sampleArtilleryPose
 } from '../artillery-preview/artilleryFourDirectionPose.js';
 import {
+  ARTILLERY_GAMEPLAY_WALK_PERIOD_MS,
+  sampleArtilleryGameplayPose
+} from '../artillery-preview/artilleryGameplayPose.js';
+import {
   STORM_WALK_PERIOD_MS,
   drawStormPose,
   sampleStormPose
 } from '../storm-preview/stormFourDirectionPose.js';
+import {
+  STORM_GAMEPLAY_WALK_PERIOD_MS,
+  sampleStormGameplayPose
+} from '../storm-preview/stormGameplayPose.js';
 
 const canvas = document.getElementById('stage');
 const context = canvas.getContext('2d');
@@ -22,27 +30,47 @@ const runToggle = document.getElementById('run-toggle');
 const tourToggle = document.getElementById('tour-toggle');
 const scaleSelect = document.getElementById('scale');
 const characterButtons = [...document.querySelectorAll('[data-character]')];
+const variantButtons = [...document.querySelectorAll('[data-variant]')];
 const directionButtons = [...document.querySelectorAll('[data-direction]')];
 const directionNames = { south: 'SÜD', west: 'WEST', north: 'NORD', east: 'OST' };
 const directionVectors = { north: [0, -1], west: [-1, 0], south: [0, 1], east: [1, 0] };
 const keyDirections = { w: 'north', arrowup: 'north', a: 'west', arrowleft: 'west', s: 'south', arrowdown: 'south', d: 'east', arrowright: 'east' };
 const numberDirections = { '1': 'south', '2': 'west', '3': 'north', '4': 'east' };
 const characters = {
-  artillery: { label: 'BUMMBERT', accent: '#d59452', gameScale: 0.275, period: ARTILLERY_WALK_PERIOD_MS, sample: sampleArtilleryPose, draw: drawArtilleryPose },
-  storm: { label: 'BLITZKAMM', accent: '#5ad7ff', gameScale: 0.235, period: STORM_WALK_PERIOD_MS, sample: sampleStormPose, draw: drawStormPose }
+  artillery: {
+    label: 'BUMMBERT', accent: '#d59452', gameScale: 0.275, draw: drawArtilleryPose,
+    rigs: {
+      next: { period: ARTILLERY_WALK_PERIOD_MS, sample: sampleArtilleryPose },
+      gameplay: { period: ARTILLERY_GAMEPLAY_WALK_PERIOD_MS, sample: sampleArtilleryGameplayPose }
+    }
+  },
+  storm: {
+    label: 'BLITZKAMM', accent: '#5ad7ff', gameScale: 0.235, draw: drawStormPose,
+    rigs: {
+      next: { period: STORM_WALK_PERIOD_MS, sample: sampleStormPose },
+      gameplay: { period: STORM_GAMEPLAY_WALK_PERIOD_MS, sample: sampleStormGameplayPose }
+    }
+  }
 };
 const held = new Set();
-const state = { character: 'artillery', direction: 'south', phase: 0, movement: 0, runInPlace: false, tour: false, scale: 1, x: 480, y: 280, time: 0 };
+const state = { character: 'artillery', variant: 'gameplay', direction: 'south', phase: 0, movement: 0, runInPlace: false, tour: false, scale: 1, x: 480, y: 280, time: 0 };
 
 function activeCharacter() { return characters[state.character]; }
+function activeRig() { return activeCharacter().rigs[state.variant]; }
 function effectiveScale() { return scaleSelect.value === 'game' ? activeCharacter().gameScale : Number(scaleSelect.value); }
 function setCharacter(character) {
   state.character = character;
   state.phase = 0;
   const config = activeCharacter();
   document.documentElement.style.setProperty('--preview-accent', config.accent);
-  characterLabel.textContent = `${config.label} / NEXT`;
+  characterLabel.textContent = `${config.label} / ${state.variant.toUpperCase()}`;
   for (const button of characterButtons) button.setAttribute('aria-pressed', String(button.dataset.character === character));
+}
+function setVariant(variant) {
+  state.variant = variant;
+  state.phase = 0;
+  characterLabel.textContent = `${activeCharacter().label} / ${variant.toUpperCase()}`;
+  for (const button of variantButtons) button.setAttribute('aria-pressed', String(button.dataset.variant === variant));
 }
 function setDirection(direction) {
   state.direction = direction;
@@ -57,6 +85,7 @@ function setPlayback(mode) {
 }
 
 for (const button of characterButtons) button.addEventListener('click', () => { setCharacter(button.dataset.character); canvas.focus(); });
+for (const button of variantButtons) button.addEventListener('click', () => { setVariant(button.dataset.variant); canvas.focus(); });
 for (const button of directionButtons) button.addEventListener('click', () => { if (state.tour) setPlayback('idle'); setDirection(button.dataset.direction); canvas.focus(); });
 idleMode.addEventListener('click', () => { setPlayback('idle'); canvas.focus(); });
 runToggle.addEventListener('click', () => { setPlayback(state.runInPlace ? 'idle' : 'run'); canvas.focus(); });
@@ -121,7 +150,8 @@ loadRoosterParts().then((images) => {
     const targetMovement = Number(keyboardMoving || state.runInPlace || state.tour);
     state.movement += (targetMovement - state.movement) * (1 - Math.exp(-delta / 65));
     const config = activeCharacter();
-    if (targetMovement) state.phase = (state.phase + delta / config.period) % 1;
+    const rig = activeRig();
+    if (targetMovement) state.phase = (state.phase + delta / rig.period) % 1;
     const scale = effectiveScale();
     if (keyboardMoving) {
       const speed = state.character === 'storm' ? 0.23 : 0.17;
@@ -130,7 +160,7 @@ loadRoosterParts().then((images) => {
       state.x = Math.max(margin, Math.min(960 - margin, state.x));
       state.y = Math.max(margin, Math.min(540 - margin, state.y));
     }
-    const pose = config.sample({ direction: state.direction, phase: state.phase, movement: state.movement, timeMs: state.time });
+    const pose = rig.sample({ direction: state.direction, phase: state.phase, movement: state.movement, timeMs: state.time });
     context.save(); context.setTransform(canvas.width / 960, 0, 0, canvas.height / 540, 0, 0);
     context.fillStyle = '#000'; context.fillRect(0, 0, 960, 540);
     const glow = context.createRadialGradient(state.x, state.y + 70 * scale, 0, state.x, state.y + 70 * scale, 150 * scale);

@@ -1,0 +1,224 @@
+{
+  "legacy": {
+    "south": {
+      "sourceWidthRange": [
+        172,
+        180
+      ],
+      "sourceHeightRange": [
+        213,
+        215
+      ],
+      "mobileVisibleWidthRange": [
+        36.3,
+        38.0
+      ],
+      "mobileVisibleHeightRange": [
+        44.9,
+        45.4
+      ]
+    },
+    "west": {
+      "sourceWidthRange": [
+        177,
+        182
+      ],
+      "sourceHeightRange": [
+        213,
+        215
+      ],
+      "mobileVisibleWidthRange": [
+        37.3,
+        38.4
+      ],
+      "mobileVisibleHeightRange": [
+        44.9,
+        45.4
+      ]
+    },
+    "north": {
+      "sourceWidthRange": [
+        165,
+        168
+      ],
+      "sourceHeightRange": [
+        216,
+        218
+      ],
+      "mobileVisibleWidthRange": [
+        34.8,
+        35.4
+      ],
+      "mobileVisibleHeightRange": [
+        45.6,
+        46.0
+      ]
+    },
+    "east": {
+      "sourceWidthRange": [
+        177,
+        182
+      ],
+      "sourceHeightRange": [
+        213,
+        215
+      ],
+      "mobileVisibleWidthRange": [
+        37.3,
+        38.4
+      ],
+      "mobileVisibleHeightRange": [
+        44.9,
+        45.4
+      ]
+    }
+  },
+  "next": {
+    "south": {
+      "sourceWidthRange": [
+        144,
+        145
+      ],
+      "sourceHeightRange": [
+        213,
+        224
+      ],
+      "mobileVisibleWidthRange": [
+        30.4,
+        30.6
+      ],
+      "mobileVisibleHeightRange": [
+        44.9,
+        47.2
+      ]
+    },
+    "west": {
+      "sourceWidthRange": [
+        151,
+        152
+      ],
+      "sourceHeightRange": [
+        208,
+        220
+      ],
+      "mobileVisibleWidthRange": [
+        31.9,
+        32.1
+      ],
+      "mobileVisibleHeightRange": [
+        43.9,
+        46.4
+      ]
+    },
+    "north": {
+      "sourceWidthRange": [
+        145,
+        145
+      ],
+      "sourceHeightRange": [
+        217,
+        224
+      ],
+      "mobileVisibleWidthRange": [
+        30.6,
+        30.6
+      ],
+      "mobileVisibleHeightRange": [
+        45.8,
+        47.2
+      ]
+    },
+    "east": {
+      "sourceWidthRange": [
+        151,
+        152
+      ],
+      "sourceHeightRange": [
+        208,
+        220
+      ],
+      "mobileVisibleWidthRange": [
+        31.9,
+        32.1
+      ],
+      "mobileVisibleHeightRange": [
+        43.9,
+        46.4
+      ]
+    }
+  },
+  "gameplay": {
+    "south": {
+      "sourceWidthRange": [
+        155,
+        174
+      ],
+      "sourceHeightRange": [
+        221,
+        221
+      ],
+      "mobileVisibleWidthRange": [
+        32.7,
+        36.7
+      ],
+      "mobileVisibleHeightRange": [
+        46.6,
+        46.6
+      ]
+    },
+    "west": {
+      "sourceWidthRange": [
+        168,
+        168
+      ],
+      "sourceHeightRange": [
+        210,
+        221
+      ],
+      "mobileVisibleWidthRange": [
+        35.4,
+        35.4
+      ],
+      "mobileVisibleHeightRange": [
+        44.3,
+        46.6
+      ]
+    },
+    "north": {
+      "sourceWidthRange": [
+        165,
+        181
+      ],
+      "sourceHeightRange": [
+        224,
+        225
+      ],
+      "mobileVisibleWidthRange": [
+        34.8,
+        38.2
+      ],
+      "mobileVisibleHeightRange": [
+        47.2,
+        47.5
+      ]
+    },
+    "east": {
+      "sourceWidthRange": [
+        168,
+        168
+      ],
+      "sourceHeightRange": [
+        210,
+        221
+      ],
+      "mobileVisibleWidthRange": [
+        35.4,
+        35.4
+      ],
+      "mobileVisibleHeightRange": [
+        44.3,
+        46.6
+      ]
+    }
+  }
+}

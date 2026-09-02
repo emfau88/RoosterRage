@@ -1,0 +1,126 @@
+{
+  "clips": [
+    {
+      "direction": "south",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 8,
+      "widthRangePx": [
+        155,
+        174
+      ],
+      "heightRangePx": [
+        216,
+        223
+      ]
+    },
+    {
+      "direction": "south",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 16,
+      "widthRangePx": [
+        162,
+        166
+      ],
+      "heightRangePx": [
+        209,
+        217
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 12,
+      "widthRangePx": [
+        168,
+        169
+      ],
+      "heightRangePx": [
+        207,
+        221
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 16,
+      "widthRangePx": [
+        167,
+        169
+      ],
+      "heightRangePx": [
+        208,
+        217
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 10,
+      "widthRangePx": [
+        165,
+        181
+      ],
+      "heightRangePx": [
+        220,
+        227
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 14,
+      "widthRangePx": [
+        172,
+        176
+      ],
+      "heightRangePx": [
+        211,
+        221
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 12,
+      "widthRangePx": [
+        168,
+        169
+      ],
+      "heightRangePx": [
+        207,
+        221
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 16,
+      "widthRangePx": [
+        167,
+        169
+      ],
+      "heightRangePx": [
+        208,
+        217
+      ]
+    }
+  ],
+  "frameSize": 256,
+  "directions": [
+    "south",
+    "west",
+    "north",
+    "east"
+  ],
+  "eastMirrorsWest": true,
+  "runtimeScale": 0.25,
+  "profile": "gameplay-readability"
+}

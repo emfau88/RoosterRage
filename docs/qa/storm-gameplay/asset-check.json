@@ -1,0 +1,126 @@
+{
+  "clips": [
+    {
+      "direction": "south",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 21,
+      "widthRangePx": [
+        96,
+        110
+      ],
+      "heightRangePx": [
+        200,
+        208
+      ]
+    },
+    {
+      "direction": "south",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 24,
+      "widthRangePx": [
+        99,
+        102
+      ],
+      "heightRangePx": [
+        195,
+        202
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 27,
+      "widthRangePx": [
+        121,
+        122
+      ],
+      "heightRangePx": [
+        191,
+        199
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 30,
+      "widthRangePx": [
+        121,
+        122
+      ],
+      "heightRangePx": [
+        189,
+        196
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 20,
+      "widthRangePx": [
+        90,
+        108
+      ],
+      "heightRangePx": [
+        202,
+        208
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 26,
+      "widthRangePx": [
+        96,
+        100
+      ],
+      "heightRangePx": [
+        197,
+        204
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "walk",
+      "frames": 24,
+      "minimumMarginPx": 27,
+      "widthRangePx": [
+        121,
+        122
+      ],
+      "heightRangePx": [
+        191,
+        199
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "idle",
+      "frames": 24,
+      "minimumMarginPx": 30,
+      "widthRangePx": [
+        121,
+        122
+      ],
+      "heightRangePx": [
+        189,
+        196
+      ]
+    }
+  ],
+  "frameSize": 256,
+  "directions": [
+    "south",
+    "west",
+    "north",
+    "east"
+  ],
+  "westDerivedFrom": true,
+  "runtimeWalkFrames": 8,
+  "sourcePartIdentity": "Same immutable direction parts in every frame"
+}

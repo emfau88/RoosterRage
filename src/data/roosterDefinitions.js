@@ -1,5 +1,6 @@
 import { SUNSHOT_ARRAY_VISUAL, TARGET_EGG_VISUALS } from './targetEggVisuals.js';
 import { BLAST_SHELL_VISUALS, STORM_EGG_VISUALS } from './primaryWeaponVisuals.js';
+import { STORM_VISUAL_VERSION } from '../config/aceVisual.js';
 
 export const ROOSTER_DEFINITIONS = [
   {
@@ -280,7 +281,7 @@ export const ROOSTER_DEFINITIONS = [
       'support-chick': 1.18
     },
     visual: {
-      scale: 0.235,
+      scale: STORM_VISUAL_VERSION === 'final' ? 0.255 : 0.235,
       texture: 'rooster-storm-walk',
       tint: null,
       accent: 0x5ad7ff

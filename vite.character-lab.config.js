@@ -10,6 +10,7 @@ export default mergeConfig(gameConfig, {
         game: 'index.html',
         characterLab: 'character-lab.html',
         acePreview: 'ace-preview.html',
+        aceGameplayPreview: 'ace-gameplay-preview.html',
         roosterPreview: 'rooster-preview.html'
       }
     }

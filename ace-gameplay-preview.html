@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Rooster Rage · Ace Gameplay A/B</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">ROOSTER RAGE / GAMEPLAY-LESETEST</p>
+          <h1>Ace · Aktuell gegen Gameplay</h1>
+          <p>Beide Varianten laufen mit identischer Größe, Richtung und Geschwindigkeit in einer kampfähnlichen Szene.</p>
+        </div>
+        <div class="links">
+          <a href="/?aceVisual=next">Aktuell im Spiel</a>
+          <a class="primary" href="/?aceVisual=gameplay">Gameplay im Spiel</a>
+          <a href="/?aceVisual=legacy">Legacy im Spiel</a>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="Vergleich steuern">
+        <div class="group" role="group" aria-label="Animation">
+          <button data-mode="walk" aria-pressed="true">Laufen</button>
+          <button data-mode="idle" aria-pressed="false">Idle</button>
+        </div>
+        <div class="group directions" role="group" aria-label="Richtung">
+          <button data-direction="south" aria-pressed="true">Süd</button>
+          <button data-direction="west">West</button>
+          <button data-direction="north">Nord</button>
+          <button data-direction="east">Ost</button>
+        </div>
+        <label>Kamera
+          <select id="camera-profile">
+            <option value="desktop">Desktop · 100 %</option>
+            <option value="portrait" selected>Mobile Portrait · 85 %</option>
+            <option value="feed">Feed Alley · 54 %</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="stage-wrap">
+        <canvas id="stage" width="1200" height="650" aria-label="Direkter Vergleich des aktuellen und gameplay-optimierten Ace"></canvas>
+        <div class="stage-top"><span>ECHTE SPIELGRÖSSE</span><strong id="status-label">MOBILE PORTRAIT · SÜD · LAUFEN</strong></div>
+      </section>
+
+      <section class="metrics">
+        <article><strong>Aktuell</strong><span>feine Bewegung · schmalere Masse</span></article>
+        <article class="candidate"><strong>Gameplay-Kandidat</strong><span>starke Hauptposen · breitere Silhouette</span></article>
+        <article><strong>Unverändert</strong><span>Scale 0,25 · Kollision · Tempo · Waffenursprung</span></article>
+      </section>
+      <p class="hint">Beurteile zuerst die beiden kleinen Figuren im Gesamtbild. Die Links oben öffnen jede Variante im echten Spiel; die Auswahl bleibt vollständig reversibel.</p>
+    </main>
+    <script type="module" src="/src/ace-gameplay-preview/main.js"></script>
+  </body>
+</html>

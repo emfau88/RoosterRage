@@ -1,0 +1,161 @@
+{
+  "ace": {
+    "scale": 0.25,
+    "directions": {
+      "south": {
+        "sourceBox": [
+          43,
+          27,
+          214,
+          240
+        ],
+        "sourceVisibleSize": [
+          171,
+          213
+        ],
+        "gameVisibleSize": [
+          42.8,
+          53.2
+        ]
+      },
+      "west": {
+        "sourceBox": [
+          65,
+          21,
+          247,
+          233
+        ],
+        "sourceVisibleSize": [
+          182,
+          212
+        ],
+        "gameVisibleSize": [
+          45.5,
+          53.0
+        ]
+      },
+      "north": {
+        "sourceBox": [
+          37,
+          19,
+          219,
+          235
+        ],
+        "sourceVisibleSize": [
+          182,
+          216
+        ],
+        "gameVisibleSize": [
+          45.5,
+          54.0
+        ]
+      }
+    }
+  },
+  "artillery": {
+    "scale": 0.275,
+    "directions": {
+      "south": {
+        "sourceBox": [
+          53,
+          40,
+          203,
+          227
+        ],
+        "sourceVisibleSize": [
+          150,
+          187
+        ],
+        "gameVisibleSize": [
+          41.2,
+          51.4
+        ]
+      },
+      "west": {
+        "sourceBox": [
+          64,
+          33,
+          224,
+          235
+        ],
+        "sourceVisibleSize": [
+          160,
+          202
+        ],
+        "gameVisibleSize": [
+          44.0,
+          55.6
+        ]
+      },
+      "north": {
+        "sourceBox": [
+          52,
+          40,
+          206,
+          237
+        ],
+        "sourceVisibleSize": [
+          154,
+          197
+        ],
+        "gameVisibleSize": [
+          42.4,
+          54.2
+        ]
+      }
+    }
+  },
+  "storm": {
+    "scale": 0.255,
+    "directions": {
+      "south": {
+        "sourceBox": [
+          72,
+          28,
+          184,
+          226
+        ],
+        "sourceVisibleSize": [
+          112,
+          198
+        ],
+        "gameVisibleSize": [
+          28.6,
+          50.5
+        ]
+      },
+      "east": {
+        "sourceBox": [
+          32,
+          34,
+          178,
+          226
+        ],
+        "sourceVisibleSize": [
+          146,
+          192
+        ],
+        "gameVisibleSize": [
+          37.2,
+          49.0
+        ]
+      },
+      "north": {
+        "sourceBox": [
+          73,
+          30,
+          183,
+          239
+        ],
+        "sourceVisibleSize": [
+          110,
+          209
+        ],
+        "gameVisibleSize": [
+          28.1,
+          53.3
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,383 @@
+{
+  "ace": {
+    "scale": 0.25,
+    "clips": [
+      {
+        "direction": "south",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 8,
+        "widthRangePx": [
+          161,
+          181
+        ],
+        "heightRangePx": [
+          216,
+          223
+        ]
+      },
+      {
+        "direction": "south",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 16,
+        "widthRangePx": [
+          170,
+          174
+        ],
+        "heightRangePx": [
+          209,
+          217
+        ]
+      },
+      {
+        "direction": "west",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 7,
+        "widthRangePx": [
+          182,
+          183
+        ],
+        "heightRangePx": [
+          207,
+          221
+        ]
+      },
+      {
+        "direction": "west",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 9,
+        "widthRangePx": [
+          182,
+          183
+        ],
+        "heightRangePx": [
+          208,
+          217
+        ]
+      },
+      {
+        "direction": "north",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 10,
+        "widthRangePx": [
+          173,
+          189
+        ],
+        "heightRangePx": [
+          220,
+          227
+        ]
+      },
+      {
+        "direction": "north",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 14,
+        "widthRangePx": [
+          180,
+          184
+        ],
+        "heightRangePx": [
+          211,
+          221
+        ]
+      },
+      {
+        "direction": "east",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 7,
+        "widthRangePx": [
+          182,
+          183
+        ],
+        "heightRangePx": [
+          207,
+          221
+        ]
+      },
+      {
+        "direction": "east",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 9,
+        "widthRangePx": [
+          182,
+          183
+        ],
+        "heightRangePx": [
+          208,
+          217
+        ]
+      }
+    ],
+    "distinctRuntimeFrames": {
+      "south-walk": 8,
+      "south-idle": 8,
+      "west-walk": 8,
+      "west-idle": 8,
+      "east-walk": 8,
+      "east-idle": 8,
+      "north-walk": 8,
+      "north-idle": 8
+    }
+  },
+  "artillery": {
+    "scale": 0.275,
+    "clips": [
+      {
+        "direction": "south",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 21,
+        "widthRangePx": [
+          150,
+          152
+        ],
+        "heightRangePx": [
+          188,
+          195
+        ]
+      },
+      {
+        "direction": "south",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 29,
+        "widthRangePx": [
+          149,
+          151
+        ],
+        "heightRangePx": [
+          183,
+          190
+        ]
+      },
+      {
+        "direction": "west",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 21,
+        "widthRangePx": [
+          160,
+          166
+        ],
+        "heightRangePx": [
+          201,
+          207
+        ]
+      },
+      {
+        "direction": "west",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 21,
+        "widthRangePx": [
+          160,
+          161
+        ],
+        "heightRangePx": [
+          199,
+          205
+        ]
+      },
+      {
+        "direction": "north",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 13,
+        "widthRangePx": [
+          154,
+          155
+        ],
+        "heightRangePx": [
+          197,
+          203
+        ]
+      },
+      {
+        "direction": "north",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 19,
+        "widthRangePx": [
+          154,
+          156
+        ],
+        "heightRangePx": [
+          193,
+          200
+        ]
+      },
+      {
+        "direction": "east",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 21,
+        "widthRangePx": [
+          160,
+          166
+        ],
+        "heightRangePx": [
+          201,
+          207
+        ]
+      },
+      {
+        "direction": "east",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 21,
+        "widthRangePx": [
+          160,
+          161
+        ],
+        "heightRangePx": [
+          199,
+          205
+        ]
+      }
+    ],
+    "distinctRuntimeFrames": {
+      "south-walk": 8,
+      "south-idle": 8,
+      "west-walk": 8,
+      "west-idle": 8,
+      "east-walk": 8,
+      "east-idle": 8,
+      "north-walk": 8,
+      "north-idle": 8
+    }
+  },
+  "storm": {
+    "scale": 0.255,
+    "clips": [
+      {
+        "direction": "south",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 20,
+        "widthRangePx": [
+          107,
+          122
+        ],
+        "heightRangePx": [
+          200,
+          208
+        ]
+      },
+      {
+        "direction": "south",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 24,
+        "widthRangePx": [
+          111,
+          113
+        ],
+        "heightRangePx": [
+          195,
+          202
+        ]
+      },
+      {
+        "direction": "west",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 26,
+        "widthRangePx": [
+          145,
+          146
+        ],
+        "heightRangePx": [
+          191,
+          200
+        ]
+      },
+      {
+        "direction": "west",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 30,
+        "widthRangePx": [
+          145,
+          146
+        ],
+        "heightRangePx": [
+          189,
+          196
+        ]
+      },
+      {
+        "direction": "north",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 18,
+        "widthRangePx": [
+          102,
+          118
+        ],
+        "heightRangePx": [
+          208,
+          211
+        ]
+      },
+      {
+        "direction": "north",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 16,
+        "widthRangePx": [
+          108,
+          112
+        ],
+        "heightRangePx": [
+          207,
+          211
+        ]
+      },
+      {
+        "direction": "east",
+        "mode": "walk",
+        "sourceFrames": 24,
+        "minimumMarginPx": 26,
+        "widthRangePx": [
+          145,
+          146
+        ],
+        "heightRangePx": [
+          191,
+          200
+        ]
+      },
+      {
+        "direction": "east",
+        "mode": "idle",
+        "sourceFrames": 24,
+        "minimumMarginPx": 30,
+        "widthRangePx": [
+          145,
+          146
+        ],
+        "heightRangePx": [
+          189,
+          196
+        ]
+      }
+    ],
+    "distinctRuntimeFrames": {
+      "south-walk": 8,
+      "south-idle": 8,
+      "west-walk": 8,
+      "west-idle": 8,
+      "east-walk": 8,
+      "east-idle": 8,
+      "north-walk": 8,
+      "north-idle": 8
+    }
+  }
+}

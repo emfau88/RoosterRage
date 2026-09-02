@@ -1,0 +1,450 @@
+{
+  "generatedAt": "2026-09-02T17:57:11.570Z",
+  "url": "http://127.0.0.1:5173/?roosterVisual=final",
+  "results": [
+    {
+      "rooster": "ace",
+      "label": "Ace / Ass",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "ace-final-desktop-combat.png",
+      "choosingRooster": false,
+      "visualState": {
+        "id": "ace",
+        "texture": "rooster-ace-walk",
+        "textureSize": {
+          "width": 2048,
+          "height": 1024
+        },
+        "frameSize": {
+          "width": 256,
+          "height": 256
+        },
+        "frameTotal": 33,
+        "animation": "rooster-ace-walk-east",
+        "frame": 12,
+        "flipX": true,
+        "angle": 0,
+        "displayScale": {
+          "x": 0.25,
+          "y": 0.25
+        },
+        "scale": 0.25,
+        "tint": 16777215,
+        "markers": 0,
+        "markerTypes": [],
+        "primary": {
+          "name": "Target Egg",
+          "speed": 520,
+          "homingTurnRate": 0.1,
+          "visualRank": 1,
+          "texture": "egg",
+          "scale": 1,
+          "tint": 16777215,
+          "trailVisible": false,
+          "lineTrailLength": 0,
+          "muzzleFlash": false,
+          "rank": 1
+        },
+        "primaryEvolution": null,
+        "upgradeAffinities": {
+          "primary-ace-rank": 2.1,
+          "ace-deadeye-drill": 1.8,
+          "ace-guidance-fins": 1.55,
+          "critical-yolk": 1.25,
+          "ricochet-eggs": 1.2,
+          "double-shot": 1.12,
+          "golden-egg": 1.22,
+          "fire-eggs": 1.1,
+          "piercing-eggs": 1.12,
+          "molotov-egg": 1.08,
+          "regen": 1.05,
+          "orbit-eggs": 1.18,
+          "armor": 1.08,
+          "lightning-comb": 1.08,
+          "move-speed": 1.05,
+          "second-wind": 1.05
+        }
+      }
+    },
+    {
+      "rooster": "ace",
+      "label": "Ace / Ass",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "ace-final-mobile-combat.png",
+      "choosingRooster": false,
+      "visualState": {
+        "id": "ace",
+        "texture": "rooster-ace-walk",
+        "textureSize": {
+          "width": 2048,
+          "height": 1024
+        },
+        "frameSize": {
+          "width": 256,
+          "height": 256
+        },
+        "frameTotal": 33,
+        "animation": "rooster-ace-walk-east",
+        "frame": 13,
+        "flipX": true,
+        "angle": 0,
+        "displayScale": {
+          "x": 0.25,
+          "y": 0.25
+        },
+        "scale": 0.25,
+        "tint": 16777215,
+        "markers": 0,
+        "markerTypes": [],
+        "primary": {
+          "name": "Target Egg",
+          "speed": 520,
+          "homingTurnRate": 0.1,
+          "visualRank": 1,
+          "texture": "egg",
+          "scale": 1,
+          "tint": 16777215,
+          "trailVisible": false,
+          "lineTrailLength": 0,
+          "muzzleFlash": false,
+          "rank": 1
+        },
+        "primaryEvolution": null,
+        "upgradeAffinities": {
+          "primary-ace-rank": 2.1,
+          "ace-deadeye-drill": 1.8,
+          "ace-guidance-fins": 1.55,
+          "critical-yolk": 1.25,
+          "ricochet-eggs": 1.2,
+          "double-shot": 1.12,
+          "golden-egg": 1.22,
+          "fire-eggs": 1.1,
+          "piercing-eggs": 1.12,
+          "molotov-egg": 1.08,
+          "regen": 1.05,
+          "orbit-eggs": 1.18,
+          "armor": 1.08,
+          "lightning-comb": 1.08,
+          "move-speed": 1.05,
+          "second-wind": 1.05
+        }
+      }
+    },
+    {
+      "rooster": "artillery",
+      "label": "Bummbert",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "artillery-final-desktop-combat.png",
+      "choosingRooster": false,
+      "visualState": {
+        "id": "artillery",
+        "texture": "rooster-artillery-walk",
+        "textureSize": {
+          "width": 2048,
+          "height": 1024
+        },
+        "frameSize": {
+          "width": 256,
+          "height": 256
+        },
+        "frameTotal": 33,
+        "animation": "rooster-artillery-walk-east",
+        "frame": 11,
+        "flipX": true,
+        "angle": 0,
+        "displayScale": {
+          "x": 0.275,
+          "y": 0.275
+        },
+        "scale": 0.275,
+        "tint": 16777215,
+        "markers": 0,
+        "markerTypes": [],
+        "primary": {
+          "name": "Blast Shell",
+          "speed": 410,
+          "homingTurnRate": 0.055,
+          "hitRadius": 30,
+          "bodyRadius": 12,
+          "splashRadius": 64,
+          "splashDamageRatio": 0.55,
+          "visualRank": 1,
+          "texture": "heavy-egg",
+          "scale": 1.34,
+          "tint": 16777215,
+          "trailVisible": false,
+          "lineTrailLength": 10,
+          "lineTrailWidth": 1.8,
+          "lineTrailColor": 16747061,
+          "lineTrailAlpha": 0.1,
+          "impactStyle": "blast-shell",
+          "rank": 1
+        },
+        "primaryEvolution": null,
+        "upgradeAffinities": {
+          "primary-artillery-rank": 2.1,
+          "artillery-reinforced-breech": 1.8,
+          "artillery-blast-plating": 1.55,
+          "fire-eggs": 1.35,
+          "rocket-egg": 1.65,
+          "molotov-egg": 1.35,
+          "bigger-eggs": 1.28,
+          "armor": 1.16,
+          "max-hp": 1.12,
+          "golden-egg": 1.12,
+          "piercing-eggs": 1.1,
+          "regen": 1.12,
+          "void-nest": 1.18,
+          "xp-magnet": 1.08,
+          "second-wind": 1.06
+        }
+      }
+    },
+    {
+      "rooster": "artillery",
+      "label": "Bummbert",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "artillery-final-mobile-combat.png",
+      "choosingRooster": false,
+      "visualState": {
+        "id": "artillery",
+        "texture": "rooster-artillery-walk",
+        "textureSize": {
+          "width": 2048,
+          "height": 1024
+        },
+        "frameSize": {
+          "width": 256,
+          "height": 256
+        },
+        "frameTotal": 33,
+        "animation": "rooster-artillery-walk-east",
+        "frame": 12,
+        "flipX": true,
+        "angle": 0,
+        "displayScale": {
+          "x": 0.275,
+          "y": 0.275
+        },
+        "scale": 0.275,
+        "tint": 16777215,
+        "markers": 0,
+        "markerTypes": [],
+        "primary": {
+          "name": "Blast Shell",
+          "speed": 410,
+          "homingTurnRate": 0.055,
+          "hitRadius": 30,
+          "bodyRadius": 12,
+          "splashRadius": 64,
+          "splashDamageRatio": 0.55,
+          "visualRank": 1,
+          "texture": "heavy-egg",
+          "scale": 1.34,
+          "tint": 16777215,
+          "trailVisible": false,
+          "lineTrailLength": 10,
+          "lineTrailWidth": 1.8,
+          "lineTrailColor": 16747061,
+          "lineTrailAlpha": 0.1,
+          "impactStyle": "blast-shell",
+          "rank": 1
+        },
+        "primaryEvolution": null,
+        "upgradeAffinities": {
+          "primary-artillery-rank": 2.1,
+          "artillery-reinforced-breech": 1.8,
+          "artillery-blast-plating": 1.55,
+          "fire-eggs": 1.35,
+          "rocket-egg": 1.65,
+          "molotov-egg": 1.35,
+          "bigger-eggs": 1.28,
+          "armor": 1.16,
+          "max-hp": 1.12,
+          "golden-egg": 1.12,
+          "piercing-eggs": 1.1,
+          "regen": 1.12,
+          "void-nest": 1.18,
+          "xp-magnet": 1.08,
+          "second-wind": 1.06
+        }
+      }
+    },
+    {
+      "rooster": "storm",
+      "label": "Blitzkamm",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "storm-final-desktop-combat.png",
+      "choosingRooster": false,
+      "visualState": {
+        "id": "storm",
+        "texture": "rooster-storm-walk",
+        "textureSize": {
+          "width": 2048,
+          "height": 1024
+        },
+        "frameSize": {
+          "width": 256,
+          "height": 256
+        },
+        "frameTotal": 33,
+        "animation": "rooster-storm-walk-east",
+        "frame": 10,
+        "flipX": false,
+        "angle": 0,
+        "displayScale": {
+          "x": 0.255,
+          "y": 0.255
+        },
+        "scale": 0.255,
+        "tint": 16777215,
+        "markers": 0,
+        "markerTypes": [],
+        "primary": {
+          "name": "Storm Egg",
+          "speed": 650,
+          "homingTurnRate": 0.12,
+          "hitRadius": 22,
+          "chainCount": 1,
+          "chainRadius": 190,
+          "chainDamageRatio": 0.6,
+          "visualRank": 1,
+          "texture": "storm-egg",
+          "scale": 0.94,
+          "tint": 16777215,
+          "trailVisible": false,
+          "lineTrailLength": 8,
+          "lineTrailWidth": 1,
+          "lineTrailColor": 5953535,
+          "lineTrailAlpha": 0.08,
+          "spritePulseX": 0.01,
+          "spritePulseY": 0.018,
+          "spritePulseMs": 250,
+          "spriteFlickerAlpha": 0.012,
+          "chainOuterWidth": 4,
+          "chainInnerWidth": 1.6,
+          "chainOuterColor": 15662335,
+          "chainInnerColor": 5953535,
+          "chainLife": 125,
+          "rank": 1
+        },
+        "primaryEvolution": null,
+        "upgradeAffinities": {
+          "primary-storm-rank": 2.1,
+          "storm-static-plumage": 1.8,
+          "storm-tailwind-training": 1.55,
+          "lightning-comb": 1.65,
+          "laser-comb": 1.45,
+          "orbit-eggs": 1.4,
+          "faster-eggs": 1.28,
+          "move-speed": 1.18,
+          "critical-yolk": 1.16,
+          "armor": 1.06,
+          "second-wind": 1.05,
+          "swift-shells": 1.2,
+          "support-chick": 1.18
+        }
+      }
+    },
+    {
+      "rooster": "storm",
+      "label": "Blitzkamm",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "storm-final-mobile-combat.png",
+      "choosingRooster": false,
+      "visualState": {
+        "id": "storm",
+        "texture": "rooster-storm-walk",
+        "textureSize": {
+          "width": 2048,
+          "height": 1024
+        },
+        "frameSize": {
+          "width": 256,
+          "height": 256
+        },
+        "frameTotal": 33,
+        "animation": "rooster-storm-walk-east",
+        "frame": 12,
+        "flipX": false,
+        "angle": 0,
+        "displayScale": {
+          "x": 0.255,
+          "y": 0.255
+        },
+        "scale": 0.255,
+        "tint": 16777215,
+        "markers": 0,
+        "markerTypes": [],
+        "primary": {
+          "name": "Storm Egg",
+          "speed": 650,
+          "homingTurnRate": 0.12,
+          "hitRadius": 22,
+          "chainCount": 1,
+          "chainRadius": 190,
+          "chainDamageRatio": 0.6,
+          "visualRank": 1,
+          "texture": "storm-egg",
+          "scale": 0.94,
+          "tint": 16777215,
+          "trailVisible": false,
+          "lineTrailLength": 8,
+          "lineTrailWidth": 1,
+          "lineTrailColor": 5953535,
+          "lineTrailAlpha": 0.08,
+          "spritePulseX": 0.01,
+          "spritePulseY": 0.018,
+          "spritePulseMs": 250,
+          "spriteFlickerAlpha": 0.012,
+          "chainOuterWidth": 4,
+          "chainInnerWidth": 1.6,
+          "chainOuterColor": 15662335,
+          "chainInnerColor": 5953535,
+          "chainLife": 125,
+          "rank": 1
+        },
+        "primaryEvolution": null,
+        "upgradeAffinities": {
+          "primary-storm-rank": 2.1,
+          "storm-static-plumage": 1.8,
+          "storm-tailwind-training": 1.55,
+          "lightning-comb": 1.65,
+          "laser-comb": 1.45,
+          "orbit-eggs": 1.4,
+          "faster-eggs": 1.28,
+          "move-speed": 1.18,
+          "critical-yolk": 1.16,
+          "armor": 1.06,
+          "second-wind": 1.05,
+          "swift-shells": 1.2,
+          "support-chick": 1.18
+        }
+      }
+    }
+  ]
+}

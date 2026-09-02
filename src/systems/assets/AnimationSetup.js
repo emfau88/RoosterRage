@@ -1,5 +1,6 @@
 import {
   NEXT_ROOSTER_IDLE_FRAME_RATE,
+  NEXT_ROOSTER_WALK_FRAME_COUNT,
   NEXT_ROOSTER_WALK_FRAME_RATE,
   USE_NEXT_ROOSTER_VISUAL
 } from '../../config/aceVisual.js';
@@ -8,8 +9,14 @@ export function createGameAnimations(scene) {
   const roosterTextures = ['ace', 'artillery', 'storm'];
   // A single clean side row is mirrored at runtime. Besides making direction
   // semantics unambiguous, this avoids baked edge bleed in opposing side rows.
-  const directions = [['south', 0], ['west', 4], ['east', 4], ['north', 12]];
   roosterTextures.forEach((roosterId) => {
+    const walkFrames = NEXT_ROOSTER_WALK_FRAME_COUNT[roosterId];
+    const directions = [
+      ['south', 0],
+      ['west', walkFrames],
+      ['east', walkFrames],
+      ['north', walkFrames * 3]
+    ];
     directions.forEach(([direction, start]) => {
       const key = `rooster-${roosterId}-walk-${direction}`;
       if (scene.anims.exists(key)) {
@@ -17,7 +24,7 @@ export function createGameAnimations(scene) {
       }
       scene.anims.create({
         key,
-        frames: scene.anims.generateFrameNumbers(`rooster-${roosterId}-walk`, { start, end: start + 3 }),
+        frames: scene.anims.generateFrameNumbers(`rooster-${roosterId}-walk`, { start, end: start + walkFrames - 1 }),
         frameRate: USE_NEXT_ROOSTER_VISUAL[roosterId]
           ? NEXT_ROOSTER_WALK_FRAME_RATE[roosterId]
           : roosterId === 'artillery' ? 8 : roosterId === 'storm' ? 12 : 10,
