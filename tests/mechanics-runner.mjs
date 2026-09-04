@@ -624,11 +624,11 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.movePlayer(700, 450);
       window.__ROOSTER_TEST__.spawnEnemyType('spitter', 900, 450, { speed: 0, damage: 0, hp: 999 });
     });
-    await page.waitForTimeout(70);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().enemyTelegraphs >= 1, null, { timeout: 1200 });
     const spitterTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(spitterTelegraph.enemyTelegraphs >= 1, 'Spitter did not telegraph its shot.', spitterTelegraph);
     assert(spitterTelegraph.enemyProjectiles === 0, 'Spitter fired before its telegraph completed.', spitterTelegraph);
-    await page.waitForTimeout(260);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().enemyProjectiles >= 1, null, { timeout: 1600 });
     const afterSpitter = await page.evaluate(() => ({
       state: window.__ROOSTER_TEST__.getState(),
       projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
@@ -646,12 +646,12 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.clearProjectiles();
       window.__ROOSTER_TEST__.spawnEnemyType('fan-spitter', 900, 450, { speed: 0, damage: 0, hp: 999 });
     });
-    await page.waitForTimeout(70);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().enemyTelegraphs >= 1, null, { timeout: 1200 });
     const fanTelegraph = await page.evaluate(() => window.__ROOSTER_TEST__.getState());
     assert(fanTelegraph.enemyTelegraphs >= 1, 'Fan Spitter did not telegraph its burst.', fanTelegraph);
     assert(fanTelegraph.enemyProjectiles === 0, 'Fan Spitter fired before its telegraph completed.', fanTelegraph);
     await page.screenshot({ path: path.join(artifactDir, 'fan-spitter-telegraph.png') });
-    await page.waitForTimeout(280);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getState().enemyProjectiles >= 3, null, { timeout: 1600 });
     const afterFan = await page.evaluate(() => ({
       state: window.__ROOSTER_TEST__.getState(),
       projectiles: window.__ROOSTER_TEST__.getEnemyProjectileSnapshot()
