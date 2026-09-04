@@ -385,7 +385,7 @@ export class WaveSystem {
     return {
       type: 'kornkrabbler',
       role: 'micro-fodder',
-      displayName: 'Kornkrabbler',
+      displayName: 'Kernel Crawler',
       hp: Math.max(3, Math.round(7 * multiplier)),
       speed: 96,
       damage: 2,
@@ -458,7 +458,7 @@ export class WaveSystem {
       ability: null,
       aura: {
         kind: 'regeneration',
-        label: 'Regenerationsaura',
+        label: 'Regeneration Aura',
         radius: 185,
         healPerSecond: 4,
         color: 0x65ef8b
@@ -517,7 +517,7 @@ export class WaveSystem {
       bodyOffsetY: 100,
       hpBarWidth: 62,
       hpBarYOffset: 42,
-      aura: { kind: 'haste', label: 'Haste-Aura', radius: 185, multiplier: 1.2, color: 0xffd35c },
+      aura: { kind: 'haste', label: 'Haste Aura', radius: 185, multiplier: 1.2, color: 0xffd35c },
       ability: { kind: 'dash', label: 'Talon Dash', cooldown: 3900, telegraphMs: 380, speed: 470, duration: 460, color: 0xffd35c }
     };
   }
@@ -543,7 +543,7 @@ export class WaveSystem {
       bodyOffsetY: 91,
       hpBarWidth: 74,
       hpBarYOffset: 56,
-      aura: { kind: 'armor', label: 'Panzer-Aura', radius: 205, reduction: 0.22, color: 0x6bd8ff },
+      aura: { kind: 'armor', label: 'Armor Aura', radius: 205, reduction: 0.22, color: 0x6bd8ff },
       ability: { kind: 'slam', label: 'Iron Stomp', cooldown: 4400, telegraphMs: 620, heavy: true, radius: 165, damage: 21, color: 0xff6a32 }
     };
   }
@@ -568,7 +568,7 @@ export class WaveSystem {
       bodyOffsetY: 93,
       hpBarWidth: 68,
       hpBarYOffset: 48,
-      aura: { kind: 'regeneration', label: 'Brood-Regenaura', radius: 210, healPerSecond: 6, color: 0xc18aff },
+      aura: { kind: 'regeneration', label: 'Brood Regeneration Aura', radius: 210, healPerSecond: 6, color: 0xc18aff },
       ability: { kind: 'fan', label: 'Violet Volley', cooldown: 2700, telegraphMs: 420, speed: 245, damage: 7, source: 'elite-spitter-shot', texture: 'enemy-purple-shot', radius: 11, count: 5, spread: 0.92, color: 0xffffff, trailColor: 0x9b5cff, scale: 1.2, muzzleDistance: 42 }
     };
   }
@@ -645,7 +645,7 @@ export class WaveSystem {
       bossPhases: [
         {
           name: 'Phase 2: Royal Fury',
-          subtitle: 'Breiterer Fächer, sechs Adds und ein klares Atemfenster.',
+          subtitle: 'Wider fan shots, six adds, and a clear breathing window.',
           threshold: 0.65,
           speedMultiplier: 1.08,
           transitionMs: 1000,
@@ -653,7 +653,7 @@ export class WaveSystem {
         },
         {
           name: 'Phase 3: Last Hatch',
-          subtitle: 'Siebenfacher Fächer, Charge und ein begrenzter Add-Trupp.',
+          subtitle: 'Seven-shot fan, charge, and a limited add squad.',
           threshold: 0.32,
           speedMultiplier: 1.12,
           transitionMs: 1100,

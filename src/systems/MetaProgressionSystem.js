@@ -15,9 +15,9 @@ const MAX_HISTORY = 10;
 const ROOSTER_IDS = ['ace', 'artillery', 'storm'];
 
 const ROOSTER_UNLOCKS = {
-  ace: { type: 'default', target: 0, label: 'Start-Rooster' },
-  artillery: { type: 'totalKills', target: 75, label: '75 Gegner besiegen' },
-  storm: { type: 'victories', target: 1, label: 'Einen Run gewinnen' }
+  ace: { type: 'default', target: 0, label: 'Starting rooster' },
+  artillery: { type: 'totalKills', target: 75, label: 'Defeat 75 enemies' },
+  storm: { type: 'victories', target: 1, label: 'Win one run' }
 };
 
 const COSMETICS = [
@@ -26,29 +26,29 @@ const COSMETICS = [
     roosterId: 'ace',
     name: 'Sunrise Comb',
     tint: 0xffe29a,
-    unlock: { type: 'totalKills', target: 100, label: '100 Gegner besiegen' }
+    unlock: { type: 'totalKills', target: 100, label: 'Defeat 100 enemies' }
   },
   {
     id: 'artillery-ironclad',
     roosterId: 'artillery',
     name: 'Ironclad Plating',
     tint: 0xc7d9e5,
-    unlock: { type: 'roosterWins', roosterId: 'artillery', target: 1, label: 'Mit Bummbert gewinnen' }
+    unlock: { type: 'roosterWins', roosterId: 'artillery', target: 1, label: 'Win with Boombardier' }
   },
   {
     id: 'storm-violet',
     roosterId: 'storm',
     name: 'Violet Arc',
     tint: 0xd3a8ff,
-    unlock: { type: 'roosterWins', roosterId: 'storm', target: 1, label: 'Mit Blitzkamm gewinnen' }
+    unlock: { type: 'roosterWins', roosterId: 'storm', target: 1, label: 'Win with Stormcrest' }
   }
 ];
 
 const EXTRA_ENEMIES = [
-  { id: 'elite-runner', purpose: 'Gilded Talon: Tempo-Aura und Dash', counterplay: 'Dash-Linie früh verlassen' },
-  { id: 'elite-brute', purpose: 'Iron Brooder: Panzer-Aura und Slam', counterplay: 'Slam-Ring räumen' },
-  { id: 'elite-spitter', purpose: 'Violet Matron: Regeneration und Fächer', counterplay: 'Matron priorisieren' },
-  { id: 'boss', purpose: 'THE BROOD KING: drei Phasen', counterplay: 'Fächer lesen, Feuerball weit führen' }
+  { id: 'elite-runner', purpose: 'Gilded Talon: speed aura and dash', counterplay: 'Leave the dash line early' },
+  { id: 'elite-brute', purpose: 'Iron Brooder: armor aura and slam', counterplay: 'Clear the slam ring' },
+  { id: 'elite-spitter', purpose: 'Violet Matron: regeneration and fan shots', counterplay: 'Prioritize the Matron' },
+  { id: 'boss', purpose: 'THE BROOD KING: three phases', counterplay: 'Read the fans and lead the fireball wide' }
 ];
 
 function defaultState() {
@@ -378,7 +378,7 @@ export class MetaProgressionSystem {
         unlocked,
         nextCost: complete ? null : talent.costs[rank],
         affordable: !complete && unlocked && this.state.kernels >= talent.costs[rank],
-        unlockLabel: unlocked ? '' : `${talent.unlockAt} Talent-Ränge benötigt`
+        unlockLabel: unlocked ? '' : `${talent.unlockAt} talent ranks required`
       };
     });
   }

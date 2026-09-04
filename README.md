@@ -1,66 +1,64 @@
 # Rooster Rage
 
-![Rooster Rage – drei Kampfhähne verteidigen ihren Hof](public/marketing/rooster-rage-key-art-master.png)
+![Rooster Rage — three battle roosters defend their yard](public/marketing/rooster-rage-key-art-master.png)
 
-**Drei Kampfhähne. Wilde Ei-Evolutionen. Ein Hof voller Monster.**
+**Three battle roosters. Wild egg evolutions. One yard full of monsters.**
 
-### [Rooster Rage jetzt im Browser spielen](https://emfau88.github.io/RoosterRage/)
+### [Play Rooster Rage in your browser](https://emfau88.github.io/RoosterRage/)
 
-Rooster Rage ist ein Mobile-first Bullet Heaven / Action Roguelite. Wähle Eier-Ass, Bummbert oder Blitzkamm, entwickle absurde Ei-Waffen und überlebe zehn eskalierende Wellen bis zum dreiphasigen Brood King.
+Rooster Rage is a mobile-first bullet heaven / action roguelite. Choose Barnyard Ace, Boombardier, or Stormcrest, evolve outrageous egg weapons, and survive ten escalating waves culminating in the three-phase Brood King.
 
-> **Projektstatus:** Der vollständige Zehn-Wellen-Loop, alle drei Rooster, Waffenränge und EVOs, drei Arenen, Meta-Fortschritt sowie der aktuelle Kampf-, VFX- und Run-Preparation-Polish sind umgesetzt. Das Multi-Seed-/Real-Run-Production-Gate mit sechs Echtzeit-Vollruns und die automatisierten Production-Gates sind abgeschlossen. Die GitHub-Pages-Version bleibt eine öffentliche Testfassung; als Nächstes stehen subjektive Abnahmen auf realer Mobile-Hardware sowie weiteres Balance- und Präsentations-Feintuning an.
+> **Project status:** The full ten-wave loop, all three playable roosters, weapon ranks and EVOs, three arenas, meta progression, and the latest combat, VFX, character-art, and run-preparation polish are implemented. The multi-seed real-run production gate, covering six full real-time runs, and the automated production gates are complete. The GitHub Pages build remains a public test version; hands-on approval on real mobile hardware plus further balance and presentation tuning are next.
 
-## Aktueller Spielumfang
+## Current feature set
 
-- Drei Rooster-Klassen mit eigenem Primärangriff, eigener Passive und je drei Build-Archetypen
-- Responsive Hennenhütte mit visueller Run-Vorbereitung, Arenaübersicht, Expeditionskarten, `Hähne`, dreistufigem Talentnest und vereinfachtem `Archiv`; der Run-Start bleibt auf Desktop und Mobile die Hauptaktion
-- Zehn handkuratierte Wellen, drei Arenen, drei Elite-Archetypen und ein dreiphasiger Boss
-- Echte 4-Richtungs-Locomotion für Kornkrabbler, Runner, Brute, Support,
-  Summoner, Gilded Talon/Stormclaw und Brood King; Horde-Peaks bis 140 Gegner
-  auf Desktop beziehungsweise 90 auf Mobile
-- 45 Upgrade-Definitionen und elf sichtbare EVOs sowie Active-, Passive-, Orbit- und Summon-Builds; Rooster-Primärwaffen und aktive Waffen besitzen klar kommunizierte Rangpfade mit eigenen Projektil-, Flächen- und Impact-Steigerungen
-- Feste Wave-/Segment-XP-Budgets: Hordenmenge und Levelgeschwindigkeit sind getrennt steuerbar
-- Sichtbare, magnetische XP-Orbs mit verlustfreier Bündelung: maximal 72 auf Desktop und 48 auf Mobile
-- Heal-, Magnet- und Bomb-Pickups an strategischen Wave-Momenten statt an schnell steigenden Killzahlen
-- Lokale Bestwerte, Herausforderungen, Meisterschaft, Talentnest, Kosmetik, Run-Historie, Gegnerlexikon und entdeckte EVO-Rezepte
-- Mobile-Hochformat als primäres Layout, eine kompakte Querformat-Sicherheitsdarstellung sowie vollständige Desktop- und Vollbild-Unterstützung
-- Keine Werbung, Energie, Gacha- oder Pay-to-Win-Systeme
+- Three rooster classes with distinct primary attacks, passives, silhouettes, and three build archetypes each
+- A responsive Henhouse with visual run preparation, arena overview, expedition cards, `Roosters`, a three-tier Talent Nest, and a streamlined `Archive`; starting a run remains the primary action on desktop and mobile
+- Ten hand-authored waves, three arenas, three elite archetypes, and a three-phase boss
+- True four-direction locomotion for Kernel Crawlers, Runners, Brutes, Supports, Summoners, Gilded Talon/Stormclaw, and the Brood King; horde peaks reach 140 enemies on desktop and 90 on mobile
+- 45 upgrade definitions and eleven visible EVOs across active, passive, orbit, and summon builds; rooster primary weapons and active weapons have clearly communicated rank paths with distinct projectile, area, and impact upgrades
+- Fixed wave and segment XP budgets, allowing horde size and leveling speed to be tuned independently
+- Visible magnetic XP orbs with lossless bundling, capped at 72 on desktop and 48 on mobile
+- Heal, Magnet, and Bomb pickups at strategic wave moments instead of rapidly increasing kill thresholds
+- Local records, challenges, mastery, the Talent Nest, cosmetics, run history, an enemy lexicon, and discovered EVO recipes
+- Mobile portrait as the primary layout, a compact landscape fallback, and full desktop and fullscreen support
+- No ads, energy systems, gacha, or pay-to-win mechanics
 
 ## Gameplay
 
 <p align="center">
-  <img src="docs/marketing/screenshots/05-run-preparation-desktop.png" alt="Aktuelle Run-Vorbereitung im Desktop-Layout" width="64%">
-  <img src="docs/marketing/screenshots/06-run-preparation-mobile-portrait.png" alt="Aktuelle Run-Vorbereitung im Mobile-Hochformat" width="27%">
+  <img src="docs/marketing/screenshots/05-run-preparation-desktop.png" alt="Current Rooster Rage run preparation on desktop" width="64%">
+  <img src="docs/marketing/screenshots/06-run-preparation-mobile-portrait.png" alt="Current Rooster Rage run preparation on mobile portrait" width="27%">
 </p>
 
-Der Charakter greift automatisch an. Bewegung, Positionierung, Upgrade-Auswahl und Build-Synergien entscheiden den Run. XP bleibt als sichtbares Orb-Sammelerlebnis in der Arena; erst bei großen Feldern werden nahe Orbs zu wertvolleren, größeren Orbs gebündelt.
+Your rooster attacks automatically. Movement, positioning, upgrade choices, and build synergies decide the run. XP remains a visible orb-collection experience in the arena; only large fields merge nearby orbs into more valuable, larger ones.
 
-- **Desktop:** WASD oder Pfeiltasten
-- **Touch:** Auf der linken Bildschirmseite ziehen; der virtuelle Joystick folgt der Berührung
-- **Interface:** Rooster-, Challenge- und Upgrade-Auswahl per Touch, Maus oder Pointer
-- **Komfort:** Vollbild sowie getrennte Einstellungen für Audio, Schadenszahlen, Bildschirmwackeln, Aufblitzen und Vibration
+- **Desktop:** WASD or arrow keys
+- **Touch:** Drag on the left side of the screen; the virtual joystick follows your touch
+- **Interface:** Select roosters, challenges, and upgrades with touch, mouse, or pointer input
+- **Comfort:** Fullscreen plus separate controls for audio, damage numbers, screen shake, hit flashes, and vibration
 
-## Lokal starten
+## Run locally
 
-Voraussetzungen: Node.js 24 und npm.
+Requirements: Node.js 24 and npm.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Vite startet das Spiel standardmäßig unter `http://127.0.0.1:5173/`.
+Vite serves the game at `http://127.0.0.1:5173/` by default.
 
-Produktions-Build:
+Production build:
 
 ```bash
 npm run build
 npm run test:production
 ```
 
-## Qualitätssicherung
+## Quality assurance
 
-Die Browser-Tests verwenden Playwright und starten bei Bedarf selbstständig einen lokalen Vite-Server.
+The browser tests use Playwright and start a local Vite server when needed.
 
 ```bash
 npm run test:smoke
@@ -73,28 +71,28 @@ npm run test:product
 npm run test:acceptance
 ```
 
-Weitere spezialisierte Gates stehen unter anderem über `test:boss`, `test:evolution`, `test:weapon-progression`, `test:hud-report`, `test:meta`, `test:balance`, `test:late-run`, `test:soak` und `test:telegraphs` bereit. Die aufgezeichneten Last- und Vollrun-Gates liegen bei 16,7–16,8 ms p95; der Late-Run-Test prüft 75, 110 und 150 aktive Gegner ohne Enemy-Pool-Drops. Das Mobile-Pressure-Gate prüft Wave 7 mit allen drei Hähnen. Eigene Regressionen sichern unter anderem XP-Werterhalt, Desktop-/Mobile-Orb-Caps, Pickup-Pacing, Waffenränge und responsive HUD-Zustände ab.
+Additional focused gates include `test:boss`, `test:evolution`, `test:weapon-progression`, `test:hud-report`, `test:meta`, `test:balance`, `test:late-run`, `test:soak`, and `test:telegraphs`. Recorded load and full-run gates sit at 16.7–16.8 ms p95; the late-run test checks 75, 110, and 150 active enemies without enemy-pool drops. The mobile-pressure gate checks Wave 7 with all three roosters. Dedicated regressions also cover XP preservation, desktop/mobile orb caps, pickup pacing, weapon ranks, and responsive HUD states.
 
-## Datenschutz
+## Privacy
 
-Die Produktmessung ist standardmäßig ausgeschaltet und muss sichtbar aktiviert werden. Ohne konfigurierten Telemetrie-Endpunkt werden keine Daten gesendet. Es gibt keine Konten, Cookies oder Werbe-IDs. Bei aktivierter Messung wird eine zufällige Sitzungs-ID ausschließlich im Arbeitsspeicher der aktuellen Seitensitzung geführt; erfasst werden begrenzte Funnel- und Run-Ereignisse ohne Anmeldedaten oder persistente Nutzerkennung.
+Product analytics are disabled by default and require explicit opt-in. No data is sent without a configured telemetry endpoint. There are no accounts, cookies, or advertising IDs. When analytics are enabled, a random session ID exists only in memory for the current page session; the game records a limited set of funnel and run events without login data or a persistent user identifier.
 
-## Technik
+## Technology
 
 - Phaser 3.90
 - Vite 8
-- Vanilla JavaScript und CSS
-- Playwright für Browser-, Mobile-Viewport- und Acceptance-Tests
-- GitHub Actions und GitHub Pages Release-Pipeline
+- Vanilla JavaScript and CSS
+- Playwright for browser, mobile-viewport, and acceptance tests
+- GitHub Actions and GitHub Pages release pipeline
 
-## Dokumentation und Medien
+## Documentation and media
 
-- [Aktueller Production Pass](RoosterRage_Next_Production_Pass.md)
-- [Produkt- und Entwicklungsroadmap](ROADMAP.md)
-- [Vertical-Slice-Validierung](docs/PHASE_17_VALIDATION.md)
-- [Kommerzielle Validierung](docs/PHASE_18_COMMERCIAL_VALIDATION.md)
-- [Character Art und HUD Production Pass](docs/PHASE_19_VISUAL_PRODUCTION.md)
-- [Store-Texte und Asset-Manifest](docs/marketing/STORE_COPY.md)
-- [36-Sekunden-Gameplay-Reel](docs/marketing/trailer/rooster-rage-35s-gameplay-reel.webm)
+- [Current production pass](RoosterRage_Next_Production_Pass.md)
+- [Product and development roadmap](ROADMAP.md)
+- [Vertical-slice validation](docs/PHASE_17_VALIDATION.md)
+- [Commercial validation](docs/PHASE_18_COMMERCIAL_VALIDATION.md)
+- [Character art and HUD production pass](docs/PHASE_19_VISUAL_PRODUCTION.md)
+- [Store copy and asset manifest](docs/marketing/STORE_COPY.md)
+- [36-second gameplay reel](docs/marketing/trailer/rooster-rage-35s-gameplay-reel.webm)
 
-Das gezeigte Key Art ist eine originale, textfreie Marketingillustration. Titel, Altersfreigabe und Store-CTA werden erst im jeweiligen Plattform-Export ergänzt.
+The featured key art is an original, text-free marketing illustration. Title treatment, age rating, and store CTA are added only in platform-specific exports.

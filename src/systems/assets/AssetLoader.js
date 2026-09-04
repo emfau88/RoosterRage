@@ -148,11 +148,11 @@ export function preloadGameAssets(scene) {
   const progressLabel = loadingUi?.querySelector('[data-boot-loader-message]');
   const progressPercent = loadingUi?.querySelector('[data-boot-loader-percent]');
   const loadingMessages = [
-    [0.22, 'Die Eier werden scharf gemacht …'],
-    [0.48, 'Der Stall wird kampfbereit gegackert …'],
-    [0.74, 'Die Horde zählt schon rückwärts …'],
-    [0.94, 'Letzte Feder festziehen …'],
-    [1, 'Hahn im Anschlag!']
+    [0.22, 'Sharpening the eggs …'],
+    [0.48, 'Getting the coop combat-ready …'],
+    [0.74, 'The horde is already counting down …'],
+    [0.94, 'Tightening the last feather …'],
+    [1, 'Rooster ready!']
   ];
   scene.assetLoadErrors = [];
   scene.load.on('progress', (progress) => {
@@ -169,7 +169,7 @@ export function preloadGameAssets(scene) {
     scene.assetLoadErrors.push(file.key);
     document.body.dataset.roosterLoadState = 'error';
     loadingUi?.classList.add('has-error');
-    if (progressLabel) progressLabel.textContent = `„${file.key}“ wollte nicht schlüpfen.`;
+    if (progressLabel) progressLabel.textContent = `“${file.key}” refused to hatch.`;
   });
   scene.load.once('complete', () => {
     if (scene.assetLoadErrors.length === 0) {
@@ -178,7 +178,7 @@ export function preloadGameAssets(scene) {
       window.setTimeout(() => loadingUi?.remove(), 260);
     } else {
       progressBar?.style.setProperty('width', '100%');
-      if (progressLabel) progressLabel.textContent = 'Ladefehler. Bitte die Seite neu laden.';
+      if (progressLabel) progressLabel.textContent = 'Loading failed. Please reload the page.';
     }
   });
 

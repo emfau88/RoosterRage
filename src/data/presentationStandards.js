@@ -1,9 +1,9 @@
 export const VISUAL_LANGUAGE = Object.freeze({
-  player: { primary: '#fff3b0', secondary: '#5ad7ff', purpose: 'Eigene Angriffe und sichere Interaktion' },
-  enemy: { primary: '#ff5268', secondary: '#c18aff', purpose: 'Gegnerkörper sowie Elementfarben normaler Projektile und Spuren' },
-  hazard: { primary: '#ff3048', secondary: '#ff9a3d', purpose: 'Dominante Telegraphs, schwere Projektile und große Schadensflächen' },
-  pickup: { primary: '#65ef8b', secondary: '#5ad7ff', reward: '#ffd35c', purpose: 'Heilung, Utility und garantierte Belohnung' },
-  evolution: { primary: '#ffe16a', secondary: '#ffffff', purpose: 'Vollständige EVOs und Bossbelohnungen' }
+  player: { primary: '#fff3b0', secondary: '#5ad7ff', purpose: 'Player attacks and safe interactions' },
+  enemy: { primary: '#ff5268', secondary: '#c18aff', purpose: 'Enemy bodies and elemental colors for standard projectiles and trails' },
+  hazard: { primary: '#ff3048', secondary: '#ff9a3d', purpose: 'Dominant telegraphs, heavy projectiles, and large damage zones' },
+  pickup: { primary: '#65ef8b', secondary: '#5ad7ff', reward: '#ffd35c', purpose: 'Healing, utility, and guaranteed rewards' },
+  evolution: { primary: '#ffe16a', secondary: '#ffffff', purpose: 'Completed EVOs and boss rewards' }
 });
 
 export const AUDIO_PRIORITIES = Object.freeze({

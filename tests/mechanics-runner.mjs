@@ -142,7 +142,7 @@ async function testUpgradeOffers(browser) {
     const spectacleCategories = new Set(['active', 'orbit', 'summon']);
     assert(guaranteeBefore, 'A spectacle upgrade should be guaranteed before the player owns one.');
     assert(choices.some((choice) => spectacleCategories.has(choice.category)), 'Early offer contains no spectacle upgrade.', choices);
-    assert(choices.every((choice) => choice.rankLabel && /Rang|Sofort/.test(choice.rankLabel)), 'Cards need rank labels.', choices);
+    assert(choices.every((choice) => choice.rankLabel && /Rank|Instant/.test(choice.rankLabel)), 'Cards need rank labels.', choices);
     assert(choices.every((choice) => /\d/.test(choice.description)), 'Cards should communicate concrete numeric effects.', choices);
     assert(choices.every((choice) => choice.momentTitle), 'Cards need a named upgrade milestone.', choices);
     assert(choices.every((choice) => choice.changeItems?.length > 0), 'Cards need scan-friendly change facts.', choices);

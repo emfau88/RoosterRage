@@ -4,12 +4,12 @@ import { RandomSystem } from './RandomSystem.js';
 
 const SPECTACLE_CATEGORIES = ['active', 'orbit', 'area', 'summon'];
 const CATEGORY_LABELS = {
-  weapon: 'Waffe',
-  active: 'Aktiv',
+  weapon: 'Weapon',
+  active: 'Active',
   orbit: 'Orbit',
-  summon: 'Begleiter',
-  passive: 'Passiv',
-  utility: 'Hilfsmittel',
+  summon: 'Companion',
+  passive: 'Passive',
+  utility: 'Utility',
   evolution: 'EVO'
 };
 
@@ -209,8 +209,8 @@ export class UpgradeSystem {
         max: displayMaxRank
       } : null,
       rankLabel: upgrade.consumable || upgrade.evolution
-        ? upgrade.evolution ? 'EVO' : 'Sofort'
-        : `Rang ${nextRank}/${displayMaxRank}`,
+        ? upgrade.evolution ? 'EVO' : 'Instant'
+        : `Rank ${nextRank}/${displayMaxRank}`,
       categoryLabel: CATEGORY_LABELS[upgrade.category] ?? upgrade.category,
       synergyActive,
       synergyDescription: synergyActive ? upgrade.synergy.description : null,

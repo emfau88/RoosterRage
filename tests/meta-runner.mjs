@@ -81,7 +81,7 @@ async function verifyFreshHub(context, serverUrl) {
         }
       };
     });
-    assert(snapshot.title === 'Hennenhütte', 'The Hennenhütte hub is not visible.', snapshot);
+    assert(snapshot.title === 'Henhouse', 'The Henhouse hub is not visible.', snapshot);
     assert(snapshot.roosterCards === 3 && snapshot.enabledRoosters === 1,
       'Fresh progression must offer only the Ace.', snapshot);
     assert(snapshot.challengeCards === 4 && snapshot.enabledChallenges === 1,
@@ -99,17 +99,17 @@ async function verifyFreshHub(context, serverUrl) {
     assert(snapshot.talentTiers === 3
       && snapshot.talentBranches === 2
       && snapshot.talentTierNodeCounts.join(',') === '3,2,1'
-      && snapshot.archiveSummary.join(',') === 'Runs,Siege,Abschüsse'
-      && snapshot.archiveRecords.join(',') === 'Meiste Abschüsse,Schnellster Sieg,Längster Run'
-      && snapshot.archiveDrawers.join(',') === 'Run-Historie,Gegner-Lexikon,EVO-Lexikon'
+      && snapshot.archiveSummary.join(',') === 'Runs,Victories,Kills'
+      && snapshot.archiveRecords.join(',') === 'Most kills,Fastest victory,Longest run'
+      && snapshot.archiveDrawers.join(',') === 'Run History,Enemy Lexicon,EVO Lexicon'
       && !snapshot.analyticsInArchive,
     'Talent tiers or the simplified archive hierarchy are incomplete.', snapshot);
     assert(snapshot.cosmeticPanels === 3 && snapshot.cosmeticPreviews === 6
-      && snapshot.cosmeticClarity.every((label) => label.includes('NUR OPTIK') && label.includes('Keine Werteänderung'))
-      && snapshot.cosmeticUnlocks.every((label) => label.startsWith('Freischaltung:')),
+      && snapshot.cosmeticClarity.every((label) => label.includes('VISUAL ONLY') && label.includes('No stat changes'))
+      && snapshot.cosmeticUnlocks.every((label) => label.startsWith('Unlock:')),
     'Cosmetic effect or unlock presentation is incomplete.', snapshot);
     assert(snapshot.layout.left >= 0 && snapshot.layout.right <= 390 && snapshot.layout.bodyOverflow <= 0,
-      'The portrait Hennenhütte overflows horizontally.', snapshot.layout);
+      'The portrait Henhouse overflows horizontally.', snapshot.layout);
     assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight
       || (snapshot.layout.primaryAction?.top >= 0
         && snapshot.layout.primaryAction.bottom <= snapshot.layout.clientHeight),
@@ -166,21 +166,21 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
       && persisted.historyRows === 1 && persisted.selected,
     'The unlocked hub did not render the persisted state.', persisted);
 
-    await page.getByRole('button', { name: 'Hähne', exact: true }).click();
+    await page.getByRole('button', { name: 'Roosters', exact: true }).click();
     await page.locator('.rooster-card--artillery').click();
     const preview = await page.evaluate(() => ({
       activeView: document.querySelector('.henhouse-view.is-active')?.dataset.hubView,
       expanded: document.querySelector('.rooster-card--artillery')?.classList.contains('is-selected'),
       committedName: document.querySelector('[data-hero-name]')?.textContent
     }));
-    assert(preview.activeView === 'roosters' && preview.expanded && preview.committedName === 'Eier-Ass',
+    assert(preview.activeView === 'roosters' && preview.expanded && preview.committedName === 'Barnyard Ace',
       'Opening rooster details must not commit the preview or leave the rooster view.', preview);
     await page.locator('.rooster-card--artillery + .rooster-card__choose').click();
     const confirmed = await page.evaluate(() => ({
       activeView: document.querySelector('.henhouse-view.is-active')?.dataset.hubView,
       committedName: document.querySelector('[data-hero-name]')?.textContent
     }));
-    assert(confirmed.activeView === 'play' && confirmed.committedName === 'Bummbert',
+    assert(confirmed.activeView === 'play' && confirmed.committedName === 'Boombardier',
       'The explicit rooster action did not confirm the preview and return to play.', confirmed);
 
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -254,7 +254,7 @@ async function verifyCompactMobileHub(context, serverUrl) {
       'Compact mobile gate did not use the intended effective viewport.', layout);
     assert(layout.panel.top >= 0 && layout.panel.bottom <= layout.viewport.height,
       'Compact hub panel exceeds the effective mobile viewport.', layout);
-    assert(layout.startVisible && layout.startText.includes('RUN STARTEN')
+    assert(layout.startVisible && layout.startText.includes('START RUN')
       && layout.start.top >= layout.panel.top && layout.start.bottom <= layout.viewport.height,
     'Run start action is not completely reachable without scrolling.', layout);
     assert(layout.fullscreenVisible && layout.settingsVisible
@@ -325,9 +325,9 @@ async function verifyMobileHubTabScrolling(context, serverUrl) {
       && carousel.every((state, index) => state.status.startsWith(`${state.selectedDot + 1} / 3`)),
     'The mobile map carousel cannot be discovered or swiped reliably.', carousel);
     const cases = [
-      { tab: 'Hähne', view: 'roosters', target: '.rooster-entry:last-child .rooster-card', requiresScroll: true },
-      { tab: 'Talente', view: 'training', target: '.talent-tier:last-child', requiresScroll: true },
-      { tab: 'Archiv', view: 'archive', target: '.henhouse-drawers details:last-child', requiresScroll: false }
+      { tab: 'Roosters', view: 'roosters', target: '.rooster-entry:last-child .rooster-card', requiresScroll: true },
+      { tab: 'Talents', view: 'training', target: '.talent-tier:last-child', requiresScroll: true },
+      { tab: 'Archive', view: 'archive', target: '.henhouse-drawers details:last-child', requiresScroll: false }
     ];
     const results = [];
     for (const testCase of cases) {
@@ -392,7 +392,7 @@ async function verifyTalentPreviewFlow(context, serverUrl) {
       window.__ROOSTER_TEST__.resetMetaProgress();
       window.__ROOSTER_TEST__.grantMetaKernels(12);
     });
-    await page.getByRole('button', { name: 'Talente', exact: true }).click();
+    await page.getByRole('button', { name: 'Talents', exact: true }).click();
     await fs.mkdir(artifactDir, { recursive: true });
     await page.screenshot({ path: path.join(artifactDir, 'talent-tree-mobile.png') });
     await page.locator('[data-talent="sturdy-nest"]').click();
@@ -410,9 +410,9 @@ async function verifyTalentPreviewFlow(context, serverUrl) {
     }));
     assert(Object.keys(preview.state.talentRanks).length === 0 && preview.enabledNodes === 6,
       'Opening a talent preview bought a rank or left locked talents uninspectable.', preview);
-    assert(preview.name === 'Stabiles Nest' && preview.description.includes('+2 % maximale HP')
+    assert(preview.name === 'Sturdy Nest' && preview.description.includes('+2% maximum HP')
       && preview.current === '0 %' && preview.next === '+2 %' && preview.max === '+6 %'
-      && preview.action.includes('12 Körner') && !preview.actionDisabled,
+      && preview.action.includes('12 kernels') && !preview.actionDisabled,
     'The talent preview does not explain current, next and maximum effects before purchase.', preview);
 
     await page.locator('[data-talent-purchase]').click();
@@ -428,7 +428,7 @@ async function verifyTalentPreviewFlow(context, serverUrl) {
       status: document.querySelector('[data-talent-detail-status]')?.textContent
     }));
     assert(purchased.state.kernels === 0 && purchased.current === '+2 %' && purchased.next === '+4 %'
-      && purchased.actionDisabled && purchased.status.includes('22 Körner'),
+      && purchased.actionDisabled && purchased.status.includes('22 more kernels'),
     'The explicit purchase did not refresh the same talent preview and balance.', purchased);
 
     await page.locator('.talent-inspector__close').click();
@@ -439,8 +439,8 @@ async function verifyTalentPreviewFlow(context, serverUrl) {
       status: document.querySelector('[data-talent-detail-status]')?.textContent,
       actionDisabled: document.querySelector('[data-talent-purchase]')?.disabled
     }));
-    assert(locked.name === 'Weite Schwingen' && locked.description.includes('XP-Magnetradius')
-      && locked.status.includes('3 Talent-Ränge benötigt') && locked.actionDisabled,
+    assert(locked.name === 'Wide Wings' && locked.description.includes('XP magnet radius')
+      && locked.status.includes('3 talent ranks required') && locked.actionDisabled,
     'Locked talents cannot be inspected and planned safely.', locked);
     assert(errors.length === 0, 'Browser errors in the talent preview flow.', errors);
     await page.waitForTimeout(220);
@@ -455,7 +455,7 @@ async function verifyCompactTalentLayout(context, serverUrl) {
   const { page, errors } = await openGame(context, serverUrl, '-talent-compact');
   try {
     await page.evaluate(() => window.__ROOSTER_TEST__.resetMetaProgress());
-    await page.getByRole('button', { name: 'Talente', exact: true }).click();
+    await page.getByRole('button', { name: 'Talents', exact: true }).click();
     const layout = await page.evaluate(() => {
       const view = document.querySelector('[data-hub-view="training"]');
       const tree = document.querySelector('.talent-tree');
@@ -509,7 +509,7 @@ async function verifyTenRunsTalentsAndReset(context, serverUrl) {
         api.recordMetaRun({
           kills: 120 + index * 8,
           elapsedMs: 510000 - index * 3500,
-          rooster: { id: 'ace', name: 'Eier-Ass' },
+          rooster: { id: 'ace', name: 'Barnyard Ace' },
           challenge: { id: challengeId, name: challengeId },
           build: { active: [], passive: [], evolutions: [] }
         });

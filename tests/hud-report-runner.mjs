@@ -142,7 +142,7 @@ async function verifyResponsiveHud(browser, serverUrl) {
       );
       const expected = viewport.width <= 760
         ? { time: '09:29', wave: '2/10', kills: '109', compact: true }
-        : { time: '09:29', wave: 'Welle 2/10', kills: '109 Abschüsse', compact: false };
+        : { time: '09:29', wave: 'Wave 2/10', kills: '109 kills', compact: false };
       assert(layout.metrics.time.visible === expected.time
         && layout.metrics.wave.visible === expected.wave
         && layout.metrics.kills.visible === expected.kills,
@@ -341,10 +341,10 @@ async function verifySettingsAndReport(browser, serverUrl) {
     assert(result.report.deathCause === 'contact:slime', 'Run report lost the lethal source.', result.report);
     assert(result.tableRows.length === result.report.combatSources.slice(0, 10).length,
       'Rendered source table differs from telemetry source data.', result);
-    assert(['Quelle', 'Schaden', 'Anteil', 'Treffer', 'Abschüsse', 'Overkill', 'Aktiv']
+    assert(['Source', 'Damage', 'Share', 'Hits', 'Kills', 'Overkill', 'Active']
       .every((heading) => result.tableHeaders.includes(heading)),
     'Run report does not expose every required combat metric.', result.tableHeaders);
-    assert(result.summaryText.includes('Eier-Ass') && result.buildText.includes('Target Egg'),
+    assert(result.summaryText.includes('Barnyard Ace') && result.buildText.includes('Target Egg'),
       'Run report does not identify rooster and build.', result);
     assert(result.panel.left >= 0 && result.panel.right <= 390 && result.panel.height <= 812,
       'Run report does not fit the portrait viewport.', result.panel);
@@ -376,8 +376,8 @@ async function verifyReturnToHub(browser, serverUrl) {
       cancelLabel: document.querySelector('[data-return-cancel]')?.textContent.trim()
     }));
     assert(confirmation.visible
-      && confirmation.confirmLabel === 'Run verlassen'
-      && confirmation.cancelLabel === 'Weiterkämpfen',
+      && confirmation.confirmLabel === 'Leave run'
+      && confirmation.cancelLabel === 'Keep fighting',
     'Returning to the hub lacks a clear confirmation step.', confirmation);
 
     await page.click('[data-return-cancel]');
@@ -393,7 +393,7 @@ async function verifyReturnToHub(browser, serverUrl) {
       choosingRooster: window.__ROOSTER_TEST__.getState().choosingRooster
     }));
     assert(result.hubVisible && result.runActionHidden && result.choosingRooster,
-      'Confirmed return did not restart safely in the Hennenhütte.', result);
+      'Confirmed return did not restart safely in the Henhouse.', result);
     assert(errors.length === 0, 'Browser errors in return-to-hub flow.', errors);
     return { confirmation, result };
   } finally {

@@ -5,12 +5,12 @@ import { STORM_VISUAL_VERSION } from '../config/aceVisual.js';
 export const ROOSTER_DEFINITIONS = [
   {
     id: 'ace',
-    name: 'Eier-Ass',
-    shortName: 'Eier-Ass',
-    role: 'Präziser Allrounder',
+    name: 'Barnyard Ace',
+    shortName: 'Ace',
+    role: 'Precision All-Rounder',
     icon: 'golden-egg',
-    description: 'Zielsuchende Eier und eine eingebaute Chance auf kritische Treffer.',
-    passive: 'Deadeye: 8% Chance auf doppelten Basis-Ei-Schaden.',
+    description: 'Homing eggs with a built-in chance to deal critical damage.',
+    passive: 'Deadeye: 8% chance to deal double base-egg damage.',
     stats: {
       maxHp: 100,
       speed: 210,
@@ -29,7 +29,7 @@ export const ROOSTER_DEFINITIONS = [
       name: 'Sunshot Array',
       texture: 'evo-sunshot-array-projectile',
       passive: 'ace-deadeye-drill',
-      description: 'Drei leuchtende Ziel-Eier durchschlagen und springen auf neue Ziele.',
+      description: 'Three radiant target eggs pierce enemies and ricochet to new targets.',
       minimumShots: 3,
       damageMultiplier: 0.82,
       speedBonus: 110,
@@ -46,19 +46,19 @@ export const ROOSTER_DEFINITIONS = [
       {
         id: 'ace-bullseye',
         name: 'Bullseye Barrage',
-        focus: 'Kritische Zielsalven und Ricochets',
+        focus: 'Critical target volleys and ricochets',
         upgrades: ['ace-deadeye-drill', 'ace-guidance-fins', 'critical-yolk', 'ricochet-eggs', 'double-shot']
       },
       {
         id: 'ace-solar-ranger',
         name: 'Solar Ranger',
-        focus: 'Piercing-Sonnen-Eier und Brandzonen',
+        focus: 'Piercing sun eggs and burning zones',
         upgrades: ['golden-egg', 'fire-eggs', 'piercing-eggs', 'molotov-egg', 'regen']
       },
       {
         id: 'ace-shell-warden',
         name: 'Shell Warden',
-        focus: 'Kontrollierter Orbit und sichere Distanz',
+        focus: 'Controlled orbit and safe spacing',
         upgrades: ['orbit-eggs', 'armor', 'lightning-comb', 'move-speed', 'second-wind']
       }
     ],
@@ -89,12 +89,12 @@ export const ROOSTER_DEFINITIONS = [
   },
   {
     id: 'artillery',
-    name: 'Bummbert',
-    shortName: 'Bumm',
-    role: 'Schwerer Flächenschaden',
+    name: 'Boombardier',
+    shortName: 'Boom',
+    role: 'Heavy Area Damage',
     icon: 'rocket-egg',
-    description: 'Langsame, schwere Eier explodieren beim Einschlag.',
-    passive: 'Blast Shell: Treffer verursachen 55% Schaden in 64 Radius.',
+    description: 'Slow, heavy eggs explode on impact.',
+    passive: 'Blast Shell: Hits deal 55% damage within a 64-unit radius.',
     stats: {
       maxHp: 115,
       speed: 185,
@@ -118,7 +118,7 @@ export const ROOSTER_DEFINITIONS = [
       texture: 'evo-siegebreaker-shell-projectile',
       tint: 0xffffff,
       passive: 'artillery-reinforced-breech',
-      description: 'Eine panzerbrechende Granate durchschlägt ihr Ziel und erzeugt eine massive Doppelwelle.',
+      description: 'An armor-piercing shell punches through its target and creates a massive double shockwave.',
       damageMultiplier: 1.18,
       speedBonus: 55,
       pierce: 1,
@@ -146,19 +146,19 @@ export const ROOSTER_DEFINITIONS = [
       {
         id: 'artillery-siege-engine',
         name: 'Siege Engine',
-        focus: 'Startwaffen-Explosionen und Standfestigkeit',
+        focus: 'Starting-weapon explosions and resilience',
         upgrades: ['artillery-reinforced-breech', 'artillery-blast-plating', 'bigger-eggs', 'armor', 'max-hp']
       },
       {
         id: 'artillery-broodstorm',
         name: 'Broodstorm Gunner',
-        focus: 'Raketenketten und breite Detonationen',
+        focus: 'Rocket chains and wide detonations',
         upgrades: ['rocket-egg', 'bigger-eggs', 'fire-eggs', 'golden-egg', 'piercing-eggs']
       },
       {
         id: 'artillery-firebreak',
         name: 'Firebreak',
-        focus: 'Brandfelder und Gruppenkontrolle',
+        focus: 'Burning fields and crowd control',
         upgrades: ['molotov-egg', 'regen', 'void-nest', 'xp-magnet', 'second-wind']
       }
     ],
@@ -188,12 +188,12 @@ export const ROOSTER_DEFINITIONS = [
   },
   {
     id: 'storm',
-    name: 'Blitzkamm',
-    shortName: 'Blitz',
-    role: 'Schneller Kettenangriff',
+    name: 'Stormcrest',
+    shortName: 'Storm',
+    role: 'Fast Chain Attacks',
     icon: 'lightning-comb',
-    description: 'Sehr schnelle Sturm-Eier entladen sich auf ein nahes zweites Ziel.',
-    passive: 'Static Chain: 60% Schaden auf 1 weiteres Ziel in 190 Radius.',
+    description: 'Very fast storm eggs discharge into a nearby second target.',
+    passive: 'Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.',
     stats: {
       maxHp: 85,
       speed: 245,
@@ -217,7 +217,7 @@ export const ROOSTER_DEFINITIONS = [
       texture: 'evo-tempest-crown-projectile',
       tint: 0xffffff,
       passive: 'storm-static-plumage',
-      description: 'Zwillings-Sturmeier jagen als weit springende Blitze durch den Schwarm.',
+      description: 'Twin storm eggs tear through the swarm as far-reaching chain lightning.',
       minimumShots: 2,
       damageMultiplier: 0.92,
       speedBonus: 140,
@@ -249,19 +249,19 @@ export const ROOSTER_DEFINITIONS = [
       {
         id: 'storm-crown-circuit',
         name: 'Crown Circuit',
-        focus: 'Schnelle Startwaffen-Ketten und Mobilität',
+        focus: 'Fast starting-weapon chains and mobility',
         upgrades: ['storm-static-plumage', 'storm-tailwind-training', 'faster-eggs', 'move-speed', 'critical-yolk']
       },
       {
         id: 'storm-thunder-halo',
         name: 'Thunder Halo',
-        focus: 'Kettenblitze und geladener Nahbereich',
+        focus: 'Chain lightning and charged close range',
         upgrades: ['lightning-comb', 'critical-yolk', 'orbit-eggs', 'armor', 'second-wind']
       },
       {
         id: 'storm-dawn-runner',
         name: 'Dawn Runner',
-        focus: 'Laserlinien und permanentes Kiten',
+        focus: 'Laser lanes and constant kiting',
         upgrades: ['laser-comb', 'swift-shells', 'move-speed', 'support-chick', 'faster-eggs']
       }
     ],

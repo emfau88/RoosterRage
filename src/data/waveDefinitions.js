@@ -18,7 +18,7 @@ function xpCurve(budget, bossXp = 0, segmentShares = null) {
 export const WAVE_DEFINITIONS = [
   {
     name: 'First Peck',
-    intent: 'Nur Fodder: Bewegung und Auto-Aim unter wachsender Dichte lernen',
+    intent: 'Fodder only: learn movement and auto-aim as the flock thickens',
     count: 48,
     interval: 500,
     targetDuration: [22, 28],
@@ -38,7 +38,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Rush Hour',
-    intent: 'Runner-Linien schneiden durch einen kontrollierten Fodder-Strom',
+    intent: 'Runner lines cut through a controlled stream of fodder',
     count: 62,
     interval: 460,
     targetDuration: [22, 28],
@@ -57,7 +57,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Heavy Company',
-    intent: 'Erste Zielpriorität mit Elite-Abschluss und kurzer Erholung davor',
+    intent: 'First target-priority test, with a brief recovery before the elite finish',
     count: 78,
     interval: 520,
     targetDuration: [31, 39],
@@ -78,7 +78,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Crossfire',
-    intent: 'Spitter arbeiten hinter einer lesbaren Nahkampfwand',
+    intent: 'Spitters operate behind a readable melee wall',
     count: 92,
     interval: 390,
     targetDuration: [27, 33],
@@ -98,7 +98,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Firing Line',
-    intent: 'Erster echter Kreuzfeuer-Druck mit Fächern in der Schlussphase',
+    intent: 'First real crossfire pressure, with fan shots in the final phase',
     count: 112,
     interval: 380,
     targetDuration: [31, 39],
@@ -119,7 +119,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Elite Pursuit',
-    intent: 'Fan-Angriffe, Rusher-Pulse und ein priorisiertes Elite-Ziel',
+    intent: 'Fan attacks, rusher pulses, and a priority elite target',
     count: 132,
     interval: 410,
     targetDuration: [40, 50],
@@ -142,7 +142,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Bombardment',
-    intent: 'Bomber-Pulse erzwingen Bewegung zwischen kurzen sicheren Fenstern',
+    intent: 'Bomber pulses force movement between short safe windows',
     count: 156,
     interval: 300,
     targetDuration: [31, 39],
@@ -164,7 +164,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Pressure Cooker',
-    intent: 'Gemischte Raumkontrolle mit Elite-Fernkämpfer als Abschluss',
+    intent: 'Mixed area control capped by an elite ranged threat',
     count: 180,
     interval: 320,
     targetDuration: [36, 44],
@@ -188,7 +188,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Royal Guard',
-    intent: 'Maximaler kontrollierter Rollendruck vor dem Finale',
+    intent: 'Maximum controlled role pressure before the finale',
     count: 210,
     interval: 330,
     targetDuration: [45, 55],
@@ -211,7 +211,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'The Brood King',
-    intent: 'Bossabschnitte, Feuerball und kontrollierte Add-Pulse',
+    intent: 'Boss phases, fireball, and controlled add pulses',
     count: 1,
     interval: 9999,
     targetDuration: [58, 76],

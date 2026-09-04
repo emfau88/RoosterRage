@@ -2,17 +2,17 @@ export const CHALLENGE_DEFINITIONS = [
   {
     id: 'standard',
     name: 'Standard Run',
-    description: 'Überlebe zehn eskalierende Wellen und besiege den Brood King.',
+    description: 'Survive ten escalating waves and defeat the Brood King.',
     arenaId: null,
-    unlock: { type: 'default', target: 0, label: 'Immer verfügbar' },
+    unlock: { type: 'default', target: 0, label: 'Always available' },
     modifiers: {}
   },
   {
     id: 'rush-hour',
     name: 'Rush Hour',
-    description: 'Vertikaler Hof mit schnelleren Gegnern und kürzeren Druckphasen.',
+    description: 'A vertical arena with faster enemies and shorter pressure phases.',
     arenaId: 'vertical-run',
-    unlock: { type: 'victories', target: 1, label: '1 Standard-Run gewinnen' },
+    unlock: { type: 'victories', target: 1, label: 'Win 1 Standard Run' },
     modifiers: {
       targetDurationScale: 0.82,
       enemySpeedMultiplier: 1.12,
@@ -22,9 +22,9 @@ export const CHALLENGE_DEFINITIONS = [
   {
     id: 'featherweight',
     name: 'Featherweight',
-    description: 'Enges Karree mit weniger HP, mehr Tempo und höherem Eigenschaden.',
+    description: 'A tight square with less HP, more speed, and higher player damage.',
     arenaId: 'square-coop',
-    unlock: { type: 'totalKills', target: 150, label: '150 Gegner besiegen' },
+    unlock: { type: 'totalKills', target: 150, label: 'Defeat 150 enemies' },
     modifiers: {
       playerHpMultiplier: 0.72,
       playerSpeedMultiplier: 1.12,
@@ -35,9 +35,9 @@ export const CHALLENGE_DEFINITIONS = [
   {
     id: 'royal-gauntlet',
     name: 'Royal Gauntlet',
-    description: 'Offener Hof mit zäherem Hofstaat und wertvollerer XP.',
+    description: 'An open yard with a tougher royal court and more valuable XP.',
     arenaId: 'open-yard',
-    unlock: { type: 'bossDefeats', target: 1, label: 'THE BROOD KING besiegen' },
+    unlock: { type: 'bossDefeats', target: 1, label: 'Defeat THE BROOD KING' },
     modifiers: {
       targetDurationScale: 0.92,
       enemyHpMultiplier: 1.18,

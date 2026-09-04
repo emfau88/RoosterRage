@@ -45,6 +45,7 @@
     "test:balance": "node tests/balance-runner.mjs",
     "test:late-run": "node tests/late-run-production-runner.mjs",
     "marketing:capture": "node scripts/capture-store-assets.mjs --screenshots",
+    "marketing:readme": "node scripts/capture-store-assets.mjs --readme",
     "marketing:trailer": "node scripts/capture-store-assets.mjs --trailer"
   },
   "dependencies": {

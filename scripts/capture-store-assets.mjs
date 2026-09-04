@@ -7,7 +7,11 @@ import {
   stopTestServer
 } from '../tests/helpers/test-runtime.mjs';
 
-const mode = process.argv.includes('--trailer') ? 'trailer' : 'screenshots';
+const mode = process.argv.includes('--trailer')
+  ? 'trailer'
+  : process.argv.includes('--readme')
+    ? 'readme'
+    : 'screenshots';
 const marketingDir = path.join(projectRoot, 'docs', 'marketing');
 const screenshotDir = path.join(marketingDir, 'screenshots');
 const trailerDir = path.join(marketingDir, 'trailer');
@@ -145,6 +149,41 @@ async function captureScreenshots(browser, serverUrl) {
   console.log(`Captured four store screenshots in ${screenshotDir}.`);
 }
 
+async function captureReadmeScreenshots(browser, serverUrl) {
+  await fs.mkdir(screenshotDir, { recursive: true });
+  const targets = [
+    {
+      name: 'desktop',
+      viewport: { width: 1440, height: 810 },
+      seed: 'readme-hub-desktop',
+      file: '05-run-preparation-desktop.png'
+    },
+    {
+      name: 'mobile portrait',
+      viewport: { width: 390, height: 844 },
+      seed: 'readme-hub-mobile',
+      file: '06-run-preparation-mobile-portrait.png'
+    }
+  ];
+
+  for (const target of targets) {
+    const context = await browser.newContext({ viewport: target.viewport });
+    const page = await context.newPage();
+    const errors = trackErrors(page);
+    await openGame(page, serverUrl, target.seed);
+    await showHub(page);
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState().choosingRooster);
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: path.join(screenshotDir, target.file) });
+    if (errors.length) throw new Error(`${target.name} README capture errors:\n${errors.join('\n')}`);
+    await context.close();
+  }
+
+  console.log(`Captured current desktop and mobile README screenshots in ${screenshotDir}.`);
+}
+
 async function captureTrailer(browser, serverUrl) {
   await fs.mkdir(trailerDir, { recursive: true });
   const context = await browser.newContext({
@@ -173,6 +212,7 @@ async function run() {
   const browser = await chromium.launch({ headless: true });
   try {
     if (mode === 'trailer') await captureTrailer(browser, serverState.url);
+    else if (mode === 'readme') await captureReadmeScreenshots(browser, serverState.url);
     else await captureScreenshots(browser, serverState.url);
   } finally {
     await browser.close();

@@ -11,7 +11,7 @@ export const ARENA_DEFINITIONS = [
     id: 'open-yard',
     name: 'Harvest Yard',
     topology: 'open',
-    description: 'Sonniger Erntehof mit offenen Ausweichlinien und kleinen Obsthainen.',
+    description: 'A sunlit harvest yard with open dodge lanes and small orchards.',
     bounds: { x: 44, y: 44, width: 1312, height: 812 },
     streaming: {
       axis: 'both',
@@ -32,7 +32,7 @@ export const ARENA_DEFINITIONS = [
     id: 'vertical-run',
     name: 'Feed Alley',
     topology: 'corridor',
-    description: 'Engere Seiten, klare Nord-Süd-Linien und durchbrechbare Sperren.',
+    description: 'Tighter sides, clear north-south lanes, and breakable barriers.',
     bounds: { x: 300, y: 44, width: 800, height: 812 },
     streaming: {
       axis: 'vertical',
@@ -62,7 +62,7 @@ export const ARENA_DEFINITIONS = [
     id: 'square-coop',
     name: 'Coop Square',
     topology: 'compact-square',
-    description: 'Kurze Rotationen, hoher Nahbereichswert und vier offene Eckrouten.',
+    description: 'Short rotations, strong close-range value, and four open corner routes.',
     bounds: { x: 85, y: 45, width: 1230, height: 810 },
     accent: 0xd49a55,
     weaponRatings: { ...sharedRatings, area: 1.2, orbit: 1.2, projectile: 0.9 },

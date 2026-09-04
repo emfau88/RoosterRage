@@ -1,12 +1,12 @@
 export const ENEMY_ROLE_MATRIX = Object.freeze([
-  { id: 'fodder', purpose: 'Dichte und Ressourcenfluss', primaryDanger: false, counterplay: 'Freie Bewegung und Flächenschaden' },
-  { id: 'runner', purpose: 'Schneller Positionsdruck', primaryDanger: true, counterplay: 'Früh seitlich schneiden' },
-  { id: 'tank', purpose: 'Blockiert Schusslinien', primaryDanger: true, counterplay: 'Priorisieren oder umgehen' },
-  { id: 'shooter', purpose: 'Erzwingt Fernkampfbewegung', primaryDanger: true, counterplay: 'Telegraphierte Linie verlassen' },
-  { id: 'area-denial', purpose: 'Sperrt Bewegungssektoren', primaryDanger: true, counterplay: 'Offene Route vor der Salve wählen' },
-  { id: 'exploder', purpose: 'Bestrafte Nahbereichs-Kills', primaryDanger: true, counterplay: 'Explosionsring nach dem Kill verlassen' },
-  { id: 'support', purpose: 'Verstärkt Gegnergruppen', primaryDanger: false, counterplay: 'Auraquelle zuerst ausschalten' },
-  { id: 'summoner', purpose: 'Erzeugt kontrollierte Zusatzdichte', primaryDanger: true, counterplay: 'Beschwör-Telegraph unterbrechen' }
+  { id: 'fodder', purpose: 'Crowd density and resource flow', primaryDanger: false, counterplay: 'Keep moving and use area damage' },
+  { id: 'runner', purpose: 'Fast positional pressure', primaryDanger: true, counterplay: 'Cut sideways early' },
+  { id: 'tank', purpose: 'Blocks firing lanes', primaryDanger: true, counterplay: 'Prioritize or evade' },
+  { id: 'shooter', purpose: 'Forces ranged movement', primaryDanger: true, counterplay: 'Leave the telegraphed line' },
+  { id: 'area-denial', purpose: 'Locks down movement sectors', primaryDanger: true, counterplay: 'Choose an open route before the volley' },
+  { id: 'exploder', purpose: 'Punishes close-range kills', primaryDanger: true, counterplay: 'Leave the blast ring after the kill' },
+  { id: 'support', purpose: 'Empowers enemy groups', primaryDanger: false, counterplay: 'Eliminate the aura source first' },
+  { id: 'summoner', purpose: 'Creates controlled extra density', primaryDanger: true, counterplay: 'Interrupt the summon telegraph' }
 ]);
 
 export const ENCOUNTER_STANDARDS = Object.freeze({

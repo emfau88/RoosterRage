@@ -323,7 +323,7 @@ export class EnemyAttackSystem {
     });
     this.scene.hud.showEncounterBanner(
       phase.name ?? `Brood King Phase ${enemy.bossPhaseIndex + 2}`,
-      phase.subtitle ?? 'Das Angriffsmuster verändert sich.',
+      phase.subtitle ?? 'The attack pattern changes.',
       'boss'
     );
   }

@@ -18,62 +18,62 @@ export const CHALLENGE_REWARD_MULTIPLIERS = Object.freeze({
 export const TALENT_DEFINITIONS = Object.freeze([
   {
     id: 'sturdy-nest',
-    name: 'Stabiles Nest',
+    name: 'Sturdy Nest',
     icon: 'max-hp',
     maxRank: 3,
     costs: [12, 22, 36],
-    description: '+2 % maximale HP pro Rang.',
-    effect: { label: 'Maximale HP', perRank: 2, unit: '%' },
+    description: '+2% maximum HP per rank.',
+    effect: { label: 'Maximum HP', perRank: 2, unit: '%' },
     unlockAt: 0
   },
   {
     id: 'swift-spurs',
-    name: 'Flotte Sporen',
+    name: 'Swift Spurs',
     icon: 'move-speed',
     maxRank: 3,
     costs: [12, 22, 36],
-    description: '+1,5 % Bewegungstempo pro Rang.',
-    effect: { label: 'Bewegungstempo', perRank: 1.5, unit: '%' },
+    description: '+1.5% movement speed per rank.',
+    effect: { label: 'Movement speed', perRank: 1.5, unit: '%' },
     unlockAt: 0
   },
   {
     id: 'polished-yolk',
-    name: 'Polierter Dotter',
+    name: 'Polished Yolk',
     icon: 'bigger-eggs',
     maxRank: 3,
     costs: [12, 22, 36],
-    description: '+2 % Startwaffen-Schaden pro Rang.',
-    effect: { label: 'Startwaffen-Schaden', perRank: 2, unit: '%' },
+    description: '+2% starting weapon damage per rank.',
+    effect: { label: 'Starting weapon damage', perRank: 2, unit: '%' },
     unlockAt: 0
   },
   {
     id: 'wide-wings',
-    name: 'Weite Schwingen',
+    name: 'Wide Wings',
     icon: 'xp-magnet',
     maxRank: 2,
     costs: [35, 55],
-    description: '+6 % XP-Magnetradius pro Rang.',
-    effect: { label: 'XP-Magnetradius', perRank: 6, unit: '%' },
+    description: '+6% XP magnet radius per rank.',
+    effect: { label: 'XP magnet radius', perRank: 6, unit: '%' },
     unlockAt: 3
   },
   {
     id: 'second-choice',
-    name: 'Zweiter Blick',
+    name: 'Second Choice',
     icon: 'restart',
     maxRank: 1,
     costs: [65],
-    description: '+1 Reroll pro Run.',
-    effect: { label: 'Rerolls pro Run', perRank: 1, unit: '' },
+    description: '+1 reroll per run.',
+    effect: { label: 'Rerolls per run', perRank: 1, unit: '' },
     unlockAt: 5
   },
   {
     id: 'royal-instinct',
-    name: 'Königsinstinkt',
+    name: 'Royal Instinct',
     icon: 'critical-yolk',
     maxRank: 1,
     costs: [90],
-    description: '+1 % kritische Trefferchance.',
-    effect: { label: 'Kritische Trefferchance', perRank: 1, unit: '%' },
+    description: '+1% critical hit chance.',
+    effect: { label: 'Critical hit chance', perRank: 1, unit: '%' },
     unlockAt: 8
   }
 ]);
