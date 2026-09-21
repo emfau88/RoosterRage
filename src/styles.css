@@ -8200,6 +8200,16 @@ html.has-ui-overlay .upgrade-confirmation {
   z-index: 3;
 }
 
+.upgrade-panel .upgrade-list {
+  margin-inline: 10px;
+}
+
+.upgrade-panel .reroll-button {
+  width: calc(100% - 20px);
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .upgrade-panel__frame--corner-tl {
   top: -10px;
   left: -10px;
