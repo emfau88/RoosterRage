@@ -1238,16 +1238,16 @@ async function testHordeCombatFeedback(browser) {
       'Transient horde feedback did not clean itself up.',
       settled
     );
-    await page.waitForTimeout(600);
+    await page.waitForTimeout(2600);
     const mobileBannerHeld = await page.evaluate(() => (
       window.__ROOSTER_TEST__.getCombatFeedbackState().hud.visible
     ));
-    assert(mobileBannerHeld, 'Mobile multi-kill feedback should remain visible beyond one second.');
-    await page.waitForTimeout(500);
+    assert(mobileBannerHeld, 'Multi-kill feedback should remain visible for its intended four-second celebration.');
+    await page.waitForTimeout(1500);
     const mobileBannerDismissed = await page.evaluate(() => (
       window.__ROOSTER_TEST__.getCombatFeedbackState().hud.visible
     ));
-    assert(!mobileBannerDismissed, 'Mobile multi-kill feedback should dismiss after its extended hold.');
+    assert(!mobileBannerDismissed, 'Multi-kill feedback should dismiss after its four-second hold.');
     assert(errors.length === 0, 'Browser reported errors during horde feedback test.', errors);
     return { name: 'horde combat feedback', status: 'passed', immediate, settled };
   } finally {

@@ -37,7 +37,7 @@ export class Pickup {
     this.sprite = scene.physics.add.sprite(x, y, texture)
       .setDepth(this.chest ? 9 : 5.5)
       .setScale(this.chest?.scale ?? 1);
-    if (!this.chest) this.sprite.setDisplaySize(60, 60);
+    if (!this.chest) this.sprite.setDisplaySize(63, 63);
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
     this.sprite.setCircle(this.chest ? 18 : 14);
     this.sprite.entity = this;

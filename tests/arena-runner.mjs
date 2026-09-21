@@ -272,8 +272,8 @@ async function verifyPickups(browser, serverUrl) {
       && result.magnetSticker?.texture === 'pickup-magnet'
       && result.bombSticker?.texture === 'pickup-bomb'
       && [result.healSticker, result.magnetSticker, result.bombSticker]
-        .every((sticker) => sticker.width === 60 && sticker.height === 60),
-    'Pickup sticker artwork no longer retains its intended 60px world size.',
+        .every((sticker) => sticker.width === 63 && sticker.height === 63),
+    'Pickup sticker artwork no longer retains its intended 63px world size.',
     result);
     assert(result.healed && result.hpAfterHeal === 65, 'Heal pickup is not a bounded 25% max-HP heal.', result);
     assert(result.beforeFirstPickup.spawned.heal === 0 && result.firstPickup.spawned.heal === 1,

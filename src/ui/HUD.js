@@ -1489,7 +1489,7 @@ export class HUD {
 
   scheduleMultiKillHide() {
     window.clearTimeout(this.multiKillTimeout);
-    const displayDuration = window.matchMedia('(max-width: 760px)').matches ? 1600 : 1050;
+    const displayDuration = 4000;
     this.multiKillTimeout = window.setTimeout(() => {
       this.multiKill?.classList.remove('is-visible');
       this.root.querySelector('[data-kills]')?.classList.remove('is-kill-burst');
