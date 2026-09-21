@@ -178,7 +178,7 @@ Die technische Freigabe dieses Änderungspakets ist erreicht. Für die eigentlic
 - [ ] **Loading Screen:** Der aktuelle 440-px-zentrierte Loader ist sauber, nutzt Desktop aber wenig. Vorschlag: auf großen Bildschirmen eine 640–760-px-Karte mit kleiner Key-Art-Fläche und separatem Fortschrittsbereich; kompakte Ansicht unverändert lassen.
 - [x] **Start-/Play-Menü:** Desktop nutzt nun bis zu 1.240 px symmetrisch, bleibt bei niedrigen Fenstern kompakt und zeigt Arena, Rooster sowie Start-Button ohne Scrollen. Mobile darf bei extrem kleinen Höhen weiter scrollen.
 - [x] **Stabiler Hub-Rahmen:** Play, Roosters, Training und Archive teilen auf Desktop dieselbe responsive Außenhöhe; nur ihr Inhalt wechselt beziehungsweise scrollt. Das verhindert das bisherige Springen des zentrierten Rahmens.
-- [x] **Level-up-Präsentation:** Ein dezenter Gold-/Farmrahmen mit XP- bzw. Ei-Medaillon, sparsamen Stroh-/Federdetails und kurzer Eröffnungsleuchte wertet die Auswahl auf. Desktop zeigt die Karten-Icons etwa 30 % größer; kurze und schmale Ansichten bleiben kompakt. Reduced Motion wird respektiert.
+- [x] **Level-up-Präsentation:** Ein handgemalter, transparenter 9-Slice-Farmrahmen mit Holz, Messing, sparsamen Stroh-/Federdetails sowie XP- bzw. Ei-Medaillon wertet die Auswahl auf. Desktop zeigt die Karten-Icons etwa 30 % größer; kurze und schmale Ansichten bleiben kompakt. Eine kurze Eröffnungsleuchte respektiert Reduced Motion.
 - [ ] **Erster-Lauf-Hinweise:** Auto-Fire, Bewegung, zerstörbare Props und Pickup-Regeln in wenigen kontextuellen Hinweisen erklären, nicht als langes Tutorial.
 - [ ] **10-Seed-Soak:** Erst nach Abschluss der P1-Entscheidungen ausführen, damit die lange Matrix nicht nach UI-/Map-Änderungen erneut laufen muss.
 

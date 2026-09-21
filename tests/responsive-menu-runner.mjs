@@ -136,7 +136,10 @@ async function verifyViewport(browser, url, viewport) {
     const upgrade = {
       panel: await readRect(page, '.upgrade-panel').then((rect) => rect),
       emblem: await readRect(page, '.upgrade-panel__emblem'),
-      ornaments: await page.locator('.upgrade-panel__straw, .upgrade-panel__feather').count(),
+      frameImage: await page.locator('.upgrade-panel__frame').first().evaluate((element) => (
+        getComputedStyle(element).backgroundImage
+      )),
+      framePieces: await page.locator('.upgrade-panel__frame').count(),
       choices: await page.locator('.upgrade-button').evaluateAll((buttons) => buttons.map((button) => {
         const rect = button.getBoundingClientRect();
         return { left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
@@ -159,8 +162,8 @@ async function verifyViewport(browser, url, viewport) {
       `${viewport.name}: an upgrade choice is outside the viewport.`, upgrade);
     assert(upgrade.documentWidth <= viewport.width,
       `${viewport.name}: Upgrade selection creates horizontal document overflow.`, upgrade);
-    assert(upgrade.ornaments === 4 && upgrade.emblem.width >= 43,
-      `${viewport.name}: Upgrade selection is missing its frame ornaments or title emblem.`, upgrade);
+    assert(upgrade.framePieces === 8 && upgrade.frameImage.includes('upgrade-panel-frame-v1.png') && upgrade.emblem.width >= 43,
+      `${viewport.name}: Upgrade selection is missing its illustrated frame or title emblem.`, upgrade);
     if (viewport.width >= 900 && viewport.height >= 701) {
       assert(upgrade.iconArt.cssWidth >= 75,
         `${viewport.name}: Upgrade artwork should use the larger desktop treatment.`, upgrade);

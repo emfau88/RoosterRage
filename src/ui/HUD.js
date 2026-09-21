@@ -258,10 +258,14 @@ export class HUD {
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel upgrade-panel upgrade-panel--${chest ? 'chest' : 'level'} ${chest ? 'panel--reward' : ''}">
-        <span class="upgrade-panel__straw upgrade-panel__straw--top" aria-hidden="true"></span>
-        <span class="upgrade-panel__straw upgrade-panel__straw--bottom" aria-hidden="true"></span>
-        <span class="upgrade-panel__feather upgrade-panel__feather--left" aria-hidden="true"></span>
-        <span class="upgrade-panel__feather upgrade-panel__feather--right" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--top" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--right" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--bottom" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--left" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-tl" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-tr" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-br" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-bl" aria-hidden="true"></span>
         <div class="upgrade-panel__heading">
           <span class="upgrade-panel__emblem" data-upgrade-panel-icon aria-hidden="true"></span>
           <span>

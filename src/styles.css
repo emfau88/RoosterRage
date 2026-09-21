@@ -8109,15 +8109,14 @@ html.has-ui-overlay .upgrade-confirmation {
   }
 }
 
-/* A restrained farm-show frame makes level-up choices feel rewarding without
-   competing with rarity colors or reducing the amount of readable card copy. */
+/* The hand-painted frame is a transparent asset; the panel keeps its own
+   readable fill underneath while the illustrated border sits above it. */
 .upgrade-panel {
-  --upgrade-frame: rgba(230, 181, 69, 0.72);
   --upgrade-frame-soft: rgba(255, 222, 127, 0.14);
   position: relative;
   isolation: isolate;
   width: min(620px, 100%);
-  border-color: var(--upgrade-frame);
+  border-color: rgba(154, 107, 39, 0.66);
   background:
     radial-gradient(circle at 50% -8%, rgba(255, 210, 101, 0.12), transparent 34%),
     linear-gradient(145deg, rgba(26, 40, 43, 0.985), rgba(7, 17, 22, 0.99));
@@ -8126,21 +8125,6 @@ html.has-ui-overlay .upgrade-confirmation {
     0 0 0 1px rgba(87, 57, 17, 0.7),
     0 26px 74px rgba(0, 0, 0, 0.6);
   animation: upgrade-panel-enter 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.upgrade-panel::before {
-  position: absolute;
-  z-index: -1;
-  inset: 6px;
-  border: 1px solid rgba(255, 223, 132, 0.13);
-  border-radius: 12px;
-  background:
-    linear-gradient(135deg, var(--upgrade-frame), transparent 42%) left top / 42px 1px no-repeat,
-    linear-gradient(45deg, transparent 58%, var(--upgrade-frame)) right top / 42px 1px no-repeat,
-    linear-gradient(45deg, var(--upgrade-frame), transparent 42%) left bottom / 42px 1px no-repeat,
-    linear-gradient(135deg, transparent 58%, var(--upgrade-frame)) right bottom / 42px 1px no-repeat;
-  content: "";
-  pointer-events: none;
 }
 
 .upgrade-panel::after {
@@ -8157,8 +8141,90 @@ html.has-ui-overlay .upgrade-confirmation {
 }
 
 .upgrade-panel--chest {
-  --upgrade-frame: rgba(255, 215, 92, 0.88);
   --upgrade-frame-soft: rgba(255, 224, 133, 0.2);
+}
+
+.upgrade-panel__frame {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1.png');
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.upgrade-panel__frame--top,
+.upgrade-panel__frame--bottom {
+  right: -10px;
+  left: -10px;
+  height: 38px;
+  background-size: calc(200% + 40px) auto;
+}
+
+.upgrade-panel__frame--top {
+  top: -10px;
+  background-position: center top;
+}
+
+.upgrade-panel__frame--bottom {
+  bottom: -10px;
+  background-position: center bottom;
+}
+
+.upgrade-panel__frame--left,
+.upgrade-panel__frame--right {
+  top: -10px;
+  bottom: -10px;
+  width: 38px;
+  background-size: auto calc(200% + 20px);
+}
+
+.upgrade-panel__frame--left {
+  left: -10px;
+  background-position: left center;
+}
+
+.upgrade-panel__frame--right {
+  right: -10px;
+  background-position: right center;
+}
+
+.upgrade-panel__frame--corner-tl,
+.upgrade-panel__frame--corner-tr,
+.upgrade-panel__frame--corner-br,
+.upgrade-panel__frame--corner-bl {
+  width: 58px;
+  height: 58px;
+  background-size: 372px 248px;
+}
+
+.upgrade-panel > :not(.upgrade-panel__frame) {
+  position: relative;
+  z-index: 3;
+}
+
+.upgrade-panel__frame--corner-tl {
+  top: -10px;
+  left: -10px;
+  background-position: left top;
+}
+
+.upgrade-panel__frame--corner-tr {
+  top: -10px;
+  right: -10px;
+  background-position: right top;
+}
+
+.upgrade-panel__frame--corner-br {
+  right: -10px;
+  bottom: -10px;
+  background-position: right bottom;
+}
+
+.upgrade-panel__frame--corner-bl {
+  bottom: -10px;
+  left: -10px;
+  background-position: left bottom;
 }
 
 .upgrade-panel__heading {
@@ -8197,71 +8263,6 @@ html.has-ui-overlay .upgrade-confirmation {
     0 0 15px rgba(255, 190, 48, 0.15);
 }
 
-.upgrade-panel__straw {
-  position: absolute;
-  z-index: 1;
-  width: 72px;
-  height: 7px;
-  opacity: 0.55;
-  background:
-    linear-gradient(8deg, transparent 42%, #d89b35 45% 52%, transparent 55%) 0 0 / 24px 7px,
-    linear-gradient(-7deg, transparent 42%, #f0c15d 45% 52%, transparent 55%) 8px 0 / 29px 7px;
-  pointer-events: none;
-}
-
-.upgrade-panel__straw--top {
-  top: -4px;
-  left: 28px;
-}
-
-.upgrade-panel__straw--bottom {
-  right: 28px;
-  bottom: -4px;
-  transform: rotate(180deg);
-}
-
-.upgrade-panel__feather {
-  position: absolute;
-  z-index: 1;
-  width: 34px;
-  height: 11px;
-  border: 1px solid rgba(248, 224, 158, 0.55);
-  border-left-width: 2px;
-  border-radius: 90% 12% 90% 12%;
-  opacity: 0.58;
-  pointer-events: none;
-}
-
-.upgrade-panel__feather::before {
-  position: absolute;
-  top: 4px;
-  left: -5px;
-  width: 39px;
-  height: 1px;
-  background: rgba(248, 224, 158, 0.66);
-  content: "";
-  transform: rotate(-3deg);
-}
-
-.upgrade-panel__feather::after {
-  position: absolute;
-  inset: 2px 5px;
-  background: repeating-linear-gradient(108deg, transparent 0 5px, rgba(248, 224, 158, 0.38) 6px 7px);
-  content: "";
-}
-
-.upgrade-panel__feather--left {
-  top: 15px;
-  right: 19px;
-  transform: rotate(-28deg);
-}
-
-.upgrade-panel__feather--right {
-  bottom: 15px;
-  left: 19px;
-  transform: rotate(152deg);
-}
-
 @media (min-width: 900px) and (min-height: 701px) {
   .upgrade-panel {
     padding: 22px;
@@ -8295,6 +8296,25 @@ html.has-ui-overlay .upgrade-confirmation {
 }
 
 @media (max-width: 520px) {
+  .upgrade-panel__frame--top,
+  .upgrade-panel__frame--bottom {
+    height: 30px;
+  }
+
+  .upgrade-panel__frame--left,
+  .upgrade-panel__frame--right {
+    width: 30px;
+  }
+
+  .upgrade-panel__frame--corner-tl,
+  .upgrade-panel__frame--corner-tr,
+  .upgrade-panel__frame--corner-br,
+  .upgrade-panel__frame--corner-bl {
+    width: 48px;
+    height: 48px;
+    background-size: 263px 175px;
+  }
+
   .upgrade-panel__heading {
     gap: 9px;
     padding-right: 4px;
@@ -8307,9 +8327,6 @@ html.has-ui-overlay .upgrade-confirmation {
     flex-basis: 44px;
   }
 
-  .upgrade-panel__feather {
-    display: none;
-  }
 }
 
 @keyframes upgrade-panel-enter {
