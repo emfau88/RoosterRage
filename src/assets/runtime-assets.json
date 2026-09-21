@@ -463,6 +463,33 @@
       "bytes": 1830
     },
     {
+      "source": "art-source/ui/stickers/pickup-heal-sticker-v2.png",
+      "sourceSha256": "d71f4012a846ef706f842a8812859380412e4f2c4c070c1fbf311c613a3c3daa",
+      "runtime": "src/assets/ui/stickers/pickup-heal-sticker-v2.webp",
+      "runtimeSha256": "281dedda8c726d79a0e463ede2c37ea5b6628a81caa6a43d409d9c40c0e047f6",
+      "width": 256,
+      "height": 256,
+      "bytes": 25950
+    },
+    {
+      "source": "art-source/ui/stickers/pickup-bomb-sticker-v2.png",
+      "sourceSha256": "5cd0a15f57c2fa91f7ab38bb01036bfbf3839cbf445be8045458dae9dea80ea1",
+      "runtime": "src/assets/ui/stickers/pickup-bomb-sticker-v2.webp",
+      "runtimeSha256": "f7a5caac90f9b780464673e4bafee5cdd548c7b55eccd1c09883d84bc545a4d7",
+      "width": 256,
+      "height": 256,
+      "bytes": 34494
+    },
+    {
+      "source": "art-source/ui/stickers/pickup-magnet-sticker-v2.png",
+      "sourceSha256": "b7769d77dba6fb4b0212315167fdcf5c956679b06f1c92ff059cca0f6c9cb62b",
+      "runtime": "src/assets/ui/stickers/pickup-magnet-sticker-v2.webp",
+      "runtimeSha256": "c4888e076bd4ebcec892fd68b76e431837cb0a8ff0423929a3d523e816df5ac5",
+      "width": 256,
+      "height": 256,
+      "bytes": 31252
+    },
+    {
       "source": "art-source/pickups/pickup-elite-chest.png",
       "sourceSha256": "f482a71054bc703a1ec171e83e59efc0a9f2660780a391f9def4c9e6ce86898d",
       "runtime": "src/assets/pickups/pickup-elite-chest.webp",

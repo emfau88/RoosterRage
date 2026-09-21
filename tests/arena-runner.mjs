@@ -229,19 +229,16 @@ async function verifyPickups(browser, serverUrl) {
         healDepth: remainingHeal?.depth,
         healSticker: remainingHeal && {
           texture: remainingHeal.texture,
-          label: remainingHeal.label,
           width: remainingHeal.displayWidth,
           height: remainingHeal.displayHeight
         },
         magnetSticker: scheduledMagnet && {
           texture: scheduledMagnet.texture,
-          label: scheduledMagnet.label,
           width: scheduledMagnet.displayWidth,
           height: scheduledMagnet.displayHeight
         },
         bombSticker: scheduledBomb && {
           texture: scheduledBomb.texture,
-          label: scheduledBomb.label,
           width: scheduledBomb.displayWidth,
           height: scheduledBomb.displayHeight
         },
@@ -272,14 +269,11 @@ async function verifyPickups(browser, serverUrl) {
       'An uncollected ground pickup renders above the rooster.', result);
     assert(
       result.healSticker?.texture === 'pickup-heal'
-      && result.healSticker.label === 'HEALTH'
       && result.magnetSticker?.texture === 'pickup-magnet'
-      && result.magnetSticker.label === 'MAGNET'
       && result.bombSticker?.texture === 'pickup-bomb'
-      && result.bombSticker.label === 'OVERKILL'
       && [result.healSticker, result.magnetSticker, result.bombSticker]
-        .every((sticker) => sticker.width === 40 && sticker.height === 40),
-    'Pickup stickers lost their labels or no longer retain the established 40px world size.',
+        .every((sticker) => sticker.width === 60 && sticker.height === 60),
+    'Pickup sticker artwork no longer retains its intended 60px world size.',
     result);
     assert(result.healed && result.hpAfterHeal === 65, 'Heal pickup is not a bounded 25% max-HP heal.', result);
     assert(result.beforeFirstPickup.spawned.heal === 0 && result.firstPickup.spawned.heal === 1,

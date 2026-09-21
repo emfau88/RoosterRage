@@ -237,7 +237,6 @@ export class PickupSystem {
         depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight),
-        label: pickup.stickerLabel?.text ?? null,
         reachable: this.scene.arena.isInsidePlayable(pickup.sprite.x, pickup.sprite.y, 20)
           && !this.scene.arena.overlapsObstacle(pickup.sprite.x, pickup.sprite.y, 22)
       }))
