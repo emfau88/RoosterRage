@@ -1,0 +1,11 @@
+ROOSTER RAGE — Kongregate upload
+
+RECOMMENDED:
+Upload rooster-rage-kongregate-complete.zip as the WebGL/HTML5 file.
+Leave Additional Files empty. The ZIP contains index.html and assets/ at its root.
+
+FALLBACK (if the portal provides separate file fields):
+Upload index.html as the WebGL/HTML5 file.
+Upload rooster-rage-additional-files.zip as Additional Files.
+
+Do not use rooster-rage-additional-files.zip as the main file: it intentionally has no index.html.

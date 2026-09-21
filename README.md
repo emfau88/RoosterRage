@@ -56,6 +56,18 @@ npm run build
 npm run test:production
 ```
 
+## Kongregate upload
+
+Create the verified, self-contained portal package with:
+
+```bash
+npm run package:kongregate
+```
+
+The local recommended upload is `dist/kongregate-upload/rooster-rage-kongregate-complete.zip`. It contains `index.html` and `assets/` at the ZIP root; upload it as the main HTML5/WebGL file and leave an optional **Additional Files** field empty.
+
+For a split upload form, use `releases/kongregate/index.html` as the main file plus `releases/kongregate/rooster-rage-additional-files.zip` as **Additional Files**. These are the two deliberately tracked artifacts in the dedicated GitHub branch; `UPLOAD-INSTRUCTIONS.txt` documents both paths.
+
 ## Quality assurance
 
 The browser tests use Playwright and start a local Vite server when needed.

@@ -9,6 +9,7 @@
     "build:standalone": "vite build --mode standalone",
     "build:pages": "vite build --mode pages",
     "build:release": "vite build --mode release",
+    "package:kongregate": "npm run test:release && node scripts/package-kongregate.mjs",
     "build:character-lab": "vite build --config vite.character-lab.config.js",
     "test:character-lab": "node --test tests/ace-prototype.test.mjs tests/ace-four-direction.test.mjs tests/ace-gameplay-pose.test.mjs tests/next-roosters-four-direction.test.mjs tests/gameplay-roosters-pose.test.mjs tests/final-roosters-pose.test.mjs",
     "assets:ace-preview": "python scripts/prepare-ace-four-direction.py && node scripts/export-ace-four-direction.mjs && python scripts/render-ace-four-direction.py",
