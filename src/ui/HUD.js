@@ -1472,7 +1472,11 @@ export class HUD {
     window.clearTimeout(this.multiKillTimeout);
     const cssColor = `#${Number(color).toString(16).padStart(6, '0')}`;
     this.multiKill.style.setProperty('--multi-kill-color', cssColor);
-    this.multiKill.innerHTML = `<strong>${event.count}×</strong><span>${event.label}</span>`;
+    this.multiKill.innerHTML = `
+      <span class="multi-kill__sticker" aria-hidden="true"><b>${event.label}</b></span>
+      <strong>${event.count}×</strong>
+      <span class="multi-kill__label">${event.label}</span>
+    `;
     this.multiKill.classList.remove('is-visible');
     void this.multiKill.offsetWidth;
     this.multiKill.classList.add('is-visible');
@@ -1496,7 +1500,8 @@ export class HUD {
     return {
       visible: this.multiKill?.classList.contains('is-visible') ?? false,
       count: this.multiKill?.querySelector('strong')?.textContent ?? null,
-      label: this.multiKill?.querySelector('span')?.textContent ?? null
+      label: this.multiKill?.querySelector('.multi-kill__label')?.textContent ?? null,
+      stickerLabel: this.multiKill?.querySelector('.multi-kill__sticker b')?.textContent ?? null
     };
   }
 

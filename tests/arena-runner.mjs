@@ -177,6 +177,7 @@ async function verifyPickups(browser, serverUrl) {
 
       api.spawnXpCluster(8, 3, 1020, 700);
       api.advancePickupSchedule(2, 0.55);
+      const scheduledMagnet = api.getPickupState().items.find((pickup) => pickup.kind === 'magnet');
       const magnet = api.collectPickup('magnet');
 
       const enemyId = api.spawnEnemyType('slime', 880, 450, {
@@ -187,6 +188,7 @@ async function verifyPickups(browser, serverUrl) {
         xpOverride: 0
       });
       api.advancePickupSchedule(3, 0.55);
+      const scheduledBomb = api.getPickupState().items.find((pickup) => pickup.kind === 'bomb');
       const bomb = api.collectPickup('bomb');
       const enemySurvived = api.getEnemySnapshot().some((enemy) => enemy.id === enemyId);
 
@@ -225,6 +227,24 @@ async function verifyPickups(browser, serverUrl) {
         blockedAtFullHealth,
         healStillAvailable,
         healDepth: remainingHeal?.depth,
+        healSticker: remainingHeal && {
+          texture: remainingHeal.texture,
+          label: remainingHeal.label,
+          width: remainingHeal.displayWidth,
+          height: remainingHeal.displayHeight
+        },
+        magnetSticker: scheduledMagnet && {
+          texture: scheduledMagnet.texture,
+          label: scheduledMagnet.label,
+          width: scheduledMagnet.displayWidth,
+          height: scheduledMagnet.displayHeight
+        },
+        bombSticker: scheduledBomb && {
+          texture: scheduledBomb.texture,
+          label: scheduledBomb.label,
+          width: scheduledBomb.displayWidth,
+          height: scheduledBomb.displayHeight
+        },
         playerDepth,
         healed,
         hpAfterHeal,
@@ -250,6 +270,17 @@ async function verifyPickups(browser, serverUrl) {
       'A full-health player consumed a heal pickup instead of leaving it available.', result);
     assert(result.healDepth < result.playerDepth,
       'An uncollected ground pickup renders above the rooster.', result);
+    assert(
+      result.healSticker?.texture === 'pickup-heal'
+      && result.healSticker.label === 'HEALTH'
+      && result.magnetSticker?.texture === 'pickup-magnet'
+      && result.magnetSticker.label === 'MAGNET'
+      && result.bombSticker?.texture === 'pickup-bomb'
+      && result.bombSticker.label === 'OVERKILL'
+      && [result.healSticker, result.magnetSticker, result.bombSticker]
+        .every((sticker) => sticker.width === 40 && sticker.height === 40),
+    'Pickup stickers lost their labels or no longer retain the established 40px world size.',
+    result);
     assert(result.healed && result.hpAfterHeal === 65, 'Heal pickup is not a bounded 25% max-HP heal.', result);
     assert(result.beforeFirstPickup.spawned.heal === 0 && result.firstPickup.spawned.heal === 1,
       'First heal did not respect its Wave 1 progress threshold.', result);

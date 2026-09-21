@@ -22,6 +22,12 @@ const CHEST_CONFIGS = Object.freeze({
   }
 });
 
+const PICKUP_STICKER_LABELS = Object.freeze({
+  heal: 'HEALTH',
+  bomb: 'OVERKILL',
+  magnet: 'MAGNET'
+});
+
 export class Pickup {
   constructor(scene, kind, x, y) {
     this.scene = scene;
@@ -37,10 +43,23 @@ export class Pickup {
     this.sprite = scene.physics.add.sprite(x, y, texture)
       .setDepth(this.chest ? 9 : 5.5)
       .setScale(this.chest?.scale ?? 1);
+    if (!this.chest) this.sprite.setDisplaySize(40, 40);
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
     this.sprite.setCircle(this.chest ? 18 : 14);
     this.sprite.entity = this;
     this.tierMarker = null;
+    this.stickerLabel = null;
+    if (!this.chest) {
+      this.stickerLabel = scene.add.text(x, y - 28, PICKUP_STICKER_LABELS[kind] ?? kind.toUpperCase(), {
+        fontFamily: 'Arial Black, Arial, sans-serif',
+        fontSize: '9px',
+        fontStyle: 'bold',
+        color: '#fff7d1',
+        stroke: '#122027',
+        strokeThickness: 3,
+        align: 'center'
+      }).setOrigin(0.5).setDepth(5.6);
+    }
     if (kind === 'golden-chest' || kind === 'royal-chest') {
       const royal = kind === 'royal-chest';
       this.tierMarker = scene.add.star(
@@ -62,6 +81,7 @@ export class Pickup {
     if (!this.sprite.active || this.opening) return;
     const bob = Math.sin((time - this.spawnedAt) * 0.005) * 4;
     this.sprite.y = this.baseY + bob;
+    this.stickerLabel?.setPosition(this.sprite.x, this.sprite.y - 28);
     if (this.tierMarker) {
       this.tierMarker
         .setPosition(this.sprite.x, this.sprite.y - (this.kind === 'royal-chest' ? 40 : 35))
@@ -220,6 +240,7 @@ export class Pickup {
     });
     this.transientFx = [];
     if (this.tierMarker?.active) this.tierMarker.destroy();
+    if (this.stickerLabel?.active) this.stickerLabel.destroy();
     if (this.sprite?.active) this.sprite.destroy();
   }
 }

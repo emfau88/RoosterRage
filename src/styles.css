@@ -4031,10 +4031,11 @@ html.has-ui-overlay .upgrade-confirmation {
   right: calc(76px + env(safe-area-inset-right));
   z-index: 9;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 108px auto auto;
   align-items: center;
-  gap: 7px;
-  padding: 6px 9px;
+  gap: 5px;
+  min-height: 64px;
+  padding: 6px 9px 6px 3px;
   border: 1px solid color-mix(in srgb, var(--multi-kill-color) 72%, white);
   border-radius: 8px;
   background: rgba(10, 20, 23, 0.92);
@@ -4058,7 +4059,32 @@ html.has-ui-overlay .upgrade-confirmation {
   text-shadow: 0 0 9px color-mix(in srgb, var(--multi-kill-color) 62%, transparent);
 }
 
-.multi-kill span {
+.multi-kill__sticker {
+  position: relative;
+  display: block;
+  width: 108px;
+  height: 92px;
+  margin: -22px -4px -22px -16px;
+  background: url('/src/assets/ui/killstreak-sticker-v1.png') center / contain no-repeat;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.48));
+}
+
+.multi-kill__sticker b {
+  position: absolute;
+  top: 61%;
+  left: 14%;
+  right: 14%;
+  display: block;
+  color: #4b170d;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 1px rgba(255, 240, 186, 0.8);
+}
+
+.multi-kill__label {
   max-width: 150px;
   color: #fff4cf;
   font-size: 9px;
@@ -4080,10 +4106,12 @@ html.has-ui-overlay .upgrade-confirmation {
 
 @media (max-width: 760px) {
   .multi-kill {
-    top: calc(66px + env(safe-area-inset-top));
+    /* Keep the celebratory sticker clear of the centered wave banner on phones. */
+    top: calc(152px + env(safe-area-inset-top));
     right: calc(8px + env(safe-area-inset-right));
-    gap: 5px;
-    padding: 4px 6px;
+    grid-template-columns: 58px auto auto;
+    gap: 3px;
+    padding: 4px 6px 4px 2px;
     border-radius: 7px;
     box-shadow: 0 7px 17px rgba(0, 0, 0, 0.34), 0 0 10px color-mix(in srgb, var(--multi-kill-color) 22%, transparent);
   }
@@ -4092,7 +4120,17 @@ html.has-ui-overlay .upgrade-confirmation {
     font-size: 15px;
   }
 
-  .multi-kill span {
+  .multi-kill__sticker {
+    width: 58px;
+    height: 52px;
+    margin: -10px -1px -10px -9px;
+  }
+
+  .multi-kill__sticker b {
+    font-size: 5px;
+  }
+
+  .multi-kill__label {
     max-width: 104px;
     font-size: 7.5px;
     letter-spacing: 0.07em;

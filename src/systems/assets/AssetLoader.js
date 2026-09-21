@@ -78,9 +78,9 @@ import enemyPurpleShotUrl from '../../assets/projectiles/enemy-purple-shot.webp'
 import enemyBlueShotUrl from '../../assets/projectiles/enemy-blue-shot.webp';
 import bossFireballUrl from '../../assets/projectiles/boss-fireball.webp';
 import xpOrbUrl from '../../assets/collectibles/xp-orb.webp';
-import pickupHealUrl from '../../assets/pickups/pickup-heal.webp';
-import pickupBombUrl from '../../assets/pickups/pickup-bomb.webp';
-import pickupMagnetUrl from '../../assets/pickups/pickup-magnet.webp';
+import pickupHealUrl from '../../assets/pickups/pickup-heal-sticker-v1.png';
+import pickupBombUrl from '../../assets/pickups/pickup-bomb-sticker-v1.png';
+import pickupMagnetUrl from '../../assets/pickups/pickup-magnet-sticker-v1.png';
 import pickupEliteChestUrl from '../../assets/pickups/pickup-elite-chest.webp';
 import pickupEliteChestAjarUrl from '../../assets/pickups/pickup-elite-chest-ajar.webp';
 import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-open.webp';

@@ -1215,7 +1215,8 @@ async function testHordeCombatFeedback(browser) {
       && immediate.deathBurstWindow === 50
       && immediate.hud.visible
       && immediate.hud.count === '50×'
-      && immediate.hud.label === 'ROOSTER RAMPAGE',
+      && immediate.hud.label === 'ROOSTER RAMPAGE'
+      && immediate.hud.stickerLabel === 'ROOSTER RAMPAGE',
       'A mass kill should bundle into one escalating horde event.',
       immediate
     );
