@@ -679,7 +679,8 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.spawnEnemyType('slime', 940, 480, { speed: 0, damage: 0, hp: 999 });
     });
     await page.waitForTimeout(70);
-    const slimeHop = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot());
+    const slimeHop = await page.evaluate(() => window.__ROOSTER_TEST__.getEnemySnapshot()
+      .filter((enemy) => enemy.type === 'slime'));
     assert(slimeHop.length === 3
       && slimeHop.every((enemy) => enemy.texture === 'enemy-slime-hop-v2'
         && enemy.animation === 'enemy-slime-hop-loop'

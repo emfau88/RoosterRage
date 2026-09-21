@@ -42,14 +42,37 @@ async function verifyArena(browser, serverUrl, arenaId) {
     const snapshot = await page.evaluate(() => ({
       arena: window.__ROOSTER_TEST__.getArenaState(),
       catalog: window.__ROOSTER_TEST__.getArenaCatalog(),
-      safePoints: window.__ROOSTER_TEST__.sampleSafeArenaPoints(40)
+      safePoints: window.__ROOSTER_TEST__.sampleSafeArenaPoints(40),
+      landmarks: window.__ROOSTER_TEST__.sampleArenaLandmarks(40)
     }));
     assert(snapshot.arena.id === arenaId, 'Requested arena was not selected.', snapshot.arena);
     assert(snapshot.arena.obstacles.some((obstacle) => obstacle.destructible),
       'Arena has no destructible cover.', snapshot.arena);
+    assert(snapshot.arena.obstacles
+      .filter((obstacle) => obstacle.destructible && obstacle.active)
+      .every((obstacle) => obstacle.markerVisible && obstacle.markerDepth > obstacle.depth),
+    'Active destructible props are missing their breakable marker.', snapshot.arena.obstacles);
+    assert(snapshot.arena.obstacles
+      .filter((obstacle) => !obstacle.destructible)
+      .every((obstacle) => !obstacle.markerVisible),
+    'Permanent architecture received a breakable marker.', snapshot.arena.obstacles);
     assert(snapshot.safePoints.every((point) => point.reachable && !point.blocked),
       'Safe point generator produced blocked or unreachable coordinates.', snapshot.safePoints);
     assert(snapshot.catalog.length === 3, 'Arena catalog does not contain all topologies.', snapshot.catalog);
+    if (arenaId === 'open-yard') {
+      const wells = snapshot.landmarks.filter((landmark) => landmark.kind === 'well');
+      const sampledChunks = 81 * 81;
+      const wellShare = wells.length / sampledChunks;
+      assert(wellShare >= 0.012 && wellShare <= 0.032,
+        'Open Yard well density is outside the approximately 70%-reduced target.', {
+          wells: wells.length,
+          sampledChunks,
+          wellShare
+        });
+      assert(snapshot.landmarks.every((landmark, index) => snapshot.landmarks.every((other, otherIndex) => (
+        index === otherIndex || Math.max(Math.abs(landmark.x - other.x), Math.abs(landmark.y - other.y)) > 1
+      ))), 'Open Yard generated directly adjacent landmarks.', snapshot.landmarks);
+    }
     if (arenaId === 'square-coop') {
       assert(snapshot.arena.bounds.x === 85 && snapshot.arena.bounds.y === 45
         && snapshot.arena.bounds.width === 1230 && snapshot.arena.bounds.height === 810,
@@ -145,7 +168,9 @@ async function verifyPickups(browser, serverUrl) {
       const beforeFirstPickup = api.advancePickupSchedule(1, 0.59);
       const firstPickup = api.advancePickupSchedule(1, 0.6);
       const blockedAtFullHealth = api.collectPickup('heal');
-      const healStillAvailable = api.getPickupState().items.some((pickup) => pickup.kind === 'heal');
+      const remainingHeal = api.getPickupState().items.find((pickup) => pickup.kind === 'heal');
+      const healStillAvailable = Boolean(remainingHeal);
+      const playerDepth = api.getPlayerStats().spriteDepth;
       api.setPlayerHp(40);
       const healed = api.collectPickup('heal');
       const hpAfterHeal = api.getPlayerStats().hp;
@@ -199,6 +224,8 @@ async function verifyPickups(browser, serverUrl) {
       return {
         blockedAtFullHealth,
         healStillAvailable,
+        healDepth: remainingHeal?.depth,
+        playerDepth,
         healed,
         hpAfterHeal,
         magnet,
@@ -221,6 +248,8 @@ async function verifyPickups(browser, serverUrl) {
     });
     assert(!result.blockedAtFullHealth && result.healStillAvailable,
       'A full-health player consumed a heal pickup instead of leaving it available.', result);
+    assert(result.healDepth < result.playerDepth,
+      'An uncollected ground pickup renders above the rooster.', result);
     assert(result.healed && result.hpAfterHeal === 65, 'Heal pickup is not a bounded 25% max-HP heal.', result);
     assert(result.beforeFirstPickup.spawned.heal === 0 && result.firstPickup.spawned.heal === 1,
       'First heal did not respect its Wave 1 progress threshold.', result);
@@ -264,6 +293,29 @@ async function verifyPickups(browser, serverUrl) {
   }
 }
 
+async function verifyBreakableHint(browser, serverUrl) {
+  const { page, errors } = await openArena(browser, serverUrl, 'open-yard');
+  try {
+    const hint = await page.evaluate(async () => {
+      window.__ROOSTER_TEST__.showBreakablePropHint();
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      const banner = document.querySelector('.wave-banner');
+      return {
+        text: banner?.textContent ?? '',
+        className: banner?.className ?? ''
+      };
+    });
+    assert(hint.className.includes('wave-banner--tip')
+      && hint.text.includes('Crates and hay can be broken')
+      && hint.text.includes('supplies'),
+    'Breakable-prop hint is missing or unclear.', hint);
+    assert(errors.length === 0, 'Browser errors in breakable-prop hint scenario.', errors);
+    return hint;
+  } finally {
+    await page.close();
+  }
+}
+
 async function verifyRewardPresentation(browser, serverUrl) {
   const { page, errors } = await openArena(browser, serverUrl, 'open-yard');
   try {
@@ -301,8 +353,9 @@ async function run() {
       arenas.push(await verifyArena(browser, serverState.url, arenaId));
     }
     const pickups = await verifyPickups(browser, serverState.url);
+    const breakableHint = await verifyBreakableHint(browser, serverState.url);
     const rewardPresentation = await verifyRewardPresentation(browser, serverState.url);
-    const report = { generatedAt: new Date().toISOString(), arenas, pickups, rewardPresentation };
+    const report = { generatedAt: new Date().toISOString(), arenas, pickups, breakableHint, rewardPresentation };
     await fs.mkdir(artifactDir, { recursive: true });
     await fs.writeFile(path.join(artifactDir, 'arena-report.json'), JSON.stringify(report, null, 2));
     console.log('Rooster arena/pickup gate passed.');

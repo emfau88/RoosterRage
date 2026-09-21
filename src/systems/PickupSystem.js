@@ -222,6 +222,7 @@ export class PickupSystem {
       openingChests: this.openingChests.size,
       openingChestStates: [...this.openingChests].map((pickup) => ({
         texture: pickup.sprite.texture.key,
+        depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight)
       })),
@@ -233,6 +234,7 @@ export class PickupSystem {
         opening: pickup.opening,
         victoryReward: pickup.victoryReward ?? false,
         texture: pickup.sprite.texture.key,
+        depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight),
         reachable: this.scene.arena.isInsidePlayable(pickup.sprite.x, pickup.sprite.y, 20)

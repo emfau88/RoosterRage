@@ -3,6 +3,8 @@ import { ARENA_DEFINITIONS, getArenaDefinition } from '../data/arenaDefinitions.
 import { getSceneViewport } from './DisplayResolutionSystem.js';
 
 const SAFE_PADDING = 44;
+const OPEN_YARD_BARN_MODULUS = 19;
+const OPEN_YARD_WELL_MODULUS = 37;
 
 function rectContains(rect, x, y, padding = 0) {
   return x >= rect.x - rect.width / 2 - padding
@@ -17,6 +19,20 @@ function chunkHash(x, y, salt = 0) {
     ^ salt;
   value = Math.imul(value ^ (value >>> 13), 1274126177);
   return (value ^ (value >>> 16)) >>> 0;
+}
+
+function rawOpenYardLandmark(chunkX, chunkY, hash = chunkHash(chunkX, chunkY, 17)) {
+  if (hash % OPEN_YARD_BARN_MODULUS === 0) return { kind: 'barn', hash, chunkX, chunkY };
+  if (hash % OPEN_YARD_WELL_MODULUS === 0) return { kind: 'well', hash, chunkX, chunkY };
+  return null;
+}
+
+function compareLandmarkPriority(a, b) {
+  const kindDifference = (a.kind === 'barn' ? 0 : 1) - (b.kind === 'barn' ? 0 : 1);
+  if (kindDifference) return kindDifference;
+  if (a.hash !== b.hash) return a.hash - b.hash;
+  if (a.chunkY !== b.chunkY) return a.chunkY - b.chunkY;
+  return a.chunkX - b.chunkX;
 }
 
 export class ArenaSystem {
@@ -158,8 +174,10 @@ export class ArenaSystem {
       damageStage: 0,
       sprite
     };
+    obstacle.breakableMarker = this.scene.add.graphics().setDepth(4.35).setVisible(false);
     sprite.entity = obstacle;
     this.obstacles.push(obstacle);
+    this.updateBreakableMarker(obstacle);
     return obstacle;
   }
 
@@ -297,7 +315,7 @@ export class ArenaSystem {
   }
 
   configureLandmark(record, centerX, centerY, hash) {
-    const landmarkConfig = this.getLandmarkConfig(hash);
+    const landmarkConfig = this.getLandmarkConfig(hash, record.chunkX, record.chunkY);
     if (!landmarkConfig) {
       record.landmark.setVisible(false);
       this.disableObstacle(record.landmarkCollider);
@@ -324,21 +342,27 @@ export class ArenaSystem {
     });
   }
 
-  getLandmarkConfig(hash) {
+  getLandmarkConfig(hash, chunkX = 0, chunkY = 0) {
     if (this.id === 'open-yard') {
-      if (hash % 19 === 0) {
+      const candidate = rawOpenYardLandmark(chunkX, chunkY, hash);
+      if (!candidate) return null;
+      for (let y = chunkY - 1; y <= chunkY + 1; y += 1) {
+        for (let x = chunkX - 1; x <= chunkX + 1; x += 1) {
+          if (x === chunkX && y === chunkY) continue;
+          const neighbor = rawOpenYardLandmark(x, y);
+          if (neighbor && compareLandmarkPriority(neighbor, candidate) < 0) return null;
+        }
+      }
+      if (candidate.kind === 'barn') {
         return {
           texture: 'landmark-barn', size: 220, kind: 'barn',
           colliderWidth: 154, colliderHeight: 76, colliderOffsetY: 45
         };
       }
-      if (hash % 11 === 0) {
-        return {
-          texture: 'landmark-well', size: 128, kind: 'well',
-          colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
-        };
-      }
-      return null;
+      return {
+        texture: 'landmark-well', size: 128, kind: 'well',
+        colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
+      };
     }
     // Feed Alley's large architecture lives outside the playable lane. Keeping
     // the combat strip free of opaque landmarks preserves silhouettes in hordes.
@@ -481,6 +505,7 @@ export class ArenaSystem {
       .clearTint();
     obstacle.sprite.refreshBody();
     obstacle.sprite.entity = obstacle;
+    this.updateBreakableMarker(obstacle);
   }
 
   disableObstacle(obstacle) {
@@ -488,7 +513,36 @@ export class ArenaSystem {
     obstacle.hp = Infinity;
     obstacle.maxHp = Infinity;
     obstacle.damageStage = 0;
+    obstacle.breakableMarker?.setVisible(false).clear();
     obstacle.sprite.disableBody(true, true);
+  }
+
+  updateBreakableMarker(obstacle) {
+    const marker = obstacle?.breakableMarker;
+    if (!marker) return;
+    if (!obstacle.destructible || !obstacle.sprite.active || !obstacle.sprite.visible) {
+      marker.setVisible(false).clear();
+      return;
+    }
+    const color = obstacle.damageStage >= 2
+      ? 0xff7654
+      : obstacle.damageStage === 1 ? 0xffb45c : 0xffd36a;
+    const halfWidth = Math.min(20, Math.max(12, obstacle.width * 0.18));
+    const drawCrack = () => {
+      marker.beginPath();
+      marker.moveTo(-halfWidth, -2);
+      marker.lineTo(-halfWidth * 0.48, 3);
+      marker.lineTo(0, -3);
+      marker.lineTo(halfWidth * 0.48, 3);
+      marker.lineTo(halfWidth, -2);
+      marker.strokePath();
+    };
+    marker.clear().setPosition(obstacle.x, obstacle.y + obstacle.height / 2 - 3);
+    marker.lineStyle(5, 0x20140b, 0.52);
+    drawCrack();
+    marker.lineStyle(2, color, 0.9);
+    drawCrack();
+    marker.setVisible(true);
   }
 
   createBoundaryColliders() {
@@ -575,6 +629,7 @@ export class ArenaSystem {
       const nextStage = healthRatio <= 0.34 ? 2 : healthRatio <= 0.67 ? 1 : 0;
       if (nextStage !== obstacle.damageStage) {
         obstacle.damageStage = nextStage;
+        this.updateBreakableMarker(obstacle);
         this.scene.telemetry.record('propDamageStageChanged', this.scene.time.now, {
           wave: this.scene.waveSystem?.currentWave ?? 0,
           id: obstacle.id,
@@ -584,6 +639,7 @@ export class ArenaSystem {
       return false;
     }
     const { x, y } = obstacle.sprite;
+    obstacle.breakableMarker?.setVisible(false).clear();
     obstacle.sprite.disableBody(true, true);
     this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
     this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.72, depth: 9 });
@@ -603,6 +659,21 @@ export class ArenaSystem {
     } else if (obstacle.damageStage >= 2) {
       obstacle.sprite.setTint(0xe66d42);
     }
+    this.updateBreakableMarker(obstacle);
+  }
+
+  sampleLandmarks(radius = 30) {
+    if (this.id !== 'open-yard') return [];
+    const safeRadius = Math.max(1, Math.min(80, Math.floor(radius)));
+    const landmarks = [];
+    for (let y = -safeRadius; y <= safeRadius; y += 1) {
+      for (let x = -safeRadius; x <= safeRadius; x += 1) {
+        const hash = chunkHash(x, y, 17);
+        const config = this.getLandmarkConfig(hash, x, y);
+        if (config) landmarks.push({ x, y, kind: config.kind });
+      }
+    }
+    return landmarks;
   }
 
   getState() {
@@ -660,12 +731,16 @@ export class ArenaSystem {
         hp: Number.isFinite(obstacle.hp) ? Math.max(0, obstacle.hp) : null,
         maxHp: Number.isFinite(obstacle.maxHp) ? obstacle.maxHp : null,
         alpha: obstacle.sprite.alpha,
+        depth: obstacle.sprite.depth,
+        markerVisible: obstacle.breakableMarker?.visible ?? false,
+        markerDepth: obstacle.breakableMarker?.depth ?? null,
         active: obstacle.sprite.active
       }))
     };
   }
 
   destroy() {
+    this.obstacles.forEach((obstacle) => obstacle.breakableMarker?.destroy());
     this.chunkRecords.forEach((record) => {
       record.ground.destroy();
       record.edgeLeft.destroy();

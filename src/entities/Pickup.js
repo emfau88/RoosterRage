@@ -35,7 +35,7 @@ export class Pickup {
     this.transientFx = [];
     const texture = this.chest ? 'pickup-elite-chest' : `pickup-${kind}`;
     this.sprite = scene.physics.add.sprite(x, y, texture)
-      .setDepth(9)
+      .setDepth(this.chest ? 9 : 5.5)
       .setScale(this.chest?.scale ?? 1);
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
     this.sprite.setCircle(this.chest ? 18 : 14);

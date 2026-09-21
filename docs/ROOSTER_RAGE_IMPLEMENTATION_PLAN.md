@@ -159,16 +159,16 @@ Die technische Vertikalabnahme bestand: 12 Challenge-Szenarien über alle neun A
 Die technische Freigabe dieses Änderungspakets ist erreicht. Für die eigentliche Release-Freigabe bleiben offen:
 
 - Die 10-Seed-Matrix (180 kurze Läufe) und die getrennte vollständige Average-/Strong-Build-Auswertung sind ein Release-Soak, kein sinnvoller Bestandteil dieses kompakten Fixpakets.
-- `assets:check` schlägt ausschließlich wegen der separaten, noch nicht optimierten Datei `art-source/enemies/animations/enemy-slime-hop-v2.png` fehl; diese fremde Arbeitskopie wird nicht verändert oder mitcommittet.
-- Die unten festgehaltenen P1-Produktentscheidungen zu Kartenobjekten, Weltdarstellung und Kosmetik sind noch nicht umgesetzt.
+- [x] Der separate Slime-Hop-Block ist integriert; `assets:check`, Build, Mechanics und Production-Gate sind wieder grün (`d932fd9`).
+- Die unten festgehaltenen P1-Entscheidungen zu Kartenobjekten und ihrer Erklärung sind umgesetzt; als nächster Release-Schritt bleibt der 10-Seed-Soak.
 
-## Release-Review – geklärt, noch nicht umgesetzt
+## Release-Review – aktueller Stand
 
 ### P1 vor dem ersten öffentlichen Release
 
-- [ ] **Open Yard ausdünnen:** Brunnen entstehen aktuell ungefähr in jedem elften geeigneten Chunk, Scheunen in jedem neunzehnten. Vorschlag: Brunnen ebenfalls auf ungefähr jeden 17.–19. Chunk begrenzen und direkt benachbarte Landmarken verhindern.
-- [ ] **Zerstörbarkeit verständlich machen:** Kisten und Heuballen sind zerstörbar; Brunnen, Scheunen, Wände und feste Kartenarchitektur nicht. Vorschlag: zerstörbare Props mit konsistentem Rand/Schadensdekal markieren und beim ersten Lauf kurz erklären: „Kisten und Heu können Vorräte enthalten.“
-- [ ] **Prop-Drops kommunizieren:** Ab Wave 2 besteht pro zerstörtem Prop eine 42-%-Chance auf Heal, Magnet oder Bombe, höchstens ein Prop-Drop pro Wave und drei pro Run. Diese Mechanik funktioniert, ist im Spiel aber noch nicht ausreichend erklärt.
+- [x] **Open Yard ausdünnen:** Brunnen sind um etwa 70 % reduziert: statt ungefähr jedem elften nur noch ungefähr jedem 37. geeigneten Chunk; Scheunen bleiben selten. Ein deterministischer Nachbarschaftsentscheid verhindert direkt benachbarte Landmarken.
+- [x] **Zerstörbarkeit verständlich machen:** Kisten und Heuballen tragen auf allen drei Karten eine kleine bernsteinfarbene Bruchmarke am unteren Rand; Brunnen, Scheunen, Wände und feste Kartenarchitektur nie. Die vorhandenen voll deckenden orange/roten Schadensstufen bleiben erhalten.
+- [x] **Prop-Drops kommunizieren:** Ein einmaliger Hinweis erklärt, dass Kisten und Heu zerstörbar sind und Vorräte enthalten können. Die bestehende Mechanik bleibt unverändert: ab Wave 2 42 % Chance auf Heal, Magnet oder Bombe, höchstens ein Prop-Drop pro Wave und drei pro Run.
 - [x] **Eingebrannte Kartennamen entfernen:** Kartennamen stehen nicht mehr im Kampffeld. Wave 1 beginnt stattdessen mit einem kurzen HUD-Intro aus Arena, Challenge und Wellenname.
 - [x] **Kosmetik klar benennen:** Jeder Rooster besitzt Original plus eine freischaltbare Farbvariante. Das Menü kennzeichnet sie bereits explizit als „VISUAL ONLY“ und „No stat changes“.
 - [x] **Run-Report aufwerten:** Statistik, Loadout und Schadensquellen verwenden die vorhandenen Icons und Arena-/Rooster-Bilder. Neue Freischaltungen besitzen nun eine eigene Reward-Hierarchie, typgerechte Icons und eine kurze, gestaffelte Reveal-Animation mit Reduced-Motion-Fallback.
@@ -180,6 +180,21 @@ Die technische Freigabe dieses Änderungspakets ist erreicht. Für die eigentlic
 - [x] **Stabiler Hub-Rahmen:** Play, Roosters, Training und Archive teilen auf Desktop dieselbe responsive Außenhöhe; nur ihr Inhalt wechselt beziehungsweise scrollt. Das verhindert das bisherige Springen des zentrierten Rahmens.
 - [ ] **Erster-Lauf-Hinweise:** Auto-Fire, Bewegung, zerstörbare Props und Pickup-Regeln in wenigen kontextuellen Hinweisen erklären, nicht als langes Tutorial.
 - [ ] **10-Seed-Soak:** Erst nach Abschluss der P1-Entscheidungen ausführen, damit die lange Matrix nicht nach UI-/Map-Änderungen erneut laufen muss.
+
+## Kompakter Umsetzungspass – abgeschlossen
+
+Der nächste Pass bleibt bewusst auf drei Produktänderungen und eine anschließende Abnahme begrenzt:
+
+1. **Open Yard aufräumen:** Brunnenhäufigkeit auf ungefähr 30 % des aktuellen Werts senken, Landmark-Nachbarschaften ausschließen und die deterministische Kartenerzeugung beibehalten.
+2. **Zerstörbare Props lesbar machen:** dieselbe dezente Bruchmarke für alle zerstörbaren Kisten und Heuballen auf allen drei Karten; feste Architektur erhält sie nie. Schadensfeedback bleibt ohne Transparenz.
+3. **Mechanik einmalig erklären:** beim ersten passenden Sichtkontakt ein kurzer Hinweis „Kisten und Heu sind zerstörbar und können Vorräte enthalten.“ Die bestehende Drop-Chance von 42 %, das Limit von einem Prop-Drop je Wave und drei je Run werden nicht neu balanciert.
+4. **Gezielt abnehmen:** Arena-/Mechanics-/Production-Gates, visueller Desktop-/Portrait-Check und danach die automatisierte 10-Seed-Wave-1-Matrix. Bewertet werden Median und Ausreißer je Rooster/Karte; Abweichungen um ungefähr eine Sekunde lösen allein keine neue Balanceänderung aus. Lange Vollruns folgen zunächst nur mit repräsentativen Seeds.
+
+**Nicht Teil dieses kleinen Passes:** größerer Desktop-Loader, vollständig neu gezeichnete Reward-Skins, Physical-Comedy-Reaktionen und weitere Enemy-Art. Diese Punkte bleiben optionaler P2-Polish und werden nicht mit Kartenlesbarkeit und Release-Soak vermischt.
+
+### Umsetzung und Abnahme vom 21. September 2026
+
+Die Punkte 1–4 sind umgesetzt. Normale Boden-Pickups liegen nun unter dem Rooster, damit ein bei vollen HP nicht aufgenommenes Heilitem die Figur nicht mehr überdeckt; Belohnungstruhen behalten ihren hervorgehobenen Layer. `test:arena`, `test:map-streaming`, `test:mechanics` und `test:production` sind grün. Der Mechanics-Test filtert bei der Slime-Animationsprüfung gezielt auf Slimes, damit parallel erzeugtes Micro-Fodder den fachlich korrekten Test nicht verfälscht.
 
 ## Phase 5 – Selektiver Physical-Comedy-Polish
 

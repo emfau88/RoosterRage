@@ -893,6 +893,17 @@ canvas {
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.12), 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
+.wave-banner--tip {
+  border-color: rgba(255, 205, 97, 0.78);
+  background: rgba(35, 27, 12, 0.94);
+  color: #ffe7a1;
+}
+
+.wave-banner--tip strong {
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+
 .run-report__unlocks::after {
   position: absolute;
   top: -80%;

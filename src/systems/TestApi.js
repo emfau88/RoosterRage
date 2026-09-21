@@ -99,6 +99,7 @@ export function installTestApi(scene) {
       rerollsRemaining: scene.runState.rerollsRemaining
     }),
     getArenaState: () => scene.arena.getState(),
+    sampleArenaLandmarks: (radius = 30) => scene.arena.sampleLandmarks(radius),
     getArenaCatalog: () => scene.arena.getCatalog(),
     getPickupState: () => scene.pickups.getState(),
     advancePickupSchedule: (wave, progress) => {
@@ -135,6 +136,7 @@ export function installTestApi(scene) {
       if (!obstacle) return false;
       return scene.arena.damageObstacle(obstacle, amount, 'test-api');
     },
+    showBreakablePropHint: () => scene.hud.showBreakablePropHint(),
     forcePropDrop: (wave = 2) => {
       scene.waveSystem.currentWave = Number(wave);
       const obstacle = scene.arena.obstacles.find((item) => item.destructible && item.sprite.active);
@@ -417,6 +419,7 @@ export function installTestApi(scene) {
       hp: scene.player.hp,
       roosterId: scene.player.roosterId,
       maxHp: scene.player.maxHp,
+      spriteDepth: scene.player.sprite.depth,
       speed: scene.player.speed,
       fireRate: scene.player.fireRate,
       projectileDamage: scene.player.projectileDamage,

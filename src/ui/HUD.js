@@ -1228,7 +1228,16 @@ export class HUD {
     );
   }
 
-  showEncounterBanner(title, subtitle = '', tier = 'elite') {
+  showBreakablePropHint() {
+    this.showEncounterBanner(
+      'BREAKABLE SUPPLIES',
+      'Crates and hay can be broken and may contain supplies.',
+      'tip',
+      3200
+    );
+  }
+
+  showEncounterBanner(title, subtitle = '', tier = 'elite', durationMs = null) {
     window.clearTimeout(this.waveBannerTimeout);
     this.waveBanner.hidden = false;
     this.waveBanner.className = `wave-banner wave-banner--${tier}`;
@@ -1237,7 +1246,7 @@ export class HUD {
     requestAnimationFrame(() => this.waveBanner.classList.add('is-visible'));
     this.waveBannerTimeout = window.setTimeout(() => {
       this.waveBanner.classList.remove('is-visible');
-    }, tier === 'boss' ? 2300 : 1700);
+    }, durationMs ?? (tier === 'boss' ? 2300 : 1700));
   }
 
   setJoystick(vector) {
