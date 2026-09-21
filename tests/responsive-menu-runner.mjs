@@ -162,7 +162,7 @@ async function verifyViewport(browser, url, viewport) {
       `${viewport.name}: an upgrade choice is outside the viewport.`, upgrade);
     assert(upgrade.documentWidth <= viewport.width,
       `${viewport.name}: Upgrade selection creates horizontal document overflow.`, upgrade);
-    assert(upgrade.framePieces === 8 && upgrade.frameImage.includes('upgrade-panel-frame-v1.png') && upgrade.emblem.width >= 43,
+    assert(upgrade.framePieces === 8 && upgrade.frameImage.includes('upgrade-panel-frame-v1-top.png') && upgrade.emblem.width >= 43,
       `${viewport.name}: Upgrade selection is missing its illustrated frame or title emblem.`, upgrade);
     if (viewport.width >= 900 && viewport.height >= 701) {
       assert(upgrade.iconArt.cssWidth >= 75,

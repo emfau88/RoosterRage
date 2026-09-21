@@ -8148,8 +8148,8 @@ html.has-ui-overlay .upgrade-confirmation {
   position: absolute;
   z-index: 1;
   display: block;
-  background-image: url('./assets/ui/upgrade-panel-frame-v1.png');
   background-repeat: no-repeat;
+  background-size: 100% 100%;
   pointer-events: none;
 }
 
@@ -8158,17 +8158,16 @@ html.has-ui-overlay .upgrade-confirmation {
   right: -10px;
   left: -10px;
   height: 38px;
-  background-size: calc(200% + 40px) auto;
 }
 
 .upgrade-panel__frame--top {
   top: -10px;
-  background-position: center top;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-top.png');
 }
 
 .upgrade-panel__frame--bottom {
   bottom: -10px;
-  background-position: center bottom;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-bottom.png');
 }
 
 .upgrade-panel__frame--left,
@@ -8176,17 +8175,16 @@ html.has-ui-overlay .upgrade-confirmation {
   top: -10px;
   bottom: -10px;
   width: 38px;
-  background-size: auto calc(200% + 20px);
 }
 
 .upgrade-panel__frame--left {
   left: -10px;
-  background-position: left center;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-left.png');
 }
 
 .upgrade-panel__frame--right {
   right: -10px;
-  background-position: right center;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-right.png');
 }
 
 .upgrade-panel__frame--corner-tl,
@@ -8195,7 +8193,6 @@ html.has-ui-overlay .upgrade-confirmation {
 .upgrade-panel__frame--corner-bl {
   width: 58px;
   height: 58px;
-  background-size: 372px 248px;
 }
 
 .upgrade-panel > :not(.upgrade-panel__frame) {
@@ -8206,25 +8203,25 @@ html.has-ui-overlay .upgrade-confirmation {
 .upgrade-panel__frame--corner-tl {
   top: -10px;
   left: -10px;
-  background-position: left top;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-corner-tl.png');
 }
 
 .upgrade-panel__frame--corner-tr {
   top: -10px;
   right: -10px;
-  background-position: right top;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-corner-tr.png');
 }
 
 .upgrade-panel__frame--corner-br {
   right: -10px;
   bottom: -10px;
-  background-position: right bottom;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-corner-br.png');
 }
 
 .upgrade-panel__frame--corner-bl {
   bottom: -10px;
   left: -10px;
-  background-position: left bottom;
+  background-image: url('./assets/ui/upgrade-panel-frame-v1-corner-bl.png');
 }
 
 .upgrade-panel__heading {
@@ -8312,7 +8309,6 @@ html.has-ui-overlay .upgrade-confirmation {
   .upgrade-panel__frame--corner-bl {
     width: 48px;
     height: 48px;
-    background-size: 263px 175px;
   }
 
   .upgrade-panel__heading {
