@@ -8007,13 +8007,13 @@ html.has-ui-overlay .upgrade-confirmation {
     padding: 10px;
   }
 
-  .upgrade-panel h2 {
+  .upgrade-panel__heading h2 {
     margin-bottom: 3px;
     font-size: 20px;
   }
 
-  .upgrade-panel > p {
-    margin-bottom: 7px;
+  .upgrade-panel__heading p {
+    margin-bottom: 0;
     font-size: 12px;
   }
 
@@ -8106,5 +8106,230 @@ html.has-ui-overlay .upgrade-confirmation {
 
   .upgrade-panel .upgrade-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* A restrained farm-show frame makes level-up choices feel rewarding without
+   competing with rarity colors or reducing the amount of readable card copy. */
+.upgrade-panel {
+  --upgrade-frame: rgba(230, 181, 69, 0.72);
+  --upgrade-frame-soft: rgba(255, 222, 127, 0.14);
+  position: relative;
+  isolation: isolate;
+  width: min(620px, 100%);
+  border-color: var(--upgrade-frame);
+  background:
+    radial-gradient(circle at 50% -8%, rgba(255, 210, 101, 0.12), transparent 34%),
+    linear-gradient(145deg, rgba(26, 40, 43, 0.985), rgba(7, 17, 22, 0.99));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(87, 57, 17, 0.7),
+    0 26px 74px rgba(0, 0, 0, 0.6);
+  animation: upgrade-panel-enter 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.upgrade-panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 6px;
+  border: 1px solid rgba(255, 223, 132, 0.13);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, var(--upgrade-frame), transparent 42%) left top / 42px 1px no-repeat,
+    linear-gradient(45deg, transparent 58%, var(--upgrade-frame)) right top / 42px 1px no-repeat,
+    linear-gradient(45deg, var(--upgrade-frame), transparent 42%) left bottom / 42px 1px no-repeat,
+    linear-gradient(135deg, transparent 58%, var(--upgrade-frame)) right bottom / 42px 1px no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
+.upgrade-panel::after {
+  position: absolute;
+  z-index: -2;
+  inset: -4px;
+  border: 1px solid rgba(255, 215, 101, 0.22);
+  border-radius: 22px;
+  box-shadow: 0 0 26px rgba(255, 186, 49, 0.2);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  animation: upgrade-frame-glow 620ms ease-out both;
+}
+
+.upgrade-panel--chest {
+  --upgrade-frame: rgba(255, 215, 92, 0.88);
+  --upgrade-frame-soft: rgba(255, 224, 133, 0.2);
+}
+
+.upgrade-panel__heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
+  padding: 0 10px 12px;
+  border-bottom: 1px solid var(--upgrade-frame-soft);
+}
+
+.upgrade-panel__heading > span:last-child {
+  min-width: 0;
+}
+
+.upgrade-panel__heading h2 {
+  margin: 0 0 3px;
+  color: #fff5cf;
+  letter-spacing: -0.02em;
+}
+
+.upgrade-panel__heading p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.upgrade-panel__emblem {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border: 1px solid rgba(255, 219, 106, 0.48);
+  border-radius: 50%;
+  background-color: rgba(255, 204, 73, 0.08);
+  box-shadow:
+    inset 0 0 0 4px rgba(6, 15, 18, 0.5),
+    0 0 15px rgba(255, 190, 48, 0.15);
+}
+
+.upgrade-panel__straw {
+  position: absolute;
+  z-index: 1;
+  width: 72px;
+  height: 7px;
+  opacity: 0.55;
+  background:
+    linear-gradient(8deg, transparent 42%, #d89b35 45% 52%, transparent 55%) 0 0 / 24px 7px,
+    linear-gradient(-7deg, transparent 42%, #f0c15d 45% 52%, transparent 55%) 8px 0 / 29px 7px;
+  pointer-events: none;
+}
+
+.upgrade-panel__straw--top {
+  top: -4px;
+  left: 28px;
+}
+
+.upgrade-panel__straw--bottom {
+  right: 28px;
+  bottom: -4px;
+  transform: rotate(180deg);
+}
+
+.upgrade-panel__feather {
+  position: absolute;
+  z-index: 1;
+  width: 34px;
+  height: 11px;
+  border: 1px solid rgba(248, 224, 158, 0.55);
+  border-left-width: 2px;
+  border-radius: 90% 12% 90% 12%;
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.upgrade-panel__feather::before {
+  position: absolute;
+  top: 4px;
+  left: -5px;
+  width: 39px;
+  height: 1px;
+  background: rgba(248, 224, 158, 0.66);
+  content: "";
+  transform: rotate(-3deg);
+}
+
+.upgrade-panel__feather::after {
+  position: absolute;
+  inset: 2px 5px;
+  background: repeating-linear-gradient(108deg, transparent 0 5px, rgba(248, 224, 158, 0.38) 6px 7px);
+  content: "";
+}
+
+.upgrade-panel__feather--left {
+  top: 15px;
+  right: 19px;
+  transform: rotate(-28deg);
+}
+
+.upgrade-panel__feather--right {
+  bottom: 15px;
+  left: 19px;
+  transform: rotate(152deg);
+}
+
+@media (min-width: 900px) and (min-height: 701px) {
+  .upgrade-panel {
+    padding: 22px;
+  }
+
+  .upgrade-panel .upgrade-list {
+    gap: 12px;
+  }
+
+  .upgrade-panel .upgrade-button {
+    min-height: 92px;
+    gap: 14px;
+    padding: 12px 14px;
+  }
+
+  .upgrade-panel .upgrade-button__art {
+    flex-basis: 76px;
+    width: 76px;
+    height: 76px;
+  }
+
+  .upgrade-panel .upgrade-button__icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .upgrade-panel .upgrade-button__rarity {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+@media (max-width: 520px) {
+  .upgrade-panel__heading {
+    gap: 9px;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .upgrade-panel__emblem {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .upgrade-panel__feather {
+    display: none;
+  }
+}
+
+@keyframes upgrade-panel-enter {
+  from { opacity: 0; transform: translateY(7px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes upgrade-frame-glow {
+  0% { opacity: 0; transform: scale(0.985); }
+  38% { opacity: 1; }
+  100% { opacity: 0.16; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .upgrade-panel,
+  .upgrade-panel::after {
+    animation: none;
+  }
+
+  .upgrade-panel::after {
+    opacity: 0.16;
   }
 }

@@ -257,9 +257,18 @@ export class HUD {
         : 'Choose an upgrade.';
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
-      <div class="panel upgrade-panel ${chest ? 'panel--reward' : ''}">
-        <h2>${title}</h2>
-        <p>${subtitle}</p>
+      <div class="panel upgrade-panel upgrade-panel--${chest ? 'chest' : 'level'} ${chest ? 'panel--reward' : ''}">
+        <span class="upgrade-panel__straw upgrade-panel__straw--top" aria-hidden="true"></span>
+        <span class="upgrade-panel__straw upgrade-panel__straw--bottom" aria-hidden="true"></span>
+        <span class="upgrade-panel__feather upgrade-panel__feather--left" aria-hidden="true"></span>
+        <span class="upgrade-panel__feather upgrade-panel__feather--right" aria-hidden="true"></span>
+        <div class="upgrade-panel__heading">
+          <span class="upgrade-panel__emblem" data-upgrade-panel-icon aria-hidden="true"></span>
+          <span>
+            <h2>${title}</h2>
+            <p>${subtitle}</p>
+          </span>
+        </div>
         ${context.recentChoice ? `
           <div class="upgrade-selection-receipt">
             <span>✓ LAST PICK</span>
@@ -271,6 +280,10 @@ export class HUD {
         ${context.canReroll ? '<button class="reroll-button" type="button">Reroll (1)</button>' : ''}
       </div>
     `;
+    this.setIcon(
+      this.overlay.querySelector('[data-upgrade-panel-icon]'),
+      chest ? 'golden-egg' : 'xp'
+    );
     const list = this.overlay.querySelector('.upgrade-list');
     choices.forEach((choice) => {
       const button = document.createElement('button');
