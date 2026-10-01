@@ -1,0 +1,791 @@
+
+> rooster-arena@0.1.0 test:boss
+> node tests/boss-runner.mjs
+
+Rooster boss gate passed.
+{
+  "generatedAt": "2026-10-01T14:09:41.969Z",
+  "outcome": "victory",
+  "bossTtkMs": 58914.40000000001,
+  "elapsedMs": 63264.100000000006,
+  "enemiesSpawned": 30,
+  "damageTaken": 0,
+  "damageTakenBySource": {},
+  "sequenceStarts": [
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 5104.9,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 5571.6,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 6554.9,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 7471.4,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 8088.1,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 9288.1,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 9738,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 10704.7,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 11604.7,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 12254.6,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 13454.6,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 13921.2,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 14871.2,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 15787.8,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 16421.1,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 17621.1,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 18104.4,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 19071,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 19987.6,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 20620.9,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 21820.9,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 22287.5,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 23237.5,
+      "wave": 10,
+      "phase": 1,
+      "sequence": "Learn the King",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 24570.8,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 25087.4,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 26087.4,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 26937.4,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 27604,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 28904,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 29437.3,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 30453.9,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 31303.9,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 31953.8,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 33253.8,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 33787.1,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 34803.7,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 35653.7,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 36320.3,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 37637,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 38170.2,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 39170.2,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "chase",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 40020.2,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "fireball",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 40670.2,
+      "wave": 10,
+      "phase": 2,
+      "sequence": "Royal Fury",
+      "step": "recovery",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 42736.7,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 43436.7,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 44386.7,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "dash",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 45019.9,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 45986.6,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fireball",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 46603.3,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 5
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 47719.9,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "add-pulse",
+      "stepIndex": 6
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 47736.6,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 7
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 49053.1,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 49769.8,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 50736.5,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "dash",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 51386.4,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 52319.600000000006,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fireball",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 52936.3,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 5
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 54052.9,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "add-pulse",
+      "stepIndex": 6
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 54069.600000000006,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 7
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 55386.200000000004,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 56069.5,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 57036.200000000004,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "dash",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 57669.5,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 3
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 58586,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fireball",
+      "stepIndex": 4
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 59269.4,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 5
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 60369.4,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "add-pulse",
+      "stepIndex": 6
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 60386,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 7
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 61686,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "fan",
+      "stepIndex": 0
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 62386.00000000001,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 1
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 63336.00000000001,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "dash",
+      "stepIndex": 2
+    },
+    {
+      "type": "bossSequenceStepStarted",
+      "time": 64069.200000000004,
+      "wave": 10,
+      "phase": 3,
+      "sequence": "Last Hatch",
+      "step": "recovery",
+      "stepIndex": 3
+    }
+  ],
+  "enemyProjectiles": {
+    "average": 4.274230145867099,
+    "peak": 11,
+    "peakHazards": 12,
+    "hitsTaken": 0,
+    "damageTaken": 0,
+    "deaths": 0
+  },
+  "combatSources": [
+    {
+      "source": "fire-eggs",
+      "shots": 218,
+      "hits": 207,
+      "hitRate": 0.9495412844036697,
+      "damage": 8726,
+      "effectiveDamage": 8335,
+      "damageShare": 0.7468637992831542,
+      "overkill": 391,
+      "overkillRatio": 0.04480861792344717,
+      "kills": 22,
+      "firstAt": 4355,
+      "lastAt": 64102.600000000006,
+      "usageMs": 59747.600000000006
+    },
+    {
+      "source": "golden-egg",
+      "shots": 14,
+      "hits": 14,
+      "hitRate": 1,
+      "damage": 840,
+      "effectiveDamage": 740,
+      "damageShare": 0.06630824372759857,
+      "overkill": 100,
+      "overkillRatio": 0.11904761904761904,
+      "kills": 3,
+      "firstAt": 4838.3,
+      "lastAt": 64269.200000000004,
+      "usageMs": 59430.9
+    },
+    {
+      "source": "lightning-comb",
+      "shots": 14,
+      "hits": 20,
+      "hitRate": 1,
+      "damage": 620,
+      "effectiveDamage": 592,
+      "damageShare": 0.05304659498207885,
+      "overkill": 28,
+      "overkillRatio": 0.04516129032258064,
+      "kills": 3,
+      "firstAt": 4921.6,
+      "lastAt": 64319.3,
+      "usageMs": 59397.700000000004
+    },
+    {
+      "source": "pickup",
+      "shots": 0,
+      "hits": 1,
+      "hitRate": null,
+      "damage": 500,
+      "effectiveDamage": 500,
+      "damageShare": 0.044802867383512544,
+      "overkill": 0,
+      "overkillRatio": 0,
+      "kills": 0,
+      "firstAt": 41620.1,
+      "lastAt": 41620.1,
+      "usageMs": 0
+    },
+    {
+      "source": "molotov-egg",
+      "shots": 0,
+      "hits": 49,
+      "hitRate": null,
+      "damage": 490,
+      "effectiveDamage": 488,
+      "damageShare": 0.04372759856630824,
+      "overkill": 2,
+      "overkillRatio": 0.004081632653061225,
+      "kills": 1,
+      "firstAt": 5188.2,
+      "lastAt": 64135.8,
+      "usageMs": 58947.600000000006
+    },
+    {
+      "source": "support-chick",
+      "shots": 45,
+      "hits": 41,
+      "hitRate": 0.9111111111111111,
+      "damage": 401,
+      "effectiveDamage": 388,
+      "damageShare": 0.03476702508960573,
+      "overkill": 13,
+      "overkillRatio": 0.032418952618453865,
+      "kills": 1,
+      "firstAt": 4738.3,
+      "lastAt": 64369.3,
+      "usageMs": 59631
+    },
+    {
+      "source": "molotov-burn",
+      "shots": 0,
+      "hits": 39,
+      "hitRate": null,
+      "damage": 117,
+      "effectiveDamage": 117,
+      "damageShare": 0.010483870967741936,
+      "overkill": 0,
+      "overkillRatio": 0,
+      "kills": 0,
+      "firstAt": 7138.2,
+      "lastAt": 63969.200000000004,
+      "usageMs": 56831.00000000001
+    }
+  ],
+  "frameTimes": {
+    "samples": 3084,
+    "averageMs": 20.50823605706874,
+    "p95Ms": 33.400000000001455,
+    "p99Ms": 50,
+    "maxMs": 200,
+    "over16Ms": 680,
+    "over33Ms": 172
+  },
+  "peakObjects": {
+    "enemies": 7,
+    "projectiles": 6,
+    "enemyProjectiles": 11,
+    "enemyTelegraphs": 2,
+    "enemyDangerZones": 1,
+    "xpOrbs": 7,
+    "pickups": 7,
+    "abilities": 3,
+    "fx": 3,
+    "total": 35
+  }
+}

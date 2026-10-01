@@ -5,6 +5,7 @@ import path from 'node:path';
 import http from 'node:http';
 import crypto from 'node:crypto';
 import os from 'node:os';
+import { captureCombat } from './helpers/portal-combat-checks.mjs';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 
@@ -13,6 +14,7 @@ const output = path.resolve(root, process.env.PORTAL_BASELINE_OUTPUT ?? 'docs/qa
 if(path.relative(root,output).startsWith('..') || path.isAbsolute(path.relative(root,output)))throw new Error('QA output must remain within the repository.');
 const dist = path.join(root, 'dist-release');
 const mode = process.argv[2] ?? '--views';
+if (['--combat','--combat-runs','--coop-runs'].includes(mode) && !process.env.PORTAL_BASELINE_OUTPUT) throw new Error('Set PORTAL_BASELINE_OUTPUT to a new QA folder; the historical baseline must stay intact.');
 const mime = { '.js':'text/javascript', '.css':'text/css', '.html':'text/html', '.webp':'image/webp', '.png':'image/png', '.mp3':'audio/mpeg' };
 await fs.mkdir(output, { recursive:true });
 const server = http.createServer(async (req,res) => {
@@ -239,7 +241,7 @@ async function runOne(config) {
   const strategy=config.strategy??'average';
   const {page,context,errors,environment}=await open(config.viewport,save,{seed:config.seed,profile:strategy,arena:config.arena});
   await page.evaluate(({rooster,strategy})=>{const s=window.__baselineGame.scene.getScene('GameScene');s.bot.enabled=true;s.bot.strategy=strategy;if(!s.chooseRooster(rooster))throw new Error('Class selection failed');},{rooster:config.rooster,strategy});
-  const started=Date.now(),samples=[],wavePeaks={},captured=new Set();let ended=false;
+  const started=Date.now(),samples=[],wavePeaks={},captured=new Set(),clips=new Set();let ended=false;
   while(Date.now()-started<660000) {
     await page.waitForTimeout(1000);
     const state=await page.evaluate(()=>{const s=window.__baselineGame.scene.getScene('GameScene');return {
@@ -250,8 +252,13 @@ async function runOne(config) {
       frames:s.debugStats.frames,error:s.debugStats.lastError??null,
       choosing:s.isChoosingUpgrade,camera:{x:s.cameras.main.scrollX,y:s.cameras.main.scrollY,zoom:s.cameras.main.zoom}};});
     samples.push(state);
-    if(state.wave && !state.choosing) {
+    if(state.wave && !state.choosing && !state.ended) {
       if(!captured.has(state.wave)) {await page.screenshot({path:path.join(runDir,`wave-${String(state.wave).padStart(2,'0')}.png`)});captured.add(state.wave);console.log(`${config.id}: wave ${state.wave}`);}
+      if(config.clips && state.wave>=7 && !clips.has(state.wave)) {
+        const frames=[];for(let i=0;i<16;i++){frames.push(await page.screenshot());await page.waitForTimeout(100);}
+        for(let i=0;i<frames.length;i++)await fs.writeFile(path.join(runDir,`clip-wave-${state.wave}-${String(i).padStart(2,'0')}.png`),frames[i]);
+        clips.add(state.wave);
+      }
       const pressure=state.enemies+state.enemyProjectiles+state.hazards;
       if(state.wave>=7 && pressure>(wavePeaks[state.wave]?.pressure??-1)) {
         wavePeaks[state.wave]={pressure,...state};
@@ -309,7 +316,17 @@ try {
     {id:'artillery-coop-late',rooster:'artillery',arena:'square-coop',seed:'portal-p0-coop-late-d',viewport:{width:960,height:540},advanced:true,strategy:'evasive'},
     {id:'storm-alley-late',rooster:'storm',arena:'vertical-run',seed:'portal-p0-alley-late-e',viewport:{width:960,height:540},advanced:true,strategy:'evasive'}
   ].map(runOne)),null,2)+'\n');
+  else if(mode==='--combat-runs')await fs.writeFile(path.join(output,'combat-runs-summary.json'),JSON.stringify(await Promise.all([
+    {...runMatrix[0],clips:true},
+    {id:'storm-alley-late',rooster:'storm',arena:'vertical-run',seed:'portal-p0-alley-late-e',viewport:{width:960,height:540},advanced:true,strategy:'evasive',clips:true},
+    {id:'artillery-coop-late',rooster:'artillery',arena:'square-coop',seed:'portal-p2-coop-average',viewport:{width:844,height:390},advanced:true,strategy:'average',clips:true}
+  ].map(runOne)),null,2)+'\n');
+  else if(mode==='--coop-runs')await fs.writeFile(path.join(output,'coop-runs-summary.json'),JSON.stringify(await Promise.all([
+    {id:'artillery-coop-average-b',rooster:'artillery',arena:'square-coop',seed:'portal-p0-yard-a',viewport:{width:960,height:540},advanced:true,strategy:'average',clips:true},
+    {id:'artillery-coop-novice',rooster:'artillery',arena:'square-coop',seed:'portal-p2-coop-novice',viewport:{width:390,height:844},advanced:true,strategy:'novice',clips:true}
+  ].map(runOne)),null,2)+'\n');
+  else if(mode==='--combat')await captureCombat({open,output});
   else if(mode==='--measure')await measure();
-  else throw new Error('Use --views, --details, --menu-matrix, --runs, --late-runs or --measure');
+  else throw new Error('Use --views, --details, --menu-matrix, --runs, --late-runs, --combat, --combat-runs, --coop-runs or --measure');
   await fs.writeFile(path.join(output,`environment-${mode.slice(2)}.json`),JSON.stringify({host:{platform:os.platform(),release:os.release(),arch:os.arch(),cpus:os.cpus()[0]?.model,logicalCpus:os.cpus().length,totalMemoryBytes:os.totalmem()},browserVersion:browser.version(),nodeVersion:process.version,environments},null,2)+'\n');
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

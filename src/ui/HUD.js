@@ -1,3 +1,4 @@
+import { CombatMessages } from './CombatMessages.js';
 import uiIconSheetUrl from '../assets/ui/ui-icons-v1-sheet.webp';
 import uiIconAtlas from '../assets/ui/ui-icons-v1.json';
 import acePortraitUrl from '../assets/characters/rooster-ace-portrait.webp';
@@ -127,7 +128,6 @@ export class HUD {
     this.onAnalyticsConsent = onAnalyticsConsent;
     this.onTalentPurchased = onTalentPurchased;
     this.recentUpgrade = null;
-    this.upgradeConfirmationTimeout = null;
     this.multiKillTimeout = null;
     this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play', talentId: null };
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
@@ -196,11 +196,15 @@ export class HUD {
     document.body.append(
       this.root,
       this.overlay,
-      this.joystick,
-      this.waveBanner,
-      this.upgradeConfirmation,
-      this.multiKill
+      this.joystick
     );
+    this.combatMessages = new CombatMessages(this.root, {
+      banner: this.waveBanner, upgrade: this.upgradeConfirmation, kill: this.multiKill
+    }, (kind, duration) => {
+      if (kind === 'upgrade' && this.recentUpgrade) {
+        this.recentUpgrade.until = performance.now() + duration + 150;
+      }
+    });
   }
 
   update(state) {
@@ -244,6 +248,11 @@ export class HUD {
       bossHud.querySelector('[data-boss-fill]').style.width = `${Math.max(0, state.boss.hp / state.boss.maxHp) * 100}%`;
     }
     this.renderLoadout(state.loadout);
+    if (this.bossVisible !== Boolean(state.boss)) {
+      this.bossVisible = Boolean(state.boss);
+      this.combatMessages.layout();
+    }
+    this.combatMessages.setPlayerRect(state.playerScreenRect ?? null);
   }
 
   setMetricValue(selector, fullText, compactText = fullText) {
@@ -1003,13 +1012,12 @@ export class HUD {
   }
 
   showEndScreen(title, message, report = {}) {
-    window.clearTimeout(this.waveBannerTimeout);
-    window.clearTimeout(this.upgradeConfirmationTimeout);
     this.waveBanner.classList.remove('is-visible');
     this.upgradeConfirmation.classList.remove('is-visible');
     this.multiKill?.classList.remove('is-visible');
     this.waveBanner.replaceChildren();
     this.upgradeConfirmation.replaceChildren();
+    this.combatMessages.clear();
     this.waveBanner.hidden = true;
     this.upgradeConfirmation.hidden = true;
     this.root.hidden = true;
@@ -1128,6 +1136,9 @@ export class HUD {
           <section class="settings-section">
             <h3>Visuals</h3>
             <div class="settings-list">
+              <button type="button" data-effect="enemyHealthBarsAlways" data-on-label="ALWAYS" data-off-label="AUTO" aria-pressed="${Boolean(effectSettings.enemyHealthBarsAlways)}">
+                <span>Enemy HP bars</span><strong>${effectSettings.enemyHealthBarsAlways ? 'ALWAYS' : 'AUTO'}</strong>
+              </button>
               ${Object.entries(labels).map(([key, label]) => `
                 <button type="button" data-effect="${key}" aria-pressed="${effectSettings[key]}">
                   <span>${label}</span><strong>${effectSettings[key] ? 'ON' : 'OFF'}</strong>
@@ -1136,6 +1147,7 @@ export class HUD {
                 <span>Fullscreen</span><strong>TOGGLE</strong>
               </button>
             </div>
+            <p class="settings-hp-note">Auto: normal enemies after damage. Elites and bosses always show HP.</p>
           </section>
           <section class="settings-section">
             <h3>Audio</h3>
@@ -1187,7 +1199,8 @@ export class HUD {
       button.addEventListener('click', () => {
         const next = onEffectToggle?.(button.dataset.effect) ?? effectSettings;
         button.setAttribute('aria-pressed', String(next[button.dataset.effect]));
-        button.querySelector('strong').textContent = next[button.dataset.effect] ? 'ON' : 'OFF';
+        button.querySelector('strong').textContent = next[button.dataset.effect]
+          ? button.dataset.onLabel ?? 'ON' : button.dataset.offLabel ?? 'OFF';
       });
     });
     this.overlay.querySelector('[data-settings-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
@@ -1258,6 +1271,7 @@ export class HUD {
   setOverlayVisible(visible) {
     this.overlay.classList.toggle('is-visible', visible);
     document.documentElement.classList.toggle('has-ui-overlay', visible);
+    this.combatMessages.setPaused(visible);
   }
 
   showWaveBanner(wave, config) {
@@ -1282,15 +1296,9 @@ export class HUD {
   }
 
   showEncounterBanner(title, subtitle = '', tier = 'elite', durationMs = null) {
-    window.clearTimeout(this.waveBannerTimeout);
-    this.waveBanner.hidden = false;
     this.waveBanner.className = `wave-banner wave-banner--${tier}`;
     this.waveBanner.innerHTML = `<strong>${title}</strong>${subtitle ? `<small>${subtitle}</small>` : ''}`;
-    this.waveBanner.classList.remove('is-visible');
-    requestAnimationFrame(() => this.waveBanner.classList.add('is-visible'));
-    this.waveBannerTimeout = window.setTimeout(() => {
-      this.waveBanner.classList.remove('is-visible');
-    }, durationMs ?? (tier === 'boss' ? 2300 : 1700));
+    this.combatMessages.request('banner', durationMs ?? (tier === 'boss' ? 2300 : 1700));
   }
 
   setJoystick(vector) {
@@ -1457,7 +1465,6 @@ export class HUD {
       key,
       until: performance.now() + displayDuration + 150
     };
-    window.clearTimeout(this.upgradeConfirmationTimeout);
     this.upgradeConfirmation.className = `upgrade-confirmation upgrade-confirmation--${upgrade.momentTone ?? upgrade.upgradeMoment ?? 'new'}`;
     this.upgradeConfirmation.innerHTML = `
       <span class="upgrade-confirmation__icon" data-confirmation-icon></span>
@@ -1472,17 +1479,12 @@ export class HUD {
       this.upgradeConfirmation.querySelector('[data-confirmation-icon]'),
       upgrade.evolution ? upgrade.id : upgrade.id
     );
-    // Reflow restarts the entrance animation when upgrades are selected in quick succession.
-    void this.upgradeConfirmation.offsetWidth;
-    this.upgradeConfirmation.classList.add('is-visible');
-    this.upgradeConfirmationTimeout = window.setTimeout(() => {
-      this.upgradeConfirmation.classList.remove('is-visible');
-    }, displayDuration);
+    this.combatMessages.request('upgrade', displayDuration);
   }
 
   getUpgradeFeedbackState() {
     return {
-      visible: this.upgradeConfirmation?.classList.contains('is-visible') ?? false,
+      visible: Boolean(this.upgradeConfirmation?.classList.contains('is-visible') && !this.combatMessages.playerHeld && !this.combatMessages.paused),
       title: this.upgradeConfirmation?.querySelector('strong')?.textContent ?? null,
       rank: this.upgradeConfirmation?.querySelector('b')?.textContent ?? null,
       milestone: this.upgradeConfirmation?.querySelector('em')?.textContent ?? null,
@@ -1504,9 +1506,6 @@ export class HUD {
       <strong>${event.count}×</strong>
       <span class="multi-kill__label">${event.label}</span>
     `;
-    this.multiKill.classList.remove('is-visible');
-    void this.multiKill.offsetWidth;
-    this.multiKill.classList.add('is-visible');
     const killMetric = this.root.querySelector('[data-kills]');
     killMetric?.classList.remove('is-kill-burst');
     void killMetric?.offsetWidth;
@@ -1515,17 +1514,16 @@ export class HUD {
   }
 
   scheduleMultiKillHide() {
+    this.combatMessages.request('kill', 1600);
     window.clearTimeout(this.multiKillTimeout);
-    const displayDuration = 4000;
     this.multiKillTimeout = window.setTimeout(() => {
-      this.multiKill?.classList.remove('is-visible');
       this.root.querySelector('[data-kills]')?.classList.remove('is-kill-burst');
-    }, displayDuration);
+    }, 450);
   }
 
   getMultiKillState() {
     return {
-      visible: this.multiKill?.classList.contains('is-visible') ?? false,
+      visible: Boolean(this.multiKill?.classList.contains('is-visible') && !this.combatMessages.playerHeld && !this.combatMessages.paused),
       count: this.multiKill?.querySelector('strong')?.textContent ?? null,
       label: this.multiKill?.querySelector('.multi-kill__label')?.textContent ?? null,
       stickerLabel: this.multiKill?.querySelector('.multi-kill__sticker b')?.textContent ?? null
@@ -1579,8 +1577,7 @@ export class HUD {
   }
 
   destroy() {
-    window.clearTimeout(this.waveBannerTimeout);
-    window.clearTimeout(this.upgradeConfirmationTimeout);
+    this.combatMessages.destroy();
     window.clearTimeout(this.multiKillTimeout);
     this.root.remove();
     this.overlay.remove();

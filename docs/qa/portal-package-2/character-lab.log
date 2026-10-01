@@ -1,0 +1,206 @@
+
+> rooster-arena@0.1.0 test:character-lab
+> node --test tests/ace-prototype.test.mjs tests/ace-four-direction.test.mjs tests/ace-gameplay-pose.test.mjs tests/next-roosters-four-direction.test.mjs tests/gameplay-roosters-pose.test.mjs tests/final-roosters-pose.test.mjs
+
+TAP version 13
+# Subtest: all four directions have seamless walk and idle loops with valid transforms
+ok 1 - all four directions have seamless walk and idle loops with valid transforms
+  ---
+  duration_ms: 198.3503
+  type: 'test'
+  ...
+# Subtest: east is an exact geometric mirror of the authored west view
+ok 2 - east is an exact geometric mirror of the authored west view
+  ---
+  duration_ms: 1.2837
+  type: 'test'
+  ...
+# Subtest: sampling one direction never mutates another direction or retains movement
+ok 3 - sampling one direction never mutates another direction or retains movement
+  ---
+  duration_ms: 2.4813
+  type: 'test'
+  ...
+# Subtest: side-view arms stay in front of the near thigh and north uses seamless complete rear legs
+ok 4 - side-view arms stay in front of the near thigh and north uses seamless complete rear legs
+  ---
+  duration_ms: 1.0659
+  type: 'test'
+  ...
+# Subtest: gameplay profile loops cleanly and mirrors the side view exactly
+ok 5 - gameplay profile loops cleanly and mirrors the side view exactly
+  ---
+  duration_ms: 21.1289
+  type: 'test'
+  ...
+# Subtest: four key poses carry readable body lift and alternating contacts
+ok 6 - four key poses carry readable body lift and alternating contacts
+  ---
+  duration_ms: 7.8886
+  type: 'test'
+  ...
+# Subtest: idle anchors feet while the body breathes visibly
+ok 7 - idle anchors feet while the body breathes visibly
+  ---
+  duration_ms: 0.8177
+  type: 'test'
+  ...
+# Subtest: gameplay fists use anatomically correct torso and pauldron layers
+ok 8 - gameplay fists use anatomically correct torso and pauldron layers
+  ---
+  duration_ms: 0.5095
+  type: 'test'
+  ...
+# Subtest: walk joins exactly at the loop seam; idle joins at its own period
+ok 9 - walk joins exactly at the loop seam; idle joins at its own period
+  ---
+  duration_ms: 30.1106
+  type: 'test'
+  ...
+# Subtest: shooting and hurt preserve the complete foot cycle
+ok 10 - shooting and hurt preserve the complete foot cycle
+  ---
+  duration_ms: 3.7053
+  type: 'test'
+  ...
+# Subtest: the visual has no late action residue, no mutated sampler state, and no invalid transforms
+ok 11 - the visual has no late action residue, no mutated sampler state, and no invalid transforms
+  ---
+  duration_ms: 19.698
+  type: 'test'
+  ...
+# Subtest: all final walk and idle rigs close their loops in four directions
+ok 12 - all final walk and idle rigs close their loops in four directions
+  ---
+  duration_ms: 47.3623
+  type: 'test'
+  ...
+# Subtest: final side strides remain visible after production scaling
+ok 13 - final side strides remain visible after production scaling
+  ---
+  duration_ms: 185.5593
+  type: 'test'
+  ...
+# Subtest: class-specific body lift is readable without making Bummbert hop
+ok 14 - class-specific body lift is readable without making Bummbert hop
+  ---
+  duration_ms: 17.0241
+  type: 'test'
+  ...
+# Subtest: Bummbert final fist is rigidly seated in the profile cuff
+ok 15 - Bummbert final fist is rigidly seated in the profile cuff
+  ---
+  duration_ms: 10.7163
+  type: 'test'
+  ...
+# Subtest: lifted final side feet travel forward instead of moonwalking
+ok 16 - lifted final side feet travel forward instead of moonwalking
+  ---
+  duration_ms: 7.5397
+  type: 'test'
+  ...
+# Subtest: final runtime sheets have eight real phases and preserve all rollbacks
+ok 17 - final runtime sheets have eight real phases and preserve all rollbacks
+  ---
+  duration_ms: 28.6944
+  type: 'test'
+  ...
+# Subtest: final query selects eight-frame animation timing for every character
+ok 18 - final query selects eight-frame animation timing for every character
+  ---
+  duration_ms: 193.7077
+  type: 'test'
+  ...
+# Subtest: approved final roosters are the default production visuals
+ok 19 - approved final roosters are the default production visuals
+  ---
+  duration_ms: 58.0984
+  type: 'test'
+  ...
+# Subtest: global and per-character rollback paths remain available
+ok 20 - global and per-character rollback paths remain available
+  ---
+  duration_ms: 226.015
+  type: 'test'
+  ...
+# Subtest: compact gameplay rigs loop in all directions and include idle motion
+ok 21 - compact gameplay rigs loop in all directions and include idle motion
+  ---
+  duration_ms: 145.5427
+  type: 'test'
+  ...
+# Subtest: Bummbert owns one upper-arm pair and only layers lower arms separately
+ok 22 - Bummbert owns one upper-arm pair and only layers lower arms separately
+  ---
+  duration_ms: 0.7447
+  type: 'test'
+  ...
+# Subtest: Bummbert north lower body follows the visible torso center
+ok 23 - Bummbert north lower body follows the visible torso center
+  ---
+  duration_ms: 0.4401
+  type: 'test'
+  ...
+# Subtest: Blitzkamm keeps hip joins masked and front arms above the torso
+ok 24 - Blitzkamm keeps hip joins masked and front arms above the torso
+  ---
+  duration_ms: 0.4162
+  type: 'test'
+  ...
+# Subtest: side walk contacts have a clearly readable fore-aft range
+ok 25 - side walk contacts have a clearly readable fore-aft range
+  ---
+  duration_ms: 1.2334
+  type: 'test'
+  ...
+# Subtest: both side feet point in the travel direction before and after mirroring
+ok 26 - both side feet point in the travel direction before and after mirroring
+  ---
+  duration_ms: 0.3528
+  type: 'test'
+  ...
+# Subtest: lifted side feet swing forward instead of producing a backwards walk
+ok 27 - lifted side feet swing forward instead of producing a backwards walk
+  ---
+  duration_ms: 0.9315
+  type: 'test'
+  ...
+# Subtest: gameplay runtime sheets use eight walk and idle phases without replacing rollback assets
+ok 28 - gameplay runtime sheets use eight walk and idle phases without replacing rollback assets
+  ---
+  duration_ms: 7.842
+  type: 'test'
+  ...
+# Subtest: Bummbert and Blitzkamm have seamless four-direction walk and idle rigs
+ok 29 - Bummbert and Blitzkamm have seamless four-direction walk and idle rigs
+  ---
+  duration_ms: 173.2331
+  type: 'test'
+  ...
+# Subtest: side views are exact mirrors of their canonical authored directions
+ok 30 - side views are exact mirrors of their canonical authored directions
+  ---
+  duration_ms: 3.78
+  type: 'test'
+  ...
+# Subtest: arms and complete north legs preserve the required anatomy and layer order
+ok 31 - arms and complete north legs preserve the required anatomy and layer order
+  ---
+  duration_ms: 0.7063
+  type: 'test'
+  ...
+# Subtest: runtime atlases and rollback manifests are present for both roosters
+ok 32 - runtime atlases and rollback manifests are present for both roosters
+  ---
+  duration_ms: 5.2668
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1966.9653

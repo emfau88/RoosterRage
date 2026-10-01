@@ -1,0 +1,36 @@
+{
+  "createdAt": "2026-10-01T14:52:51.957Z",
+  "testedParentRevision": "27ba8e8a1774ce4cef344077ed6f5a62853f0a88",
+  "sourceHashes": {
+    "src/scenes/GameScene.js": "3404a9eb85cede361f88aa5d657b828e2071086e29f6864aa23cb84ce7b25a17",
+    "src/entities/Player.js": "1a0e7ff5b4fad4e9de4778a2c5c3ce067de990cf1ef6a9a482083aeb294be171",
+    "src/entities/Enemy.js": "c2556e92643c56c9ec62d4610a4e32546e7d4de7d8dda4fe89b0fd75c312cdc2",
+    "src/data/playerVisualBounds.js": "52b36343454c82ac4273ecab222ef1f8c7f9e5f5170496cb17724e3dac81bec0",
+    "src/data/presentationStandards.js": "24af7e326c58daff651bbdf3a019198f75774e0e6a49570151786d1734203ad4",
+    "src/systems/MetaProgressionSystem.js": "05574582590a533d41451947086ddb7421bfebdef5a0eb9ea29e4bd47df3c1e2",
+    "src/systems/RoosterClassSystem.js": "3cd121dda2270931c9c6ddf4ddac6d9ad8ee6ac95fe490d90bac3e226668fef9",
+    "src/systems/TestApi.js": "27d322fce1cce93fa3a6a465b497978238fb76f799cbcaad8b0b96c07284d818",
+    "src/ui/HUD.js": "d1fb0f44720c06d8d15ea010db580d7cfd6be46c45ced6b0148e682f261ab088",
+    "src/ui/CombatMessages.js": "22fb3840ed99dfdaf184ece07247b99ad621fe5aa80b47d5f97e296fec745bdb",
+    "src/main.js": "e1f4907defcb8bf76afb86bc20b5fb6963b1383692aeb89a9c54ec8d265dd48d",
+    "src/combat-layouts.css": "ec508e4f5a0795138f9b0728468c6299747e37a92ccc6e9455b631fa4ed56bfa"
+  },
+  "releaseFilesMatched": 143,
+  "totalBytes": 19336786,
+  "checks": [
+    "pressure",
+    "telegraphs",
+    "boss",
+    "pause",
+    "character-lab",
+    "hud-report",
+    "meta",
+    "evolution",
+    "menus",
+    "release"
+  ],
+  "layouts": 20,
+  "playerFrames": 192,
+  "geometryCases": 9,
+  "deviceAcceptance": "Real hardware, Safari and human direction recognition still require Package 5 acceptance."
+}

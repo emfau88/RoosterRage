@@ -1,0 +1,66 @@
+
+> rooster-arena@0.1.0 test:pressure
+> node tests/pressure-runner.mjs
+
+Phase C pressure gate passed.
+{
+  "generatedAt": "2026-10-01T14:51:06.314Z",
+  "viewport": [
+    390,
+    844
+  ],
+  "wave": 7,
+  "results": [
+    {
+      "roosterId": "ace",
+      "outcome": "running",
+      "waveOutcome": "completed",
+      "elapsedMs": 34631.90000000001,
+      "averageEnemyProjectiles": 1.8109549200193893,
+      "peakEnemyProjectiles": 12,
+      "peakEnemyHazards": 15,
+      "averagePlayerSpeed": 186.00120949965265,
+      "distanceTravelled": 6422.993766442007,
+      "damageTaken": 2,
+      "deathCause": null,
+      "deferredAttacks": 7,
+      "gameEnded": false,
+      "timedOut": false,
+      "errors": []
+    },
+    {
+      "roosterId": "artillery",
+      "outcome": "running",
+      "waveOutcome": "completed",
+      "elapsedMs": 33715.40000000001,
+      "averageEnemyProjectiles": 3.8848454636091723,
+      "peakEnemyProjectiles": 12,
+      "peakEnemyHazards": 13,
+      "averagePlayerSpeed": 148.67617412405133,
+      "distanceTravelled": 4997.809063649636,
+      "damageTaken": 6,
+      "deathCause": null,
+      "deferredAttacks": 10,
+      "gameEnded": false,
+      "timedOut": false,
+      "errors": []
+    },
+    {
+      "roosterId": "storm",
+      "outcome": "running",
+      "waveOutcome": "completed",
+      "elapsedMs": 53831.299999999996,
+      "averageEnemyProjectiles": 7.375350140056023,
+      "peakEnemyProjectiles": 12,
+      "peakEnemyHazards": 17,
+      "averagePlayerSpeed": 185.977242899092,
+      "distanceTravelled": 9992.799031383984,
+      "damageTaken": 4,
+      "deathCause": null,
+      "deferredAttacks": 7,
+      "gameEnded": false,
+      "timedOut": false,
+      "errors": []
+    }
+  ]
+}

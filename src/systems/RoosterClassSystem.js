@@ -51,7 +51,7 @@ export class RoosterClassSystem {
     if (tint) {
       player.sprite.setTint(tint);
     }
-    player.updateHealthBar();
+    player.updateGroundMarker();
   }
 
   applyResponsiveVisualScale() {

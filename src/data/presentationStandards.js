@@ -15,6 +15,7 @@ export const AUDIO_PRIORITIES = Object.freeze({
 });
 
 export const EFFECT_DEFAULTS = Object.freeze({
+  enemyHealthBarsAlways: false,
   damageNumbers: true,
   screenShake: true,
   screenFlash: true,

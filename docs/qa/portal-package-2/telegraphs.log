@@ -1,0 +1,11 @@
+
+> rooster-arena@0.1.0 test:telegraphs
+> node tests/acceptance-runner.mjs --telegraphs
+
+Rooster telegraph-avoidance gate passed.
+{
+  "bomberDistance": 175.15202414859385,
+  "dashOffset": 96.54295389481558,
+  "damageTaken": 0,
+  "frames": 58
+}

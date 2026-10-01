@@ -289,7 +289,7 @@ async function verifySettingsAndReport(browser, serverUrl) {
       returnToHubVisible: document.querySelector('[data-return-hub]') !== null,
       settings: window.__ROOSTER_TEST__.getEffectSettings()
     }));
-    assert(settingsOpen.visible && settingsOpen.buttons === 4 && settingsOpen.privacyVisible
+    assert(settingsOpen.visible && settingsOpen.buttons === 5 && settingsOpen.privacyVisible
       && settingsOpen.fullscreenVisible
       && settingsOpen.returnToHubVisible,
     'In-run settings must expose effects, fullscreen, privacy and the main-menu action.', settingsOpen);

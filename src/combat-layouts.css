@@ -1,0 +1,49 @@
+/* One measured slot below the HUD, with priority handled by CombatMessages. */
+.combat-messages {
+  position: fixed;
+  left: 50%;
+  z-index: 12;
+  width: min(390px, calc(100vw - 24px));
+  transform: none;
+  pointer-events: none;
+}
+.combat-messages > .wave-banner,
+.combat-messages > .upgrade-confirmation,
+.combat-messages > .multi-kill {
+  box-sizing: border-box;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 8px 10px;
+  transform: none;
+  transition: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.combat-messages > :not(.is-visible),
+html.has-ui-overlay .combat-messages { display: none; }
+.combat-messages .wave-banner strong { font-size: 15px; line-height: 1.15; letter-spacing: 0.03em; }
+.combat-messages .wave-banner small { margin-top: 3px; font-size: 12px; line-height: 1.25; }
+.combat-messages .upgrade-confirmation { gap: 8px; }
+.combat-messages .upgrade-confirmation__icon { width: 32px; height: 32px; flex: 0 0 32px; filter: none; }
+.combat-messages .upgrade-confirmation__copy { flex: 1; }
+.combat-messages .upgrade-confirmation__copy small { font-size: 10px; letter-spacing: 0.06em; }
+.combat-messages .upgrade-confirmation__copy strong { font-size: 14px; line-height: 1.2; }
+.combat-messages .upgrade-confirmation__copy b { font-size: 12px; flex: 0 0 auto; }
+/* Effects and milestones are already explained by the selection dialog. */
+.combat-messages .upgrade-confirmation__copy em,
+.combat-messages .upgrade-button__changes { display: none; }
+.combat-messages .multi-kill { display: flex; justify-content: center; gap: 8px; min-height: 36px; }
+.combat-messages .multi-kill:not(.is-visible) { display: none; }
+.combat-messages .multi-kill__sticker { display: none; }
+.combat-messages .multi-kill strong { font-size: 17px; text-shadow: none; }
+.combat-messages .multi-kill__label { max-width: none; font-size: 12px; letter-spacing: 0.05em; }
+.settings-panel .settings-hp-note { margin: 8px 0 0; font-size: 13px; line-height: 1.35; }
+@media (max-height: 480px) {
+  .combat-messages > .wave-banner { padding: 6px 9px; }
+  .combat-messages .wave-banner strong { font-size: 14px; }
+  .combat-messages .wave-banner small { font-size: 11px; }
+}

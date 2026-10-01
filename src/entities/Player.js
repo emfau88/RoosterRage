@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { USE_NEXT_ROOSTER_VISUAL } from '../config/aceVisual.js';
+import { USE_NEXT_ROOSTER_VISUAL, ACE_VISUAL_VERSION, ARTILLERY_VISUAL_VERSION, STORM_VISUAL_VERSION } from '../config/aceVisual.js';
+import { PLAYER_VISUAL_BOUNDS } from '../data/playerVisualBounds.js';
 
 export class Player {
   constructor(scene, x, y) {
@@ -47,12 +48,13 @@ export class Player {
     this.sprite.body.setDamping(true);
     this.sprite.body.setDrag(0.88);
     this.lastMoveDirection = 'south';
+    // A contact mark identifies the player without suggesting an attack radius.
+    // Enemy warnings still render above it; the physics body stays unchanged.
+    this.groundMarker = scene.add.ellipse(x, y, 34, 10, 0x10242a, 0.65)
+      .setStrokeStyle(2, 0xd6f6ed, 0.8).setDepth(5.8);
     this.sprite.play('rooster-ace-walk-south');
 
-    this.hpBarWidth = 54;
-    this.hpBarBack = scene.add.rectangle(x - 27, y - 46, this.hpBarWidth, 6, 0x1c0f12, 0.92).setOrigin(0, 0.5).setDepth(20);
-    this.hpBarFill = scene.add.rectangle(x - 27, y - 46, this.hpBarWidth, 6, 0x5cff74, 1).setOrigin(0, 0.5).setDepth(21);
-    this.hpBarBorder = scene.add.rectangle(x, y - 46, this.hpBarWidth + 2, 8).setStrokeStyle(1, 0xffffff, 0.7).setDepth(22);
+
   }
 
   update(inputVector) {
@@ -64,7 +66,7 @@ export class Player {
     this.regenerate();
     this.updateAnimation(velocity);
     this.updateVisualPose(velocity);
-    this.updateHealthBar();
+    this.updateGroundMarker();
   }
 
   aimAt(angle) {
@@ -92,7 +94,6 @@ export class Player {
     } else {
       this.invulnerableUntil = time + 500;
     }
-    this.updateHealthBar();
     this.scene.tweens.add({
       targets: this.sprite,
       alpha: 0.45,
@@ -138,13 +139,11 @@ export class Player {
 
   heal(amount) {
     this.hp = Math.min(this.maxHp, this.hp + amount);
-    this.updateHealthBar();
   }
 
   addMaxHp(amount) {
     this.maxHp += amount;
     this.hp = Math.min(this.maxHp, this.hp + amount);
-    this.updateHealthBar();
   }
 
   addXp(amount) {
@@ -259,27 +258,14 @@ export class Player {
     this.sprite.setAngle(0);
   }
 
-  updateHealthBar() {
-    const ratio = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
-    const barX = this.sprite.x - this.hpBarWidth / 2;
-    const barY = this.sprite.y - 48;
-    this.hpBarBack.setPosition(barX, barY);
-    this.hpBarFill.setPosition(barX, barY);
-    this.hpBarBorder.setPosition(this.sprite.x, barY);
-    this.hpBarFill.scaleX = ratio;
-    if (ratio > 0.55) {
-      this.hpBarFill.fillColor = 0x5cff74;
-    } else if (ratio > 0.25) {
-      this.hpBarFill.fillColor = 0xffd35c;
-    } else {
-      this.hpBarFill.fillColor = 0xff4f5f;
-    }
+  updateGroundMarker() {
+    const versions = { ace: ACE_VISUAL_VERSION, artillery: ARTILLERY_VISUAL_VERSION, storm: STORM_VISUAL_VERSION };
+    const bounds = versions[this.roosterId] === 'final' ? PLAYER_VISUAL_BOUNDS[this.roosterId] : null;
+    this.groundMarker.setPosition(this.sprite.x, this.sprite.y + (bounds ? bounds.bottom - 128 : 105) * this.baseScale);
   }
 
   destroy() {
-    this.hpBarBack.destroy();
-    this.hpBarFill.destroy();
-    this.hpBarBorder.destroy();
+    this.groundMarker.destroy();
     this.sprite.destroy();
   }
 }

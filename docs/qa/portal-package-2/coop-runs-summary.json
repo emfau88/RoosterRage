@@ -1,0 +1,32 @@
+[
+  {
+    "id": "artillery-coop-average-b",
+    "outcome": "gameOver",
+    "ended": true,
+    "waves": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "errors": []
+  },
+  {
+    "id": "artillery-coop-novice",
+    "outcome": "gameOver",
+    "ended": true,
+    "waves": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "errors": []
+  }
+]

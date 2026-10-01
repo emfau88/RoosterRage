@@ -79,6 +79,7 @@ export class Enemy {
     this.hpBarWidth = config.hpBarWidth ?? 42;
     this.hpBarYOffset = config.hpBarYOffset ?? 30;
     this.showHpBar = config.showHpBar ?? true;
+    this.hpBarVisibleUntil = 0;
     this.baseTint = config.tint ?? null;
     this.statusBaseTint = this.elite && config.eliteTint !== false ? 0xfff2a6 : this.baseTint;
     this.baseRenderScale = config.scale ?? 0.24;
@@ -143,6 +144,7 @@ export class Enemy {
       .setAlpha(1)
       .setVisible(this.showHpBar)
       .setActive(this.showHpBar);
+    this.updateHpBarVisibility();
     return this;
   }
 
@@ -183,6 +185,17 @@ export class Enemy {
     this.hpBarBack.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.scaleX = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
+    this.updateHpBarVisibility();
+  }
+
+  updateHpBarVisibility() {
+    // Full ordinary bars compete with warnings in crowded late waves. Damage
+    // briefly reveals them; priority enemies retain their permanent identity.
+    const visible = this.showHpBar && (this.elite || this.boss || this.champion
+      || this.scene.effects.enabled('enemyHealthBarsAlways')
+      || this.scene.time.now < this.hpBarVisibleUntil);
+    this.hpBarBack.setVisible(visible);
+    this.hpBarFill.setVisible(visible);
   }
 
   updateDirectionalAnimation(direction) {
@@ -249,6 +262,8 @@ export class Enemy {
 
   takeDamage(amount, feedback = {}) {
     this.hp -= amount;
+    this.hpBarVisibleUntil = this.scene.time.now + 1600;
+    this.updateHpBarVisibility();
     const healthRatio = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
     this.hpBarFill.scaleX = healthRatio;
     this.sprite.setAlpha(1);

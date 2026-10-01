@@ -850,7 +850,6 @@ export function installTestApi(scene) {
     },
     setPlayerHp: (hp) => {
       scene.player.hp = Phaser.Math.Clamp(hp, 0, scene.player.maxHp);
-      scene.player.updateHealthBar();
       return scene.player.hp;
     },
     damagePlayer: (amount) => {
@@ -875,9 +874,7 @@ export function installTestApi(scene) {
       scene.player.sprite.body?.stop();
       [
         scene.player.sprite,
-        scene.player.hpBarBack,
-        scene.player.hpBarFill,
-        scene.player.hpBarBorder,
+        scene.player.groundMarker,
         scene.arena.title
       ].forEach((object) => object?.setVisible(false));
       scene.cameras.main.centerOn(center.x, center.y);
@@ -1034,7 +1031,7 @@ export function installTestApi(scene) {
       const point = resolveLegacyTestPoint(scene, x, y);
       scene.player.sprite.setPosition(point.x, point.y);
       scene.arena.update(true);
-      scene.player.updateHealthBar();
+      scene.player.updateGroundMarker();
     },
     setShotCount: (count) => {
       scene.player.shotCount = Phaser.Math.Clamp(count, 1, 3);

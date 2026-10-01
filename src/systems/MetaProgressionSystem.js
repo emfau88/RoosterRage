@@ -418,7 +418,6 @@ export class MetaProgressionSystem {
     player.xpMagnetRadius = Math.round(player.xpMagnetRadius * bonuses.xpMagnetMultiplier);
     player.critChance = Math.min(0.5, player.critChance + bonuses.critChance);
     runState.rerollsRemaining += bonuses.rerolls;
-    player.updateHealthBar();
     return bonuses;
   }
 

@@ -1,0 +1,39 @@
+{
+  "config": {
+    "id": "artillery-coop-average-b",
+    "rooster": "artillery",
+    "arena": "square-coop",
+    "seed": "portal-p0-yard-a",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "advanced": true,
+    "strategy": "average",
+    "clips": true
+  },
+  "latest": {
+    "time": 244291.60000000003,
+    "wave": 6,
+    "ended": false,
+    "selection": null,
+    "hp": 32,
+    "maxHp": 130,
+    "x": 935.3007715328438,
+    "y": 635.8044467125659,
+    "enemies": 2,
+    "enemyProjectiles": 0,
+    "hazards": 0,
+    "visibleEnemies": 2,
+    "frames": 7757,
+    "error": null,
+    "choosing": false,
+    "camera": {
+      "x": 409,
+      "y": 349,
+      "zoom": 1
+    }
+  },
+  "wallMs": 242028,
+  "errors": []
+}
