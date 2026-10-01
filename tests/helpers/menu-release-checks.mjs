@@ -18,7 +18,8 @@ export async function verifyUpgradePanel(page, viewport, expectedCount) {
     };
     const panel = document.querySelector('.upgrade-panel');
     const body = panel.querySelector('.upgrade-panel__body');
-    const important = [...panel.querySelectorAll('.upgrade-button__rank, .upgrade-button__changes > span, .upgrade-button__description, .upgrade-button__synergy, .upgrade-button__evolution-hint')];
+    const important = [...panel.querySelectorAll('.upgrade-button__rank, .upgrade-button__changes > span, .upgrade-button__description, .upgrade-button__synergy, .upgrade-button__evolution-hint, .upgrade-button__summary')]
+      .filter(element => element.getClientRects().length > 0);
     return {
       panel: rect(panel), body: rect(body), reroll: panel.querySelector('.reroll-button') ? rect(panel.querySelector('.reroll-button')) : null,
       columns: getComputedStyle(panel.querySelector('.upgrade-list')).gridTemplateColumns.split(' ').length,
@@ -37,8 +38,23 @@ export async function verifyUpgradePanel(page, viewport, expectedCount) {
   assert(geometry.cards.length === expectedCount && geometry.cards.every((card) => card.height >= 44 && card.titleSize >= 16), `${viewport.name}: missing offer, undersized title or touch target.`, geometry);
   const floor = viewport.width <= 899 ? 13 : 12;
   assert(geometry.important.length > 0 && geometry.important.every((text) => text.fontSize >= floor && text.display !== 'none' && text.height > 0), `${viewport.name}: an effect, rank, synergy or recipe was hidden or reduced below ${floor}px.`, geometry.important);
-  const expectedColumns = expectedCount === 4 ? (viewport.width >= 720 ? 2 : 1) : (viewport.width >= 900 ? 3 : 1);
+  const compact = viewport.width >= 600 && viewport.width > viewport.height && viewport.height <= 500;
+  const expectedColumns = expectedCount === 4 ? (compact || viewport.width >= 720 ? 2 : 1) : (!compact && viewport.width >= 900 ? 3 : 1);
   assert(geometry.columns === expectedColumns, `${viewport.name}: offers are not distributed equally across ${expectedColumns} columns.`, geometry);
+  if (compact) {
+    assert(geometry.cards.every(card => card.top >= geometry.body.top - 1 && card.bottom <= geometry.body.bottom + 1), `${viewport.name}: compact offers require scrolling.`, geometry);
+    const original = await page.evaluate(() => JSON.stringify(window.__ROOSTER_TEST__.getProgressionState()));
+    await page.locator('.upgrade-offer__details').first().click();
+    const detail = await page.locator('.upgrade-detail').evaluate(element => {
+      const r = element.getBoundingClientRect();
+      const texts = [...element.querySelectorAll('.upgrade-button__changes > span, .upgrade-button__description, .upgrade-button__synergy, .upgrade-button__evolution-hint')];
+      return { left:r.left, right:r.right, top:r.top, bottom:r.bottom, readable:texts.every(text => text.getClientRects().length && parseFloat(getComputedStyle(text).fontSize) >= 13) };
+    });
+    assert(inside(detail) && detail.readable, `${viewport.name}: full details are clipped or hidden.`, detail);
+    assert(await page.evaluate(() => JSON.stringify(window.__ROOSTER_TEST__.getProgressionState())) === original, 'Opening details consumed or replaced an upgrade.');
+    await page.keyboard.press('Escape');
+    assert(await page.locator('.upgrade-offer__details').first().evaluate(element => document.activeElement === element), 'Closing details lost the original focus.');
+  }
   // Each card must be reachable inside its own scroll area, including the fourth boss offer.
   const cards = page.locator('.upgrade-button');
   for (let index = 0; index < expectedCount; index += 1) {
@@ -119,7 +135,13 @@ export async function verifyReleaseMenuInteractions(browser, url) {
       });
       const recipe = await verifyUpgradePanel(page, viewport, 3);
       assert(await page.locator('.upgrade-button__evolution-hint').count() > 0, 'The primary offer is missing its EVO recipe.');
-      assert((await page.locator('.upgrade-panel').innerText()).includes('EVO RECIPE'), 'Recipe label is not English.');
+      if (await page.locator('.upgrade-offer__details').first().isVisible()) {
+        await page.locator('.upgrade-offer__details').first().click();
+        assert((await page.locator('.upgrade-detail').innerText()).includes('EVO RECIPE'), 'The complete EVO recipe is missing from details.');
+        await page.keyboard.press('Escape');
+      } else {
+        assert((await page.locator('.upgrade-panel').innerText()).includes('EVO RECIPE'), 'Recipe label is not English.');
+      }
       await page.locator('.reroll-button').focus();
       await page.keyboard.press('Tab');
       assert(await page.locator('.upgrade-button').first().evaluate((button) => document.activeElement === button), 'Tab does not wrap from reroll to the first offer.');

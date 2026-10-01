@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { USE_NEXT_ROOSTER_VISUAL, ACE_VISUAL_VERSION, ARTILLERY_VISUAL_VERSION, STORM_VISUAL_VERSION } from '../config/aceVisual.js';
 import { PLAYER_VISUAL_BOUNDS } from '../data/playerVisualBounds.js';
+import { ensurePlayerContactShadow } from '../systems/assets/PlayerContactShadow.js';
 
 export class Player {
   constructor(scene, x, y) {
@@ -48,10 +49,8 @@ export class Player {
     this.sprite.body.setDamping(true);
     this.sprite.body.setDrag(0.88);
     this.lastMoveDirection = 'south';
-    // A contact mark identifies the player without suggesting an attack radius.
-    // Enemy warnings still render above it; the physics body stays unchanged.
-    this.groundMarker = scene.add.ellipse(x, y, 34, 10, 0x10242a, 0.65)
-      .setStrokeStyle(2, 0xd6f6ed, 0.8).setDepth(5.8);
+    this.groundMarker = scene.add.image(x, y, ensurePlayerContactShadow(scene))
+      .setDisplaySize(34, 12).setDepth(5.8);
     this.sprite.play('rooster-ace-walk-south');
 
 
@@ -262,6 +261,10 @@ export class Player {
     const versions = { ace: ACE_VISUAL_VERSION, artillery: ARTILLERY_VISUAL_VERSION, storm: STORM_VISUAL_VERSION };
     const bounds = versions[this.roosterId] === 'final' ? PLAYER_VISUAL_BOUNDS[this.roosterId] : null;
     this.groundMarker.setPosition(this.sprite.x, this.sprite.y + (bounds ? bounds.bottom - 128 : 105) * this.baseScale);
+    const moving = this.sprite.body.velocity.lengthSq() > 1;
+    const step = moving ? Math.sin((this.sprite.anims.currentFrame?.index ?? 1) * Math.PI / 2) : 0;
+    const size = this.baseScale / 0.25;
+    this.groundMarker.setDisplaySize(34 * size * (1 + step * 0.025), 12 * size * (1 - step * 0.025));
   }
 
   destroy() {

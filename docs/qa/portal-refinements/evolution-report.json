@@ -1,0 +1,523 @@
+{
+  "generatedAt": "2026-10-01T20:41:26.477Z",
+  "slots": {
+    "filled": {
+      "loadout": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          },
+          {
+            "id": "golden-egg",
+            "sourceId": "golden-egg",
+            "name": "Golden Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.8181818181818182,
+              "remainingMs": 450,
+              "durationMs": 550
+            }
+          },
+          {
+            "id": "molotov-egg",
+            "sourceId": "molotov-egg",
+            "name": "Molotov Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.8823529411764706,
+              "remainingMs": 750,
+              "durationMs": 850
+            }
+          },
+          {
+            "id": "lightning-comb",
+            "sourceId": "lightning-comb",
+            "name": "Lightning Comb",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.8461538461538461,
+              "remainingMs": 550,
+              "durationMs": 650
+            }
+          },
+          {
+            "id": "void-nest",
+            "sourceId": "void-nest",
+            "name": "Void Nest",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.8888888888888888,
+              "remainingMs": 800,
+              "durationMs": 900
+            }
+          }
+        ],
+        "passive": [
+          {
+            "id": "max-hp",
+            "sourceId": "max-hp",
+            "name": "Max HP",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          },
+          {
+            "id": "move-speed",
+            "sourceId": "move-speed",
+            "name": "Move Speed",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          },
+          {
+            "id": "armor",
+            "sourceId": "armor",
+            "name": "Armor",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          },
+          {
+            "id": "regen",
+            "sourceId": "regen",
+            "name": "Regen",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 3,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          }
+        ],
+        "evolutions": [],
+        "activeFree": 0,
+        "passiveFree": 0,
+        "rerollsRemaining": 1
+      },
+      "available": [
+        "primary-ace-rank",
+        "golden-egg",
+        "molotov-egg",
+        "lightning-comb",
+        "void-nest",
+        "max-hp",
+        "move-speed",
+        "armor",
+        "regen"
+      ]
+    },
+    "rerolled": {
+      "first": true,
+      "second": false,
+      "loadout": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          },
+          {
+            "id": "golden-egg",
+            "sourceId": "golden-egg",
+            "name": "Golden Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.5758181818181815,
+              "remainingMs": 316.6999999999998,
+              "durationMs": 550
+            }
+          },
+          {
+            "id": "molotov-egg",
+            "sourceId": "molotov-egg",
+            "name": "Molotov Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.7255294117647056,
+              "remainingMs": 616.6999999999998,
+              "durationMs": 850
+            }
+          },
+          {
+            "id": "lightning-comb",
+            "sourceId": "lightning-comb",
+            "name": "Lightning Comb",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.6410769230769228,
+              "remainingMs": 416.6999999999998,
+              "durationMs": 650
+            }
+          },
+          {
+            "id": "void-nest",
+            "sourceId": "void-nest",
+            "name": "Void Nest",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.7407777777777775,
+              "remainingMs": 666.6999999999998,
+              "durationMs": 900
+            }
+          }
+        ],
+        "passive": [
+          {
+            "id": "max-hp",
+            "sourceId": "max-hp",
+            "name": "Max HP",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          },
+          {
+            "id": "move-speed",
+            "sourceId": "move-speed",
+            "name": "Move Speed",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          },
+          {
+            "id": "armor",
+            "sourceId": "armor",
+            "name": "Armor",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          },
+          {
+            "id": "regen",
+            "sourceId": "regen",
+            "name": "Regen",
+            "slotType": "passive",
+            "rank": 1,
+            "maxRank": 3,
+            "startWeapon": false,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": null
+          }
+        ],
+        "evolutions": [],
+        "activeFree": 0,
+        "passiveFree": 0,
+        "rerollsRemaining": 0
+      }
+    }
+  },
+  "evolutions": [
+    {
+      "id": "evo-sunshot-array",
+      "damage": 310,
+      "ability": {
+        "primaryEvolution": "evo-sunshot-array"
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 4,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 0,
+        "fx": 0,
+        "total": 16
+      }
+    },
+    {
+      "id": "evo-siegebreaker-shell",
+      "damage": 70,
+      "ability": {
+        "primaryEvolution": "evo-siegebreaker-shell"
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 2,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 0,
+        "fx": 4,
+        "total": 18
+      }
+    },
+    {
+      "id": "evo-tempest-crown",
+      "damage": 78,
+      "ability": {
+        "primaryEvolution": "evo-tempest-crown"
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 2,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 0,
+        "fx": 14,
+        "total": 26
+      }
+    },
+    {
+      "id": "evo-solar-scramble",
+      "damage": 312,
+      "ability": {
+        "rank": 4,
+        "evolved": true
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 3,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 0,
+        "fx": 0,
+        "total": 15
+      }
+    },
+    {
+      "id": "evo-thunder-roost",
+      "damage": 526,
+      "ability": {
+        "rank": 4,
+        "evolved": true
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 1,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 1,
+        "fx": 0,
+        "total": 13
+      }
+    },
+    {
+      "id": "evo-shell-halo",
+      "damage": 2940,
+      "ability": {
+        "rank": 4,
+        "evolved": true,
+        "count": 6
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 1,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 6,
+        "fx": 0,
+        "total": 19
+      }
+    },
+    {
+      "id": "evo-broodstorm",
+      "damage": 2016,
+      "ability": {
+        "rank": 4,
+        "evolved": true
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 1,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 2,
+        "fx": 0,
+        "total": 14
+      }
+    },
+    {
+      "id": "evo-singularity-nest",
+      "damage": 1848,
+      "ability": {
+        "rank": 4,
+        "evolved": true
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 1,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 1,
+        "fx": 0,
+        "total": 14
+      }
+    },
+    {
+      "id": "evo-phoenix-pan",
+      "damage": 528,
+      "ability": {
+        "rank": 4,
+        "evolved": true
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 1,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 2,
+        "fx": 0,
+        "total": 15
+      }
+    },
+    {
+      "id": "evo-dawn-laser",
+      "damage": 270,
+      "ability": {
+        "rank": 4,
+        "evolved": true
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 1,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 0,
+        "fx": 0,
+        "total": 13
+      }
+    },
+    {
+      "id": "evo-chick-squadron",
+      "damage": 1364,
+      "ability": {
+        "rank": 5,
+        "evolved": true,
+        "count": 4
+      },
+      "peakObjects": {
+        "enemies": 12,
+        "projectiles": 13,
+        "enemyProjectiles": 0,
+        "enemyTelegraphs": 0,
+        "enemyDangerZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "abilities": 4,
+        "fx": 0,
+        "total": 29
+      }
+    }
+  ]
+}

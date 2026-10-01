@@ -107,7 +107,7 @@ function keepFocusInDialog(event, dialog) {
   if (event.key !== 'Tab') return;
   const focusable = [...dialog.querySelectorAll(
     'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href]'
-  )].filter((element) => element.tabIndex >= 0);
+  )].filter((element) => element.tabIndex >= 0 && element.getClientRects().length && !element.closest('[inert]'));
   if (!focusable.length) return;
   const activeIndex = focusable.indexOf(document.activeElement);
   const nextIndex = event.shiftKey
@@ -266,6 +266,7 @@ export class HUD {
   }
 
   showUpgradeChoices(choices, context = {}) {
+    this.upgradeDetailTrigger = null;
     const chest = context.type === 'chest';
     const title = chest
       ? context.kind === 'boss' ? 'Royal Boss Chest'
@@ -294,15 +295,15 @@ export class HUD {
             <h2 id="upgrade-title">${title}</h2>
             <p>${subtitle}</p>
           </span>
+          ${context.recentChoice ? `
+            <div class="upgrade-selection-receipt">
+              <span>✓ LAST PICK</span>
+              <strong>${context.recentChoice.name} ${context.recentChoice.evolution ? 'EVO' : `R${context.recentChoice.nextRank ?? 1}`}</strong>
+              <em>${context.recentChoice.momentTitle ?? context.recentChoice.name}</em>
+            </div>
+          ` : ''}
         </div>
         <div class="upgrade-panel__body">
-        ${context.recentChoice ? `
-          <div class="upgrade-selection-receipt">
-            <span>✓ LAST PICK</span>
-            <strong>${context.recentChoice.name} ${context.recentChoice.evolution ? 'EVO' : `R${context.recentChoice.nextRank ?? 1}`}</strong>
-            <em>${context.recentChoice.momentTitle ?? context.recentChoice.name}</em>
-          </div>
-        ` : ''}
         <div class="upgrade-list"></div>
         </div>
         ${context.canReroll ? '<button class="reroll-button" type="button">Reroll (1)</button>' : ''}
@@ -331,6 +332,7 @@ export class HUD {
             <strong>${choice.name}</strong>
             <span class="upgrade-button__rank">${choice.rankDeltaLabel ?? choice.rankLabel ?? ''}</span>
           </span>
+          <span class="upgrade-button__summary">${(choice.changeItems?.length ? choice.changeItems.slice(0, 2).join(' · ') : description) || choice.momentTitle || choice.name}</span>
           ${this.renderRankPips(choice.rankProgress)}
           <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
           <span class="upgrade-button__milestone">${choice.momentTitle ?? choice.name}</span>
@@ -348,18 +350,63 @@ export class HUD {
             ? `<span class="upgrade-button__evolution-hint"><strong>EVO RECIPE · ${choice.evolutionHint.name}</strong><span class="${choice.evolutionHint.baseReady ? 'is-ready' : ''}">R4 ${choice.evolutionHint.baseReady ? '✓' : '○'}</span><span class="${choice.evolutionHint.passiveOwned ? 'is-ready' : ''}">${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span></span>`
             : ''}
         </span>
+        <span class="upgrade-button__pick-label" aria-hidden="true">Select</span>
       `;
       this.setIcon(button.querySelector('[data-upgrade-icon]'), choice.id);
       this.setIcon(button.querySelector('[data-rarity-icon]'), `rarity-${choice.rarity ?? 'common'}`);
       button.addEventListener('click', () => this.onUpgradeSelected(choice), { once: true });
-      list.append(button);
+      const offer = document.createElement('div');
+      offer.className = 'upgrade-offer';
+      const details = document.createElement('button');
+      details.type = 'button';
+      details.className = 'upgrade-offer__details';
+      details.textContent = choice.evolutionHint ? 'EVO details' : 'Details';
+      details.setAttribute('aria-label', `Details for ${choice.name}`);
+      details.addEventListener('click', () => this.showUpgradeDetails(button, details, choice));
+      offer.append(button, details);
+      list.append(offer);
     });
     this.overlay.querySelector('.reroll-button')?.addEventListener('click', () => this.onReroll?.(), { once: true });
     const panel = this.overlay.querySelector('.upgrade-panel');
-    this.overlay.onkeydown = (event) => keepFocusInDialog(event, panel);
+    this.overlay.onkeydown = (event) => {
+      const detail = panel.querySelector('.upgrade-detail');
+      if (detail && event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        this.closeUpgradeDetails();
+        return;
+      }
+      keepFocusInDialog(event, detail ?? panel);
+    };
     requestAnimationFrame(() => {
       if (panel.isConnected) panel.querySelector('.upgrade-button')?.focus({ preventScroll: true });
     });
+  }
+
+  showUpgradeDetails(offer, trigger, choice) {
+    const panel = offer.closest('.upgrade-panel');
+    if (!panel || panel.querySelector('.upgrade-detail')) return;
+    const layer = document.createElement('div');
+    layer.className = 'upgrade-detail-layer';
+    layer.innerHTML = `<section class="upgrade-detail" role="dialog" aria-modal="true" aria-labelledby="upgrade-detail-title">
+      <header><h2 id="upgrade-detail-title">${choice.name}</h2><button type="button" data-upgrade-detail-close aria-label="Back to upgrade offers">×</button></header>
+      <div class="upgrade-detail__body"><div class="upgrade-detail__card">${offer.innerHTML}</div></div>
+      <button type="button" class="upgrade-detail__select">Select ${choice.name}</button>
+    </section>`;
+    for (const child of panel.children) child.inert = true;
+    panel.append(layer);
+    this.upgradeDetailTrigger = trigger;
+    layer.querySelector('[data-upgrade-detail-close]').addEventListener('click', () => this.closeUpgradeDetails());
+    layer.querySelector('.upgrade-detail__select').addEventListener('click', () => offer.click(), { once: true });
+    layer.querySelector('[data-upgrade-detail-close]').focus({ preventScroll: true });
+  }
+
+  closeUpgradeDetails() {
+    const panel = this.overlay.querySelector('.upgrade-panel');
+    panel?.querySelector('.upgrade-detail-layer')?.remove();
+    for (const child of panel?.children ?? []) child.inert = false;
+    if (this.upgradeDetailTrigger?.isConnected) this.upgradeDetailTrigger.focus({ preventScroll: true });
+    this.upgradeDetailTrigger = null;
   }
 
   showRoosterSelection(definitions, hub = {}, onCosmeticSelected = null) {
@@ -708,6 +755,27 @@ export class HUD {
     };
     this.overlay.querySelector('[data-hub-settings]')?.addEventListener('click', () => this.onSettings?.());
     this.overlay.querySelector('[data-hub-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
+    const inspector = document.createElement('section');
+    inspector.className = 'rooster-inspector';
+    inspector.id = 'rooster-inspector';
+    inspector.setAttribute('aria-label', 'Character details');
+    const customization = document.createElement('section');
+    customization.className = 'rooster-customization';
+    customization.setAttribute('aria-label', 'Character cosmetics');
+    list.after(inspector, customization);
+    const refreshCharacterDetails = (id) => {
+      const card = list.querySelector(`.rooster-card--${id}`);
+      inspector.replaceChildren();
+      for (const selector of ['.rooster-card__stats', '.rooster-card__primary', '.rooster-card__passive', '.rooster-card__mastery', '.rooster-card__progress']) {
+        inspector.append(card.querySelector(selector).cloneNode(true));
+      }
+      const heading = document.createElement('h3');
+      heading.textContent = `${definitions.find(definition => definition.id === id).name} · Details`;
+      inspector.prepend(heading);
+      customization.querySelectorAll('.cosmetic-panel').forEach(panel => {
+        panel.hidden = panel.dataset.roosterId !== id;
+      });
+    };
     definitions.forEach((definition) => {
       const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
         ?? { unlocked: true, cosmetics: [], runs: 0, wins: 0 };
@@ -721,6 +789,7 @@ export class HUD {
       button.dataset.unlocked = `${meta.unlocked}`;
       button.style.setProperty('--portrait-focus', PORTRAIT_FOCUS[definition.id]);
       button.setAttribute('aria-expanded', `${definition.id === selectedRoosterId}`);
+      button.setAttribute('aria-controls', inspector.id);
       button.setAttribute(
         'aria-label',
         meta.unlocked
@@ -767,6 +836,8 @@ export class HUD {
           candidate.classList.toggle('is-selected', expanded);
           candidate.setAttribute('aria-expanded', `${expanded}`);
         });
+        refreshCharacterDetails(definition.id);
+        if (window.matchMedia('(max-width: 760px)').matches) inspector.scrollIntoView({ block: 'nearest' });
       });
       entry.append(button);
       const chooseButton = document.createElement('button');
@@ -789,9 +860,10 @@ export class HUD {
         const tint = `#${Math.max(0, variant.tint ?? 0xffffff).toString(16).padStart(6, '0').slice(-6)}`;
         const cosmetics = document.createElement('div');
         cosmetics.className = 'cosmetic-panel';
+        cosmetics.dataset.roosterId = definition.id;
         cosmetics.innerHTML = `
           <div class="cosmetic-panel__heading">
-            <span>VISUAL ONLY</span>
+            <span>${definition.name} · VISUAL ONLY</span>
             <strong>No stat changes</strong>
             <button type="button" class="cosmetic-panel__toggle" data-cosmetic-toggle aria-expanded="false">Show</button>
           </div>
@@ -830,7 +902,7 @@ export class HUD {
           cosmetics.classList.toggle('is-expanded', !expanded);
           event.currentTarget.textContent = expanded ? 'Show' : 'Close';
         });
-        entry.append(cosmetics);
+        customization.append(cosmetics);
       }
       list.append(entry);
     });
@@ -861,6 +933,7 @@ export class HUD {
       this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
         candidate.setAttribute('aria-expanded', `${candidate.classList.contains('is-selected')}`)
       ));
+      refreshCharacterDetails(definition.id);
     };
     const updateChallenge = () => {
       const challenge = (hub.challenges ?? []).find((candidate) => candidate.id === selectedChallenge)
@@ -1264,6 +1337,7 @@ export class HUD {
   }
 
   hideOverlay() {
+    this.upgradeDetailTrigger = null;
     this.setOverlayVisible(false);
     this.overlay.innerHTML = '';
   }

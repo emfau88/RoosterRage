@@ -1,0 +1,4180 @@
+{
+  "viewports": [
+    {
+      "name": "desktop-full-hd",
+      "hub": {
+        "panel": {
+          "left": 340,
+          "top": 130,
+          "right": 1580,
+          "bottom": 950
+        },
+        "start": {
+          "left": 1115.0625,
+          "top": 850,
+          "right": 1546,
+          "bottom": 916
+        },
+        "playClientHeight": 647,
+        "playScrollHeight": 647,
+        "documentWidth": 1920
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 130,
+          "left": 340,
+          "right": 1580,
+          "bottom": 950,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 647
+        },
+        {
+          "view": "roosters",
+          "top": 130,
+          "left": 340,
+          "right": 1580,
+          "bottom": 950,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 130,
+          "left": 340,
+          "right": 1580,
+          "bottom": 950,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 130,
+          "left": 340,
+          "right": 1580,
+          "bottom": 950,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 647
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 770,
+          "top": 8,
+          "right": 1150,
+          "bottom": 1072,
+          "width": 380,
+          "height": 1064
+        },
+        "continue": {
+          "left": 789,
+          "top": 1009,
+          "right": 1131,
+          "bottom": 1053,
+          "width": 342,
+          "height": 44
+        },
+        "documentWidth": 1920
+      },
+      "upgrade": {
+        "panel": {
+          "left": 420,
+          "top": 316.234375,
+          "right": 1500,
+          "bottom": 763.765625,
+          "width": 1080,
+          "height": 447.53125
+        },
+        "emblem": {
+          "left": 445,
+          "top": 343,
+          "right": 495,
+          "bottom": 393,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 445,
+            "top": 406.78125,
+            "right": 780.328125,
+            "bottom": 682.765625
+          },
+          {
+            "left": 792.328125,
+            "top": 406.78125,
+            "right": 1127.65625,
+            "bottom": 682.765625
+          },
+          {
+            "left": 1139.65625,
+            "top": 406.78125,
+            "right": 1475,
+            "bottom": 682.765625
+          }
+        ],
+        "iconArt": {
+          "left": 460,
+          "top": 421.78125,
+          "right": 536,
+          "bottom": 497.78125,
+          "width": 76,
+          "height": 76,
+          "cssWidth": 76
+        },
+        "documentWidth": 1920
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": false,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 420,
+          "top": 316.234375,
+          "right": 1500,
+          "bottom": 763.765625,
+          "width": 1080,
+          "height": 447.53125
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 420,
+          "top": 258.234375,
+          "right": 1500,
+          "bottom": 821.75,
+          "width": 1080,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "laptop-large",
+      "hub": {
+        "panel": {
+          "left": 100,
+          "top": 40,
+          "right": 1340,
+          "bottom": 860
+        },
+        "start": {
+          "left": 875.0625,
+          "top": 760.1326293945312,
+          "right": 1306,
+          "bottom": 826.1326293945312
+        },
+        "playClientHeight": 647,
+        "playScrollHeight": 647,
+        "documentWidth": 1440
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 40,
+          "left": 100,
+          "right": 1340,
+          "bottom": 860,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 647
+        },
+        {
+          "view": "roosters",
+          "top": 40,
+          "left": 100,
+          "right": 1340,
+          "bottom": 860,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 40,
+          "left": 100,
+          "right": 1340,
+          "bottom": 860,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 40,
+          "left": 100,
+          "right": 1340,
+          "bottom": 860,
+          "width": 1240,
+          "height": 820,
+          "sectionClientHeight": 647,
+          "sectionScrollHeight": 647
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 340,
+          "top": 144.859375,
+          "right": 1100,
+          "bottom": 755.140625,
+          "width": 760,
+          "height": 610.28125
+        },
+        "continue": {
+          "left": 983.4375,
+          "top": 700.140625,
+          "right": 1087,
+          "bottom": 744.140625,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1440
+      },
+      "upgrade": {
+        "panel": {
+          "left": 180,
+          "top": 217.53125,
+          "right": 1260,
+          "bottom": 682.453125,
+          "width": 1080,
+          "height": 464.921875
+        },
+        "emblem": {
+          "left": 205,
+          "top": 244.296875,
+          "right": 255,
+          "bottom": 294.296875,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 205,
+            "top": 308.078125,
+            "right": 540.328125,
+            "bottom": 601.453125
+          },
+          {
+            "left": 552.328125,
+            "top": 308.078125,
+            "right": 887.65625,
+            "bottom": 601.453125
+          },
+          {
+            "left": 899.65625,
+            "top": 308.078125,
+            "right": 1235,
+            "bottom": 601.453125
+          }
+        ],
+        "iconArt": {
+          "left": 220,
+          "top": 323.078125,
+          "right": 296,
+          "bottom": 399.078125,
+          "width": 76,
+          "height": 76,
+          "cssWidth": 76
+        },
+        "documentWidth": 1440
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": false,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 180,
+          "top": 217.53125,
+          "right": 1260,
+          "bottom": 682.453125,
+          "width": 1080,
+          "height": 464.921875
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 180,
+          "top": 168.234375,
+          "right": 1260,
+          "bottom": 731.75,
+          "width": 1080,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "laptop-standard",
+      "hub": {
+        "panel": {
+          "left": 63,
+          "top": 12,
+          "right": 1303,
+          "bottom": 756
+        },
+        "start": {
+          "left": 838.0625,
+          "top": 656,
+          "right": 1269,
+          "bottom": 722
+        },
+        "playClientHeight": 571,
+        "playScrollHeight": 571,
+        "documentWidth": 1366
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 63,
+          "right": 1303,
+          "bottom": 756,
+          "width": 1240,
+          "height": 744,
+          "sectionClientHeight": 571,
+          "sectionScrollHeight": 571
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 63,
+          "right": 1303,
+          "bottom": 756,
+          "width": 1240,
+          "height": 744,
+          "sectionClientHeight": 571,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 63,
+          "right": 1303,
+          "bottom": 756,
+          "width": 1240,
+          "height": 744,
+          "sectionClientHeight": 571,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 63,
+          "right": 1303,
+          "bottom": 756,
+          "width": 1240,
+          "height": 744,
+          "sectionClientHeight": 571,
+          "sectionScrollHeight": 571
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 303,
+          "top": 78.859375,
+          "right": 1063,
+          "bottom": 689.140625,
+          "width": 760,
+          "height": 610.28125
+        },
+        "continue": {
+          "left": 946.4375,
+          "top": 634.140625,
+          "right": 1050,
+          "bottom": 678.140625,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1366
+      },
+      "upgrade": {
+        "panel": {
+          "left": 143,
+          "top": 151.53125,
+          "right": 1223,
+          "bottom": 616.453125,
+          "width": 1080,
+          "height": 464.921875
+        },
+        "emblem": {
+          "left": 168,
+          "top": 178.296875,
+          "right": 218,
+          "bottom": 228.296875,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 168,
+            "top": 242.078125,
+            "right": 503.328125,
+            "bottom": 535.453125
+          },
+          {
+            "left": 515.328125,
+            "top": 242.078125,
+            "right": 850.65625,
+            "bottom": 535.453125
+          },
+          {
+            "left": 862.65625,
+            "top": 242.078125,
+            "right": 1198,
+            "bottom": 535.453125
+          }
+        ],
+        "iconArt": {
+          "left": 183,
+          "top": 257.078125,
+          "right": 259,
+          "bottom": 333.078125,
+          "width": 76,
+          "height": 76,
+          "cssWidth": 76
+        },
+        "documentWidth": 1366
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": false,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 143,
+          "top": 151.53125,
+          "right": 1223,
+          "bottom": 616.453125,
+          "width": 1080,
+          "height": 464.921875
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 143,
+          "top": 102.234375,
+          "right": 1223,
+          "bottom": 665.75,
+          "width": 1080,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "portal-1280",
+      "hub": {
+        "panel": {
+          "left": 20,
+          "top": 12,
+          "right": 1260,
+          "bottom": 708
+        },
+        "start": {
+          "left": 795.0625,
+          "top": 608,
+          "right": 1226,
+          "bottom": 674
+        },
+        "playClientHeight": 523,
+        "playScrollHeight": 523,
+        "documentWidth": 1280
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 20,
+          "right": 1260,
+          "bottom": 708,
+          "width": 1240,
+          "height": 696,
+          "sectionClientHeight": 523,
+          "sectionScrollHeight": 523
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 20,
+          "right": 1260,
+          "bottom": 708,
+          "width": 1240,
+          "height": 696,
+          "sectionClientHeight": 523,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 20,
+          "right": 1260,
+          "bottom": 708,
+          "width": 1240,
+          "height": 696,
+          "sectionClientHeight": 523,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 20,
+          "right": 1260,
+          "bottom": 708,
+          "width": 1240,
+          "height": 696,
+          "sectionClientHeight": 523,
+          "sectionScrollHeight": 523
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 260,
+          "top": 54.859375,
+          "right": 1020,
+          "bottom": 665.140625,
+          "width": 760,
+          "height": 610.28125
+        },
+        "continue": {
+          "left": 903.4375,
+          "top": 610.140625,
+          "right": 1007,
+          "bottom": 654.140625,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1280
+      },
+      "upgrade": {
+        "panel": {
+          "left": 100,
+          "top": 136.234375,
+          "right": 1180,
+          "bottom": 583.765625,
+          "width": 1080,
+          "height": 447.53125
+        },
+        "emblem": {
+          "left": 125,
+          "top": 163,
+          "right": 175,
+          "bottom": 213,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 125,
+            "top": 226.78125,
+            "right": 460.328125,
+            "bottom": 502.765625
+          },
+          {
+            "left": 472.328125,
+            "top": 226.78125,
+            "right": 807.65625,
+            "bottom": 502.765625
+          },
+          {
+            "left": 819.65625,
+            "top": 226.78125,
+            "right": 1155,
+            "bottom": 502.765625
+          }
+        ],
+        "iconArt": {
+          "left": 140,
+          "top": 241.78125,
+          "right": 216,
+          "bottom": 317.78125,
+          "width": 76,
+          "height": 76,
+          "cssWidth": 76
+        },
+        "documentWidth": 1280
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": false,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 100,
+          "top": 136.234375,
+          "right": 1180,
+          "bottom": 583.765625,
+          "width": 1080,
+          "height": 447.53125
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 100,
+          "top": 78.234375,
+          "right": 1180,
+          "bottom": 641.75,
+          "width": 1080,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "portal-1216",
+      "hub": {
+        "panel": {
+          "left": 18,
+          "top": 12,
+          "right": 1198,
+          "bottom": 672
+        },
+        "start": {
+          "left": 1012,
+          "top": 574.15625,
+          "right": 1176,
+          "bottom": 640.15625
+        },
+        "playClientHeight": 520,
+        "playScrollHeight": 520,
+        "documentWidth": 1216
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 18,
+          "right": 1198,
+          "bottom": 672,
+          "width": 1180,
+          "height": 660,
+          "sectionClientHeight": 520,
+          "sectionScrollHeight": 520
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 18,
+          "right": 1198,
+          "bottom": 672,
+          "width": 1180,
+          "height": 660,
+          "sectionClientHeight": 520,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 18,
+          "right": 1198,
+          "bottom": 672,
+          "width": 1180,
+          "height": 660,
+          "sectionClientHeight": 520,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 18,
+          "right": 1198,
+          "bottom": 672,
+          "width": 1180,
+          "height": 660,
+          "sectionClientHeight": 520,
+          "sectionScrollHeight": 520
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 228,
+          "top": 36.859375,
+          "right": 988,
+          "bottom": 647.140625,
+          "width": 760,
+          "height": 610.28125
+        },
+        "continue": {
+          "left": 871.4375,
+          "top": 592.140625,
+          "right": 975,
+          "bottom": 636.140625,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1216
+      },
+      "upgrade": {
+        "panel": {
+          "left": 68,
+          "top": 127.234375,
+          "right": 1148,
+          "bottom": 556.765625,
+          "width": 1080,
+          "height": 429.53125
+        },
+        "emblem": {
+          "left": 93,
+          "top": 154,
+          "right": 143,
+          "bottom": 204,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 93,
+            "top": 217.78125,
+            "right": 428.328125,
+            "bottom": 475.765625
+          },
+          {
+            "left": 440.328125,
+            "top": 217.78125,
+            "right": 775.65625,
+            "bottom": 475.765625
+          },
+          {
+            "left": 787.65625,
+            "top": 217.78125,
+            "right": 1123,
+            "bottom": 475.765625
+          }
+        ],
+        "iconArt": {
+          "left": 108,
+          "top": 232.78125,
+          "right": 166,
+          "bottom": 290.78125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 1216
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 68,
+          "top": 127.234375,
+          "right": 1148,
+          "bottom": 556.765625,
+          "width": 1080,
+          "height": 429.53125
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 68,
+          "top": 60.234375,
+          "right": 1148,
+          "bottom": 623.75,
+          "width": 1080,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "portal-1077",
+      "hub": {
+        "panel": {
+          "left": 18,
+          "top": 12,
+          "right": 1059,
+          "bottom": 594
+        },
+        "start": {
+          "left": 873,
+          "top": 496.15625,
+          "right": 1037,
+          "bottom": 562.15625
+        },
+        "playClientHeight": 442,
+        "playScrollHeight": 442,
+        "documentWidth": 1077
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 18,
+          "right": 1059,
+          "bottom": 594,
+          "width": 1041,
+          "height": 582,
+          "sectionClientHeight": 442,
+          "sectionScrollHeight": 442
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 18,
+          "right": 1059,
+          "bottom": 594,
+          "width": 1041,
+          "height": 582,
+          "sectionClientHeight": 442,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 18,
+          "right": 1059,
+          "bottom": 594,
+          "width": 1041,
+          "height": 582,
+          "sectionClientHeight": 442,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 18,
+          "right": 1059,
+          "bottom": 594,
+          "width": 1041,
+          "height": 582,
+          "sectionClientHeight": 442,
+          "sectionScrollHeight": 442
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 158.5,
+          "top": 8,
+          "right": 918.5,
+          "bottom": 598,
+          "width": 760,
+          "height": 590
+        },
+        "continue": {
+          "left": 801.9375,
+          "top": 543,
+          "right": 905.5,
+          "bottom": 587,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1077
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 88.234375,
+          "right": 1061,
+          "bottom": 517.765625,
+          "width": 1045,
+          "height": 429.53125
+        },
+        "emblem": {
+          "left": 41,
+          "top": 115,
+          "right": 91,
+          "bottom": 165,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 178.78125,
+            "right": 364.65625,
+            "bottom": 436.765625
+          },
+          {
+            "left": 376.65625,
+            "top": 178.78125,
+            "right": 700.328125,
+            "bottom": 436.765625
+          },
+          {
+            "left": 712.328125,
+            "top": 178.78125,
+            "right": 1035.984375,
+            "bottom": 436.765625
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 193.78125,
+          "right": 114,
+          "bottom": 251.78125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 1077
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 88.234375,
+          "right": 1061,
+          "bottom": 517.765625,
+          "width": 1045,
+          "height": 429.53125
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 21.234375,
+          "right": 1061,
+          "bottom": 584.75,
+          "width": 1045,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "embedded-desktop",
+      "hub": {
+        "panel": {
+          "left": 18,
+          "top": 12,
+          "right": 949,
+          "bottom": 592
+        },
+        "start": {
+          "left": 763,
+          "top": 494.15625,
+          "right": 927,
+          "bottom": 560.15625
+        },
+        "playClientHeight": 440,
+        "playScrollHeight": 440,
+        "documentWidth": 967
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 18,
+          "right": 949,
+          "bottom": 592,
+          "width": 931,
+          "height": 580,
+          "sectionClientHeight": 440,
+          "sectionScrollHeight": 440
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 18,
+          "right": 949,
+          "bottom": 592,
+          "width": 931,
+          "height": 580,
+          "sectionClientHeight": 440,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 18,
+          "right": 949,
+          "bottom": 592,
+          "width": 931,
+          "height": 580,
+          "sectionClientHeight": 440,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 18,
+          "right": 949,
+          "bottom": 592,
+          "width": 931,
+          "height": 580,
+          "sectionClientHeight": 440,
+          "sectionScrollHeight": 440
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 103.5,
+          "top": 8,
+          "right": 863.5,
+          "bottom": 596,
+          "width": 760,
+          "height": 588
+        },
+        "continue": {
+          "left": 746.9375,
+          "top": 541,
+          "right": 850.5,
+          "bottom": 585,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 967
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 87.234375,
+          "right": 951,
+          "bottom": 516.765625,
+          "width": 935,
+          "height": 429.53125
+        },
+        "emblem": {
+          "left": 41,
+          "top": 114,
+          "right": 91,
+          "bottom": 164,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 177.78125,
+            "right": 328,
+            "bottom": 435.765625
+          },
+          {
+            "left": 340,
+            "top": 177.78125,
+            "right": 627,
+            "bottom": 435.765625
+          },
+          {
+            "left": 639,
+            "top": 177.78125,
+            "right": 926,
+            "bottom": 435.765625
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 192.78125,
+          "right": 114,
+          "bottom": 250.78125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 967
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 87.234375,
+          "right": 951,
+          "bottom": 516.765625,
+          "width": 935,
+          "height": 429.53125
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 951,
+          "bottom": 588,
+          "width": 935,
+          "height": 572
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "desktop",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 952,
+          "bottom": 524
+        },
+        "start": {
+          "left": 766,
+          "top": 436,
+          "right": 930,
+          "bottom": 502
+        },
+        "playClientHeight": 373,
+        "playScrollHeight": 373,
+        "documentWidth": 960
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 952,
+          "bottom": 524,
+          "width": 944,
+          "height": 516,
+          "sectionClientHeight": 373,
+          "sectionScrollHeight": 373
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 952,
+          "bottom": 524,
+          "width": 944,
+          "height": 516,
+          "sectionClientHeight": 373,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 952,
+          "bottom": 524,
+          "width": 944,
+          "height": 516,
+          "sectionClientHeight": 373,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 952,
+          "bottom": 524,
+          "width": 944,
+          "height": 516,
+          "sectionClientHeight": 373,
+          "sectionScrollHeight": 373
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 100,
+          "top": 8,
+          "right": 860,
+          "bottom": 532,
+          "width": 760,
+          "height": 524
+        },
+        "continue": {
+          "left": 743.4375,
+          "top": 477,
+          "right": 847,
+          "bottom": 521,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 960
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 46.53125,
+          "right": 944,
+          "bottom": 493.453125,
+          "width": 928,
+          "height": 446.921875
+        },
+        "emblem": {
+          "left": 41,
+          "top": 73.296875,
+          "right": 91,
+          "bottom": 123.296875,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 137.078125,
+            "right": 325.65625,
+            "bottom": 412.453125
+          },
+          {
+            "left": 337.65625,
+            "top": 137.078125,
+            "right": 622.328125,
+            "bottom": 412.453125
+          },
+          {
+            "left": 634.328125,
+            "top": 137.078125,
+            "right": 918.984375,
+            "bottom": 412.453125
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 152.078125,
+          "right": 114,
+          "bottom": 210.078125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 960
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 46.53125,
+          "right": 944,
+          "bottom": 493.453125,
+          "width": 928,
+          "height": 446.921875
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 944,
+          "bottom": 524,
+          "width": 928,
+          "height": 508
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "desktop-short",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 899,
+          "bottom": 494
+        },
+        "start": {
+          "left": 713,
+          "top": 406,
+          "right": 877,
+          "bottom": 472
+        },
+        "playClientHeight": 343,
+        "playScrollHeight": 343,
+        "documentWidth": 907
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 899,
+          "bottom": 494,
+          "width": 891,
+          "height": 486,
+          "sectionClientHeight": 343,
+          "sectionScrollHeight": 343
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 899,
+          "bottom": 494,
+          "width": 891,
+          "height": 486,
+          "sectionClientHeight": 343,
+          "sectionScrollHeight": 857
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 899,
+          "bottom": 494,
+          "width": 891,
+          "height": 486,
+          "sectionClientHeight": 343,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 899,
+          "bottom": 494,
+          "width": 891,
+          "height": 486,
+          "sectionClientHeight": 343,
+          "sectionScrollHeight": 343
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 73.5,
+          "top": 8,
+          "right": 833.5,
+          "bottom": 502,
+          "width": 760,
+          "height": 494
+        },
+        "continue": {
+          "left": 716.9375,
+          "top": 447,
+          "right": 820.5,
+          "bottom": 491,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 907
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 31.53125,
+          "right": 891,
+          "bottom": 478.453125,
+          "width": 875,
+          "height": 446.921875
+        },
+        "emblem": {
+          "left": 41,
+          "top": 58.296875,
+          "right": 91,
+          "bottom": 108.296875,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 122.078125,
+            "right": 308,
+            "bottom": 397.453125
+          },
+          {
+            "left": 320,
+            "top": 122.078125,
+            "right": 587,
+            "bottom": 397.453125
+          },
+          {
+            "left": 599,
+            "top": 122.078125,
+            "right": 866,
+            "bottom": 397.453125
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 137.078125,
+          "right": 114,
+          "bottom": 195.078125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 907
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 31.53125,
+          "right": 891,
+          "bottom": 478.453125,
+          "width": 875,
+          "height": 446.921875
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 891,
+          "bottom": 494,
+          "width": 875,
+          "height": 478
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "laptop-short",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 813,
+          "bottom": 446
+        },
+        "start": {
+          "left": 627,
+          "top": 359,
+          "right": 791,
+          "bottom": 426
+        },
+        "playClientHeight": 295,
+        "playScrollHeight": 295,
+        "documentWidth": 821
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 813,
+          "bottom": 446,
+          "width": 805,
+          "height": 438,
+          "sectionClientHeight": 295,
+          "sectionScrollHeight": 295
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 813,
+          "bottom": 446,
+          "width": 805,
+          "height": 438,
+          "sectionClientHeight": 295,
+          "sectionScrollHeight": 861
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 813,
+          "bottom": 446,
+          "width": 805,
+          "height": 438,
+          "sectionClientHeight": 295,
+          "sectionScrollHeight": 865
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 813,
+          "bottom": 446,
+          "width": 805,
+          "height": 438,
+          "sectionClientHeight": 295,
+          "sectionScrollHeight": 334
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 30.5,
+          "top": 8,
+          "right": 790.5,
+          "bottom": 454,
+          "width": 760,
+          "height": 446
+        },
+        "continue": {
+          "left": 675.9375,
+          "top": 401,
+          "right": 779.5,
+          "bottom": 445,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 821
+      },
+      "upgrade": {
+        "panel": {
+          "left": 8,
+          "top": 61,
+          "right": 813,
+          "bottom": 401,
+          "width": 805,
+          "height": 340
+        },
+        "emblem": {
+          "left": 31,
+          "top": 78,
+          "right": 77,
+          "bottom": 124,
+          "width": 46,
+          "height": 46
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 31,
+            "top": 130,
+            "right": 720,
+            "bottom": 194
+          },
+          {
+            "left": 31,
+            "top": 200,
+            "right": 720,
+            "bottom": 264
+          },
+          {
+            "left": 31,
+            "top": 270,
+            "right": 720,
+            "bottom": 334
+          }
+        ],
+        "iconArt": {
+          "left": 40,
+          "top": 140,
+          "right": 84,
+          "bottom": 184,
+          "width": 44,
+          "height": 44,
+          "cssWidth": 44
+        },
+        "documentWidth": 821
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 61,
+          "right": 813,
+          "bottom": 401,
+          "width": 805,
+          "height": 340
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 60,
+          "right": 813,
+          "bottom": 402,
+          "width": 805,
+          "height": 342
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "landscape-short",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 792,
+          "bottom": 434
+        },
+        "start": {
+          "left": 606,
+          "top": 347,
+          "right": 770,
+          "bottom": 414
+        },
+        "playClientHeight": 283,
+        "playScrollHeight": 283,
+        "documentWidth": 800
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 792,
+          "bottom": 434,
+          "width": 784,
+          "height": 426,
+          "sectionClientHeight": 283,
+          "sectionScrollHeight": 283
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 792,
+          "bottom": 434,
+          "width": 784,
+          "height": 426,
+          "sectionClientHeight": 283,
+          "sectionScrollHeight": 861
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 792,
+          "bottom": 434,
+          "width": 784,
+          "height": 426,
+          "sectionClientHeight": 283,
+          "sectionScrollHeight": 865
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 792,
+          "bottom": 434,
+          "width": 784,
+          "height": 426,
+          "sectionClientHeight": 283,
+          "sectionScrollHeight": 334
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 20,
+          "top": 8,
+          "right": 780,
+          "bottom": 442,
+          "width": 760,
+          "height": 434
+        },
+        "continue": {
+          "left": 665.4375,
+          "top": 389,
+          "right": 769,
+          "bottom": 433,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 800
+      },
+      "upgrade": {
+        "panel": {
+          "left": 8,
+          "top": 55,
+          "right": 792,
+          "bottom": 395,
+          "width": 784,
+          "height": 340
+        },
+        "emblem": {
+          "left": 31,
+          "top": 72,
+          "right": 77,
+          "bottom": 118,
+          "width": 46,
+          "height": 46
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 31,
+            "top": 124,
+            "right": 699,
+            "bottom": 188
+          },
+          {
+            "left": 31,
+            "top": 194,
+            "right": 699,
+            "bottom": 258
+          },
+          {
+            "left": 31,
+            "top": 264,
+            "right": 699,
+            "bottom": 328
+          }
+        ],
+        "iconArt": {
+          "left": 40,
+          "top": 134,
+          "right": 84,
+          "bottom": 178,
+          "width": 44,
+          "height": 44,
+          "cssWidth": 44
+        },
+        "documentWidth": 800
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 55,
+          "right": 792,
+          "bottom": 395,
+          "width": 784,
+          "height": 340
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 54,
+          "right": 792,
+          "bottom": 396,
+          "width": 784,
+          "height": 342
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "landscape-mobile",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 836,
+          "bottom": 374
+        },
+        "start": {
+          "left": 650,
+          "top": 287,
+          "right": 814,
+          "bottom": 354
+        },
+        "playClientHeight": 223,
+        "playScrollHeight": 223,
+        "documentWidth": 844
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 836,
+          "bottom": 374,
+          "width": 828,
+          "height": 366,
+          "sectionClientHeight": 223,
+          "sectionScrollHeight": 223
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 836,
+          "bottom": 374,
+          "width": 828,
+          "height": 366,
+          "sectionClientHeight": 223,
+          "sectionScrollHeight": 861
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 836,
+          "bottom": 374,
+          "width": 828,
+          "height": 366,
+          "sectionClientHeight": 223,
+          "sectionScrollHeight": 865
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 836,
+          "bottom": 374,
+          "width": 828,
+          "height": 366,
+          "sectionClientHeight": 223,
+          "sectionScrollHeight": 334
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 42,
+          "top": 8,
+          "right": 802,
+          "bottom": 382,
+          "width": 760,
+          "height": 374
+        },
+        "continue": {
+          "left": 687.4375,
+          "top": 329,
+          "right": 791,
+          "bottom": 373,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 844
+      },
+      "upgrade": {
+        "panel": {
+          "left": 8,
+          "top": 25,
+          "right": 836,
+          "bottom": 365,
+          "width": 828,
+          "height": 340
+        },
+        "emblem": {
+          "left": 31,
+          "top": 42,
+          "right": 77,
+          "bottom": 88,
+          "width": 46,
+          "height": 46
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 31,
+            "top": 94,
+            "right": 743,
+            "bottom": 158
+          },
+          {
+            "left": 31,
+            "top": 164,
+            "right": 743,
+            "bottom": 228
+          },
+          {
+            "left": 31,
+            "top": 234,
+            "right": 743,
+            "bottom": 298
+          }
+        ],
+        "iconArt": {
+          "left": 40,
+          "top": 104,
+          "right": 84,
+          "bottom": 148,
+          "width": 44,
+          "height": 44,
+          "cssWidth": 44
+        },
+        "documentWidth": 844
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 25,
+          "right": 836,
+          "bottom": 365,
+          "width": 828,
+          "height": 340
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 24,
+          "right": 836,
+          "bottom": 366,
+          "width": 828,
+          "height": 342
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "boundary-wide",
+      "hub": {
+        "panel": {
+          "left": 18,
+          "top": 12,
+          "right": 1082,
+          "bottom": 688
+        },
+        "start": {
+          "left": 686.609375,
+          "top": 596,
+          "right": 1056,
+          "bottom": 662
+        },
+        "playClientHeight": 536,
+        "playScrollHeight": 536,
+        "documentWidth": 1100
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 18,
+          "right": 1082,
+          "bottom": 688,
+          "width": 1064,
+          "height": 676,
+          "sectionClientHeight": 536,
+          "sectionScrollHeight": 536
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 18,
+          "right": 1082,
+          "bottom": 688,
+          "width": 1064,
+          "height": 676,
+          "sectionClientHeight": 536,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 18,
+          "right": 1082,
+          "bottom": 688,
+          "width": 1064,
+          "height": 676,
+          "sectionClientHeight": 536,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 18,
+          "right": 1082,
+          "bottom": 688,
+          "width": 1064,
+          "height": 676,
+          "sectionClientHeight": 536,
+          "sectionScrollHeight": 536
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 170,
+          "top": 44.859375,
+          "right": 930,
+          "bottom": 655.140625,
+          "width": 760,
+          "height": 610.28125
+        },
+        "continue": {
+          "left": 813.4375,
+          "top": 600.140625,
+          "right": 917,
+          "bottom": 644.140625,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1100
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 126.234375,
+          "right": 1084,
+          "bottom": 573.765625,
+          "width": 1068,
+          "height": 447.53125
+        },
+        "emblem": {
+          "left": 41,
+          "top": 153,
+          "right": 91,
+          "bottom": 203,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 216.78125,
+            "right": 372.328125,
+            "bottom": 492.765625
+          },
+          {
+            "left": 384.328125,
+            "top": 216.78125,
+            "right": 715.65625,
+            "bottom": 492.765625
+          },
+          {
+            "left": 727.65625,
+            "top": 216.78125,
+            "right": 1059,
+            "bottom": 492.765625
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 231.78125,
+          "right": 132,
+          "bottom": 307.78125,
+          "width": 76,
+          "height": 76,
+          "cssWidth": 76
+        },
+        "documentWidth": 1100
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": false,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 126.234375,
+          "right": 1084,
+          "bottom": 573.765625,
+          "width": 1068,
+          "height": 447.53125
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 68.234375,
+          "right": 1084,
+          "bottom": 631.75,
+          "width": 1068,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "boundary-below-wide",
+      "hub": {
+        "panel": {
+          "left": 18,
+          "top": 12,
+          "right": 1081,
+          "bottom": 687
+        },
+        "start": {
+          "left": 895,
+          "top": 589.15625,
+          "right": 1059,
+          "bottom": 655.15625
+        },
+        "playClientHeight": 535,
+        "playScrollHeight": 535,
+        "documentWidth": 1099
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 18,
+          "right": 1081,
+          "bottom": 687,
+          "width": 1063,
+          "height": 675,
+          "sectionClientHeight": 535,
+          "sectionScrollHeight": 535
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 18,
+          "right": 1081,
+          "bottom": 687,
+          "width": 1063,
+          "height": 675,
+          "sectionClientHeight": 535,
+          "sectionScrollHeight": 839
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 18,
+          "right": 1081,
+          "bottom": 687,
+          "width": 1063,
+          "height": 675,
+          "sectionClientHeight": 535,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 18,
+          "right": 1081,
+          "bottom": 687,
+          "width": 1063,
+          "height": 675,
+          "sectionClientHeight": 535,
+          "sectionScrollHeight": 535
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 169.5,
+          "top": 44.359375,
+          "right": 929.5,
+          "bottom": 654.640625,
+          "width": 760,
+          "height": 610.28125
+        },
+        "continue": {
+          "left": 812.9375,
+          "top": 599.640625,
+          "right": 916.5,
+          "bottom": 643.640625,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 1099
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 126.03125,
+          "right": 1083,
+          "bottom": 572.953125,
+          "width": 1067,
+          "height": 446.921875
+        },
+        "emblem": {
+          "left": 41,
+          "top": 152.796875,
+          "right": 91,
+          "bottom": 202.796875,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 216.578125,
+            "right": 372,
+            "bottom": 491.953125
+          },
+          {
+            "left": 384,
+            "top": 216.578125,
+            "right": 715,
+            "bottom": 491.953125
+          },
+          {
+            "left": 727,
+            "top": 216.578125,
+            "right": 1058,
+            "bottom": 491.953125
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 231.578125,
+          "right": 114,
+          "bottom": 289.578125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 1099
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 126.03125,
+          "right": 1083,
+          "bottom": 572.953125,
+          "width": 1067,
+          "height": 446.921875
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 67.734375,
+          "right": 1083,
+          "bottom": 631.25,
+          "width": 1067,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "boundary-three",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 892,
+          "bottom": 584
+        },
+        "start": {
+          "left": 706,
+          "top": 496.1329345703125,
+          "right": 870,
+          "bottom": 562.1329345703125
+        },
+        "playClientHeight": 433,
+        "playScrollHeight": 433,
+        "documentWidth": 900
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 892,
+          "bottom": 584,
+          "width": 884,
+          "height": 576,
+          "sectionClientHeight": 433,
+          "sectionScrollHeight": 433
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 892,
+          "bottom": 584,
+          "width": 884,
+          "height": 576,
+          "sectionClientHeight": 433,
+          "sectionScrollHeight": 857
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 892,
+          "bottom": 584,
+          "width": 884,
+          "height": 576,
+          "sectionClientHeight": 433,
+          "sectionScrollHeight": 851
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 892,
+          "bottom": 584,
+          "width": 884,
+          "height": 576,
+          "sectionClientHeight": 433,
+          "sectionScrollHeight": 433
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 70,
+          "top": 8,
+          "right": 830,
+          "bottom": 592,
+          "width": 760,
+          "height": 584
+        },
+        "continue": {
+          "left": 713.4375,
+          "top": 537,
+          "right": 817,
+          "bottom": 581,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 900
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 76.53125,
+          "right": 884,
+          "bottom": 523.453125,
+          "width": 868,
+          "height": 446.921875
+        },
+        "emblem": {
+          "left": 41,
+          "top": 103.296875,
+          "right": 91,
+          "bottom": 153.296875,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 167.078125,
+            "right": 305.65625,
+            "bottom": 442.453125
+          },
+          {
+            "left": 317.65625,
+            "top": 167.078125,
+            "right": 582.328125,
+            "bottom": 442.453125
+          },
+          {
+            "left": 594.328125,
+            "top": 167.078125,
+            "right": 858.984375,
+            "bottom": 442.453125
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 182.078125,
+          "right": 114,
+          "bottom": 240.078125,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 900
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 12,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 12,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 12,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 76.53125,
+          "right": 884,
+          "bottom": 523.453125,
+          "width": 868,
+          "height": 446.921875
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 18.234375,
+          "right": 884,
+          "bottom": 581.75,
+          "width": 868,
+          "height": 563.515625
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "boundary-list",
+      "hub": {
+        "panel": {
+          "left": 18,
+          "top": 12,
+          "right": 881,
+          "bottom": 589
+        },
+        "start": {
+          "left": 695,
+          "top": 490.78973388671875,
+          "right": 859,
+          "bottom": 557.7897338867188
+        },
+        "playClientHeight": 437,
+        "playScrollHeight": 437,
+        "documentWidth": 899
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 12,
+          "left": 18,
+          "right": 881,
+          "bottom": 589,
+          "width": 863,
+          "height": 577,
+          "sectionClientHeight": 437,
+          "sectionScrollHeight": 437
+        },
+        {
+          "view": "roosters",
+          "top": 12,
+          "left": 18,
+          "right": 881,
+          "bottom": 589,
+          "width": 863,
+          "height": 577,
+          "sectionClientHeight": 437,
+          "sectionScrollHeight": 864
+        },
+        {
+          "view": "training",
+          "top": 12,
+          "left": 18,
+          "right": 881,
+          "bottom": 589,
+          "width": 863,
+          "height": 577,
+          "sectionClientHeight": 437,
+          "sectionScrollHeight": 865
+        },
+        {
+          "view": "archive",
+          "top": 12,
+          "left": 18,
+          "right": 881,
+          "bottom": 589,
+          "width": 863,
+          "height": 577,
+          "sectionClientHeight": 437,
+          "sectionScrollHeight": 437
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 69.5,
+          "top": 8,
+          "right": 829.5,
+          "bottom": 593,
+          "width": 760,
+          "height": 585
+        },
+        "continue": {
+          "left": 712.9375,
+          "top": 538,
+          "right": 816.5,
+          "bottom": 582,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 899
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 883,
+          "bottom": 585,
+          "width": 867,
+          "height": 569
+        },
+        "emblem": {
+          "left": 41,
+          "top": 42.765625,
+          "right": 91,
+          "bottom": 92.765625,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 106.546875,
+            "right": 858,
+            "bottom": 302.28125
+          },
+          {
+            "left": 41,
+            "top": 314.28125,
+            "right": 858,
+            "bottom": 510.015625
+          },
+          {
+            "left": 41,
+            "top": 522.015625,
+            "right": 858,
+            "bottom": 717.75
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 121.546875,
+          "right": 114,
+          "bottom": 179.546875,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 899
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 12
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 883,
+          "bottom": 585,
+          "width": 867,
+          "height": 569
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 883,
+          "bottom": 585,
+          "width": 867,
+          "height": 569
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "boundary-boss-grid",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 712,
+          "bottom": 584
+        },
+        "start": {
+          "left": 518,
+          "top": 487,
+          "right": 682,
+          "bottom": 554
+        },
+        "playClientHeight": 399,
+        "playScrollHeight": 399,
+        "documentWidth": 720
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 712,
+          "bottom": 584,
+          "width": 704,
+          "height": 576,
+          "sectionClientHeight": 399,
+          "sectionScrollHeight": 399
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 712,
+          "bottom": 584,
+          "width": 704,
+          "height": 576,
+          "sectionClientHeight": 399,
+          "sectionScrollHeight": 1127
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 712,
+          "bottom": 584,
+          "width": 704,
+          "height": 576,
+          "sectionClientHeight": 399,
+          "sectionScrollHeight": 789
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 712,
+          "bottom": 584,
+          "width": 704,
+          "height": 576,
+          "sectionClientHeight": 399,
+          "sectionScrollHeight": 399
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 712,
+          "bottom": 592,
+          "width": 704,
+          "height": 584
+        },
+        "continue": {
+          "left": 595.4375,
+          "top": 537,
+          "right": 699,
+          "bottom": 581,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 720
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 704,
+          "bottom": 584,
+          "width": 688,
+          "height": 568
+        },
+        "emblem": {
+          "left": 41,
+          "top": 42.765625,
+          "right": 91,
+          "bottom": 92.765625,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 41,
+            "top": 106.546875,
+            "right": 679,
+            "bottom": 302.28125
+          },
+          {
+            "left": 41,
+            "top": 314.28125,
+            "right": 679,
+            "bottom": 510.015625
+          },
+          {
+            "left": 41,
+            "top": 522.015625,
+            "right": 679,
+            "bottom": 717.75
+          }
+        ],
+        "iconArt": {
+          "left": 56,
+          "top": 121.546875,
+          "right": 114,
+          "bottom": 179.546875,
+          "width": 58,
+          "height": 58,
+          "cssWidth": 58
+        },
+        "documentWidth": 720
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 6
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 704,
+          "bottom": 584,
+          "width": 688,
+          "height": 568
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 2,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 704,
+          "bottom": 584,
+          "width": 688,
+          "height": 568
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "boundary-boss-list",
+      "hub": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 711,
+          "bottom": 583
+        },
+        "start": {
+          "left": 583,
+          "top": 487,
+          "right": 683,
+          "bottom": 547
+        },
+        "playClientHeight": 398,
+        "playScrollHeight": 398,
+        "documentWidth": 719
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 8,
+          "left": 8,
+          "right": 711,
+          "bottom": 583,
+          "width": 703,
+          "height": 575,
+          "sectionClientHeight": 398,
+          "sectionScrollHeight": 398
+        },
+        {
+          "view": "roosters",
+          "top": 8,
+          "left": 8,
+          "right": 711,
+          "bottom": 583,
+          "width": 703,
+          "height": 575,
+          "sectionClientHeight": 398,
+          "sectionScrollHeight": 1127
+        },
+        {
+          "view": "training",
+          "top": 8,
+          "left": 8,
+          "right": 711,
+          "bottom": 583,
+          "width": 703,
+          "height": 575,
+          "sectionClientHeight": 398,
+          "sectionScrollHeight": 789
+        },
+        {
+          "view": "archive",
+          "top": 8,
+          "left": 8,
+          "right": 711,
+          "bottom": 583,
+          "width": 703,
+          "height": 575,
+          "sectionClientHeight": 398,
+          "sectionScrollHeight": 398
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 711,
+          "bottom": 591,
+          "width": 703,
+          "height": 583
+        },
+        "continue": {
+          "left": 594.4375,
+          "top": 536,
+          "right": 698,
+          "bottom": 580,
+          "width": 103.5625,
+          "height": 44
+        },
+        "documentWidth": 719
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 703,
+          "bottom": 583,
+          "width": 687,
+          "height": 567
+        },
+        "emblem": {
+          "left": 37,
+          "top": 38.765625,
+          "right": 87,
+          "bottom": 88.765625,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 37,
+            "top": 100.546875,
+            "right": 682,
+            "bottom": 292.28125
+          },
+          {
+            "left": 37,
+            "top": 304.28125,
+            "right": 682,
+            "bottom": 483.015625
+          },
+          {
+            "left": 37,
+            "top": 495.015625,
+            "right": 682,
+            "bottom": 686.75
+          }
+        ],
+        "iconArt": {
+          "left": 50,
+          "top": 113.546875,
+          "right": 94,
+          "bottom": 157.546875,
+          "width": 44,
+          "height": 44,
+          "cssWidth": 44
+        },
+        "documentWidth": 719
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 6
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 703,
+          "bottom": 583,
+          "width": 687,
+          "height": 567
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 703,
+          "bottom": 583,
+          "width": 687,
+          "height": 567
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "portrait",
+      "hub": {
+        "panel": {
+          "left": 0,
+          "top": 0,
+          "right": 390,
+          "bottom": 844
+        },
+        "start": {
+          "left": 273,
+          "top": 761,
+          "right": 373,
+          "bottom": 821
+        },
+        "playClientHeight": 711,
+        "playScrollHeight": 711,
+        "documentWidth": 390
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 0,
+          "left": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844,
+          "sectionClientHeight": 711,
+          "sectionScrollHeight": 711
+        },
+        {
+          "view": "roosters",
+          "top": 0,
+          "left": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844,
+          "sectionClientHeight": 711,
+          "sectionScrollHeight": 1101
+        },
+        {
+          "view": "training",
+          "top": 0,
+          "left": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844,
+          "sectionClientHeight": 711,
+          "sectionScrollHeight": 908
+        },
+        {
+          "view": "archive",
+          "top": 0,
+          "left": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844,
+          "sectionClientHeight": 711,
+          "sectionScrollHeight": 711
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 382,
+          "bottom": 836,
+          "width": 374,
+          "height": 828
+        },
+        "continue": {
+          "left": 21,
+          "top": 779,
+          "right": 369,
+          "bottom": 823,
+          "width": 348,
+          "height": 44
+        },
+        "documentWidth": 390
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 49.125,
+          "right": 374,
+          "bottom": 794.875,
+          "width": 358,
+          "height": 745.75
+        },
+        "emblem": {
+          "left": 37,
+          "top": 71.890625,
+          "right": 87,
+          "bottom": 121.890625,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 37,
+            "top": 133.671875,
+            "right": 353,
+            "bottom": 325.40625
+          },
+          {
+            "left": 37,
+            "top": 337.40625,
+            "right": 353,
+            "bottom": 516.140625
+          },
+          {
+            "left": 37,
+            "top": 528.140625,
+            "right": 353,
+            "bottom": 719.875
+          }
+        ],
+        "iconArt": {
+          "left": 50,
+          "top": 146.671875,
+          "right": 94,
+          "bottom": 190.671875,
+          "width": 44,
+          "height": 44,
+          "cssWidth": 44
+        },
+        "documentWidth": 390
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 6
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 49.125,
+          "right": 374,
+          "bottom": 794.875,
+          "width": 358,
+          "height": 745.75
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 374,
+          "bottom": 828,
+          "width": 358,
+          "height": 812
+        },
+        "allOffersReachable": true
+      }
+    },
+    {
+      "name": "phone-short",
+      "hub": {
+        "panel": {
+          "left": 0,
+          "top": 0,
+          "right": 320,
+          "bottom": 568
+        },
+        "start": {
+          "left": 203,
+          "top": 492.109375,
+          "right": 303,
+          "bottom": 552.109375
+        },
+        "playClientHeight": 435,
+        "playScrollHeight": 435,
+        "documentWidth": 320
+      },
+      "hubViews": [
+        {
+          "view": "play",
+          "top": 0,
+          "left": 0,
+          "right": 320,
+          "bottom": 568,
+          "width": 320,
+          "height": 568,
+          "sectionClientHeight": 435,
+          "sectionScrollHeight": 435
+        },
+        {
+          "view": "roosters",
+          "top": 0,
+          "left": 0,
+          "right": 320,
+          "bottom": 568,
+          "width": 320,
+          "height": 568,
+          "sectionClientHeight": 435,
+          "sectionScrollHeight": 1101
+        },
+        {
+          "view": "training",
+          "top": 0,
+          "left": 0,
+          "right": 320,
+          "bottom": 568,
+          "width": 320,
+          "height": 568,
+          "sectionClientHeight": 435,
+          "sectionScrollHeight": 983
+        },
+        {
+          "view": "archive",
+          "top": 0,
+          "left": 0,
+          "right": 320,
+          "bottom": 568,
+          "width": 320,
+          "height": 568,
+          "sectionClientHeight": 435,
+          "sectionScrollHeight": 787
+        }
+      ],
+      "settings": {
+        "panel": {
+          "left": 8,
+          "top": 8,
+          "right": 312,
+          "bottom": 560,
+          "width": 304,
+          "height": 552
+        },
+        "continue": {
+          "left": 21,
+          "top": 503,
+          "right": 299,
+          "bottom": 547,
+          "width": 278,
+          "height": 44
+        },
+        "documentWidth": 320
+      },
+      "upgrade": {
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 304,
+          "bottom": 552,
+          "width": 288,
+          "height": 536
+        },
+        "emblem": {
+          "left": 37,
+          "top": 38.765625,
+          "right": 87,
+          "bottom": 88.765625,
+          "width": 50,
+          "height": 50
+        },
+        "frameImage": "url(\"http://127.0.0.1:5173/src/assets/ui/upgrade-panel-frame-v1-top.png\")",
+        "framePieces": 8,
+        "choices": [
+          {
+            "left": 37,
+            "top": 100.546875,
+            "right": 283,
+            "bottom": 346.28125
+          },
+          {
+            "left": 37,
+            "top": 358.28125,
+            "right": 283,
+            "bottom": 652.75
+          },
+          {
+            "left": 37,
+            "top": 664.75,
+            "right": 283,
+            "bottom": 940.375
+          }
+        ],
+        "iconArt": {
+          "left": 50,
+          "top": 113.546875,
+          "right": 94,
+          "bottom": 157.546875,
+          "width": 44,
+          "height": 44,
+          "cssWidth": 44
+        },
+        "documentWidth": 320
+      },
+      "playContent": {
+        "separated": true,
+        "controlsClear": true,
+        "importantLoaded": true
+      },
+      "menuTextChecks": [
+        {
+          "view": "roosters",
+          "floor": 13,
+          "checked": 6
+        },
+        {
+          "view": "training",
+          "floor": 13,
+          "checked": 21
+        },
+        {
+          "view": "archive",
+          "floor": 13,
+          "checked": 31
+        }
+      ],
+      "upgradeReadability": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 304,
+          "bottom": 552,
+          "width": 288,
+          "height": 536
+        },
+        "allOffersReachable": true
+      },
+      "bossReadability": {
+        "count": 4,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 304,
+          "bottom": 552,
+          "width": 288,
+          "height": 536
+        },
+        "allOffersReachable": true
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "viewport": {
+        "name": "desktop-interactions",
+        "width": 960,
+        "height": 540
+      },
+      "recipe": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 944,
+          "bottom": 524,
+          "width": 928,
+          "height": 508
+        },
+        "allOffersReachable": true
+      },
+      "queue": [
+        "level",
+        "elite",
+        "boss",
+        "level",
+        "level"
+      ],
+      "panels": [
+        {
+          "count": 3,
+          "columns": 3,
+          "textFloor": 12,
+          "panel": {
+            "left": 16,
+            "top": 40.34375,
+            "right": 944,
+            "bottom": 499.640625,
+            "width": 928,
+            "height": 459.296875
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 3,
+          "textFloor": 12,
+          "panel": {
+            "left": 16,
+            "top": 29.125,
+            "right": 944,
+            "bottom": 510.875,
+            "width": 928,
+            "height": 481.75
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 4,
+          "columns": 2,
+          "textFloor": 12,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 944,
+            "bottom": 524,
+            "width": 928,
+            "height": 508
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 3,
+          "textFloor": 12,
+          "panel": {
+            "left": 16,
+            "top": 29.125,
+            "right": 944,
+            "bottom": 510.875,
+            "width": 928,
+            "height": 481.75
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 3,
+          "textFloor": 12,
+          "panel": {
+            "left": 16,
+            "top": 72,
+            "right": 944,
+            "bottom": 467.984375,
+            "width": 928,
+            "height": 395.984375
+          },
+          "allOffersReachable": true
+        }
+      ],
+      "receiptChecks": 4,
+      "fullBuild": {
+        "count": 3,
+        "columns": 3,
+        "textFloor": 12,
+        "panel": {
+          "left": 16,
+          "top": 20.046875,
+          "right": 944,
+          "bottom": 519.9375,
+          "width": 928,
+          "height": 499.890625
+        },
+        "allOffersReachable": true
+      },
+      "keyboard": true,
+      "touch": false,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "name": "landscape-interactions",
+        "width": 844,
+        "height": 390
+      },
+      "recipe": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 25,
+          "right": 836,
+          "bottom": 365,
+          "width": 828,
+          "height": 340
+        },
+        "allOffersReachable": true
+      },
+      "queue": [
+        "level",
+        "elite",
+        "boss",
+        "level",
+        "level"
+      ],
+      "panels": [
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 8,
+            "top": 50,
+            "right": 836,
+            "bottom": 340,
+            "width": 828,
+            "height": 290
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 8,
+            "top": 50,
+            "right": 836,
+            "bottom": 340,
+            "width": 828,
+            "height": 290
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 4,
+          "columns": 2,
+          "textFloor": 13,
+          "panel": {
+            "left": 8,
+            "top": 49,
+            "right": 836,
+            "bottom": 341,
+            "width": 828,
+            "height": 292
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 8,
+            "top": 50,
+            "right": 836,
+            "bottom": 340,
+            "width": 828,
+            "height": 290
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 8,
+            "top": 50,
+            "right": 836,
+            "bottom": 340,
+            "width": 828,
+            "height": 290
+          },
+          "allOffersReachable": true
+        }
+      ],
+      "receiptChecks": 4,
+      "fullBuild": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 8,
+          "top": 50,
+          "right": 836,
+          "bottom": 340,
+          "width": 828,
+          "height": 290
+        },
+        "allOffersReachable": true
+      },
+      "keyboard": true,
+      "touch": false,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "name": "touch-interactions",
+        "width": 390,
+        "height": 844,
+        "touch": true
+      },
+      "recipe": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 374,
+          "bottom": 828,
+          "width": 358,
+          "height": 812
+        },
+        "allOffersReachable": true
+      },
+      "queue": [
+        "level",
+        "elite",
+        "boss",
+        "level",
+        "level"
+      ],
+      "panels": [
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 374,
+            "bottom": 828,
+            "width": 358,
+            "height": 812
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 374,
+            "bottom": 828,
+            "width": 358,
+            "height": 812
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 4,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 374,
+            "bottom": 828,
+            "width": 358,
+            "height": 812
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 374,
+            "bottom": 828,
+            "width": 358,
+            "height": 812
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 374,
+            "bottom": 828,
+            "width": 358,
+            "height": 812
+          },
+          "allOffersReachable": true
+        }
+      ],
+      "receiptChecks": 4,
+      "fullBuild": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 374,
+          "bottom": 828,
+          "width": 358,
+          "height": 812
+        },
+        "allOffersReachable": true
+      },
+      "keyboard": true,
+      "touch": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "name": "short-interactions",
+        "width": 320,
+        "height": 568,
+        "touch": true
+      },
+      "recipe": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 304,
+          "bottom": 552,
+          "width": 288,
+          "height": 536
+        },
+        "allOffersReachable": true
+      },
+      "queue": [
+        "level",
+        "elite",
+        "boss",
+        "level",
+        "level"
+      ],
+      "panels": [
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 304,
+            "bottom": 552,
+            "width": 288,
+            "height": 536
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 304,
+            "bottom": 552,
+            "width": 288,
+            "height": 536
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 4,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 304,
+            "bottom": 552,
+            "width": 288,
+            "height": 536
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 304,
+            "bottom": 552,
+            "width": 288,
+            "height": 536
+          },
+          "allOffersReachable": true
+        },
+        {
+          "count": 3,
+          "columns": 1,
+          "textFloor": 13,
+          "panel": {
+            "left": 16,
+            "top": 16,
+            "right": 304,
+            "bottom": 552,
+            "width": 288,
+            "height": 536
+          },
+          "allOffersReachable": true
+        }
+      ],
+      "receiptChecks": 4,
+      "fullBuild": {
+        "count": 3,
+        "columns": 1,
+        "textFloor": 13,
+        "panel": {
+          "left": 16,
+          "top": 16,
+          "right": 304,
+          "bottom": 552,
+          "width": 288,
+          "height": 536
+        },
+        "allOffersReachable": true
+      },
+      "keyboard": true,
+      "touch": true,
+      "errors": []
+    }
+  ]
+}
