@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { getArenaArtTint } from '../../config/mapArt.js';
 
 export function playSceneFx(scene, key, x, y, options = {}) {
   const sprite = scene.objectPools.createFx(() => scene.add.sprite(x, y, 'fx-atlas-v1')
@@ -22,6 +23,7 @@ export function addArena(scene, width, height, renderPaddingY = 0, options = {})
   const groundTexture = options.groundTexture ?? 'arena-ground';
   scene.add.image(width / 2, height / 2, groundTexture)
     .setDisplaySize(width, options.cleanPresentation ? height : renderHeight)
+    .setTint(getArenaArtTint(options.cleanPresentation ? 'square-coop' : 'open-yard'))
     .setDepth(0);
   if (options.cleanPresentation) return;
   const grid = scene.add.graphics();

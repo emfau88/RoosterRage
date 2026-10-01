@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-10-01T22:01:28.602Z",
+  "viewport": [
+    390,
+    844
+  ],
+  "wave": 7,
+  "results": [
+    {
+      "roosterId": "ace",
+      "outcome": "running",
+      "waveOutcome": "completed",
+      "elapsedMs": 35431.8,
+      "averageEnemyProjectiles": 2.437679769894535,
+      "peakEnemyProjectiles": 12,
+      "peakEnemyHazards": 20,
+      "averagePlayerSpeed": 192.55036452900677,
+      "distanceTravelled": 6783.895933013061,
+      "damageTaken": 0,
+      "deathCause": null,
+      "deferredAttacks": 7,
+      "gameEnded": false,
+      "timedOut": false,
+      "errors": []
+    },
+    {
+      "roosterId": "artillery",
+      "outcome": "running",
+      "waveOutcome": "completed",
+      "elapsedMs": 38515.100000000006,
+      "averageEnemyProjectiles": 3.880794701986755,
+      "peakEnemyProjectiles": 12,
+      "peakEnemyHazards": 13,
+      "averagePlayerSpeed": 160.02803188181846,
+      "distanceTravelled": 6131.490044355064,
+      "damageTaken": 0,
+      "deathCause": null,
+      "deferredAttacks": 3,
+      "gameEnded": false,
+      "timedOut": false,
+      "errors": []
+    },
+    {
+      "roosterId": "storm",
+      "outcome": "running",
+      "waveOutcome": "completed",
+      "elapsedMs": 41681.59999999999,
+      "averageEnemyProjectiles": 8.615071283095723,
+      "peakEnemyProjectiles": 12,
+      "peakEnemyHazards": 18,
+      "averagePlayerSpeed": 176.16741907930205,
+      "distanceTravelled": 7307.706411279974,
+      "damageTaken": 0,
+      "deathCause": null,
+      "deferredAttacks": 28,
+      "gameEnded": false,
+      "timedOut": false,
+      "errors": []
+    }
+  ]
+}

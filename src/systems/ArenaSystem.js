@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import { ARENA_DEFINITIONS, getArenaDefinition } from '../data/arenaDefinitions.js';
 import { getSceneViewport } from './DisplayResolutionSystem.js';
+import { getArenaArtTint } from '../config/mapArt.js';
+import { ensureHarvestGroundVariants, harvestGroundTexture } from './assets/HarvestGroundVariants.js';
 
 const SAFE_PADDING = 44;
 const OPEN_YARD_BARN_MODULUS = 19;
@@ -180,6 +182,7 @@ export class ArenaSystem {
   }
 
   createChunkPool() {
+    if (this.id === 'open-yard') ensureHarvestGroundVariants(this.scene);
     const { radiusX, radiusY } = this.streaming.chunk;
     const count = (radiusX * 2 + 1) * (radiusY * 2 + 1);
     for (let index = 0; index < count; index += 1) {
@@ -276,7 +279,7 @@ export class ArenaSystem {
     record.key = key;
     record.chunkX = chunkX;
     record.chunkY = chunkY;
-    const groundTexture = this.streaming.groundTexture;
+    const groundTexture = this.id === 'open-yard' ? harvestGroundTexture(hash) : this.streaming.groundTexture;
     record.ground.setTexture(groundTexture);
     const groundWidth = this.id === 'vertical-run' ? world.width : width;
     if (this.id === 'vertical-run' && groundWidth < record.ground.frame.realWidth) {
@@ -284,6 +287,7 @@ export class ArenaSystem {
       record.ground.setCrop(cropX, 0, groundWidth, record.ground.frame.realHeight);
     }
     record.ground.setPosition(centerX, centerY)
+      .setTint(getArenaArtTint(this.id))
       .setFlip(false, false);
     if (this.id === 'vertical-run' && groundWidth < record.ground.frame.realWidth) {
       record.ground.setScale(
@@ -297,10 +301,12 @@ export class ArenaSystem {
       const world = this.playableWorldBounds;
       const edgeWidth = 300;
       record.edgeLeft.setTexture('arena-feed-alley-left')
+        .setTint(getArenaArtTint(this.id, 'edge'))
         .setPosition(world.x - edgeWidth / 2, centerY)
         .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
       record.edgeRight.setTexture('arena-feed-alley-right')
+        .setTint(getArenaArtTint(this.id, 'edge'))
         .setPosition(world.x + world.width + edgeWidth / 2, centerY)
         .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);

@@ -1226,6 +1226,51 @@
       "width": 768,
       "height": 1024,
       "bytes": 340310
+    },
+    {
+      "source": "art-source/map/portal-v3/crate.png",
+      "sourceSha256": "56fde39a74d6dfba894c59f302f52dfb9994d64871083da4a3fe11da776e504d",
+      "runtime": "src/assets/map/portal-v3/crate.webp",
+      "runtimeSha256": "e063cca5f48780d49064d3327ad39c823c18cdcde1ef278d7e5d5e7fe9190db6",
+      "width": 128,
+      "height": 128,
+      "bytes": 7404
+    },
+    {
+      "source": "art-source/map/portal-v3/bale.png",
+      "sourceSha256": "8f93c92d77f447677a998b502f6fde1f99c7985d0068eb6d6ba2c6c98427a286",
+      "runtime": "src/assets/map/portal-v3/bale.webp",
+      "runtimeSha256": "2c518db5e21a8b29a218d4f337956c0cd356e4addd37f3b916bfa29564eb9886",
+      "width": 192,
+      "height": 96,
+      "bytes": 11966
+    },
+    {
+      "source": "art-source/map/portal-v3/ground-a.png",
+      "sourceSha256": "b8dd8bd02847f606e7000a79d8fa7f358d5943756c5fafc7fe9bad089f24a480",
+      "runtime": "src/assets/map/portal-v3/ground-a.webp",
+      "runtimeSha256": "60362a52cf6648f82d27f557ce1a762333f12547987b6d44ea5dc46f6511bf08",
+      "width": 700,
+      "height": 700,
+      "bytes": 76534
+    },
+    {
+      "source": "art-source/map/portal-v3/ground-b.png",
+      "sourceSha256": "e77988db1d061d0a483acfe67b5a802882f18ece0d3dab735de96413205fef68",
+      "runtime": "src/assets/map/portal-v3/ground-b.webp",
+      "runtimeSha256": "2fe6e74118c802845532c6faca8e9feeb05f6808b483044b7a44c05cc003bf70",
+      "width": 700,
+      "height": 700,
+      "bytes": 80740
+    },
+    {
+      "source": "art-source/map/portal-v3/ground-c.png",
+      "sourceSha256": "df4751354c7e69bc7a9d92e997b6b0a2b546a2663ff7cd88e6a17e39db50506d",
+      "runtime": "src/assets/map/portal-v3/ground-c.webp",
+      "runtimeSha256": "17fd044facd5a1294a3340ed0ec6011e7ba2f1304e5f42fb3a3ff6ea85c4fd6d",
+      "width": 700,
+      "height": 700,
+      "bytes": 80366
     }
   ]
 }

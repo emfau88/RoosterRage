@@ -1,0 +1,175 @@
+{
+  "generatedAt": "2026-10-01T21:55:01.145Z",
+  "equivalentRunSeconds": 129,
+  "openYard": {
+    "arenaId": "open-yard",
+    "chunkPoolSize": 25,
+    "recycledChunks": 125,
+    "seenLandmarks": [
+      "landmark-barn",
+      "landmark-well"
+    ],
+    "seenEdgeTextures": [],
+    "routes": [
+      {
+        "player": {
+          "x": 92536,
+          "y": 65536
+        },
+        "anchor": {
+          "x": 132,
+          "y": 93
+        },
+        "recycledChunks": 25,
+        "landmarks": 1
+      },
+      {
+        "player": {
+          "x": 38536,
+          "y": 65536
+        },
+        "anchor": {
+          "x": 55,
+          "y": 93
+        },
+        "recycledChunks": 50,
+        "landmarks": 0
+      },
+      {
+        "player": {
+          "x": 65536,
+          "y": 92536
+        },
+        "anchor": {
+          "x": 93,
+          "y": 132
+        },
+        "recycledChunks": 75,
+        "landmarks": 4
+      },
+      {
+        "player": {
+          "x": 65536,
+          "y": 38536
+        },
+        "anchor": {
+          "x": 93,
+          "y": 55
+        },
+        "recycledChunks": 100,
+        "landmarks": 1
+      },
+      {
+        "player": {
+          "x": 84436,
+          "y": 84436
+        },
+        "anchor": {
+          "x": 120,
+          "y": 120
+        },
+        "recycledChunks": 125,
+        "landmarks": 4
+      }
+    ]
+  },
+  "verticalRun": {
+    "arenaId": "vertical-run",
+    "chunkPoolSize": 5,
+    "recycledChunks": 15,
+    "seenLandmarks": [],
+    "seenEdgeTextures": [
+      "arena-feed-alley-left",
+      "arena-feed-alley-right"
+    ],
+    "routes": [
+      {
+        "player": {
+          "x": 65536,
+          "y": 92536
+        },
+        "anchor": {
+          "x": 0,
+          "y": 154
+        },
+        "recycledChunks": 5,
+        "landmarks": 0
+      },
+      {
+        "player": {
+          "x": 65536,
+          "y": 38536
+        },
+        "anchor": {
+          "x": 0,
+          "y": 64
+        },
+        "recycledChunks": 10,
+        "landmarks": 0
+      },
+      {
+        "player": {
+          "x": 65536,
+          "y": 79036
+        },
+        "anchor": {
+          "x": 0,
+          "y": 131
+        },
+        "recycledChunks": 15,
+        "landmarks": 0
+      }
+    ]
+  },
+  "coopSquare": {
+    "bounds": {
+      "x": 85,
+      "y": 45,
+      "width": 1230,
+      "height": 810
+    },
+    "physicalFenceStops": [
+      {
+        "id": "north",
+        "x": 700,
+        "y": 55.5
+      },
+      {
+        "id": "south",
+        "x": 700,
+        "y": 791.5
+      },
+      {
+        "id": "west",
+        "x": 99.5,
+        "y": 450
+      },
+      {
+        "id": "east",
+        "x": 1300.5,
+        "y": 450
+      }
+    ],
+    "spawnSampleSize": 80
+  },
+  "feedResponsive": [
+    {
+      "id": "portrait",
+      "laneWidth": 560,
+      "cameraZoom": 0.54,
+      "visibleWorldWidth": 722.2222222222222
+    },
+    {
+      "id": "landscape",
+      "laneWidth": 800,
+      "cameraZoom": 1,
+      "visibleWorldWidth": 844
+    },
+    {
+      "id": "desktop",
+      "laneWidth": 800,
+      "cameraZoom": 1,
+      "visibleWorldWidth": 960
+    }
+  ]
+}

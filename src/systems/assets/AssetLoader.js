@@ -86,6 +86,12 @@ import pickupEliteChestAjarUrl from '../../assets/pickups/pickup-elite-chest-aja
 import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-open.webp';
 import arenaCrateUrl from '../../assets/map/arena-crate.webp';
 import arenaBaleUrl from '../../assets/map/arena-bale.webp';
+import portalCrateUrl from '../../assets/map/portal-v3/crate.webp';
+import portalBaleUrl from '../../assets/map/portal-v3/bale.webp';
+import portalGroundAUrl from '../../assets/map/portal-v3/ground-a.webp';
+import portalGroundBUrl from '../../assets/map/portal-v3/ground-b.webp';
+import portalGroundCUrl from '../../assets/map/portal-v3/ground-c.webp';
+import { USE_REFINED_PROPS, USE_GROUND_VARIANTS } from '../../config/mapArt.js';
 import arenaWallUrl from '../../assets/map/arena-wall.webp';
 import arenaGroundFarmUrl from '../../assets/map/arena-ground-farm.webp';
 import arenaGroundRoadUrl from '../../assets/map/arena-ground-road.webp';
@@ -262,8 +268,13 @@ export function preloadGameAssets(scene) {
   scene.load.image('pickup-elite-chest', pickupEliteChestUrl);
   scene.load.image('pickup-elite-chest-ajar', pickupEliteChestAjarUrl);
   scene.load.image('pickup-elite-chest-open', pickupEliteChestOpenUrl);
-  scene.load.image('arena-crate', arenaCrateUrl);
-  scene.load.image('arena-bale', arenaBaleUrl);
+  scene.load.image('arena-crate', USE_REFINED_PROPS ? portalCrateUrl : arenaCrateUrl);
+  scene.load.image('arena-bale', USE_REFINED_PROPS ? portalBaleUrl : arenaBaleUrl);
+  if (USE_GROUND_VARIANTS) {
+    scene.load.image('portal-ground-source-a', portalGroundAUrl);
+    scene.load.image('portal-ground-source-b', portalGroundBUrl);
+    scene.load.image('portal-ground-source-c', portalGroundCUrl);
+  }
   scene.load.image('arena-wall', arenaWallUrl);
   scene.load.image('arena-ground-farm', arenaGroundFarmUrl);
   scene.load.image('arena-ground-road', arenaGroundRoadUrl);
