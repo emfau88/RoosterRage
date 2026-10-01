@@ -48,14 +48,8 @@ async function verifyArena(browser, serverUrl, arenaId) {
     assert(snapshot.arena.id === arenaId, 'Requested arena was not selected.', snapshot.arena);
     assert(snapshot.arena.obstacles.some((obstacle) => obstacle.destructible),
       'Arena has no destructible cover.', snapshot.arena);
-    assert(snapshot.arena.obstacles
-      .filter((obstacle) => obstacle.destructible && obstacle.active)
-      .every((obstacle) => obstacle.markerVisible && obstacle.markerDepth > obstacle.depth),
-    'Active destructible props are missing their breakable marker.', snapshot.arena.obstacles);
-    assert(snapshot.arena.obstacles
-      .filter((obstacle) => !obstacle.destructible)
-      .every((obstacle) => !obstacle.markerVisible),
-    'Permanent architecture received a breakable marker.', snapshot.arena.obstacles);
+    assert(snapshot.arena.obstacles.every((obstacle) => !obstacle.markerVisible),
+      'Props still show the removed W-shaped breakable marker.', snapshot.arena.obstacles);
     assert(snapshot.safePoints.every((point) => point.reachable && !point.blocked),
       'Safe point generator produced blocked or unreachable coordinates.', snapshot.safePoints);
     assert(snapshot.catalog.length === 3, 'Arena catalog does not contain all topologies.', snapshot.catalog);

@@ -174,10 +174,8 @@ export class ArenaSystem {
       damageStage: 0,
       sprite
     };
-    obstacle.breakableMarker = this.scene.add.graphics().setDepth(4.35).setVisible(false);
     sprite.entity = obstacle;
     this.obstacles.push(obstacle);
-    this.updateBreakableMarker(obstacle);
     return obstacle;
   }
 
@@ -505,7 +503,6 @@ export class ArenaSystem {
       .clearTint();
     obstacle.sprite.refreshBody();
     obstacle.sprite.entity = obstacle;
-    this.updateBreakableMarker(obstacle);
   }
 
   disableObstacle(obstacle) {
@@ -513,36 +510,7 @@ export class ArenaSystem {
     obstacle.hp = Infinity;
     obstacle.maxHp = Infinity;
     obstacle.damageStage = 0;
-    obstacle.breakableMarker?.setVisible(false).clear();
     obstacle.sprite.disableBody(true, true);
-  }
-
-  updateBreakableMarker(obstacle) {
-    const marker = obstacle?.breakableMarker;
-    if (!marker) return;
-    if (!obstacle.destructible || !obstacle.sprite.active || !obstacle.sprite.visible) {
-      marker.setVisible(false).clear();
-      return;
-    }
-    const color = obstacle.damageStage >= 2
-      ? 0xff7654
-      : obstacle.damageStage === 1 ? 0xffb45c : 0xffd36a;
-    const halfWidth = Math.min(20, Math.max(12, obstacle.width * 0.18));
-    const drawCrack = () => {
-      marker.beginPath();
-      marker.moveTo(-halfWidth, -2);
-      marker.lineTo(-halfWidth * 0.48, 3);
-      marker.lineTo(0, -3);
-      marker.lineTo(halfWidth * 0.48, 3);
-      marker.lineTo(halfWidth, -2);
-      marker.strokePath();
-    };
-    marker.clear().setPosition(obstacle.x, obstacle.y + obstacle.height / 2 - 3);
-    marker.lineStyle(5, 0x20140b, 0.52);
-    drawCrack();
-    marker.lineStyle(2, color, 0.9);
-    drawCrack();
-    marker.setVisible(true);
   }
 
   createBoundaryColliders() {
@@ -629,7 +597,6 @@ export class ArenaSystem {
       const nextStage = healthRatio <= 0.34 ? 2 : healthRatio <= 0.67 ? 1 : 0;
       if (nextStage !== obstacle.damageStage) {
         obstacle.damageStage = nextStage;
-        this.updateBreakableMarker(obstacle);
         this.scene.telemetry.record('propDamageStageChanged', this.scene.time.now, {
           wave: this.scene.waveSystem?.currentWave ?? 0,
           id: obstacle.id,
@@ -639,7 +606,6 @@ export class ArenaSystem {
       return false;
     }
     const { x, y } = obstacle.sprite;
-    obstacle.breakableMarker?.setVisible(false).clear();
     obstacle.sprite.disableBody(true, true);
     this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
     this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.72, depth: 9 });
@@ -659,7 +625,6 @@ export class ArenaSystem {
     } else if (obstacle.damageStage >= 2) {
       obstacle.sprite.setTint(0xe66d42);
     }
-    this.updateBreakableMarker(obstacle);
   }
 
   sampleLandmarks(radius = 30) {
@@ -732,15 +697,14 @@ export class ArenaSystem {
         maxHp: Number.isFinite(obstacle.maxHp) ? obstacle.maxHp : null,
         alpha: obstacle.sprite.alpha,
         depth: obstacle.sprite.depth,
-        markerVisible: obstacle.breakableMarker?.visible ?? false,
-        markerDepth: obstacle.breakableMarker?.depth ?? null,
+        markerVisible: false,
+        markerDepth: null,
         active: obstacle.sprite.active
       }))
     };
   }
 
   destroy() {
-    this.obstacles.forEach((obstacle) => obstacle.breakableMarker?.destroy());
     this.chunkRecords.forEach((record) => {
       record.ground.destroy();
       record.edgeLeft.destroy();
