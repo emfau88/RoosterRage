@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-10-01T19:50:47.789Z",
+  "pairs": 16,
+  "errors": [],
+  "desktop": {
+    "images": 32,
+    "broken": 0,
+    "overflow": false
+  },
+  "mobile": {
+    "overflow": false,
+    "pairs": [
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      },
+      {
+        "sideBySide": true,
+        "equalWidths": true
+      }
+    ]
+  },
+  "sourceHashesUnchanged": true
+}
