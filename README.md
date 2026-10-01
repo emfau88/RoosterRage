@@ -1,5 +1,9 @@
 # Rooster Rage
 
+### [Play the Kongregate test build](https://emfau88.github.io/RoosterRage/kongregate/)
+
+Test the current portal candidate directly in your browser. This GitHub-hosted preview uses the same game-only release build as the Kongregate package.
+
 ![Rooster Rage — three battle roosters defend their yard](public/marketing/rooster-rage-key-art-master.png)
 
 **Three battle roosters. Wild egg evolutions. One yard full of monsters.**
@@ -57,6 +61,8 @@ npm run test:production
 ```
 
 ## Kongregate upload
+
+The [playable Kongregate preview](https://emfau88.github.io/RoosterRage/kongregate/) follows `codex/kongregate-upload`. GitHub Pages publishes it under `/kongregate/` alongside the standard build from `master`; both builds must pass their production checks before deployment.
 
 Create the verified, self-contained portal package with:
 
