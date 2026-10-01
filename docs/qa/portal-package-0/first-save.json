@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "kernels": 0,
+  "lifetimeKernels": 0,
+  "talentRanks": {},
+  "roosterMastery": {},
+  "firstClearClaims": [],
+  "totalRuns": 0,
+  "victories": 0,
+  "totalKills": 0,
+  "bossDefeats": 0,
+  "roosterRuns": {},
+  "roosterWins": {},
+  "unlockedRoosters": [
+    "ace"
+  ],
+  "unlockedChallenges": [
+    "standard"
+  ],
+  "unlockedCosmetics": [],
+  "selectedChallenge": "standard",
+  "selectedCosmetics": {},
+  "discoveredEnemies": [],
+  "discoveredEvolutions": [],
+  "bests": {
+    "highestKills": 0,
+    "longestRunMs": 0,
+    "fastestVictoryMs": null
+  },
+  "history": []
+}

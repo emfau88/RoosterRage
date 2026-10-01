@@ -803,7 +803,7 @@ export class GameScene extends Phaser.Scene {
     });
     this.lastUpgradeFeedback = {
       id: upgrade.id,
-      rank: rank || 'SOFORT',
+      rank: rank || 'INSTANT',
       milestone: upgrade.momentTitle ?? upgrade.name,
       changes: [...(upgrade.changeItems ?? [])],
       color,

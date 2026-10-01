@@ -1,0 +1,10 @@
+
+> rooster-arena@0.1.0 test:menus
+> node tests/responsive-menu-runner.mjs
+
+Responsive menu test passed.
+{
+  "viewportCount": 20,
+  "interactionScenarios": 4,
+  "report": "C:\\Users\\madde\\Documents\\ChatGPT\\Rooster\\RoosterRage\\test-results\\package-1\\menus.json"
+}

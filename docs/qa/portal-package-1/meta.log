@@ -1,0 +1,28 @@
+
+> rooster-arena@0.1.0 test:meta
+> node tests/meta-runner.mjs
+
+Rooster meta/challenge gate passed.
+{
+  "roosters": [
+    "ace",
+    "artillery",
+    "storm"
+  ],
+  "challenges": [
+    "standard",
+    "rush-hour",
+    "featherweight",
+    "royal-gauntlet"
+  ],
+  "cosmetics": [
+    "ace-sunrise"
+  ],
+  "history": 1,
+  "tenRunKernels": 600,
+  "migratedVeteranKernels": 80,
+  "lexicon": {
+    "enemies": 12,
+    "evolutions": 11
+  }
+}

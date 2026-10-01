@@ -1,0 +1,35 @@
+{
+  "verifiedAt": "2026-10-01T09:08:11.357Z",
+  "sourceRevision": "fe755230a3601580dc6bfdcb90fba31893b6913f",
+  "status": "Baseline artifacts complete and consistent; not a portal release approval",
+  "checks": {
+    "releaseFilesSha256Matched": 143,
+    "releaseBytes": 19346468,
+    "viewScreenshots": 76,
+    "detailScreenshots": 9,
+    "fullBuildEvoQueueCases": 4,
+    "geometryCases": 27,
+    "regularRunsEnded": 5,
+    "recordedRunErrors": 0,
+    "dedicatedMeasurementCases": 2,
+    "pngsDecodeChecked": 132,
+    "internalDocumentLinksChecked": 37,
+    "trackedChanges": []
+  },
+  "limitations": [
+    "Coop Square waves 7-10 not reached in these regular bot runs",
+    "No physical mobile-device or Safari/WebKit verification",
+    "Dedicated frame samples cover waves 1-2 on headless SwiftShader",
+    "Peak screenshots selected by global object count, not guaranteed maximum visible density"
+  ],
+  "commandsAlreadyExecuted": [
+    "npm.cmd run test:release",
+    "node scripts/capture-portal-baseline.mjs --views",
+    "node scripts/capture-portal-baseline.mjs --runs",
+    "python scripts/render-portal-style-reference.py",
+    "node scripts/capture-portal-baseline.mjs --details",
+    "node scripts/capture-portal-baseline.mjs --late-runs",
+    "node scripts/capture-portal-baseline.mjs --measure",
+    "node --check scripts/capture-portal-baseline.mjs"
+  ]
+}

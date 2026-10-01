@@ -1,0 +1,60 @@
+
+> rooster-arena@0.1.0 test:hud-report
+> node tests/hud-report-runner.mjs
+
+Rooster HUD/report gate passed.
+{
+  "layouts": [
+    {
+      "name": "desktop",
+      "height": 68
+    },
+    {
+      "name": "portrait",
+      "height": 79
+    },
+    {
+      "name": "landscape",
+      "height": 62
+    }
+  ],
+  "sources": [
+    {
+      "source": "golden-egg",
+      "shots": 1,
+      "hits": 4,
+      "hitRate": 1,
+      "damage": 240,
+      "effectiveDamage": 240,
+      "damageShare": 0.8,
+      "overkill": 0,
+      "overkillRatio": 0,
+      "kills": 0,
+      "firstAt": 2632.9,
+      "lastAt": 3099.5,
+      "usageMs": 466.5999999999999
+    },
+    {
+      "source": "base-egg",
+      "shots": 3,
+      "hits": 3,
+      "hitRate": 1,
+      "damage": 60,
+      "effectiveDamage": 60,
+      "damageShare": 0.2,
+      "overkill": 0,
+      "overkillRatio": 0,
+      "kills": 0,
+      "firstAt": 2082.9,
+      "lastAt": 3832.8,
+      "usageMs": 1749.9
+    }
+  ],
+  "deathCause": "contact:slime",
+  "effectControls": 4,
+  "returnToHub": {
+    "hubVisible": true,
+    "runActionHidden": true,
+    "choosingRooster": true
+  }
+}

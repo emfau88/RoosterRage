@@ -18,6 +18,9 @@ const ROOSTER_PORTRAITS = {
   storm: stormPortraitUrl
 };
 
+// Focus points keep each face visible in a wide card as well as a square avatar.
+const PORTRAIT_FOCUS = { ace: '50% 46%', artillery: '45% 44%', storm: '50% 59%' };
+
 const MASTERY_BADGES = {
   ace: masteryAceUrl,
   artillery: masteryArtilleryUrl,
@@ -94,6 +97,12 @@ const ICON_ALIASES_BY_ID = {
 };
 
 function keepFocusInDialog(event, dialog) {
+  // Phaser captures Space at the window level through its cursor keys. Keep
+  // native button activation in HTML dialogs without changing combat input.
+  if (event.key === ' ' && event.target.closest('button')) {
+    event.stopPropagation();
+    return;
+  }
   if (event.key !== 'Tab') return;
   const focusable = [...dialog.querySelectorAll(
     'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href]'
@@ -166,6 +175,9 @@ export class HUD {
 
     this.overlay = document.createElement('div');
     this.overlay.className = 'overlay';
+    this.overlay.addEventListener('keyup', (event) => {
+      if (event.key === ' ' && event.target.closest('button')) event.stopPropagation();
+    });
 
     this.joystick = document.createElement('div');
     this.joystick.className = 'joystick';
@@ -257,7 +269,8 @@ export class HUD {
         : 'Choose an upgrade.';
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
-      <div class="panel upgrade-panel upgrade-panel--${chest ? 'chest' : 'level'} ${chest ? 'panel--reward' : ''}">
+      <div class="panel upgrade-panel upgrade-panel--${chest ? 'chest' : 'level'} ${chest ? 'panel--reward' : ''}"
+        role="dialog" aria-modal="true" aria-labelledby="upgrade-title" data-choice-count="${choices.length}">
         <span class="upgrade-panel__frame upgrade-panel__frame--top" aria-hidden="true"></span>
         <span class="upgrade-panel__frame upgrade-panel__frame--right" aria-hidden="true"></span>
         <span class="upgrade-panel__frame upgrade-panel__frame--bottom" aria-hidden="true"></span>
@@ -269,10 +282,11 @@ export class HUD {
         <div class="upgrade-panel__heading">
           <span class="upgrade-panel__emblem" data-upgrade-panel-icon aria-hidden="true"></span>
           <span>
-            <h2>${title}</h2>
+            <h2 id="upgrade-title">${title}</h2>
             <p>${subtitle}</p>
           </span>
         </div>
+        <div class="upgrade-panel__body">
         ${context.recentChoice ? `
           <div class="upgrade-selection-receipt">
             <span>✓ LAST PICK</span>
@@ -281,6 +295,7 @@ export class HUD {
           </div>
         ` : ''}
         <div class="upgrade-list"></div>
+        </div>
         ${context.canReroll ? '<button class="reroll-button" type="button">Reroll (1)</button>' : ''}
       </div>
     `;
@@ -290,8 +305,13 @@ export class HUD {
     );
     const list = this.overlay.querySelector('.upgrade-list');
     choices.forEach((choice) => {
+      const description = choice.description ?? '';
+      const normalizeEffect = (text) => text.trim().replace(/[.!]$/, '').toLowerCase();
+      const repeatsEffect = (choice.changeItems ?? []).some((item) => normalizeEffect(item) === normalizeEffect(description));
       const button = document.createElement('button');
       button.className = `upgrade-button upgrade-button--${choice.rarity ?? 'common'}`;
+      button.type = 'button';
+      button.dataset.upgradeId = choice.id;
       button.innerHTML = `
         <span class="upgrade-button__art">
           <span class="upgrade-button__rarity" data-rarity-icon></span>
@@ -311,12 +331,12 @@ export class HUD {
               : choice.upgradeMoment === 'evolution' ? 'EVO ready'
                 : choice.upgradeMoment === 'instant' ? 'Instant effect' : 'New ability'
           }</span>
-          <span class="upgrade-button__description">${choice.description}</span>
+          ${description && !repeatsEffect ? `<span class="upgrade-button__description">${description}</span>` : ''}
           ${choice.synergyActive
             ? `<span class="upgrade-button__synergy">Synergy active: ${choice.synergyDescription}</span>`
             : ''}
           ${choice.evolutionHint
-            ? `<span class="upgrade-button__evolution-hint"><strong>EVO-ZIEL · ${choice.evolutionHint.name}</strong><span class="${choice.evolutionHint.baseReady ? 'is-ready' : ''}">R4 ${choice.evolutionHint.baseReady ? '✓' : '○'}</span><span class="${choice.evolutionHint.passiveOwned ? 'is-ready' : ''}">${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span></span>`
+            ? `<span class="upgrade-button__evolution-hint"><strong>EVO RECIPE · ${choice.evolutionHint.name}</strong><span class="${choice.evolutionHint.baseReady ? 'is-ready' : ''}">R4 ${choice.evolutionHint.baseReady ? '✓' : '○'}</span><span class="${choice.evolutionHint.passiveOwned ? 'is-ready' : ''}">${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span></span>`
             : ''}
         </span>
       `;
@@ -326,6 +346,11 @@ export class HUD {
       list.append(button);
     });
     this.overlay.querySelector('.reroll-button')?.addEventListener('click', () => this.onReroll?.(), { once: true });
+    const panel = this.overlay.querySelector('.upgrade-panel');
+    this.overlay.onkeydown = (event) => keepFocusInDialog(event, panel);
+    requestAnimationFrame(() => {
+      if (panel.isConnected) panel.querySelector('.upgrade-button')?.focus({ preventScroll: true });
+    });
   }
 
   showRoosterSelection(definitions, hub = {}, onCosmeticSelected = null) {
@@ -470,7 +495,7 @@ export class HUD {
         <nav class="henhouse-nav" aria-label="Henhouse sections">
           <button type="button" data-hub-tab="play" class="is-selected">Play</button>
           <button type="button" data-hub-tab="roosters">Roosters</button>
-          <button type="button" data-hub-tab="training"><span class="hub-nav-label--desktop">Training</span><span class="hub-nav-label--mobile">Talents</span></button>
+          <button type="button" data-hub-tab="training">Talents</button>
           <button type="button" data-hub-tab="archive">Archive</button>
         </nav>
         <section class="henhouse-view is-active" data-hub-view="play">
@@ -538,7 +563,7 @@ export class HUD {
         </section>
         <section class="henhouse-view" data-hub-view="training" hidden>
           <div class="henhouse-section-heading talent-heading">
-            <span><small>PERMANENT</small><h2>Talent Nest</h2></span>
+            <span><small>PERMANENT</small><h2>Talents</h2></span>
             <div class="talent-summary" aria-label="Talent progress">
               <span><small>INVESTED</small><strong>${talentTotalRanks}</strong><em>ranks</em></span>
               <span><small>EARNED</small><strong>${currency.lifetimeKernels}</strong><em>kernels</em></span>
@@ -685,6 +710,7 @@ export class HUD {
       button.className = `rooster-card rooster-card--${definition.id} ${definition.id === selectedRoosterId ? 'is-selected' : ''} ${meta.unlocked ? '' : 'is-locked'}`;
       button.type = 'button';
       button.dataset.unlocked = `${meta.unlocked}`;
+      button.style.setProperty('--portrait-focus', PORTRAIT_FOCUS[definition.id]);
       button.setAttribute('aria-expanded', `${definition.id === selectedRoosterId}`);
       button.setAttribute(
         'aria-label',
@@ -739,7 +765,7 @@ export class HUD {
       chooseButton.type = 'button';
       chooseButton.disabled = !meta.unlocked;
       chooseButton.innerHTML = meta.unlocked
-        ? `<span>PLAY AS ${definition.name.toUpperCase()}</span><small>Confirm selection</small>`
+        ? `<span>SELECT ${definition.name.toUpperCase()}</span><small>Return to Play</small>`
         : `<span>STILL LOCKED</span><small>${meta.unlockLabel}</small>`;
       chooseButton.addEventListener('click', () => {
         if (!meta.unlocked) return;
@@ -807,6 +833,7 @@ export class HUD {
       const portrait = this.overlay.querySelector('[data-hero-portrait]');
       portrait.src = ROOSTER_PORTRAITS[definition.id];
       portrait.alt = `${definition.name} portrait`;
+      portrait.style.objectPosition = PORTRAIT_FOCUS[definition.id];
       const badge = this.overlay.querySelector('[data-hero-mastery-badge]');
       badge.src = MASTERY_BADGES[definition.id];
       badge.alt = `${definition.name} mastery badge`;

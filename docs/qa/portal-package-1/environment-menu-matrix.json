@@ -1,0 +1,62 @@
+{
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64",
+    "cpus": "AMD Ryzen 7 6800H with Radeon Graphics         ",
+    "logicalCpus": 16,
+    "totalMemoryBytes": 16387997696
+  },
+  "browserVersion": "151.0.7922.34",
+  "nodeVersion": "v22.17.1",
+  "environments": [
+    {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "dpr": 2,
+      "renderer": "WebGL",
+      "canvas": {
+        "width": 640,
+        "height": 1136
+      },
+      "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "testApiExposed": false,
+      "instrumented": true
+    },
+    {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "viewport": {
+        "width": 720,
+        "height": 600
+      },
+      "dpr": 2,
+      "renderer": "WebGL",
+      "canvas": {
+        "width": 1440,
+        "height": 1200
+      },
+      "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "testApiExposed": false,
+      "instrumented": true
+    },
+    {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "viewport": {
+        "width": 719,
+        "height": 599
+      },
+      "dpr": 2,
+      "renderer": "WebGL",
+      "canvas": {
+        "width": 1438,
+        "height": 1198
+      },
+      "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "testApiExposed": false,
+      "instrumented": true
+    }
+  ]
+}
