@@ -1,5 +1,9 @@
 # Rooster Rage
 
+### [Play the Kongregate test build](https://emfau88.github.io/RoosterRage/kongregate/)
+
+Test the current portal candidate directly in your browser. This GitHub-hosted preview uses the same game-only release build as the Kongregate package and follows `codex/kongregate-upload`.
+
 ![Rooster Rage — three battle roosters defend their yard](public/marketing/rooster-rage-key-art-master.png)
 
 **Three battle roosters. Wild egg evolutions. One yard full of monsters.**

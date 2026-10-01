@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - codex/kongregate-upload
   workflow_dispatch:
 
 permissions:
@@ -22,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          ref: master
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -53,12 +56,37 @@ jobs:
       - name: Build and verify GitHub Pages artifact
         run: npm run test:pages
 
+      - name: Checkout Kongregate candidate
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name == 'codex/kongregate-upload' && github.sha || 'codex/kongregate-upload' }}
+          path: kongregate-source
+
+      - name: Install Kongregate candidate dependencies
+        working-directory: kongregate-source
+        run: npm ci
+
+      - name: Build and verify Kongregate candidate
+        working-directory: kongregate-source
+        run: npm run test:release
+
+      - name: Verify Kongregate preview URL
+        working-directory: kongregate-source
+        run: node tests/release-gate.mjs dist-release /RoosterRage/kongregate/
+
+      - name: Add Kongregate preview to GitHub Pages
+        run: |
+          cp -R kongregate-source/dist-release dist-pages/kongregate
+          node --input-type=module -e "import { execFileSync } from 'node:child_process'; import { writeFileSync } from 'node:fs'; const commit = execFileSync('git', ['-C', 'kongregate-source', 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(); writeFileSync('dist-pages/kongregate/build-info.json', JSON.stringify({ branch: 'codex/kongregate-upload', commit }, null, 2) + '\n');"
+
       - name: Upload failed test artifacts
         if: failure()
         uses: actions/upload-artifact@v7
         with:
           name: rooster-test-results
-          path: test-results
+          path: |
+            test-results
+            kongregate-source/test-results
           if-no-files-found: ignore
           retention-days: 7
 
