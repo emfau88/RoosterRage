@@ -1,0 +1,827 @@
+{
+  "frameSize": 256,
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "parts": {
+    "south/head": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/head.png",
+      "width": 392,
+      "height": 336,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        12,
+        99,
+        404,
+        435
+      ],
+      "sha256": "79233e50118f54675f0f48b1557f58e90303de4e31286e9976e4810f5b1b8057"
+    },
+    "south/comb": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/comb.png",
+      "width": 386,
+      "height": 333,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        427,
+        56,
+        813,
+        389
+      ],
+      "sha256": "5f83bf9336b6e955c9583c3c5fd84ec21cc9e5784e111e007cc5ef914c294109"
+    },
+    "south/body": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/body.png",
+      "width": 395,
+      "height": 364,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        840,
+        82,
+        1235,
+        446
+      ],
+      "sha256": "2d5e63de44a084956e80912a6a84de2003594d7ac1c79f079a12ac9679be20b1"
+    },
+    "south/wing-left": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/wing-left.png",
+      "width": 274,
+      "height": 333,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        72,
+        480,
+        346,
+        813
+      ],
+      "sha256": "060453e5f8a0da5e293bd7535ec80f0d27b4810eb3e2405823dd14bc532384f3"
+    },
+    "south/wing-right": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/wing-right.png",
+      "width": 271,
+      "height": 340,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        514,
+        473,
+        785,
+        813
+      ],
+      "sha256": "ce2a4aca916fcda0b757ad94c3dc13f00aa5a4226132eb5d19e4d2f34c9ba904"
+    },
+    "south/tail": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/tail.png",
+      "width": 333,
+      "height": 299,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        883,
+        499,
+        1216,
+        798
+      ],
+      "sha256": "899507ee5fa0c44e585b43d9d63419de45f44768535cb0b56903a63fb2120a0d"
+    },
+    "south/foot-left": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/foot-left.png",
+      "width": 286,
+      "height": 294,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        51,
+        894,
+        337,
+        1188
+      ],
+      "sha256": "34086a8fcc0ba9f26d58357682dc7d09b6cf452bdc57ed1d14171d0076ede850"
+    },
+    "south/foot-right": {
+      "file": "art-source/characters/ace-mascot-v1/parts/south/foot-right.png",
+      "width": 289,
+      "height": 293,
+      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "sourceRect": [
+        496,
+        895,
+        785,
+        1188
+      ],
+      "sha256": "d1710bd754132760b39cc3a1c7b154e90e0ba8f3e6c0923eab2753f3106e03d9"
+    },
+    "west/head": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/head.png",
+      "width": 371,
+      "height": 339,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        43,
+        94,
+        414,
+        433
+      ],
+      "sha256": "50d99f0e7f3f432f69cb9846bfe86791c954f0dd7293db7abcd5859dcba9b798"
+    },
+    "west/comb": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/comb.png",
+      "width": 367,
+      "height": 366,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        446,
+        42,
+        813,
+        408
+      ],
+      "sha256": "ae62eecb89e3dc9811ec7044f4bd6365dcf8e7be18dfc0f153bd9bd2087ef5c2"
+    },
+    "west/body": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/body.png",
+      "width": 374,
+      "height": 316,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        845,
+        127,
+        1219,
+        443
+      ],
+      "sha256": "4d1885fe275c670034b75ceba37f708b3c3ae69679b3dd909b65be19b69f0121"
+    },
+    "west/wing-left": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/wing-left.png",
+      "width": 310,
+      "height": 315,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        62,
+        485,
+        372,
+        800
+      ],
+      "sha256": "beb83e57f33740cdda0c713ec99ca355ac04d19d961f12647f673c2dc1ac72b3"
+    },
+    "west/wing-right": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/wing-right.png",
+      "width": 298,
+      "height": 321,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        489,
+        485,
+        787,
+        806
+      ],
+      "sha256": "c87ea5782adf3bf62c1165c38deb31d34ba5c3425e6df7064ad0a76dc85c9456"
+    },
+    "west/tail": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/tail.png",
+      "width": 318,
+      "height": 300,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        910,
+        501,
+        1228,
+        801
+      ],
+      "sha256": "2d17a460e43d502749851305700d065dc646ff867a35db323545ff7fe79a5a3a"
+    },
+    "west/foot-left": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/foot-left.png",
+      "width": 304,
+      "height": 281,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        67,
+        913,
+        371,
+        1194
+      ],
+      "sha256": "68d7a78028041ca89e1d4989eaf3eef14066c5d10ffecdf43ace7b806fd558ff"
+    },
+    "west/foot-right": {
+      "file": "art-source/characters/ace-mascot-v1/parts/west/foot-right.png",
+      "width": 293,
+      "height": 277,
+      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "sourceRect": [
+        460,
+        920,
+        753,
+        1197
+      ],
+      "sha256": "2fbe727afd3ea40734d3d5359eebd5b1e0f9117f853b6ee7f11285f7d2e2823f"
+    },
+    "north/head": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/head.png",
+      "width": 380,
+      "height": 342,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        34,
+        90,
+        414,
+        432
+      ],
+      "sha256": "db250b60ddc62bbbdc40052f005d51aed5c684e618f836d17dbdd42cddc0878b"
+    },
+    "north/comb": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/comb.png",
+      "width": 376,
+      "height": 339,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        437,
+        57,
+        813,
+        396
+      ],
+      "sha256": "8d3123042651d2863041d164d1dc89f59af6862b37d5425b080e83c3e42cf7bf"
+    },
+    "north/body": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/body.png",
+      "width": 400,
+      "height": 327,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        829,
+        118,
+        1229,
+        445
+      ],
+      "sha256": "5abe13c1b183f89f00f8dca9109c9ce34f432ecddc5a84b6f7136591219d9edf"
+    },
+    "north/wing-left": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/wing-left.png",
+      "width": 292,
+      "height": 325,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        107,
+        483,
+        399,
+        808
+      ],
+      "sha256": "5bde4794803af28e6aa2a16e13565bf42e408176180ff5d793312ab741198529"
+    },
+    "north/wing-right": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/wing-right.png",
+      "width": 287,
+      "height": 322,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        483,
+        483,
+        770,
+        805
+      ],
+      "sha256": "a866ec7913409091016c5843e28fd2f35ce5dbf4835a17f805536e0d06e1f70e"
+    },
+    "north/tail": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/tail.png",
+      "width": 350,
+      "height": 279,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        846,
+        521,
+        1196,
+        800
+      ],
+      "sha256": "a7801245db13ca47870cec19ac045500a314a7c1c1a06acf6110508ea06af972"
+    },
+    "north/foot-left": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/foot-left.png",
+      "width": 282,
+      "height": 273,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        90,
+        911,
+        372,
+        1184
+      ],
+      "sha256": "3c0355a3d0555b724b302e8a1ec5e1d0c33aad94dd5b2f6d9b1519a92cf51931"
+    },
+    "north/foot-right": {
+      "file": "art-source/characters/ace-mascot-v1/parts/north/foot-right.png",
+      "width": 281,
+      "height": 272,
+      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "sourceRect": [
+        513,
+        911,
+        794,
+        1183
+      ],
+      "sha256": "a0c63eff68959dbe565c313ea59e7001e90e50d581985ee1d302f5175ca2ef2d"
+    }
+  },
+  "clips": {
+    "south-idle": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          51,
+          20,
+          215,
+          239
+        ],
+        [
+          52,
+          21,
+          215,
+          239
+        ],
+        [
+          51,
+          22,
+          215,
+          239
+        ],
+        [
+          51,
+          21,
+          215,
+          239
+        ],
+        [
+          50,
+          20,
+          214,
+          239
+        ],
+        [
+          50,
+          19,
+          215,
+          239
+        ],
+        [
+          50,
+          18,
+          215,
+          239
+        ],
+        [
+          51,
+          19,
+          215,
+          239
+        ]
+      ],
+      "durationMs": 2800
+    },
+    "south-walk": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          54,
+          20,
+          216,
+          242
+        ],
+        [
+          53,
+          17,
+          216,
+          237
+        ],
+        [
+          51,
+          15,
+          215,
+          239
+        ],
+        [
+          49,
+          18,
+          214,
+          242
+        ],
+        [
+          48,
+          20,
+          214,
+          243
+        ],
+        [
+          49,
+          17,
+          214,
+          237
+        ],
+        [
+          51,
+          15,
+          215,
+          239
+        ],
+        [
+          53,
+          18,
+          216,
+          242
+        ]
+      ],
+      "durationMs": 520
+    },
+    "west-idle": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          50,
+          20,
+          233,
+          240
+        ],
+        [
+          50,
+          21,
+          233,
+          240
+        ],
+        [
+          50,
+          22,
+          233,
+          240
+        ],
+        [
+          49,
+          21,
+          233,
+          240
+        ],
+        [
+          49,
+          20,
+          232,
+          240
+        ],
+        [
+          49,
+          19,
+          233,
+          240
+        ],
+        [
+          50,
+          19,
+          233,
+          240
+        ],
+        [
+          50,
+          19,
+          233,
+          240
+        ]
+      ],
+      "durationMs": 2800
+    },
+    "west-walk": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          51,
+          20,
+          234,
+          239
+        ],
+        [
+          50,
+          17,
+          234,
+          239
+        ],
+        [
+          50,
+          15,
+          233,
+          239
+        ],
+        [
+          49,
+          18,
+          232,
+          239
+        ],
+        [
+          49,
+          20,
+          232,
+          239
+        ],
+        [
+          49,
+          17,
+          232,
+          239
+        ],
+        [
+          50,
+          15,
+          233,
+          240
+        ],
+        [
+          51,
+          19,
+          234,
+          240
+        ]
+      ],
+      "durationMs": 520
+    },
+    "east-idle": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          23,
+          20,
+          206,
+          240
+        ],
+        [
+          23,
+          21,
+          206,
+          240
+        ],
+        [
+          23,
+          22,
+          206,
+          240
+        ],
+        [
+          23,
+          21,
+          207,
+          240
+        ],
+        [
+          24,
+          20,
+          207,
+          240
+        ],
+        [
+          23,
+          19,
+          207,
+          240
+        ],
+        [
+          23,
+          19,
+          206,
+          240
+        ],
+        [
+          23,
+          19,
+          206,
+          240
+        ]
+      ],
+      "durationMs": 2800
+    },
+    "east-walk": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          22,
+          20,
+          205,
+          239
+        ],
+        [
+          22,
+          17,
+          206,
+          239
+        ],
+        [
+          23,
+          15,
+          206,
+          239
+        ],
+        [
+          24,
+          18,
+          207,
+          239
+        ],
+        [
+          24,
+          20,
+          207,
+          239
+        ],
+        [
+          24,
+          17,
+          207,
+          239
+        ],
+        [
+          23,
+          15,
+          206,
+          240
+        ],
+        [
+          22,
+          19,
+          205,
+          240
+        ]
+      ],
+      "durationMs": 520
+    },
+    "north-idle": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          51,
+          20,
+          206,
+          239
+        ],
+        [
+          52,
+          21,
+          205,
+          239
+        ],
+        [
+          51,
+          22,
+          205,
+          239
+        ],
+        [
+          51,
+          21,
+          204,
+          239
+        ],
+        [
+          50,
+          20,
+          205,
+          239
+        ],
+        [
+          50,
+          19,
+          205,
+          239
+        ],
+        [
+          50,
+          18,
+          206,
+          239
+        ],
+        [
+          51,
+          19,
+          206,
+          239
+        ]
+      ],
+      "durationMs": 2800
+    },
+    "north-walk": {
+      "frames": 8,
+      "distinct": 8,
+      "bounds": [
+        [
+          54,
+          20,
+          204,
+          242
+        ],
+        [
+          53,
+          17,
+          204,
+          242
+        ],
+        [
+          51,
+          15,
+          205,
+          239
+        ],
+        [
+          49,
+          18,
+          206,
+          237
+        ],
+        [
+          48,
+          20,
+          206,
+          242
+        ],
+        [
+          49,
+          17,
+          206,
+          242
+        ],
+        [
+          51,
+          15,
+          205,
+          239
+        ],
+        [
+          53,
+          18,
+          204,
+          237
+        ]
+      ],
+      "durationMs": 520
+    }
+  },
+  "runtime": {
+    "version": 1,
+    "frameWidth": 256,
+    "frameHeight": 256,
+    "origin": [
+      0.5,
+      0.5
+    ],
+    "rows": {
+      "south": 0,
+      "west": 1,
+      "east": 2,
+      "north": 3
+    },
+    "eastMirrorsWest": true,
+    "clips": {
+      "idle": {
+        "file": "rooster-ace-mascot-idle.webp",
+        "columns": 8,
+        "durationMs": 2800,
+        "sha256": "4e139273e1ce5f7d4f9464dc525bb24c438772a5ee1785d251beecc76c0f5960",
+        "bytes": 489696,
+        "alphaPreserved": true
+      },
+      "walk": {
+        "file": "rooster-ace-mascot-walk.webp",
+        "columns": 8,
+        "durationMs": 520,
+        "sha256": "1d1af102926eff68162f7130c1b6fdb01a7eb40a15fe7b53c5a16fed7cadd188",
+        "bytes": 506280,
+        "alphaPreserved": true
+      }
+    },
+    "alphaBounds": {
+      "left": 22,
+      "top": 15,
+      "right": 234,
+      "bottom": 243
+    }
+  }
+}
