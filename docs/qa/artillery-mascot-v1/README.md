@@ -26,3 +26,7 @@
 - Finale neue Atlanten: zwei Dateien zu 2048×1024, acht Frames je Zeile, Süd/West/West/Nord, Osten per Spiegelung. Origin 0,5/0,5; Scale 0,275 vor Viewportfaktor. Lauf 650 ms, Idle 3200 ms.
 
 Die öffentliche `/kongregate/`-Vorschau wird aus dem Kandidatenbranch gebaut. Der zweite README-Link zur Root-Version wird weiterhin aus `master` gebaut. Die Veröffentlichungsprüfung muss den Kandidaten-Commit über `build-info.json` und die tatsächlich geladenen Mascot-Atlanten aller drei Figuren bestätigen; ein Git-Push allein reicht nicht als Nachweis.
+
+Auf der öffentlichen Vorschau sind alle drei Rooster auch mit frischem oder zurückgesetztem Spielstand sofort auswählbar. Diese Verfügbarkeit gilt ausschließlich auf `emfau88.github.io/RoosterRage/kongregate/` und schreibt keine künstlichen Freischaltungen in den Spielstand; reguläre Spielversionen behalten ihre Fortschrittsregeln.
+
+Zusätzliche Prüfung: zwei Tests für Vorschau-Geltungsbereich und unveränderte gespeicherte Freischaltungen bestanden. `node scripts/verify-public-roosters.mjs --local` startet alle drei Rooster mit jeweils leerem Speicher im Release-Build auf der simulierten öffentlichen URL sowie Boombardier mit blockiertem Storage. Ohne `--local` prüft dasselbe Skript die echte Veröffentlichung inklusive Commit-ID. Es verwendet keine Test-API und keinen vorbereiteten Spielstand.

@@ -11,6 +11,7 @@ import {
 } from '../data/metaProgressionDefinitions.js';
 import { UPGRADE_DEFINITIONS } from '../data/upgradeDefinitions.js';
 import { safeStorage } from './SafeStorage.js';
+import { isPublicRoosterPreview } from '../config/publicRoosterPreview.js';
 
 const MAX_HISTORY = 10;
 const ROOSTER_IDS = ['ace', 'artillery', 'storm'];
@@ -443,7 +444,8 @@ export class MetaProgressionSystem {
   }
 
   isRoosterUnlocked(id) {
-    return this.state.unlockedRoosters.includes(id);
+    return this.state.unlockedRoosters.includes(id)
+      || (ROOSTER_IDS.includes(id) && isPublicRoosterPreview());
   }
 
   getMastery(id) {
