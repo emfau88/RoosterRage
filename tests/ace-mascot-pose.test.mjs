@@ -71,6 +71,6 @@ test('previous Ace can be selected independently with unchanged other characters
   globalThis.window={location:{search:'?aceVisual=final'}};
   const old=await import('../src/config/aceVisual.js?mascot-rollback');
   delete globalThis.window;
-  assert.equal(old.ACE_VISUAL_VERSION,'final');assert.equal(old.ARTILLERY_VISUAL_VERSION,'final');assert.equal(old.STORM_VISUAL_VERSION,'final');
+  assert.equal(old.ACE_VISUAL_VERSION,'final');assert.equal(old.ARTILLERY_VISUAL_VERSION,'final');assert.equal(old.STORM_VISUAL_VERSION,'mascot');
   assert.equal(old.ACE_NEXT_WALK_FRAME_RATE,8*1000/520);
 });

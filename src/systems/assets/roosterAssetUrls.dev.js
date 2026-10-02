@@ -21,11 +21,13 @@ import stormGameplayWalk from '../../assets/characters/storm-gameplay/rooster-st
 import stormGameplayIdle from '../../assets/characters/storm-gameplay/rooster-storm-gameplay-idle.webp';
 import stormFinalWalk from '../../assets/characters/storm-final/rooster-storm-final-walk.webp';
 import stormFinalIdle from '../../assets/characters/storm-final/rooster-storm-final-idle.webp';
+import stormMascot from './stormMascotAssets.js';
 import {
   USE_FINAL_ACE_VISUAL,
   USE_MASCOT_ACE_VISUAL,
   USE_FINAL_ARTILLERY_VISUAL,
   USE_FINAL_STORM_VISUAL,
+  USE_MASCOT_STORM_VISUAL,
   USE_GAMEPLAY_ACE_VISUAL,
   USE_GAMEPLAY_ARTILLERY_VISUAL,
   USE_GAMEPLAY_STORM_VISUAL,
@@ -51,7 +53,7 @@ export const ROOSTER_ASSET_URLS = Object.freeze({
       : USE_GAMEPLAY_ARTILLERY_VISUAL ? artilleryGameplayIdle : artilleryNextIdle,
     legacyWalk: artilleryLegacyWalk
   },
-  storm: {
+  storm: USE_MASCOT_STORM_VISUAL ? stormMascot : {
     walk: USE_FINAL_STORM_VISUAL ? stormFinalWalk
       : USE_GAMEPLAY_STORM_VISUAL ? stormGameplayWalk
       : USE_NEXT_STORM_VISUAL ? stormNextWalk : stormLegacyWalk,

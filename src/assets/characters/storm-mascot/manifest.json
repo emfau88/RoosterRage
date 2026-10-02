@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "rows": {
+    "south": 0,
+    "west": 1,
+    "east": 2,
+    "north": 3
+  },
+  "westMirrorsEast": true,
+  "clips": {
+    "idle": {
+      "file": "rooster-storm-mascot-idle.webp",
+      "columns": 8,
+      "durationMs": 2400,
+      "sha256": "fb181263a47c9523fee850ce1adc726b57a019480d2a5a1f0384204259de29cc",
+      "bytes": 546902,
+      "alphaPreserved": true
+    },
+    "walk": {
+      "file": "rooster-storm-mascot-walk.webp",
+      "columns": 8,
+      "durationMs": 480,
+      "sha256": "4f0e72188e2a4abad570d9e941a33020c8695e223ff5dc561e535b67664b5814",
+      "bytes": 558924,
+      "alphaPreserved": true
+    },
+    "idle-attack": {
+      "file": "rooster-storm-mascot-idle-attack.webp",
+      "columns": 8,
+      "stages": 2,
+      "rowsPerStage": [
+        "south",
+        "east",
+        "north"
+      ],
+      "quality": 68,
+      "alphaPreserved": true,
+      "sha256": "585264df31b0578e6f4b7a3ac5900d3146a5bd867558e703e072a4995e6dd451",
+      "bytes": 513234
+    },
+    "walk-attack": {
+      "file": "rooster-storm-mascot-walk-attack.webp",
+      "columns": 8,
+      "stages": 2,
+      "rowsPerStage": [
+        "south",
+        "east",
+        "north"
+      ],
+      "quality": 68,
+      "alphaPreserved": true,
+      "sha256": "302c830611cde2d7c6ae3cf31193b4f7ce5f81e8b78f5a61da747e5e6172b5be",
+      "bytes": 530874
+    }
+  },
+  "alphaBounds": {
+    "left": 24,
+    "top": 11,
+    "right": 232,
+    "bottom": 243
+  }
+}

@@ -124,13 +124,13 @@ test('final query selects eight-frame animation timing for every character', asy
   assert.equal(config.STORM_VISUAL_VERSION, 'final');
 });
 
-test('Ace mascot and the two unchanged final roosters are the defaults', async () => {
+test('Ace and Storm mascots retain Artillery final by default', async () => {
   globalThis.window = { location: { search: '' } };
   const config = await import('../src/config/aceVisual.js?final-rooster-default-test');
   delete globalThis.window;
   assert.equal(config.ACE_VISUAL_VERSION, 'mascot');
   assert.equal(config.ARTILLERY_VISUAL_VERSION, 'final');
-  assert.equal(config.STORM_VISUAL_VERSION, 'final');
+  assert.equal(config.STORM_VISUAL_VERSION, 'mascot');
   assert.deepEqual(config.NEXT_ROOSTER_WALK_FRAME_COUNT, { ace: 8, artillery: 8, storm: 8 });
 });
 
@@ -146,5 +146,5 @@ test('global and per-character rollback paths remain available', async () => {
   delete globalThis.window;
   assert.equal(selective.ACE_VISUAL_VERSION, 'mascot');
   assert.equal(selective.ARTILLERY_VISUAL_VERSION, 'legacy');
-  assert.equal(selective.STORM_VISUAL_VERSION, 'final');
+  assert.equal(selective.STORM_VISUAL_VERSION, 'mascot');
 });

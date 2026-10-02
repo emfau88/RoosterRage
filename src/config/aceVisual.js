@@ -1,5 +1,6 @@
-// Ace uses the compact mascot rig. ?aceVisual=final restores the previous Ace.
-// Release rollback: VITE_ACE_VISUAL_VERSION=final. Other roosters stay final.
+// Ace and Storm use compact mascot rigs. ?aceVisual=final / ?stormVisual=final
+// restore the previous visuals. Build rollback: VITE_ACE_VISUAL_VERSION=final
+// or VITE_STORM_VISUAL_VERSION=final. Artillery stays final.
 // Append
 // ?roosterVisual=legacy to roll all of them back, or use ?aceVisual=legacy,
 // ?artilleryVisual=legacy, or ?stormVisual=legacy for one character.
@@ -18,7 +19,8 @@ const versionFor = (id) => {
   if (requested === 'next') return 'next';
   if (requested === 'gameplay') return 'gameplay';
   if (requested === 'final') return 'final';
-  if (id === 'ace' && requested === 'mascot') return 'mascot';
+  if ((id === 'ace' || id === 'storm') && requested === 'mascot') return 'mascot';
+  if (id === 'storm') return import.meta.env?.VITE_STORM_VISUAL_VERSION === 'final' ? 'final' : 'mascot';
   return id === 'ace' ? (import.meta.env?.VITE_ACE_VISUAL_VERSION === 'final' ? 'final' : 'mascot') : 'final';
 };
 
@@ -35,6 +37,7 @@ export const USE_FINAL_ARTILLERY_VISUAL = ARTILLERY_VISUAL_VERSION === 'final';
 export const USE_NEXT_STORM_VISUAL = STORM_VISUAL_VERSION !== 'legacy';
 export const USE_GAMEPLAY_STORM_VISUAL = STORM_VISUAL_VERSION === 'gameplay';
 export const USE_FINAL_STORM_VISUAL = STORM_VISUAL_VERSION === 'final';
+export const USE_MASCOT_STORM_VISUAL = STORM_VISUAL_VERSION === 'mascot';
 export const USE_NEXT_ROOSTER_VISUAL = Object.freeze({
   ace: USE_NEXT_ACE_VISUAL,
   artillery: USE_NEXT_ARTILLERY_VISUAL,
@@ -44,12 +47,12 @@ export const ACE_NEXT_WALK_FRAME_RATE = (USE_FINAL_ACE_VISUAL || USE_MASCOT_ACE_
 export const ACE_NEXT_IDLE_FRAME_RATE = 8 * 1000 / 2800;
 export const ARTILLERY_NEXT_WALK_FRAME_RATE = (USE_GAMEPLAY_ARTILLERY_VISUAL || USE_FINAL_ARTILLERY_VISUAL ? 8 : 4) * 1000 / 650;
 export const ARTILLERY_NEXT_IDLE_FRAME_RATE = 8 * 1000 / 3200;
-export const STORM_NEXT_WALK_FRAME_RATE = (USE_GAMEPLAY_STORM_VISUAL || USE_FINAL_STORM_VISUAL ? 8 * 1000 / 480 : 4 * 1000 / 440);
+export const STORM_NEXT_WALK_FRAME_RATE = (USE_GAMEPLAY_STORM_VISUAL || USE_FINAL_STORM_VISUAL || USE_MASCOT_STORM_VISUAL ? 8 * 1000 / 480 : 4 * 1000 / 440);
 export const STORM_NEXT_IDLE_FRAME_RATE = 8 * 1000 / 2400;
 export const NEXT_ROOSTER_WALK_FRAME_COUNT = Object.freeze({
   ace: USE_FINAL_ACE_VISUAL || USE_MASCOT_ACE_VISUAL ? 8 : 4,
   artillery: USE_GAMEPLAY_ARTILLERY_VISUAL || USE_FINAL_ARTILLERY_VISUAL ? 8 : 4,
-  storm: USE_GAMEPLAY_STORM_VISUAL || USE_FINAL_STORM_VISUAL ? 8 : 4
+  storm: USE_GAMEPLAY_STORM_VISUAL || USE_FINAL_STORM_VISUAL || USE_MASCOT_STORM_VISUAL ? 8 : 4
 });
 export const NEXT_ROOSTER_WALK_FRAME_RATE = Object.freeze({
   ace: ACE_NEXT_WALK_FRAME_RATE,
