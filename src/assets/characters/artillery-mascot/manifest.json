@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "rows": {
+    "south": 0,
+    "west": 1,
+    "east": 2,
+    "north": 3
+  },
+  "eastMirrorsWest": true,
+  "clips": {
+    "idle": {
+      "file": "rooster-artillery-mascot-idle.webp",
+      "columns": 8,
+      "durationMs": 3200,
+      "sha256": "aa3bdd31e44a5dc09b73987d201040bc1888bc0c93ac024a8ad5a7e0ee77a809",
+      "bytes": 515500,
+      "alphaPreserved": true
+    },
+    "walk": {
+      "file": "rooster-artillery-mascot-walk.webp",
+      "columns": 8,
+      "durationMs": 650,
+      "sha256": "c9ffb900374c550136fca7099742baa38a911016a1d532d9361b1f65a0b67041",
+      "bytes": 526208,
+      "alphaPreserved": true
+    }
+  },
+  "alphaBounds": {
+    "left": 26,
+    "top": 8,
+    "right": 230,
+    "bottom": 243
+  }
+}

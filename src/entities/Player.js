@@ -3,6 +3,7 @@ import { USE_NEXT_ROOSTER_VISUAL, ACE_VISUAL_VERSION, ARTILLERY_VISUAL_VERSION, 
 import { PLAYER_VISUAL_BOUNDS } from '../data/playerVisualBounds.js';
 import { ACE_MASCOT_VISUAL_BOUNDS } from '../data/aceMascotVisualBounds.js';
 import { STORM_MASCOT_VISUAL_BOUNDS } from '../data/stormMascotVisualBounds.js';
+import { ARTILLERY_MASCOT_VISUAL_BOUNDS } from '../data/artilleryMascotVisualBounds.js';
 import { ensurePlayerContactShadow } from '../systems/assets/PlayerContactShadow.js';
 
 export class Player {
@@ -264,6 +265,7 @@ export class Player {
     const bounds = this.roosterId === 'ace' && ACE_VISUAL_VERSION === 'mascot'
       ? ACE_MASCOT_VISUAL_BOUNDS
       : this.roosterId === 'storm' && STORM_VISUAL_VERSION === 'mascot' ? STORM_MASCOT_VISUAL_BOUNDS
+      : this.roosterId === 'artillery' && ARTILLERY_VISUAL_VERSION === 'mascot' ? ARTILLERY_MASCOT_VISUAL_BOUNDS
       : versions[this.roosterId] === 'final' ? PLAYER_VISUAL_BOUNDS[this.roosterId] : null;
     this.groundMarker.setPosition(this.sprite.x, this.sprite.y + (bounds ? bounds.bottom - 128 : 105) * this.baseScale);
     const moving = this.sprite.body.velocity.lengthSq() > 1;

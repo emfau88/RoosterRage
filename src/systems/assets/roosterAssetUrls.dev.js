@@ -14,6 +14,8 @@ import artilleryGameplayWalk from '../../assets/characters/artillery-gameplay/ro
 import artilleryGameplayIdle from '../../assets/characters/artillery-gameplay/rooster-artillery-gameplay-idle.webp';
 import artilleryFinalWalk from '../../assets/characters/artillery-final/rooster-artillery-final-walk.webp';
 import artilleryFinalIdle from '../../assets/characters/artillery-final/rooster-artillery-final-idle.webp';
+import artilleryMascotWalk from '../../assets/characters/artillery-mascot/rooster-artillery-mascot-walk.webp';
+import artilleryMascotIdle from '../../assets/characters/artillery-mascot/rooster-artillery-mascot-idle.webp';
 import stormLegacyWalk from '../../assets/characters/rooster-storm-walk-v3.webp';
 import stormNextWalk from '../../assets/characters/storm-next/rooster-storm-next-walk.webp';
 import stormNextIdle from '../../assets/characters/storm-next/rooster-storm-next-idle.webp';
@@ -26,6 +28,7 @@ import {
   USE_FINAL_ACE_VISUAL,
   USE_MASCOT_ACE_VISUAL,
   USE_FINAL_ARTILLERY_VISUAL,
+  USE_MASCOT_ARTILLERY_VISUAL,
   USE_FINAL_STORM_VISUAL,
   USE_MASCOT_STORM_VISUAL,
   USE_GAMEPLAY_ACE_VISUAL,
@@ -46,10 +49,10 @@ export const ROOSTER_ASSET_URLS = Object.freeze({
     legacyWalk: aceLegacyWalk
   },
   artillery: {
-    walk: USE_FINAL_ARTILLERY_VISUAL ? artilleryFinalWalk
+    walk: USE_MASCOT_ARTILLERY_VISUAL ? artilleryMascotWalk : USE_FINAL_ARTILLERY_VISUAL ? artilleryFinalWalk
       : USE_GAMEPLAY_ARTILLERY_VISUAL ? artilleryGameplayWalk
       : USE_NEXT_ARTILLERY_VISUAL ? artilleryNextWalk : artilleryLegacyWalk,
-    idle: USE_FINAL_ARTILLERY_VISUAL ? artilleryFinalIdle
+    idle: USE_MASCOT_ARTILLERY_VISUAL ? artilleryMascotIdle : USE_FINAL_ARTILLERY_VISUAL ? artilleryFinalIdle
       : USE_GAMEPLAY_ARTILLERY_VISUAL ? artilleryGameplayIdle : artilleryNextIdle,
     legacyWalk: artilleryLegacyWalk
   },

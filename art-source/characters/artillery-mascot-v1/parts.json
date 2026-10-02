@@ -1,0 +1,347 @@
+{
+  "version": 1,
+  "parts": {
+    "south/head": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/head.png",
+      "width": 384,
+      "height": 335,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        26,
+        112,
+        410,
+        447
+      ],
+      "sha256": "f137b48541b7a493e857dd169022cab9522bbe65af5691ceb70dc34ee95e83a4"
+    },
+    "south/comb": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/comb.png",
+      "width": 371,
+      "height": 345,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        420,
+        47,
+        791,
+        392
+      ],
+      "sha256": "84265cc418d9320f26e94e035ea091e7dfc2f98d78321131c60f5cf7fee54f47"
+    },
+    "south/body": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/body.png",
+      "width": 433,
+      "height": 388,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        805,
+        79,
+        1238,
+        467
+      ],
+      "sha256": "97643a186a8cc75bfb4ee186fbd2177431a35819e4474333bd18a40f03a8879a"
+    },
+    "south/wing-left": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/wing-left.png",
+      "width": 297,
+      "height": 387,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        64,
+        463,
+        361,
+        850
+      ],
+      "sha256": "e2c9c9ec19a32d9b5bc49776b33ccbaabcb4440ac1af6cc6d02fa46b4332180d"
+    },
+    "south/wing-right": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/wing-right.png",
+      "width": 286,
+      "height": 386,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        526,
+        463,
+        812,
+        849
+      ],
+      "sha256": "16cd3f2352eb272b16d526320f19dc0dab76dbbac676506906179cd6a5b9574a"
+    },
+    "south/tail": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/tail.png",
+      "width": 811,
+      "height": 660,
+      "source": "art-source/characters/artillery-mascot-v1/generated/tail-fan.png",
+      "sourceSha256": "507a831e66e07a95d70134724c038af223e8d9f00a4285813abeb6c41a717894",
+      "sourceRect": [
+        920,
+        130,
+        1731,
+        790
+      ],
+      "sha256": "b8e606a1fa4c65f529bd78255df3bd067b7fd93b8cb14a574f55a35d68601236"
+    },
+    "south/foot-left": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/foot-left.png",
+      "width": 306,
+      "height": 295,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        32,
+        901,
+        338,
+        1196
+      ],
+      "sha256": "25b2b6a0e4d9065292faf37f6ecb451274bd6bd0a8f432114e798c149d5a1463"
+    },
+    "south/foot-right": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/south/foot-right.png",
+      "width": 307,
+      "height": 295,
+      "source": "art-source/characters/artillery-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "75d378d50fcd8ad69300e2393740420a7c7cac2473a0ffadca71daf2e836b475",
+      "sourceRect": [
+        499,
+        900,
+        806,
+        1195
+      ],
+      "sha256": "c445a9b94c31a88627162ec274fef90c84376c4ddea5110b4a24895648f71789"
+    },
+    "west/head": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/head.png",
+      "width": 379,
+      "height": 340,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        35,
+        110,
+        414,
+        450
+      ],
+      "sha256": "4e56e859d46c91acfcef8e6f119b7e329755cd96e2cdf966c7723bf698ebe514"
+    },
+    "west/comb": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/comb.png",
+      "width": 353,
+      "height": 364,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        425,
+        42,
+        778,
+        406
+      ],
+      "sha256": "9a1972b3270b48c807db687fcaf08d489152186f85e0dad95186f7da90589e10"
+    },
+    "west/body": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/body.png",
+      "width": 434,
+      "height": 386,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        801,
+        82,
+        1235,
+        468
+      ],
+      "sha256": "e1f79353353d7b394608d5f5fe60b7c5a47b0b2bde00a56689ba119de10caf55"
+    },
+    "west/wing-left": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/wing-left.png",
+      "width": 359,
+      "height": 376,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        37,
+        464,
+        396,
+        840
+      ],
+      "sha256": "1c42af3c83c7fd34c8369953ad0a9ff6812efe31eaa83f6e049a9740db096ccc"
+    },
+    "west/wing-right": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/wing-right.png",
+      "width": 281,
+      "height": 373,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        531,
+        480,
+        812,
+        853
+      ],
+      "sha256": "92c8c445fcffd7def910580035f2dc62b949f1cdf37f2e57ca97da075a74f2c5"
+    },
+    "west/tail": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/tail.png",
+      "width": 754,
+      "height": 685,
+      "source": "art-source/characters/artillery-mascot-v1/generated/tail-fan.png",
+      "sourceSha256": "507a831e66e07a95d70134724c038af223e8d9f00a4285813abeb6c41a717894",
+      "sourceRect": [
+        81,
+        116,
+        835,
+        801
+      ],
+      "sha256": "0c1ceb38ed870cafbe0a224d7fbd906486f289cc072b44f8ffa6a05e5f4aeef8"
+    },
+    "west/foot-left": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/foot-left.png",
+      "width": 352,
+      "height": 287,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        24,
+        899,
+        376,
+        1186
+      ],
+      "sha256": "f41220fe4bd5d00ca31a5764e9928367747629c303a735b3c590b23ab8fd5806"
+    },
+    "west/foot-right": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/west/foot-right.png",
+      "width": 311,
+      "height": 297,
+      "source": "art-source/characters/artillery-mascot-v1/generated/west-kit.png",
+      "sourceSha256": "29482b32292b5bcd3409f4910a3aa47e19afdb394dd3bcd44ded32aa807b21c3",
+      "sourceRect": [
+        460,
+        899,
+        771,
+        1196
+      ],
+      "sha256": "4d7784d9e11a4c07c0dddef87252bd42c71c4cab0e398e4b3d8209ffa6eab61e"
+    },
+    "north/head": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/head.png",
+      "width": 359,
+      "height": 341,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        46,
+        84,
+        405,
+        425
+      ],
+      "sha256": "01e34f0019452e15a8b576e4b7d3ebddf197b7ed14f234ad8d30d271d9f9289d"
+    },
+    "north/comb": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/comb.png",
+      "width": 358,
+      "height": 340,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        436,
+        52,
+        794,
+        392
+      ],
+      "sha256": "de457f429a0fc8caf8d0da7991a3c68abe68477d8ad1055062ed3a05d1e0ea35"
+    },
+    "north/body": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/body.png",
+      "width": 414,
+      "height": 373,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        814,
+        74,
+        1228,
+        447
+      ],
+      "sha256": "83900aba85c145d66265e391cad4e4cf6786c906d5e66393a1c84cc851d08f52"
+    },
+    "north/wing-left": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/wing-left.png",
+      "width": 283,
+      "height": 382,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        89,
+        461,
+        372,
+        843
+      ],
+      "sha256": "53a3af29db9aa600020cf68adfe59cdcf7da18566aa4c213c25ce107ef530d81"
+    },
+    "north/wing-right": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/wing-right.png",
+      "width": 274,
+      "height": 382,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        511,
+        461,
+        785,
+        843
+      ],
+      "sha256": "df9c72df4c93ff25eb4c689680e6bc45c1f0dd0c41a370301b6571e9e9f94ee0"
+    },
+    "north/tail": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/tail.png",
+      "width": 811,
+      "height": 660,
+      "source": "art-source/characters/artillery-mascot-v1/generated/tail-fan.png",
+      "sourceSha256": "507a831e66e07a95d70134724c038af223e8d9f00a4285813abeb6c41a717894",
+      "sourceRect": [
+        920,
+        130,
+        1731,
+        790
+      ],
+      "sha256": "b8e606a1fa4c65f529bd78255df3bd067b7fd93b8cb14a574f55a35d68601236"
+    },
+    "north/foot-left": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/foot-left.png",
+      "width": 251,
+      "height": 297,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        100,
+        888,
+        351,
+        1185
+      ],
+      "sha256": "aa508f056a4358e05c2582d5474c3ef7318ed8358c4f2de60b48c16e6535d9a9"
+    },
+    "north/foot-right": {
+      "file": "art-source/characters/artillery-mascot-v1/parts/north/foot-right.png",
+      "width": 251,
+      "height": 296,
+      "source": "art-source/characters/artillery-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "98092f2b494e3c04fcd4d15022844bc65772d77f0fd8ac50ff44745397e4f02b",
+      "sourceRect": [
+        483,
+        889,
+        734,
+        1185
+      ],
+      "sha256": "eed05441a738fd7ed27ecb02cf9e893cc8d6d02c4f289b29d520fc542661e8e5"
+    }
+  },
+  "directions": [
+    "south",
+    "west",
+    "north"
+  ],
+  "east": "exact mirror of west"
+}

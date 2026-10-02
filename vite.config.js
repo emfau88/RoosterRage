@@ -7,6 +7,7 @@ const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig(({ command, mode }) => {
   const aceVersion = (process.env.VITE_ACE_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_ACE_VISUAL_VERSION) === 'final' ? 'final' : 'mascot';
   const pagesBuild = mode === 'pages';
+  const artilleryVersion = (process.env.VITE_ARTILLERY_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_ARTILLERY_VISUAL_VERSION) === 'final' ? 'final' : 'mascot';
   const stormVersion = (process.env.VITE_STORM_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_STORM_VISUAL_VERSION) === 'final' ? 'Final' : 'Mascot';
   const standaloneBuild = mode === 'standalone';
   const releaseBuild = mode === 'release';
@@ -28,6 +29,8 @@ export default defineConfig(({ command, mode }) => {
     }] : [],
     resolve: {
       alias: {
+        '@artillery-production-walk': path.resolve(projectRoot, `src/assets/characters/artillery-${artilleryVersion}/rooster-artillery-${artilleryVersion}-walk.webp`),
+        '@artillery-production-idle': path.resolve(projectRoot, `src/assets/characters/artillery-${artilleryVersion}/rooster-artillery-${artilleryVersion}-idle.webp`),
         '@storm-production-assets': path.resolve(projectRoot, `src/systems/assets/storm${stormVersion}Assets.js`),
         '@ace-production-walk': path.resolve(projectRoot, `src/assets/characters/ace-${aceVersion}/rooster-ace-${aceVersion}-walk.webp`),
         '@ace-production-idle': path.resolve(projectRoot, `src/assets/characters/ace-${aceVersion}/rooster-ace-${aceVersion}-idle.webp`),

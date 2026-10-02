@@ -46,5 +46,5 @@ test('all Storm baked frames have margins and source hashes match',()=>{
 test('Storm rollback leaves Ace and Artillery independently selected',async()=>{
   globalThis.window={location:{search:'?stormVisual=final'}};
   const c=await import('../src/config/aceVisual.js?storm-rollback');delete globalThis.window;
-  assert.equal(c.STORM_VISUAL_VERSION,'final');assert.equal(c.ACE_VISUAL_VERSION,'mascot');assert.equal(c.ARTILLERY_VISUAL_VERSION,'final');
+  assert.equal(c.STORM_VISUAL_VERSION,'final');assert.equal(c.ACE_VISUAL_VERSION,'mascot');assert.equal(c.ARTILLERY_VISUAL_VERSION,'mascot');
 });

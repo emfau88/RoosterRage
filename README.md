@@ -4,6 +4,8 @@
 
 Test the current portal candidate directly in your browser. This GitHub-hosted preview uses the same game-only release build as the Kongregate package.
 
+The portal candidate includes the new playable mascot versions of **Barnyard Ace, Boombardier and Stormcrest**. Previous character artwork remains preserved in the repository for comparison and rollback.
+
 ![Rooster Rage — three battle roosters defend their yard](public/marketing/rooster-rage-key-art-master.png)
 
 **Three battle roosters. Wild egg evolutions. One yard full of monsters.**
