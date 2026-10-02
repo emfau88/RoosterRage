@@ -21,17 +21,17 @@
     },
     "south/comb": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/comb.png",
-      "width": 386,
-      "height": 333,
-      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
-      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "width": 598,
+      "height": 531,
+      "source": "art-source/characters/ace-mascot-v1/generated/comb-classic-v2.png",
+      "sourceSha256": "5f2a858200d6ae64ba0034cb28816dbf93990e6d0901897eefdc49e7c962f08e",
       "sourceRect": [
-        427,
-        56,
-        813,
-        389
+        70,
+        96,
+        668,
+        627
       ],
-      "sha256": "5f83bf9336b6e955c9583c3c5fd84ec21cc9e5784e111e007cc5ef914c294109"
+      "sha256": "4eb1003539147dd0a7d62c0e9f2a6be97ed3715d1c3b86ff8ed25decf82bb48d"
     },
     "south/body": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/body.png",
@@ -77,17 +77,17 @@
     },
     "south/tail": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/tail.png",
-      "width": 333,
-      "height": 299,
-      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
-      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "width": 850,
+      "height": 831,
+      "source": "art-source/characters/ace-mascot-v1/generated/tail-upright-v2.png",
+      "sourceSha256": "2325c49afd63241647dfb5920b7ad51de9f73f101f60100e92178ce168398829",
       "sourceRect": [
-        883,
-        499,
-        1216,
-        798
+        920,
+        49,
+        1770,
+        880
       ],
-      "sha256": "899507ee5fa0c44e585b43d9d63419de45f44768535cb0b56903a63fb2120a0d"
+      "sha256": "5d8ffb32f95212931ba32c57e6011b8a90c377373cd074ea91e8c1e9b05ed659"
     },
     "south/foot-left": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/foot-left.png",
@@ -133,17 +133,17 @@
     },
     "west/comb": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/comb.png",
-      "width": 367,
-      "height": 366,
-      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
-      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "width": 622,
+      "height": 480,
+      "source": "art-source/characters/ace-mascot-v1/generated/comb-classic-v2.png",
+      "sourceSha256": "5f2a858200d6ae64ba0034cb28816dbf93990e6d0901897eefdc49e7c962f08e",
       "sourceRect": [
-        446,
-        42,
-        813,
-        408
+        782,
+        110,
+        1404,
+        590
       ],
-      "sha256": "ae62eecb89e3dc9811ec7044f4bd6365dcf8e7be18dfc0f153bd9bd2087ef5c2"
+      "sha256": "a14d3feaabd34a6069e5dec8ebb2dd91f432e7e50bbc7d765929736d7c72fb5c"
     },
     "west/body": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/body.png",
@@ -189,17 +189,17 @@
     },
     "west/tail": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/tail.png",
-      "width": 318,
-      "height": 300,
-      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
-      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "width": 865,
+      "height": 871,
+      "source": "art-source/characters/ace-mascot-v1/generated/tail-upright-v2.png",
+      "sourceSha256": "2325c49afd63241647dfb5920b7ad51de9f73f101f60100e92178ce168398829",
       "sourceRect": [
-        910,
-        501,
-        1228,
-        801
+        22,
+        7,
+        887,
+        878
       ],
-      "sha256": "2d17a460e43d502749851305700d065dc646ff867a35db323545ff7fe79a5a3a"
+      "sha256": "4d4be78faf59b97eee46104f1480787413f786522b6cdd0e5e582c438f6e156f"
     },
     "west/foot-left": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/foot-left.png",
@@ -245,17 +245,17 @@
     },
     "north/comb": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/comb.png",
-      "width": 376,
-      "height": 339,
-      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
-      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "width": 598,
+      "height": 531,
+      "source": "art-source/characters/ace-mascot-v1/generated/comb-classic-v2.png",
+      "sourceSha256": "5f2a858200d6ae64ba0034cb28816dbf93990e6d0901897eefdc49e7c962f08e",
       "sourceRect": [
-        437,
-        57,
-        813,
-        396
+        1504,
+        96,
+        2102,
+        627
       ],
-      "sha256": "8d3123042651d2863041d164d1dc89f59af6862b37d5425b080e83c3e42cf7bf"
+      "sha256": "dc1e13e49f6d58e5107969cffec2fe3d2f4310694a5aa82ce42afea5e3c2bfa9"
     },
     "north/body": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/body.png",
@@ -301,17 +301,17 @@
     },
     "north/tail": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/tail.png",
-      "width": 350,
-      "height": 279,
-      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
-      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "width": 850,
+      "height": 831,
+      "source": "art-source/characters/ace-mascot-v1/generated/tail-upright-v2.png",
+      "sourceSha256": "2325c49afd63241647dfb5920b7ad51de9f73f101f60100e92178ce168398829",
       "sourceRect": [
-        846,
-        521,
-        1196,
-        800
+        920,
+        49,
+        1770,
+        880
       ],
-      "sha256": "a7801245db13ca47870cec19ac045500a314a7c1c1a06acf6110508ea06af972"
+      "sha256": "5d8ffb32f95212931ba32c57e6011b8a90c377373cd074ea91e8c1e9b05ed659"
     },
     "north/foot-left": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/foot-left.png",
@@ -349,50 +349,50 @@
       "bounds": [
         [
           51,
-          20,
-          215,
+          16,
+          206,
           239
         ],
         [
           52,
-          21,
-          215,
+          17,
+          205,
           239
         ],
         [
           51,
-          22,
-          215,
+          17,
+          204,
           239
         ],
         [
           51,
-          21,
-          215,
+          17,
+          204,
           239
         ],
         [
           50,
-          20,
-          214,
+          16,
+          204,
           239
         ],
         [
           50,
-          19,
-          215,
+          15,
+          205,
           239
         ],
         [
           50,
-          18,
-          215,
+          14,
+          205,
           239
         ],
         [
           51,
-          19,
-          215,
+          15,
+          206,
           239
         ]
       ],
@@ -404,50 +404,50 @@
       "bounds": [
         [
           54,
-          20,
-          216,
+          16,
+          204,
           242
         ],
         [
           53,
-          17,
-          216,
+          12,
+          204,
           237
         ],
         [
           51,
-          15,
-          215,
+          11,
+          205,
           239
         ],
         [
           49,
-          18,
-          214,
+          14,
+          206,
           242
         ],
         [
           48,
-          20,
-          214,
+          16,
+          206,
           243
         ],
         [
           49,
-          17,
-          214,
+          12,
+          206,
           237
         ],
         [
           51,
-          15,
-          215,
+          11,
+          205,
           239
         ],
         [
           53,
-          18,
-          216,
+          14,
+          204,
           242
         ]
       ],
@@ -459,30 +459,18 @@
       "bounds": [
         [
           50,
-          20,
-          233,
+          18,
+          231,
           240
         ],
         [
           50,
-          21,
-          233,
+          19,
+          232,
           240
         ],
         [
           50,
-          22,
-          233,
-          240
-        ],
-        [
-          49,
-          21,
-          233,
-          240
-        ],
-        [
-          49,
           20,
           232,
           240
@@ -490,19 +478,31 @@
         [
           49,
           19,
-          233,
+          231,
+          240
+        ],
+        [
+          49,
+          18,
+          230,
+          240
+        ],
+        [
+          49,
+          17,
+          230,
           240
         ],
         [
           50,
-          19,
-          233,
+          16,
+          230,
           240
         ],
         [
           50,
-          19,
-          233,
+          17,
+          230,
           240
         ]
       ],
@@ -514,19 +514,25 @@
       "bounds": [
         [
           51,
-          20,
-          234,
-          239
-        ],
-        [
-          50,
-          17,
-          234,
+          18,
+          230,
           239
         ],
         [
           50,
           15,
+          232,
+          239
+        ],
+        [
+          50,
+          13,
+          233,
+          239
+        ],
+        [
+          49,
+          17,
           233,
           239
         ],
@@ -538,26 +544,20 @@
         ],
         [
           49,
-          20,
-          232,
-          239
-        ],
-        [
-          49,
-          17,
-          232,
+          14,
+          230,
           239
         ],
         [
           50,
-          15,
-          233,
+          12,
+          228,
           240
         ],
         [
           51,
-          19,
-          234,
+          16,
+          228,
           240
         ]
       ],
@@ -568,50 +568,50 @@
       "distinct": 8,
       "bounds": [
         [
-          23,
-          20,
+          25,
+          18,
           206,
           240
         ],
         [
-          23,
-          21,
+          24,
+          19,
           206,
-          240
-        ],
-        [
-          23,
-          22,
-          206,
-          240
-        ],
-        [
-          23,
-          21,
-          207,
           240
         ],
         [
           24,
           20,
-          207,
-          240
-        ],
-        [
-          23,
-          19,
-          207,
-          240
-        ],
-        [
-          23,
-          19,
           206,
           240
         ],
         [
-          23,
+          25,
           19,
+          207,
+          240
+        ],
+        [
+          26,
+          18,
+          207,
+          240
+        ],
+        [
+          26,
+          17,
+          207,
+          240
+        ],
+        [
+          26,
+          16,
+          206,
+          240
+        ],
+        [
+          26,
+          17,
           206,
           240
         ]
@@ -623,21 +623,27 @@
       "distinct": 8,
       "bounds": [
         [
-          22,
-          20,
+          26,
+          18,
           205,
           239
         ],
         [
-          22,
-          17,
+          24,
+          15,
           206,
           239
         ],
         [
           23,
-          15,
+          13,
           206,
+          239
+        ],
+        [
+          23,
+          17,
+          207,
           239
         ],
         [
@@ -647,26 +653,20 @@
           239
         ],
         [
-          24,
-          20,
+          26,
+          14,
           207,
           239
         ],
         [
-          24,
-          17,
-          207,
-          239
-        ],
-        [
-          23,
-          15,
+          28,
+          12,
           206,
           240
         ],
         [
-          22,
-          19,
+          28,
+          16,
           205,
           240
         ]
@@ -679,49 +679,49 @@
       "bounds": [
         [
           51,
-          20,
+          16,
           206,
           239
         ],
         [
           52,
-          21,
+          17,
           205,
           239
         ],
         [
           51,
-          22,
+          17,
           205,
           239
         ],
         [
           51,
-          21,
+          17,
           204,
           239
         ],
         [
           50,
-          20,
+          16,
           205,
           239
         ],
         [
           50,
-          19,
+          15,
           205,
           239
         ],
         [
           50,
-          18,
+          14,
           206,
           239
         ],
         [
           51,
-          19,
+          15,
           206,
           239
         ]
@@ -734,49 +734,49 @@
       "bounds": [
         [
           54,
-          20,
+          16,
           204,
           242
         ],
         [
           53,
-          17,
+          12,
           204,
           242
         ],
         [
           51,
-          15,
+          11,
           205,
           239
         ],
         [
           49,
-          18,
+          14,
           206,
           237
         ],
         [
           48,
-          20,
+          16,
           206,
           242
         ],
         [
           49,
-          17,
+          12,
           206,
           242
         ],
         [
           51,
-          15,
+          11,
           205,
           239
         ],
         [
           53,
-          18,
+          14,
           204,
           237
         ]
@@ -804,23 +804,23 @@
         "file": "rooster-ace-mascot-idle.webp",
         "columns": 8,
         "durationMs": 2800,
-        "sha256": "4e139273e1ce5f7d4f9464dc525bb24c438772a5ee1785d251beecc76c0f5960",
-        "bytes": 489696,
+        "sha256": "46c578d8a7790f16c0ef025567627096efbd6aa94eed704f7133b5bccff4436c",
+        "bytes": 497678,
         "alphaPreserved": true
       },
       "walk": {
         "file": "rooster-ace-mascot-walk.webp",
         "columns": 8,
         "durationMs": 520,
-        "sha256": "1d1af102926eff68162f7130c1b6fdb01a7eb40a15fe7b53c5a16fed7cadd188",
-        "bytes": 506280,
+        "sha256": "029edc0651fd4976685fdaf66af18cff0aaf9dc51ca4717f13401b3590d8960c",
+        "bytes": 512102,
         "alphaPreserved": true
       }
     },
     "alphaBounds": {
-      "left": 22,
-      "top": 15,
-      "right": 234,
+      "left": 23,
+      "top": 11,
+      "right": 233,
       "bottom": 243
     }
   }

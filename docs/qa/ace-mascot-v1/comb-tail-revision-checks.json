@@ -1,0 +1,76 @@
+{
+  "revision": "classic-comb-upright-tail-v2",
+  "date": "2026-10-02",
+  "characterTests": 36,
+  "unchangedParts": [
+    "south/head",
+    "south/body",
+    "south/wing-left",
+    "south/wing-right",
+    "south/foot-left",
+    "south/foot-right",
+    "west/head",
+    "west/body",
+    "west/wing-left",
+    "west/wing-right",
+    "west/foot-left",
+    "west/foot-right",
+    "north/head",
+    "north/body",
+    "north/wing-left",
+    "north/wing-right",
+    "north/foot-left",
+    "north/foot-right"
+  ],
+  "release": {
+    "package": {
+      "files": 148,
+      "totalBytes": 18987212,
+      "totalMiB": 18.11,
+      "largest": [
+        {
+          "file": "assets/boss-theme-DikIQNT3.mp3",
+          "bytes": 1981143
+        },
+        {
+          "file": "assets/phaser-CUdU0QcG.js",
+          "bytes": 1197177
+        },
+        {
+          "file": "assets/run-theme-DXaiNGyI.mp3",
+          "bytes": 1134690
+        },
+        {
+          "file": "assets/rooster-artillery-final-walk-epIx7hb4.webp",
+          "bytes": 784432
+        },
+        {
+          "file": "assets/rooster-artillery-final-idle-C3pVL0jS.webp",
+          "bytes": 725936
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "blockedStorage": false,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      },
+      {
+        "blockedStorage": true,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      }
+    ]
+  }
+}

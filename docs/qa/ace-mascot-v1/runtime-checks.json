@@ -979,8 +979,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -1973,8 +1973,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -2967,8 +2967,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -3353,8 +3353,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -3739,8 +3739,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -4125,8 +4125,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -4447,8 +4447,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -4769,8 +4769,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -5091,8 +5091,8 @@
         "assets": [
           {
             "id": "ace",
-            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
-            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+            "idle": "rooster-ace-mascot-idle-CS4fjW_V.webp",
+            "walk": "rooster-ace-mascot-walk-tlFdHWZA.webp"
           },
           {
             "id": "artillery",
@@ -5757,7 +5757,7 @@
           "direction": "west",
           "walk": {
             "key": "rooster-ace-walk-west",
-            "frame": 13,
+            "frame": 12,
             "flip": false,
             "origin": [
               0.5,
@@ -5937,7 +5937,7 @@
           "direction": "north",
           "walk": {
             "key": "rooster-ace-walk-north",
-            "frame": 29,
+            "frame": 28,
             "flip": false,
             "origin": [
               0.5,

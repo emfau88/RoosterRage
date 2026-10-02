@@ -57,15 +57,29 @@ def main():
         if atlas.width != atlas.height or atlas.getchannel('A').getextrema() != (0,255):
             raise ValueError(f'Unexpected source atlas: {source}')
         for name, rect in RECTS.items():
-            rect = tuple(round(value * atlas.width / 1280) for value in rect)
-            part, box = largest_component(atlas.crop(rect))
+            part_source, part_atlas = source, atlas
+            if name == 'comb':
+                part_source = SOURCE / 'comb-classic-v2.png'
+                part_atlas = Image.open(part_source).convert('RGBA')
+                column = manifest['directions'].index(direction)
+                rect = (round(column*part_atlas.width/3), 0,
+                        round((column+1)*part_atlas.width/3), part_atlas.height)
+            elif name == 'tail':
+                part_source = SOURCE / 'tail-upright-v2.png'
+                part_atlas = Image.open(part_source).convert('RGBA')
+                column = 0 if direction == 'west' else 1
+                rect = (round(column*part_atlas.width/2), 0,
+                        round((column+1)*part_atlas.width/2), part_atlas.height)
+            else:
+                rect = tuple(round(value * atlas.width / 1280) for value in rect)
+            part, box = largest_component(part_atlas.crop(rect))
             output = OUTPUT / direction / f'{name}.png'
             output.parent.mkdir(parents=True, exist_ok=True)
             part.save(output, optimize=True)
             manifest['parts'][f'{direction}/{name}'] = {
                 'file': output.relative_to(ROOT).as_posix(), 'width':part.width,'height':part.height,
-                'source': source.relative_to(ROOT).as_posix(),
-                'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),
+                'source': part_source.relative_to(ROOT).as_posix(),
+                'sourceSha256':hashlib.sha256(part_source.read_bytes()).hexdigest(),
                 'sourceRect':[rect[0]+box[0],rect[1]+box[1],rect[0]+box[2],rect[1]+box[3]],
                 'sha256':hashlib.sha256(output.read_bytes()).hexdigest(),
             }

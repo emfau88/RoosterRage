@@ -17,17 +17,17 @@
     },
     "south/comb": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/comb.png",
-      "width": 386,
-      "height": 333,
-      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
-      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "width": 598,
+      "height": 531,
+      "source": "art-source/characters/ace-mascot-v1/generated/comb-classic-v2.png",
+      "sourceSha256": "5f2a858200d6ae64ba0034cb28816dbf93990e6d0901897eefdc49e7c962f08e",
       "sourceRect": [
-        427,
-        56,
-        813,
-        389
+        70,
+        96,
+        668,
+        627
       ],
-      "sha256": "5f83bf9336b6e955c9583c3c5fd84ec21cc9e5784e111e007cc5ef914c294109"
+      "sha256": "4eb1003539147dd0a7d62c0e9f2a6be97ed3715d1c3b86ff8ed25decf82bb48d"
     },
     "south/body": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/body.png",
@@ -73,17 +73,17 @@
     },
     "south/tail": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/tail.png",
-      "width": 333,
-      "height": 299,
-      "source": "art-source/characters/ace-mascot-v1/generated/south-kit.png",
-      "sourceSha256": "c96c39b676b99b3754d26fcd984099239d761a92485b3ca1ce449d35a6504980",
+      "width": 850,
+      "height": 831,
+      "source": "art-source/characters/ace-mascot-v1/generated/tail-upright-v2.png",
+      "sourceSha256": "2325c49afd63241647dfb5920b7ad51de9f73f101f60100e92178ce168398829",
       "sourceRect": [
-        883,
-        499,
-        1216,
-        798
+        920,
+        49,
+        1770,
+        880
       ],
-      "sha256": "899507ee5fa0c44e585b43d9d63419de45f44768535cb0b56903a63fb2120a0d"
+      "sha256": "5d8ffb32f95212931ba32c57e6011b8a90c377373cd074ea91e8c1e9b05ed659"
     },
     "south/foot-left": {
       "file": "art-source/characters/ace-mascot-v1/parts/south/foot-left.png",
@@ -129,17 +129,17 @@
     },
     "west/comb": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/comb.png",
-      "width": 367,
-      "height": 366,
-      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
-      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "width": 622,
+      "height": 480,
+      "source": "art-source/characters/ace-mascot-v1/generated/comb-classic-v2.png",
+      "sourceSha256": "5f2a858200d6ae64ba0034cb28816dbf93990e6d0901897eefdc49e7c962f08e",
       "sourceRect": [
-        446,
-        42,
-        813,
-        408
+        782,
+        110,
+        1404,
+        590
       ],
-      "sha256": "ae62eecb89e3dc9811ec7044f4bd6365dcf8e7be18dfc0f153bd9bd2087ef5c2"
+      "sha256": "a14d3feaabd34a6069e5dec8ebb2dd91f432e7e50bbc7d765929736d7c72fb5c"
     },
     "west/body": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/body.png",
@@ -185,17 +185,17 @@
     },
     "west/tail": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/tail.png",
-      "width": 318,
-      "height": 300,
-      "source": "art-source/characters/ace-mascot-v1/generated/west-kit.png",
-      "sourceSha256": "9fa99653e047057d8e860b18a18c9f193946299909e6933c6e75d237d3f367d9",
+      "width": 865,
+      "height": 871,
+      "source": "art-source/characters/ace-mascot-v1/generated/tail-upright-v2.png",
+      "sourceSha256": "2325c49afd63241647dfb5920b7ad51de9f73f101f60100e92178ce168398829",
       "sourceRect": [
-        910,
-        501,
-        1228,
-        801
+        22,
+        7,
+        887,
+        878
       ],
-      "sha256": "2d17a460e43d502749851305700d065dc646ff867a35db323545ff7fe79a5a3a"
+      "sha256": "4d4be78faf59b97eee46104f1480787413f786522b6cdd0e5e582c438f6e156f"
     },
     "west/foot-left": {
       "file": "art-source/characters/ace-mascot-v1/parts/west/foot-left.png",
@@ -241,17 +241,17 @@
     },
     "north/comb": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/comb.png",
-      "width": 376,
-      "height": 339,
-      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
-      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "width": 598,
+      "height": 531,
+      "source": "art-source/characters/ace-mascot-v1/generated/comb-classic-v2.png",
+      "sourceSha256": "5f2a858200d6ae64ba0034cb28816dbf93990e6d0901897eefdc49e7c962f08e",
       "sourceRect": [
-        437,
-        57,
-        813,
-        396
+        1504,
+        96,
+        2102,
+        627
       ],
-      "sha256": "8d3123042651d2863041d164d1dc89f59af6862b37d5425b080e83c3e42cf7bf"
+      "sha256": "dc1e13e49f6d58e5107969cffec2fe3d2f4310694a5aa82ce42afea5e3c2bfa9"
     },
     "north/body": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/body.png",
@@ -297,17 +297,17 @@
     },
     "north/tail": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/tail.png",
-      "width": 350,
-      "height": 279,
-      "source": "art-source/characters/ace-mascot-v1/generated/north-kit.png",
-      "sourceSha256": "d01d9a8ab8b9494557ec2dea8e7ae3eb8e48af281ce95b3a59fbf65ffed123d0",
+      "width": 850,
+      "height": 831,
+      "source": "art-source/characters/ace-mascot-v1/generated/tail-upright-v2.png",
+      "sourceSha256": "2325c49afd63241647dfb5920b7ad51de9f73f101f60100e92178ce168398829",
       "sourceRect": [
-        846,
-        521,
-        1196,
-        800
+        920,
+        49,
+        1770,
+        880
       ],
-      "sha256": "a7801245db13ca47870cec19ac045500a314a7c1c1a06acf6110508ea06af972"
+      "sha256": "5d8ffb32f95212931ba32c57e6011b8a90c377373cd074ea91e8c1e9b05ed659"
     },
     "north/foot-left": {
       "file": "art-source/characters/ace-mascot-v1/parts/north/foot-left.png",

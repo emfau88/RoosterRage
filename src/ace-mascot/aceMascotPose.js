@@ -26,8 +26,9 @@ function authoredPose(direction, phase, movement, timeMs) {
   const p = (name, ...args) => part(`${direction}/${name}`, ...args);
   const parts = [];
 
-  if (!north) parts.push(p('tail', bodyX + (side ? 48 : 44), bodyY + 9,
-    side ? 65 : 49, side ? 58 : 48, 0.13, 0.53, tailLag));
+  // A broad rump root overlaps the torso; feather tips grow upward from it.
+  if (!north) parts.push(p('tail', bodyX + (side ? 25 : 0), bodyY + 26,
+    side ? 94 : 132, side ? 116 : 98, side ? 0.18 : 0.5, 0.95, tailLag));
 
   const feet = [-1, 1].map((sign, index) => {
     const footPhase = angle + (index ? Math.PI : 0);
@@ -49,12 +50,14 @@ function authoredPose(direction, phase, movement, timeMs) {
       side ? 43 : 42, 61, 0.5, 0.15,
       -sign * 0.06 + sign * contact * 0.08 * movement + breathe * sign * 0.018));
   }
-  if (north) parts.push(p('tail', bodyX, bodyY - 3, 66, 43, 0.5, 0.12, tailLag));
   parts.push(p('head', headX, headY, side ? 138 : 145, north ? 98 : 101,
     0.5, 0.5, headTilt));
+  // Rear view: the raised fan is nearest the viewer and covers the lower back.
+  if (north) parts.push(p('tail', bodyX, bodyY + 37, 126, 100, 0.5, 0.95, tailLag));
   // The root overlaps the crown in front, keeping the whole red comb readable.
-  parts.push(p('comb', headX + (side ? 8 : 1), headY - 34,
-    side ? 98 : 104, 63, 0.5, 0.88, headTilt + combLag));
+  // Classic rounded lobes; profile attaches at its forward root, not its center.
+  parts.push(p('comb', headX + (side ? -17 : 1), headY - (side ? 30 : 34),
+    side ? 92 : 78, side ? 70 : 68, side ? 0.3 : 0.5, 0.88, headTilt + combLag));
   return parts;
 }
 

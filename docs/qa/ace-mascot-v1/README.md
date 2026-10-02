@@ -2,6 +2,14 @@
 
 Stand: 2. Oktober 2026. Branch `codex/ace-character-redesign`, Vergleichsbasis `124f853`. Nur der Ace-Ingame-Charakter wurde neu gestaltet. Die Arbeit endet hier zur Stilabnahme; keine automatische Übertragung auf Boombardier oder Stormcrest und keine Veröffentlichung.
 
+## Aktuelle Revision: Kamm und Schwanz
+
+Auf ausdrücklichen Wunsch sind Kamm und Schwanz überarbeitet: drei aufrechte runde Kammlappen in Front/Rücken, passende klassische Profilform und ein dichter weißer Federfächer, der aus einem breiten Bürzelansatz nach oben wächst. Seitlich überlappt der Ansatz den Rumpf; hinten liegt der Fächer vor dem unteren Rücken. Die übrigen 18 Quellteile (Kopf, Rumpf, Flügel, Füße) sind per SHA-256 unverändert. Es wurden keine Kopf-/Körper-Skalierungen umgesetzt.
+
+[Isolierter Offline-Vergleich](ace-vergleich.html): links entweder der alte Final-Ace oder der Mascot vor der Anpassung, rechts die aktuelle Fassung. Alle sechs Atlanten sind eingebettet. `node scripts/build-ace-comparison.mjs` baut diese Datei neu. Den vorigen Mascot bewahrt `art-source/characters/ace-mascot-v1/revisions/comb-v1/` auf.
+
+Aktuelle Prüfung: 36 Charaktertests, Release-Gate einschließlich Storage-Blockade sowie erneut neun Produktionsszenen mit 72 Animationszuständen bestanden. [Prüfnachweis der Revision](comb-tail-revision-checks.json). Release jetzt 18,11 MiB. Die folgenden Acceptance-/Production- und Rebuild-Ergebnisse dokumentieren zusätzlich die erste Mascot-Abnahme; für die rein visuellen Änderungen wurden die oben genannten betroffenen Prüfungen erneut ausgeführt. Galerie, Ingame-Aufnahmen, Asset- und Runtime-Prüfdaten zeigen die aktuelle Revision.
+
 [Galerie mit synchronem Animationsvergleich](index.html) · [Analyse vor Umsetzung](CURRENT_PIPELINE.md) · [ImageGen-Quellen und Spezifikationen](../../../art-source/characters/ace-mascot-v1/PROMPTS.md) · [Runtime-Prüfdaten](runtime-checks.json) · [Acceptance-Matrix](acceptance-matrix-report.json) · [Asset-Prüfung](asset-check.json)
 
 ## Ergebnis und Bewertung
@@ -27,7 +35,7 @@ Die drei mit dem eingebauten ImageGen-Werkzeug erzeugten transparenten Richtungs
 - Runtime: zwei RGBA-WebPs, je 2048 × 1024, 8 × 4 Frames zu 256 px. Origin (0.5, 0.5). Laufzyklus 520 ms, Idle 2800 ms.
 - Süd/West/West-Kopie/Nord in den Atlaszeilen. Ost nutzt wie zuvor West mit `flipX`.
 - WebP-Farbe Qualität 94; Alpha wird nach dem Dekodieren exakt mit dem gerenderten Alpha verglichen. Keine Behauptung verlustfreier RGB-Kompression.
-- Idle 489.696 Bytes, Walk 506.280 Bytes; zusammen 632.096 Bytes weniger als die beiden bisherigen Ace-Atlanten (38,8 %). Atlasdimensionen und damit die grundlegende GPU-Texturfläche bleiben gleich.
+- Aktuelle Revision: Idle 497.678 Bytes, Walk 512.102 Bytes; zusammen 618.292 Bytes weniger als die beiden bisherigen Final-Ace-Atlanten. Atlasdimensionen und damit die grundlegende GPU-Texturfläche bleiben gleich.
 - Nur der visuelle Kontaktschatten verwendet die neu gemessene Unterkante. Trefferkreis, Geschwindigkeit, Schadenswerte, Feuerrate, Kamera und übrige Spielsysteme bleiben bestehen.
 
 Build benötigt Node/npm sowie Python mit Pillow. Aus dem Repo:

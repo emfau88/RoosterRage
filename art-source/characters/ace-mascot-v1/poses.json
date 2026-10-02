@@ -17,12 +17,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172.55,
-              "y": 196,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128.55,
+              "y": 213,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0
             },
             {
@@ -89,8 +89,8 @@
               "key": "south/comb",
               "x": 129.55,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0
@@ -108,12 +108,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172.3889087296526,
-              "y": 197.13137084989847,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128.3889087296526,
+              "y": 214.13137084989847,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.015556349186104042
             },
             {
@@ -180,8 +180,8 @@
               "key": "south/comb",
               "x": 129.3889087296526,
               "y": 77.13137084989847,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.009192388155425116
@@ -199,12 +199,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172,
-              "y": 197.6,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128,
+              "y": 214.6,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.022
             },
             {
@@ -271,8 +271,8 @@
               "key": "south/comb",
               "x": 129,
               "y": 77.6,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.013
@@ -290,12 +290,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 171.6110912703474,
-              "y": 197.13137084989847,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 127.6110912703474,
+              "y": 214.13137084989847,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.015556349186104046
             },
             {
@@ -362,8 +362,8 @@
               "key": "south/comb",
               "x": 128.6110912703474,
               "y": 77.13137084989847,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.009192388155425118
@@ -381,12 +381,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 171.45,
-              "y": 196,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 127.45,
+              "y": 213,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 2.694222958124177e-18
             },
             {
@@ -453,8 +453,8 @@
               "key": "south/comb",
               "x": 128.45,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 1.5920408388915591e-18
@@ -472,12 +472,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 171.6110912703474,
-              "y": 194.86862915010153,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 127.6110912703474,
+              "y": 211.86862915010153,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.015556349186104042
             },
             {
@@ -544,8 +544,8 @@
               "key": "south/comb",
               "x": 128.6110912703474,
               "y": 74.86862915010153,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.009192388155425116
@@ -563,12 +563,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172,
-              "y": 194.4,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128,
+              "y": 211.4,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.022
             },
             {
@@ -635,8 +635,8 @@
               "key": "south/comb",
               "x": 129,
               "y": 74.4,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.013
@@ -654,12 +654,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172.3889087296526,
-              "y": 194.86862915010153,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128.3889087296526,
+              "y": 211.86862915010153,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.015556349186104048
             },
             {
@@ -726,8 +726,8 @@
               "key": "south/comb",
               "x": 129.3889087296526,
               "y": 74.86862915010153,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.00919238815542512
@@ -752,12 +752,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 173.1,
-              "y": 196,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 129.1,
+              "y": 213,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.03543197279807301
             },
             {
@@ -824,8 +824,8 @@
               "key": "south/comb",
               "x": 130.1,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.010004207284558295
@@ -843,12 +843,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172.7778174593052,
-              "y": 193.5,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128.7778174593052,
+              "y": 210.5,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.00469119210781801
             },
             {
@@ -915,8 +915,8 @@
               "key": "south/comb",
               "x": 129.7778174593052,
               "y": 72.7,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.013934300019359067
@@ -934,12 +934,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172,
-              "y": 191,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128,
+              "y": 208,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.04206632030064686
             },
             {
@@ -1006,8 +1006,8 @@
               "key": "south/comb",
               "x": 129,
               "y": 71,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.02971028335411157
@@ -1025,12 +1025,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 171.2221825406948,
-              "y": 193.5,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 127.2221825406948,
+              "y": 210.5,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.054799568580487436
             },
             {
@@ -1097,8 +1097,8 @@
               "key": "south/comb",
               "x": 128.2221825406948,
               "y": 74.3,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.028082385641973122
@@ -1116,12 +1116,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 170.9,
-              "y": 196,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 126.9,
+              "y": 213,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": 0.035431972798073016
             },
             {
@@ -1188,8 +1188,8 @@
               "key": "south/comb",
               "x": 127.9,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.010004207284558302
@@ -1207,12 +1207,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 171.2221825406948,
-              "y": 193.5,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 127.2221825406948,
+              "y": 210.5,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.004691192107817992
             },
             {
@@ -1279,8 +1279,8 @@
               "key": "south/comb",
               "x": 128.2221825406948,
               "y": 72.7,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.01393430001935906
@@ -1298,12 +1298,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172,
-              "y": 191,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128,
+              "y": 208,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.04206632030064685
             },
             {
@@ -1370,8 +1370,8 @@
               "key": "south/comb",
               "x": 129,
               "y": 71,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.029710283354111564
@@ -1389,12 +1389,12 @@
           "parts": [
             {
               "key": "south/tail",
-              "x": 172.7778174593052,
-              "y": 193.5,
-              "width": 49,
-              "height": 48,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 128.7778174593052,
+              "y": 210.5,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
               "rotation": -0.05479956858048744
             },
             {
@@ -1461,8 +1461,8 @@
               "key": "south/comb",
               "x": 129.7778174593052,
               "y": 74.3,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.028082385641973125
@@ -1487,12 +1487,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176.55,
-              "y": 196,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153.55,
+              "y": 213,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0
             },
             {
@@ -1557,11 +1557,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127.55000000000001,
-              "y": 76,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102.55000000000001,
+              "y": 80,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0
             }
@@ -1578,12 +1578,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176.3889087296526,
-              "y": 197.13137084989847,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153.3889087296526,
+              "y": 214.13137084989847,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.015556349186104042
             },
             {
@@ -1648,11 +1648,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127.3889087296526,
-              "y": 77.13137084989847,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102.3889087296526,
+              "y": 81.13137084989847,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.009192388155425116
             }
@@ -1669,12 +1669,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176,
-              "y": 197.6,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153,
+              "y": 214.6,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.022
             },
             {
@@ -1739,11 +1739,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127,
-              "y": 77.6,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102,
+              "y": 81.6,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.013
             }
@@ -1760,12 +1760,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 175.6110912703474,
-              "y": 197.13137084989847,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 152.6110912703474,
+              "y": 214.13137084989847,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.015556349186104046
             },
             {
@@ -1830,11 +1830,11 @@
             },
             {
               "key": "west/comb",
-              "x": 126.6110912703474,
-              "y": 77.13137084989847,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 101.6110912703474,
+              "y": 81.13137084989847,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.009192388155425118
             }
@@ -1851,12 +1851,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 175.45,
-              "y": 196,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 152.45,
+              "y": 213,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 2.694222958124177e-18
             },
             {
@@ -1921,11 +1921,11 @@
             },
             {
               "key": "west/comb",
-              "x": 126.45,
-              "y": 76,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 101.45,
+              "y": 80,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 1.5920408388915591e-18
             }
@@ -1942,12 +1942,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 175.6110912703474,
-              "y": 194.86862915010153,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 152.6110912703474,
+              "y": 211.86862915010153,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.015556349186104042
             },
             {
@@ -2012,11 +2012,11 @@
             },
             {
               "key": "west/comb",
-              "x": 126.6110912703474,
-              "y": 74.86862915010153,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 101.6110912703474,
+              "y": 78.86862915010153,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.009192388155425116
             }
@@ -2033,12 +2033,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176,
-              "y": 194.4,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153,
+              "y": 211.4,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.022
             },
             {
@@ -2103,11 +2103,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127,
-              "y": 74.4,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102,
+              "y": 78.4,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.013
             }
@@ -2124,12 +2124,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176.3889087296526,
-              "y": 194.86862915010153,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153.3889087296526,
+              "y": 211.86862915010153,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.015556349186104048
             },
             {
@@ -2194,11 +2194,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127.3889087296526,
-              "y": 74.86862915010153,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102.3889087296526,
+              "y": 78.86862915010153,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.00919238815542512
             }
@@ -2222,12 +2222,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 177.1,
-              "y": 196,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 154.1,
+              "y": 213,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.03543197279807301
             },
             {
@@ -2292,11 +2292,11 @@
             },
             {
               "key": "west/comb",
-              "x": 128.1,
-              "y": 76,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 103.1,
+              "y": 80,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.010004207284558295
             }
@@ -2313,12 +2313,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176.7778174593052,
-              "y": 193.5,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153.7778174593052,
+              "y": 210.5,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.00469119210781801
             },
             {
@@ -2383,11 +2383,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127.7778174593052,
-              "y": 72.7,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102.7778174593052,
+              "y": 76.7,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.013934300019359067
             }
@@ -2404,12 +2404,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176,
-              "y": 191,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153,
+              "y": 208,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.04206632030064686
             },
             {
@@ -2474,11 +2474,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127,
-              "y": 71,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102,
+              "y": 75,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.02971028335411157
             }
@@ -2495,12 +2495,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 175.2221825406948,
-              "y": 193.5,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 152.2221825406948,
+              "y": 210.5,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.054799568580487436
             },
             {
@@ -2565,11 +2565,11 @@
             },
             {
               "key": "west/comb",
-              "x": 126.2221825406948,
-              "y": 74.3,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 101.2221825406948,
+              "y": 78.3,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.028082385641973122
             }
@@ -2586,12 +2586,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 174.9,
-              "y": 196,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 151.9,
+              "y": 213,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.035431972798073016
             },
             {
@@ -2656,11 +2656,11 @@
             },
             {
               "key": "west/comb",
-              "x": 125.9,
-              "y": 76,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 100.9,
+              "y": 80,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.010004207284558302
             }
@@ -2677,12 +2677,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 175.2221825406948,
-              "y": 193.5,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 152.2221825406948,
+              "y": 210.5,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.004691192107817992
             },
             {
@@ -2747,11 +2747,11 @@
             },
             {
               "key": "west/comb",
-              "x": 126.2221825406948,
-              "y": 72.7,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 101.2221825406948,
+              "y": 76.7,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.01393430001935906
             }
@@ -2768,12 +2768,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176,
-              "y": 191,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153,
+              "y": 208,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.04206632030064685
             },
             {
@@ -2838,11 +2838,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127,
-              "y": 71,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102,
+              "y": 75,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.029710283354111564
             }
@@ -2859,12 +2859,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 176.7778174593052,
-              "y": 193.5,
-              "width": 65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 153.7778174593052,
+              "y": 210.5,
+              "width": 94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.05479956858048744
             },
             {
@@ -2929,11 +2929,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127.7778174593052,
-              "y": 74.3,
-              "width": 98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 102.7778174593052,
+              "y": 78.3,
+              "width": 92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.028082385641973125
             }
@@ -2957,12 +2957,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 79.44999999999999,
-              "y": 196,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 102.44999999999999,
+              "y": 213,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0
             },
             {
@@ -3027,11 +3027,11 @@
             },
             {
               "key": "west/comb",
-              "x": 128.45,
-              "y": 76,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 153.45,
+              "y": 80,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0
             }
@@ -3048,12 +3048,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 79.6110912703474,
-              "y": 197.13137084989847,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 102.6110912703474,
+              "y": 214.13137084989847,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.015556349186104042
             },
             {
@@ -3118,11 +3118,11 @@
             },
             {
               "key": "west/comb",
-              "x": 128.6110912703474,
-              "y": 77.13137084989847,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 153.6110912703474,
+              "y": 81.13137084989847,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.009192388155425116
             }
@@ -3139,12 +3139,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80,
-              "y": 197.6,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103,
+              "y": 214.6,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.022
             },
             {
@@ -3209,11 +3209,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129,
-              "y": 77.6,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154,
+              "y": 81.6,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.013
             }
@@ -3230,12 +3230,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80.3889087296526,
-              "y": 197.13137084989847,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103.3889087296526,
+              "y": 214.13137084989847,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.015556349186104046
             },
             {
@@ -3300,11 +3300,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129.3889087296526,
-              "y": 77.13137084989847,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154.3889087296526,
+              "y": 81.13137084989847,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.009192388155425118
             }
@@ -3321,12 +3321,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80.55000000000001,
-              "y": 196,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103.55000000000001,
+              "y": 213,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -2.694222958124177e-18
             },
             {
@@ -3391,11 +3391,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129.55,
-              "y": 76,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154.55,
+              "y": 80,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -1.5920408388915591e-18
             }
@@ -3412,12 +3412,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80.3889087296526,
-              "y": 194.86862915010153,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103.3889087296526,
+              "y": 211.86862915010153,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.015556349186104042
             },
             {
@@ -3482,11 +3482,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129.3889087296526,
-              "y": 74.86862915010153,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154.3889087296526,
+              "y": 78.86862915010153,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.009192388155425116
             }
@@ -3503,12 +3503,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80,
-              "y": 194.4,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103,
+              "y": 211.4,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.022
             },
             {
@@ -3573,11 +3573,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129,
-              "y": 74.4,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154,
+              "y": 78.4,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.013
             }
@@ -3594,12 +3594,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 79.6110912703474,
-              "y": 194.86862915010153,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 102.6110912703474,
+              "y": 211.86862915010153,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.015556349186104048
             },
             {
@@ -3664,11 +3664,11 @@
             },
             {
               "key": "west/comb",
-              "x": 128.6110912703474,
-              "y": 74.86862915010153,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 153.6110912703474,
+              "y": 78.86862915010153,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.00919238815542512
             }
@@ -3692,12 +3692,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 78.9,
-              "y": 196,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 101.9,
+              "y": 213,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.03543197279807301
             },
             {
@@ -3762,11 +3762,11 @@
             },
             {
               "key": "west/comb",
-              "x": 127.9,
-              "y": 76,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 152.9,
+              "y": 80,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.010004207284558295
             }
@@ -3783,12 +3783,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 79.2221825406948,
-              "y": 193.5,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 102.2221825406948,
+              "y": 210.5,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.00469119210781801
             },
             {
@@ -3853,11 +3853,11 @@
             },
             {
               "key": "west/comb",
-              "x": 128.2221825406948,
-              "y": 72.7,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 153.2221825406948,
+              "y": 76.7,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.013934300019359067
             }
@@ -3874,12 +3874,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80,
-              "y": 191,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103,
+              "y": 208,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.04206632030064686
             },
             {
@@ -3944,11 +3944,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129,
-              "y": 71,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154,
+              "y": 75,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.02971028335411157
             }
@@ -3965,12 +3965,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80.7778174593052,
-              "y": 193.5,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103.7778174593052,
+              "y": 210.5,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.054799568580487436
             },
             {
@@ -4035,11 +4035,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129.7778174593052,
-              "y": 74.3,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154.7778174593052,
+              "y": 78.3,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.028082385641973122
             }
@@ -4056,12 +4056,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 81.1,
-              "y": 196,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 104.1,
+              "y": 213,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": -0.035431972798073016
             },
             {
@@ -4126,11 +4126,11 @@
             },
             {
               "key": "west/comb",
-              "x": 130.1,
-              "y": 76,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 155.1,
+              "y": 80,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": -0.010004207284558302
             }
@@ -4147,12 +4147,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80.7778174593052,
-              "y": 193.5,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103.7778174593052,
+              "y": 210.5,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.004691192107817992
             },
             {
@@ -4217,11 +4217,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129.7778174593052,
-              "y": 72.7,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154.7778174593052,
+              "y": 76.7,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.01393430001935906
             }
@@ -4238,12 +4238,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 80,
-              "y": 191,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 103,
+              "y": 208,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.04206632030064685
             },
             {
@@ -4308,11 +4308,11 @@
             },
             {
               "key": "west/comb",
-              "x": 129,
-              "y": 71,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 154,
+              "y": 75,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.029710283354111564
             }
@@ -4329,12 +4329,12 @@
           "parts": [
             {
               "key": "west/tail",
-              "x": 79.2221825406948,
-              "y": 193.5,
-              "width": -65,
-              "height": 58,
-              "originX": 0.13,
-              "originY": 0.53,
+              "x": 102.2221825406948,
+              "y": 210.5,
+              "width": -94,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
               "rotation": 0.05479956858048744
             },
             {
@@ -4399,11 +4399,11 @@
             },
             {
               "key": "west/comb",
-              "x": 128.2221825406948,
-              "y": 74.3,
-              "width": -98,
-              "height": 63,
-              "originX": 0.5,
+              "x": 153.2221825406948,
+              "y": 78.3,
+              "width": -92,
+              "height": 70,
+              "originX": 0.3,
               "originY": 0.88,
               "rotation": 0.028082385641973125
             }
@@ -4476,16 +4476,6 @@
               "rotation": -0.06
             },
             {
-              "key": "north/tail",
-              "x": 128.55,
-              "y": 184,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0
-            },
-            {
               "key": "north/head",
               "x": 128.55,
               "y": 110,
@@ -4496,11 +4486,21 @@
               "rotation": 0
             },
             {
+              "key": "north/tail",
+              "x": 128.55,
+              "y": 224,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0
+            },
+            {
               "key": "north/comb",
               "x": 129.55,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0
@@ -4567,16 +4567,6 @@
               "rotation": -0.047272077938642146
             },
             {
-              "key": "north/tail",
-              "x": 128.3889087296526,
-              "y": 185.13137084989847,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.015556349186104042
-            },
-            {
               "key": "north/head",
               "x": 128.3889087296526,
               "y": 111.13137084989847,
@@ -4587,11 +4577,21 @@
               "rotation": 0.00282842712474619
             },
             {
+              "key": "north/tail",
+              "x": 128.3889087296526,
+              "y": 225.13137084989847,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.015556349186104042
+            },
+            {
               "key": "north/comb",
               "x": 129.3889087296526,
               "y": 77.13137084989847,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.009192388155425116
@@ -4658,16 +4658,6 @@
               "rotation": -0.041999999999999996
             },
             {
-              "key": "north/tail",
-              "x": 128,
-              "y": 185.6,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.022
-            },
-            {
               "key": "north/head",
               "x": 128,
               "y": 111.6,
@@ -4678,11 +4668,21 @@
               "rotation": 0.004
             },
             {
+              "key": "north/tail",
+              "x": 128,
+              "y": 225.6,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.022
+            },
+            {
               "key": "north/comb",
               "x": 129,
               "y": 77.6,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.013
@@ -4749,16 +4749,6 @@
               "rotation": -0.047272077938642146
             },
             {
-              "key": "north/tail",
-              "x": 127.6110912703474,
-              "y": 185.13137084989847,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.015556349186104046
-            },
-            {
               "key": "north/head",
               "x": 127.6110912703474,
               "y": 111.13137084989847,
@@ -4769,11 +4759,21 @@
               "rotation": 0.0028284271247461905
             },
             {
+              "key": "north/tail",
+              "x": 127.6110912703474,
+              "y": 225.13137084989847,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.015556349186104046
+            },
+            {
               "key": "north/comb",
               "x": 128.6110912703474,
               "y": 77.13137084989847,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.009192388155425118
@@ -4840,16 +4840,6 @@
               "rotation": -0.06
             },
             {
-              "key": "north/tail",
-              "x": 127.45,
-              "y": 184,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 2.694222958124177e-18
-            },
-            {
               "key": "north/head",
               "x": 127.45,
               "y": 110,
@@ -4860,11 +4850,21 @@
               "rotation": 4.898587196589413e-19
             },
             {
+              "key": "north/tail",
+              "x": 127.45,
+              "y": 224,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 2.694222958124177e-18
+            },
+            {
               "key": "north/comb",
               "x": 128.45,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 1.5920408388915591e-18
@@ -4931,16 +4931,6 @@
               "rotation": -0.07272792206135785
             },
             {
-              "key": "north/tail",
-              "x": 127.6110912703474,
-              "y": 182.86862915010153,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.015556349186104042
-            },
-            {
               "key": "north/head",
               "x": 127.6110912703474,
               "y": 108.86862915010153,
@@ -4951,11 +4941,21 @@
               "rotation": -0.00282842712474619
             },
             {
+              "key": "north/tail",
+              "x": 127.6110912703474,
+              "y": 222.86862915010153,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.015556349186104042
+            },
+            {
               "key": "north/comb",
               "x": 128.6110912703474,
               "y": 74.86862915010153,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.009192388155425116
@@ -5022,16 +5022,6 @@
               "rotation": -0.078
             },
             {
-              "key": "north/tail",
-              "x": 128,
-              "y": 182.4,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.022
-            },
-            {
               "key": "north/head",
               "x": 128,
               "y": 108.4,
@@ -5042,11 +5032,21 @@
               "rotation": -0.004
             },
             {
+              "key": "north/tail",
+              "x": 128,
+              "y": 222.4,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.022
+            },
+            {
               "key": "north/comb",
               "x": 129,
               "y": 74.4,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.013
@@ -5113,16 +5113,6 @@
               "rotation": -0.07272792206135785
             },
             {
-              "key": "north/tail",
-              "x": 128.3889087296526,
-              "y": 182.86862915010153,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.015556349186104048
-            },
-            {
               "key": "north/head",
               "x": 128.3889087296526,
               "y": 108.86862915010153,
@@ -5133,11 +5123,21 @@
               "rotation": -0.002828427124746191
             },
             {
+              "key": "north/tail",
+              "x": 128.3889087296526,
+              "y": 222.86862915010153,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.015556349186104048
+            },
+            {
               "key": "north/comb",
               "x": 129.3889087296526,
               "y": 74.86862915010153,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.00919238815542512
@@ -5211,16 +5211,6 @@
               "rotation": 0.020000000000000004
             },
             {
-              "key": "north/tail",
-              "x": 129.1,
-              "y": 184,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.03543197279807301
-            },
-            {
               "key": "north/head",
               "x": 129.1,
               "y": 110,
@@ -5231,11 +5221,21 @@
               "rotation": 0
             },
             {
+              "key": "north/tail",
+              "x": 129.1,
+              "y": 224,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.03543197279807301
+            },
+            {
               "key": "north/comb",
               "x": 130.1,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.010004207284558295
@@ -5302,16 +5302,6 @@
               "rotation": -0.003431457505076188
             },
             {
-              "key": "north/tail",
-              "x": 128.7778174593052,
-              "y": 181.5,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.00469119210781801
-            },
-            {
               "key": "north/head",
               "x": 128.7778174593052,
               "y": 106.7,
@@ -5322,11 +5312,21 @@
               "rotation": 0.006363961030678927
             },
             {
+              "key": "north/tail",
+              "x": 128.7778174593052,
+              "y": 221.5,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.00469119210781801
+            },
+            {
               "key": "north/comb",
               "x": 129.7778174593052,
               "y": 72.7,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.013934300019359067
@@ -5393,16 +5393,6 @@
               "rotation": -0.05999999999999999
             },
             {
-              "key": "north/tail",
-              "x": 128,
-              "y": 179,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.04206632030064686
-            },
-            {
               "key": "north/head",
               "x": 128,
               "y": 105,
@@ -5413,11 +5403,21 @@
               "rotation": 0.009
             },
             {
+              "key": "north/tail",
+              "x": 128,
+              "y": 219,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.04206632030064686
+            },
+            {
               "key": "north/comb",
               "x": 129,
               "y": 71,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.02971028335411157
@@ -5484,16 +5484,6 @@
               "rotation": -0.1165685424949238
             },
             {
-              "key": "north/tail",
-              "x": 127.2221825406948,
-              "y": 181.5,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.054799568580487436
-            },
-            {
               "key": "north/head",
               "x": 127.2221825406948,
               "y": 108.3,
@@ -5504,11 +5494,21 @@
               "rotation": 0.006363961030678928
             },
             {
+              "key": "north/tail",
+              "x": 127.2221825406948,
+              "y": 221.5,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.054799568580487436
+            },
+            {
               "key": "north/comb",
               "x": 128.2221825406948,
               "y": 74.3,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.028082385641973122
@@ -5575,16 +5575,6 @@
               "rotation": -0.14
             },
             {
-              "key": "north/tail",
-              "x": 126.9,
-              "y": 184,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": 0.035431972798073016
-            },
-            {
               "key": "north/head",
               "x": 126.9,
               "y": 110,
@@ -5595,11 +5585,21 @@
               "rotation": 1.1021821192326178e-18
             },
             {
+              "key": "north/tail",
+              "x": 126.9,
+              "y": 224,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.035431972798073016
+            },
+            {
               "key": "north/comb",
               "x": 127.9,
               "y": 76,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": 0.010004207284558302
@@ -5666,16 +5666,6 @@
               "rotation": -0.11656854249492382
             },
             {
-              "key": "north/tail",
-              "x": 127.2221825406948,
-              "y": 181.5,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.004691192107817992
-            },
-            {
               "key": "north/head",
               "x": 127.2221825406948,
               "y": 106.7,
@@ -5686,11 +5676,21 @@
               "rotation": -0.006363961030678927
             },
             {
+              "key": "north/tail",
+              "x": 127.2221825406948,
+              "y": 221.5,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.004691192107817992
+            },
+            {
               "key": "north/comb",
               "x": 128.2221825406948,
               "y": 72.7,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.01393430001935906
@@ -5757,16 +5757,6 @@
               "rotation": -0.06000000000000001
             },
             {
-              "key": "north/tail",
-              "x": 128,
-              "y": 179,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.04206632030064685
-            },
-            {
               "key": "north/head",
               "x": 128,
               "y": 105,
@@ -5777,11 +5767,21 @@
               "rotation": -0.009
             },
             {
+              "key": "north/tail",
+              "x": 128,
+              "y": 219,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.04206632030064685
+            },
+            {
               "key": "north/comb",
               "x": 129,
               "y": 71,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.029710283354111564
@@ -5848,16 +5848,6 @@
               "rotation": -0.003431457505076209
             },
             {
-              "key": "north/tail",
-              "x": 128.7778174593052,
-              "y": 181.5,
-              "width": 66,
-              "height": 43,
-              "originX": 0.5,
-              "originY": 0.12,
-              "rotation": -0.05479956858048744
-            },
-            {
               "key": "north/head",
               "x": 128.7778174593052,
               "y": 108.3,
@@ -5868,11 +5858,21 @@
               "rotation": -0.006363961030678929
             },
             {
+              "key": "north/tail",
+              "x": 128.7778174593052,
+              "y": 221.5,
+              "width": 126,
+              "height": 100,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.05479956858048744
+            },
+            {
               "key": "north/comb",
               "x": 129.7778174593052,
               "y": 74.3,
-              "width": 104,
-              "height": 63,
+              "width": 78,
+              "height": 68,
               "originX": 0.5,
               "originY": 0.88,
               "rotation": -0.028082385641973125
