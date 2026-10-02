@@ -124,11 +124,11 @@ test('final query selects eight-frame animation timing for every character', asy
   assert.equal(config.STORM_VISUAL_VERSION, 'final');
 });
 
-test('approved final roosters are the default production visuals', async () => {
+test('Ace mascot and the two unchanged final roosters are the defaults', async () => {
   globalThis.window = { location: { search: '' } };
   const config = await import('../src/config/aceVisual.js?final-rooster-default-test');
   delete globalThis.window;
-  assert.equal(config.ACE_VISUAL_VERSION, 'final');
+  assert.equal(config.ACE_VISUAL_VERSION, 'mascot');
   assert.equal(config.ARTILLERY_VISUAL_VERSION, 'final');
   assert.equal(config.STORM_VISUAL_VERSION, 'final');
   assert.deepEqual(config.NEXT_ROOSTER_WALK_FRAME_COUNT, { ace: 8, artillery: 8, storm: 8 });
@@ -144,7 +144,7 @@ test('global and per-character rollback paths remain available', async () => {
   globalThis.window = { location: { search: '?artilleryVisual=legacy' } };
   const selective = await import('../src/config/aceVisual.js?final-rooster-selective-rollback-test');
   delete globalThis.window;
-  assert.equal(selective.ACE_VISUAL_VERSION, 'final');
+  assert.equal(selective.ACE_VISUAL_VERSION, 'mascot');
   assert.equal(selective.ARTILLERY_VISUAL_VERSION, 'legacy');
   assert.equal(selective.STORM_VISUAL_VERSION, 'final');
 });

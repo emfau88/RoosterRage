@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ command, mode }) => {
+  const aceVersion = (process.env.VITE_ACE_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_ACE_VISUAL_VERSION) === 'final' ? 'final' : 'mascot';
   const pagesBuild = mode === 'pages';
   const standaloneBuild = mode === 'standalone';
   const releaseBuild = mode === 'release';
@@ -26,6 +27,8 @@ export default defineConfig(({ command, mode }) => {
     }] : [],
     resolve: {
       alias: {
+        '@ace-production-walk': path.resolve(projectRoot, `src/assets/characters/ace-${aceVersion}/rooster-ace-${aceVersion}-walk.webp`),
+        '@ace-production-idle': path.resolve(projectRoot, `src/assets/characters/ace-${aceVersion}/rooster-ace-${aceVersion}-idle.webp`),
         '@rooster-assets': path.resolve(
           projectRoot,
           command === 'build'

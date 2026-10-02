@@ -5,6 +5,8 @@ import aceGameplayWalk from '../../assets/characters/ace-gameplay/rooster-ace-ga
 import aceGameplayIdle from '../../assets/characters/ace-gameplay/rooster-ace-gameplay-idle.webp';
 import aceFinalWalk from '../../assets/characters/ace-final/rooster-ace-final-walk.webp';
 import aceFinalIdle from '../../assets/characters/ace-final/rooster-ace-final-idle.webp';
+import aceMascotWalk from '../../assets/characters/ace-mascot/rooster-ace-mascot-walk.webp';
+import aceMascotIdle from '../../assets/characters/ace-mascot/rooster-ace-mascot-idle.webp';
 import artilleryLegacyWalk from '../../assets/characters/rooster-artillery-walk-v3.webp';
 import artilleryNextWalk from '../../assets/characters/artillery-next/rooster-artillery-next-walk.webp';
 import artilleryNextIdle from '../../assets/characters/artillery-next/rooster-artillery-next-idle.webp';
@@ -21,6 +23,7 @@ import stormFinalWalk from '../../assets/characters/storm-final/rooster-storm-fi
 import stormFinalIdle from '../../assets/characters/storm-final/rooster-storm-final-idle.webp';
 import {
   USE_FINAL_ACE_VISUAL,
+  USE_MASCOT_ACE_VISUAL,
   USE_FINAL_ARTILLERY_VISUAL,
   USE_FINAL_STORM_VISUAL,
   USE_GAMEPLAY_ACE_VISUAL,
@@ -33,10 +36,10 @@ import {
 
 export const ROOSTER_ASSET_URLS = Object.freeze({
   ace: {
-    walk: USE_FINAL_ACE_VISUAL ? aceFinalWalk
+    walk: USE_MASCOT_ACE_VISUAL ? aceMascotWalk : USE_FINAL_ACE_VISUAL ? aceFinalWalk
       : USE_GAMEPLAY_ACE_VISUAL ? aceGameplayWalk
       : USE_NEXT_ACE_VISUAL ? aceNextWalk : aceLegacyWalk,
-    idle: USE_FINAL_ACE_VISUAL ? aceFinalIdle
+    idle: USE_MASCOT_ACE_VISUAL ? aceMascotIdle : USE_FINAL_ACE_VISUAL ? aceFinalIdle
       : USE_GAMEPLAY_ACE_VISUAL ? aceGameplayIdle : aceNextIdle,
     legacyWalk: aceLegacyWalk
   },

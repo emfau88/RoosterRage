@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-02",
+  "baseline": "124f853",
+  "characterTests": 36,
+  "assetsChecked": 141,
+  "characterLabBuild": "passed",
+  "productionGate": "Rooster production gate passed. Test API is not exposed.",
+  "release": {
+    "package": {
+      "files": 148,
+      "totalBytes": 18973408,
+      "totalMiB": 18.09,
+      "largest": [
+        {
+          "file": "assets/boss-theme-DikIQNT3.mp3",
+          "bytes": 1981143
+        },
+        {
+          "file": "assets/phaser-CUdU0QcG.js",
+          "bytes": 1197177
+        },
+        {
+          "file": "assets/run-theme-DXaiNGyI.mp3",
+          "bytes": 1134690
+        },
+        {
+          "file": "assets/rooster-artillery-final-walk-epIx7hb4.webp",
+          "bytes": 784432
+        },
+        {
+          "file": "assets/rooster-artillery-final-idle-C3pVL0jS.webp",
+          "bytes": 725936
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "blockedStorage": false,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      },
+      {
+        "blockedStorage": true,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      }
+    ]
+  },
+  "rollbackRelease": {
+    "package": {
+      "files": 148,
+      "totalBytes": 19605491,
+      "totalMiB": 18.7,
+      "largest": [
+        {
+          "file": "assets/boss-theme-DikIQNT3.mp3",
+          "bytes": 1981143
+        },
+        {
+          "file": "assets/phaser-CUdU0QcG.js",
+          "bytes": 1197177
+        },
+        {
+          "file": "assets/run-theme-DXaiNGyI.mp3",
+          "bytes": 1134690
+        },
+        {
+          "file": "assets/rooster-ace-final-walk-BLyUL9vP.webp",
+          "bytes": 819898
+        },
+        {
+          "file": "assets/rooster-ace-final-idle-9qzmQ9E9.webp",
+          "bytes": 808174
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "blockedStorage": false,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      },
+      {
+        "blockedStorage": true,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      }
+    ]
+  },
+  "deterministicRebuild": "Rebuild hashes identical",
+  "oldAssetModifications": [],
+  "unchangedMechanics": [
+    "src/scenes/GameScene.js",
+    "src/systems/RoosterClassSystem.js",
+    "src/systems/CombatSystem.js",
+    "src/systems/CollisionSystem.js",
+    "src/systems/ArenaSystem.js",
+    "src/systems/WaveSystem.js",
+    "src/systems/MetaProgressionSystem.js"
+  ]
+}

@@ -1,0 +1,6212 @@
+{
+  "baselineCommit": "124f853",
+  "renderer": "production-webgl",
+  "cases": [
+    {
+      "name": "open-yard-desktop",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "before": {
+        "zoom": 1,
+        "scale": [
+          0.275,
+          0.275
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 52.72727272727272,
+          "width": 28.999999999999996,
+          "height": 28.999999999999996,
+          "offset": [
+            75.27272727272728,
+            89.81818181818181
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "open-yard",
+        "obstacles": [
+          {
+            "id": "91:91-hay-north",
+            "x": 63805,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:91-hay-south",
+            "x": 64295,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-north",
+            "x": 64505,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-south",
+            "x": 64995,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:91-lone-crate",
+            "x": 65715,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:91-hay-north",
+            "x": 65905,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:91-hay-south",
+            "x": 66395,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:91-lone-crate",
+            "x": 66585,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:92-lone-crate",
+            "x": 63785,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:92-lone-crate",
+            "x": 65015,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:92-mixed-bale",
+            "x": 65720,
+            "y": 64935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:92-mixed-crate",
+            "x": 65265,
+            "y": 64505,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-north",
+            "x": 65900,
+            "y": 64555,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-south",
+            "x": 66400,
+            "y": 64945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-hay-east",
+            "x": 66435,
+            "y": 64585,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-north",
+            "x": 66605,
+            "y": 64535,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-south",
+            "x": 67095,
+            "y": 64965,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-a",
+            "x": 64320,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-b",
+            "x": 64295,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-pocket-crate",
+            "x": 64330,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-north",
+            "x": 64500,
+            "y": 65255,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-south",
+            "x": 65000,
+            "y": 65645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-hay-east",
+            "x": 65035,
+            "y": 65285,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-north",
+            "x": 65205,
+            "y": 65235,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-south",
+            "x": 65695,
+            "y": 65665,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:93-lone-crate",
+            "x": 66415,
+            "y": 65245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:93-hay-pocket-a",
+            "x": 67120,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-hay-pocket-b",
+            "x": 67095,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-pocket-crate",
+            "x": 67130,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-north",
+            "x": 63800,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-south",
+            "x": 64300,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-hay-east",
+            "x": 64335,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-north",
+            "x": 64505,
+            "y": 65935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-south",
+            "x": 64995,
+            "y": 66365,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:94-crate-north",
+            "x": 65200,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-crate-south",
+            "x": 65700,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-hay-east",
+            "x": 65735,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:94-lone-crate",
+            "x": 65885,
+            "y": 65945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:94-mixed-bale",
+            "x": 66580,
+            "y": 66335,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:94-mixed-crate",
+            "x": 67035,
+            "y": 65905,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:95-hay-pocket-a",
+            "x": 63780,
+            "y": 66670,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-hay-pocket-b",
+            "x": 63805,
+            "y": 66885,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-pocket-crate",
+            "x": 63770,
+            "y": 67075,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:95-lone-crate",
+            "x": 65015,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:95-wide-bale",
+            "x": 65165,
+            "y": 67055,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:95-wide-crate",
+            "x": 65735,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-north",
+            "x": 65900,
+            "y": 66655,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-south",
+            "x": 66400,
+            "y": 67045,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-hay-east",
+            "x": 66435,
+            "y": 66685,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-north",
+            "x": 66605,
+            "y": 66635,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-south",
+            "x": 67095,
+            "y": 67065,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 1,
+        "scale": [
+          0.275,
+          0.275
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 52.72727272727272,
+          "width": 28.999999999999996,
+          "height": 28.999999999999996,
+          "offset": [
+            75.27272727272728,
+            89.81818181818181
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "open-yard",
+        "obstacles": [
+          {
+            "id": "91:91-hay-north",
+            "x": 63805,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:91-hay-south",
+            "x": 64295,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-north",
+            "x": 64505,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-south",
+            "x": 64995,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:91-lone-crate",
+            "x": 65715,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:91-hay-north",
+            "x": 65905,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:91-hay-south",
+            "x": 66395,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:91-lone-crate",
+            "x": 66585,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:92-lone-crate",
+            "x": 63785,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:92-lone-crate",
+            "x": 65015,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:92-mixed-bale",
+            "x": 65720,
+            "y": 64935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:92-mixed-crate",
+            "x": 65265,
+            "y": 64505,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-north",
+            "x": 65900,
+            "y": 64555,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-south",
+            "x": 66400,
+            "y": 64945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-hay-east",
+            "x": 66435,
+            "y": 64585,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-north",
+            "x": 66605,
+            "y": 64535,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-south",
+            "x": 67095,
+            "y": 64965,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-a",
+            "x": 64320,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-b",
+            "x": 64295,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-pocket-crate",
+            "x": 64330,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-north",
+            "x": 64500,
+            "y": 65255,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-south",
+            "x": 65000,
+            "y": 65645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-hay-east",
+            "x": 65035,
+            "y": 65285,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-north",
+            "x": 65205,
+            "y": 65235,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-south",
+            "x": 65695,
+            "y": 65665,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:93-lone-crate",
+            "x": 66415,
+            "y": 65245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:93-hay-pocket-a",
+            "x": 67120,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-hay-pocket-b",
+            "x": 67095,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-pocket-crate",
+            "x": 67130,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-north",
+            "x": 63800,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-south",
+            "x": 64300,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-hay-east",
+            "x": 64335,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-north",
+            "x": 64505,
+            "y": 65935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-south",
+            "x": 64995,
+            "y": 66365,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:94-crate-north",
+            "x": 65200,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-crate-south",
+            "x": 65700,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-hay-east",
+            "x": 65735,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:94-lone-crate",
+            "x": 65885,
+            "y": 65945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:94-mixed-bale",
+            "x": 66580,
+            "y": 66335,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:94-mixed-crate",
+            "x": 67035,
+            "y": 65905,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:95-hay-pocket-a",
+            "x": 63780,
+            "y": 66670,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-hay-pocket-b",
+            "x": 63805,
+            "y": 66885,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-pocket-crate",
+            "x": 63770,
+            "y": 67075,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:95-lone-crate",
+            "x": 65015,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:95-wide-bale",
+            "x": 65165,
+            "y": 67055,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:95-wide-crate",
+            "x": 65735,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-north",
+            "x": 65900,
+            "y": 66655,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-south",
+            "x": 66400,
+            "y": 67045,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-hay-east",
+            "x": 66435,
+            "y": 66685,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-north",
+            "x": 66605,
+            "y": 66635,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-south",
+            "x": 67095,
+            "y": 67065,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "open-yard-portrait",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "before": {
+        "zoom": 0.85,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "open-yard",
+        "obstacles": [
+          {
+            "id": "91:91-hay-north",
+            "x": 63805,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:91-hay-south",
+            "x": 64295,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-north",
+            "x": 64505,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-south",
+            "x": 64995,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:91-lone-crate",
+            "x": 65715,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:91-hay-north",
+            "x": 65905,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:91-hay-south",
+            "x": 66395,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:91-lone-crate",
+            "x": 66585,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:92-lone-crate",
+            "x": 63785,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:92-lone-crate",
+            "x": 65015,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:92-mixed-bale",
+            "x": 65720,
+            "y": 64935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:92-mixed-crate",
+            "x": 65265,
+            "y": 64505,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-north",
+            "x": 65900,
+            "y": 64555,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-south",
+            "x": 66400,
+            "y": 64945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-hay-east",
+            "x": 66435,
+            "y": 64585,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-north",
+            "x": 66605,
+            "y": 64535,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-south",
+            "x": 67095,
+            "y": 64965,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-a",
+            "x": 64320,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-b",
+            "x": 64295,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-pocket-crate",
+            "x": 64330,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-north",
+            "x": 64500,
+            "y": 65255,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-south",
+            "x": 65000,
+            "y": 65645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-hay-east",
+            "x": 65035,
+            "y": 65285,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-north",
+            "x": 65205,
+            "y": 65235,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-south",
+            "x": 65695,
+            "y": 65665,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:93-lone-crate",
+            "x": 66415,
+            "y": 65245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:93-hay-pocket-a",
+            "x": 67120,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-hay-pocket-b",
+            "x": 67095,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-pocket-crate",
+            "x": 67130,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-north",
+            "x": 63800,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-south",
+            "x": 64300,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-hay-east",
+            "x": 64335,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-north",
+            "x": 64505,
+            "y": 65935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-south",
+            "x": 64995,
+            "y": 66365,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:94-crate-north",
+            "x": 65200,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-crate-south",
+            "x": 65700,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-hay-east",
+            "x": 65735,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:94-lone-crate",
+            "x": 65885,
+            "y": 65945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:94-mixed-bale",
+            "x": 66580,
+            "y": 66335,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:94-mixed-crate",
+            "x": 67035,
+            "y": 65905,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:95-hay-pocket-a",
+            "x": 63780,
+            "y": 66670,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-hay-pocket-b",
+            "x": 63805,
+            "y": 66885,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-pocket-crate",
+            "x": 63770,
+            "y": 67075,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:95-lone-crate",
+            "x": 65015,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:95-wide-bale",
+            "x": 65165,
+            "y": 67055,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:95-wide-crate",
+            "x": 65735,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-north",
+            "x": 65900,
+            "y": 66655,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-south",
+            "x": 66400,
+            "y": 67045,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-hay-east",
+            "x": 66435,
+            "y": 66685,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-north",
+            "x": 66605,
+            "y": 66635,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-south",
+            "x": 67095,
+            "y": 67065,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 0.85,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "open-yard",
+        "obstacles": [
+          {
+            "id": "91:91-hay-north",
+            "x": 63805,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:91-hay-south",
+            "x": 64295,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-north",
+            "x": 64505,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-south",
+            "x": 64995,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:91-lone-crate",
+            "x": 65715,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:91-hay-north",
+            "x": 65905,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:91-hay-south",
+            "x": 66395,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:91-lone-crate",
+            "x": 66585,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:92-lone-crate",
+            "x": 63785,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:92-lone-crate",
+            "x": 65015,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:92-mixed-bale",
+            "x": 65720,
+            "y": 64935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:92-mixed-crate",
+            "x": 65265,
+            "y": 64505,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-north",
+            "x": 65900,
+            "y": 64555,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-south",
+            "x": 66400,
+            "y": 64945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-hay-east",
+            "x": 66435,
+            "y": 64585,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-north",
+            "x": 66605,
+            "y": 64535,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-south",
+            "x": 67095,
+            "y": 64965,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-a",
+            "x": 64320,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-b",
+            "x": 64295,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-pocket-crate",
+            "x": 64330,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-north",
+            "x": 64500,
+            "y": 65255,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-south",
+            "x": 65000,
+            "y": 65645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-hay-east",
+            "x": 65035,
+            "y": 65285,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-north",
+            "x": 65205,
+            "y": 65235,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-south",
+            "x": 65695,
+            "y": 65665,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:93-lone-crate",
+            "x": 66415,
+            "y": 65245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:93-hay-pocket-a",
+            "x": 67120,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-hay-pocket-b",
+            "x": 67095,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-pocket-crate",
+            "x": 67130,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-north",
+            "x": 63800,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-south",
+            "x": 64300,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-hay-east",
+            "x": 64335,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-north",
+            "x": 64505,
+            "y": 65935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-south",
+            "x": 64995,
+            "y": 66365,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:94-crate-north",
+            "x": 65200,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-crate-south",
+            "x": 65700,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-hay-east",
+            "x": 65735,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:94-lone-crate",
+            "x": 65885,
+            "y": 65945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:94-mixed-bale",
+            "x": 66580,
+            "y": 66335,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:94-mixed-crate",
+            "x": 67035,
+            "y": 65905,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:95-hay-pocket-a",
+            "x": 63780,
+            "y": 66670,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-hay-pocket-b",
+            "x": 63805,
+            "y": 66885,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-pocket-crate",
+            "x": 63770,
+            "y": 67075,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:95-lone-crate",
+            "x": 65015,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:95-wide-bale",
+            "x": 65165,
+            "y": 67055,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:95-wide-crate",
+            "x": 65735,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-north",
+            "x": 65900,
+            "y": 66655,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-south",
+            "x": 66400,
+            "y": 67045,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-hay-east",
+            "x": 66435,
+            "y": 66685,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-north",
+            "x": 66605,
+            "y": 66635,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-south",
+            "x": 67095,
+            "y": 67065,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "open-yard-landscape",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "before": {
+        "zoom": 1,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "open-yard",
+        "obstacles": [
+          {
+            "id": "91:91-hay-north",
+            "x": 63805,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:91-hay-south",
+            "x": 64295,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-north",
+            "x": 64505,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-south",
+            "x": 64995,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:91-lone-crate",
+            "x": 65715,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:91-hay-north",
+            "x": 65905,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:91-hay-south",
+            "x": 66395,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:91-lone-crate",
+            "x": 66585,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:92-lone-crate",
+            "x": 63785,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:92-lone-crate",
+            "x": 65015,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:92-mixed-bale",
+            "x": 65720,
+            "y": 64935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:92-mixed-crate",
+            "x": 65265,
+            "y": 64505,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-north",
+            "x": 65900,
+            "y": 64555,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-south",
+            "x": 66400,
+            "y": 64945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-hay-east",
+            "x": 66435,
+            "y": 64585,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-north",
+            "x": 66605,
+            "y": 64535,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-south",
+            "x": 67095,
+            "y": 64965,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-a",
+            "x": 64320,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-b",
+            "x": 64295,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-pocket-crate",
+            "x": 64330,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-north",
+            "x": 64500,
+            "y": 65255,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-south",
+            "x": 65000,
+            "y": 65645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-hay-east",
+            "x": 65035,
+            "y": 65285,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-north",
+            "x": 65205,
+            "y": 65235,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-south",
+            "x": 65695,
+            "y": 65665,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:93-lone-crate",
+            "x": 66415,
+            "y": 65245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:93-hay-pocket-a",
+            "x": 67120,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-hay-pocket-b",
+            "x": 67095,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-pocket-crate",
+            "x": 67130,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-north",
+            "x": 63800,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-south",
+            "x": 64300,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-hay-east",
+            "x": 64335,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-north",
+            "x": 64505,
+            "y": 65935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-south",
+            "x": 64995,
+            "y": 66365,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:94-crate-north",
+            "x": 65200,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-crate-south",
+            "x": 65700,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-hay-east",
+            "x": 65735,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:94-lone-crate",
+            "x": 65885,
+            "y": 65945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:94-mixed-bale",
+            "x": 66580,
+            "y": 66335,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:94-mixed-crate",
+            "x": 67035,
+            "y": 65905,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:95-hay-pocket-a",
+            "x": 63780,
+            "y": 66670,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-hay-pocket-b",
+            "x": 63805,
+            "y": 66885,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-pocket-crate",
+            "x": 63770,
+            "y": 67075,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:95-lone-crate",
+            "x": 65015,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:95-wide-bale",
+            "x": 65165,
+            "y": 67055,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:95-wide-crate",
+            "x": 65735,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-north",
+            "x": 65900,
+            "y": 66655,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-south",
+            "x": 66400,
+            "y": 67045,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-hay-east",
+            "x": 66435,
+            "y": 66685,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-north",
+            "x": 66605,
+            "y": 66635,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-south",
+            "x": 67095,
+            "y": 67065,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 1,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "open-yard",
+        "obstacles": [
+          {
+            "id": "91:91-hay-north",
+            "x": 63805,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:91-hay-south",
+            "x": 64295,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-north",
+            "x": 64505,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:91-hay-south",
+            "x": 64995,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:91-lone-crate",
+            "x": 65715,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:91-hay-north",
+            "x": 65905,
+            "y": 63835,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:91-hay-south",
+            "x": 66395,
+            "y": 64265,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:91-lone-crate",
+            "x": 66585,
+            "y": 63845,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:92-lone-crate",
+            "x": 63785,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:92-lone-crate",
+            "x": 65015,
+            "y": 64545,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:92-mixed-bale",
+            "x": 65720,
+            "y": 64935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:92-mixed-crate",
+            "x": 65265,
+            "y": 64505,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-north",
+            "x": 65900,
+            "y": 64555,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-crate-south",
+            "x": 66400,
+            "y": 64945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:92-hay-east",
+            "x": 66435,
+            "y": 64585,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-north",
+            "x": 66605,
+            "y": 64535,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:92-hay-south",
+            "x": 67095,
+            "y": 64965,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-a",
+            "x": 64320,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-hay-pocket-b",
+            "x": 64295,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:93-pocket-crate",
+            "x": 64330,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-north",
+            "x": 64500,
+            "y": 65255,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-crate-south",
+            "x": 65000,
+            "y": 65645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:93-hay-east",
+            "x": 65035,
+            "y": 65285,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-north",
+            "x": 65205,
+            "y": 65235,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:93-hay-south",
+            "x": 65695,
+            "y": 65665,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:93-lone-crate",
+            "x": 66415,
+            "y": 65245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:93-hay-pocket-a",
+            "x": 67120,
+            "y": 65270,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-hay-pocket-b",
+            "x": 67095,
+            "y": 65485,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:93-pocket-crate",
+            "x": 67130,
+            "y": 65675,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-north",
+            "x": 63800,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-crate-south",
+            "x": 64300,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:94-hay-east",
+            "x": 64335,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-north",
+            "x": 64505,
+            "y": 65935,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "92:94-hay-south",
+            "x": 64995,
+            "y": 66365,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:94-crate-north",
+            "x": 65200,
+            "y": 65955,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-crate-south",
+            "x": 65700,
+            "y": 66345,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:94-hay-east",
+            "x": 65735,
+            "y": 65985,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "94:94-lone-crate",
+            "x": 65885,
+            "y": 65945,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "95:94-mixed-bale",
+            "x": 66580,
+            "y": 66335,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:94-mixed-crate",
+            "x": 67035,
+            "y": 65905,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "91:95-hay-pocket-a",
+            "x": 63780,
+            "y": 66670,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-hay-pocket-b",
+            "x": 63805,
+            "y": 66885,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "91:95-pocket-crate",
+            "x": 63770,
+            "y": 67075,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "92:95-lone-crate",
+            "x": 65015,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "93:95-wide-bale",
+            "x": 65165,
+            "y": 67055,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "93:95-wide-crate",
+            "x": 65735,
+            "y": 66645,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-north",
+            "x": 65900,
+            "y": 66655,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-crate-south",
+            "x": 66400,
+            "y": 67045,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "94:95-hay-east",
+            "x": 66435,
+            "y": 66685,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-north",
+            "x": 66605,
+            "y": 66635,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "95:95-hay-south",
+            "x": 67095,
+            "y": 67065,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "vertical-run-desktop",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "before": {
+        "zoom": 1,
+        "scale": [
+          0.275,
+          0.275
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 52.72727272727272,
+          "width": 28.999999999999996,
+          "height": 28.999999999999996,
+          "offset": [
+            75.27272727272728,
+            89.81818181818181
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "vertical-run",
+        "obstacles": [
+          {
+            "id": "0:107-left-wall",
+            "x": 65156,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:107-right-wall",
+            "x": 65916,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-shoulder-bale",
+            "x": 65341,
+            "y": 64975,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:108-left-wall",
+            "x": 65156,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-right-wall",
+            "x": 65916,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-gate",
+            "x": 65386,
+            "y": 65705,
+            "width": 148,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:109-left-wall",
+            "x": 65156,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-right-wall",
+            "x": 65916,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-left-wall",
+            "x": 65156,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-right-wall",
+            "x": 65916,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-crate",
+            "x": 65266,
+            "y": 66837,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "0:111-left-wall",
+            "x": 65156,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-right-wall",
+            "x": 65916,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 1,
+        "scale": [
+          0.275,
+          0.275
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 52.72727272727272,
+          "width": 28.999999999999996,
+          "height": 28.999999999999996,
+          "offset": [
+            75.27272727272728,
+            89.81818181818181
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "vertical-run",
+        "obstacles": [
+          {
+            "id": "0:107-left-wall",
+            "x": 65156,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:107-right-wall",
+            "x": 65916,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-shoulder-bale",
+            "x": 65341,
+            "y": 64975,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:108-left-wall",
+            "x": 65156,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-right-wall",
+            "x": 65916,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-gate",
+            "x": 65386,
+            "y": 65705,
+            "width": 148,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:109-left-wall",
+            "x": 65156,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-right-wall",
+            "x": 65916,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-left-wall",
+            "x": 65156,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-right-wall",
+            "x": 65916,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-crate",
+            "x": 65266,
+            "y": 66837,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "0:111-left-wall",
+            "x": 65156,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-right-wall",
+            "x": 65916,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "vertical-run-portrait",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "before": {
+        "zoom": 0.54,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "vertical-run",
+        "obstacles": [
+          {
+            "id": "0:107-left-wall",
+            "x": 65276,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:107-right-wall",
+            "x": 65796,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-shoulder-bale",
+            "x": 65341,
+            "y": 64975,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:108-left-wall",
+            "x": 65276,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-right-wall",
+            "x": 65796,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-gate",
+            "x": 65386,
+            "y": 65705,
+            "width": 148,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:109-left-wall",
+            "x": 65276,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-right-wall",
+            "x": 65796,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-left-wall",
+            "x": 65276,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-right-wall",
+            "x": 65796,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-crate",
+            "x": 65336,
+            "y": 66837,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "0:111-left-wall",
+            "x": 65276,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-right-wall",
+            "x": 65796,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 0.54,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "vertical-run",
+        "obstacles": [
+          {
+            "id": "0:107-left-wall",
+            "x": 65276,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:107-right-wall",
+            "x": 65796,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-shoulder-bale",
+            "x": 65341,
+            "y": 64975,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:108-left-wall",
+            "x": 65276,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-right-wall",
+            "x": 65796,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-gate",
+            "x": 65386,
+            "y": 65705,
+            "width": 148,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:109-left-wall",
+            "x": 65276,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-right-wall",
+            "x": 65796,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-left-wall",
+            "x": 65276,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-right-wall",
+            "x": 65796,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-crate",
+            "x": 65336,
+            "y": 66837,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "0:111-left-wall",
+            "x": 65276,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-right-wall",
+            "x": 65796,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "vertical-run-landscape",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "before": {
+        "zoom": 1,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "vertical-run",
+        "obstacles": [
+          {
+            "id": "0:107-left-wall",
+            "x": 65156,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:107-right-wall",
+            "x": 65916,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-shoulder-bale",
+            "x": 65341,
+            "y": 64975,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:108-left-wall",
+            "x": 65156,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-right-wall",
+            "x": 65916,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-gate",
+            "x": 65386,
+            "y": 65705,
+            "width": 148,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:109-left-wall",
+            "x": 65156,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-right-wall",
+            "x": 65916,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-left-wall",
+            "x": 65156,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-right-wall",
+            "x": 65916,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-crate",
+            "x": 65266,
+            "y": 66837,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "0:111-left-wall",
+            "x": 65156,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-right-wall",
+            "x": 65916,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 1,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          65536,
+          65536
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "vertical-run",
+        "obstacles": [
+          {
+            "id": "0:107-left-wall",
+            "x": 65156,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:107-right-wall",
+            "x": 65916,
+            "y": 64500,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-shoulder-bale",
+            "x": 65341,
+            "y": 64975,
+            "width": 118,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:108-left-wall",
+            "x": 65156,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:108-right-wall",
+            "x": 65916,
+            "y": 65100,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-gate",
+            "x": 65386,
+            "y": 65705,
+            "width": 148,
+            "height": 52,
+            "kind": "bale"
+          },
+          {
+            "id": "0:109-left-wall",
+            "x": 65156,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:109-right-wall",
+            "x": 65916,
+            "y": 65700,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-left-wall",
+            "x": 65156,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:110-right-wall",
+            "x": 65916,
+            "y": 66300,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-crate",
+            "x": 65266,
+            "y": 66837,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "0:111-left-wall",
+            "x": 65156,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          },
+          {
+            "id": "0:111-right-wall",
+            "x": 65916,
+            "y": 66900,
+            "width": 40,
+            "height": 602,
+            "kind": "wall"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "square-coop-desktop",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "before": {
+        "zoom": 1,
+        "scale": [
+          0.275,
+          0.275
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          700,
+          450
+        ],
+        "body": {
+          "radius": 52.72727272727272,
+          "width": 28.999999999999996,
+          "height": 28.999999999999996,
+          "offset": [
+            75.27272727272728,
+            89.81818181818181
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "square-coop",
+        "obstacles": [
+          {
+            "id": "square-hay-nw",
+            "x": 365,
+            "y": 195,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-hay-se",
+            "x": 1035,
+            "y": 685,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-tractor",
+            "x": 346,
+            "y": 300,
+            "width": 138,
+            "height": 112,
+            "kind": "tractor"
+          },
+          {
+            "id": "square-trough-west",
+            "x": 347,
+            "y": 563,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-trough-east",
+            "x": 1050,
+            "y": 425,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-crate-north",
+            "x": 915,
+            "y": 245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-crate-south",
+            "x": 480,
+            "y": 650,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-bale-north",
+            "x": 515,
+            "y": 245,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-bale-south",
+            "x": 885,
+            "y": 650,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 1,
+        "scale": [
+          0.275,
+          0.275
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          700,
+          450
+        ],
+        "body": {
+          "radius": 52.72727272727272,
+          "width": 28.999999999999996,
+          "height": 28.999999999999996,
+          "offset": [
+            75.27272727272728,
+            89.81818181818181
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "square-coop",
+        "obstacles": [
+          {
+            "id": "square-hay-nw",
+            "x": 365,
+            "y": 195,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-hay-se",
+            "x": 1035,
+            "y": 685,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-tractor",
+            "x": 346,
+            "y": 300,
+            "width": 138,
+            "height": 112,
+            "kind": "tractor"
+          },
+          {
+            "id": "square-trough-west",
+            "x": 347,
+            "y": 563,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-trough-east",
+            "x": 1050,
+            "y": 425,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-crate-north",
+            "x": 915,
+            "y": 245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-crate-south",
+            "x": 480,
+            "y": 650,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-bale-north",
+            "x": 515,
+            "y": 245,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-bale-south",
+            "x": 885,
+            "y": 650,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "square-coop-portrait",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "before": {
+        "zoom": 0.85,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          700,
+          450
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "square-coop",
+        "obstacles": [
+          {
+            "id": "square-hay-nw",
+            "x": 365,
+            "y": 195,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-hay-se",
+            "x": 1035,
+            "y": 685,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-tractor",
+            "x": 346,
+            "y": 300,
+            "width": 138,
+            "height": 112,
+            "kind": "tractor"
+          },
+          {
+            "id": "square-trough-west",
+            "x": 347,
+            "y": 563,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-trough-east",
+            "x": 1050,
+            "y": 425,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-crate-north",
+            "x": 915,
+            "y": 245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-crate-south",
+            "x": 480,
+            "y": 650,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-bale-north",
+            "x": 515,
+            "y": 245,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-bale-south",
+            "x": 885,
+            "y": 650,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 0.85,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          700,
+          450
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "square-coop",
+        "obstacles": [
+          {
+            "id": "square-hay-nw",
+            "x": 365,
+            "y": 195,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-hay-se",
+            "x": 1035,
+            "y": 685,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-tractor",
+            "x": 346,
+            "y": 300,
+            "width": 138,
+            "height": 112,
+            "kind": "tractor"
+          },
+          {
+            "id": "square-trough-west",
+            "x": 347,
+            "y": 563,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-trough-east",
+            "x": 1050,
+            "y": 425,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-crate-north",
+            "x": 915,
+            "y": 245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-crate-south",
+            "x": 480,
+            "y": 650,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-bale-north",
+            "x": 515,
+            "y": 245,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-bale-south",
+            "x": 885,
+            "y": 650,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    },
+    {
+      "name": "square-coop-landscape",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "before": {
+        "zoom": 1,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          700,
+          450
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "square-coop",
+        "obstacles": [
+          {
+            "id": "square-hay-nw",
+            "x": 365,
+            "y": 195,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-hay-se",
+            "x": 1035,
+            "y": 685,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-tractor",
+            "x": 346,
+            "y": 300,
+            "width": 138,
+            "height": 112,
+            "kind": "tractor"
+          },
+          {
+            "id": "square-trough-west",
+            "x": 347,
+            "y": 563,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-trough-east",
+            "x": 1050,
+            "y": 425,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-crate-north",
+            "x": 915,
+            "y": 245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-crate-south",
+            "x": 480,
+            "y": 650,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-bale-north",
+            "x": 515,
+            "y": 245,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-bale-south",
+            "x": 885,
+            "y": 650,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-final-idle-9qzmQ9E9.webp",
+            "walk": "rooster-ace-final-walk-BLyUL9vP.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "after": {
+        "zoom": 1,
+        "scale": [
+          0.25,
+          0.25
+        ],
+        "origin": [
+          0.5,
+          0.5
+        ],
+        "player": [
+          700,
+          450
+        ],
+        "body": {
+          "radius": 58,
+          "width": 29,
+          "height": 29,
+          "offset": [
+            70,
+            86
+          ]
+        },
+        "stats": {
+          "speed": 210,
+          "fireRate": 800,
+          "damage": 20,
+          "maxHp": 100
+        },
+        "arena": "square-coop",
+        "obstacles": [
+          {
+            "id": "square-hay-nw",
+            "x": 365,
+            "y": 195,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-hay-se",
+            "x": 1035,
+            "y": 685,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-tractor",
+            "x": 346,
+            "y": 300,
+            "width": 138,
+            "height": 112,
+            "kind": "tractor"
+          },
+          {
+            "id": "square-trough-west",
+            "x": 347,
+            "y": 563,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-trough-east",
+            "x": 1050,
+            "y": 425,
+            "width": 118,
+            "height": 66,
+            "kind": "trough"
+          },
+          {
+            "id": "square-crate-north",
+            "x": 915,
+            "y": 245,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-crate-south",
+            "x": 480,
+            "y": 650,
+            "width": 68,
+            "height": 68,
+            "kind": "crate"
+          },
+          {
+            "id": "square-bale-north",
+            "x": 515,
+            "y": 245,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          },
+          {
+            "id": "square-bale-south",
+            "x": 885,
+            "y": 650,
+            "width": 116,
+            "height": 74,
+            "kind": "bale"
+          }
+        ],
+        "textureSizes": [
+          {
+            "id": "ace",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "artillery",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "id": "storm",
+            "idle": [
+              2048,
+              1024
+            ],
+            "walk": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "assets": [
+          {
+            "id": "ace",
+            "idle": "rooster-ace-mascot-idle-DJJRG7Co.webp",
+            "walk": "rooster-ace-mascot-walk-C6sT0vcv.webp"
+          },
+          {
+            "id": "artillery",
+            "idle": "rooster-artillery-final-idle-C3pVL0jS.webp",
+            "walk": "rooster-artillery-final-walk-epIx7hb4.webp"
+          },
+          {
+            "id": "storm",
+            "idle": "rooster-storm-final-idle-NSoOvTOq.webp",
+            "walk": "rooster-storm-final-walk-Cr6Kqgpy.webp"
+          }
+        ]
+      },
+      "gameplayUnchanged": true
+    }
+  ],
+  "animationChecks": [
+    {
+      "arena": "open-yard",
+      "view": "desktop",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "open-yard",
+      "view": "portrait",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "open-yard",
+      "view": "landscape",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "vertical-run",
+      "view": "desktop",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "vertical-run",
+      "view": "portrait",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "vertical-run",
+      "view": "landscape",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "square-coop",
+      "view": "desktop",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.275,
+              0.275
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "square-coop",
+      "view": "portrait",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arena": "square-coop",
+      "view": "landscape",
+      "samples": [
+        {
+          "direction": "south",
+          "walk": {
+            "key": "rooster-ace-walk-south",
+            "frame": 5,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-south",
+            "frame": 1,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "west",
+          "walk": {
+            "key": "rooster-ace-walk-west",
+            "frame": 13,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-west",
+            "frame": 9,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "east",
+          "walk": {
+            "key": "rooster-ace-walk-east",
+            "frame": 13,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-east",
+            "frame": 9,
+            "flip": true,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        },
+        {
+          "direction": "north",
+          "walk": {
+            "key": "rooster-ace-walk-north",
+            "frame": 29,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          },
+          "idle": {
+            "key": "rooster-ace-idle-north",
+            "frame": 25,
+            "flip": false,
+            "origin": [
+              0.5,
+              0.5
+            ],
+            "scale": [
+              0.25,
+              0.25
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
