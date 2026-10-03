@@ -21,9 +21,9 @@ try {
     api.setPlayerCombatModifiers({maxHp:9999,projectileDamage:1,fireRate:999999});api.setPlayerHp(9999);
     window.__eliteGame.scene.getScene('GameScene').lastShotAt=Infinity;
   });
-  for(const type of ['elite-brute','elite-spitter']){
+  for(const type of ['elite-brute','elite-spitter','champion-spitter']){
     for(const [direction,dx,dy] of [['left',-230,0],['right',230,0],['up',0,-230],['down',0,230]]){
-      const prefix=`enemy-${type}`;
+      const prefix=type==='champion-spitter'?'enemy-elite-spitter':`enemy-${type}`;
       await page.evaluate(({type,dx,dy})=>{
         const api=window.__ROOSTER_TEST__;api.clearEnemies();api.clearProjectiles();api.movePlayer(700+dx,450+dy);
         api.spawnEnemyType(type,700,450,{speed:0,hp:99999,ability:null});
@@ -34,7 +34,7 @@ try {
       assert.equal(move.key,`${prefix}-run-${direction}`);assert.equal(move.state,'move');
       await page.evaluate(type=>{
         const s=window.__eliteGame.scene.getScene('GameScene'),e=window.__testedElite;
-        const c=type==='elite-brute'?s.waveSystem.makeEliteBrute():s.waveSystem.makeEliteSpitter();
+        const c=s.waveSystem.makeEnemyFromSpec({kind:type});
         e.speed=c.speed;e.ability={...c.ability,cooldown:999999};e.nextAbilityAt=s.time.now+50;
         window.__eliteSamples=[];
         window.__eliteSampler=()=>{
@@ -57,7 +57,8 @@ try {
       await page.waitForFunction(()=>window.__testedElite.animationState==='move');
       const result=await page.evaluate(()=>{
         const s=window.__eliteGame.scene.getScene('GameScene'),e=window.__testedElite;s.events.off('postupdate',window.__eliteSampler);
-        return {samples:window.__eliteSamples,projectiles:s.enemyProjectiles.filter(p=>p.sprite.active&&p.source==='elite-spitter-shot').length,
+        const source=e.type==='champion-spitter'?'champion-spitter-shot':'elite-spitter-shot';
+        return {samples:window.__eliteSamples,projectiles:s.enemyProjectiles.filter(p=>p.sprite.active&&p.source===source).length,
           events:s.telemetry.events.filter(event=>event.enemyType===e.type&&['enemyAbilityFired','enemyTelegraphShown'].includes(event.type))};
       });
       for(const state of ['windup','resolve','recovery']){
@@ -65,15 +66,17 @@ try {
         assert(samples.every(s=>s.key===`${prefix}-${state}-${direction}`),`${type} changed facing during ${state}`);
         assert(new Set(samples.map(s=>s.frame)).size>=2,`${type} ${state} animation did not advance`);
         const settled=samples.filter(s=>!s.paused).slice(2);
-        assert(settled.every(s=>s.velocity<=(state==='windup'&&type==='elite-brute'?13.3:state==='recovery'?type==='elite-brute'?23.2:12.2:.1)),`${type} ignored its planted attack rhythm: ${state}, ${JSON.stringify(settled.map(s=>s.velocity))}`);
+        const limit=state==='windup'&&type==='elite-brute'?13.3:state==='recovery'
+          ?type==='elite-brute'?23.2:type==='champion-spitter'?21.1:12.2:.1;
+        assert(settled.every(s=>s.velocity<=limit),`${type} ignored its planted attack rhythm: ${state}, ${JSON.stringify(settled.map(s=>s.velocity))}`);
       }
       assert(result.events.some(e=>e.type==='enemyAbilityFired'),`${type} never fired`);
-      if(type==='elite-spitter')assert.equal(result.projectiles,5,'Chili volley changed its projectile count');
+      if(type!=='elite-brute')assert.equal(result.projectiles,5,'Chili volley changed its projectile count');
       rows.push({type,direction,paused,states:Object.fromEntries(['windup','resolve','recovery'].map(state=>[state,
         {frames:[...new Set(result.samples.filter(s=>s.state===state).map(s=>s.frame))]}])),projectiles:result.projectiles});
     }
   }
   assert.deepEqual(errors,[]);
   await fs.writeFile(path.join(projectRoot,'test-results/portal-elites.json'),JSON.stringify({rows,errors},null,2));
-  console.log('Portal elites passed: two roles × four directions; movement → windup → impact → recovery, planted attack rhythm, frozen pause frames and five-shot volley.');
+  console.log('Portal elites passed: two elites and Chili champion × four directions; movement → windup → impact → recovery, planted attack rhythm, frozen pause frames and five-shot volley.');
 }finally{await browser.close();await stopTestServer(server);}

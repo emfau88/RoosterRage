@@ -2,15 +2,14 @@ import Phaser from 'phaser';
 
 const EXTINGUISH_MS = 440;
 const RANK_CONFIG = {
-  1: { radius: 90, damage: 10, life: 3000, lobes: 1, fireIslands: 4, flameScale: 1, ground: 0x3d130d, rim: 0xff6235 },
-  2: { radius: 108, damage: 12, life: 3400, lobes: 2, fireIslands: 6, flameScale: 1.06, ground: 0x49170d, rim: 0xff7138 },
-  3: { radius: 124, damage: 14, life: 3800, lobes: 3, fireIslands: 8, flameScale: 1.12, ground: 0x551a0b, rim: 0xff843d },
-  // Rank four splits into two compact patches: five flames per patch make the
-  // total coverage grow to ten without turning either field into visual noise.
-  4: { radius: 112, damage: 16, life: 4000, lobes: 3, fireIslands: 5, flameScale: 1.28, ground: 0x5b1c0a, rim: 0xff9141 }
+  1: { radius: 90, damage: 10, life: 3000, lobes: 1, edgeFlames: 12, innerFlames: 20, flameScale: 1, ground: 0x3d130d, rim: 0xff6235 },
+  2: { radius: 108, damage: 12, life: 3400, lobes: 2, edgeFlames: 14, innerFlames: 26, flameScale: 1.02, ground: 0x49170d, rim: 0xff7138 },
+  3: { radius: 124, damage: 14, life: 3800, lobes: 3, edgeFlames: 16, innerFlames: 32, flameScale: 1.06, ground: 0x551a0b, rim: 0xff843d },
+  // Rank four's two blue patches grow total coverage, not each patch's radius.
+  4: { radius: 112, damage: 16, life: 4000, lobes: 3, edgeFlames: 14, innerFlames: 28, flameScale: 1.1, ground: 0x5b1c0a, rim: 0xff9141 }
 };
 const EVOLVED_CONFIG = {
-  radius: 136, damage: 22, life: 4500, lobes: 4, fireIslands: 6, flameScale: 1.34, ground: 0x682006, rim: 0xffc45a
+  radius: 136, damage: 22, life: 4500, lobes: 4, edgeFlames: 18, innerFlames: 38, flameScale: 1.16, ground: 0x682006, rim: 0xffc45a
 };
 const LOBE_LAYOUT = [
   { x: -0.2, y: -0.04, width: 1.25, height: 0.68, rotation: -0.08 },
@@ -18,18 +17,32 @@ const LOBE_LAYOUT = [
   { x: -0.03, y: 0.18, width: 0.92, height: 0.5, rotation: -0.04 },
   { x: 0.04, y: -0.18, width: 0.78, height: 0.44, rotation: 0.05 }
 ];
-const HEAT_LAYOUT = [
-  { x: -0.24, y: 0.03, width: 0.5, phase: 0.2 },
-  { x: 0.25, y: -0.08, width: 0.44, phase: 2.1 },
-  { x: 0.02, y: 0.18, width: 0.38, phase: 4.3 },
-  { x: 0.04, y: -0.2, width: 0.34, phase: 5.4 },
-  { x: 0.4, y: 0.13, width: 0.3, phase: 3.2 },
-  { x: -0.42, y: 0.12, width: 0.28, phase: 1.3 },
-  { x: 0.31, y: 0.23, width: 0.25, phase: 4.9 },
-  { x: -0.06, y: -0.29, width: 0.23, phase: 2.8 }
-];
 const ORANGE_FLAME = 'molotov-ground-flame-orange';
 const BLUE_FLAME = 'molotov-ground-flame-blue';
+
+function getHeatLayout(config) {
+  const edge = Array.from({ length: config.edgeFlames }, (_, index) => {
+    const angle = -Math.PI / 2 + index * Math.PI * 2 / config.edgeFlames;
+    const radius = index % 2 === 0 ? 0.88 : 0.91;
+    return {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius * 0.5,
+      width: 0.34 + Math.sin(index * 2.3) * 0.09,
+      phase: index * 2.1,
+      edge: true
+    };
+  });
+  // A sunflower distribution fills the whole oval, including its center,
+  // without adding visible concentric rings or changing the floor perspective.
+  const inner = Array.from({ length: config.innerFlames }, (_, index) => {
+    const angle = index * Math.PI * (3 - Math.sqrt(5));
+    const radius = Math.sqrt(index / (config.innerFlames - 1)) * 0.78;
+    return { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius * 0.5,
+      width: 0.34 + Math.sin(index * 2.3 + 0.9) * 0.09,
+      phase: index * 2.1 + 0.7, edge: false };
+  });
+  return [...edge, ...inner];
+}
 
 function getFlameVisual(rank, evolved, index) {
   if (evolved) {
@@ -83,7 +96,7 @@ export class HazardZone {
       .setBlendMode(Phaser.BlendModes.ADD)
       .setAlpha(evolved ? 0.18 : 0.11)
       .setDepth(3.3);
-    this.heatSpots = HEAT_LAYOUT.slice(0, config.fireIslands).map((spot, index) => {
+    this.heatSpots = getHeatLayout(config).map((spot, index) => {
       const visual = getFlameVisual(rank, evolved, index);
       const sprite = scene.add.sprite(
         x + this.radius * spot.x,
@@ -93,7 +106,7 @@ export class HazardZone {
       )
         .setDisplaySize(
           this.radius * spot.width * config.flameScale,
-          this.radius * spot.width * 0.62 * config.flameScale
+          this.radius * spot.width * 0.85 * config.flameScale
         )
         .setOrigin(0.5, 0.72)
         .setFlipX(index % 2 === 1)
@@ -103,6 +116,7 @@ export class HazardZone {
         .play({ key: visual.animation, startFrame: (index * 3) % 12 });
       return {
         sprite,
+        edge: spot.edge,
         phase: spot.phase,
         baseScaleX: sprite.scaleX,
         baseScaleY: sprite.scaleY
@@ -138,7 +152,7 @@ export class HazardZone {
       const glow = Math.sin(this.age * 0.0018 + spot.phase) * 0.015;
       spot.sprite
         .setScale(spot.baseScaleX * (1 + glow), spot.baseScaleY * (1 + glow * 0.7))
-        .setAlpha(visibility * ((this.evolved ? 0.88 : 0.78) + index * 0.012 + this.tickFlash * 0.06));
+        .setAlpha(visibility * ((this.evolved ? 0.88 : 0.78) + (index % 3) * 0.012 + this.tickFlash * 0.06));
     });
     if (this.life <= 0) this.destroy();
   }

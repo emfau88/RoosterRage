@@ -20,7 +20,9 @@ Kein pauschaler Assettausch und keine behauptete komplette Portalfreigabe. Jeder
 ## Nach jüngstem Feedback weiterhin offen
 
 - [x] Zwei weitere eigenständige Elite-Typen (Panzertruthahn und Chili-Puter), mit unterschiedlicher Darstellung und Angriffsrhythmus. [Vergleich und Abnahme](qa/portal-elites-v2/README.md).
-- [ ] Stärkere grafische/spielerische Unterschiede weiterer Champions; bislang bleibt die goldene Goose-Variante.
+- [x] Frühe Abwechslung: Turbo-Gans in Welle 3, Chili-Puter-Champion früh in Welle 6, Panzertruthahn zum Abschluss von Welle 6. Bestehende Gegner- und Belohnungsplätze sowie XP-Budgets beibehalten.
+- [x] Molotov ab Stufe 1: vorhandene ovale Bodenperspektive erhalten, Rand und Mitte dicht mit unterschiedlich großen Flammen füllen, alle Ränge und Evolution kräftiger darstellen. [Vergleiche und Prüfung](qa/molotov-boundary/index.html).
+- [ ] Weitere Champion-Gestaltung über die beiden vorhandenen Varianten (Gans und Chili-Puter) hinaus.
 - [ ] Akustische und visuelle Abnahme auf echten Mobilgeräten, Kamera/Figurengröße in Feed Alley und Erstspielerfeedback.
 
 Die sechs Schritte des oben abgegrenzten Passes sind geprüft. [Umsetzungsbericht](PORTAL_FEEDBACK_POLISH_REPORT_2026-10-03.md) und [Direktvergleich](qa/portal-feedback/index.html) enthalten die Belege.

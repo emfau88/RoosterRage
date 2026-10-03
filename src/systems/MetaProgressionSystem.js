@@ -47,9 +47,11 @@ const COSMETICS = [
 ];
 
 const EXTRA_ENEMIES = [
-  { id: 'elite-runner', purpose: 'Gilded Talon: speed aura and dash', counterplay: 'Leave the dash line early' },
-  { id: 'elite-brute', purpose: 'Iron Brooder: armor aura and slam', counterplay: 'Clear the slam ring' },
-  { id: 'elite-spitter', purpose: 'Violet Matron: regeneration and fan shots', counterplay: 'Prioritize the Matron' },
+  { id: 'elite-runner', purpose: 'Turbo Goose: speed aura and dash', counterplay: 'Leave the dash line early' },
+  { id: 'elite-brute', purpose: 'Panzer Turkey: armor aura and slam', counterplay: 'Clear the slam ring' },
+  { id: 'elite-spitter', purpose: 'Chili Gobbler: regeneration and fan shots', counterplay: 'Prioritize the cook' },
+  { id: 'champion-charger', purpose: 'Golden Goose Champion: announced rush', counterplay: 'Leave the dash line early' },
+  { id: 'champion-spitter', purpose: 'Chili Gobbler Champion: announced hot-sauce volley', counterplay: 'Move into the gaps between shots' },
   { id: 'boss', purpose: 'THE BROOD KING: three phases', counterplay: 'Read the fans and lead the fireball wide' }
 ];
 

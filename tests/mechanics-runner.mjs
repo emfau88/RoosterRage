@@ -467,7 +467,7 @@ async function testWaveCuration(browser) {
       { slime: 24, kornkrabbler: 32, runner: 17, brute: 4, 'elite-runner': 1 },
       { slime: 36, kornkrabbler: 37, runner: 14, spitter: 5 },
       { slime: 40, kornkrabbler: 47, runner: 16, 'fan-spitter': 5, brute: 4 },
-      { slime: 36, kornkrabbler: 56, runner: 23, 'champion-charger': 1, 'fan-spitter': 6, brute: 9, 'elite-runner': 1 },
+      { slime: 36, kornkrabbler: 56, runner: 23, 'champion-spitter': 1, 'fan-spitter': 6, brute: 9, 'elite-brute': 1 },
       { slime: 53, kornkrabbler: 71, bomber: 20, 'fan-spitter': 5, support: 5, summoner: 2 },
       { slime: 57, kornkrabbler: 84, runner: 23, 'champion-charger': 1, spitter: 6, support: 6, summoner: 2, 'elite-spitter': 1 },
       { slime: 77, kornkrabbler: 98, brute: 20, 'fan-spitter': 6, support: 6, summoner: 2, 'elite-brute': 1 },
@@ -1087,7 +1087,7 @@ async function testAreaEffectReadability(browser) {
       && settled.hazards[0]?.animation === null
       && settled.hazards[0]?.flameCount === 0
       && settled.hazards[0]?.lobeCount === 1
-      && settled.hazards[0]?.heatSpotCount === 4
+      && settled.hazards[0]?.heatSpotCount === 32
       && settled.hazards[0]?.heatSpotTextures.every((texture) => texture === 'molotov-ground-flame-orange')
       && settled.hazards[0]?.heatSpotAnimations.every((animation) => animation === 'molotov-ground-flame-orange-loop')
       && Math.abs(settled.hazards[0]?.groundWidth - 181.8) < 3

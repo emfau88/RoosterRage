@@ -76,6 +76,14 @@ async function verifyCatalog(browser, serverUrl) {
     assert(result.waves.some((wave) => wave.roleCounts.support > 0)
       && result.waves.some((wave) => wave.roleCounts.summoner > 0),
     'Support and summoner roles are absent from curated waves.', result.waves);
+    const earlySpecials = result.waves.flatMap((wave) => wave.queue
+      .filter((type) => /^(elite-|champion-)/.test(type))
+      .map((type) => ({ wave: wave.wave, type }))).slice(0, 3);
+    assert(JSON.stringify(earlySpecials) === JSON.stringify([
+      { wave: 3, type: 'elite-runner' },
+      { wave: 6, type: 'champion-spitter' },
+      { wave: 6, type: 'elite-brute' }
+    ]), 'The first three special encounters must introduce three different silhouettes.', earlySpecials);
     assert(errors.length === 0, 'Browser errors in encounter catalog gate.', errors);
     return result;
   } finally {
@@ -485,23 +493,30 @@ async function verifyEncounterMatrix(browser, serverUrl) {
   return rows;
 }
 
-async function verifyChampion(browser, serverUrl) {
-  const { page, errors } = await openGame(browser, serverUrl, 'champion');
+async function verifyChampion(browser, serverUrl, type = 'champion-charger') {
+  const { page, errors } = await openGame(browser, serverUrl, type);
   try {
-    const id = await page.evaluate(() => window.__ROOSTER_TEST__.spawnEnemyType(
-      'champion-charger', 900, 450, { damage: 0, hp: 900 }
-    ));
+    const id = await page.evaluate((type) => window.__ROOSTER_TEST__.spawnEnemyType(
+      type, 900, 450, { damage: 0, hp: 900 }
+    ), type);
     await page.waitForTimeout(760);
     const combat = await page.evaluate((championId) => ({
       enemy: window.__ROOSTER_TEST__.getEnemySnapshot().find((enemy) => enemy.id === championId),
       events: window.__ROOSTER_TEST__.getEncounterEvents(),
       banner: document.querySelector('.wave-banner')?.textContent ?? ''
     }), id);
-    assert(combat.enemy?.champion && combat.enemy.type === 'champion-charger',
-      'Stormclaw did not enter the champion layer.', combat);
+    assert(combat.enemy?.champion && combat.enemy.type === type && !combat.enemy.elite,
+      `${type} did not enter the champion layer.`, combat);
+    assert((type === 'champion-spitter'
+      ? ['enemy-elite-spitter-run', 'enemy-elite-spitter-pulse'] : ['enemy-elite-runner-run'])
+      .includes(combat.enemy.texture),
+      'Champion uses the wrong silhouette.', combat);
     assert(combat.events.some((event) => event.type === 'enemyTelegraphShown'
-      && event.enemyType === 'champion-charger' && event.duration >= 500),
-    'Stormclaw Charge is missing its heavy readable telegraph.', combat.events);
+      && event.enemyType === type && event.duration >= 500),
+    'Champion is missing its heavy readable telegraph.', combat.events);
+    assert(combat.events.some((event) => event.type === 'enemyAbilityFired'
+      && event.enemyType === type && event.ability === (type === 'champion-spitter' ? 'fan' : 'dash')),
+      'Champion did not resolve its distinct attack.', combat.events);
     assert(combat.banner.includes(combat.enemy.name),
       'Champion arrival is not announced.', combat.banner);
     const reward = await page.evaluate((championId) => {
@@ -529,14 +544,16 @@ async function run() {
       projectileBudget: await verifyNormalProjectileBudget(browser, serverState.url),
       stateDrivenArt: await verifyStateDrivenEnemyArt(browser, serverState.url),
       elites: [],
-      champion: null,
+      champions: [],
       protectionAndBoss: null,
       matrix: null
     };
     for (const type of ['elite-runner', 'elite-brute', 'elite-spitter']) {
       report.elites.push(await verifyElite(browser, serverState.url, type));
     }
-    report.champion = await verifyChampion(browser, serverState.url);
+    for (const type of ['champion-charger', 'champion-spitter']) {
+      report.champions.push(await verifyChampion(browser, serverState.url, type));
+    }
     report.protectionAndBoss = await verifyProtectionAndBoss(browser, serverState.url);
     report.matrix = await verifyEncounterMatrix(browser, serverState.url);
     await fs.mkdir(artifactDir, { recursive: true });
@@ -548,7 +565,7 @@ async function run() {
       projectileBudget: report.projectileBudget,
       stateDrivenArt: report.stateDrivenArt,
       elites: report.elites,
-      champion: report.champion,
+      champions: report.champions,
       boss: report.protectionAndBoss,
       matrixCases: report.matrix.length
     }, null, 2));

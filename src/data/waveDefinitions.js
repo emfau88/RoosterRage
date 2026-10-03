@@ -140,7 +140,7 @@ export const WAVE_DEFINITIONS = [
   },
   {
     name: 'Elite Pursuit',
-    intent: 'Fan attacks, rusher pulses, and a priority elite target',
+    intent: 'A Chili champion introduces a volley, followed by the armored Turkey finale',
     count: 132,
     interval: 410,
     targetDuration: [40, 50],
@@ -151,12 +151,14 @@ export const WAVE_DEFINITIONS = [
     primaryRoles: ['runner', 'area-denial', 'tank'],
     pressureCurve: pressureCurve({ opening: 4, pressure: 6, finale: 8, finalePattern: 'rusher-line' }),
     xpCurve: xpCurve(228),
-    elites: [{ kind: 'elite-runner' }],
+    // Intro Turkey keeps the replaced early Goose's 360 HP; later Turkey
+    // retains full strength. Its pose, slam and armor aura are unchanged.
+    elites: [{ kind: 'elite-brute', multiplier: 0.8 }],
     composition: [
       { count: 36, enemy: { kind: 'slime' } },
       { count: 56, enemy: { kind: 'kornkrabbler' } },
       { count: 23, enemy: { kind: 'runner' } },
-      { count: 1, enemy: { kind: 'champion-charger' } },
+      { count: 1, enemy: { kind: 'champion-spitter' } },
       { count: 6, enemy: { kind: 'fan-spitter' } },
       { count: 9, enemy: { kind: 'brute' } }
     ]

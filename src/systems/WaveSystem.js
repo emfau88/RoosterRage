@@ -72,8 +72,9 @@ export class WaveSystem {
       support: () => this.makeSupport(multiplier),
       summoner: () => this.makeSummoner(multiplier),
       'champion-charger': () => this.makeChampionCharger(),
+      'champion-spitter': () => this.makeChampionSpitter(),
       'elite-runner': () => this.makeEliteRunner(),
-      'elite-brute': () => this.makeEliteBrute(),
+      'elite-brute': () => this.makeEliteBrute(multiplier),
       'elite-spitter': () => this.makeEliteSpitter(),
       boss: () => this.makeBoss()
     };
@@ -556,9 +557,11 @@ export class WaveSystem {
     };
   }
 
-  makeEliteBrute() {
+  makeEliteBrute(hpMultiplier = 1) {
+    const brute = this.makeBrute(3.1);
     return {
-      ...this.makeBrute(3.1),
+      ...brute,
+      hp: Math.round(brute.hp * hpMultiplier),
       type: 'elite-brute',
       role: 'tank',
       displayName: USE_NEW_PORTAL_ELITES ? 'Panzer Turkey' : 'Iron Brooder',
@@ -706,6 +709,36 @@ export class WaveSystem {
 
   getEnemyRoleMatrix() {
     return ENEMY_ROLE_MATRIX.map((role) => ({ ...role }));
+  }
+
+  makeChampionSpitter() {
+    const elite = this.makeEliteSpitter();
+    return {
+      ...elite,
+      type: 'champion-spitter',
+      role: 'area-denial',
+      displayName: 'Chili Gobbler Champion',
+      elite: false,
+      champion: true,
+      hp: 360,
+      speed: 84,
+      damage: 15,
+      xp: 30,
+      tint: null,
+      scale: 0.32,
+      hpBarWidth: 58,
+      hpBarYOffset: 40,
+      aura: null,
+      // The first ranged champion borrows an already introduced fan attack.
+      // A slower cadence and longer warning separate it from the later elite.
+      ability: {
+        ...elite.ability,
+        label: 'Champion Hot-Sauce Volley',
+        cooldown: 5200,
+        telegraphMs: 520,
+        source: 'champion-spitter-shot'
+      }
+    };
   }
 
   makeChampionCharger() {

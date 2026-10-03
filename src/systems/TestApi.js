@@ -214,6 +214,10 @@ export function installTestApi(scene) {
         groundHeight: zone.groundSprite.displayHeight,
         lobeCount: zone.lobes.length,
         heatSpotCount: zone.heatSpots.length,
+        heatSpotPositions: zone.heatSpots.map((spot) => ({
+          x: spot.sprite.x - zone.x, y: spot.sprite.y - zone.y, edge: spot.edge,
+          width: spot.sprite.displayWidth, height: spot.sprite.displayHeight
+        })),
         heatSpotTextures: zone.heatSpots.map((spot) => spot.sprite.texture?.key ?? null),
         heatSpotAnimations: zone.heatSpots.map((spot) => spot.sprite.anims?.currentAnim?.key ?? null),
         heatSpotTints: zone.heatSpots.map((spot) => spot.sprite.tintTopLeft),
@@ -923,6 +927,7 @@ export function installTestApi(scene) {
         support: () => scene.waveSystem.makeSupport(),
         summoner: () => scene.waveSystem.makeSummoner(),
         'champion-charger': () => scene.waveSystem.makeChampionCharger(),
+        'champion-spitter': () => scene.waveSystem.makeChampionSpitter(),
         'elite-runner': () => scene.waveSystem.makeEliteRunner(),
         'elite-brute': () => scene.waveSystem.makeEliteBrute(),
         'elite-spitter': () => scene.waveSystem.makeEliteSpitter(),

@@ -235,11 +235,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
   if (weapon.id === 'molotov-egg') {
     const visualExpectations = {
-      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, lobes: 1, flames: 4, flamePalette: ['molotov-ground-flame-orange'] },
-      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, lobes: 2, flames: 6, flamePalette: ['molotov-ground-flame-orange'] },
-      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, lobes: 3, flames: 8, flamePalette: ['molotov-ground-flame-orange'] },
-      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, lobes: 3, flames: 5, flamePalette: ['molotov-ground-flame-blue'] },
-      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, lobes: 4, flames: 6, flamePalette: ['molotov-ground-flame-orange', 'molotov-ground-flame-blue'] }
+      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, lobes: 1, flames: 32, flamePalette: ['molotov-ground-flame-orange'] },
+      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, lobes: 2, flames: 40, flamePalette: ['molotov-ground-flame-orange'] },
+      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, lobes: 3, flames: 48, flamePalette: ['molotov-ground-flame-orange'] },
+      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, lobes: 3, flames: 42, flamePalette: ['molotov-ground-flame-blue'] },
+      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, lobes: 4, flames: 56, flamePalette: ['molotov-ground-flame-orange', 'molotov-ground-flame-blue'] }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.molotovFlights.length === expected.count
@@ -270,9 +270,22 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
         ))
         && zone.radius === expected.radius
         && zone.groundWidth > zone.groundHeight * 1.5
+        && zone.heatSpotPositions.every((spot) => Math.hypot(spot.x, spot.y) < expected.radius)
+        && Math.max(...zone.heatSpotPositions.map((spot) => spot.width))
+          > Math.min(...zone.heatSpotPositions.map((spot) => spot.width)) * 1.5
+        && Array.from({ length: 121 }, (_, index) => ({
+          x: (index % 11 - 5) * 0.18, y: (Math.floor(index / 11) - 5) * 0.18
+        })).filter((sample) => Math.hypot(sample.x, sample.y) <= 0.9).every((sample) => (
+          zone.heatSpotPositions.some((spot) => Math.hypot(
+            sample.x - spot.x / expected.radius, sample.y - spot.y / (expected.radius * 0.5)
+          ) <= 0.32)
+        ))
+        && new Set(zone.heatSpotPositions.filter((spot) => spot.edge).map((spot) => (
+          Math.round((Math.atan2(spot.y / 0.5, spot.x) + Math.PI * 2) / (Math.PI / 4)) % 8
+        ))).size === 8
         && zone.rimAlpha <= 0.6
         && zone.emberAlpha <= 0.3
-      )), `Molotov ${stage} has the wrong perspective-correct ground field.`, {
+      )), `Molotov ${stage} must retain the oval perspective and fill its center and all eight edge sectors.`, {
       expected,
       fieldState
     });

@@ -118,17 +118,26 @@ export class PlayerInputSystem {
 
     const priorityPickup = this.findPriorityPickup(playerPosition);
     const nearestOrb = this.findNearestXpOrb();
-    if (!bossKiting && !avoidingDangerZone && !avoidingProjectile && priorityPickup) {
+    const cleanupEnemy = !nearestEnemy && this.scene.waveSystem.waitingForClear
+      ? this.scene.enemies.filter((enemy) => enemy.sprite.active)
+        .reduce((nearest, enemy) => !nearest || playerPosition.distanceSq(enemy.sprite)
+          < playerPosition.distanceSq(nearest.sprite) ? enemy : nearest, null)
+      : null;
+    if (!cleanupEnemy && !bossKiting && !avoidingDangerZone && !avoidingProjectile && priorityPickup) {
       movement.add(new Phaser.Math.Vector2(priorityPickup.sprite.x, priorityPickup.sprite.y)
         .subtract(playerPosition)
         .normalize()
         .scale(1.15));
-    } else if (!bossKiting && !avoidingDangerZone && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
+    } else if (!cleanupEnemy && !bossKiting && !avoidingDangerZone && !avoidingProjectile && nearestOrb && nearestDistance > 145) {
       movement.add(new Phaser.Math.Vector2(nearestOrb.sprite.x, nearestOrb.sprite.y)
         .subtract(playerPosition)
         .normalize()
         .scale(profile.pickupWeight));
     } else if (!nearestEnemy && !avoidingDangerZone && !avoidingProjectile) {
+      // On streaming maps, the QA bot must finish the remaining enemies
+      // before wandering toward a distant world target. Human input never
+      // enters this bot-only path.
+      if (cleanupEnemy) this.scene.bot.target.set(cleanupEnemy.sprite.x, cleanupEnemy.sprite.y);
       movement.add(this.scene.bot.target.clone().subtract(playerPosition).normalize());
       if (Phaser.Math.Distance.Between(
         playerPosition.x,
