@@ -12,6 +12,8 @@ Basis: `d776dd1`. Boombardier war bereits committed und auf dem öffentlichen Te
 - **Belohnungen:** Truhen öffnen in 520 statt 760 ms. Die zentrale Pause verhindert Kampf während der Öffnung und respektiert weitere Pausegründe. Elite-, Champion- und Boss-Rewards bekommen unterschiedliche Farbakzente. Der bestehende EVO-/Upgrade-Beleg bleibt erhalten und hat Vorrang vor Pickup-Meldungen.
 - **Ergebnis:** Kernels und Freischaltungen zuerst, danach kurze Laufübersicht und Build. Kampfdaten sind über ein natives, per Tastatur bedienbares Details-Element einklappbar. Die Rückkehraktion bleibt am unteren Rand erreichbar.
 
+Nach der Portrait-Rückmeldung kamen drei **separate Hintergründe** hinter die unveränderten Figuren: goldenes Farmlicht (Ace), warme Scheune (Boombardier), blauer Sturmhimmel (Stormcrest). Auch das ausgewählte Portrait im Play-Bereich verwendet den zugehörigen Hintergrund. Originale und genaue Imagegen-Prompts liegen unter `art-source/ui/portrait-backdrops-v1`, die drei optimierten Laufzeitassets unter `src/assets/ui/portrait-backdrops-v1` (zusammen 323.468 Bytes). Der Export verändert nur Größe/Format der Hintergründe. [Direktvergleich mit/ohne Hintergrund](qa/portrait-backdrops-v1/index.html): Desktop, Hochformat und Querformat; identische Figurengröße und Position, keine Überläufe oder Browserfehler. Das erneute Release-Gate ist bestanden, Paketgröße 18,33 MiB. Der visuelle Gewinn liegt in Atmosphäre und Tiefe, bei weiterhin gut erkennbarem Charakter.
+
 ## Sound-Abdeckung
 
 Codepfade und Assetmanifest wurden geprüft. Die drei neuen Sounds wurden im Browser tatsächlich gestartet; das ersetzt keine akustische Feinabnahme auf Lautsprechern und Mobilgeräten.

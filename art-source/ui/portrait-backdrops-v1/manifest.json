@@ -1,0 +1,38 @@
+[
+  {
+    "rooster": "ace",
+    "source": "art-source/ui/portrait-backdrops-v1/ace.png",
+    "runtime": "src/assets/ui/portrait-backdrops-v1/ace.webp",
+    "size": [
+      1023,
+      576
+    ],
+    "sourceSha256": "f2ee50dec7354a760f46fd3f5f868c1723fdb90b2e5f41a2f388f860b662fc82",
+    "runtimeSha256": "61889f9db6366565e031d23811ee9b65b4912d02a2ee45cc462248aca872e2b7",
+    "bytes": 130322
+  },
+  {
+    "rooster": "artillery",
+    "source": "art-source/ui/portrait-backdrops-v1/artillery.png",
+    "runtime": "src/assets/ui/portrait-backdrops-v1/artillery.webp",
+    "size": [
+      1023,
+      576
+    ],
+    "sourceSha256": "9d2ebc29592bd8a2e69cae29a18e73ce74c3872c436d4edbfc2fe0ada71aea8b",
+    "runtimeSha256": "a2510420b983a36d40fb2919683db148889cf683224225cf1d85468ab86e0d81",
+    "bytes": 96598
+  },
+  {
+    "rooster": "storm",
+    "source": "art-source/ui/portrait-backdrops-v1/storm.png",
+    "runtime": "src/assets/ui/portrait-backdrops-v1/storm.webp",
+    "size": [
+      1023,
+      576
+    ],
+    "sourceSha256": "576465d651928336b1fa899aefcb2cf16f77ca12b9eead6eb2677cd5b82343c1",
+    "runtimeSha256": "590925c3fd75afd616e123d38a1e82239e3c2fd35b3bc85004330a74093514ed",
+    "bytes": 96548
+  }
+]

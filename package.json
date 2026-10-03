@@ -34,6 +34,8 @@
     "test:pickup-contact": "node tests/pickup-contact-runner.mjs",
     "test:portal-feedback-unit": "node --test tests/portal-audio-priority.test.mjs tests/portal-prop-feedback.test.mjs",
     "qa:portal-feedback": "node scripts/capture-portal-feedback.mjs && python scripts/render-portal-feedback-gallery.py",
+    "assets:portrait-backdrops": "python scripts/prepare-portrait-backdrops.py",
+    "qa:portrait-backdrops": "node scripts/capture-portrait-backdrops.mjs && python scripts/render-portrait-backdrops.py",
     "test:pause": "node tests/pause-runner.mjs",
     "test:menus": "node tests/responsive-menu-runner.mjs",
     "test:mechanics": "node tests/mechanics-runner.mjs",

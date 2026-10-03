@@ -2,9 +2,9 @@
   "basis": "d776dd1",
   "release": {
     "package": {
-      "files": 151,
-      "totalBytes": 18891225,
-      "totalMiB": 18.02,
+      "files": 154,
+      "totalBytes": 19215279,
+      "totalMiB": 18.33,
       "largest": [
         {
           "file": "assets/boss-theme-DikIQNT3.mp3",
@@ -95,5 +95,11 @@
     "menus",
     "release"
   ],
-  "physicalDeviceAcceptance": false
+  "physicalDeviceAcceptance": false,
+  "portraitBackdropChecks": {
+    "viewports": 3,
+    "unchangedFigureGeometry": true,
+    "browserErrors": 0,
+    "runtimeBytes": 323468
+  }
 }

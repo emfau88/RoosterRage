@@ -630,3 +630,18 @@ html.has-ui-overlay, html.has-ui-overlay body, html.has-ui-overlay #game-root,
   object-position: center top;
   transform: none;
 }
+.rooster-card--ace, .hub-rooster-hero__portrait[data-rooster="ace"] {
+  --portrait-backdrop: url('./assets/ui/portrait-backdrops-v1/ace.webp');
+}
+.rooster-card--artillery, .hub-rooster-hero__portrait[data-rooster="artillery"] {
+  --portrait-backdrop: url('./assets/ui/portrait-backdrops-v1/artillery.webp');
+}
+.rooster-card--storm, .hub-rooster-hero__portrait[data-rooster="storm"] {
+  --portrait-backdrop: url('./assets/ui/portrait-backdrops-v1/storm.webp');
+}
+.henhouse-panel .rooster-card__portrait,
+.hub-rooster-hero__portrait {
+  background-image: linear-gradient(rgba(7, 16, 20, .12), rgba(7, 16, 20, .24)), var(--portrait-backdrop);
+  background-size: cover;
+  background-position: center;
+}

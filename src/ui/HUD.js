@@ -919,6 +919,7 @@ export class HUD {
       portrait.src = ROOSTER_PORTRAITS[definition.id];
       portrait.alt = `${definition.name} portrait`;
       portrait.style.objectPosition = PORTRAIT_FOCUS[definition.id];
+      portrait.parentElement.dataset.rooster = definition.id;
       const badge = this.overlay.querySelector('[data-hero-mastery-badge]');
       badge.src = MASTERY_BADGES[definition.id];
       badge.alt = `${definition.name} mastery badge`;
