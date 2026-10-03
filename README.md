@@ -2,7 +2,7 @@
 
 ### [Play the Kongregate test build](https://emfau88.github.io/RoosterRage/kongregate/)
 
-Test the current portal candidate directly in your browser. This GitHub-hosted preview uses the same game-only release build as the Kongregate package.
+Test the current portal candidate directly in your browser. This GitHub-hosted preview uses the same game-only release build as the Kongregate package and follows `codex/kongregate-upload`.
 
 The portal candidate includes the new playable mascot versions of **Barnyard Ace, Boombardier and Stormcrest**, all immediately selectable on this public test page. Previous character artwork remains preserved in the repository for comparison and rollback.
 
