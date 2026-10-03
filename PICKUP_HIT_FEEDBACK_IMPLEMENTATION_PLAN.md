@@ -135,6 +135,15 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Desktop und Mobilformat prüfen: 12, 170 und erneut 170 aufeinanderfolgende Bomben-Tode, jeder mit Konfetti, Pool-Limit, Farbvielfalt, Pause, Ablauf, andere Waffen und Neustart.
 - [ ] Abschließende Release-/Pages-Prüfung, Paket, Commit/Push und öffentlicher Play-Link bestätigen.
 
+## Deploy-Korrektur und Prüfung der Upload-Dateien
+
+- [x] Fehlgeschlagenen Pages-Workflow `37151769696` prüfen: Der Pickup-Sequenztest nahm wegen eng gesetzter Test-Items unbeabsichtigt weitere Items auf; der Spiel-Build und die vorherigen Prüfungen bestanden.
+- [x] Ausschließlich die Testaufstellung korrigieren: sechs hindernisfreie Positionen innerhalb der aktiven Arena, jeweils mindestens 200 Welteinheiten Abstand. Keine Änderung am Spielcode oder am Upload-Bundle.
+- [x] Lokalen Release-Gate erneut bestehen: Elite-Balance, zwölf frühe/späte Pickup-Aufnahmen und Bomben-Konfetti auf Desktop und im Mobilformat.
+- [x] Beide Upload-ZIPs Datei für Datei mit dem getesteten Release vergleichen: 155 Dateien im Komplett-ZIP und 154 Dateien im Additional-Files-ZIP stimmen vollständig überein.
+- [ ] Korrektur pushen/mergen und erfolgreichen öffentlichen Pages-Deploy samt Commit-ID bestätigen.
+- [ ] Komplett-ZIP entpacken und den Release-Gate direkt auf dem entpackten Upload-Paket bestehen.
+
 ## Bisheriges Laufprotokoll
 
 - 2026-10-03: Plan erstellt; Git-Stand, Einstiegspunkte und vorhandene Testskripte geprüft. Noch keine Spieländerung und keine vollständigen Testläufe.
