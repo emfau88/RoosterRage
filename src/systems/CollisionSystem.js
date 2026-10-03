@@ -54,7 +54,9 @@ export class CollisionSystem {
     });
 
     scene.physics.add.overlap(scene.player.sprite, scene.pickups.group, (_playerSprite, pickupSprite) => {
-      scene.pickups.collect(pickupSprite.entity);
+      // Normal pickups use the rooster's visible foot contact in PickupSystem.
+      // Chests retain their existing Arcade overlap and opening sequence.
+      if (pickupSprite.entity?.chest) scene.pickups.collect(pickupSprite.entity);
     });
 
     scene.physics.add.overlap(scene.player.sprite, scene.enemyProjectileGroup, (_playerSprite, projectileSprite) => {

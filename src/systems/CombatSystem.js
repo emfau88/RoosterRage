@@ -60,6 +60,7 @@ export class CombatSystem {
     const fireEggVisual = !evolution && scene.player.fireEggs
       ? getFireEggVisual(scene.player.getUpgradeRank('fire-eggs'))
       : null;
+    const fireRank = fireEggVisual ? scene.player.getUpgradeRank('fire-eggs') : 0;
     const source = evolution?.id ?? (scene.player.fireEggs ? 'fire-eggs' : 'base-egg');
     this.primaryAttackSequence += 1;
     const pattern = this.getShotPattern();
@@ -84,7 +85,12 @@ export class CombatSystem {
           * (fireEggVisual?.scaleMultiplier ?? 1);
       const lineTrailLength = evolution?.lineTrailLength ?? primary.lineTrailLength ?? 0;
       this.spawnProjectile(angle, shotTarget, shot.laneOffset, {
-        damage: Math.round(scene.player.projectileDamage * (evolution?.damageMultiplier ?? 1)),
+        // Three of the existing +10 direct damage per rank move into three
+        // afterburn ticks. Other weapons keep their existing global bonus.
+        damage: Math.round((scene.player.projectileDamage - fireRank * 3)
+          * (evolution?.damageMultiplier ?? 1)),
+        burnDamage: fireRank,
+        burnDuration: fireRank ? 2400 : 0,
         source,
         homing: true,
         maxTurnRate: primary.homingTurnRate ?? shot.maxTurnRate ?? 0.08,
@@ -472,6 +478,12 @@ export class CombatSystem {
       projectile.criticalBonusApplied = true;
     }
     this.damageEnemy(enemy, damage, hitX, hitY, { critical, source: projectile.source });
+    if (projectile.source === 'fire-eggs') {
+      this.scene.combatFeedback.showFireEggHit(hitX, hitY);
+      if (enemy.sprite.active && projectile.burnDamage > 0) {
+        enemy.applyBurn(projectile.burnDuration, projectile.burnDamage, 'fire-eggs-burn');
+      }
+    }
     this.applyPrimaryImpact(projectile, enemy, damage, hitX, hitY);
     if (projectile.knockbackRank > 0 && enemy.sprite.active) {
       enemy.applyKnockback(projectile.currentAngle, 80 + projectile.knockbackRank * 30);

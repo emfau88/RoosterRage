@@ -87,6 +87,10 @@ export class GamePauseSystem {
     // New elite attack poses must hold with their telegraph, rather than
     // advancing to the impact frame while the simulation clock is frozen.
     for (const enemy of this.scene.enemies ?? []) {
+      for (const flame of enemy.burnFlames ?? []) {
+        if (shouldFreezeTime) flame.anims.pause();
+        else flame.anims.resume();
+      }
       if (!enemy.directionalStateAnimations || !enemy.sprite.active) continue;
       if (shouldFreezeTime && !enemy.sprite.anims.isPaused) {
         enemy.sprite.anims.pause();

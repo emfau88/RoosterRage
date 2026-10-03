@@ -33,6 +33,70 @@ canvas {
   image-rendering: auto;
 }
 
+.pickup-indicators {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.pickup-indicator {
+  position: fixed;
+  display: flex;
+  width: 32px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(241, 249, 244, 0.53);
+  border-radius: 12px;
+  background: rgba(8, 26, 31, 0.72);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, -50%);
+  transition: left 120ms linear, top 120ms linear;
+}
+
+.pickup-indicator[hidden] { display: none; }
+.pickup-indicator--heal { border-color: rgba(101, 239, 139, 0.7); }
+.pickup-indicator--bomb { border-color: rgba(255, 180, 89, 0.72); }
+.pickup-indicator--magnet { border-color: rgba(90, 215, 255, 0.72); }
+.pickup-indicator.is-urgent { box-shadow: 0 0 11px rgba(101, 239, 139, 0.44); }
+
+.pickup-indicator img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.pickup-indicator__arrow {
+  position: absolute;
+  top: -12px;
+  left: 11px;
+  color: #f8f5d8;
+  font-size: 11px;
+  line-height: 1;
+  text-shadow: 0 1px 2px #122124;
+}
+
+.pickup-indicator__distance {
+  position: absolute;
+  bottom: 2px;
+  display: flex;
+  gap: 2px;
+}
+
+.pickup-indicator__distance i {
+  width: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(245, 251, 249, 0.25);
+}
+
+.pickup-indicator[data-distance-tier="1"] .pickup-indicator__distance i:first-child,
+.pickup-indicator[data-distance-tier="2"] .pickup-indicator__distance i:nth-child(-n+2),
+.pickup-indicator[data-distance-tier="3"] .pickup-indicator__distance i {
+  background: #e8f7eb;
+}
+
 .boot-loader {
   position: fixed;
   inset: 0;

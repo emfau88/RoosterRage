@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
 
+const CLASSIC_FEEDBACK = import.meta.env?.DEV
+  && new URLSearchParams(globalThis.location?.search ?? '').get('feedbackCompare') === 'before';
+
 export class Enemy {
   constructor(scene) {
     this.scene = scene;
@@ -8,6 +11,8 @@ export class Enemy {
     this.auraVisual = null;
     this.championVisual = null;
     this.burnOverlay = null;
+    this.burnFlames = [];
+    this.burnSources = new Map();
     this.knockbackVelocity = new Phaser.Math.Vector2();
     this.sprite = scene.physics.add.sprite(0, 0, 'enemy-slime');
     this.sprite.setActive(false).setVisible(false);
@@ -349,23 +354,37 @@ export class Enemy {
     }
   }
 
-  applyBurn(duration = 3000, damage = 3) {
+  applyBurn(duration = 3000, damage = 3, source = 'molotov-burn') {
     const now = this.scene.time.now;
-    this.burnUntil = Math.max(this.burnUntil ?? 0, now + duration);
-    this.burnDamage = Math.max(this.burnDamage ?? 0, damage);
-    this.nextBurnTickAt = Math.max(this.nextBurnTickAt ?? 0, now + 650);
+    const current = this.burnSources.get(source);
+    this.burnSources.set(source, {
+      until: Math.max(current?.until ?? 0, now + duration),
+      damage: Math.max(current?.damage ?? 0, damage)
+    });
+    this.refreshBurnStrength(now);
+    if (!this.nextBurnTickAt) this.nextBurnTickAt = now + 650;
+    // Preserve the existing Molotov contact behavior: its repeated zone ticks
+    // defer afterburn while the victim remains in the fire field. Fire Egg
+    // contacts extend duration without postponing an already planned tick.
+    else if (source === 'molotov-burn') this.nextBurnTickAt = Math.max(this.nextBurnTickAt, now + 650);
     if (!this.burnOverlay?.active) {
-      this.burnOverlay = this.scene.add.ellipse(
-        this.sprite.x,
-        this.sprite.y + 2,
-        32,
-        12,
-        0xff6b28,
-        0.12
-      )
-        .setStrokeStyle(1, 0xffc45a, 0.38)
-        .setDepth(5.8);
-      this.burnOverlayKind = 'ground-glow';
+      if (CLASSIC_FEEDBACK) {
+        this.burnOverlay = this.scene.add.ellipse(this.sprite.x, this.sprite.y + 2,
+          32, 12, 0xff6b28, 0.12)
+          .setStrokeStyle(1, 0xffc45a, 0.38).setDepth(5.8);
+        this.burnOverlayKind = 'ground-glow';
+      } else {
+        const count = this.boss || this.elite ? 3 : 2;
+        this.burnFlames = Array.from({ length: count }, (_, index) => {
+          const flame = this.scene.add.sprite(this.sprite.x, this.sprite.y,
+            'molotov-ground-flame-orange').setDepth(this.sprite.depth + 1.35);
+          flame.play('molotov-ground-flame-orange-loop');
+          flame.anims.setProgress((index * 0.37) % 1);
+          return flame;
+        });
+        this.burnOverlay = this.burnFlames[0];
+        this.burnOverlayKind = 'body-flames';
+      }
     }
     this.updateBurnOverlay();
   }
@@ -373,7 +392,8 @@ export class Enemy {
   updateBurn() {
     if (!this.burnUntil) return;
     const now = this.scene.time.now;
-    if (now >= this.burnUntil) {
+    this.refreshBurnStrength(now);
+    if (!this.burnUntil) {
       this.clearBurn();
       return;
     }
@@ -385,25 +405,63 @@ export class Enemy {
       this.burnDamage,
       this.sprite.x,
       this.sprite.y,
-      { source: 'molotov-burn', quiet: true }
+      { source: this.burnSource, quiet: true }
     );
     if (killed) this.clearBurn();
   }
 
+  refreshBurnStrength(now) {
+    let strongest = null;
+    let until = 0;
+    for (const [source, entry] of this.burnSources) {
+      if (entry.until <= now) {
+        this.burnSources.delete(source);
+        continue;
+      }
+      until = Math.max(until, entry.until);
+      if (!strongest || entry.damage > strongest.damage) strongest = { source, damage: entry.damage };
+    }
+    this.burnUntil = until;
+    this.burnDamage = strongest?.damage ?? 0;
+    this.burnSource = strongest?.source ?? null;
+  }
+
   updateBurnOverlay() {
     if (!this.burnOverlay?.active) return;
-    const size = Math.max(28, Math.min(82, this.sprite.displayWidth * 0.72));
-    this.burnOverlay
-      .setPosition(this.sprite.x, this.sprite.y + this.sprite.displayHeight * 0.18)
-      .setDisplaySize(size, size * 0.34)
-      .setAlpha(0.1 + Math.sin(this.scene.time.now * 0.006) * 0.025);
+    if (CLASSIC_FEEDBACK) {
+      const size = Math.max(28, Math.min(82, this.sprite.displayWidth * 0.72));
+      this.burnOverlay
+        .setPosition(this.sprite.x, this.sprite.y + this.sprite.displayHeight * 0.18)
+        .setDisplaySize(size, size * 0.34)
+        .setAlpha(0.1 + Math.sin(this.scene.time.now * 0.006) * 0.025);
+      return;
+    }
+    const width = this.sprite.displayWidth;
+    const height = this.sprite.displayHeight;
+    const size = Math.max(15, Math.min(32, height * (this.boss ? 0.31 : 0.29)));
+    const positions = [
+      [-0.25, 0.24],
+      [0.23, 0.25],
+      [0.02, 0.34]
+    ];
+    this.burnFlames.forEach((flame, index) => {
+      const [offsetX, offsetY] = positions[index];
+      flame
+        .setPosition(this.sprite.x + width * offsetX, this.sprite.y + height * offsetY)
+        .setDisplaySize(size * (index === 2 ? 0.77 : 0.9), size)
+        .setAlpha(0.72 + Math.sin(this.scene.time.now * 0.011 + index * 2.1) * 0.08);
+    });
   }
 
   clearBurn() {
     this.burnUntil = 0;
     this.burnDamage = 0;
     this.nextBurnTickAt = 0;
-    this.burnOverlay?.destroy();
+    this.burnSource = null;
+    this.burnSources?.clear();
+    if (this.burnOverlay && !this.burnFlames?.includes(this.burnOverlay)) this.burnOverlay.destroy();
+    this.burnFlames?.forEach((flame) => flame.destroy());
+    this.burnFlames = [];
     this.burnOverlay = null;
     this.burnOverlayKind = null;
   }

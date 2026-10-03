@@ -18,6 +18,7 @@ await page.addInitScript(() => {
   } });
 });
 const rows = [];
+const expectedRadii = { heal: 15, bomb: 11, magnet: 15 };
 try {
   await page.goto(`${server.url}?seed=pickup-contact&arena=square-coop&profile=average`);
   await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState && window.__pickupGame);
@@ -32,15 +33,18 @@ try {
           const s = window.__pickupGame.scene.getScene('GameScene');
           s.roosterClasses.select(rooster); s.pickups.items.forEach(p => p.destroy()); s.pickups.items = [];
           s.pickups.spawned[kind] = 0; s.player.hp = s.player.maxHp * 0.4;
-          s.player.sprite.body.reset(700+dx,450+dy);
+          s.player.updateGroundMarker();
+          const footOffset = s.player.groundMarker.y - s.player.sprite.y;
+          s.player.sprite.body.reset(700+dx,450+dy-footOffset);
+          s.player.updateGroundMarker();
           const p = s.pickups.spawn(kind,700,450); window.__contactPickup = p;
           const b = p.sprite.body;
           return {collected:s.pickups.collected[kind], hp:s.player.hp, maxHp:s.player.maxHp,
             center:[b.center.x,b.center.y], anchor:[p.sprite.x,p.sprite.y], radius:b.halfWidth,
-            visualY:p.visual.y};
+            footOffset, visualY:p.visual.y};
         }, {rooster,kind,dx,dy});
         assert(Math.hypot(before.center[0]-700,before.center[1]-450) <= 1.5, 'Pickup body is not centered');
-        assert(before.radius >= 20, 'Collection area too small');
+        assert.equal(before.radius, expectedRadii[kind], `${kind} contact radius changed`);
         await page.keyboard.down(key);
         await page.waitForFunction(({kind,n}) => window.__pickupGame.scene.getScene('GameScene').pickups.collected[kind] > n,
           {kind,n:before.collected}, {timeout:2500});
@@ -60,9 +64,102 @@ try {
       }
     }
   }
+  const passes = [];
+  for (const { name: viewport, width, height, speed } of [
+    { name: 'desktop', width: 960, height: 720, speed: 210 },
+    { name: 'portrait-fast', width: 390, height: 844, speed: 560 }
+  ]) {
+    await page.setViewportSize({ width, height });
+    for (const rooster of ['ace', 'storm', 'artillery']) {
+      for (const kind of ['heal', 'bomb', 'magnet']) {
+        for (const diagonal of [false, true]) {
+          const missDistance = kind === 'bomb' ? 33 : 39;
+          const offset = diagonal ? missDistance / Math.SQRT2 : 0;
+          const startX = 620 + offset;
+          const startY = diagonal ? 530 + offset : 450 + missDistance;
+          const stopX = 780 + offset;
+          const before = await page.evaluate(({ rooster, kind, speed, startX, startY }) => {
+            const s = window.__pickupGame.scene.getScene('GameScene');
+            s.roosterClasses.select(rooster);
+            s.player.speed = speed;
+            s.player.hp = s.player.maxHp * 0.4;
+            s.pickups.items.forEach((pickup) => pickup.destroy());
+            s.pickups.items = [];
+            s.pickups.spawned[kind] = 0;
+            s.player.updateGroundMarker();
+            const footOffset = s.player.groundMarker.y - s.player.sprite.y;
+            s.player.sprite.body.reset(startX, startY - footOffset);
+            s.player.updateGroundMarker();
+            const pickup = s.pickups.spawn(kind, 700, 450);
+            if (!pickup) throw new Error(`Could not spawn ${kind}`);
+            const body = s.player.sprite.body;
+            return {
+              collected: s.pickups.collected[kind],
+              playerRadius: body.halfWidth,
+              footOffset,
+              bodyToFoot: s.player.groundMarker.y - body.center.y,
+              pickupRadius: pickup.sprite.body.halfWidth,
+              visualY: pickup.visual.y,
+              anchorY: pickup.sprite.y
+            };
+          }, { rooster, kind, speed, startX, startY });
+          assert.equal(before.pickupRadius, expectedRadii[kind]);
+          assert(before.playerRadius > 13 && before.playerRadius < 17, 'Unexpected rooster collision footprint');
+          assert(before.footOffset > 25 && before.footOffset < 40,
+            `Player contact point left its foot anchor: ${JSON.stringify({ viewport, rooster, before })}`);
+          await page.keyboard.down('d');
+          if (diagonal) await page.keyboard.down('w');
+          await page.waitForFunction((targetX) => window.__pickupGame.scene.getScene('GameScene').player.sprite.x >= targetX,
+            stopX, { timeout: 3500 });
+          await page.keyboard.up('d');
+          if (diagonal) await page.keyboard.up('w');
+          const after = await page.evaluate((kind) => {
+            const s = window.__pickupGame.scene.getScene('GameScene');
+            const pickup = s.pickups.items.find((item) => item.kind === kind);
+            return {
+              collected: s.pickups.collected[kind],
+              active: pickup?.sprite.active ?? false,
+              anchorY: pickup?.sprite.y,
+              visualY: pickup?.visual.y
+            };
+          }, kind);
+          assert.equal(after.collected, before.collected, `${kind} collected on a ${viewport} near miss`);
+          assert(after.active, `${kind} disappeared on a near miss`);
+          assert.equal(after.anchorY, before.anchorY, 'Physical ground anchor moved with bobbing art');
+          passes.push({ viewport, rooster, kind, diagonal, missDistance, speed, before, after });
+        }
+        if (viewport === 'portrait-fast') {
+          const before = await page.evaluate(({ rooster, kind, speed }) => {
+            const s = window.__pickupGame.scene.getScene('GameScene');
+            s.roosterClasses.select(rooster);
+            s.player.speed = speed;
+            s.player.hp = s.player.maxHp * 0.4;
+            s.pickups.items.forEach((pickup) => pickup.destroy());
+            s.pickups.items = [];
+            s.pickups.spawned[kind] = 0;
+            s.player.updateGroundMarker();
+            const footOffset = s.player.groundMarker.y - s.player.sprite.y;
+            s.player.sprite.body.reset(620, 450 - footOffset);
+            s.player.updateGroundMarker();
+            s.pickups.spawn(kind, 700, 450);
+            return s.pickups.collected[kind];
+          }, { rooster, kind, speed });
+          await page.keyboard.down('d');
+          await page.waitForFunction(({ kind, before }) =>
+            window.__pickupGame.scene.getScene('GameScene').pickups.collected[kind] > before,
+          { kind, before }, { timeout: 3000 });
+          await page.keyboard.up('d');
+          passes.push({ viewport, rooster, kind, intentionalFastContact: true });
+        }
+      }
+    }
+  }
+  await page.setViewportSize({ width: 960, height: 720 });
   const fullHp = await page.evaluate(async () => {
     const s=window.__pickupGame.scene.getScene('GameScene'); s.pickups.spawned.heal=0;
-    s.player.hp=s.player.maxHp; s.player.sprite.body.reset(700,450);
+    s.player.hp=s.player.maxHp; s.player.updateGroundMarker();
+    const footOffset=s.player.groundMarker.y-s.player.sprite.y;
+    s.player.sprite.body.reset(700,450-footOffset); s.player.updateGroundMarker();
     const p=s.pickups.spawn('heal',700,450);
     await new Promise(r=>setTimeout(r,180));
     const full={active:p.sprite.active,collected:s.pickups.collected.heal,title:s.hud.getUpgradeFeedbackState().title,
@@ -80,6 +177,23 @@ try {
   assert(fullHp.paused.time && fullHp.paused.visual && fullHp.paused.active);
   assert.equal(fullHp.after.active,false); assert.equal(fullHp.after.collected,fullHp.full.collected+1);
   assert.equal(fullHp.after.hp,fullHp.after.maxHp); assert.deepEqual(errors,[]);
+  const magnetExclusion = await page.evaluate(async () => {
+    const s = window.__pickupGame.scene.getScene('GameScene');
+    s.pickups.items.forEach((pickup) => pickup.destroy());
+    s.pickups.items = [];
+    s.pickups.spawned.bomb = 0;
+    s.pickups.spawned.magnet = 0;
+    const bomb = s.pickups.spawn('bomb', 850, 450);
+    const magnet = s.pickups.spawn('magnet', 700, 450);
+    const bombCount = s.pickups.collected.bomb;
+    s.pickups.collect(magnet);
+    await new Promise((resolve) => setTimeout(resolve, 160));
+    return { active: bomb.sprite.active, bombCount: s.pickups.collected.bomb,
+      before: bombCount, magnetActive: s.pickups.isMagnetActive() };
+  });
+  assert(magnetExclusion.active && magnetExclusion.magnetActive);
+  assert.equal(magnetExclusion.bombCount, magnetExclusion.before,
+    'XP magnet pulled or detonated a special pickup');
   await page.evaluate(()=>{
     const s=window.__pickupGame.scene.getScene('GameScene');s.player.sprite.body.reset(700,500);
     const p=s.pickups.spawn('elite-chest',850,450);window.__openingPickup=p;
@@ -125,8 +239,16 @@ try {
     return rows;
   });
   assert(sounds.every(row=>row.cached&&row.playing),'A new attack sound could not actually play');
+  await page.evaluate(() => window.__pickupGame.scene.getScene('GameScene').scene.restart());
+  await page.waitForFunction(() => window.__ROOSTER_TEST__?.getPickupState
+    && window.__ROOSTER_TEST__.getPickupState().items.length === 0);
+  const reset = await page.evaluate(() => window.__ROOSTER_TEST__.getPickupState());
+  assert.equal(reset.collected.bomb, 0);
+  assert.equal(reset.collected.heal, 0);
+  assert.equal(reset.collected.magnet, 0);
+  assert.equal(reset.magnetActive, false);
   assert.deepEqual(errors,[]);
   await fs.mkdir(path.join(projectRoot,'test-results'),{recursive:true});
-  await fs.writeFile(path.join(projectRoot,'test-results/pickup-contact.json'),JSON.stringify({rows,fullHp,opening,rewardQueue,receipts,sounds,errors},null,2));
-  console.log(`Pickup contact passed: ${rows.length} real keyboard crossings, full HP, pause, exactly once, five queued rewards, three playing attack sounds.`);
+  await fs.writeFile(path.join(projectRoot,'test-results/pickup-contact.json'),JSON.stringify({rows,passes,fullHp,magnetExclusion,opening,rewardQueue,receipts,sounds,reset,errors},null,2));
+  console.log(`Pickup contact passed: ${rows.length} cardinal crossings, ${passes.length} near-miss/fast cases, full HP, pause, magnet exclusion, restart, exactly once, five queued rewards, three playing attack sounds.`);
 } finally { await browser.close(); await stopTestServer(server.server); }

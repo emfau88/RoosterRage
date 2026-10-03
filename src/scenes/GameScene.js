@@ -19,6 +19,7 @@ import { EntitySystem } from '../systems/EntitySystem.js';
 import { GamePauseSystem } from '../systems/GamePauseSystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
 import { PickupSystem } from '../systems/PickupSystem.js';
+import { PickupIndicatorSystem } from '../systems/PickupIndicatorSystem.js';
 import { LoadoutSystem } from '../systems/LoadoutSystem.js';
 import { MetaProgressionSystem } from '../systems/MetaProgressionSystem.js';
 import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
@@ -202,6 +203,7 @@ export class GameScene extends Phaser.Scene {
         return result;
       }
     );
+    this.pickupIndicators = new PickupIndicatorSystem(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
     this.setupTouchInput();
@@ -220,15 +222,18 @@ export class GameScene extends Phaser.Scene {
   update(time, delta) {
     const simulationTime = this.time.now;
     if (this.gameEnded || this.isChoosingRooster || this.isSettingsOpen) {
+      this.pickupIndicators?.hide();
       return;
     }
 
     if (this.isChoosingUpgrade) {
+      this.pickupIndicators?.hide();
       this.maybeChooseBotUpgrade();
       return;
     }
 
     if (this.gamePause?.isPaused) {
+      this.pickupIndicators?.hide();
       return;
     }
 
@@ -675,6 +680,7 @@ export class GameScene extends Phaser.Scene {
         protected: this.time.now < boss.invulnerableUntil
       } : null
     });
+    this.pickupIndicators?.update();
   }
 
   gameOver() {
@@ -892,6 +898,7 @@ export class GameScene extends Phaser.Scene {
     this.audio?.destroy();
     removeTestApi();
     this.hud?.destroy();
+    this.pickupIndicators?.destroy();
     this.objectPools?.destroy();
     this.pickups?.destroy();
     this.arena?.destroy();

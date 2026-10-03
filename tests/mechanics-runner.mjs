@@ -719,6 +719,9 @@ async function testEnemyAbilities(browser) {
       window.__ROOSTER_TEST__.clearEnemies();
       window.__ROOSTER_TEST__.clearProjectiles();
       window.__ROOSTER_TEST__.movePlayer(700, 450);
+      // The boss telegraph fixture observes several full attack phases. Keep
+      // the player alive so incidental projectile contact cannot end it.
+      window.__ROOSTER_TEST__.setPlayerCombatModifiers({ maxHp: 10000, hp: 10000 });
       window.__ROOSTER_TEST__.spawnEnemyType('boss', 940, 450, {
         speed: 0,
         damage: 0,
@@ -1095,11 +1098,12 @@ async function testAreaEffectReadability(browser) {
     'Molotov did not enter the simple rank-one ground-fire presentation.', settled);
     assert(settled.voids[0]?.frame === -1 && settled.voids[0]?.alpha >= 0.3,
       'Void Nest did not hold its compact gravity core.', settled);
-    assert(settled.burningEnemies[0]?.overlay === null
-      && settled.burningEnemies[0]?.animation === null
-      && settled.burningEnemies[0]?.overlayKind === 'ground-glow'
+    assert(settled.burningEnemies[0]?.overlay === 'molotov-ground-flame-orange'
+      && settled.burningEnemies[0]?.animation === 'molotov-ground-flame-orange-loop'
+      && settled.burningEnemies[0]?.overlayKind === 'body-flames'
+      && settled.burningEnemies[0]?.flameCount >= 2
       && settled.burningEnemies[0]?.remainingMs > 2500,
-    'Molotov contact did not apply the subtle three-second burn status.', settled);
+    'Molotov contact did not apply the visible three-second burn status.', settled);
     await page.screenshot({ path: path.join(artifactDir, 'aoe-readability-runtime.png') });
 
     await page.waitForTimeout(80);

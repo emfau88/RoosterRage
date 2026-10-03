@@ -165,7 +165,7 @@ export class HazardZone {
       this.scene.damageEnemy(enemy, this.damage, enemy.sprite.x, enemy.sprite.y, {
         source: this.evolved ? 'evo-phoenix-pan' : 'molotov-egg'
       });
-      if (enemy.sprite.active) enemy.applyBurn(3000, Math.max(2, Math.round(this.damage * 0.25)));
+      if (enemy.sprite.active) enemy.applyBurn(3000, Math.max(2, Math.round(this.damage * 0.25)), 'molotov-burn');
     });
   }
 

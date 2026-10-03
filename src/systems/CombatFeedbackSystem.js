@@ -86,6 +86,7 @@ export class CombatFeedbackSystem {
           burst.destroy();
         }
       });
+      if (this.activeHitVisuals.size < 11) this.showImpactAccent(x, y, profile.id);
     }
     if (text) {
       this.scene.tweens.add({
@@ -102,6 +103,71 @@ export class CombatFeedbackSystem {
     if (heavy && ['explosive', 'laser', 'void'].includes(profile.id)) {
       this.shake(95, critical ? 0.0032 : 0.0024, 190);
     }
+  }
+
+  showImpactAccent(x, y, profile) {
+    if (!['lightning', 'explosive', 'void'].includes(profile)) return;
+    let accent;
+    if (profile === 'void') {
+      accent = this.scene.add.circle(x, y, 17, 0x642baa, 0.26)
+        .setStrokeStyle(2, 0xd8afff, 0.78).setDepth(9.6).setScale(1.3);
+    } else {
+      accent = this.scene.add.graphics({ x, y }).setDepth(9.6);
+      if (profile === 'lightning') {
+        accent.lineStyle(2.1, 0xe6fdff, 0.88);
+        for (const side of [-1, 1]) {
+          accent.beginPath();
+          accent.moveTo(side * 3, -12);
+          accent.lineTo(side * 14, -19);
+          accent.lineTo(side * 10, -6);
+          accent.lineTo(side * 25, -12);
+          accent.strokePath();
+        }
+      } else {
+        accent.lineStyle(2.2, 0xffdb78, 0.85);
+        for (let index = 0; index < 5; index += 1) {
+          const angle = index * Math.PI * 2 / 5 + 0.18;
+          accent.lineBetween(
+            Math.cos(angle) * 8, Math.sin(angle) * 5,
+            Math.cos(angle) * 20, Math.sin(angle) * 13
+          );
+        }
+      }
+      accent.setBlendMode(Phaser.BlendModes.ADD);
+    }
+    this.activeHitVisuals.add(accent);
+    this.scene.tweens.add({
+      targets: accent,
+      alpha: 0,
+      scaleX: profile === 'void' ? 0.24 : 1.2,
+      scaleY: profile === 'void' ? 0.24 : 1.2,
+      duration: profile === 'void' ? 185 : 120,
+      ease: 'Cubic.Out',
+      onComplete: () => {
+        this.activeHitVisuals.delete(accent);
+        accent.destroy();
+      }
+    });
+  }
+
+  showFireEggHit(x, y) {
+    if (this.activeHitVisuals.size >= 12) return;
+    const flame = this.scene.add.image(x, y + 4, 'molotov-ground-flame-orange', 3)
+      .setDisplaySize(16, 23).setAlpha(0.76).setDepth(10);
+    this.activeHitVisuals.add(flame);
+    this.scene.tweens.add({
+      targets: flame,
+      y: y - 9,
+      scaleX: 1.16,
+      scaleY: 1.24,
+      alpha: 0,
+      duration: 190,
+      ease: 'Cubic.Out',
+      onComplete: () => {
+        this.activeHitVisuals.delete(flame);
+        flame.destroy();
+      }
+    });
   }
 
   showEnemyDeath(enemy, source = 'base-egg') {

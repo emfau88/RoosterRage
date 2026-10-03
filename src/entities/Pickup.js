@@ -22,6 +22,12 @@ const CHEST_CONFIGS = Object.freeze({
   }
 });
 
+// World-space contact radii. PickupSystem adds the player's collision radius
+// around the foot marker, so these values are intentionally smaller than the art.
+const PICKUP_CONTACT_RADII = Object.freeze({ heal: 15, bomb: 11, magnet: 15 });
+const CLASSIC_FEEDBACK = import.meta.env?.DEV
+  && new URLSearchParams(globalThis.location?.search ?? '').get('feedbackCompare') === 'before';
+
 export class Pickup {
   constructor(scene, kind, x, y) {
     this.scene = scene;
@@ -41,8 +47,11 @@ export class Pickup {
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
     // Arcade circles use unscaled texture coordinates. Keep the collection
     // circle at the ground anchor, centered and sized in world units.
-    const radius = this.chest ? 24 : 21;
-    const sourceRadius = radius / this.sprite.scaleX;
+    const radius = this.chest ? 24 : PICKUP_CONTACT_RADII[kind];
+    this.contactRadius = radius;
+    // Arcade floors halfWidth, which can turn an exact 15 into 14 through
+    // floating-point rounding after scaling. Keep the intended world radius.
+    const sourceRadius = (radius + 0.05) / this.sprite.scaleX;
     this.sprite.setCircle(sourceRadius, this.sprite.width / 2 - sourceRadius, this.sprite.height / 2 - sourceRadius);
     this.sprite.body.updateFromGameObject();
     this.sprite.entity = this;
@@ -50,6 +59,12 @@ export class Pickup {
       .setDepth(this.sprite.depth).setScale(this.sprite.scaleX, this.sprite.scaleY);
     if (this.chest?.tint) this.visual.setTint(this.chest.tint);
     this.sprite.setVisible(false);
+    this.fieldBaseAlpha = kind === 'magnet' ? 0.46 : 0.67;
+    this.beamBaseAlpha = kind === 'magnet' ? 0.37 : 0.52;
+    this.field = this.chest || CLASSIC_FEEDBACK ? null : scene.add.image(x, y + 11, `pickup-${kind}-ground`)
+      .setDisplaySize(68, 34).setDepth(5.1).setAlpha(this.fieldBaseAlpha);
+    this.beam = this.chest || CLASSIC_FEEDBACK ? null : scene.add.image(x, y - 12, `pickup-${kind}-beam`)
+      .setDisplaySize(28, 54).setDepth(5.38).setAlpha(this.beamBaseAlpha);
     this.shadow = this.chest ? null : scene.add.ellipse(x, y + 11, 23, 8, 0x302515, 0.2).setDepth(5.3);
     this.tierMarker = null;
     if (kind === 'golden-chest' || kind === 'royal-chest') {
@@ -73,6 +88,8 @@ export class Pickup {
     if (!this.sprite.active || this.opening) return;
     const bob = Math.sin((time - this.spawnedAt) * 0.005) * 4;
     this.visual.y = this.baseY + bob;
+    if (this.field) this.field.setAlpha(this.fieldBaseAlpha + Math.sin((time - this.spawnedAt) * 0.0023) * 0.06);
+    if (this.beam) this.beam.setAlpha(this.beamBaseAlpha + Math.sin((time - this.spawnedAt) * 0.0067) * 0.05);
     if (this.shadow) this.shadow.setScale(0.94 - bob * 0.015).setAlpha(0.2 - bob * 0.007);
     if (this.tierMarker) {
       this.tierMarker
@@ -236,6 +253,8 @@ export class Pickup {
     if (this.tierMarker?.active) this.tierMarker.destroy();
     if (this.sprite?.active) this.sprite.destroy();
     this.visual?.destroy();
+    this.field?.destroy();
+    this.beam?.destroy();
     this.shadow?.destroy();
   }
 }

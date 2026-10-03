@@ -463,6 +463,60 @@
       "bytes": 1830
     },
     {
+      "source": "art-source/pickups/fields/heal-ground.png",
+      "sourceSha256": "2b7e48804d1eb5ce017623550db226a74762f7a4bec9fe78a581cfb0bfab75a6",
+      "runtime": "src/assets/pickups/fields/heal-ground.webp",
+      "runtimeSha256": "35561b93b81ba658ccb9f590f8321753babb4da5011b9b9cf5c19ffb52b50079",
+      "width": 128,
+      "height": 64,
+      "bytes": 1884
+    },
+    {
+      "source": "art-source/pickups/fields/bomb-ground.png",
+      "sourceSha256": "ac831e98f09f01f8c95d07b5e42d309561cc714fc71499c1371515abab6a69f0",
+      "runtime": "src/assets/pickups/fields/bomb-ground.webp",
+      "runtimeSha256": "ab6645cb0878970b429b6c09f37c078c8f3db6018a73a5ad48e15e08610b705d",
+      "width": 128,
+      "height": 64,
+      "bytes": 2568
+    },
+    {
+      "source": "art-source/pickups/fields/magnet-ground.png",
+      "sourceSha256": "4530a29a780d6bf504336a184213ab11b5591dfd91f3c303089b30a0dda1412c",
+      "runtime": "src/assets/pickups/fields/magnet-ground.webp",
+      "runtimeSha256": "8567fd6301ee55b6517058e57ea7eec6835f1e681c833d3c8a287733d823d93d",
+      "width": 128,
+      "height": 64,
+      "bytes": 2920
+    },
+    {
+      "source": "art-source/pickups/fields/heal-beam.png",
+      "sourceSha256": "335b844f7f03795bb5c3df5942d0ad42419ec0637c84d6bc4c2ad9c06805e56a",
+      "runtime": "src/assets/pickups/fields/heal-beam.webp",
+      "runtimeSha256": "e8c2373e3616041e93b84128b19c5cc2e72ab01d42402194ece1a933653c1bd9",
+      "width": 64,
+      "height": 128,
+      "bytes": 2314
+    },
+    {
+      "source": "art-source/pickups/fields/bomb-beam.png",
+      "sourceSha256": "584845abf8bdd3e342500ee48a5a8a4ebe08d053a235f031680d1e177944891e",
+      "runtime": "src/assets/pickups/fields/bomb-beam.webp",
+      "runtimeSha256": "1180fbad59d9e93745b4c4658670edae9b9a17d0a9b8f508a57a07521135d71c",
+      "width": 64,
+      "height": 128,
+      "bytes": 2478
+    },
+    {
+      "source": "art-source/pickups/fields/magnet-beam.png",
+      "sourceSha256": "9af02ad8fb617ba8d67a849fc8405012069c8a942a3dee4672a2e3cbb20ede80",
+      "runtime": "src/assets/pickups/fields/magnet-beam.webp",
+      "runtimeSha256": "c518d5121ac43a0c097287c66992f410fefce7ccf28af2a9b43be727c91830ea",
+      "width": 64,
+      "height": 128,
+      "bytes": 2524
+    },
+    {
       "source": "art-source/ui/stickers/pickup-heal-sticker-v2.png",
       "sourceSha256": "d71f4012a846ef706f842a8812859380412e4f2c4c070c1fbf311c613a3c3daa",
       "runtime": "src/assets/ui/stickers/pickup-heal-sticker-v2.webp",

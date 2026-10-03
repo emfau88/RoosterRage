@@ -82,6 +82,12 @@ import xpOrbUrl from '../../assets/collectibles/xp-orb.webp';
 import pickupHealUrl from '@portal-pickup-heal';
 import pickupBombUrl from '@portal-pickup-bomb';
 import pickupMagnetUrl from '@portal-pickup-magnet';
+import pickupHealGroundUrl from '../../assets/pickups/fields/heal-ground.webp';
+import pickupBombGroundUrl from '../../assets/pickups/fields/bomb-ground.webp';
+import pickupMagnetGroundUrl from '../../assets/pickups/fields/magnet-ground.webp';
+import pickupHealBeamUrl from '../../assets/pickups/fields/heal-beam.webp';
+import pickupBombBeamUrl from '../../assets/pickups/fields/bomb-beam.webp';
+import pickupMagnetBeamUrl from '../../assets/pickups/fields/magnet-beam.webp';
 import pickupEliteChestUrl from '../../assets/pickups/pickup-elite-chest.webp';
 import pickupEliteChestAjarUrl from '../../assets/pickups/pickup-elite-chest-ajar.webp';
 import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-open.webp';
@@ -267,6 +273,14 @@ export function preloadGameAssets(scene) {
   scene.load.image('pickup-heal', pickupHealUrl);
   scene.load.image('pickup-bomb', pickupBombUrl);
   scene.load.image('pickup-magnet', pickupMagnetUrl);
+  [
+    ['heal', pickupHealGroundUrl, pickupHealBeamUrl],
+    ['bomb', pickupBombGroundUrl, pickupBombBeamUrl],
+    ['magnet', pickupMagnetGroundUrl, pickupMagnetBeamUrl]
+  ].forEach(([kind, groundUrl, beamUrl]) => {
+    scene.load.image(`pickup-${kind}-ground`, groundUrl);
+    scene.load.image(`pickup-${kind}-beam`, beamUrl);
+  });
   scene.load.image('pickup-elite-chest', pickupEliteChestUrl);
   scene.load.image('pickup-elite-chest-ajar', pickupEliteChestAjarUrl);
   scene.load.image('pickup-elite-chest-open', pickupEliteChestOpenUrl);

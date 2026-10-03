@@ -16,6 +16,8 @@ export class Projectile {
     const { scene } = this;
     this.damage = damage;
     this.source = options.source ?? (isFireEgg ? 'fire-eggs' : 'base-egg');
+    this.burnDamage = options.burnDamage ?? 0;
+    this.burnDuration = options.burnDuration ?? 0;
     this.target = target;
     this.targetOffset = targetOffset;
     this.laneOffset = options.laneOffset ?? targetOffset;

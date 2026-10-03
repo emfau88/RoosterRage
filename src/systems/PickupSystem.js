@@ -34,6 +34,16 @@ export class PickupSystem {
 
   update(time) {
     this.items.forEach((pickup) => pickup.update(time));
+    const foot = this.scene.player?.groundMarker;
+    const playerRadius = this.scene.player?.sprite.body?.halfWidth ?? 0;
+    if (!foot || !playerRadius) return;
+    for (const pickup of this.items) {
+      if (pickup.chest || !pickup.sprite.active) continue;
+      const reach = pickup.contactRadius + playerRadius;
+      const dx = foot.x - pickup.sprite.x;
+      const dy = foot.y - pickup.sprite.y;
+      if (dx * dx + dy * dy <= reach * reach) this.collect(pickup);
+    }
   }
 
   onEnemyKilled(enemy) {
@@ -245,6 +255,8 @@ export class PickupSystem {
         opening: pickup.opening,
         victoryReward: pickup.victoryReward ?? false,
         texture: pickup.sprite.texture.key,
+        field: pickup.field?.texture?.key ?? null,
+        beam: pickup.beam?.texture?.key ?? null,
         depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight),
