@@ -12,6 +12,6 @@ Do not use rooster-rage-additional-files.zip as the main file: it intentionally 
 
 KONGREGATE STATISTICS (create in Manage Statistics; exact case):
 Kills: type Max, Display in Leaderboards enabled.
-RunsWon: type Add, Display in Leaderboards disabled; +1 per victory.
+RunsWon: type Add, +1 per victory; optionally enable Display in Leaderboards for a wins ranking.
 The client API needs no private API key. Scores submit only on Kongregate.
 See docs/KONGREGATE_API_SETUP.md in the source repository for testing steps.

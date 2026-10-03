@@ -264,6 +264,54 @@ async function verifyKongregateApi(browser, portalUrl, unavailable = false) {
   }
 }
 
+async function verifyOriginalRoosterColors(browser, portalUrl) {
+  const context = await browser.newContext({ viewport: { width: 430, height: 900 } });
+  await context.addInitScript(() => {
+    const skins = { ace: 'ace-sunrise', artillery: 'artillery-ironclad', storm: 'storm-violet' };
+    localStorage.setItem('rooster-rage:meta:v2', JSON.stringify({ version: 2,
+      unlockedRoosters: Object.keys(skins), unlockedCosmetics: Object.values(skins), selectedCosmetics: skins }));
+    let phaser;
+    Object.defineProperty(window, 'Phaser', { configurable: true, get: () => phaser, set(value) {
+      phaser = value;
+      const boot = value.Game.prototype.boot;
+      value.Game.prototype.boot = function(...args) { window.__colorTestGame = this; return boot.apply(this, args); };
+    } });
+  });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  try {
+    await page.goto(portalUrl, { waitUntil: 'domcontentloaded' });
+    await page.locator('iframe').evaluate(iframe => { iframe.style.width = '390px'; iframe.style.height = '844px'; });
+    const frame = await (await page.locator('iframe').elementHandle()).contentFrame();
+    const colors = [];
+    for (const id of ['ace', 'artillery', 'storm']) {
+      await frame.waitForSelector('.henhouse-panel');
+      assert(await frame.locator('.cosmetic-panel').count() === 0, 'Disabled skins remain visible in the hub.');
+      await frame.getByRole('button', { name: 'Roosters', exact: true }).click();
+      await frame.locator(`.rooster-card--${id}`).click();
+      await frame.locator(`.rooster-card--${id} + .rooster-card__choose`).click();
+      await frame.locator('[data-run-start]').click();
+      await frame.waitForFunction(() => !window.__colorTestGame.scene.getScene('GameScene').isChoosingRooster);
+      const color = await frame.evaluate(() => {
+        const s = window.__colorTestGame.scene.getScene('GameScene');
+        return { id: s.player.roosterId, tinted: s.player.sprite.isTinted, tint: s.player.sprite.tintTopLeft,
+          selectedSkin: s.meta.getSelectedCosmetic(s.player.roosterId) };
+      });
+      assert(color.id === id && !color.tinted && color.tint === 0xffffff && color.selectedSkin === null,
+        'A previously saved skin still tints the production rooster.', color);
+      colors.push(color);
+      if (id !== 'storm') await frame.evaluate(() => window.__colorTestGame.scene.getScene('GameScene').scene.restart());
+    }
+    await fs.mkdir(path.join(projectRoot, 'test-results'), { recursive: true });
+    await page.screenshot({ path: path.join(projectRoot, 'test-results/no-skins-storm-portrait.png') });
+    assert(errors.length === 0, 'Original-color test raised browser errors.', errors);
+    return { viewport: 'portrait', oldSkinsIgnored: colors };
+  } finally {
+    await context.close();
+  }
+}
+
 async function run() {
   const packageReport = await inspectPackage();
   console.log(`Release package inspected: ${packageReport.totalMiB} MiB.`);
@@ -275,8 +323,9 @@ async function run() {
     const withoutStorage = await verifyPortalFrame(browser, url, true);
     const kongregateScenarios = !expectMarketing && distributionName === 'dist-release'
       ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
+    const originalColors = await verifyOriginalRoosterColors(browser, url);
     console.log('Release gate passed.');
-    console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage], kongregateScenarios }, null, 2));
+    console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage], kongregateScenarios, originalColors }, null, 2));
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

@@ -90,7 +90,7 @@ const instructions = `ROOSTER RAGE — Kongregate upload\n\n` +
   `Do not use ${additionalZipName} as the main file: it intentionally has no index.html.\n\n` +
   `KONGREGATE STATISTICS (create in Manage Statistics; exact case):\n` +
   `Kills: type Max, Display in Leaderboards enabled.\n` +
-  `RunsWon: type Add, Display in Leaderboards disabled; +1 per victory.\n` +
+  `RunsWon: type Add, +1 per victory; optionally enable Display in Leaderboards for a wins ranking.\n` +
   `The client API needs no private API key. Scores submit only on Kongregate.\n` +
   `See docs/KONGREGATE_API_SETUP.md in the source repository for testing steps.\n`;
 await writeFile(`${uploadDirectory}/UPLOAD-INSTRUCTIONS.txt`, instructions, 'utf8');

@@ -11,11 +11,13 @@ Names are case-sensitive and must match this table exactly.
 | Name | Type | Display in Leaderboards | Description |
 | --- | --- | --- | --- |
 | `Kills` | **Max** | **Yes** | Highest enemy kill count in a single completed run. |
-| `RunsWon` | **Add** | **No** | Total number of completed victorious runs. |
+| `RunsWon` | **Add** | **Optional: Yes for a victories leaderboard** | Total number of completed victorious runs. |
 
 `Kills` submits the player's highest completed-run kill count. `RunsWon` submits
 **1 for each new victory**, never the cumulative local total. Do not configure
 `RunsWon` as Max: that would stop the counter at 1. There are no wave/time stats.
+Enabling Display in Leaderboards for `RunsWon` also ranks players by total wins;
+it does not require a code change and the type remains **Add**.
 
 ## Upload and verify
 

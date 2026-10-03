@@ -27,7 +27,7 @@
     "maps:capture-previews": "node scripts/capture-arena-previews.mjs",
     "pretest:production": "npm run build",
     "test:production": "node tests/production-gate.mjs",
-    "test:release": "node --test tests/public-rooster-preview.test.mjs tests/kongregate.test.mjs && npm run build:release && node tests/release-gate.mjs",
+    "test:release": "node --test tests/public-rooster-preview.test.mjs tests/kongregate.test.mjs tests/rooster-cosmetics.test.mjs && npm run build:release && node tests/release-gate.mjs",
     "test:pages": "npm run build:pages && node tests/release-gate.mjs dist-pages /RoosterRage/ --marketing",
     "test:smoke": "node tests/rooster-smoke.mjs",
     "test:audio": "node tests/audio-settings-runner.mjs",

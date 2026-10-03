@@ -104,8 +104,17 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Einmalige Meldung pro beendetem Run, Ausschluss von Gästen/Bots/Abbrüchen und Kontowechseln implementieren; Kill-Rekorde pro Konto speichern und erneut melden, Siege niemals beim Neuladen wiederholen.
 - [x] Acht API-Tests, Release-Browserprüfung mit SDK-Mock (Sieg, Niederlage, Neustart und Ausfall), englische Wegweiser und Build-Budgets verifizieren. Release 18,78 MiB, Pages 20,99 MiB.
 - [x] Kongregate-Statistikdefinitionen unter `docs/KONGREGATE_API_SETUP.md` und aktuelles vollständiges Upload-ZIP (18.279.342 Byte) samt aktualisierten Split-Artefakten bereitstellen.
-- [ ] Integration committen/pushen und aktualisierten GitHub-Play-Link überprüfen.
+- [x] Integration als `6b84981` committen/pushen; Pages-Deploy `37147944727` erfolgreich abgeschlossen.
 - [ ] Zwei Statistikdefinitionen im Kongregate-Portal anlegen und echte Servermeldungen im hochgeladenen Preview bestätigen (Statistikverwaltung hier derzeit wegen Netzwerkfehler nicht erreichbar).
+
+## Release: Zweitskins vorerst deaktivieren
+
+- [x] Neue Skin-Freischaltungen und Auswahl deaktivieren, Skin-Oberfläche ausblenden und Originalfarben für alle drei Rooster verwenden.
+- [x] Gespeicherte Skin-Auswahlen ignorieren; vorhandenen Besitz und übrigen Fortschritt für eine spätere Überarbeitung erhalten.
+- [x] Unit-Test und Meta-/Challenge-Test bestehen; alle drei Originalfarben mit alten Spielständen im mobilen WebGL-Release und Pages-Build prüfen.
+- [x] `test:release` und `test:pages` bestehen; Kongregate-API bleibt optional und Spielstart bei API-Ausfall funktioniert.
+- [ ] Aktuelles Kongregate-HTML und ZIP erstellen und auf beide GitHub-Branches pushen.
+- [ ] Pages-Deploy und tatsächlich veröffentlichte Commit-ID am Play-Link bestätigen.
 
 ## Bisheriges Laufprotokoll
 
