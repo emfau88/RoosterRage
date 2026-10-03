@@ -367,7 +367,7 @@ async function verifySettingsAndReport(browser, serverUrl) {
     assert(result.panel.left >= 0 && result.panel.right <= 390 && result.panel.height <= 812,
       'Run report does not fit the portrait viewport.', result.panel);
     assert(Object.keys(result.standards.colors).length === 5
-      && Object.keys(result.standards.audio).length === 5,
+      && ['danger','critical','reward','ability','weapon','impact'].every(tier => result.standards.audio[tier]),
     'Color or audio priority language is incomplete.', result.standards);
     assert(errors.length === 0, 'Browser errors in settings/report gate.', errors);
     await page.screenshot({ path: path.join(artifactDir, 'run-report-portrait.png') });

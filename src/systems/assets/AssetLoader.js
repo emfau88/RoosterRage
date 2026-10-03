@@ -4,7 +4,7 @@ import enemySlimeWobbleUrl from '../../assets/enemies/animations/enemy-slime-wob
 import enemySlimeHopUrl from '../../assets/enemies/animations/enemy-slime-hop-v2.webp';
 import enemyKornkrabblerRunUrl from '../../assets/enemies/animations/enemy-kornkrabbler-run.webp';
 import enemyRunnerRunUrl from '../../assets/enemies/animations/enemy-runner-run.webp';
-import enemyEliteRunnerRunUrl from '../../assets/enemies/animations/enemy-elite-runner-run.webp';
+import enemyEliteRunnerRunUrl from '@portal-elite-runner';
 import enemyBruteRunUrl from '../../assets/enemies/animations/enemy-brute-run.webp';
 import enemyBossRunUrl from '../../assets/enemies/animations/enemy-boss-run.webp';
 import enemyBruteStompUrl from '../../assets/enemies/animations/enemy-brute-stomp.webp';
@@ -78,9 +78,9 @@ import enemyPurpleShotUrl from '../../assets/projectiles/enemy-purple-shot.webp'
 import enemyBlueShotUrl from '../../assets/projectiles/enemy-blue-shot.webp';
 import bossFireballUrl from '../../assets/projectiles/boss-fireball.webp';
 import xpOrbUrl from '../../assets/collectibles/xp-orb.webp';
-import pickupHealUrl from '../../assets/ui/stickers/pickup-heal-sticker-v2.webp';
-import pickupBombUrl from '../../assets/ui/stickers/pickup-bomb-sticker-v2.webp';
-import pickupMagnetUrl from '../../assets/ui/stickers/pickup-magnet-sticker-v2.webp';
+import pickupHealUrl from '@portal-pickup-heal';
+import pickupBombUrl from '@portal-pickup-bomb';
+import pickupMagnetUrl from '@portal-pickup-magnet';
 import pickupEliteChestUrl from '../../assets/pickups/pickup-elite-chest.webp';
 import pickupEliteChestAjarUrl from '../../assets/pickups/pickup-elite-chest-ajar.webp';
 import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-open.webp';
@@ -109,11 +109,11 @@ import {
   getSceneRenderScale
 } from '../DisplayResolutionSystem.js';
 
-const audioAssetUrls = import.meta.glob('../../assets/audio/**/*.mp3', {
+const audioAssetUrls = { ...import.meta.glob('../../assets/audio/**/*.mp3', {
   eager: true,
   query: '?url',
   import: 'default'
-});
+}), ...import.meta.glob('../../assets/audio/portal-v1/*.wav', { eager: true, query: '?url', import: 'default' }) };
 
 export function preloadGameAssets(scene) {
   document.body.dataset.roosterLoadState = 'loading';
@@ -290,7 +290,7 @@ export function preloadGameAssets(scene) {
   scene.load.image('coop-square-hay-stack', coopSquareHayStackUrl);
   const audioKeys = new Set();
   Object.entries(audioAssetUrls).forEach(([assetPath, assetUrl]) => {
-    const key = assetPath.split('/').at(-1).replace(/\.mp3$/i, '');
+    const key = assetPath.split('/').at(-1).replace(/\.(mp3|wav)$/i, '');
     if (audioKeys.has(key)) throw new Error(`Duplicate audio asset key: ${key}`);
     audioKeys.add(key);
     scene.load.audio(key, assetUrl);

@@ -711,6 +711,7 @@ export class CombatSystem {
   }
 
   showBlastShellImpact(projectile, x, y, radius, { secondary = false } = {}) {
+    if (!secondary) this.scene.audio.play('blast-shell-impact');
     const evolution = projectile.impactStyle === 'blast-shell-evo';
     const rank = evolution ? 5 : Math.max(1, Math.min(4, Number(projectile.visualRank) || 1));
     const color = evolution ? 0xfff0a3 : rank >= 4 ? 0xffd35c : 0xffa044;
@@ -928,7 +929,9 @@ export class CombatSystem {
     }
     const eggImpact = /^(base-egg|fire-eggs|golden-egg|support-chick|evo-solar-scramble|evo-chick-squadron|evo-sunshot-array|evo-siegebreaker-shell|evo-tempest-crown)/.test(source);
     if (!options.quiet) {
-      if (eggImpact) {
+      if (/^(orbit-eggs|evo-shell-halo)/.test(source)) {
+        scene.audio.play('orbit-contact');
+      } else if (eggImpact) {
         scene.audio.playVariant('egg-impact');
       } else {
         scene.audio.play('enemy-hit');

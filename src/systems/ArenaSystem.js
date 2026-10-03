@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { playPropBreak } from './PropBreakFeedback.js';
 import { ARENA_DEFINITIONS, getArenaDefinition } from '../data/arenaDefinitions.js';
 import { getSceneViewport } from './DisplayResolutionSystem.js';
 import { getArenaArtTint } from '../config/mapArt.js';
@@ -614,7 +615,7 @@ export class ArenaSystem {
     const { x, y } = obstacle.sprite;
     obstacle.sprite.disableBody(true, true);
     this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
-    this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.72, depth: 9 });
+    playPropBreak(this.scene, obstacle.kind, x, y);
     this.scene.pickups?.spawnFromProp(x, y, obstacle);
     this.scene.telemetry.record('propDestroyed', this.scene.time.now, {
       wave: this.scene.waveSystem?.currentWave ?? 0,

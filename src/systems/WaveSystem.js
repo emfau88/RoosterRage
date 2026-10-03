@@ -535,7 +535,7 @@ export class WaveSystem {
       ...this.makeRunner(10),
       type: 'elite-runner',
       role: 'runner',
-      displayName: 'Gilded Talon',
+      displayName: 'Turbo Goose',
       elite: true,
       eliteTint: false,
       speed: 126,
@@ -551,7 +551,7 @@ export class WaveSystem {
       hpBarWidth: 62,
       hpBarYOffset: 42,
       aura: { kind: 'haste', label: 'Haste Aura', radius: 185, multiplier: 1.2, color: 0xffd35c },
-      ability: { kind: 'dash', label: 'Talon Dash', cooldown: 3900, telegraphMs: 380, speed: 470, duration: 460, color: 0xffd35c }
+      ability: { kind: 'dash', label: 'Goose Rush', cooldown: 3900, telegraphMs: 380, speed: 470, duration: 460, color: 0xffd35c }
     };
   }
 
@@ -708,7 +708,7 @@ export class WaveSystem {
       ...this.makeEliteRunner(),
       type: 'champion-charger',
       role: 'runner',
-      displayName: 'Stormclaw Champion',
+      displayName: 'Golden Goose Champion',
       elite: false,
       champion: true,
       hp: 520,
@@ -723,7 +723,7 @@ export class WaveSystem {
       aura: null,
       ability: {
         kind: 'dash',
-        label: 'Stormclaw Charge',
+        label: 'Champion Rush',
         cooldown: 4200,
         telegraphMs: 520,
         speed: 455,

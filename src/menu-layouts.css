@@ -586,3 +586,47 @@ html.has-ui-overlay, html.has-ui-overlay body, html.has-ui-overlay #game-root,
   .upgrade-detail-layer { padding: 16px 22px; }
   .upgrade-detail__card .upgrade-button__copy { flex: 1; }
 }
+.run-report__details {
+  margin: 16px 0 4px;
+  border: 1px solid rgba(238,202,121,.22);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(9,20,24,.4);
+}
+.run-report__details > summary {
+  cursor: pointer;
+  color: #f3d484;
+  font-weight: 750;
+  min-height: 36px;
+  text-align: left;
+}
+.run-report__details > summary small {
+  display: block;
+  margin: 4px 0 10px 15px;
+  color: #a8bbb0;
+  font-size: 11px;
+  font-weight: 400;
+}
+.run-report__details > summary:focus-visible { outline: 2px solid #ffe48a; outline-offset: 3px; }
+.run-report__actions {
+  position: sticky;
+  bottom: -1px;
+  padding: 14px 0 2px;
+  margin-top: 8px;
+  background: linear-gradient(transparent,#102329 25%);
+  z-index: 2;
+}
+.run-report__meta-reward { margin: 10px 0 12px; }
+.upgrade-panel[data-reward-kind="golden"] { --reward-accent: #ffbc51; }
+.upgrade-panel[data-reward-kind="boss"] { --reward-accent: #d2a4ff; }
+.upgrade-panel[data-reward-kind="elite"] { --reward-accent: #ead17b; }
+.upgrade-panel--chest .upgrade-panel__heading { border-bottom: 2px solid var(--reward-accent,#ead17b); }
+@media (max-width:760px) {
+  .run-report__detail-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .run-report__actions .restart-button { width: 100%; min-height: 48px; }
+}
+.henhouse-panel .rooster-card__portrait img.rooster-card__portrait-image {
+  object-fit: contain;
+  object-position: center top;
+  transform: none;
+}

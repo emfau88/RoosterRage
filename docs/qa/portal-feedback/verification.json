@@ -1,0 +1,99 @@
+{
+  "basis": "d776dd1",
+  "release": {
+    "package": {
+      "files": 151,
+      "totalBytes": 18891225,
+      "totalMiB": 18.02,
+      "largest": [
+        {
+          "file": "assets/boss-theme-DikIQNT3.mp3",
+          "bytes": 1981143
+        },
+        {
+          "file": "assets/phaser-CUdU0QcG.js",
+          "bytes": 1197177
+        },
+        {
+          "file": "assets/run-theme-DXaiNGyI.mp3",
+          "bytes": 1134690
+        },
+        {
+          "file": "assets/rooster-storm-mascot-walk-T1VR-WRy.webp",
+          "bytes": 558924
+        },
+        {
+          "file": "assets/rooster-storm-mascot-idle-CsyrtdQZ.webp",
+          "bytes": 546902
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "blockedStorage": false,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      },
+      {
+        "blockedStorage": true,
+        "boot": {
+          "testApiExposed": false,
+          "roosterCards": 3,
+          "canvas": true,
+          "renderer": "webgl",
+          "loadState": "ready"
+        }
+      }
+    ]
+  },
+  "menus": {
+    "viewports": [
+      "desktop-full-hd",
+      "laptop-large",
+      "laptop-standard",
+      "portal-1280",
+      "portal-1216",
+      "portal-1077",
+      "embedded-desktop",
+      "desktop",
+      "desktop-short",
+      "laptop-short",
+      "landscape-short",
+      "landscape-mobile",
+      "boundary-wide",
+      "boundary-below-wide",
+      "boundary-three",
+      "boundary-list",
+      "boundary-boss-grid",
+      "boundary-boss-list",
+      "portrait",
+      "phone-short"
+    ],
+    "interactionScenarios": 4
+  },
+  "unitTests": {
+    "passed": 3,
+    "failed": 0
+  },
+  "runtimeAssetIntegrity": {
+    "checked": 141,
+    "passed": true
+  },
+  "passedSuites": [
+    "pickup-contact",
+    "arena",
+    "audio",
+    "pause",
+    "hud-report",
+    "meta",
+    "mechanics",
+    "menus",
+    "release"
+  ],
+  "physicalDeviceAcceptance": false
+}

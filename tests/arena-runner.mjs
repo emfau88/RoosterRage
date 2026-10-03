@@ -188,9 +188,9 @@ async function verifyPickups(browser, serverUrl) {
 
       api.spawnPickup('elite-chest');
       const chest = api.collectPickup('elite-chest');
-      await new Promise((resolve) => setTimeout(resolve, 240));
+      await new Promise((resolve) => setTimeout(resolve, 160));
       const chestAjar = api.getPickupState().openingChestStates[0]?.texture;
-      await new Promise((resolve) => setTimeout(resolve, 220));
+      await new Promise((resolve) => setTimeout(resolve, 170));
       const chestOpen = api.getPickupState().openingChestStates[0]?.texture;
       await new Promise((resolve) => setTimeout(resolve, 500));
       const chestSelection = api.getProgressionState();
@@ -266,8 +266,8 @@ async function verifyPickups(browser, serverUrl) {
       && result.magnetSticker?.texture === 'pickup-magnet'
       && result.bombSticker?.texture === 'pickup-bomb'
       && [result.healSticker, result.magnetSticker, result.bombSticker]
-        .every((sticker) => sticker.width === 63 && sticker.height === 63),
-    'Pickup sticker artwork no longer retains its intended 63px world size.',
+        .every((sticker) => sticker.width === 44 && sticker.height === 44),
+    'Compact pickup artwork no longer has its intended 44px world size.',
     result);
     assert(result.healed && result.hpAfterHeal === 65, 'Heal pickup is not a bounded 25% max-HP heal.', result);
     assert(result.beforeFirstPickup.spawned.heal === 0 && result.firstPickup.spawned.heal === 1,

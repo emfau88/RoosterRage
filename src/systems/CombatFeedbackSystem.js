@@ -418,7 +418,7 @@ export class CombatFeedbackSystem {
     this.killChain.source = source;
     const tier = getMultiKillTier(this.killChain.count);
     if (!tier || tier.threshold <= this.killChain.announced) {
-      if (tier && this.killChain.announced >= 15 && this.lastMultiKill) {
+      if (tier && this.lastMultiKill) {
         this.lastMultiKill.count = this.killChain.count;
         this.scene.hud.updateMultiKillCount(this.killChain.count);
       }

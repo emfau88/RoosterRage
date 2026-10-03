@@ -1,9 +1,10 @@
 import { CombatMessages } from './CombatMessages.js';
 import uiIconSheetUrl from '../assets/ui/ui-icons-v1-sheet.webp';
 import uiIconAtlas from '../assets/ui/ui-icons-v1.json';
-import acePortraitUrl from '../assets/characters/rooster-ace-portrait.webp';
-import artilleryPortraitUrl from '../assets/characters/rooster-artillery-portrait.webp';
-import stormPortraitUrl from '../assets/characters/rooster-storm-portrait.webp';
+import acePortraitUrl from '@portal-portrait-ace';
+import artilleryPortraitUrl from '@portal-portrait-artillery';
+import stormPortraitUrl from '@portal-portrait-storm';
+import { PORTAL_ICONS } from './PortalIcons.js';
 import kernelCurrencyUrl from '../assets/meta/kernel-currency.webp';
 import masteryAceUrl from '../assets/meta/mastery-ace.webp';
 import masteryArtilleryUrl from '../assets/meta/mastery-artillery.webp';
@@ -20,7 +21,7 @@ const ROOSTER_PORTRAITS = {
 };
 
 // Focus points keep each face visible in a wide card as well as a square avatar.
-const PORTRAIT_FOCUS = { ace: '50% 46%', artillery: '45% 44%', storm: '50% 59%' };
+const PORTRAIT_FOCUS = { ace: '50% 40%', artillery: '50% 40%', storm: '50% 40%' };
 
 const MASTERY_BADGES = {
   ace: masteryAceUrl,
@@ -49,6 +50,9 @@ const ARENA_PREVIEWS = {
 const ICON_COLUMNS = uiIconAtlas.columns;
 const ICON_ROWS = uiIconAtlas.rows;
 const ICON_IDS_BY_NAME = {
+  'Target Egg': 'precision-egg',
+  'Blast Shell': 'blast-shell',
+  'Storm Egg': 'storm-egg',
   Heal: 'heal',
   'Double Shot': 'double-shot',
   'Triple Shot': 'triple-shot',
@@ -70,18 +74,14 @@ const ICON_IDS_BY_NAME = {
   'Piercing Eggs': 'piercing-eggs',
   'Bigger Eggs': 'bigger-eggs',
   'Swift Shells': 'faster-eggs',
-  'Critical Yolk': 'fire-eggs',
-  'Ricochet Eggs': 'piercing-eggs',
-  'Shell Shock': 'bigger-eggs',
-  'Second Wind': 'heal'
+  'Critical Yolk': 'critical-yolk',
+  'Ricochet Eggs': 'ricochet-eggs',
+  'Shell Shock': 'shell-shock',
+  'Second Wind': 'second-wind'
 };
 const ICON_ALIASES_BY_ID = {
   'swift-shells': 'faster-eggs',
-  'critical-yolk': 'fire-eggs',
-  'ricochet-eggs': 'piercing-eggs',
-  'shell-shock': 'bigger-eggs',
-  'second-wind': 'heal',
-  'ace-deadeye-drill': 'fire-eggs',
+  'ace-deadeye-drill': 'critical-yolk',
   'ace-guidance-fins': 'faster-eggs',
   'artillery-reinforced-breech': 'bigger-eggs',
   'artillery-blast-plating': 'armor',
@@ -92,9 +92,12 @@ const ICON_ALIASES_BY_ID = {
   'evo-singularity-nest': 'evo-singularity-nest',
   'evo-dawn-laser': 'evo-dawn-laser',
   'evo-chick-squadron': 'evo-chick-squadron',
-  'primary-ace': 'active-upgrade',
-  'primary-artillery': 'rocket-egg',
-  'primary-storm': 'lightning-comb'
+  'primary-ace': 'precision-egg',
+  'primary-artillery': 'blast-shell',
+  'primary-storm': 'storm-egg',
+  'primary-ace-rank': 'precision-egg',
+  'primary-artillery-rank': 'blast-shell',
+  'primary-storm-rank': 'storm-egg'
 };
 
 function keepFocusInDialog(event, dialog) {
@@ -106,7 +109,7 @@ function keepFocusInDialog(event, dialog) {
   }
   if (event.key !== 'Tab') return;
   const focusable = [...dialog.querySelectorAll(
-    'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href]'
+    'button:not(:disabled), summary, input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href]'
   )].filter((element) => element.tabIndex >= 0 && element.getClientRects().length && !element.closest('[inert]'));
   if (!focusable.length) return;
   const activeIndex = focusable.indexOf(document.activeElement);
@@ -280,6 +283,7 @@ export class HUD {
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel upgrade-panel upgrade-panel--${chest ? 'chest' : 'level'} ${chest ? 'panel--reward' : ''}"
+        data-reward-kind="${chest ? context.kind ?? 'elite' : 'level'}"
         role="dialog" aria-modal="true" aria-labelledby="upgrade-title" data-choice-count="${choices.length}">
         <span class="upgrade-panel__frame upgrade-panel__frame--top" aria-hidden="true"></span>
         <span class="upgrade-panel__frame upgrade-panel__frame--right" aria-hidden="true"></span>
@@ -1134,7 +1138,7 @@ export class HUD {
     const arenaPreview = ARENA_PREVIEWS[report.arena?.id] ?? ARENA_PREVIEWS['open-yard'];
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
-      <div class="panel run-report">
+      <div class="panel run-report" role="dialog" aria-modal="true" aria-label="Run result" tabindex="-1">
         <h1>${title}</h1>
         <p>${message}</p>
         <div class="run-report__summary">
@@ -1163,17 +1167,30 @@ export class HUD {
           </header>
           ${unlocks}
         </section>` : ''}
+        <details class="run-report__details"><summary>Combat details <small>Damage, accuracy and enemy pressure</small></summary>
+        <div class="run-report__detail-stats run-report__summary"></div>
         <div class="run-report__table-wrap">
           <table>
             <thead><tr><th>Source</th><th>Damage</th><th>Share</th><th>Hits</th><th>Kills</th><th>Overkill</th><th>Active</th></tr></thead>
             <tbody>${sourceRows}</tbody>
           </table>
         </div>
-        <button class="restart-button"><span data-restart-icon></span><span>Return to Henhouse</span></button>
+        </details>
+        <div class="run-report__actions"><button class="restart-button"><span data-restart-icon></span><span>Return to Henhouse</span></button></div>
       </div>
     `;
     this.setIcon(this.overlay.querySelector('[data-restart-icon]'), 'restart');
     this.overlay.querySelectorAll('[data-report-icon]').forEach((icon) => this.setIcon(icon, icon.dataset.reportIcon));
+    const panel = this.overlay.querySelector('.run-report');
+    const summary = panel.querySelector('.run-report__summary');
+    const stats = panel.querySelector('.run-report__detail-stats');
+    [...summary.children].forEach((card,index) => { if ([2,5,6,7,8].includes(index)) stats.append(card); });
+    const reward = panel.querySelector('.run-report__meta-reward');
+    const unlockSection = panel.querySelector('.run-report__unlocks');
+    if (reward) panel.insertBefore(reward,summary);
+    if (unlockSection) panel.insertBefore(unlockSection,summary);
+    this.overlay.onkeydown = event => keepFocusInDialog(event,panel);
+    requestAnimationFrame(()=>panel.querySelector('.restart-button')?.focus({preventScroll:true}));
     this.overlay.querySelector('button').addEventListener('click', this.onRestart);
   }
 
@@ -1556,6 +1573,17 @@ export class HUD {
     this.combatMessages.request('upgrade', displayDuration);
   }
 
+  showPickupFeedback(kind, title, description) {
+    // Preserve the more important EVO/upgrade receipt while it is still visible.
+    if (this.recentUpgrade && this.recentUpgrade.until > performance.now()) return;
+    this.upgradeConfirmation.className = 'upgrade-confirmation upgrade-confirmation--instant';
+    this.upgradeConfirmation.innerHTML = '<span class="upgrade-confirmation__icon" data-pickup-icon></span><span class="upgrade-confirmation__copy"><small>PICKUP</small><strong></strong><em></em></span>';
+    this.upgradeConfirmation.querySelector('strong').textContent = title;
+    this.upgradeConfirmation.querySelector('em').textContent = description;
+    this.setIcon(this.upgradeConfirmation.querySelector('[data-pickup-icon]'), { heal: 'heal', bomb: 'rocket-egg', magnet: 'xp-magnet' }[kind]);
+    this.combatMessages.request('upgrade', 1600);
+  }
+
   getUpgradeFeedbackState() {
     return {
       visible: Boolean(this.upgradeConfirmation?.classList.contains('is-visible') && !this.combatMessages.playerHeld && !this.combatMessages.paused),
@@ -1564,7 +1592,9 @@ export class HUD {
       milestone: this.upgradeConfirmation?.querySelector('em')?.textContent ?? null,
       changes: [...(this.upgradeConfirmation?.querySelectorAll('.upgrade-button__changes span') ?? [])]
         .map((item) => item.textContent),
-      recent: this.recentUpgrade ? { ...this.recentUpgrade } : null
+      recent: this.recentUpgrade ? { ...this.recentUpgrade } : null,
+      messageState: { paused: this.combatMessages.paused, playerHeld: this.combatMessages.playerHeld,
+        active: this.combatMessages.active?.kind ?? null, queued: this.combatMessages.pending.has('upgrade') }
     };
   }
 
@@ -1640,6 +1670,15 @@ export class HUD {
       return;
     }
     const resolvedId = ICON_ALIASES_BY_ID[id] ?? id;
+    element.classList.add('ui-icon');
+    element.dataset.iconId = resolvedId;
+    const standalone = PORTAL_ICONS[resolvedId];
+    element.classList.toggle('ui-icon--standalone', Boolean(standalone));
+    if (standalone) {
+      element.style.backgroundImage = `url("${standalone}")`;
+      return;
+    }
+    element.style.removeProperty('background-image');
     const frame = uiIconAtlas.frames[resolvedId] ?? uiIconAtlas.frames['active-upgrade'];
     const col = frame % ICON_COLUMNS;
     const row = Math.floor(frame / ICON_COLUMNS);

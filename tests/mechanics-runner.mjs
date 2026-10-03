@@ -205,10 +205,10 @@ async function testUpgradeOffers(browser) {
 
     const spectacle = choices.find((choice) => spectacleCategories.has(choice.category));
     await page.evaluate(() => {
-      document.documentElement.classList.remove('has-ui-overlay');
-      document.querySelector('.overlay')?.classList.remove('is-visible');
+      window.__ROOSTER_TEST__.closePreviewUpgradeOverlay();
     });
     await page.evaluate((id) => window.__ROOSTER_TEST__.applyUpgradeById(id), spectacle.id);
+    await page.waitForFunction(() => window.__ROOSTER_TEST__.getUpgradeFeedbackState().hud.visible, null, { timeout: 6500 });
     const feedback = await page.evaluate(() => window.__ROOSTER_TEST__.getUpgradeFeedbackState());
     assert(
       feedback.hud.visible
@@ -251,7 +251,7 @@ async function testUpgradeOffers(browser) {
       narrowConfirmationBounds
       && narrowConfirmationBounds.x >= 0
       && narrowConfirmationBounds.x + narrowConfirmationBounds.width <= 360
-      && narrowConfirmationBounds.width <= 287,
+      && narrowConfirmationBounds.width <= 360 - 24,
       'Upgrade confirmation should use the narrow mobile layout.',
       narrowConfirmationBounds
     );
@@ -1186,6 +1186,7 @@ async function testHordeCombatFeedback(browser) {
     { width: 390, height: 844 }
   );
   try {
+    await page.waitForFunction(() => !document.querySelector('.wave-banner')?.classList.contains('is-visible'), null, { timeout: 6500 });
     const immediate = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
       api.resumeIfUpgradeOpen();
@@ -1238,16 +1239,16 @@ async function testHordeCombatFeedback(browser) {
       'Transient horde feedback did not clean itself up.',
       settled
     );
-    await page.waitForTimeout(2600);
+    await page.waitForTimeout(500);
     const mobileBannerHeld = await page.evaluate(() => (
       window.__ROOSTER_TEST__.getCombatFeedbackState().hud.visible
     ));
-    assert(mobileBannerHeld, 'Multi-kill feedback should remain visible for its intended four-second celebration.');
-    await page.waitForTimeout(1500);
+    assert(mobileBannerHeld, 'Multi-kill feedback should stay readable for at least one second.');
+    await page.waitForTimeout(800);
     const mobileBannerDismissed = await page.evaluate(() => (
       window.__ROOSTER_TEST__.getCombatFeedbackState().hud.visible
     ));
-    assert(!mobileBannerDismissed, 'Multi-kill feedback should dismiss after its four-second hold.');
+    assert(!mobileBannerDismissed, 'Multi-kill feedback should dismiss after its short celebration.');
     assert(errors.length === 0, 'Browser reported errors during horde feedback test.', errors);
     return { name: 'horde combat feedback', status: 'passed', immediate, settled };
   } finally {

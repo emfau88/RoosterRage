@@ -296,6 +296,7 @@ export class Enemy {
   }
 
   beginDash(angle, speed = 420, duration = 480) {
+    this.scene.audio.play('enemy-dash');
     this.dashVelocity.setToPolar(angle, speed);
     this.dashUntil = this.scene.time.now + duration;
   }

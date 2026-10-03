@@ -1,0 +1,198 @@
+[
+  {
+    "version": "before",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "errors": [],
+    "elites": [
+      {
+        "type": "elite-runner",
+        "hp": 360,
+        "speed": 126,
+        "damage": 13,
+        "xp": 34,
+        "scale": 0.34,
+        "radius": 29,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          3900,
+          380,
+          470,
+          460
+        ],
+        "aura": [
+          185,
+          1.2
+        ]
+      },
+      {
+        "type": "champion-charger",
+        "hp": 520,
+        "speed": 112,
+        "damage": 15,
+        "xp": 30,
+        "scale": 0.32,
+        "radius": 28,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          4200,
+          520,
+          455,
+          460
+        ],
+        "aura": null
+      }
+    ]
+  },
+  {
+    "version": "before",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "elites": [
+      {
+        "type": "elite-runner",
+        "hp": 360,
+        "speed": 126,
+        "damage": 13,
+        "xp": 34,
+        "scale": 0.34,
+        "radius": 29,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          3900,
+          380,
+          470,
+          460
+        ],
+        "aura": [
+          185,
+          1.2
+        ]
+      },
+      {
+        "type": "champion-charger",
+        "hp": 520,
+        "speed": 112,
+        "damage": 15,
+        "xp": 30,
+        "scale": 0.32,
+        "radius": 28,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          4200,
+          520,
+          455,
+          460
+        ],
+        "aura": null
+      }
+    ]
+  },
+  {
+    "version": "after",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "errors": [],
+    "elites": [
+      {
+        "type": "elite-runner",
+        "hp": 360,
+        "speed": 126,
+        "damage": 13,
+        "xp": 34,
+        "scale": 0.34,
+        "radius": 29,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          3900,
+          380,
+          470,
+          460
+        ],
+        "aura": [
+          185,
+          1.2
+        ]
+      },
+      {
+        "type": "champion-charger",
+        "hp": 520,
+        "speed": 112,
+        "damage": 15,
+        "xp": 30,
+        "scale": 0.32,
+        "radius": 28,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          4200,
+          520,
+          455,
+          460
+        ],
+        "aura": null
+      }
+    ]
+  },
+  {
+    "version": "after",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "elites": [
+      {
+        "type": "elite-runner",
+        "hp": 360,
+        "speed": 126,
+        "damage": 13,
+        "xp": 34,
+        "scale": 0.34,
+        "radius": 29,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          3900,
+          380,
+          470,
+          460
+        ],
+        "aura": [
+          185,
+          1.2
+        ]
+      },
+      {
+        "type": "champion-charger",
+        "hp": 520,
+        "speed": 112,
+        "damage": 15,
+        "xp": 30,
+        "scale": 0.32,
+        "radius": 28,
+        "bodyOffsetX": 99,
+        "bodyOffsetY": 100,
+        "dash": [
+          4200,
+          520,
+          455,
+          460
+        ],
+        "aura": null
+      }
+    ]
+  }
+]

@@ -5717,3 +5717,9 @@ html.has-ui-overlay .upgrade-confirmation {
     background: linear-gradient(180deg, rgba(var(--arena-accent-rgb), 0.2), rgba(255, 255, 255, 0.035));
   }
 }
+/* Portal polish symbols have their own single-frame image. */
+.ui-icon.ui-icon--standalone {
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}

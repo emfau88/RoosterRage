@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ command, mode }) => {
+  const classicFeedbackArt = (process.env.VITE_PORTAL_FEEDBACK_ART ?? loadEnv(mode, projectRoot, 'VITE_').VITE_PORTAL_FEEDBACK_ART) === 'classic';
   const aceVersion = (process.env.VITE_ACE_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_ACE_VISUAL_VERSION) === 'final' ? 'final' : 'mascot';
   const pagesBuild = mode === 'pages';
   const artilleryVersion = (process.env.VITE_ARTILLERY_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_ARTILLERY_VISUAL_VERSION) === 'final' ? 'final' : 'mascot';
@@ -29,6 +30,11 @@ export default defineConfig(({ command, mode }) => {
     }] : [],
     resolve: {
       alias: {
+        '@portal-elite-runner': path.resolve(projectRoot, classicFeedbackArt ? 'src/assets/enemies/animations/enemy-elite-runner-run.webp' : 'src/assets/enemies/portal-v1/enemy-turbo-goose-run.webp'),
+        ...Object.fromEntries(['heal','bomb','magnet'].map(kind => [`@portal-pickup-${kind}`, path.resolve(projectRoot, classicFeedbackArt
+          ? `src/assets/ui/stickers/pickup-${kind}-sticker-v2.webp` : `src/assets/pickups/portal-v1/pickup-${kind}.webp`)])),
+        ...Object.fromEntries(['ace','storm','artillery'].map(id => [`@portal-portrait-${id}`, path.resolve(projectRoot, classicFeedbackArt
+          ? `src/assets/characters/rooster-${id}-portrait.webp` : `src/assets/characters/portraits-mascot/rooster-${id}-portrait.webp`)])),
         '@artillery-production-walk': path.resolve(projectRoot, `src/assets/characters/artillery-${artilleryVersion}/rooster-artillery-${artilleryVersion}-walk.webp`),
         '@artillery-production-idle': path.resolve(projectRoot, `src/assets/characters/artillery-${artilleryVersion}/rooster-artillery-${artilleryVersion}-idle.webp`),
         '@storm-production-assets': path.resolve(projectRoot, `src/systems/assets/storm${stormVersion}Assets.js`),

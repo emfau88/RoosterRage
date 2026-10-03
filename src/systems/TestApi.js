@@ -785,6 +785,7 @@ export function installTestApi(scene) {
       scene.hud.showUpgradeChoices(choices);
       return choices.map((upgrade) => upgrade.id);
     },
+    closePreviewUpgradeOverlay: () => scene.hud.hideOverlay(),
     getUpgradeCatalog: () => scene.upgradeSystem.upgrades.map((upgrade) => ({
       id: upgrade.id,
       category: upgrade.category,
