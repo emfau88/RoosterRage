@@ -45,11 +45,11 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'fire-eggs',
     name: 'Fire Eggs',
-    description: '+10 damage per egg and fiery projectiles.',
+    description: '+7 direct damage per rank and a short 3-tick burn on Fire Eggs; other attacks keep the +10 direct bonus.',
     rankDescriptions: [
-      'R1: +10 damage; compact Fire Eggs burn with a smooth, steady flicker.',
-      'R2: +20 total damage; larger flames pulse with greater intensity.',
-      'R3: +30 total damage; white-hot Fire Eggs with bold, fluid flame motion.'
+      'R1: +7 direct damage and 3 burn damage over about 2.4 s on Fire Eggs.',
+      'R2: +14 direct damage and 6 burn damage over about 2.4 s on Fire Eggs.',
+      'R3: +21 direct damage and 9 burn damage over about 2.4 s on Fire Eggs.'
     ],
     category: 'weapon',
     rarity: 'common',

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { GameScene } from './scenes/GameScene.js';
+import { kongregate } from './systems/KongregateSystem.js';
 import {
   createDisplayMetrics,
   installDisplayResolution
@@ -41,4 +42,5 @@ const config = {
   scene: [GameScene]
 };
 
+void kongregate.init();
 new Phaser.Game(config);

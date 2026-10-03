@@ -72,6 +72,12 @@ Create the verified, self-contained portal package with:
 npm run package:kongregate
 ```
 
+The release includes optional Kongregate API support: a **Kills** leaderboard
+(`Max`) and a **RunsWon** counter (`Add`, +1 per victory). Create these exact
+statistics in the developer portal before testing the uploaded preview. See
+[Kongregate API setup](docs/KONGREGATE_API_SETUP.md) for configuration and checks.
+The SDK is inactive when playing the GitHub preview directly.
+
 The local recommended upload is `dist/kongregate-upload/rooster-rage-kongregate-complete.zip`. It contains `index.html` and `assets/` at the ZIP root; upload it as the main HTML5/WebGL file and leave an optional **Additional Files** field empty.
 
 For a split upload form, use `releases/kongregate/index.html` as the main file plus `releases/kongregate/rooster-rage-additional-files.zip` as **Additional Files**. These are the two deliberately tracked artifacts in the dedicated GitHub branch; `UPLOAD-INSTRUCTIONS.txt` documents both paths.

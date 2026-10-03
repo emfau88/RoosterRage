@@ -618,7 +618,7 @@ export class HUD {
           </aside>
         </section>
         <section class="henhouse-view" data-hub-view="roosters" hidden>
-          <div class="henhouse-section-heading"><span><small>ROOSTERS</small><h2>Roosters</h2></span><p>Stats, mastery, cosmetics, and unlocks.</p></div>
+          <div class="henhouse-section-heading"><span><small>ROOSTERS</small><h2>Roosters</h2></span><p>Stats, mastery, and unlocks.</p></div>
           <div class="rooster-list"></div>
         </section>
         <section class="henhouse-view" data-hub-view="training" hidden>
@@ -766,6 +766,7 @@ export class HUD {
     const customization = document.createElement('section');
     customization.className = 'rooster-customization';
     customization.setAttribute('aria-label', 'Character cosmetics');
+    customization.hidden = !hub.roosters?.some((rooster) => rooster.cosmetics?.length);
     list.after(inspector, customization);
     const refreshCharacterDetails = (id) => {
       const card = list.querySelector(`.rooster-card--${id}`);

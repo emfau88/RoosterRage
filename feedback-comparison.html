@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoosterRage – Feedbackvergleich</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #162227; color: #f5f4df; font: 16px Arial, sans-serif; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 22px; }
+    h1 { margin: 0; font-size: 20px; }
+    nav { display: flex; gap: 8px; }
+    button { padding: 8px 13px; border: 1px solid #8da9a6; border-radius: 8px; background: #22383d; color: inherit; cursor: pointer; }
+    button[aria-pressed="true"] { border-color: #f7c66d; background: #75502e; }
+    main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0 12px 12px; }
+    section { overflow: hidden; border: 1px solid #46676b; border-radius: 12px; background: #0b171b; }
+    h2 { margin: 0; padding: 10px 14px; font-size: 15px; }
+    iframe { display: block; width: 100%; height: min(76vh, 680px); border: 0; }
+    p { margin: 0; padding: 0 14px 10px; color: #bed2ce; font-size: 12px; }
+    #status { padding: 0 22px 12px; color: #bddbd8; font-size: 13px; }
+    @media (max-width: 850px) { header { flex-wrap: wrap; } main { grid-template-columns: 1fr; } iframe { height: 60vh; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pickup- und Brandfeedback</h1>
+    <nav><button data-mode="pickup" aria-pressed="true">Pickups</button><button data-mode="burn" aria-pressed="false">Brennende Gegner</button></nav>
+  </header>
+  <main>
+    <section><h2>Vorher</h2><iframe title="Vorher" data-version="before"></iframe><p>Bestandsdarstellung am Beginn dieses Passes</p></section>
+    <section><h2>Nachher</h2><iframe title="Nachher" data-version="after"></iframe><p>Aktuelle Darstellung auf demselben Spielstand</p></section>
+  </main>
+  <div id="status" role="status">Spielansichten laden …</div>
+  <script>
+    const frames = [...document.querySelectorAll('iframe')];
+    const timers = new Map();
+    let mode = 'pickup';
+    let generation = 0;
+
+    async function prepare(frame, expectedGeneration) {
+      const api = await new Promise((resolve, reject) => {
+        let attempts = 0;
+        const timer = setInterval(() => {
+          if (generation !== expectedGeneration) { clearInterval(timer); reject(new Error('Ansicht gewechselt')); return; }
+          const candidate = frame.contentWindow?.__ROOSTER_TEST__;
+          if (candidate?.getState) { clearInterval(timer); resolve(candidate); }
+          else if (++attempts > 120) { clearInterval(timer); reject(new Error('Spiel lädt nicht')); }
+        }, 100);
+      });
+      api.selectRooster('ace');
+      api.disableBot();
+      api.pauseWaves();
+      api.clearEnemies();
+      api.clearProjectiles();
+      api.clearXpOrbs();
+      api.clearPickups();
+      api.setPlayerCombatModifiers({ fireRate: 100000000 });
+      api.movePlayerTo(700, 540);
+      api.setPlayerHp(60);
+      if (mode === 'pickup') {
+        for (const [kind, x] of [['heal', 610], ['bomb', 700], ['magnet', 790]]) api.spawnPickup(kind, x, 430);
+      } else {
+        const ids = [
+          api.spawnEnemyType('slime', 610, 425, { speed: 0, damage: 0, hp: 9999 }),
+          api.spawnEnemyType('brute', 700, 425, { speed: 0, damage: 0, hp: 9999 }),
+          api.spawnEnemyType('elite-brute', 790, 425, { speed: 0, damage: 0, hp: 9999, aura: null, ability: null })
+        ].filter(Boolean);
+        const ignite = () => ids.forEach((id) => api.igniteEnemyById(id, 3000, 3));
+        ignite();
+        timers.set(frame, setInterval(ignite, 1600));
+      }
+    }
+
+    function show(nextMode) {
+      mode = nextMode;
+      generation += 1;
+      const current = generation;
+      document.querySelectorAll('button[data-mode]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.mode === mode));
+      });
+      document.querySelector('#status').textContent = 'Spielansichten laden …';
+      for (const frame of frames) {
+        clearInterval(timers.get(frame));
+        timers.delete(frame);
+        frame.onload = () => prepare(frame, current).then(() => {
+          if (generation === current && frames.every((item) => item.contentWindow?.__ROOSTER_TEST__)) {
+            document.querySelector('#status').textContent = 'Beide Szenen laufen. Die Effekte bleiben animiert.';
+          }
+        }).catch((error) => {
+          if (generation === current) document.querySelector('#status').textContent = error.message;
+        });
+        frame.src = `./?seed=feedback-compare&arena=square-coop&profile=average&feedbackCompare=${frame.dataset.version}&fixture=${mode}`;
+      }
+    }
+
+    document.querySelectorAll('button[data-mode]').forEach((button) => button.onclick = () => show(button.dataset.mode));
+    show(mode);
+  </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 const projectDirectory = fileURLToPath(new URL('../', import.meta.url));
 const releaseDirectory = fileURLToPath(new URL('../dist-release/', import.meta.url));
@@ -14,6 +15,14 @@ const completeZipName = 'rooster-rage-kongregate-complete.zip';
 const additionalZipName = 'rooster-rage-additional-files.zip';
 const completeZipPath = fileURLToPath(new URL(`../dist/kongregate-upload/${completeZipName}`, import.meta.url));
 const additionalZipPath = fileURLToPath(new URL(`../dist/kongregate-upload/${additionalZipName}`, import.meta.url));
+
+// Validate every recursive cleanup target before touching existing packages.
+for (const directory of [uploadDirectory, stagingDirectory, trackedReleaseDirectory]) {
+  const relative = path.relative(path.resolve(projectDirectory), path.resolve(directory));
+  if (!relative || relative.startsWith('..') || path.isAbsolute(relative)) {
+    throw new Error(`Refusing package cleanup outside the project: ${directory}`);
+  }
+}
 
 async function assertFile(path, label) {
   const details = await stat(path).catch(() => null);
@@ -78,7 +87,12 @@ const instructions = `ROOSTER RAGE — Kongregate upload\n\n` +
   `FALLBACK (if the portal provides separate file fields):\n` +
   `Upload index.html as the WebGL/HTML5 file.\n` +
   `Upload ${additionalZipName} as Additional Files.\n\n` +
-  `Do not use ${additionalZipName} as the main file: it intentionally has no index.html.\n`;
+  `Do not use ${additionalZipName} as the main file: it intentionally has no index.html.\n\n` +
+  `KONGREGATE STATISTICS (create in Manage Statistics; exact case):\n` +
+  `Kills: type Max, Display in Leaderboards enabled.\n` +
+  `RunsWon: type Add, +1 per victory; optionally enable Display in Leaderboards for a wins ranking.\n` +
+  `The client API needs no private API key. Scores submit only on Kongregate.\n` +
+  `See docs/KONGREGATE_API_SETUP.md in the source repository for testing steps.\n`;
 await writeFile(`${uploadDirectory}/UPLOAD-INSTRUCTIONS.txt`, instructions, 'utf8');
 
 await rm(trackedReleaseDirectory, { recursive: true, force: true });

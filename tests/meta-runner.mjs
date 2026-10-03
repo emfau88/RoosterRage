@@ -28,7 +28,13 @@ async function openGame(context, serverUrl, suffix = '') {
   const page = await context.newPage();
   const errors = trackErrors(page);
   await page.goto(`${serverUrl}?seed=phase-16${suffix}`, { waitUntil: 'domcontentloaded' });
-  await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
+  try {
+    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
+  } catch (error) {
+    const boot = await page.evaluate(() => ({ loadState: document.body.dataset.roosterLoadState,
+      text: document.body.innerText.slice(0, 1200) })).catch(() => ({}));
+    throw new Error(`Meta test could not boot: ${JSON.stringify({ errors, boot })}\n${error.message}`);
+  }
   return { page, errors };
 }
 
@@ -104,10 +110,8 @@ async function verifyFreshHub(context, serverUrl) {
       && snapshot.archiveDrawers.join(',') === 'Run History,Enemy Lexicon,EVO Lexicon'
       && !snapshot.analyticsInArchive,
     'Talent tiers or the simplified archive hierarchy are incomplete.', snapshot);
-    assert(snapshot.cosmeticPanels === 3 && snapshot.cosmeticPreviews === 6
-      && snapshot.cosmeticClarity.every((label) => label.includes('VISUAL ONLY') && label.includes('No stat changes'))
-      && snapshot.cosmeticUnlocks.every((label) => label.startsWith('Unlock:')),
-    'Cosmetic effect or unlock presentation is incomplete.', snapshot);
+    assert(snapshot.cosmeticPanels === 0 && snapshot.cosmeticPreviews === 0,
+    'Disabled second skins must not appear in the hub.', snapshot);
     assert(snapshot.layout.left >= 0 && snapshot.layout.right <= 390 && snapshot.layout.bodyOverflow <= 0,
       'The portrait Henhouse overflows horizontally.', snapshot.layout);
     assert(snapshot.layout.scrollHeight > snapshot.layout.clientHeight
@@ -146,10 +150,12 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
     'History or personal bests are incorrect.', recorded.state);
     assert(recorded.state.unlockedRoosters.length === 3
       && recorded.state.unlockedChallenges.length === 4
-      && recorded.state.unlockedCosmetics.includes('ace-sunrise'),
+      && recorded.state.unlockedCosmetics.length === 0,
     'A clear unlock target did not unlock after the run.', recorded.state);
     assert(recorded.newUnlocks.length >= 6,
       'The run did not return a complete unlock summary.', recorded.newUnlocks);
+    assert(recorded.newUnlocks.every((unlock) => unlock.type !== 'cosmetic'),
+      'Disabled skins must not be advertised as new rewards.', recorded.newUnlocks);
 
     await page.reload({ waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getMetaHub);
@@ -163,7 +169,7 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
     assert(persisted.state.totalRuns === 1 && persisted.state.history.length === 1,
       'Meta progression did not persist across reload.', persisted);
     assert(persisted.enabledRoosters === 3 && persisted.enabledChallenges === 4
-      && persisted.historyRows === 1 && persisted.selected,
+      && persisted.historyRows === 1 && !persisted.selected,
     'The unlocked hub did not render the persisted state.', persisted);
 
     await page.getByRole('button', { name: 'Roosters', exact: true }).click();
@@ -193,8 +199,8 @@ async function verifyUnlocksAndPersistence(context, serverUrl) {
         selected: api.getMetaState().selectedCosmetics.ace
       };
     });
-    assert(cosmetic.selected === 'ace-sunrise' && cosmetic.visual.tint === 0xffe29a,
-      'The selected cosmetic is not persisted or applied.', cosmetic);
+    assert(!cosmetic.selected && cosmetic.visual.tint === 0xffffff,
+      'Disabled cosmetics must not tint the original rooster.', cosmetic);
     assert(errors.length === 0, 'Browser errors in unlock/persistence gate.', errors);
     return recorded;
   } finally {

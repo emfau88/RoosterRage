@@ -22,6 +22,43 @@ const CHEST_CONFIGS = Object.freeze({
   }
 });
 
+// World-space contact radii. PickupSystem adds the player's collision radius
+// around the foot marker, so these values are intentionally smaller than the art.
+const PICKUP_CONTACT_RADII = Object.freeze({ heal: 15, bomb: 11, magnet: 15 });
+const CLASSIC_FEEDBACK = import.meta.env?.DEV
+  && new URLSearchParams(globalThis.location?.search ?? '').get('feedbackCompare') === 'before';
+const PICKUP_COLORS = Object.freeze({ heal: 0x67ff99, bomb: 0xffbb65, magnet: 0x74e5ff });
+
+// Cache one tiny gradient per color. Baking the color also keeps the Canvas
+// renderer fallback readable, where image tint is unsupported.
+function beaconTexture(scene, color) {
+  const key = `pickup-beacon-light-${color.toString(16)}`;
+  if (scene.textures.exists(key)) return key;
+  const texture = scene.textures.createCanvas(key, 64, 256);
+  const ctx = texture.context;
+  const rgba = (alpha) => `rgba(${color >> 16 & 255},${color >> 8 & 255},${color & 255},${alpha})`;
+  const halo = ctx.createLinearGradient(0, 0, 64, 0);
+  halo.addColorStop(0, rgba(0));
+  halo.addColorStop(0.3, rgba(0.12));
+  halo.addColorStop(0.46, rgba(0.42));
+  halo.addColorStop(0.5, rgba(0.95));
+  halo.addColorStop(0.54, rgba(0.42));
+  halo.addColorStop(0.7, rgba(0.12));
+  halo.addColorStop(1, rgba(0));
+  ctx.fillStyle = halo;
+  ctx.fillRect(0, 0, 64, 256);
+  const fade = ctx.createLinearGradient(0, 0, 0, 256);
+  fade.addColorStop(0, 'rgba(255,255,255,0)');
+  fade.addColorStop(0.18, 'rgba(255,255,255,0.45)');
+  fade.addColorStop(0.7, 'rgba(255,255,255,1)');
+  fade.addColorStop(1, 'rgba(255,255,255,0.7)');
+  ctx.globalCompositeOperation = 'destination-in';
+  ctx.fillStyle = fade;
+  ctx.fillRect(0, 0, 64, 256);
+  texture.refresh();
+  return key;
+}
+
 export class Pickup {
   constructor(scene, kind, x, y) {
     this.scene = scene;
@@ -41,8 +78,11 @@ export class Pickup {
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
     // Arcade circles use unscaled texture coordinates. Keep the collection
     // circle at the ground anchor, centered and sized in world units.
-    const radius = this.chest ? 24 : 21;
-    const sourceRadius = radius / this.sprite.scaleX;
+    const radius = this.chest ? 24 : PICKUP_CONTACT_RADII[kind];
+    this.contactRadius = radius;
+    // Arcade floors halfWidth, which can turn an exact 15 into 14 through
+    // floating-point rounding after scaling. Keep the intended world radius.
+    const sourceRadius = (radius + 0.05) / this.sprite.scaleX;
     this.sprite.setCircle(sourceRadius, this.sprite.width / 2 - sourceRadius, this.sprite.height / 2 - sourceRadius);
     this.sprite.body.updateFromGameObject();
     this.sprite.entity = this;
@@ -50,6 +90,29 @@ export class Pickup {
       .setDepth(this.sprite.depth).setScale(this.sprite.scaleX, this.sprite.scaleY);
     if (this.chest?.tint) this.visual.setTint(this.chest.tint);
     this.sprite.setVisible(false);
+    this.fieldBaseAlpha = kind === 'magnet' ? 0.46 : 0.67;
+    this.beamBaseAlpha = this.chest ? 0.95 : 0.88;
+    this.field = this.chest || CLASSIC_FEEDBACK ? null : scene.add.image(x, y + 11, `pickup-${kind}-ground`)
+      .setDisplaySize(68, 34).setDepth(5.1).setAlpha(this.fieldBaseAlpha);
+    const beamColor = this.chest?.glow ?? PICKUP_COLORS[kind];
+    const coreColor = this.chest?.burst ?? PICKUP_COLORS[kind];
+    this.beam = CLASSIC_FEEDBACK ? null : scene.add.image(x, y + 12, beaconTexture(scene, beamColor))
+      .setOrigin(0.5, 1).setDisplaySize(this.chest ? 84 : 46, this.chest ? 192 : 124)
+      .setDepth(this.chest ? 8.7 : 5.38).setAlpha(this.beamBaseAlpha);
+    this.beamCore = CLASSIC_FEEDBACK ? null : scene.add.image(x, y + 12, beaconTexture(scene, coreColor))
+      .setOrigin(0.5, 1).setDisplaySize(this.chest ? 24 : 12, this.chest ? 168 : 108)
+      .setBlendMode('ADD').setDepth(this.chest ? 8.71 : 5.39).setAlpha(0.8);
+    this.beaconParticles = [];
+    if (this.chest && !CLASSIC_FEEDBACK) {
+      this.field = scene.add.ellipse(x, y + 14, 84, 26, this.chest.glow, 0.18)
+        .setStrokeStyle(2, this.chest.glow, 0.65).setDepth(8.5).setAlpha(0.75);
+      this.fieldBaseAlpha = 0.75;
+      for (let index = 0; index < 6; index += 1) {
+        const spark = scene.add.star(x, y, 4, 1, index % 2 ? 3 : 4, this.chest.burst)
+          .setBlendMode('ADD').setDepth(10).setAlpha(0);
+        this.beaconParticles.push(spark);
+      }
+    }
     this.shadow = this.chest ? null : scene.add.ellipse(x, y + 11, 23, 8, 0x302515, 0.2).setDepth(5.3);
     this.tierMarker = null;
     if (kind === 'golden-chest' || kind === 'royal-chest') {
@@ -73,6 +136,17 @@ export class Pickup {
     if (!this.sprite.active || this.opening) return;
     const bob = Math.sin((time - this.spawnedAt) * 0.005) * 4;
     this.visual.y = this.baseY + bob;
+    if (this.field) this.field.setAlpha(this.fieldBaseAlpha + Math.sin((time - this.spawnedAt) * 0.0023) * 0.06);
+    if (this.beam) this.beam.setAlpha(this.beamBaseAlpha + Math.sin((time - this.spawnedAt) * 0.0067) * 0.05);
+    if (this.beamCore) this.beamCore.setAlpha(0.8 + Math.sin((time - this.spawnedAt) * 0.003) * 0.12);
+    this.beaconParticles.forEach((spark, index) => {
+      const phase = ((time - this.spawnedAt) / (2200 + index * 130) + index / 6) % 1;
+      spark.setPosition(this.sprite.x + Math.sin(phase * 5 + index * 2.4) * (12 + index * 2),
+        this.baseY + 5 - phase * 155)
+        .setAlpha(Math.sin(phase * Math.PI) * 0.92)
+        .setScale(0.6 + Math.sin(phase * Math.PI) * 0.4)
+        .setRotation(phase * 2 + index);
+    });
     if (this.shadow) this.shadow.setScale(0.94 - bob * 0.015).setAlpha(0.2 - bob * 0.007);
     if (this.tierMarker) {
       this.tierMarker
@@ -117,6 +191,12 @@ export class Pickup {
   playChestOpening(onComplete) {
     if (this.opening || this.destroyed) return false;
     this.opening = true;
+    // Gameplay updates pause during the opening animation. Fade these objects
+    // with its tween clock so the rising sparkles never freeze in mid-air.
+    this.scene.tweens.add({
+      targets: [this.beam, this.beamCore, this.field, ...this.beaconParticles].filter(Boolean),
+      alpha: 0, duration: 180, ease: 'Sine.Out'
+    });
     this.baseY = this.visual.y;
     this.sprite.body?.stop();
     if (this.sprite.body) this.sprite.body.enable = false;
@@ -228,7 +308,8 @@ export class Pickup {
     this.destroyed = true;
     this.timers.forEach((timer) => timer.remove(false));
     this.timers = [];
-    this.scene.tweens.killTweensOf([this.visual, ...this.transientFx]);
+    this.scene.tweens.killTweensOf([this.visual, this.beam, this.beamCore, this.field,
+      ...this.beaconParticles, ...this.transientFx].filter(Boolean));
     this.transientFx.forEach((fx) => {
       if (fx?.active) fx.destroy();
     });
@@ -236,6 +317,11 @@ export class Pickup {
     if (this.tierMarker?.active) this.tierMarker.destroy();
     if (this.sprite?.active) this.sprite.destroy();
     this.visual?.destroy();
+    this.field?.destroy();
+    this.beam?.destroy();
+    this.beamCore?.destroy();
+    this.beaconParticles.forEach((spark) => spark.destroy());
+    this.beaconParticles = [];
     this.shadow?.destroy();
   }
 }

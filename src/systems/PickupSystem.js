@@ -34,6 +34,16 @@ export class PickupSystem {
 
   update(time) {
     this.items.forEach((pickup) => pickup.update(time));
+    const foot = this.scene.player?.groundMarker;
+    const playerRadius = this.scene.player?.sprite.body?.halfWidth ?? 0;
+    if (!foot || !playerRadius) return;
+    for (const pickup of this.items) {
+      if (pickup.chest || !pickup.sprite.active) continue;
+      const reach = pickup.contactRadius + playerRadius;
+      const dx = foot.x - pickup.sprite.x;
+      const dy = foot.y - pickup.sprite.y;
+      if (dx * dx + dy * dy <= reach * reach) this.collect(pickup);
+    }
   }
 
   onEnemyKilled(enemy) {
@@ -132,14 +142,14 @@ export class PickupSystem {
       scene.telemetry.addHealing(scene.player.hp - before, scene.time.now, scene.waveSystem.currentWave, 'pickup:heal');
       scene.hud.showPickupFeedback(kind, `+${scene.player.hp - before} HP`, 'Health restored');
     } else if (kind === 'bomb') {
+      scene.combatFeedback.bombConfetti.prepareBomb(scene.enemies.filter(enemy =>
+        enemy.sprite.active && (enemy.boss || (!enemy.elite && !enemy.champion))).length);
       [...scene.enemies].forEach((enemy) => {
+        if (!enemy.boss && (enemy.elite || enemy.champion)) return;
         const damage = enemy.boss ? Math.max(1, Math.round(enemy.maxHp * 0.05)) : enemy.maxHp;
-        scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, { source: 'pickup:bomb' });
+        scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, { source: 'pickup:bomb', quiet: true });
       });
-      if (scene.effects.enabled('screenFlash')) {
-        scene.cameras.main.flash(120, 255, 202, 88, false);
-      }
-      scene.hud.showPickupFeedback(kind, 'EGG BOMB', 'Horde cleared · Boss takes 5% max HP');
+      scene.hud.showPickupFeedback(kind, 'EGG BOMB', 'Elites immune · Boss takes 5% max HP');
     } else if (kind === 'magnet') {
       this.magnetUntil = Math.max(this.magnetUntil, scene.time.now + 8000);
       scene.hud.showPickupFeedback(kind, 'MAGNET · 8s', 'All XP is pulled towards you');
@@ -180,21 +190,20 @@ export class PickupSystem {
   }
 
   playCollectFx(kind, x, y) {
+    // The bomb celebrates its defeated enemies with confetti, without a fire
+    // explosion, ring or core at the player's feet.
+    if (kind === 'bomb') return;
     const palette = {
       heal: { color: 0x65ef8b, radius: 20 },
-      bomb: { color: 0xffa24d, radius: 27 },
       magnet: { color: 0x5ad7ff, radius: 23 }
     }[kind];
     if (!palette) return;
 
-    if (kind === 'bomb') {
-      this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.48, depth: 10 });
-    }
     const ring = this.scene.add.circle(x, y, palette.radius)
       .setStrokeStyle(kind === 'magnet' ? 3 : 2, palette.color, 0.88)
       .setDepth(10)
       .setScale(kind === 'magnet' ? 1.25 : 0.45);
-    const core = this.scene.add.circle(x, y, kind === 'bomb' ? 10 : 8, palette.color, 0.32).setDepth(9);
+    const core = this.scene.add.circle(x, y, 8, palette.color, 0.32).setDepth(9);
     this.scene.tweens.add({
       targets: ring,
       scale: kind === 'magnet' ? 0.25 : 1.55,
@@ -245,6 +254,8 @@ export class PickupSystem {
         opening: pickup.opening,
         victoryReward: pickup.victoryReward ?? false,
         texture: pickup.sprite.texture.key,
+        field: pickup.field?.texture?.key ?? null,
+        beam: pickup.beam?.texture?.key ?? null,
         depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight),

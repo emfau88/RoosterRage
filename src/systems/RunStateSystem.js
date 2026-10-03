@@ -67,6 +67,7 @@ export class RunStateSystem {
       challengeId: this.scene.challenge.id,
       arenaId: this.scene.arena.id
     });
+    this.kongregateRun = this.scene.kongregate?.beginRun(this.scene.telemetry.metadata.profile);
     this.scene.updateHud();
     return true;
   }
@@ -254,6 +255,7 @@ export class RunStateSystem {
     this.gameEnded = true;
     this.scene.gamePause.request('ended', { freezeTime: false, freezeTweens: false });
     this.scene.telemetry.finish(this.scene.time.now, 'abandoned');
+    this.scene.kongregate?.finishRun(this.kongregateRun, this.getRunReport());
     this.scene.productAnalytics.finishRun(this.getRunReport());
     this.scene.scene.restart({});
     return true;
@@ -283,6 +285,7 @@ export class RunStateSystem {
     }
     this.scene.telemetry.finish(this.scene.time.now, outcome);
     const report = this.getRunReport();
+    this.scene.kongregate?.finishRun(this.kongregateRun, report, { assisted: this.scene.bot.enabled });
     this.scene.productAnalytics.finishRun(report);
     report.newUnlocks = this.scene.meta.recordRun(report, this.scene.telemetry.events);
     report.metaReward = this.scene.meta.getLastRunReward();

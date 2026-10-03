@@ -2,9 +2,9 @@ const MOMENTS = {
   'double-shot': [{ title: 'TWIN VOLLEY', changes: ['1 → 2 eggs', 'Twin formation'] }],
   'triple-shot': [{ title: 'TRIPLE VOLLEY', changes: ['2 → 3 eggs', 'Wide formation'] }],
   'fire-eggs': [
-    { title: 'EMBER SHELL', changes: ['+10 damage', 'Fire projectile'] },
-    { title: 'BLAZE SHELL', changes: ['+20 total', 'Larger flame'] },
-    { title: 'WHITE-HOT YOLK', changes: ['+30 total', 'White-hot core'] }
+    { title: 'EMBER SHELL', changes: ['+7 impact', '+3 short burn'] },
+    { title: 'BLAZE SHELL', changes: ['+14 impact total', '+6 burn total'] },
+    { title: 'WHITE-HOT YOLK', changes: ['+21 impact total', '+9 burn total'] }
   ],
   'primary-ace-rank': [
     { title: 'TWIN LOCK', changes: ['Every 2nd attack: 2 eggs', 'Stronger homing'] },

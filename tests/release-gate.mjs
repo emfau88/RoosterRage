@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import http from 'node:http';
 import path from 'node:path';
+import { spawn } from 'node:child_process';
 import { loadPlaywright, projectRoot } from './helpers/test-runtime.mjs';
 
 const [distributionName = 'dist-release', requestedPrefix = '/nested/game/', marketingFlag] = process.argv.slice(2);
@@ -136,6 +137,10 @@ async function verifyPortalFrame(browser, url, blockedStorage) {
   const page = await context.newPage();
   const errors = [];
   const failedResponses = [];
+  const apiRequests = [];
+  page.on('request', (request) => {
+    if (request.url().includes('kongregate_api.js')) apiRequests.push(request.url());
+  });
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
     if (message.type() === 'error') errors.push(message.text());
@@ -190,9 +195,120 @@ async function verifyPortalFrame(browser, url, blockedStorage) {
 
     assert(errors.length === 0, 'Production iframe reported browser errors.', errors);
     assert(failedResponses.length === 0, 'Production iframe requested missing files.', failedResponses);
+    assert(apiRequests.length === 0, 'An ordinary off-platform visit loaded the Kongregate SDK.', apiRequests);
     return { blockedStorage, boot };
   } finally {
     await page.close();
+    await context.close();
+  }
+}
+
+async function verifyKongregateApi(browser, portalUrl, unavailable = false) {
+  const context = await browser.newContext({ viewport: { width: 1000, height: 580 } });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  let requests = 0;
+  await context.addInitScript(() => {
+    Object.defineProperty(document, 'referrer', { configurable: true,
+      get: () => 'https://www.kongregate.com/en/games/emfau/roosterrage-survivor' });
+    let phaser;
+    Object.defineProperty(window, 'Phaser', { configurable: true, get: () => phaser, set(value) {
+      phaser = value;
+      const boot = value.Game.prototype.boot;
+      value.Game.prototype.boot = function(...args) { window.__portalTestGame = this; return boot.apply(this, args); };
+    } });
+  });
+  await context.route('https://cdn1.kongregate.com/javascripts/kongregate_api.js', async route => {
+    requests++;
+    if (unavailable) { await route.abort(); return; }
+    await route.fulfill({ contentType: 'application/javascript', body: `
+      window.__portalStatCalls = []; window.__portalLoadCalls = 0;
+      const api = { services: { getUserId: () => 42, isGuest: () => false, addEventListener() {} },
+        stats: { submit: (name, value) => window.__portalStatCalls.push([name, value]) } };
+      window.kongregateAPI = { getAPI: () => api, loadAPI: callback => { window.__portalLoadCalls++; callback(); } };
+    ` });
+  });
+  try {
+    await page.goto(portalUrl, { waitUntil: 'domcontentloaded' });
+    const frame = await (await page.locator('iframe').elementHandle()).contentFrame();
+    await frame.waitForSelector('.henhouse-panel');
+    await frame.locator('[data-run-start]').click();
+    await frame.waitForFunction(() => window.__portalTestGame?.scene.getScene('GameScene')?.isChoosingRooster === false);
+    if (!unavailable) {
+      await frame.waitForFunction(() => window.__portalLoadCalls === 1);
+      await frame.evaluate(() => {
+        const s = window.__portalTestGame.scene.getScene('GameScene');
+        s.telemetry.summary.kills = 123; s.victory(); s.victory();
+      });
+      let calls = await frame.evaluate(() => window.__portalStatCalls);
+      assert(JSON.stringify(calls) === JSON.stringify([['Kills', 123], ['RunsWon', 1]]),
+        'The production victory hook submitted incorrect or duplicate stats.', calls);
+      await frame.evaluate(() => window.__portalTestGame.scene.getScene('GameScene').scene.restart());
+      await frame.waitForSelector('.henhouse-panel');
+      await frame.locator('[data-run-start]').click();
+      await frame.waitForFunction(() => !window.__portalTestGame.scene.getScene('GameScene').isChoosingRooster);
+      await frame.evaluate(() => {
+        const s = window.__portalTestGame.scene.getScene('GameScene');
+        s.telemetry.summary.kills = 150; s.gameOver(); s.gameOver();
+      });
+      calls = await frame.evaluate(() => window.__portalStatCalls);
+      assert(JSON.stringify(calls) === JSON.stringify([['Kills', 123], ['RunsWon', 1], ['Kills', 150]]),
+        'Defeat/restart incorrectly added wins or lost the best kill score.', calls);
+      assert(await frame.evaluate(() => window.__portalLoadCalls === 1), 'Scene restart initialized the SDK twice.');
+    }
+    assert(requests === 1, 'The portal SDK must be requested only once.', requests);
+    assert(errors.length === 0, 'Kongregate integration raised gameplay errors.', errors);
+    return { sdkUnavailable: unavailable, sdkRequests: requests, playable: true };
+  } finally {
+    await context.close();
+  }
+}
+
+async function verifyOriginalRoosterColors(browser, portalUrl) {
+  const context = await browser.newContext({ viewport: { width: 430, height: 900 } });
+  await context.addInitScript(() => {
+    const skins = { ace: 'ace-sunrise', artillery: 'artillery-ironclad', storm: 'storm-violet' };
+    localStorage.setItem('rooster-rage:meta:v2', JSON.stringify({ version: 2,
+      unlockedRoosters: Object.keys(skins), unlockedCosmetics: Object.values(skins), selectedCosmetics: skins }));
+    let phaser;
+    Object.defineProperty(window, 'Phaser', { configurable: true, get: () => phaser, set(value) {
+      phaser = value;
+      const boot = value.Game.prototype.boot;
+      value.Game.prototype.boot = function(...args) { window.__colorTestGame = this; return boot.apply(this, args); };
+    } });
+  });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  try {
+    await page.goto(portalUrl, { waitUntil: 'domcontentloaded' });
+    await page.locator('iframe').evaluate(iframe => { iframe.style.width = '390px'; iframe.style.height = '844px'; });
+    const frame = await (await page.locator('iframe').elementHandle()).contentFrame();
+    const colors = [];
+    for (const id of ['ace', 'artillery', 'storm']) {
+      await frame.waitForSelector('.henhouse-panel');
+      assert(await frame.locator('.cosmetic-panel').count() === 0, 'Disabled skins remain visible in the hub.');
+      await frame.getByRole('button', { name: 'Roosters', exact: true }).click();
+      await frame.locator(`.rooster-card--${id}`).click();
+      await frame.locator(`.rooster-card--${id} + .rooster-card__choose`).click();
+      await frame.locator('[data-run-start]').click();
+      await frame.waitForFunction(() => !window.__colorTestGame.scene.getScene('GameScene').isChoosingRooster);
+      const color = await frame.evaluate(() => {
+        const s = window.__colorTestGame.scene.getScene('GameScene');
+        return { id: s.player.roosterId, tinted: s.player.sprite.isTinted, tint: s.player.sprite.tintTopLeft,
+          selectedSkin: s.meta.getSelectedCosmetic(s.player.roosterId) };
+      });
+      assert(color.id === id && !color.tinted && color.tint === 0xffffff && color.selectedSkin === null,
+        'A previously saved skin still tints the production rooster.', color);
+      colors.push(color);
+      if (id !== 'storm') await frame.evaluate(() => window.__colorTestGame.scene.getScene('GameScene').scene.restart());
+    }
+    await fs.mkdir(path.join(projectRoot, 'test-results'), { recursive: true });
+    await page.screenshot({ path: path.join(projectRoot, 'test-results/no-skins-storm-portrait.png') });
+    assert(errors.length === 0, 'Original-color test raised browser errors.', errors);
+    return { viewport: 'portrait', oldSkinsIgnored: colors };
+  } finally {
     await context.close();
   }
 }
@@ -206,8 +322,25 @@ async function run() {
   try {
     const normal = await verifyPortalFrame(browser, url, false);
     const withoutStorage = await verifyPortalFrame(browser, url, true);
+    const kongregateScenarios = !expectMarketing && distributionName === 'dist-release'
+      ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
+    const originalColors = await verifyOriginalRoosterColors(browser, url);
+    if (!expectMarketing) {
+      for (const runner of ['elite-balance', 'pickup-sequence', 'bomb-confetti']) {
+        console.log(`Checking release gameplay: ${runner} …`);
+        await new Promise((resolve, reject) => {
+          const child = spawn(process.execPath, [path.join(projectRoot, 'tests', `${runner}-runner.mjs`)], {
+            cwd: projectRoot,
+            env: { ...process.env, ROOSTER_TEST_URL: new URL(gamePrefix, url).href },
+            stdio: 'inherit'
+          });
+          child.once('error', reject);
+          child.once('exit', code => code === 0 ? resolve() : reject(new Error(`${runner} release gate failed (${code})`)));
+        });
+      }
+    }
     console.log('Release gate passed.');
-    console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage] }, null, 2));
+    console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage], kongregateScenarios, originalColors }, null, 2));
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

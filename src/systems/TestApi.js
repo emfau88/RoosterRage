@@ -266,9 +266,13 @@ export function installTestApi(scene) {
           id: enemy.id,
           remainingMs: enemy.burnUntil - scene.time.now,
           damage: enemy.burnDamage,
+          source: enemy.burnSource,
+          nextTickInMs: enemy.nextBurnTickAt - scene.time.now,
+          sources: [...(enemy.burnSources ?? [])].map(([source, entry]) => ({ source, ...entry })),
           overlay: enemy.burnOverlay?.texture?.key ?? null,
           animation: enemy.burnOverlay?.anims?.currentAnim?.key ?? null,
-          overlayKind: enemy.burnOverlayKind ?? null
+          overlayKind: enemy.burnOverlayKind ?? null,
+          flameCount: enemy.burnFlames?.length ?? 0
         }))
     }),
     getTargetAcquisitionState: () => {
@@ -865,6 +869,17 @@ export function installTestApi(scene) {
     clearEnemies: () => {
       scene.enemies.forEach((enemy) => enemy.destroy());
       scene.enemies = [];
+      return true;
+    },
+    clearPickups: () => {
+      scene.pickups.items.forEach((pickup) => pickup.destroy());
+      scene.pickups.items = [];
+      return true;
+    },
+    igniteEnemyById: (id, duration = 3000, damage = 3, source = 'molotov-burn') => {
+      const enemy = scene.enemies.find((item) => item.id === id && item.sprite.active);
+      if (!enemy) return false;
+      enemy.applyBurn(duration, damage, source);
       return true;
     },
     clearXpOrbs: () => {

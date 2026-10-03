@@ -66,6 +66,12 @@ RUNTIME_IMAGES = (
     "pickups/pickup-heal.png",
     "pickups/pickup-bomb.png",
     "pickups/pickup-magnet.png",
+    "pickups/fields/heal-ground.png",
+    "pickups/fields/bomb-ground.png",
+    "pickups/fields/magnet-ground.png",
+    "pickups/fields/heal-beam.png",
+    "pickups/fields/bomb-beam.png",
+    "pickups/fields/magnet-beam.png",
     "ui/stickers/pickup-heal-sticker-v2.png",
     "ui/stickers/pickup-bomb-sticker-v2.png",
     "ui/stickers/pickup-magnet-sticker-v2.png",
@@ -159,6 +165,12 @@ RUNTIME_IMAGES = (
 )
 
 RUNTIME_SIZES = {
+    "pickups/fields/heal-ground.png": (128, 64),
+    "pickups/fields/bomb-ground.png": (128, 64),
+    "pickups/fields/magnet-ground.png": (128, 64),
+    "pickups/fields/heal-beam.png": (64, 128),
+    "pickups/fields/bomb-beam.png": (64, 128),
+    "pickups/fields/magnet-beam.png": (64, 128),
     "meta/kernel-currency.png": (64, 64),
     "meta/mastery-ace.png": (96, 96),
     "meta/mastery-artillery.png": (96, 96),
@@ -248,10 +260,18 @@ def digest(path):
     return sha256(path.read_bytes()).hexdigest()
 
 
-def fit_visible(image, size, margin):
+def fit_visible(image, size, margin, alpha_threshold=0, edge_expansion=0):
     image = image.convert("RGBA")
-    bounds = image.getchannel("A").getbbox()
+    alpha = image.getchannel("A")
+    bounds = alpha.point(lambda value: 255 if value > alpha_threshold else 0).getbbox()
     if bounds:
+        if edge_expansion:
+            dx = int((bounds[2] - bounds[0]) * edge_expansion)
+            dy = int((bounds[3] - bounds[1]) * edge_expansion)
+            bounds = (
+                max(0, bounds[0] - dx), max(0, bounds[1] - dy),
+                min(image.width, bounds[2] + dx), min(image.height, bounds[3] + dy)
+            )
         image = image.crop(bounds)
     max_size = (max(1, size[0] - margin * 2), max(1, size[1] - margin * 2))
     image.thumbnail(max_size, Image.Resampling.LANCZOS)
@@ -295,7 +315,10 @@ def optimize_assets():
                 )
             elif relative_name in RUNTIME_SIZES:
                 margin = 10 if relative_name.startswith("fx/") else 2
-                image = fit_visible(source_image, RUNTIME_SIZES[relative_name], margin)
+                if relative_name.startswith("pickups/fields/"):
+                    image = fit_visible(source_image, RUNTIME_SIZES[relative_name], 2, 12, 0.16)
+                else:
+                    image = fit_visible(source_image, RUNTIME_SIZES[relative_name], margin)
             else:
                 image = source_image.convert("RGBA")
             width, height = image.size

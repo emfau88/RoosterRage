@@ -14,6 +14,8 @@ import { safeStorage } from './SafeStorage.js';
 import { isPublicRoosterPreview } from '../config/publicRoosterPreview.js';
 
 const MAX_HISTORY = 10;
+// Keep saved cosmetic ownership for a future art pass; ship original colors.
+export const ROOSTER_COSMETICS_ENABLED = false;
 const ROOSTER_IDS = ['ace', 'artillery', 'storm'];
 
 const ROOSTER_UNLOCKS = {
@@ -224,10 +226,12 @@ export class MetaProgressionSystem {
         .filter((challenge) => this.meets(challenge.unlock))
         .map((challenge) => challenge.id)
     ]);
-    this.state.unlockedCosmetics = unique([
-      ...this.state.unlockedCosmetics,
-      ...COSMETICS.filter((cosmetic) => this.meets(cosmetic.unlock)).map((cosmetic) => cosmetic.id)
-    ]);
+    if (ROOSTER_COSMETICS_ENABLED) {
+      this.state.unlockedCosmetics = unique([
+        ...this.state.unlockedCosmetics,
+        ...COSMETICS.filter((cosmetic) => this.meets(cosmetic.unlock)).map((cosmetic) => cosmetic.id)
+      ]);
+    }
     if (!this.state.unlockedChallenges.includes(this.state.selectedChallenge)) {
       this.state.selectedChallenge = 'standard';
     }
@@ -432,6 +436,7 @@ export class MetaProgressionSystem {
   }
 
   selectCosmetic(roosterId, cosmeticId = null) {
+    if (!ROOSTER_COSMETICS_ENABLED && cosmeticId) return false;
     if (cosmeticId && !this.state.unlockedCosmetics.includes(cosmeticId)) return false;
     const cosmetic = COSMETICS.find((entry) => entry.id === cosmeticId);
     if (cosmetic && cosmetic.roosterId !== roosterId) return false;
@@ -441,6 +446,7 @@ export class MetaProgressionSystem {
   }
 
   getSelectedCosmetic(roosterId) {
+    if (!ROOSTER_COSMETICS_ENABLED) return null;
     const id = this.state.selectedCosmetics[roosterId];
     return COSMETICS.find((cosmetic) => cosmetic.id === id) ?? null;
   }
@@ -519,14 +525,14 @@ export class MetaProgressionSystem {
         runs: this.state.roosterRuns[rooster.id] ?? 0,
         wins: this.state.roosterWins[rooster.id] ?? 0,
         mastery: this.getMastery(rooster.id),
-        selectedCosmetic: this.state.selectedCosmetics[rooster.id] ?? null,
-        cosmetics: COSMETICS.filter((cosmetic) => cosmetic.roosterId === rooster.id).map((cosmetic) => ({
+        selectedCosmetic: this.getSelectedCosmetic(rooster.id)?.id ?? null,
+        cosmetics: ROOSTER_COSMETICS_ENABLED ? COSMETICS.filter((cosmetic) => cosmetic.roosterId === rooster.id).map((cosmetic) => ({
           id: cosmetic.id,
           name: cosmetic.name,
           tint: cosmetic.tint,
           unlocked: this.state.unlockedCosmetics.includes(cosmetic.id),
           unlockLabel: cosmetic.unlock.label
-        }))
+        })) : []
       })),
       challenges: CHALLENGE_DEFINITIONS.map((challenge) => ({
         id: challenge.id,
