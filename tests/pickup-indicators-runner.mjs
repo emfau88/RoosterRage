@@ -83,7 +83,15 @@ try {
       const heal = s.pickups.items.find((pickup) => pickup.kind === 'heal');
       s.cameras.main.centerOn(heal.sprite.x, heal.sprite.y);
     });
-    await page.waitForFunction(() => document.querySelector('.pickup-indicator--heal').hidden);
+    try {
+      await page.waitForFunction(() => document.querySelector('.pickup-indicator--heal').hidden);
+    } catch (error) {
+      console.log(await page.evaluate(() => {
+        const s = window.__indicatorGame.scene.getScene('GameScene');
+        return { view: s.cameras.main.worldView, pickups: s.pickups.getState(), state: window.__ROOSTER_TEST__.getState() };
+      }));
+      throw error;
+    }
     await page.evaluate(() => window.__indicatorGame.scene.getScene('GameScene').cameras.main.centerOn(700, 450));
     await page.waitForFunction(() => document.querySelectorAll('.pickup-indicator:not([hidden])').length === 3);
     assert(await page.locator('.pickup-indicator--heal').evaluate((node) => node.classList.contains('is-urgent')));

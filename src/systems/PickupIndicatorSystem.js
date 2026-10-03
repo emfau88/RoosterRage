@@ -1,9 +1,10 @@
 import healUrl from '@portal-pickup-heal';
 import bombUrl from '@portal-pickup-bomb';
 import magnetUrl from '@portal-pickup-magnet';
+import chestUrl from '../assets/pickups/pickup-elite-chest.webp';
 
-const TYPES = ['heal', 'bomb', 'magnet'];
-const ICONS = { heal: healUrl, bomb: bombUrl, magnet: magnetUrl };
+const TYPES = ['heal', 'bomb', 'magnet', 'chest'];
+const ICONS = { heal: healUrl, bomb: bombUrl, magnet: magnetUrl, chest: chestUrl };
 const CLASSIC_FEEDBACK = import.meta.env?.DEV
   && new URLSearchParams(globalThis.location?.search ?? '').get('feedbackCompare') === 'before';
 
@@ -20,7 +21,7 @@ export class PickupIndicatorSystem {
       node.className = `pickup-indicator pickup-indicator--${kind}`;
       node.dataset.pickupKind = kind;
       node.hidden = true;
-      node.innerHTML = '<span class="pickup-indicator__arrow">▲</span><img alt=""><span class="pickup-indicator__distance" aria-hidden="true"><i></i><i></i><i></i></span>';
+      node.innerHTML = '<span class="pickup-indicator__arrow">▲</span><img alt=""><span class="pickup-indicator__distance"><b></b><span aria-hidden="true"><i></i><i></i><i></i></span></span>';
       node.querySelector('img').src = ICONS[kind];
       this.root.append(node);
       this.nodes.set(kind, node);
@@ -44,9 +45,9 @@ export class PickupIndicatorSystem {
     const view = scene.cameras.main.worldView;
     const compact = rect.width < 760;
     const safe = {
-      left: rect.left + (compact ? 33 : 42),
-      right: rect.right - (compact ? 33 : 42),
-      top: rect.top + (compact ? 112 : 94),
+      left: rect.left + 52,
+      right: rect.right - 52,
+      top: rect.top + (compact ? 126 : 116),
       bottom: rect.bottom - (compact ? 156 : 56)
     };
     if (safe.right <= safe.left || safe.bottom <= safe.top) {
@@ -57,12 +58,17 @@ export class PickupIndicatorSystem {
     const nearest = new Map();
     const player = scene.player.groundMarker;
     for (const pickup of scene.pickups.items) {
-      if (!TYPES.includes(pickup.kind) || !pickup.sprite.active) continue;
+      const kind = pickup.chest ? 'chest' : pickup.kind;
+      if (!TYPES.includes(kind) || !pickup.sprite.active || pickup.opening) continue;
+      // A visible pickup should not conceal another collectible of its type
+      // that was left behind outside the camera.
+      const { x, y } = pickup.sprite;
+      if (x >= view.x && x <= view.right && y >= view.y && y <= view.bottom) continue;
       const dx = pickup.sprite.x - player.x;
       const dy = pickup.sprite.y - player.y;
       const distance = Math.hypot(dx, dy);
-      if (!nearest.has(pickup.kind) || distance < nearest.get(pickup.kind).distance) {
-        nearest.set(pickup.kind, { pickup, distance });
+      if (!nearest.has(kind) || distance < nearest.get(kind).distance) {
+        nearest.set(kind, { pickup, distance });
       }
     }
     const placements = [];
@@ -89,24 +95,20 @@ export class PickupIndicatorSystem {
         kind, node, edge,
         x: clamp(center.x + dx * t, safe.left, safe.right),
         y: clamp(center.y + dy * t, safe.top, safe.bottom),
-        angle: Math.atan2(dy, dx) * 180 / Math.PI + 90,
+        projected,
         distance: target.distance
       });
     }
-    // At most three indicators exist. Offset later ones along their edge until
-    // nearby arrows no longer cover each other.
+    // At most four indicators exist. Find a free slot along the same edge,
+    // including when all types point toward the same corner.
     for (let index = 0; index < placements.length; index += 1) {
       const current = placements[index];
-      for (let earlier = 0; earlier < index; earlier += 1) {
-        const other = placements[earlier];
-        if (Math.hypot(current.x - other.x, current.y - other.y) >= 44) continue;
-        if (current.edge === 'side') {
-          const down = other.y + 44;
-          current.y = down <= safe.bottom ? down : clamp(other.y - 44, safe.top, safe.bottom);
-        } else {
-          const right = other.x + 44;
-          current.x = right <= safe.right ? right : clamp(other.x - 44, safe.left, safe.right);
-        }
+      const vertical = current.edge === 'side';
+      const axis = vertical ? 'y' : 'x';
+      const initial = current[axis];
+      for (const offset of [0, 64, -64, 128, -128, 192, -192, 256, -256]) {
+        current[axis] = clamp(initial + offset, vertical ? safe.top : safe.left, vertical ? safe.bottom : safe.right);
+        if (placements.slice(0, index).every((other) => Math.hypot(current.x - other.x, current.y - other.y) >= 63)) break;
       }
     }
     for (const entry of placements) {
@@ -114,10 +116,16 @@ export class PickupIndicatorSystem {
       node.hidden = false;
       node.style.left = `${entry.x}px`;
       node.style.top = `${entry.y}px`;
-      node.querySelector('.pickup-indicator__arrow').style.rotate = `${entry.angle}deg`;
+      const angle = Math.atan2(entry.projected.y - entry.y, entry.projected.x - entry.x);
+      const arrow = node.querySelector('.pickup-indicator__arrow');
+      arrow.style.transform = `translate(-50%, -50%) rotate(${angle * 180 / Math.PI + 90}deg)`;
+      arrow.style.left = `${20 + Math.cos(angle) * 32}px`;
+      arrow.style.top = `${20 + Math.sin(angle) * 32}px`;
       const threshold = Math.max(view.width, view.height);
-      const tier = entry.distance < threshold * 1.5 ? 1 : entry.distance < threshold * 3 ? 2 : 3;
+      const tier = entry.distance < threshold * 0.75 ? 1 : entry.distance < threshold * 1.5 ? 2 : 3;
       node.dataset.distanceTier = String(tier);
+      node.querySelector('.pickup-indicator__distance b').textContent = ['NAH', 'WEIT', 'FERN'][tier - 1];
+      node.classList.toggle('is-royal', kind === 'chest' && nearest.get(kind).pickup.kind === 'royal-chest');
       node.classList.toggle('is-urgent', kind === 'heal' && scene.player.hp < scene.player.maxHp);
     }
   }

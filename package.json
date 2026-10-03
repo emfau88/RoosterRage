@@ -32,6 +32,7 @@
     "test:smoke": "node tests/rooster-smoke.mjs",
     "test:audio": "node tests/audio-settings-runner.mjs",
     "test:pickup-contact": "node tests/pickup-contact-runner.mjs",
+    "test:pickup-beacons": "node tests/pickup-indicators-runner.mjs && node tests/pickup-beacons-runner.mjs",
     "test:portal-feedback-unit": "node --test tests/portal-audio-priority.test.mjs tests/portal-prop-feedback.test.mjs",
     "qa:portal-feedback": "node scripts/capture-portal-feedback.mjs && python scripts/render-portal-feedback-gallery.py",
     "assets:portrait-backdrops": "python scripts/prepare-portrait-backdrops.py",

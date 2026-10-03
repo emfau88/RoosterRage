@@ -84,7 +84,19 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 | Release-Budget | 19 MiB | 18,78 MiB laut `test:release` |
 | Pages-Budget | 21 MiB | 20,98 MiB laut `test:pages` |
 
-## Laufprotokoll
+## Nachbesserung: sichtbare Strahlen und Wegweiser
+
+- [x] Health, Bombe und Magnet mit deutlich höheren Strahlen, farbigem Halo und hellem Kern versehen (124 statt 54 Welteinheiten Höhe).
+- [x] Farben auch im Canvas-Fallback erhalten; kleine Farbverläufe einmalig pro Farbe erzeugen und wiederverwenden.
+- [x] Alle Truhentypen mit 192 Welteinheiten hohem Strahl, Bodenring und sechs aufsteigenden Funkelpartikeln versehen; königliche Truhen violett darstellen.
+- [x] Wegweiser größer und kontrastreicher gestalten, Entfernung mit NAH/WEIT/FERN und Balken darstellen; einen gemeinsamen Truhen-Wegweiser ergänzen.
+- [x] Pro Typ das nächste Item außerhalb des Bildes markieren; ein sichtbares Item verdeckt keinen weiteren Wegweiser desselben Typs.
+- [x] Vier Wegweiser am selben Rand ohne Überlappung in Harvest Yard auf Desktop und im Hochformat prüfen; Bilder unter `docs/qa/pickup-hit-feedback/beacons-*.png` und `wayfinders-*.png` ablegen.
+- [x] Bewegung, Pause, Ausblenden beim Truhenöffnen und vollständiges Cleanup prüfen; Pickup-Radien und Belohnungsabläufe unverändert verifizieren.
+- [x] `test:pickup-indicators` (direkter Runner), `test:pickup-beacons` (direkter Runner), `test:pickup-contact`, `test:release` und `test:pages` bestanden. Release weiterhin 18,78 MiB.
+- [ ] Korrektur committen, auf Entwicklungs- und Preview-Branch pushen und erfolgreichen Pages-Deploy samt veröffentlichter Commit-ID prüfen.
+
+## Bisheriges Laufprotokoll
 
 - 2026-10-03: Plan erstellt; Git-Stand, Einstiegspunkte und vorhandene Testskripte geprüft. Noch keine Spieländerung und keine vollständigen Testläufe.
 - 2026-10-03: Plan als `e4ff073` auf `origin/codex/portal-feedback-polish` gepusht. Nach Freigabe Pakete 1–6 umgesetzt. Vergleichsbilder und bewegliche lokale Vergleichsseite erstellt.
