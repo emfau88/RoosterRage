@@ -326,7 +326,7 @@ async function run() {
       ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
-      for (const runner of ['elite-balance', 'pickup-sequence', 'bomb-confetti']) {
+      for (const runner of ['elite-balance', 'pickup-ground-contact', 'pickup-sequence', 'bomb-confetti']) {
         console.log(`Checking release gameplay: ${runner} …`);
         await new Promise((resolve, reject) => {
           const child = spawn(process.execPath, [path.join(projectRoot, 'tests', `${runner}-runner.mjs`)], {

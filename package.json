@@ -32,6 +32,7 @@
     "test:smoke": "node tests/rooster-smoke.mjs",
     "test:audio": "node tests/audio-settings-runner.mjs",
     "test:pickup-contact": "node tests/pickup-contact-runner.mjs",
+    "test:pickup-ground-contact": "node tests/pickup-ground-contact-runner.mjs",
     "test:pickup-sequence": "node tests/pickup-sequence-runner.mjs",
     "test:pickup-beacons": "node tests/pickup-indicators-runner.mjs && node tests/pickup-beacons-runner.mjs",
     "test:kongregate": "node --test tests/kongregate.test.mjs",

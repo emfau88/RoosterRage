@@ -124,7 +124,7 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Zwölf aufeinanderfolgende Pickup-Aufnahmen mit Ace in Harvest Yard im WebGL-Release auf Desktop und im Mobilformat mit DPR 3 prüfen. Alle sechs vorhandenen Items je Format werden vor/nach später Ausrüstung unmittelbar am Fußkontakt gesammelt; keine verzögerte Heilung oder Magnet-Aktivierung, keine verbleibenden Item-Grafiken.
 - [x] Neuesten lokalen Release unter `http://127.0.0.1:5176/` für den Nutzertest bereitstellen.
 - [x] Nutzer hat die Pickup-Aufnahme am neuesten lokalen Release am 2026-10-03 als korrekt bestätigt. Die Ursache im vorher getesteten Stand ist nicht abschließend nachgewiesen; kein separater spekulativer Kontakt-Fix.
-- [ ] Elite-Update mit aktuellem Kongregate-Paket committen/pushen und öffentlichen Deploy prüfen.
+- [x] Elite-Update mit aktuellem Kongregate-Paket als `200ffe1` committen/pushen; PR #4 gemergt. Öffentlicher Deploy nach Testkorrektur erfolgreich, Commit `7f4c763` bestätigt.
 
 ## Bomben-Konfetti
 
@@ -133,7 +133,7 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Animationen beim Pausieren einfrieren und Emitter beim Neustart vollständig entfernen.
 - [x] Feuerexplosion, Ring und Kern direkt beim Aufheben entfernen; Bomben-Kills zeigen ausschließlich Konfetti, ohne bisherigen orangefarbenen Todes-Blast oder Bildschirmblitz.
 - [x] Desktop und Mobilformat prüfen: 12, 170 und erneut 170 aufeinanderfolgende Bomben-Tode, jeder mit Konfetti, Pool-Limit, Farbvielfalt, Pause, Ablauf, andere Waffen und Neustart.
-- [ ] Abschließende Release-/Pages-Prüfung, Paket, Commit/Push und öffentlicher Play-Link bestätigen.
+- [x] Abschließende Release-/Pages-Prüfung, Paket, Commit/Push und öffentlicher Play-Link bestätigen: Workflow `37153131036` erfolgreich; Release-Bundle `index-BQglksFb.js` öffentlich und im Upload-Paket identisch.
 
 ## Deploy-Korrektur und Prüfung der Upload-Dateien
 
@@ -141,8 +141,8 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Ausschließlich die Testaufstellung korrigieren: sechs hindernisfreie Positionen innerhalb der aktiven Arena, jeweils mindestens 200 Welteinheiten Abstand. Keine Änderung am Spielcode oder am Upload-Bundle.
 - [x] Lokalen Release-Gate erneut bestehen: Elite-Balance, zwölf frühe/späte Pickup-Aufnahmen und Bomben-Konfetti auf Desktop und im Mobilformat.
 - [x] Beide Upload-ZIPs Datei für Datei mit dem getesteten Release vergleichen: 155 Dateien im Komplett-ZIP und 154 Dateien im Additional-Files-ZIP stimmen vollständig überein.
-- [ ] Korrektur pushen/mergen und erfolgreichen öffentlichen Pages-Deploy samt Commit-ID bestätigen.
-- [ ] Komplett-ZIP entpacken und den Release-Gate direkt auf dem entpackten Upload-Paket bestehen.
+- [x] Korrektur als `ae08401` pushen, PR #5 mergen und erfolgreichen öffentlichen Pages-Deploy samt Commit-ID bestätigen: Workflow `37153131036`, veröffentlichter Commit `7f4c763c46adb06b86d841cf1eeca4c1daaa7a36`. Öffentliches HTML (abgesehen von plattformbedingten Zeilenumbrüchen) und alle vier referenzierten JS-/CSS-Dateien stimmen mit dem geprüften Upload-Build überein.
+- [x] Komplett-ZIP entpacken und den Release-Gate direkt auf dem entpackten Upload-Paket bestehen: normale/gesperrte Speicherung, SDK-Mock/Ausfall, alte Skin-Spielstände, Elite-Balance, frühe/späte Pickups und wiederholtes Bomben-Konfetti auf Desktop und im Mobilformat.
 
 ## Bisheriges Laufprotokoll
 
