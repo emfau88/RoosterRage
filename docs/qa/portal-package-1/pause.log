@@ -1,0 +1,5 @@
+
+> rooster-arena@0.1.0 test:pause
+> node tests/pause-runner.mjs
+
+Pause handling test passed.

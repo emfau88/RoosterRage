@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "kernels": 45,
+  "lifetimeKernels": 500,
+  "talentRanks": {
+    "sturdy-nest": 3,
+    "swift-spurs": 3,
+    "polished-yolk": 3,
+    "wide-wings": 2,
+    "second-choice": 1,
+    "royal-instinct": 1
+  },
+  "roosterMastery": {
+    "ace": {
+      "xp": 950
+    },
+    "artillery": {
+      "xp": 950
+    },
+    "storm": {
+      "xp": 950
+    }
+  },
+  "totalRuns": 8,
+  "victories": 3,
+  "totalKills": 1300,
+  "bossDefeats": 3,
+  "roosterRuns": {
+    "ace": 4,
+    "artillery": 2,
+    "storm": 2
+  },
+  "roosterWins": {
+    "ace": 1,
+    "artillery": 1,
+    "storm": 1
+  },
+  "unlockedRoosters": [
+    "ace",
+    "artillery",
+    "storm"
+  ],
+  "unlockedChallenges": [
+    "standard",
+    "rush-hour",
+    "featherweight",
+    "royal-gauntlet"
+  ],
+  "selectedChallenge": "standard",
+  "selectedCosmetics": {},
+  "discoveredEnemies": [
+    "slime",
+    "runner",
+    "brute",
+    "spitter",
+    "boss"
+  ],
+  "discoveredEvolutions": [
+    "evo-sunshot-array"
+  ],
+  "firstClearClaims": [
+    "standard"
+  ],
+  "history": [],
+  "bests": {
+    "highestKills": 450,
+    "longestRunMs": 440000,
+    "fastestVictoryMs": 440000
+  }
+}

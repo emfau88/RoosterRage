@@ -1,0 +1,5885 @@
+{
+  "frameSize": 256,
+  "clips": [
+    {
+      "direction": "south",
+      "mode": "idle",
+      "durationMs": 3200,
+      "frames": [
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128.55,
+              "y": 207,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 128.55,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67.55000000000001,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189.55,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "south/head",
+              "x": 128.55,
+              "y": 105,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/comb",
+              "x": 129.55,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128.3889087296526,
+              "y": 208.13137084989847,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.015556349186104042
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 128.3889087296526,
+              "y": 182.13137084989847,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67.3889087296526,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.047272077938642146
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189.3889087296526,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.047272077938642146
+            },
+            {
+              "key": "south/head",
+              "x": 128.3889087296526,
+              "y": 106.13137084989847,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.00282842712474619
+            },
+            {
+              "key": "south/comb",
+              "x": 129.3889087296526,
+              "y": 72.13137084989847,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128,
+              "y": 208.6,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.022
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 128,
+              "y": 182.6,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67,
+              "y": 157.6,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.041999999999999996
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189,
+              "y": 157.6,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.041999999999999996
+            },
+            {
+              "key": "south/head",
+              "x": 128,
+              "y": 106.6,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.004
+            },
+            {
+              "key": "south/comb",
+              "x": 129,
+              "y": 72.6,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 127.6110912703474,
+              "y": 208.13137084989847,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.015556349186104046
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 127.6110912703474,
+              "y": 182.13137084989847,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 66.6110912703474,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.047272077938642146
+            },
+            {
+              "key": "south/wing-right",
+              "x": 188.6110912703474,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.047272077938642146
+            },
+            {
+              "key": "south/head",
+              "x": 127.6110912703474,
+              "y": 106.13137084989847,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.0028284271247461905
+            },
+            {
+              "key": "south/comb",
+              "x": 128.6110912703474,
+              "y": 72.13137084989847,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425118
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 127.45,
+              "y": 207,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 2.694222958124177e-18
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 127.45,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 66.45,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "south/wing-right",
+              "x": 188.45,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "south/head",
+              "x": 127.45,
+              "y": 105,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 4.898587196589413e-19
+            },
+            {
+              "key": "south/comb",
+              "x": 128.45,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 1.5920408388915591e-18
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 127.6110912703474,
+              "y": 205.86862915010153,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.015556349186104042
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 127.6110912703474,
+              "y": 179.86862915010153,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 66.6110912703474,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.07272792206135785
+            },
+            {
+              "key": "south/wing-right",
+              "x": 188.6110912703474,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.07272792206135785
+            },
+            {
+              "key": "south/head",
+              "x": 127.6110912703474,
+              "y": 103.86862915010153,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.00282842712474619
+            },
+            {
+              "key": "south/comb",
+              "x": 128.6110912703474,
+              "y": 69.86862915010153,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128,
+              "y": 205.4,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.022
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 128,
+              "y": 179.4,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67,
+              "y": 154.4,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.078
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189,
+              "y": 154.4,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.078
+            },
+            {
+              "key": "south/head",
+              "x": 128,
+              "y": 103.4,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.004
+            },
+            {
+              "key": "south/comb",
+              "x": 129,
+              "y": 69.4,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.013
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128.3889087296526,
+              "y": 205.86862915010153,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.015556349186104048
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "south/body",
+              "x": 128.3889087296526,
+              "y": 179.86862915010153,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67.3889087296526,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.07272792206135785
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189.3889087296526,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.07272792206135785
+            },
+            {
+              "key": "south/head",
+              "x": 128.3889087296526,
+              "y": 103.86862915010153,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.002828427124746191
+            },
+            {
+              "key": "south/comb",
+              "x": 129.3889087296526,
+              "y": 69.86862915010153,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.00919238815542512
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "south",
+      "mode": "walk",
+      "durationMs": 650,
+      "frames": [
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 129.4,
+              "y": 207,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.03543197279807301
+            },
+            {
+              "key": "south/foot-left",
+              "x": 100.2,
+              "y": 242,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155.8,
+              "y": 236,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "south/body",
+              "x": 129.4,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 68.4,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.020000000000000004
+            },
+            {
+              "key": "south/wing-right",
+              "x": 190.4,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.020000000000000004
+            },
+            {
+              "key": "south/head",
+              "x": 129.4,
+              "y": 105,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/comb",
+              "x": 130.4,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.010004207284558295
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128.98994949366116,
+              "y": 205.5,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.00469119210781801
+            },
+            {
+              "key": "south/foot-left",
+              "x": 100.43431457505076,
+              "y": 237.5857864376269,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.00732233047033631
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155.56568542494924,
+              "y": 236.87867965644037,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.00732233047033631
+            },
+            {
+              "key": "south/body",
+              "x": 128.98994949366116,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.003431457505076188
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.003431457505076188
+            },
+            {
+              "key": "south/head",
+              "x": 128.98994949366116,
+              "y": 102.7,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678927
+            },
+            {
+              "key": "south/comb",
+              "x": 129.98994949366116,
+              "y": 68.7,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013934300019359067
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128,
+              "y": 204,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.04206632030064686
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 234,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.024999999999999998
+            },
+            {
+              "key": "south/body",
+              "x": 128,
+              "y": 178,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.05999999999999999
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.05999999999999999
+            },
+            {
+              "key": "south/head",
+              "x": 128,
+              "y": 102,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.009
+            },
+            {
+              "key": "south/comb",
+              "x": 129,
+              "y": 68,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.02971028335411157
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 127.01005050633883,
+              "y": 205.5,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.054799568580487436
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101.56568542494924,
+              "y": 233.34314575050763,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04267766952966369
+            },
+            {
+              "key": "south/foot-right",
+              "x": 154.43431457505076,
+              "y": 241.12132034355963,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04267766952966369
+            },
+            {
+              "key": "south/body",
+              "x": 127.01005050633883,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 66.01005050633883,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.1165685424949238
+            },
+            {
+              "key": "south/wing-right",
+              "x": 188.0100505063388,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.1165685424949238
+            },
+            {
+              "key": "south/head",
+              "x": 127.01005050633883,
+              "y": 104.3,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678928
+            },
+            {
+              "key": "south/comb",
+              "x": 128.0100505063388,
+              "y": 70.3,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.028082385641973122
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 126.6,
+              "y": 207,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.035431972798073016
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101.8,
+              "y": 236,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.05
+            },
+            {
+              "key": "south/foot-right",
+              "x": 154.2,
+              "y": 242,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.05
+            },
+            {
+              "key": "south/body",
+              "x": 126.6,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 65.6,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.14
+            },
+            {
+              "key": "south/wing-right",
+              "x": 187.6,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.14
+            },
+            {
+              "key": "south/head",
+              "x": 126.6,
+              "y": 105,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 1.1021821192326178e-18
+            },
+            {
+              "key": "south/comb",
+              "x": 127.6,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.010004207284558302
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 127.01005050633883,
+              "y": 205.5,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.004691192107817992
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101.56568542494924,
+              "y": 236.87867965644037,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04267766952966369
+            },
+            {
+              "key": "south/foot-right",
+              "x": 154.43431457505076,
+              "y": 237.5857864376269,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04267766952966369
+            },
+            {
+              "key": "south/body",
+              "x": 127.01005050633883,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 66.01005050633883,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.11656854249492382
+            },
+            {
+              "key": "south/wing-right",
+              "x": 188.0100505063388,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.11656854249492382
+            },
+            {
+              "key": "south/head",
+              "x": 127.01005050633883,
+              "y": 102.7,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678927
+            },
+            {
+              "key": "south/comb",
+              "x": 128.0100505063388,
+              "y": 68.7,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.01393430001935906
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128,
+              "y": 204,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.04206632030064685
+            },
+            {
+              "key": "south/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025000000000000005
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155,
+              "y": 234,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.02500000000000001
+            },
+            {
+              "key": "south/body",
+              "x": 128,
+              "y": 178,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06000000000000001
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06000000000000001
+            },
+            {
+              "key": "south/head",
+              "x": 128,
+              "y": 102,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.009
+            },
+            {
+              "key": "south/comb",
+              "x": 129,
+              "y": 68,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.029710283354111564
+            }
+          ]
+        },
+        {
+          "direction": "south",
+          "sourceDirection": "south",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "south/tail",
+              "x": 128.98994949366116,
+              "y": 205.5,
+              "width": 140,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.05479956858048744
+            },
+            {
+              "key": "south/foot-left",
+              "x": 100.43431457505076,
+              "y": 241.12132034355963,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.007322330470336317
+            },
+            {
+              "key": "south/foot-right",
+              "x": 155.56568542494924,
+              "y": 233.34314575050763,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.007322330470336334
+            },
+            {
+              "key": "south/body",
+              "x": 128.98994949366116,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "south/wing-left",
+              "x": 67.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.003431457505076209
+            },
+            {
+              "key": "south/wing-right",
+              "x": 189.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.003431457505076209
+            },
+            {
+              "key": "south/head",
+              "x": 128.98994949366116,
+              "y": 104.3,
+              "width": 136,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678929
+            },
+            {
+              "key": "south/comb",
+              "x": 129.98994949366116,
+              "y": 70.3,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.028082385641973125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "idle",
+      "durationMs": 3200,
+      "frames": [
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153.55,
+              "y": 207,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111.55000000000001,
+              "y": 159,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128.55,
+              "y": 181,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158.55,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "west/head",
+              "x": 119.55000000000001,
+              "y": 105,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/comb",
+              "x": 115.55000000000001,
+              "y": 75,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153.3889087296526,
+              "y": 208.13137084989847,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.015556349186104042
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111.3889087296526,
+              "y": 160.13137084989847,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128.3889087296526,
+              "y": 182.13137084989847,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158.3889087296526,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.047272077938642146
+            },
+            {
+              "key": "west/head",
+              "x": 119.3889087296526,
+              "y": 106.13137084989847,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.00282842712474619
+            },
+            {
+              "key": "west/comb",
+              "x": 115.3889087296526,
+              "y": 76.13137084989847,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153,
+              "y": 208.6,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.022
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111,
+              "y": 160.6,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 182.6,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158,
+              "y": 157.6,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.041999999999999996
+            },
+            {
+              "key": "west/head",
+              "x": 119,
+              "y": 106.6,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.004
+            },
+            {
+              "key": "west/comb",
+              "x": 115,
+              "y": 76.6,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 152.6110912703474,
+              "y": 208.13137084989847,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.015556349186104046
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 110.6110912703474,
+              "y": 160.13137084989847,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 127.6110912703474,
+              "y": 182.13137084989847,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 157.6110912703474,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.047272077938642146
+            },
+            {
+              "key": "west/head",
+              "x": 118.6110912703474,
+              "y": 106.13137084989847,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.0028284271247461905
+            },
+            {
+              "key": "west/comb",
+              "x": 114.6110912703474,
+              "y": 76.13137084989847,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425118
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 152.45,
+              "y": 207,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 2.694222958124177e-18
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 110.45,
+              "y": 159,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 127.45,
+              "y": 181,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 157.45,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "west/head",
+              "x": 118.45,
+              "y": 105,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 4.898587196589413e-19
+            },
+            {
+              "key": "west/comb",
+              "x": 114.45,
+              "y": 75,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 1.5920408388915591e-18
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 152.6110912703474,
+              "y": 205.86862915010153,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.015556349186104042
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 110.6110912703474,
+              "y": 157.86862915010153,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 127.6110912703474,
+              "y": 179.86862915010153,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 157.6110912703474,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.07272792206135785
+            },
+            {
+              "key": "west/head",
+              "x": 118.6110912703474,
+              "y": 103.86862915010153,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.00282842712474619
+            },
+            {
+              "key": "west/comb",
+              "x": 114.6110912703474,
+              "y": 73.86862915010153,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153,
+              "y": 205.4,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.022
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111,
+              "y": 157.4,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 179.4,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158,
+              "y": 154.4,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.078
+            },
+            {
+              "key": "west/head",
+              "x": 119,
+              "y": 103.4,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.004
+            },
+            {
+              "key": "west/comb",
+              "x": 115,
+              "y": 73.4,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.013
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153.3889087296526,
+              "y": 205.86862915010153,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.015556349186104048
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111.3889087296526,
+              "y": 157.86862915010153,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128.3889087296526,
+              "y": 179.86862915010153,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158.3889087296526,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.07272792206135785
+            },
+            {
+              "key": "west/head",
+              "x": 119.3889087296526,
+              "y": 103.86862915010153,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.002828427124746191
+            },
+            {
+              "key": "west/comb",
+              "x": 115.3889087296526,
+              "y": 73.86862915010153,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.00919238815542512
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "west",
+      "mode": "walk",
+      "durationMs": 650,
+      "frames": [
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 154.4,
+              "y": 207,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.03543197279807301
+            },
+            {
+              "key": "west/foot-left",
+              "x": 139,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 107,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -8.572527594031473e-18
+            },
+            {
+              "key": "west/wing-right",
+              "x": 112.4,
+              "y": 159,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 129.4,
+              "y": 181,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 159.4,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.020000000000000004
+            },
+            {
+              "key": "west/head",
+              "x": 120.4,
+              "y": 105,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/comb",
+              "x": 116.4,
+              "y": 75,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.010004207284558295
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153.98994949366116,
+              "y": 205.5,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.00469119210781801
+            },
+            {
+              "key": "west/foot-left",
+              "x": 134.31370849898477,
+              "y": 233.34314575050763,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.049497474683058325
+            },
+            {
+              "key": "west/foot-right",
+              "x": 111.68629150101523,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.049497474683058325
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111.98994949366116,
+              "y": 157.5,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.04242640687119285
+            },
+            {
+              "key": "west/body",
+              "x": 128.98994949366116,
+              "y": 179.5,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.003431457505076188
+            },
+            {
+              "key": "west/head",
+              "x": 119.98994949366116,
+              "y": 102.7,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678927
+            },
+            {
+              "key": "west/comb",
+              "x": 115.98994949366116,
+              "y": 72.7,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013934300019359067
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153,
+              "y": 204,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.04206632030064686
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 231,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.07
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.07
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111,
+              "y": 156,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 178,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.05999999999999999
+            },
+            {
+              "key": "west/head",
+              "x": 119,
+              "y": 102,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.009
+            },
+            {
+              "key": "west/comb",
+              "x": 115,
+              "y": 72,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.02971028335411157
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 152.0100505063388,
+              "y": 205.5,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.054799568580487436
+            },
+            {
+              "key": "west/foot-left",
+              "x": 111.68629150101523,
+              "y": 233.34314575050763,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04949747468305833
+            },
+            {
+              "key": "west/foot-right",
+              "x": 134.31370849898477,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.049497474683058346
+            },
+            {
+              "key": "west/wing-right",
+              "x": 110.01005050633883,
+              "y": 157.5,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.042426406871192854
+            },
+            {
+              "key": "west/body",
+              "x": 127.01005050633883,
+              "y": 179.5,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 157.0100505063388,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.1165685424949238
+            },
+            {
+              "key": "west/head",
+              "x": 118.01005050633883,
+              "y": 104.3,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678928
+            },
+            {
+              "key": "west/comb",
+              "x": 114.01005050633883,
+              "y": 74.3,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.028082385641973122
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 151.6,
+              "y": 207,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.035431972798073016
+            },
+            {
+              "key": "west/foot-left",
+              "x": 107,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -8.572527594031473e-18
+            },
+            {
+              "key": "west/foot-right",
+              "x": 139,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 1.7145055188062947e-17
+            },
+            {
+              "key": "west/wing-right",
+              "x": 109.6,
+              "y": 159,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -7.347880794884118e-18
+            },
+            {
+              "key": "west/body",
+              "x": 126.6,
+              "y": 181,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 156.6,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.14
+            },
+            {
+              "key": "west/head",
+              "x": 117.6,
+              "y": 105,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 1.1021821192326178e-18
+            },
+            {
+              "key": "west/comb",
+              "x": 113.6,
+              "y": 75,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.010004207284558302
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 152.0100505063388,
+              "y": 205.5,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.004691192107817992
+            },
+            {
+              "key": "west/foot-left",
+              "x": 111.68629150101523,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.049497474683058325
+            },
+            {
+              "key": "west/foot-right",
+              "x": 134.31370849898477,
+              "y": 233.34314575050763,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04949747468305832
+            },
+            {
+              "key": "west/wing-right",
+              "x": 110.01005050633883,
+              "y": 157.5,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.04242640687119285
+            },
+            {
+              "key": "west/body",
+              "x": 127.01005050633883,
+              "y": 179.5,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 157.0100505063388,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.11656854249492382
+            },
+            {
+              "key": "west/head",
+              "x": 118.01005050633883,
+              "y": 102.7,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678927
+            },
+            {
+              "key": "west/comb",
+              "x": 114.01005050633883,
+              "y": 72.7,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.01393430001935906
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153,
+              "y": 204,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.04206632030064685
+            },
+            {
+              "key": "west/foot-left",
+              "x": 123,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.07
+            },
+            {
+              "key": "west/foot-right",
+              "x": 123,
+              "y": 231,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.07
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111,
+              "y": 156,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 178,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06000000000000001
+            },
+            {
+              "key": "west/head",
+              "x": 119,
+              "y": 102,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.009
+            },
+            {
+              "key": "west/comb",
+              "x": 115,
+              "y": 72,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.029710283354111564
+            }
+          ]
+        },
+        {
+          "direction": "west",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 153.98994949366116,
+              "y": 205.5,
+              "width": 91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.05479956858048744
+            },
+            {
+              "key": "west/foot-left",
+              "x": 134.31370849898477,
+              "y": 239,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.049497474683058346
+            },
+            {
+              "key": "west/foot-right",
+              "x": 111.68629150101525,
+              "y": 233.3431457505076,
+              "width": 47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04949747468305839
+            },
+            {
+              "key": "west/wing-right",
+              "x": 111.98994949366116,
+              "y": 157.5,
+              "width": 37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.04242640687119286
+            },
+            {
+              "key": "west/body",
+              "x": 128.98994949366116,
+              "y": 179.5,
+              "width": 124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 158.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.003431457505076209
+            },
+            {
+              "key": "west/head",
+              "x": 119.98994949366116,
+              "y": 104.3,
+              "width": 132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678929
+            },
+            {
+              "key": "west/comb",
+              "x": 115.98994949366116,
+              "y": 74.3,
+              "width": 92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.028082385641973125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "idle",
+      "durationMs": 3200,
+      "frames": [
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 102.44999999999999,
+              "y": 207,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 144.45,
+              "y": 159,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 127.44999999999999,
+              "y": 181,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 97.44999999999999,
+              "y": 156,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "west/head",
+              "x": 136.45,
+              "y": 105,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/comb",
+              "x": 140.45,
+              "y": 75,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 102.6110912703474,
+              "y": 208.13137084989847,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.015556349186104042
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 144.6110912703474,
+              "y": 160.13137084989847,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 127.6110912703474,
+              "y": 182.13137084989847,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 97.6110912703474,
+              "y": 157.13137084989847,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.047272077938642146
+            },
+            {
+              "key": "west/head",
+              "x": 136.6110912703474,
+              "y": 106.13137084989847,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.00282842712474619
+            },
+            {
+              "key": "west/comb",
+              "x": 140.6110912703474,
+              "y": 76.13137084989847,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103,
+              "y": 208.6,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.022
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145,
+              "y": 160.6,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 182.6,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98,
+              "y": 157.6,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.041999999999999996
+            },
+            {
+              "key": "west/head",
+              "x": 137,
+              "y": 106.6,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.004
+            },
+            {
+              "key": "west/comb",
+              "x": 141,
+              "y": 76.6,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.013
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103.3889087296526,
+              "y": 208.13137084989847,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.015556349186104046
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145.3889087296526,
+              "y": 160.13137084989847,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128.3889087296526,
+              "y": 182.13137084989847,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98.3889087296526,
+              "y": 157.13137084989847,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.047272077938642146
+            },
+            {
+              "key": "west/head",
+              "x": 137.3889087296526,
+              "y": 106.13137084989847,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.0028284271247461905
+            },
+            {
+              "key": "west/comb",
+              "x": 141.3889087296526,
+              "y": 76.13137084989847,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.009192388155425118
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103.55000000000001,
+              "y": 207,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -2.694222958124177e-18
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145.55,
+              "y": 159,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128.55,
+              "y": 181,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98.55000000000001,
+              "y": 156,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "west/head",
+              "x": 137.55,
+              "y": 105,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -4.898587196589413e-19
+            },
+            {
+              "key": "west/comb",
+              "x": 141.55,
+              "y": 75,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -1.5920408388915591e-18
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103.3889087296526,
+              "y": 205.86862915010153,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.015556349186104042
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145.3889087296526,
+              "y": 157.86862915010153,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128.3889087296526,
+              "y": 179.86862915010153,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98.3889087296526,
+              "y": 154.86862915010153,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.07272792206135785
+            },
+            {
+              "key": "west/head",
+              "x": 137.3889087296526,
+              "y": 103.86862915010153,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.00282842712474619
+            },
+            {
+              "key": "west/comb",
+              "x": 141.3889087296526,
+              "y": 73.86862915010153,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103,
+              "y": 205.4,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.022
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145,
+              "y": 157.4,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 179.4,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98,
+              "y": 154.4,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.078
+            },
+            {
+              "key": "west/head",
+              "x": 137,
+              "y": 103.4,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.004
+            },
+            {
+              "key": "west/comb",
+              "x": 141,
+              "y": 73.4,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 102.6110912703474,
+              "y": 205.86862915010153,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.015556349186104048
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-right",
+              "x": 144.6110912703474,
+              "y": 157.86862915010153,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 127.6110912703474,
+              "y": 179.86862915010153,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 97.6110912703474,
+              "y": 154.86862915010153,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.07272792206135785
+            },
+            {
+              "key": "west/head",
+              "x": 136.6110912703474,
+              "y": 103.86862915010153,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.002828427124746191
+            },
+            {
+              "key": "west/comb",
+              "x": 140.6110912703474,
+              "y": 73.86862915010153,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.00919238815542512
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "east",
+      "mode": "walk",
+      "durationMs": 650,
+      "frames": [
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 101.6,
+              "y": 207,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.03543197279807301
+            },
+            {
+              "key": "west/foot-left",
+              "x": 117,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "west/foot-right",
+              "x": 149,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 8.572527594031473e-18
+            },
+            {
+              "key": "west/wing-right",
+              "x": 143.6,
+              "y": 159,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0
+            },
+            {
+              "key": "west/body",
+              "x": 126.6,
+              "y": 181,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 96.6,
+              "y": 156,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.020000000000000004
+            },
+            {
+              "key": "west/head",
+              "x": 135.6,
+              "y": 105,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/comb",
+              "x": 139.6,
+              "y": 75,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.010004207284558295
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 102.01005050633884,
+              "y": 205.5,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.00469119210781801
+            },
+            {
+              "key": "west/foot-left",
+              "x": 121.68629150101523,
+              "y": 233.34314575050763,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.049497474683058325
+            },
+            {
+              "key": "west/foot-right",
+              "x": 144.31370849898477,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.049497474683058325
+            },
+            {
+              "key": "west/wing-right",
+              "x": 144.01005050633884,
+              "y": 157.5,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.04242640687119285
+            },
+            {
+              "key": "west/body",
+              "x": 127.01005050633884,
+              "y": 179.5,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 97.01005050633884,
+              "y": 154.5,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.003431457505076188
+            },
+            {
+              "key": "west/head",
+              "x": 136.01005050633884,
+              "y": 102.7,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678927
+            },
+            {
+              "key": "west/comb",
+              "x": 140.01005050633884,
+              "y": 72.7,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.013934300019359067
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103,
+              "y": 204,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.04206632030064686
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 231,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.07
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.07
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145,
+              "y": 156,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 178,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98,
+              "y": 153,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.05999999999999999
+            },
+            {
+              "key": "west/head",
+              "x": 137,
+              "y": 102,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.009
+            },
+            {
+              "key": "west/comb",
+              "x": 141,
+              "y": 72,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.02971028335411157
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103.98994949366119,
+              "y": 205.5,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.054799568580487436
+            },
+            {
+              "key": "west/foot-left",
+              "x": 144.31370849898477,
+              "y": 233.34314575050763,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04949747468305833
+            },
+            {
+              "key": "west/foot-right",
+              "x": 121.68629150101523,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.049497474683058346
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145.9899494936612,
+              "y": 157.5,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.042426406871192854
+            },
+            {
+              "key": "west/body",
+              "x": 128.9899494936612,
+              "y": 179.5,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98.98994949366119,
+              "y": 154.5,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.1165685424949238
+            },
+            {
+              "key": "west/head",
+              "x": 137.9899494936612,
+              "y": 104.3,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678928
+            },
+            {
+              "key": "west/comb",
+              "x": 141.9899494936612,
+              "y": 74.3,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.028082385641973122
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 104.4,
+              "y": 207,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": -0.035431972798073016
+            },
+            {
+              "key": "west/foot-left",
+              "x": 149,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 8.572527594031473e-18
+            },
+            {
+              "key": "west/foot-right",
+              "x": 117,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -1.7145055188062947e-17
+            },
+            {
+              "key": "west/wing-right",
+              "x": 146.4,
+              "y": 159,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 7.347880794884118e-18
+            },
+            {
+              "key": "west/body",
+              "x": 129.4,
+              "y": 181,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 99.4,
+              "y": 156,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.14
+            },
+            {
+              "key": "west/head",
+              "x": 138.4,
+              "y": 105,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -1.1021821192326178e-18
+            },
+            {
+              "key": "west/comb",
+              "x": 142.4,
+              "y": 75,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.010004207284558302
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103.98994949366119,
+              "y": 205.5,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.004691192107817992
+            },
+            {
+              "key": "west/foot-left",
+              "x": 144.31370849898477,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.049497474683058325
+            },
+            {
+              "key": "west/foot-right",
+              "x": 121.68629150101523,
+              "y": 233.34314575050763,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04949747468305832
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145.9899494936612,
+              "y": 157.5,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.04242640687119285
+            },
+            {
+              "key": "west/body",
+              "x": 128.9899494936612,
+              "y": 179.5,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98.98994949366119,
+              "y": 154.5,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.11656854249492382
+            },
+            {
+              "key": "west/head",
+              "x": 137.9899494936612,
+              "y": 102.7,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678927
+            },
+            {
+              "key": "west/comb",
+              "x": 141.9899494936612,
+              "y": 72.7,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.01393430001935906
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 103,
+              "y": 204,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.04206632030064685
+            },
+            {
+              "key": "west/foot-left",
+              "x": 133,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.07
+            },
+            {
+              "key": "west/foot-right",
+              "x": 133,
+              "y": 231,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.07
+            },
+            {
+              "key": "west/wing-right",
+              "x": 145,
+              "y": 156,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "west/body",
+              "x": 128,
+              "y": 178,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 98,
+              "y": 153,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06000000000000001
+            },
+            {
+              "key": "west/head",
+              "x": 137,
+              "y": 102,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.009
+            },
+            {
+              "key": "west/comb",
+              "x": 141,
+              "y": 72,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.029710283354111564
+            }
+          ]
+        },
+        {
+          "direction": "east",
+          "sourceDirection": "west",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "west/tail",
+              "x": 102.01005050633884,
+              "y": 205.5,
+              "width": -91,
+              "height": 116,
+              "originX": 0.18,
+              "originY": 0.95,
+              "rotation": 0.05479956858048744
+            },
+            {
+              "key": "west/foot-left",
+              "x": 121.68629150101523,
+              "y": 239,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.049497474683058346
+            },
+            {
+              "key": "west/foot-right",
+              "x": 144.31370849898474,
+              "y": 233.3431457505076,
+              "width": -47,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04949747468305839
+            },
+            {
+              "key": "west/wing-right",
+              "x": 144.01005050633884,
+              "y": 157.5,
+              "width": -37,
+              "height": 54,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.04242640687119286
+            },
+            {
+              "key": "west/body",
+              "x": 127.01005050633884,
+              "y": 179.5,
+              "width": -124,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "west/wing-left",
+              "x": 97.01005050633884,
+              "y": 154.5,
+              "width": -48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.003431457505076209
+            },
+            {
+              "key": "west/head",
+              "x": 136.01005050633884,
+              "y": 104.3,
+              "width": -132,
+              "height": 98,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678929
+            },
+            {
+              "key": "west/comb",
+              "x": 140.01005050633884,
+              "y": 74.3,
+              "width": -92,
+              "height": 70,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.028082385641973125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "idle",
+      "durationMs": 3200,
+      "frames": [
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 128.55,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67.55000000000001,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189.55,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "north/head",
+              "x": 128.55,
+              "y": 105,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/tail",
+              "x": 128.55,
+              "y": 223,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0
+            },
+            {
+              "key": "north/comb",
+              "x": 129.55,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 128.3889087296526,
+              "y": 182.13137084989847,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67.3889087296526,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.047272077938642146
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189.3889087296526,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.047272077938642146
+            },
+            {
+              "key": "north/head",
+              "x": 128.3889087296526,
+              "y": 106.13137084989847,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.00282842712474619
+            },
+            {
+              "key": "north/tail",
+              "x": 128.3889087296526,
+              "y": 224.13137084989847,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.015556349186104042
+            },
+            {
+              "key": "north/comb",
+              "x": 129.3889087296526,
+              "y": 72.13137084989847,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 128,
+              "y": 182.6,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67,
+              "y": 157.6,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.041999999999999996
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189,
+              "y": 157.6,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.041999999999999996
+            },
+            {
+              "key": "north/head",
+              "x": 128,
+              "y": 106.6,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.004
+            },
+            {
+              "key": "north/tail",
+              "x": 128,
+              "y": 224.6,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.022
+            },
+            {
+              "key": "north/comb",
+              "x": 129,
+              "y": 72.6,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 127.6110912703474,
+              "y": 182.13137084989847,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 66.6110912703474,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.047272077938642146
+            },
+            {
+              "key": "north/wing-right",
+              "x": 188.6110912703474,
+              "y": 157.13137084989847,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.047272077938642146
+            },
+            {
+              "key": "north/head",
+              "x": 127.6110912703474,
+              "y": 106.13137084989847,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.0028284271247461905
+            },
+            {
+              "key": "north/tail",
+              "x": 127.6110912703474,
+              "y": 224.13137084989847,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.015556349186104046
+            },
+            {
+              "key": "north/comb",
+              "x": 128.6110912703474,
+              "y": 72.13137084989847,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.009192388155425118
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 127.45,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 66.45,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06
+            },
+            {
+              "key": "north/wing-right",
+              "x": 188.45,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06
+            },
+            {
+              "key": "north/head",
+              "x": 127.45,
+              "y": 105,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 4.898587196589413e-19
+            },
+            {
+              "key": "north/tail",
+              "x": 127.45,
+              "y": 223,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 2.694222958124177e-18
+            },
+            {
+              "key": "north/comb",
+              "x": 128.45,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 1.5920408388915591e-18
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 127.6110912703474,
+              "y": 179.86862915010153,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 66.6110912703474,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.07272792206135785
+            },
+            {
+              "key": "north/wing-right",
+              "x": 188.6110912703474,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.07272792206135785
+            },
+            {
+              "key": "north/head",
+              "x": 127.6110912703474,
+              "y": 103.86862915010153,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.00282842712474619
+            },
+            {
+              "key": "north/tail",
+              "x": 127.6110912703474,
+              "y": 221.86862915010153,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.015556349186104042
+            },
+            {
+              "key": "north/comb",
+              "x": 128.6110912703474,
+              "y": 69.86862915010153,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.009192388155425116
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 128,
+              "y": 179.4,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67,
+              "y": 154.4,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.078
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189,
+              "y": 154.4,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.078
+            },
+            {
+              "key": "north/head",
+              "x": 128,
+              "y": 103.4,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.004
+            },
+            {
+              "key": "north/tail",
+              "x": 128,
+              "y": 221.4,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.022
+            },
+            {
+              "key": "north/comb",
+              "x": 129,
+              "y": 69.4,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.013
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.025
+            },
+            {
+              "key": "north/body",
+              "x": 128.3889087296526,
+              "y": 179.86862915010153,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67.3889087296526,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.07272792206135785
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189.3889087296526,
+              "y": 154.86862915010153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.07272792206135785
+            },
+            {
+              "key": "north/head",
+              "x": 128.3889087296526,
+              "y": 103.86862915010153,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.002828427124746191
+            },
+            {
+              "key": "north/tail",
+              "x": 128.3889087296526,
+              "y": 221.86862915010153,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.015556349186104048
+            },
+            {
+              "key": "north/comb",
+              "x": 129.3889087296526,
+              "y": 69.86862915010153,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.00919238815542512
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "north",
+      "mode": "walk",
+      "durationMs": 650,
+      "frames": [
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 100.2,
+              "y": 236,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155.8,
+              "y": 242,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0
+            },
+            {
+              "key": "north/body",
+              "x": 129.4,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 68.4,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.020000000000000004
+            },
+            {
+              "key": "north/wing-right",
+              "x": 190.4,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.020000000000000004
+            },
+            {
+              "key": "north/head",
+              "x": 129.4,
+              "y": 105,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/tail",
+              "x": 129.4,
+              "y": 223,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.03543197279807301
+            },
+            {
+              "key": "north/comb",
+              "x": 130.4,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.010004207284558295
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 100.43431457505076,
+              "y": 233.34314575050763,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.00732233047033631
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155.56568542494924,
+              "y": 241.12132034355963,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.00732233047033631
+            },
+            {
+              "key": "north/body",
+              "x": 128.98994949366116,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.003431457505076188
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.003431457505076188
+            },
+            {
+              "key": "north/head",
+              "x": 128.98994949366116,
+              "y": 102.7,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678927
+            },
+            {
+              "key": "north/tail",
+              "x": 128.98994949366116,
+              "y": 221.5,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.00469119210781801
+            },
+            {
+              "key": "north/comb",
+              "x": 129.98994949366116,
+              "y": 68.7,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.013934300019359067
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 234,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.024999999999999998
+            },
+            {
+              "key": "north/body",
+              "x": 128,
+              "y": 178,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.05999999999999999
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.05999999999999999
+            },
+            {
+              "key": "north/head",
+              "x": 128,
+              "y": 102,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.009
+            },
+            {
+              "key": "north/tail",
+              "x": 128,
+              "y": 220,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.04206632030064686
+            },
+            {
+              "key": "north/comb",
+              "x": 129,
+              "y": 68,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.02971028335411157
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101.56568542494924,
+              "y": 237.5857864376269,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04267766952966369
+            },
+            {
+              "key": "north/foot-right",
+              "x": 154.43431457505076,
+              "y": 236.87867965644037,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04267766952966369
+            },
+            {
+              "key": "north/body",
+              "x": 127.01005050633883,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 66.01005050633883,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.1165685424949238
+            },
+            {
+              "key": "north/wing-right",
+              "x": 188.0100505063388,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.1165685424949238
+            },
+            {
+              "key": "north/head",
+              "x": 127.01005050633883,
+              "y": 104.3,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0.006363961030678928
+            },
+            {
+              "key": "north/tail",
+              "x": 127.01005050633883,
+              "y": 221.5,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.054799568580487436
+            },
+            {
+              "key": "north/comb",
+              "x": 128.0100505063388,
+              "y": 70.3,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.028082385641973122
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101.8,
+              "y": 242,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.05
+            },
+            {
+              "key": "north/foot-right",
+              "x": 154.2,
+              "y": 236,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.05
+            },
+            {
+              "key": "north/body",
+              "x": 126.6,
+              "y": 181,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 65.6,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.14
+            },
+            {
+              "key": "north/wing-right",
+              "x": 187.6,
+              "y": 156,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.14
+            },
+            {
+              "key": "north/head",
+              "x": 126.6,
+              "y": 105,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 1.1021821192326178e-18
+            },
+            {
+              "key": "north/tail",
+              "x": 126.6,
+              "y": 223,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": 0.035431972798073016
+            },
+            {
+              "key": "north/comb",
+              "x": 127.6,
+              "y": 71,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": 0.010004207284558302
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101.56568542494924,
+              "y": 241.12132034355963,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.04267766952966369
+            },
+            {
+              "key": "north/foot-right",
+              "x": 154.43431457505076,
+              "y": 233.34314575050763,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.04267766952966369
+            },
+            {
+              "key": "north/body",
+              "x": 127.01005050633883,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 66.01005050633883,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.11656854249492382
+            },
+            {
+              "key": "north/wing-right",
+              "x": 188.0100505063388,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.11656854249492382
+            },
+            {
+              "key": "north/head",
+              "x": 127.01005050633883,
+              "y": 102.7,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678927
+            },
+            {
+              "key": "north/tail",
+              "x": 127.01005050633883,
+              "y": 221.5,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.004691192107817992
+            },
+            {
+              "key": "north/comb",
+              "x": 128.0100505063388,
+              "y": 68.7,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.01393430001935906
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 101,
+              "y": 239,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.025000000000000005
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155,
+              "y": 234,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.02500000000000001
+            },
+            {
+              "key": "north/body",
+              "x": 128,
+              "y": 178,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.06000000000000001
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189,
+              "y": 153,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.06000000000000001
+            },
+            {
+              "key": "north/head",
+              "x": 128,
+              "y": 102,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.009
+            },
+            {
+              "key": "north/tail",
+              "x": 128,
+              "y": 220,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.04206632030064685
+            },
+            {
+              "key": "north/comb",
+              "x": 129,
+              "y": 68,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.029710283354111564
+            }
+          ]
+        },
+        {
+          "direction": "north",
+          "sourceDirection": "north",
+          "frameSize": 256,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "parts": [
+            {
+              "key": "north/foot-left",
+              "x": 100.43431457505076,
+              "y": 236.87867965644037,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": -0.007322330470336317
+            },
+            {
+              "key": "north/foot-right",
+              "x": 155.56568542494924,
+              "y": 237.5857864376269,
+              "width": 46,
+              "height": 43,
+              "originX": 0.5,
+              "originY": 1,
+              "rotation": 0.007322330470336334
+            },
+            {
+              "key": "north/body",
+              "x": 128.98994949366116,
+              "y": 179.5,
+              "width": 140,
+              "height": 88,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": 0
+            },
+            {
+              "key": "north/wing-left",
+              "x": 67.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": 0.003431457505076209
+            },
+            {
+              "key": "north/wing-right",
+              "x": 189.98994949366116,
+              "y": 154.5,
+              "width": 48,
+              "height": 64,
+              "originX": 0.5,
+              "originY": 0.15,
+              "rotation": -0.003431457505076209
+            },
+            {
+              "key": "north/head",
+              "x": 128.98994949366116,
+              "y": 104.3,
+              "width": 136,
+              "height": 96,
+              "originX": 0.5,
+              "originY": 0.5,
+              "rotation": -0.006363961030678929
+            },
+            {
+              "key": "north/tail",
+              "x": 128.98994949366116,
+              "y": 221.5,
+              "width": 132,
+              "height": 108,
+              "originX": 0.5,
+              "originY": 0.95,
+              "rotation": -0.05479956858048744
+            },
+            {
+              "key": "north/comb",
+              "x": 129.98994949366116,
+              "y": 70.3,
+              "width": 78,
+              "height": 68,
+              "originX": 0.5,
+              "originY": 0.88,
+              "rotation": -0.028082385641973125
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

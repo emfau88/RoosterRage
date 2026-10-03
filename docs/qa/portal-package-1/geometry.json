@@ -1,0 +1,596 @@
+[
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "open-yard",
+    "rooster": "ace",
+    "scale": 0.275,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 58.575,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "open-yard",
+    "rooster": "artillery",
+    "scale": 0.30250000000000005,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 56.26500000000001,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "open-yard",
+    "rooster": "storm",
+    "scale": 0.2805,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 55.53900000000001,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "vertical-run",
+    "rooster": "ace",
+    "scale": 0.275,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 58.575,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "vertical-run",
+    "rooster": "artillery",
+    "scale": 0.30250000000000005,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 56.26500000000001,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "vertical-run",
+    "rooster": "storm",
+    "scale": 0.2805,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 55.53900000000001,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "square-coop",
+    "rooster": "ace",
+    "scale": 0.275,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 58.575,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "square-coop",
+    "rooster": "artillery",
+    "scale": 0.30250000000000005,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 56.26500000000001,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "desktop",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "arena": "square-coop",
+    "rooster": "storm",
+    "scale": 0.2805,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 55.53900000000001,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "open-yard",
+    "rooster": "ace",
+    "scale": 0.25,
+    "zoom": 0.85,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 45.262499999999996,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "open-yard",
+    "rooster": "artillery",
+    "scale": 0.275,
+    "zoom": 0.85,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 43.477500000000006,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "open-yard",
+    "rooster": "storm",
+    "scale": 0.255,
+    "zoom": 0.85,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 42.9165,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "vertical-run",
+    "rooster": "ace",
+    "scale": 0.25,
+    "zoom": 0.54,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 28.755000000000003,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "vertical-run",
+    "rooster": "artillery",
+    "scale": 0.275,
+    "zoom": 0.54,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 27.621000000000006,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "vertical-run",
+    "rooster": "storm",
+    "scale": 0.255,
+    "zoom": 0.54,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 27.2646,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "square-coop",
+    "rooster": "ace",
+    "scale": 0.25,
+    "zoom": 0.85,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 45.262499999999996,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "square-coop",
+    "rooster": "artillery",
+    "scale": 0.275,
+    "zoom": 0.85,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 43.477500000000006,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "portrait",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "arena": "square-coop",
+    "rooster": "storm",
+    "scale": 0.255,
+    "zoom": 0.85,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 42.9165,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "open-yard",
+    "rooster": "ace",
+    "scale": 0.25,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 53.25,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "open-yard",
+    "rooster": "artillery",
+    "scale": 0.275,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 51.150000000000006,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "open-yard",
+    "rooster": "storm",
+    "scale": 0.255,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 50.49,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "vertical-run",
+    "rooster": "ace",
+    "scale": 0.25,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 53.25,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "vertical-run",
+    "rooster": "artillery",
+    "scale": 0.275,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 51.150000000000006,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "vertical-run",
+    "rooster": "storm",
+    "scale": 0.255,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 50.49,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "square-coop",
+    "rooster": "ace",
+    "scale": 0.25,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightCss": 53.25,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "square-coop",
+    "rooster": "artillery",
+    "scale": 0.275,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightCss": 51.150000000000006,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  },
+  {
+    "viewportId": "landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "arena": "square-coop",
+    "rooster": "storm",
+    "scale": 0.255,
+    "zoom": 1,
+    "renderScale": 1,
+    "frameHeight": 256,
+    "cssPerRenderPixel": 1,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightCss": 50.49,
+    "method": "South idle frame 0, alpha >= 16; transparent padding excluded. No animation-pose range or human recognition test."
+  }
+]

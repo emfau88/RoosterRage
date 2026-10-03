@@ -1,0 +1,1397 @@
+[
+  {
+    "name": "desktop-primary-recipe-details",
+    "kind": "fixture",
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "ROOSTER\nBoom L1\n115 / 115 HP\n115/115\nRUN\n00:00\nWAVE\nWave 1/10\nHUNT\n0 kills\n1\n1/5\nLevel Up\n\nChoose an upgrade.\n\nBlast Shell\nR1 → R2\nWeapon\nHEAVY LOAD\nLarger shell\n+12 explosion radius\nRank up\nHeavy Load: Larger shell, stronger trail, and wider explosion radius.\nEVO RECIPE · Siegebreaker Shell\nR4 ○\nReinforced Breech ○\nReinforced Breech\nNEW · R1\nPassive\nREINFORCED BREECH\nBoombardier's starting shell creates wider, harder shockwaves.\nNew ability\nRocket Egg\nNEW · R1\nActive\nEGGSHELL ROCKET\n48 area damage\n82 radius\nNew ability\n48 damage in an 82 radius with a compact eggshell rocket.\nEVO RECIPE · Broodstorm Battery\nR4 ○\nBigger Eggs ○\nReroll (1)\nHARVEST YARD\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [
+          {
+            "text": "Blast Shell",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 56,
+              "y": 189.546875,
+              "width": 77.453125,
+              "height": 20
+            }
+          },
+          {
+            "text": "Reinforced Breech",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 352.65625,
+              "y": 189.546875,
+              "width": 137,
+              "height": 20
+            }
+          },
+          {
+            "text": "Rocket Egg",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 649.328125,
+              "y": 189.546875,
+              "width": 83.859375,
+              "height": 20
+            }
+          }
+        ],
+        ".upgrade-button__rank": [
+          {
+            "text": "R1 → R2",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 266.421875,
+              "y": 192.546875,
+              "width": 44.234375,
+              "height": 16
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 558.25,
+              "y": 192.546875,
+              "width": 49.078125,
+              "height": 16
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 854.90625,
+              "y": 192.546875,
+              "width": 49.078125,
+              "height": 16
+            }
+          }
+        ],
+        ".upgrade-button__changes > span": [
+          {
+            "text": "Larger shell",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 56,
+              "y": 271.546875,
+              "width": 82.765625,
+              "height": 23.59375
+            }
+          },
+          {
+            "text": "+12 explosion radius",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 143.765625,
+              "y": 271.546875,
+              "width": 136.703125,
+              "height": 23.59375
+            }
+          },
+          {
+            "text": "Boombardier's starting shell creates wider, harder shockwaves.",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 352.65625,
+              "y": 271.546875,
+              "width": 254.671875,
+              "height": 39.1875
+            }
+          },
+          {
+            "text": "48 area damage",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 649.328125,
+              "y": 271.546875,
+              "width": 107.734375,
+              "height": 23.59375
+            }
+          },
+          {
+            "text": "82 radius",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 762.0625,
+              "y": 271.546875,
+              "width": 68.390625,
+              "height": 23.59375
+            }
+          }
+        ],
+        ".upgrade-button__description": [
+          {
+            "text": "Heavy Load: Larger shell, stronger trail, and wider explosion radius.",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 56,
+              "y": 332.140625,
+              "width": 254.65625,
+              "height": 34.78125
+            }
+          },
+          {
+            "text": "48 damage in an 82 radius with a compact eggshell rocket.",
+            "fontSize": "12px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 649.328125,
+              "y": 332.140625,
+              "width": 254.65625,
+              "height": 34.78125
+            }
+          }
+        ],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [
+          {
+            "text": "EVO RECIPE · Siegebreaker ShellR4 ○Reinforced Breech ○",
+            "fontSize": "12px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 56,
+              "y": 374.921875,
+              "width": 254.65625,
+              "height": 60.375
+            }
+          },
+          {
+            "text": "EVO RECIPE · Broodstorm BatteryR4 ○Bigger Eggs ○",
+            "fontSize": "12px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 649.328125,
+              "y": 374.921875,
+              "width": 254.65625,
+              "height": 60.375
+            }
+          }
+        ],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Harvest YardStandard Run · Wave 1: First Peck",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 292,
+              "y": 72,
+              "width": 376,
+              "height": 69.296875
+            }
+          }
+        ]
+      },
+      "selection": {
+        "type": "level",
+        "index": 1,
+        "remaining": 0
+      },
+      "choices": [
+        {
+          "id": "primary-artillery-rank",
+          "name": "Blast Shell",
+          "description": "Heavy Load: Larger shell, stronger trail, and wider explosion radius.",
+          "evolutionHint": {
+            "name": "Siegebreaker Shell",
+            "baseReady": false,
+            "passiveName": "Reinforced Breech",
+            "passiveOwned": false
+          },
+          "synergyActive": false
+        },
+        {
+          "id": "artillery-reinforced-breech",
+          "name": "Reinforced Breech",
+          "description": "Boombardier's starting shell creates wider, harder shockwaves.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "rocket-egg",
+          "name": "Rocket Egg",
+          "description": "48 damage in an 82 radius with a compact eggshell rocket.",
+          "evolutionHint": {
+            "name": "Broodstorm Battery",
+            "baseReady": false,
+            "passiveName": "Bigger Eggs",
+            "passiveOwned": false
+          },
+          "synergyActive": false
+        }
+      ],
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-artillery",
+            "sourceId": "primary-artillery",
+            "name": "Blast Shell",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 1050
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "desktop-boss-banner-layout",
+    "kind": "fixture",
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "ROOSTER\nAce L1\n100 / 100 HP\n100/100\nRUN\n00:00\nWAVE\nWave 1/10\nHUNT\n0 kills\nTHE BROOD KING\nENTRY SHIELD\n1\n1/5\nWave 10: The Brood King\nBoss phases, fireball, and controlled add pulses",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "THE BROOD KINGENTRY SHIELD",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 111,
+              "y": 71,
+              "width": 660,
+              "height": 47
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Wave 10: The Brood KingBoss phases, fireball, and controlled add pulses",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 335.59375,
+              "y": 72,
+              "width": 288.8125,
+              "height": 56.296875
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "desktop-feed-alley-geometry",
+    "kind": "fixture",
+    "viewport": {
+      "width": 960,
+      "height": 540,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "ROOSTER\nAce L1\n100 / 100 HP\n100/100\nRUN\n00:00\nWAVE\nWave 1/10\nHUNT\n0 kills\n1\n1/5\nFEED ALLEY\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Feed AlleyStandard Run · Wave 1: First Peck",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 292,
+              "y": 72,
+              "width": 376,
+              "height": 69.296875
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "portrait-primary-recipe-details",
+    "kind": "fixture",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "Boom L1\n115/115\n00:00\n1/10\n0\n1\nLevel Up\n\nChoose an upgrade.\n\nBlast Shell\nR1 → R2\nWeapon\nHEAVY LOAD\nLarger shell\n+12 explosion radius\nRank up\nHeavy Load: Larger shell, stronger trail, and wider explosion radius.\nEVO RECIPE · Siegebreaker Shell\nR4 ○\nReinforced Breech ○\nReinforced Breech\nNEW · R1\nPassive\nREINFORCED BREECH\nBoombardier's starting shell creates wider, harder shockwaves.\nNew ability\nRocket Egg\nNEW · R1\nActive\nEGGSHELL ROCKET\n48 area damage\n82 radius\nNew ability\n48 damage in an 82 radius with a compact eggshell rocket.\nEVO RECIPE · Broodstorm Battery\nR4 ○\nBigger Eggs ○\nReroll (1)\nHARVEST YARD\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [
+          {
+            "text": "Blast Shell",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 113.546875,
+              "width": 77.453125,
+              "height": 20
+            }
+          },
+          {
+            "text": "Reinforced Breech",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 437.109375,
+              "width": 137,
+              "height": 20
+            }
+          },
+          {
+            "text": "Rocket Egg",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 630.890625,
+              "width": 83.859375,
+              "height": 20
+            }
+          }
+        ],
+        ".upgrade-button__rank": [
+          {
+            "text": "R1 → R2",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 292.09375,
+              "y": 115.546875,
+              "width": 47.90625,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 286.828125,
+              "y": 439.109375,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 286.828125,
+              "y": 632.890625,
+              "width": 53.171875,
+              "height": 17
+            }
+          }
+        ],
+        ".upgrade-button__changes > span": [
+          {
+            "text": "Larger shell",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 197.546875,
+              "width": 88.5,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+12 explosion radius",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 227.4375,
+              "width": 146.9375,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Boombardier's starting shell creates wider, harder shockwaves.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 521.109375,
+              "width": 236,
+              "height": 41.78125
+            }
+          },
+          {
+            "text": "48 area damage",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 714.890625,
+              "width": 115.53125,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "82 radius",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 224.53125,
+              "y": 714.890625,
+              "width": 72.921875,
+              "height": 24.890625
+            }
+          }
+        ],
+        ".upgrade-button__description": [
+          {
+            "text": "Heavy Load: Larger shell, stronger trail, and wider explosion radius.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 290.328125,
+              "width": 236,
+              "height": 37.6875
+            }
+          },
+          {
+            "text": "48 damage in an 82 radius with a compact eggshell rocket.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 777.78125,
+              "width": 236,
+              "height": 37.6875
+            }
+          }
+        ],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [
+          {
+            "text": "EVO RECIPE · Siegebreaker ShellR4 ○Reinforced Breech ○",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 336.015625,
+              "width": 236,
+              "height": 63.09375
+            }
+          },
+          {
+            "text": "EVO RECIPE · Broodstorm BatteryR4 ○Bigger Eggs ○",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 823.46875,
+              "width": 236,
+              "height": 63.09375
+            }
+          }
+        ],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Harvest YardStandard Run · Wave 1: First Peck",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 17,
+              "y": 83,
+              "width": 356,
+              "height": 61.296875
+            }
+          }
+        ]
+      },
+      "selection": {
+        "type": "level",
+        "index": 1,
+        "remaining": 0
+      },
+      "choices": [
+        {
+          "id": "primary-artillery-rank",
+          "name": "Blast Shell",
+          "description": "Heavy Load: Larger shell, stronger trail, and wider explosion radius.",
+          "evolutionHint": {
+            "name": "Siegebreaker Shell",
+            "baseReady": false,
+            "passiveName": "Reinforced Breech",
+            "passiveOwned": false
+          },
+          "synergyActive": false
+        },
+        {
+          "id": "artillery-reinforced-breech",
+          "name": "Reinforced Breech",
+          "description": "Boombardier's starting shell creates wider, harder shockwaves.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "rocket-egg",
+          "name": "Rocket Egg",
+          "description": "48 damage in an 82 radius with a compact eggshell rocket.",
+          "evolutionHint": {
+            "name": "Broodstorm Battery",
+            "baseReady": false,
+            "passiveName": "Bigger Eggs",
+            "passiveOwned": false
+          },
+          "synergyActive": false
+        }
+      ],
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-artillery",
+            "sourceId": "primary-artillery",
+            "name": "Blast Shell",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 1050
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "portrait-boss-banner-layout",
+    "kind": "fixture",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "Ace L1\n100/100\nTHE BROOD KING\nENTRY SHIELD\n1\nWave 10: The Brood King\nBoss phases, fireball, and controlled add pulses",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "THE BROOD KINGENTRY SHIELD",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 140.078125,
+              "y": 6,
+              "width": 201.921875,
+              "height": 46
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Wave 10: The Brood KingBoss phases, fireball, and controlled add pulses",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 97.5,
+              "y": 83,
+              "width": 195,
+              "height": 87.59375
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "portrait-feed-alley-geometry",
+    "kind": "fixture",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "Ace L1\n100/100\n00:00\n1/10\n0\n1\nFEED ALLEY\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Feed AlleyStandard Run · Wave 1: First Peck",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 17,
+              "y": 83,
+              "width": 356,
+              "height": 61.296875
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "landscape-primary-recipe-details",
+    "kind": "fixture",
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "ROOSTER\nBoom L1\n115 / 115 HP\n115/115\nRUN\n00:00\nWAVE\nWave 1/10\nHUNT\n0 kills\n1\n1/5\nLevel Up\n\nChoose an upgrade.\n\nBlast Shell\nR1 → R2\nWeapon\nHEAVY LOAD\nLarger shell\n+12 explosion radius\nRank up\nHeavy Load: Larger shell, stronger trail, and wider explosion radius.\nEVO RECIPE · Siegebreaker Shell\nR4 ○\nReinforced Breech ○\nReinforced Breech\nNEW · R1\nPassive\nREINFORCED BREECH\nBoombardier's starting shell creates wider, harder shockwaves.\nNew ability\nRocket Egg\nNEW · R1\nActive\nEGGSHELL ROCKET\n48 area damage\n82 radius\nNew ability\n48 damage in an 82 radius with a compact eggshell rocket.\nEVO RECIPE · Broodstorm Battery\nR4 ○\nBigger Eggs ○\nReroll (1)\nHARVEST YARD\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [
+          {
+            "text": "Blast Shell",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 121.546875,
+              "width": 77.453125,
+              "height": 20
+            }
+          },
+          {
+            "text": "Reinforced Breech",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 400.375,
+              "width": 137,
+              "height": 20
+            }
+          },
+          {
+            "text": "Rocket Egg",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 581.265625,
+              "width": 83.859375,
+              "height": 20
+            }
+          }
+        ],
+        ".upgrade-button__rank": [
+          {
+            "text": "R1 → R2",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 740.09375,
+              "y": 123.546875,
+              "width": 47.90625,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 734.828125,
+              "y": 402.375,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 734.828125,
+              "y": 583.265625,
+              "width": 53.171875,
+              "height": 17
+            }
+          }
+        ],
+        ".upgrade-button__changes > span": [
+          {
+            "text": "Larger shell",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 205.546875,
+              "width": 88.5,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+12 explosion radius",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 217.5,
+              "y": 205.546875,
+              "width": 146.9375,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Boombardier's starting shell creates wider, harder shockwaves.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 484.375,
+              "width": 419.734375,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "48 area damage",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 665.265625,
+              "width": 115.53125,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "82 radius",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 244.53125,
+              "y": 665.265625,
+              "width": 72.921875,
+              "height": 24.890625
+            }
+          }
+        ],
+        ".upgrade-button__description": [
+          {
+            "text": "Heavy Load: Larger shell, stronger trail, and wider explosion radius.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 268.4375,
+              "width": 664,
+              "height": 18.84375
+            }
+          },
+          {
+            "text": "48 damage in an 82 radius with a compact eggshell rocket.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 728.15625,
+              "width": 664,
+              "height": 18.84375
+            }
+          }
+        ],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [
+          {
+            "text": "EVO RECIPE · Siegebreaker ShellR4 ○Reinforced Breech ○",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 295.28125,
+              "width": 664,
+              "height": 63.09375
+            }
+          },
+          {
+            "text": "EVO RECIPE · Broodstorm BatteryR4 ○Bigger Eggs ○",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 755,
+              "width": 664,
+              "height": 63.09375
+            }
+          }
+        ],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Harvest YardStandard Run · Wave 1: First Peck",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 234,
+              "y": 72,
+              "width": 376,
+              "height": 69.296875
+            }
+          }
+        ]
+      },
+      "selection": {
+        "type": "level",
+        "index": 1,
+        "remaining": 0
+      },
+      "choices": [
+        {
+          "id": "primary-artillery-rank",
+          "name": "Blast Shell",
+          "description": "Heavy Load: Larger shell, stronger trail, and wider explosion radius.",
+          "evolutionHint": {
+            "name": "Siegebreaker Shell",
+            "baseReady": false,
+            "passiveName": "Reinforced Breech",
+            "passiveOwned": false
+          },
+          "synergyActive": false
+        },
+        {
+          "id": "artillery-reinforced-breech",
+          "name": "Reinforced Breech",
+          "description": "Boombardier's starting shell creates wider, harder shockwaves.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "rocket-egg",
+          "name": "Rocket Egg",
+          "description": "48 damage in an 82 radius with a compact eggshell rocket.",
+          "evolutionHint": {
+            "name": "Broodstorm Battery",
+            "baseReady": false,
+            "passiveName": "Bigger Eggs",
+            "passiveOwned": false
+          },
+          "synergyActive": false
+        }
+      ],
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-artillery",
+            "sourceId": "primary-artillery",
+            "name": "Blast Shell",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 1050
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "landscape-boss-banner-layout",
+    "kind": "fixture",
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "ROOSTER\nAce L1\n100 / 100 HP\n100/100\nRUN\n00:00\nWAVE\nWave 1/10\nHUNT\n0 kills\nTHE BROOD KING\nENTRY SHIELD\n1\n1/5\nWave 10: The Brood King\nBoss phases, fireball, and controlled add pulses",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "THE BROOD KINGENTRY SHIELD",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 71,
+              "y": 63,
+              "width": 660,
+              "height": 47
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Wave 10: The Brood KingBoss phases, fireball, and controlled add pulses",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 277.59375,
+              "y": 72,
+              "width": 288.8125,
+              "height": 56.296875
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "landscape-feed-alley-geometry",
+    "kind": "fixture",
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "dpr": 1
+    },
+    "ui": {
+      "bodyText": "ROOSTER\nAce L1\n100 / 100 HP\n100/100\nRUN\n00:00\nWAVE\nWave 1/10\nHUNT\n0 kills\n1\n1/5\nFEED ALLEY\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Feed AlleyStandard Run · Wave 1: First Peck",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 234,
+              "y": 72,
+              "width": 376,
+              "height": 69.296875
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  }
+]

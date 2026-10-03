@@ -1,8 +1,10 @@
+import { CombatMessages } from './CombatMessages.js';
 import uiIconSheetUrl from '../assets/ui/ui-icons-v1-sheet.webp';
 import uiIconAtlas from '../assets/ui/ui-icons-v1.json';
-import acePortraitUrl from '../assets/characters/rooster-ace-portrait.webp';
-import artilleryPortraitUrl from '../assets/characters/rooster-artillery-portrait.webp';
-import stormPortraitUrl from '../assets/characters/rooster-storm-portrait.webp';
+import acePortraitUrl from '@portal-portrait-ace';
+import artilleryPortraitUrl from '@portal-portrait-artillery';
+import stormPortraitUrl from '@portal-portrait-storm';
+import { PORTAL_ICONS } from './PortalIcons.js';
 import kernelCurrencyUrl from '../assets/meta/kernel-currency.webp';
 import masteryAceUrl from '../assets/meta/mastery-ace.webp';
 import masteryArtilleryUrl from '../assets/meta/mastery-artillery.webp';
@@ -17,6 +19,9 @@ const ROOSTER_PORTRAITS = {
   artillery: artilleryPortraitUrl,
   storm: stormPortraitUrl
 };
+
+// Focus points keep each face visible in a wide card as well as a square avatar.
+const PORTRAIT_FOCUS = { ace: '50% 40%', artillery: '50% 40%', storm: '50% 40%' };
 
 const MASTERY_BADGES = {
   ace: masteryAceUrl,
@@ -45,6 +50,9 @@ const ARENA_PREVIEWS = {
 const ICON_COLUMNS = uiIconAtlas.columns;
 const ICON_ROWS = uiIconAtlas.rows;
 const ICON_IDS_BY_NAME = {
+  'Target Egg': 'precision-egg',
+  'Blast Shell': 'blast-shell',
+  'Storm Egg': 'storm-egg',
   Heal: 'heal',
   'Double Shot': 'double-shot',
   'Triple Shot': 'triple-shot',
@@ -66,18 +74,14 @@ const ICON_IDS_BY_NAME = {
   'Piercing Eggs': 'piercing-eggs',
   'Bigger Eggs': 'bigger-eggs',
   'Swift Shells': 'faster-eggs',
-  'Critical Yolk': 'fire-eggs',
-  'Ricochet Eggs': 'piercing-eggs',
-  'Shell Shock': 'bigger-eggs',
-  'Second Wind': 'heal'
+  'Critical Yolk': 'critical-yolk',
+  'Ricochet Eggs': 'ricochet-eggs',
+  'Shell Shock': 'shell-shock',
+  'Second Wind': 'second-wind'
 };
 const ICON_ALIASES_BY_ID = {
   'swift-shells': 'faster-eggs',
-  'critical-yolk': 'fire-eggs',
-  'ricochet-eggs': 'piercing-eggs',
-  'shell-shock': 'bigger-eggs',
-  'second-wind': 'heal',
-  'ace-deadeye-drill': 'fire-eggs',
+  'ace-deadeye-drill': 'critical-yolk',
   'ace-guidance-fins': 'faster-eggs',
   'artillery-reinforced-breech': 'bigger-eggs',
   'artillery-blast-plating': 'armor',
@@ -88,16 +92,25 @@ const ICON_ALIASES_BY_ID = {
   'evo-singularity-nest': 'evo-singularity-nest',
   'evo-dawn-laser': 'evo-dawn-laser',
   'evo-chick-squadron': 'evo-chick-squadron',
-  'primary-ace': 'active-upgrade',
-  'primary-artillery': 'rocket-egg',
-  'primary-storm': 'lightning-comb'
+  'primary-ace': 'precision-egg',
+  'primary-artillery': 'blast-shell',
+  'primary-storm': 'storm-egg',
+  'primary-ace-rank': 'precision-egg',
+  'primary-artillery-rank': 'blast-shell',
+  'primary-storm-rank': 'storm-egg'
 };
 
 function keepFocusInDialog(event, dialog) {
+  // Phaser captures Space at the window level through its cursor keys. Keep
+  // native button activation in HTML dialogs without changing combat input.
+  if (event.key === ' ' && event.target.closest('button')) {
+    event.stopPropagation();
+    return;
+  }
   if (event.key !== 'Tab') return;
   const focusable = [...dialog.querySelectorAll(
-    'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href]'
-  )].filter((element) => element.tabIndex >= 0);
+    'button:not(:disabled), summary, input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href]'
+  )].filter((element) => element.tabIndex >= 0 && element.getClientRects().length && !element.closest('[inert]'));
   if (!focusable.length) return;
   const activeIndex = focusable.indexOf(document.activeElement);
   const nextIndex = event.shiftKey
@@ -118,7 +131,6 @@ export class HUD {
     this.onAnalyticsConsent = onAnalyticsConsent;
     this.onTalentPurchased = onTalentPurchased;
     this.recentUpgrade = null;
-    this.upgradeConfirmationTimeout = null;
     this.multiKillTimeout = null;
     this.hubSelection = { roosterId: 'ace', challengeId: 'standard', view: 'play', talentId: null };
     document.documentElement.style.setProperty('--ui-icon-sheet', `url("${uiIconSheetUrl}")`);
@@ -166,6 +178,9 @@ export class HUD {
 
     this.overlay = document.createElement('div');
     this.overlay.className = 'overlay';
+    this.overlay.addEventListener('keyup', (event) => {
+      if (event.key === ' ' && event.target.closest('button')) event.stopPropagation();
+    });
 
     this.joystick = document.createElement('div');
     this.joystick.className = 'joystick';
@@ -184,11 +199,15 @@ export class HUD {
     document.body.append(
       this.root,
       this.overlay,
-      this.joystick,
-      this.waveBanner,
-      this.upgradeConfirmation,
-      this.multiKill
+      this.joystick
     );
+    this.combatMessages = new CombatMessages(this.root, {
+      banner: this.waveBanner, upgrade: this.upgradeConfirmation, kill: this.multiKill
+    }, (kind, duration) => {
+      if (kind === 'upgrade' && this.recentUpgrade) {
+        this.recentUpgrade.until = performance.now() + duration + 150;
+      }
+    });
   }
 
   update(state) {
@@ -232,6 +251,11 @@ export class HUD {
       bossHud.querySelector('[data-boss-fill]').style.width = `${Math.max(0, state.boss.hp / state.boss.maxHp) * 100}%`;
     }
     this.renderLoadout(state.loadout);
+    if (this.bossVisible !== Boolean(state.boss)) {
+      this.bossVisible = Boolean(state.boss);
+      this.combatMessages.layout();
+    }
+    this.combatMessages.setPlayerRect(state.playerScreenRect ?? null);
   }
 
   setMetricValue(selector, fullText, compactText = fullText) {
@@ -245,6 +269,7 @@ export class HUD {
   }
 
   showUpgradeChoices(choices, context = {}) {
+    this.upgradeDetailTrigger = null;
     const chest = context.type === 'chest';
     const title = chest
       ? context.kind === 'boss' ? 'Royal Boss Chest'
@@ -257,24 +282,50 @@ export class HUD {
         : 'Choose an upgrade.';
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
-      <div class="panel upgrade-panel ${chest ? 'panel--reward' : ''}">
-        <h2>${title}</h2>
-        <p>${subtitle}</p>
-        ${context.recentChoice ? `
-          <div class="upgrade-selection-receipt">
-            <span>✓ LAST PICK</span>
-            <strong>${context.recentChoice.name} ${context.recentChoice.evolution ? 'EVO' : `R${context.recentChoice.nextRank ?? 1}`}</strong>
-            <em>${context.recentChoice.momentTitle ?? context.recentChoice.name}</em>
-          </div>
-        ` : ''}
+      <div class="panel upgrade-panel upgrade-panel--${chest ? 'chest' : 'level'} ${chest ? 'panel--reward' : ''}"
+        data-reward-kind="${chest ? context.kind ?? 'elite' : 'level'}"
+        role="dialog" aria-modal="true" aria-labelledby="upgrade-title" data-choice-count="${choices.length}">
+        <span class="upgrade-panel__frame upgrade-panel__frame--top" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--right" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--bottom" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--left" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-tl" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-tr" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-br" aria-hidden="true"></span>
+        <span class="upgrade-panel__frame upgrade-panel__frame--corner-bl" aria-hidden="true"></span>
+        <div class="upgrade-panel__heading">
+          <span class="upgrade-panel__emblem" data-upgrade-panel-icon aria-hidden="true"></span>
+          <span>
+            <h2 id="upgrade-title">${title}</h2>
+            <p>${subtitle}</p>
+          </span>
+          ${context.recentChoice ? `
+            <div class="upgrade-selection-receipt">
+              <span>✓ LAST PICK</span>
+              <strong>${context.recentChoice.name} ${context.recentChoice.evolution ? 'EVO' : `R${context.recentChoice.nextRank ?? 1}`}</strong>
+              <em>${context.recentChoice.momentTitle ?? context.recentChoice.name}</em>
+            </div>
+          ` : ''}
+        </div>
+        <div class="upgrade-panel__body">
         <div class="upgrade-list"></div>
+        </div>
         ${context.canReroll ? '<button class="reroll-button" type="button">Reroll (1)</button>' : ''}
       </div>
     `;
+    this.setIcon(
+      this.overlay.querySelector('[data-upgrade-panel-icon]'),
+      chest ? 'golden-egg' : 'xp'
+    );
     const list = this.overlay.querySelector('.upgrade-list');
     choices.forEach((choice) => {
+      const description = choice.description ?? '';
+      const normalizeEffect = (text) => text.trim().replace(/[.!]$/, '').toLowerCase();
+      const repeatsEffect = (choice.changeItems ?? []).some((item) => normalizeEffect(item) === normalizeEffect(description));
       const button = document.createElement('button');
       button.className = `upgrade-button upgrade-button--${choice.rarity ?? 'common'}`;
+      button.type = 'button';
+      button.dataset.upgradeId = choice.id;
       button.innerHTML = `
         <span class="upgrade-button__art">
           <span class="upgrade-button__rarity" data-rarity-icon></span>
@@ -285,6 +336,7 @@ export class HUD {
             <strong>${choice.name}</strong>
             <span class="upgrade-button__rank">${choice.rankDeltaLabel ?? choice.rankLabel ?? ''}</span>
           </span>
+          <span class="upgrade-button__summary">${(choice.changeItems?.length ? choice.changeItems.slice(0, 2).join(' · ') : description) || choice.momentTitle || choice.name}</span>
           ${this.renderRankPips(choice.rankProgress)}
           <span class="upgrade-button__meta">${choice.categoryLabel ?? choice.category}</span>
           <span class="upgrade-button__milestone">${choice.momentTitle ?? choice.name}</span>
@@ -294,21 +346,71 @@ export class HUD {
               : choice.upgradeMoment === 'evolution' ? 'EVO ready'
                 : choice.upgradeMoment === 'instant' ? 'Instant effect' : 'New ability'
           }</span>
-          <span class="upgrade-button__description">${choice.description}</span>
+          ${description && !repeatsEffect ? `<span class="upgrade-button__description">${description}</span>` : ''}
           ${choice.synergyActive
             ? `<span class="upgrade-button__synergy">Synergy active: ${choice.synergyDescription}</span>`
             : ''}
           ${choice.evolutionHint
-            ? `<span class="upgrade-button__evolution-hint"><strong>EVO-ZIEL · ${choice.evolutionHint.name}</strong><span class="${choice.evolutionHint.baseReady ? 'is-ready' : ''}">R4 ${choice.evolutionHint.baseReady ? '✓' : '○'}</span><span class="${choice.evolutionHint.passiveOwned ? 'is-ready' : ''}">${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span></span>`
+            ? `<span class="upgrade-button__evolution-hint"><strong>EVO RECIPE · ${choice.evolutionHint.name}</strong><span class="${choice.evolutionHint.baseReady ? 'is-ready' : ''}">R4 ${choice.evolutionHint.baseReady ? '✓' : '○'}</span><span class="${choice.evolutionHint.passiveOwned ? 'is-ready' : ''}">${choice.evolutionHint.passiveName} ${choice.evolutionHint.passiveOwned ? '✓' : '○'}</span></span>`
             : ''}
         </span>
+        <span class="upgrade-button__pick-label" aria-hidden="true">Select</span>
       `;
       this.setIcon(button.querySelector('[data-upgrade-icon]'), choice.id);
       this.setIcon(button.querySelector('[data-rarity-icon]'), `rarity-${choice.rarity ?? 'common'}`);
       button.addEventListener('click', () => this.onUpgradeSelected(choice), { once: true });
-      list.append(button);
+      const offer = document.createElement('div');
+      offer.className = 'upgrade-offer';
+      const details = document.createElement('button');
+      details.type = 'button';
+      details.className = 'upgrade-offer__details';
+      details.textContent = choice.evolutionHint ? 'EVO details' : 'Details';
+      details.setAttribute('aria-label', `Details for ${choice.name}`);
+      details.addEventListener('click', () => this.showUpgradeDetails(button, details, choice));
+      offer.append(button, details);
+      list.append(offer);
     });
     this.overlay.querySelector('.reroll-button')?.addEventListener('click', () => this.onReroll?.(), { once: true });
+    const panel = this.overlay.querySelector('.upgrade-panel');
+    this.overlay.onkeydown = (event) => {
+      const detail = panel.querySelector('.upgrade-detail');
+      if (detail && event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        this.closeUpgradeDetails();
+        return;
+      }
+      keepFocusInDialog(event, detail ?? panel);
+    };
+    requestAnimationFrame(() => {
+      if (panel.isConnected) panel.querySelector('.upgrade-button')?.focus({ preventScroll: true });
+    });
+  }
+
+  showUpgradeDetails(offer, trigger, choice) {
+    const panel = offer.closest('.upgrade-panel');
+    if (!panel || panel.querySelector('.upgrade-detail')) return;
+    const layer = document.createElement('div');
+    layer.className = 'upgrade-detail-layer';
+    layer.innerHTML = `<section class="upgrade-detail" role="dialog" aria-modal="true" aria-labelledby="upgrade-detail-title">
+      <header><h2 id="upgrade-detail-title">${choice.name}</h2><button type="button" data-upgrade-detail-close aria-label="Back to upgrade offers">×</button></header>
+      <div class="upgrade-detail__body"><div class="upgrade-detail__card">${offer.innerHTML}</div></div>
+      <button type="button" class="upgrade-detail__select">Select ${choice.name}</button>
+    </section>`;
+    for (const child of panel.children) child.inert = true;
+    panel.append(layer);
+    this.upgradeDetailTrigger = trigger;
+    layer.querySelector('[data-upgrade-detail-close]').addEventListener('click', () => this.closeUpgradeDetails());
+    layer.querySelector('.upgrade-detail__select').addEventListener('click', () => offer.click(), { once: true });
+    layer.querySelector('[data-upgrade-detail-close]').focus({ preventScroll: true });
+  }
+
+  closeUpgradeDetails() {
+    const panel = this.overlay.querySelector('.upgrade-panel');
+    panel?.querySelector('.upgrade-detail-layer')?.remove();
+    for (const child of panel?.children ?? []) child.inert = false;
+    if (this.upgradeDetailTrigger?.isConnected) this.upgradeDetailTrigger.focus({ preventScroll: true });
+    this.upgradeDetailTrigger = null;
   }
 
   showRoosterSelection(definitions, hub = {}, onCosmeticSelected = null) {
@@ -453,7 +555,7 @@ export class HUD {
         <nav class="henhouse-nav" aria-label="Henhouse sections">
           <button type="button" data-hub-tab="play" class="is-selected">Play</button>
           <button type="button" data-hub-tab="roosters">Roosters</button>
-          <button type="button" data-hub-tab="training"><span class="hub-nav-label--desktop">Training</span><span class="hub-nav-label--mobile">Talents</span></button>
+          <button type="button" data-hub-tab="training">Talents</button>
           <button type="button" data-hub-tab="archive">Archive</button>
         </nav>
         <section class="henhouse-view is-active" data-hub-view="play">
@@ -521,7 +623,7 @@ export class HUD {
         </section>
         <section class="henhouse-view" data-hub-view="training" hidden>
           <div class="henhouse-section-heading talent-heading">
-            <span><small>PERMANENT</small><h2>Talent Nest</h2></span>
+            <span><small>PERMANENT</small><h2>Talents</h2></span>
             <div class="talent-summary" aria-label="Talent progress">
               <span><small>INVESTED</small><strong>${talentTotalRanks}</strong><em>ranks</em></span>
               <span><small>EARNED</small><strong>${currency.lifetimeKernels}</strong><em>kernels</em></span>
@@ -657,6 +759,27 @@ export class HUD {
     };
     this.overlay.querySelector('[data-hub-settings]')?.addEventListener('click', () => this.onSettings?.());
     this.overlay.querySelector('[data-hub-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
+    const inspector = document.createElement('section');
+    inspector.className = 'rooster-inspector';
+    inspector.id = 'rooster-inspector';
+    inspector.setAttribute('aria-label', 'Character details');
+    const customization = document.createElement('section');
+    customization.className = 'rooster-customization';
+    customization.setAttribute('aria-label', 'Character cosmetics');
+    list.after(inspector, customization);
+    const refreshCharacterDetails = (id) => {
+      const card = list.querySelector(`.rooster-card--${id}`);
+      inspector.replaceChildren();
+      for (const selector of ['.rooster-card__stats', '.rooster-card__primary', '.rooster-card__passive', '.rooster-card__mastery', '.rooster-card__progress']) {
+        inspector.append(card.querySelector(selector).cloneNode(true));
+      }
+      const heading = document.createElement('h3');
+      heading.textContent = `${definitions.find(definition => definition.id === id).name} · Details`;
+      inspector.prepend(heading);
+      customization.querySelectorAll('.cosmetic-panel').forEach(panel => {
+        panel.hidden = panel.dataset.roosterId !== id;
+      });
+    };
     definitions.forEach((definition) => {
       const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
         ?? { unlocked: true, cosmetics: [], runs: 0, wins: 0 };
@@ -668,7 +791,9 @@ export class HUD {
       button.className = `rooster-card rooster-card--${definition.id} ${definition.id === selectedRoosterId ? 'is-selected' : ''} ${meta.unlocked ? '' : 'is-locked'}`;
       button.type = 'button';
       button.dataset.unlocked = `${meta.unlocked}`;
+      button.style.setProperty('--portrait-focus', PORTRAIT_FOCUS[definition.id]);
       button.setAttribute('aria-expanded', `${definition.id === selectedRoosterId}`);
+      button.setAttribute('aria-controls', inspector.id);
       button.setAttribute(
         'aria-label',
         meta.unlocked
@@ -715,6 +840,8 @@ export class HUD {
           candidate.classList.toggle('is-selected', expanded);
           candidate.setAttribute('aria-expanded', `${expanded}`);
         });
+        refreshCharacterDetails(definition.id);
+        if (window.matchMedia('(max-width: 760px)').matches) inspector.scrollIntoView({ block: 'nearest' });
       });
       entry.append(button);
       const chooseButton = document.createElement('button');
@@ -722,7 +849,7 @@ export class HUD {
       chooseButton.type = 'button';
       chooseButton.disabled = !meta.unlocked;
       chooseButton.innerHTML = meta.unlocked
-        ? `<span>PLAY AS ${definition.name.toUpperCase()}</span><small>Confirm selection</small>`
+        ? `<span>SELECT ${definition.name.toUpperCase()}</span><small>Return to Play</small>`
         : `<span>STILL LOCKED</span><small>${meta.unlockLabel}</small>`;
       chooseButton.addEventListener('click', () => {
         if (!meta.unlocked) return;
@@ -737,9 +864,10 @@ export class HUD {
         const tint = `#${Math.max(0, variant.tint ?? 0xffffff).toString(16).padStart(6, '0').slice(-6)}`;
         const cosmetics = document.createElement('div');
         cosmetics.className = 'cosmetic-panel';
+        cosmetics.dataset.roosterId = definition.id;
         cosmetics.innerHTML = `
           <div class="cosmetic-panel__heading">
-            <span>VISUAL ONLY</span>
+            <span>${definition.name} · VISUAL ONLY</span>
             <strong>No stat changes</strong>
             <button type="button" class="cosmetic-panel__toggle" data-cosmetic-toggle aria-expanded="false">Show</button>
           </div>
@@ -778,7 +906,7 @@ export class HUD {
           cosmetics.classList.toggle('is-expanded', !expanded);
           event.currentTarget.textContent = expanded ? 'Show' : 'Close';
         });
-        entry.append(cosmetics);
+        customization.append(cosmetics);
       }
       list.append(entry);
     });
@@ -790,6 +918,8 @@ export class HUD {
       const portrait = this.overlay.querySelector('[data-hero-portrait]');
       portrait.src = ROOSTER_PORTRAITS[definition.id];
       portrait.alt = `${definition.name} portrait`;
+      portrait.style.objectPosition = PORTRAIT_FOCUS[definition.id];
+      portrait.parentElement.dataset.rooster = definition.id;
       const badge = this.overlay.querySelector('[data-hero-mastery-badge]');
       badge.src = MASTERY_BADGES[definition.id];
       badge.alt = `${definition.name} mastery badge`;
@@ -808,6 +938,7 @@ export class HUD {
       this.overlay.querySelectorAll('.rooster-card').forEach((candidate) => (
         candidate.setAttribute('aria-expanded', `${candidate.classList.contains('is-selected')}`)
       ));
+      refreshCharacterDetails(definition.id);
     };
     const updateChallenge = () => {
       const challenge = (hub.challenges ?? []).find((candidate) => candidate.id === selectedChallenge)
@@ -959,13 +1090,12 @@ export class HUD {
   }
 
   showEndScreen(title, message, report = {}) {
-    window.clearTimeout(this.waveBannerTimeout);
-    window.clearTimeout(this.upgradeConfirmationTimeout);
     this.waveBanner.classList.remove('is-visible');
     this.upgradeConfirmation.classList.remove('is-visible');
     this.multiKill?.classList.remove('is-visible');
     this.waveBanner.replaceChildren();
     this.upgradeConfirmation.replaceChildren();
+    this.combatMessages.clear();
     this.waveBanner.hidden = true;
     this.upgradeConfirmation.hidden = true;
     this.root.hidden = true;
@@ -1009,7 +1139,7 @@ export class HUD {
     const arenaPreview = ARENA_PREVIEWS[report.arena?.id] ?? ARENA_PREVIEWS['open-yard'];
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
-      <div class="panel run-report">
+      <div class="panel run-report" role="dialog" aria-modal="true" aria-label="Run result" tabindex="-1">
         <h1>${title}</h1>
         <p>${message}</p>
         <div class="run-report__summary">
@@ -1038,17 +1168,30 @@ export class HUD {
           </header>
           ${unlocks}
         </section>` : ''}
+        <details class="run-report__details"><summary>Combat details <small>Damage, accuracy and enemy pressure</small></summary>
+        <div class="run-report__detail-stats run-report__summary"></div>
         <div class="run-report__table-wrap">
           <table>
             <thead><tr><th>Source</th><th>Damage</th><th>Share</th><th>Hits</th><th>Kills</th><th>Overkill</th><th>Active</th></tr></thead>
             <tbody>${sourceRows}</tbody>
           </table>
         </div>
-        <button class="restart-button"><span data-restart-icon></span><span>Return to Henhouse</span></button>
+        </details>
+        <div class="run-report__actions"><button class="restart-button"><span data-restart-icon></span><span>Return to Henhouse</span></button></div>
       </div>
     `;
     this.setIcon(this.overlay.querySelector('[data-restart-icon]'), 'restart');
     this.overlay.querySelectorAll('[data-report-icon]').forEach((icon) => this.setIcon(icon, icon.dataset.reportIcon));
+    const panel = this.overlay.querySelector('.run-report');
+    const summary = panel.querySelector('.run-report__summary');
+    const stats = panel.querySelector('.run-report__detail-stats');
+    [...summary.children].forEach((card,index) => { if ([2,5,6,7,8].includes(index)) stats.append(card); });
+    const reward = panel.querySelector('.run-report__meta-reward');
+    const unlockSection = panel.querySelector('.run-report__unlocks');
+    if (reward) panel.insertBefore(reward,summary);
+    if (unlockSection) panel.insertBefore(unlockSection,summary);
+    this.overlay.onkeydown = event => keepFocusInDialog(event,panel);
+    requestAnimationFrame(()=>panel.querySelector('.restart-button')?.focus({preventScroll:true}));
     this.overlay.querySelector('button').addEventListener('click', this.onRestart);
   }
 
@@ -1084,6 +1227,9 @@ export class HUD {
           <section class="settings-section">
             <h3>Visuals</h3>
             <div class="settings-list">
+              <button type="button" data-effect="enemyHealthBarsAlways" data-on-label="ALWAYS" data-off-label="AUTO" aria-pressed="${Boolean(effectSettings.enemyHealthBarsAlways)}">
+                <span>Enemy HP bars</span><strong>${effectSettings.enemyHealthBarsAlways ? 'ALWAYS' : 'AUTO'}</strong>
+              </button>
               ${Object.entries(labels).map(([key, label]) => `
                 <button type="button" data-effect="${key}" aria-pressed="${effectSettings[key]}">
                   <span>${label}</span><strong>${effectSettings[key] ? 'ON' : 'OFF'}</strong>
@@ -1092,6 +1238,7 @@ export class HUD {
                 <span>Fullscreen</span><strong>TOGGLE</strong>
               </button>
             </div>
+            <p class="settings-hp-note">Auto: normal enemies after damage. Elites and bosses always show HP.</p>
           </section>
           <section class="settings-section">
             <h3>Audio</h3>
@@ -1143,7 +1290,8 @@ export class HUD {
       button.addEventListener('click', () => {
         const next = onEffectToggle?.(button.dataset.effect) ?? effectSettings;
         button.setAttribute('aria-pressed', String(next[button.dataset.effect]));
-        button.querySelector('strong').textContent = next[button.dataset.effect] ? 'ON' : 'OFF';
+        button.querySelector('strong').textContent = next[button.dataset.effect]
+          ? button.dataset.onLabel ?? 'ON' : button.dataset.offLabel ?? 'OFF';
       });
     });
     this.overlay.querySelector('[data-settings-fullscreen]')?.addEventListener('click', () => this.onFullscreen?.());
@@ -1207,6 +1355,7 @@ export class HUD {
   }
 
   hideOverlay() {
+    this.upgradeDetailTrigger = null;
     this.setOverlayVisible(false);
     this.overlay.innerHTML = '';
   }
@@ -1214,6 +1363,7 @@ export class HUD {
   setOverlayVisible(visible) {
     this.overlay.classList.toggle('is-visible', visible);
     document.documentElement.classList.toggle('has-ui-overlay', visible);
+    this.combatMessages.setPaused(visible);
   }
 
   showWaveBanner(wave, config) {
@@ -1228,16 +1378,19 @@ export class HUD {
     );
   }
 
-  showEncounterBanner(title, subtitle = '', tier = 'elite') {
-    window.clearTimeout(this.waveBannerTimeout);
-    this.waveBanner.hidden = false;
+  showBreakablePropHint() {
+    this.showEncounterBanner(
+      'BREAKABLE SUPPLIES',
+      'Crates and hay can be broken and may contain supplies.',
+      'tip',
+      3200
+    );
+  }
+
+  showEncounterBanner(title, subtitle = '', tier = 'elite', durationMs = null) {
     this.waveBanner.className = `wave-banner wave-banner--${tier}`;
     this.waveBanner.innerHTML = `<strong>${title}</strong>${subtitle ? `<small>${subtitle}</small>` : ''}`;
-    this.waveBanner.classList.remove('is-visible');
-    requestAnimationFrame(() => this.waveBanner.classList.add('is-visible'));
-    this.waveBannerTimeout = window.setTimeout(() => {
-      this.waveBanner.classList.remove('is-visible');
-    }, tier === 'boss' ? 2300 : 1700);
+    this.combatMessages.request('banner', durationMs ?? (tier === 'boss' ? 2300 : 1700));
   }
 
   setJoystick(vector) {
@@ -1404,7 +1557,6 @@ export class HUD {
       key,
       until: performance.now() + displayDuration + 150
     };
-    window.clearTimeout(this.upgradeConfirmationTimeout);
     this.upgradeConfirmation.className = `upgrade-confirmation upgrade-confirmation--${upgrade.momentTone ?? upgrade.upgradeMoment ?? 'new'}`;
     this.upgradeConfirmation.innerHTML = `
       <span class="upgrade-confirmation__icon" data-confirmation-icon></span>
@@ -1419,23 +1571,31 @@ export class HUD {
       this.upgradeConfirmation.querySelector('[data-confirmation-icon]'),
       upgrade.evolution ? upgrade.id : upgrade.id
     );
-    // Reflow restarts the entrance animation when upgrades are selected in quick succession.
-    void this.upgradeConfirmation.offsetWidth;
-    this.upgradeConfirmation.classList.add('is-visible');
-    this.upgradeConfirmationTimeout = window.setTimeout(() => {
-      this.upgradeConfirmation.classList.remove('is-visible');
-    }, displayDuration);
+    this.combatMessages.request('upgrade', displayDuration);
+  }
+
+  showPickupFeedback(kind, title, description) {
+    // Preserve the more important EVO/upgrade receipt while it is still visible.
+    if (this.recentUpgrade && this.recentUpgrade.until > performance.now()) return;
+    this.upgradeConfirmation.className = 'upgrade-confirmation upgrade-confirmation--instant';
+    this.upgradeConfirmation.innerHTML = '<span class="upgrade-confirmation__icon" data-pickup-icon></span><span class="upgrade-confirmation__copy"><small>PICKUP</small><strong></strong><em></em></span>';
+    this.upgradeConfirmation.querySelector('strong').textContent = title;
+    this.upgradeConfirmation.querySelector('em').textContent = description;
+    this.setIcon(this.upgradeConfirmation.querySelector('[data-pickup-icon]'), { heal: 'heal', bomb: 'rocket-egg', magnet: 'xp-magnet' }[kind]);
+    this.combatMessages.request('upgrade', 1600);
   }
 
   getUpgradeFeedbackState() {
     return {
-      visible: this.upgradeConfirmation?.classList.contains('is-visible') ?? false,
+      visible: Boolean(this.upgradeConfirmation?.classList.contains('is-visible') && !this.combatMessages.playerHeld && !this.combatMessages.paused),
       title: this.upgradeConfirmation?.querySelector('strong')?.textContent ?? null,
       rank: this.upgradeConfirmation?.querySelector('b')?.textContent ?? null,
       milestone: this.upgradeConfirmation?.querySelector('em')?.textContent ?? null,
       changes: [...(this.upgradeConfirmation?.querySelectorAll('.upgrade-button__changes span') ?? [])]
         .map((item) => item.textContent),
-      recent: this.recentUpgrade ? { ...this.recentUpgrade } : null
+      recent: this.recentUpgrade ? { ...this.recentUpgrade } : null,
+      messageState: { paused: this.combatMessages.paused, playerHeld: this.combatMessages.playerHeld,
+        active: this.combatMessages.active?.kind ?? null, queued: this.combatMessages.pending.has('upgrade') }
     };
   }
 
@@ -1446,10 +1606,11 @@ export class HUD {
     window.clearTimeout(this.multiKillTimeout);
     const cssColor = `#${Number(color).toString(16).padStart(6, '0')}`;
     this.multiKill.style.setProperty('--multi-kill-color', cssColor);
-    this.multiKill.innerHTML = `<strong>${event.count}×</strong><span>${event.label}</span>`;
-    this.multiKill.classList.remove('is-visible');
-    void this.multiKill.offsetWidth;
-    this.multiKill.classList.add('is-visible');
+    this.multiKill.innerHTML = `
+      <span class="multi-kill__sticker" aria-hidden="true"><b>${event.label}</b></span>
+      <strong>${event.count}×</strong>
+      <span class="multi-kill__label">${event.label}</span>
+    `;
     const killMetric = this.root.querySelector('[data-kills]');
     killMetric?.classList.remove('is-kill-burst');
     void killMetric?.offsetWidth;
@@ -1458,19 +1619,19 @@ export class HUD {
   }
 
   scheduleMultiKillHide() {
+    this.combatMessages.request('kill', 1600);
     window.clearTimeout(this.multiKillTimeout);
-    const displayDuration = window.matchMedia('(max-width: 760px)').matches ? 1600 : 1050;
     this.multiKillTimeout = window.setTimeout(() => {
-      this.multiKill?.classList.remove('is-visible');
       this.root.querySelector('[data-kills]')?.classList.remove('is-kill-burst');
-    }, displayDuration);
+    }, 450);
   }
 
   getMultiKillState() {
     return {
-      visible: this.multiKill?.classList.contains('is-visible') ?? false,
+      visible: Boolean(this.multiKill?.classList.contains('is-visible') && !this.combatMessages.playerHeld && !this.combatMessages.paused),
       count: this.multiKill?.querySelector('strong')?.textContent ?? null,
-      label: this.multiKill?.querySelector('span')?.textContent ?? null
+      label: this.multiKill?.querySelector('.multi-kill__label')?.textContent ?? null,
+      stickerLabel: this.multiKill?.querySelector('.multi-kill__sticker b')?.textContent ?? null
     };
   }
 
@@ -1510,6 +1671,15 @@ export class HUD {
       return;
     }
     const resolvedId = ICON_ALIASES_BY_ID[id] ?? id;
+    element.classList.add('ui-icon');
+    element.dataset.iconId = resolvedId;
+    const standalone = PORTAL_ICONS[resolvedId];
+    element.classList.toggle('ui-icon--standalone', Boolean(standalone));
+    if (standalone) {
+      element.style.backgroundImage = `url("${standalone}")`;
+      return;
+    }
+    element.style.removeProperty('background-image');
     const frame = uiIconAtlas.frames[resolvedId] ?? uiIconAtlas.frames['active-upgrade'];
     const col = frame % ICON_COLUMNS;
     const row = Math.floor(frame / ICON_COLUMNS);
@@ -1521,8 +1691,7 @@ export class HUD {
   }
 
   destroy() {
-    window.clearTimeout(this.waveBannerTimeout);
-    window.clearTimeout(this.upgradeConfirmationTimeout);
+    this.combatMessages.destroy();
     window.clearTimeout(this.multiKillTimeout);
     this.root.remove();
     this.overlay.remove();

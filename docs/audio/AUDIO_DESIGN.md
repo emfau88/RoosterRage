@@ -10,23 +10,25 @@ The final direction is arcade action with restrained farm character. Chicken voi
 | --- | --- |
 | Primaries | One launch per salvo: `egg-launch-ace`, `egg-launch-artillery`, `egg-launch-storm`; egg projectile hits rotate `egg-impact-1..4` |
 | Combat | Non-egg damage `enemy-hit`; normal kill `enemy-pop`; player damage `player-hurt`; second wind `second-wind` |
-| Abilities | `laser`, `lightning`, `lightning-chain`, `molotov-impact`, `rocket-launch`, `rocket-explosion`, `void-open` |
+| Abilities | `laser`, `lightning`, `lightning-chain`, `molotov-impact`, `rocket-launch`, `rocket-explosion`, `void-open`; `orbit-contact` for Orbit Eggs / Shell Halo and `blast-shell-impact` for the primary blast |
 | Rewards | `xp-pickup`, `level-up`, `upgrade-select`, `evolution`, `pickup-heal`, `pickup-magnet`, `pickup-bomb`, `victory` |
-| Chest | Spawn `chest-spawn` → latch at 120 ms → open at 285 ms → reward at 500 ms |
+| Chest | Spawn `chest-spawn` → latch at 120 ms → open at 245 ms → reward at 400 ms → choice at 520 ms |
 | Enemies | Spitter volley `spitter-shot`; Brute slam `brute-stomp`; Bomber `bomber-explosion`; Summoner charge/spawn; Elite entry sting |
-| Boss | Entry roar and boss music; heavy fireball cue; `boss-phase` for phase changes; separated death punctuation and delayed victory |
+| Boss | Entry roar and boss music; heavy fireball cue; `enemy-dash` for enemy/boss rush; `boss-phase` for phase changes; separated death punctuation and delayed victory |
 | Environment | `crate-break` and filtered `bale-break`; routine prop hits stay silent to protect the mix |
 | UI | Kenney family for navigate, confirm, back, denied, toggle and reroll; run confirmation is layered with one rooster crow |
 
 ## Architecture and mix
 
-`AudioSystem` owns persisted Master, SFX, UI, Music and Ambience levels. SFX and UI have independent voice pools; loop buses never consume combat voices. SFX define per-key volume, cooldown, max voices, pitch jitter and priority. Critical/reward sounds can borrow two SFX voices while common hits remain limited. Music and ambience crossfade independently and are stopped during shutdown/run transitions. Browser unlock recovery listens for pointer, touch and keyboard gestures.
+`AudioSystem` owns persisted Master, SFX, UI, Music and Ambience levels. SFX and UI have independent voice pools; loop buses never consume combat voices. SFX define per-key volume, cooldown, max voices, pitch jitter and priority. Danger/critical/reward sounds can borrow two SFX voices while common hits remain limited. At saturation, a priority sound can replace one lower-tier sound without exceeding the pool limit; danger has the highest tier. Music and ambience crossfade independently and are stopped during shutdown/run transitions. Browser unlock recovery listens for pointer, touch and keyboard gestures.
 
 Defaults: Master 80%, SFX 90%, UI 85%, Music 65%, Ambience 35%. Common egg hits use a shared 55 ms variant cooldown; XP uses 95 ms and one voice; launches are one sound per salvo. Frequent effects are mono MP3, while music and ambience remain stereo. The production audio payload is about 4.5 MB.
 
 ## Processing and reproducibility
 
 Run `powershell -ExecutionPolicy Bypass -File scripts/process-audio-assets.ps1` while the supplied raw pack is at `C:\Users\madde\Documents\ROOSTER\SOUNDS`, or pass `-SourceRoot`. The script trims, fades, filters, pitch/speed-shapes, loudness-normalizes and converts without modifying originals. Generated assets live under `src/assets/audio/{sfx,ui,music,ambience}` and are auto-discovered by Vite.
+
+The three portal-polish effects (`enemy-dash`, `blast-shell-impact`, `orbit-contact`) are short mono WAVs synthesized without external samples by `scripts/prepare-portal-feedback-audio.py`. Browser playback, mute handling and saturated-pool priority are covered by the portal feedback tests. See [the implementation report](../PORTAL_FEEDBACK_POLISH_REPORT_2026-10-03.md) for attack coverage and outstanding device listening checks.
 
 ## Deliberately rejected candidates
 

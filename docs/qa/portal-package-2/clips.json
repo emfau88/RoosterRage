@@ -1,0 +1,61 @@
+{
+  "method": "Sampled production screenshots (100ms wait plus screenshot latency), encoded as 5fps WebM sequences; not frame-rate or hardware evidence.",
+  "clips": [
+    {
+      "path": "runs/ace-yard/wave-10-sequence.webm",
+      "bytes": 202609,
+      "sha256": "6bb9a2d3d95cc34c82478e54fc2d0d6a0418b0da1b94cd7c2f3d4b71bb52fc86",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/ace-yard/wave-7-sequence.webm",
+      "bytes": 171457,
+      "sha256": "6e47d9a5a693b81c52d954dcf0971bf083753c7010d3c1ad5be073ebe3724bc9",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/ace-yard/wave-8-sequence.webm",
+      "bytes": 208502,
+      "sha256": "a03fde8907734d76617a5661e4a78024d2a03624d7bcec14b2b11a299d0e9609",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/ace-yard/wave-9-sequence.webm",
+      "bytes": 184340,
+      "sha256": "8e02fc2fd2254ca1918edd54815da349a7579431c3d4b388b67372853f1fa143",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/artillery-coop-novice/wave-7-sequence.webm",
+      "bytes": 162855,
+      "sha256": "c7f9aec18f8945451f2dba91f59ede7e4f8b28e82b275b4a86f484057bcbb25a",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/artillery-coop-novice/wave-8-sequence.webm",
+      "bytes": 183415,
+      "sha256": "9b824410432c9633e9269fa3b68e1df39708a2da369acb126adb79614dd97f88",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/storm-alley-late/wave-7-sequence.webm",
+      "bytes": 238068,
+      "sha256": "90d5e188d12cac60f2b516157b19d86c48ca59c1323c4fff1bdc1ea28f61a463",
+      "frames": 16,
+      "playbackFps": 5
+    },
+    {
+      "path": "runs/storm-alley-late/wave-8-sequence.webm",
+      "bytes": 196905,
+      "sha256": "3c5af78a9f5cf4411933d1371dfa9ee2e5e2c0e0f3a568644507d2cddc2823c4",
+      "frames": 16,
+      "playbackFps": 5
+    }
+  ]
+}

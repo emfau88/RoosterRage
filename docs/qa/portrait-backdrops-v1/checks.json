@@ -1,0 +1,146 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "backgrounds": [
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp"
+      },
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/artillery.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/artillery.webp"
+      },
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/storm.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/storm.webp"
+      }
+    ],
+    "geometry": [
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-ace-portrait.webp",
+        "x": 123,
+        "y": 253,
+        "width": 387.328125,
+        "height": 180
+      },
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-artillery-portrait.webp",
+        "x": 526.328125,
+        "y": 253,
+        "width": 387.328125,
+        "height": 180
+      },
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-storm-portrait.webp",
+        "x": 929.65625,
+        "y": 253,
+        "width": 387.34375,
+        "height": 180
+      }
+    ],
+    "hero": {
+      "rooster": "ace",
+      "background": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp\")"
+    },
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "backgrounds": [
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp"
+      },
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/artillery.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/artillery.webp"
+      },
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/storm.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/storm.webp"
+      }
+    ],
+    "geometry": [
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-ace-portrait.webp",
+        "x": 14,
+        "y": 231.1875,
+        "width": 106,
+        "height": 128
+      },
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-artillery-portrait.webp",
+        "x": 14,
+        "y": 425.1875,
+        "width": 106,
+        "height": 132
+      },
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-storm-portrait.webp",
+        "x": 14,
+        "y": 619.1875,
+        "width": 106,
+        "height": 132
+      }
+    ],
+    "hero": {
+      "rooster": "ace",
+      "background": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp\")"
+    },
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "backgrounds": [
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp"
+      },
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/artillery.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/artillery.webp"
+      },
+      {
+        "image": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/storm.webp\")",
+        "asset": "http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/storm.webp"
+      }
+    ],
+    "geometry": [
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-ace-portrait.webp",
+        "x": 23,
+        "y": 201,
+        "width": 255.328125,
+        "height": 180
+      },
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-artillery-portrait.webp",
+        "x": 294.328125,
+        "y": 201,
+        "width": 255.328125,
+        "height": 180
+      },
+      {
+        "src": "http://127.0.0.1:5173/src/assets/characters/portraits-mascot/rooster-storm-portrait.webp",
+        "x": 565.65625,
+        "y": 201,
+        "width": 255.34375,
+        "height": 180
+      }
+    ],
+    "hero": {
+      "rooster": "ace",
+      "background": "linear-gradient(rgba(7, 16, 20, 0.12), rgba(7, 16, 20, 0.24)), url(\"http://127.0.0.1:5173/src/assets/ui/portrait-backdrops-v1/ace.webp\")"
+    },
+    "errors": []
+  }
+]

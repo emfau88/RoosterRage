@@ -1,0 +1,2157 @@
+{
+  "alphaThreshold": 16,
+  "frames": [
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 0,
+      "bounds": [
+        43,
+        27,
+        214,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 1,
+      "bounds": [
+        44,
+        30,
+        213,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 2,
+      "bounds": [
+        44,
+        31,
+        212,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 3,
+      "bounds": [
+        43,
+        30,
+        212,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 4,
+      "bounds": [
+        42,
+        27,
+        213,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 5,
+      "bounds": [
+        42,
+        24,
+        214,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 6,
+      "bounds": [
+        41,
+        23,
+        215,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 7,
+      "bounds": [
+        42,
+        24,
+        214,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 8,
+      "bounds": [
+        65,
+        21,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 9,
+      "bounds": [
+        64,
+        24,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 10,
+      "bounds": [
+        64,
+        25,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 11,
+      "bounds": [
+        64,
+        24,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 12,
+      "bounds": [
+        65,
+        21,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 13,
+      "bounds": [
+        65,
+        17,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 14,
+      "bounds": [
+        65,
+        16,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 15,
+      "bounds": [
+        65,
+        17,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 16,
+      "bounds": [
+        65,
+        21,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 17,
+      "bounds": [
+        64,
+        24,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 18,
+      "bounds": [
+        64,
+        25,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 19,
+      "bounds": [
+        64,
+        24,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 20,
+      "bounds": [
+        65,
+        21,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 21,
+      "bounds": [
+        65,
+        17,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 22,
+      "bounds": [
+        65,
+        16,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 23,
+      "bounds": [
+        65,
+        17,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 24,
+      "bounds": [
+        37,
+        19,
+        219,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 25,
+      "bounds": [
+        38,
+        22,
+        218,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 26,
+      "bounds": [
+        39,
+        24,
+        217,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 27,
+      "bounds": [
+        39,
+        22,
+        217,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 28,
+      "bounds": [
+        38,
+        19,
+        218,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 29,
+      "bounds": [
+        37,
+        16,
+        219,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 30,
+      "bounds": [
+        37,
+        14,
+        219,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "idle",
+      "frame": 31,
+      "bounds": [
+        37,
+        16,
+        219,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 0,
+      "bounds": [
+        40,
+        27,
+        221,
+        248
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 1,
+      "bounds": [
+        41,
+        23,
+        218,
+        246
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 2,
+      "bounds": [
+        43,
+        19,
+        213,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 3,
+      "bounds": [
+        44,
+        23,
+        208,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 4,
+      "bounds": [
+        45,
+        27,
+        206,
+        248
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 5,
+      "bounds": [
+        44,
+        23,
+        208,
+        246
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 6,
+      "bounds": [
+        43,
+        19,
+        213,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 7,
+      "bounds": [
+        41,
+        23,
+        218,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 8,
+      "bounds": [
+        63,
+        21,
+        245,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 9,
+      "bounds": [
+        63,
+        17,
+        246,
+        224
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 10,
+      "bounds": [
+        65,
+        12,
+        247,
+        225
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 11,
+      "bounds": [
+        66,
+        16,
+        248,
+        227
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 12,
+      "bounds": [
+        66,
+        21,
+        248,
+        230
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 13,
+      "bounds": [
+        66,
+        16,
+        248,
+        231
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 14,
+      "bounds": [
+        65,
+        12,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 15,
+      "bounds": [
+        63,
+        17,
+        246,
+        234
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 16,
+      "bounds": [
+        63,
+        21,
+        245,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 17,
+      "bounds": [
+        63,
+        17,
+        246,
+        224
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 18,
+      "bounds": [
+        65,
+        12,
+        247,
+        225
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 19,
+      "bounds": [
+        66,
+        16,
+        248,
+        227
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 20,
+      "bounds": [
+        66,
+        21,
+        248,
+        230
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 21,
+      "bounds": [
+        66,
+        16,
+        248,
+        231
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 22,
+      "bounds": [
+        65,
+        12,
+        247,
+        233
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 23,
+      "bounds": [
+        63,
+        17,
+        246,
+        234
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 24,
+      "bounds": [
+        39,
+        19,
+        212,
+        243
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 25,
+      "bounds": [
+        39,
+        15,
+        213,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 26,
+      "bounds": [
+        38,
+        10,
+        218,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 27,
+      "bounds": [
+        37,
+        15,
+        223,
+        234
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 28,
+      "bounds": [
+        36,
+        19,
+        225,
+        242
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 29,
+      "bounds": [
+        37,
+        15,
+        223,
+        240
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 30,
+      "bounds": [
+        38,
+        10,
+        218,
+        235
+      ]
+    },
+    {
+      "rooster": "ace",
+      "pose": "walk",
+      "frame": 31,
+      "bounds": [
+        39,
+        15,
+        213,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 0,
+      "bounds": [
+        53,
+        41,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 1,
+      "bounds": [
+        53,
+        43,
+        204,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 2,
+      "bounds": [
+        53,
+        44,
+        204,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 3,
+      "bounds": [
+        53,
+        43,
+        204,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 4,
+      "bounds": [
+        53,
+        41,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 5,
+      "bounds": [
+        54,
+        38,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 6,
+      "bounds": [
+        53,
+        37,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 7,
+      "bounds": [
+        54,
+        38,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 8,
+      "bounds": [
+        64,
+        33,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 9,
+      "bounds": [
+        63,
+        35,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 10,
+      "bounds": [
+        63,
+        36,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 11,
+      "bounds": [
+        63,
+        35,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 12,
+      "bounds": [
+        64,
+        33,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 13,
+      "bounds": [
+        64,
+        31,
+        223,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 14,
+      "bounds": [
+        64,
+        30,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 15,
+      "bounds": [
+        64,
+        31,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 16,
+      "bounds": [
+        64,
+        33,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 17,
+      "bounds": [
+        63,
+        35,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 18,
+      "bounds": [
+        63,
+        36,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 19,
+      "bounds": [
+        63,
+        35,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 20,
+      "bounds": [
+        64,
+        33,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 21,
+      "bounds": [
+        64,
+        31,
+        223,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 22,
+      "bounds": [
+        64,
+        30,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 23,
+      "bounds": [
+        64,
+        31,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 24,
+      "bounds": [
+        52,
+        41,
+        206,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 25,
+      "bounds": [
+        51,
+        43,
+        206,
+        237
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 26,
+      "bounds": [
+        51,
+        44,
+        206,
+        237
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 27,
+      "bounds": [
+        51,
+        43,
+        206,
+        237
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 28,
+      "bounds": [
+        52,
+        41,
+        206,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 29,
+      "bounds": [
+        52,
+        38,
+        205,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 30,
+      "bounds": [
+        52,
+        37,
+        205,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "idle",
+      "frame": 31,
+      "bounds": [
+        52,
+        38,
+        205,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 0,
+      "bounds": [
+        54,
+        41,
+        206,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 1,
+      "bounds": [
+        54,
+        39,
+        205,
+        233
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 2,
+      "bounds": [
+        53,
+        36,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 3,
+      "bounds": [
+        52,
+        39,
+        202,
+        228
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 4,
+      "bounds": [
+        52,
+        41,
+        202,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 5,
+      "bounds": [
+        52,
+        39,
+        202,
+        233
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 6,
+      "bounds": [
+        53,
+        36,
+        203,
+        227
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 7,
+      "bounds": [
+        54,
+        39,
+        205,
+        228
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 8,
+      "bounds": [
+        57,
+        33,
+        223,
+        235
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 9,
+      "bounds": [
+        61,
+        31,
+        223,
+        235
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 10,
+      "bounds": [
+        64,
+        28,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 11,
+      "bounds": [
+        64,
+        31,
+        225,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 12,
+      "bounds": [
+        61,
+        33,
+        225,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 13,
+      "bounds": [
+        64,
+        31,
+        225,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 14,
+      "bounds": [
+        64,
+        28,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 15,
+      "bounds": [
+        61,
+        31,
+        222,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 16,
+      "bounds": [
+        57,
+        33,
+        223,
+        235
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 17,
+      "bounds": [
+        61,
+        31,
+        223,
+        235
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 18,
+      "bounds": [
+        64,
+        28,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 19,
+      "bounds": [
+        64,
+        31,
+        225,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 20,
+      "bounds": [
+        61,
+        33,
+        225,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 21,
+      "bounds": [
+        64,
+        31,
+        225,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 22,
+      "bounds": [
+        64,
+        28,
+        224,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 23,
+      "bounds": [
+        61,
+        31,
+        222,
+        234
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 24,
+      "bounds": [
+        50,
+        40,
+        204,
+        242
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 25,
+      "bounds": [
+        50,
+        39,
+        205,
+        241
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 26,
+      "bounds": [
+        52,
+        36,
+        206,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 27,
+      "bounds": [
+        53,
+        39,
+        207,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 28,
+      "bounds": [
+        53,
+        41,
+        207,
+        242
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 29,
+      "bounds": [
+        53,
+        39,
+        207,
+        241
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 30,
+      "bounds": [
+        52,
+        36,
+        206,
+        236
+      ]
+    },
+    {
+      "rooster": "artillery",
+      "pose": "walk",
+      "frame": 31,
+      "bounds": [
+        50,
+        39,
+        205,
+        236
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 0,
+      "bounds": [
+        72,
+        28,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 1,
+      "bounds": [
+        72,
+        30,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 2,
+      "bounds": [
+        73,
+        31,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 3,
+      "bounds": [
+        72,
+        30,
+        183,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 4,
+      "bounds": [
+        72,
+        28,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 5,
+      "bounds": [
+        72,
+        25,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 6,
+      "bounds": [
+        71,
+        24,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 7,
+      "bounds": [
+        72,
+        25,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 8,
+      "bounds": [
+        33,
+        34,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 9,
+      "bounds": [
+        33,
+        36,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 10,
+      "bounds": [
+        32,
+        37,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 11,
+      "bounds": [
+        32,
+        36,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 12,
+      "bounds": [
+        32,
+        34,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 13,
+      "bounds": [
+        33,
+        31,
+        177,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 14,
+      "bounds": [
+        33,
+        30,
+        177,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 15,
+      "bounds": [
+        33,
+        31,
+        177,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 16,
+      "bounds": [
+        33,
+        34,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 17,
+      "bounds": [
+        33,
+        36,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 18,
+      "bounds": [
+        32,
+        37,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 19,
+      "bounds": [
+        32,
+        36,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 20,
+      "bounds": [
+        32,
+        34,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 21,
+      "bounds": [
+        33,
+        31,
+        177,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 22,
+      "bounds": [
+        33,
+        30,
+        177,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 23,
+      "bounds": [
+        33,
+        31,
+        177,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 24,
+      "bounds": [
+        73,
+        30,
+        183,
+        238
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 25,
+      "bounds": [
+        74,
+        32,
+        182,
+        240
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 26,
+      "bounds": [
+        74,
+        33,
+        182,
+        240
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 27,
+      "bounds": [
+        74,
+        32,
+        182,
+        240
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 28,
+      "bounds": [
+        74,
+        30,
+        182,
+        238
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 29,
+      "bounds": [
+        73,
+        27,
+        183,
+        237
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 30,
+      "bounds": [
+        72,
+        26,
+        184,
+        237
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "idle",
+      "frame": 31,
+      "bounds": [
+        72,
+        27,
+        184,
+        237
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 0,
+      "bounds": [
+        70,
+        28,
+        191,
+        233
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 1,
+      "bounds": [
+        71,
+        24,
+        189,
+        231
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 2,
+      "bounds": [
+        72,
+        20,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 3,
+      "bounds": [
+        72,
+        24,
+        181,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 4,
+      "bounds": [
+        72,
+        28,
+        179,
+        234
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 5,
+      "bounds": [
+        72,
+        24,
+        181,
+        231
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 6,
+      "bounds": [
+        72,
+        20,
+        184,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 7,
+      "bounds": [
+        71,
+        24,
+        189,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 8,
+      "bounds": [
+        34,
+        33,
+        179,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 9,
+      "bounds": [
+        34,
+        29,
+        179,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 10,
+      "bounds": [
+        32,
+        26,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 11,
+      "bounds": [
+        31,
+        30,
+        176,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 12,
+      "bounds": [
+        31,
+        34,
+        176,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 13,
+      "bounds": [
+        32,
+        30,
+        176,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 14,
+      "bounds": [
+        33,
+        26,
+        178,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 15,
+      "bounds": [
+        34,
+        29,
+        179,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 16,
+      "bounds": [
+        34,
+        33,
+        179,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 17,
+      "bounds": [
+        34,
+        29,
+        179,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 18,
+      "bounds": [
+        32,
+        26,
+        178,
+        226
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 19,
+      "bounds": [
+        31,
+        30,
+        176,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 20,
+      "bounds": [
+        31,
+        34,
+        176,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 21,
+      "bounds": [
+        32,
+        30,
+        176,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 22,
+      "bounds": [
+        33,
+        26,
+        178,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 23,
+      "bounds": [
+        34,
+        29,
+        179,
+        225
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 24,
+      "bounds": [
+        75,
+        30,
+        176,
+        238
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 25,
+      "bounds": [
+        75,
+        26,
+        178,
+        235
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 26,
+      "bounds": [
+        73,
+        22,
+        183,
+        232
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 27,
+      "bounds": [
+        72,
+        26,
+        187,
+        235
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 28,
+      "bounds": [
+        71,
+        30,
+        189,
+        238
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 29,
+      "bounds": [
+        72,
+        26,
+        187,
+        235
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 30,
+      "bounds": [
+        73,
+        22,
+        183,
+        232
+      ]
+    },
+    {
+      "rooster": "storm",
+      "pose": "walk",
+      "frame": 31,
+      "bounds": [
+        75,
+        26,
+        178,
+        235
+      ]
+    }
+  ],
+  "envelopes": {
+    "ace": {
+      "top": 10,
+      "bottom": 248
+    },
+    "artillery": {
+      "top": 28,
+      "bottom": 242
+    },
+    "storm": {
+      "top": 20,
+      "bottom": 240
+    }
+  },
+  "sources": [
+    {
+      "path": "src/assets/characters/ace-final/rooster-ace-final-idle.webp",
+      "sha256": "d545ddbccf5c1a6183c6812e325b09ead6c17563b9a53215ec15efeb1b4afad4"
+    },
+    {
+      "path": "src/assets/characters/ace-final/rooster-ace-final-walk.webp",
+      "sha256": "055796e91ad230aa4f4995c9201a30de081cd4cdda617a416415c57607d937dd"
+    },
+    {
+      "path": "src/assets/characters/artillery-final/rooster-artillery-final-idle.webp",
+      "sha256": "fcda8767bb02f9314c9dc3918fefd47910ea376f692ae3f0860be77177598f8d"
+    },
+    {
+      "path": "src/assets/characters/artillery-final/rooster-artillery-final-walk.webp",
+      "sha256": "fb58ff9894170bc43d2f4c693dccfc244f0bd75dd0ea9069df2fed9f4eed7184"
+    },
+    {
+      "path": "src/assets/characters/storm-final/rooster-storm-final-idle.webp",
+      "sha256": "454dee0d91ba92eb6c0ed442538d8ec63c0b97cbc5daccd3c3ae36f6ee16b8d7"
+    },
+    {
+      "path": "src/assets/characters/storm-final/rooster-storm-final-walk.webp",
+      "sha256": "44734673e07ea5c703efaa1580e38769ad0f56371c50689b5ad05bd448057629"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import enemySlimeWobbleUrl from '../../assets/enemies/animations/enemy-slime-wob
 import enemySlimeHopUrl from '../../assets/enemies/animations/enemy-slime-hop-v2.webp';
 import enemyKornkrabblerRunUrl from '../../assets/enemies/animations/enemy-kornkrabbler-run.webp';
 import enemyRunnerRunUrl from '../../assets/enemies/animations/enemy-runner-run.webp';
-import enemyEliteRunnerRunUrl from '../../assets/enemies/animations/enemy-elite-runner-run.webp';
+import enemyEliteRunnerRunUrl from '@portal-elite-runner';
 import enemyBruteRunUrl from '../../assets/enemies/animations/enemy-brute-run.webp';
 import enemyBossRunUrl from '../../assets/enemies/animations/enemy-boss-run.webp';
 import enemyBruteStompUrl from '../../assets/enemies/animations/enemy-brute-stomp.webp';
@@ -16,9 +16,10 @@ import enemyBomberBobUrl from '../../assets/enemies/animations/enemy-bomber-bob.
 import enemyBomberRunUrl from '../../assets/enemies/animations/enemy-bomber-run.webp';
 import enemySupportRunUrl from '../../assets/enemies/animations/enemy-support-run.webp';
 import enemySummonerRunUrl from '../../assets/enemies/animations/enemy-summoner-run.webp';
-import enemyEliteBruteStompUrl from '../../assets/enemies/animations/enemy-elite-brute-stomp.webp';
-import enemyEliteSpitterPulseUrl from '../../assets/enemies/animations/enemy-elite-spitter-pulse.webp';
-import enemyEliteSpitterRunUrl from '../../assets/enemies/animations/enemy-elite-spitter-run.webp';
+import enemyEliteBruteStompUrl from '@portal-elite-tank-actions';
+import enemyEliteBruteRunUrl from '@portal-elite-tank-run';
+import enemyEliteSpitterPulseUrl from '@portal-elite-chili-actions';
+import enemyEliteSpitterRunUrl from '@portal-elite-chili-run';
 import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
 import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.webp';
 import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
@@ -78,14 +79,20 @@ import enemyPurpleShotUrl from '../../assets/projectiles/enemy-purple-shot.webp'
 import enemyBlueShotUrl from '../../assets/projectiles/enemy-blue-shot.webp';
 import bossFireballUrl from '../../assets/projectiles/boss-fireball.webp';
 import xpOrbUrl from '../../assets/collectibles/xp-orb.webp';
-import pickupHealUrl from '../../assets/pickups/pickup-heal.webp';
-import pickupBombUrl from '../../assets/pickups/pickup-bomb.webp';
-import pickupMagnetUrl from '../../assets/pickups/pickup-magnet.webp';
+import pickupHealUrl from '@portal-pickup-heal';
+import pickupBombUrl from '@portal-pickup-bomb';
+import pickupMagnetUrl from '@portal-pickup-magnet';
 import pickupEliteChestUrl from '../../assets/pickups/pickup-elite-chest.webp';
 import pickupEliteChestAjarUrl from '../../assets/pickups/pickup-elite-chest-ajar.webp';
 import pickupEliteChestOpenUrl from '../../assets/pickups/pickup-elite-chest-open.webp';
 import arenaCrateUrl from '../../assets/map/arena-crate.webp';
 import arenaBaleUrl from '../../assets/map/arena-bale.webp';
+import portalCrateUrl from '../../assets/map/portal-v3/crate.webp';
+import portalBaleUrl from '../../assets/map/portal-v3/bale.webp';
+import portalGroundAUrl from '../../assets/map/portal-v3/ground-a.webp';
+import portalGroundBUrl from '../../assets/map/portal-v3/ground-b.webp';
+import portalGroundCUrl from '../../assets/map/portal-v3/ground-c.webp';
+import { USE_REFINED_PROPS, USE_GROUND_VARIANTS } from '../../config/mapArt.js';
 import arenaWallUrl from '../../assets/map/arena-wall.webp';
 import arenaGroundFarmUrl from '../../assets/map/arena-ground-farm.webp';
 import arenaGroundRoadUrl from '../../assets/map/arena-ground-road.webp';
@@ -103,11 +110,11 @@ import {
   getSceneRenderScale
 } from '../DisplayResolutionSystem.js';
 
-const audioAssetUrls = import.meta.glob('../../assets/audio/**/*.mp3', {
+const audioAssetUrls = { ...import.meta.glob('../../assets/audio/**/*.mp3', {
   eager: true,
   query: '?url',
   import: 'default'
-});
+}), ...import.meta.glob('../../assets/audio/portal-v1/*.wav', { eager: true, query: '?url', import: 'default' }) };
 
 export function preloadGameAssets(scene) {
   document.body.dataset.roosterLoadState = 'loading';
@@ -177,6 +184,7 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-support-run', enemySupportRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-summoner-run', enemySummonerRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-brute-stomp', enemyEliteBruteStompUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('enemy-elite-brute-run', enemyEliteBruteRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-pulse', enemyEliteSpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-run', enemyEliteSpitterRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('fx-atlas-v1', fxAtlasUrl, { frameWidth: 256, frameHeight: 256 });
@@ -262,8 +270,13 @@ export function preloadGameAssets(scene) {
   scene.load.image('pickup-elite-chest', pickupEliteChestUrl);
   scene.load.image('pickup-elite-chest-ajar', pickupEliteChestAjarUrl);
   scene.load.image('pickup-elite-chest-open', pickupEliteChestOpenUrl);
-  scene.load.image('arena-crate', arenaCrateUrl);
-  scene.load.image('arena-bale', arenaBaleUrl);
+  scene.load.image('arena-crate', USE_REFINED_PROPS ? portalCrateUrl : arenaCrateUrl);
+  scene.load.image('arena-bale', USE_REFINED_PROPS ? portalBaleUrl : arenaBaleUrl);
+  if (USE_GROUND_VARIANTS) {
+    scene.load.image('portal-ground-source-a', portalGroundAUrl);
+    scene.load.image('portal-ground-source-b', portalGroundBUrl);
+    scene.load.image('portal-ground-source-c', portalGroundCUrl);
+  }
   scene.load.image('arena-wall', arenaWallUrl);
   scene.load.image('arena-ground-farm', arenaGroundFarmUrl);
   scene.load.image('arena-ground-road', arenaGroundRoadUrl);
@@ -279,7 +292,7 @@ export function preloadGameAssets(scene) {
   scene.load.image('coop-square-hay-stack', coopSquareHayStackUrl);
   const audioKeys = new Set();
   Object.entries(audioAssetUrls).forEach(([assetPath, assetUrl]) => {
-    const key = assetPath.split('/').at(-1).replace(/\.mp3$/i, '');
+    const key = assetPath.split('/').at(-1).replace(/\.(mp3|wav)$/i, '');
     if (audioKeys.has(key)) throw new Error(`Duplicate audio asset key: ${key}`);
     audioKeys.add(key);
     scene.load.audio(key, assetUrl);

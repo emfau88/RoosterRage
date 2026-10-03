@@ -1,0 +1,347 @@
+{
+  "version": 1,
+  "parts": {
+    "south/head": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/head.png",
+      "width": 404,
+      "height": 342,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        14,
+        88,
+        418,
+        430
+      ],
+      "sha256": "37f8b0cb41afd130f89de230f1511c17fd3be695e13f179fc0df03817e2cd330"
+    },
+    "south/comb": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/comb.png",
+      "width": 379,
+      "height": 343,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        434,
+        43,
+        813,
+        386
+      ],
+      "sha256": "14a45851a5d37ddf7f198fc6e8135801e7dd2ed638a326aa72530698a88bee35"
+    },
+    "south/body": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/body.png",
+      "width": 410,
+      "height": 356,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        830,
+        83,
+        1240,
+        439
+      ],
+      "sha256": "0bda1f95279b79c9b8fb7b56326553988ac960dd3db725a8db1c32cc572ae08c"
+    },
+    "south/wing-left": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/wing-left.png",
+      "width": 301,
+      "height": 321,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        78,
+        484,
+        379,
+        805
+      ],
+      "sha256": "fcb2a6cc9518b54e3eff83fdd741b62dc5c3d51bc6bb636a56128408196164e1"
+    },
+    "south/wing-right": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/wing-right.png",
+      "width": 291,
+      "height": 325,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        501,
+        481,
+        792,
+        806
+      ],
+      "sha256": "c8448be76e8cea0d11229aa952d7d8b0190a1aed6cb487a213db3aa0d506617f"
+    },
+    "south/tail": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/tail.png",
+      "width": 409,
+      "height": 347,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        819,
+        454,
+        1228,
+        801
+      ],
+      "sha256": "f34a80ba69a52af13b6cc3e84da20552253184f515468e9b505a9a6bbedee8ed"
+    },
+    "south/foot-left": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/foot-left.png",
+      "width": 306,
+      "height": 304,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        46,
+        887,
+        352,
+        1191
+      ],
+      "sha256": "10cd42e643e77f0d86533e1e01235573218f253e19ff7e521dd28b008dff27a3"
+    },
+    "south/foot-right": {
+      "file": "art-source/characters/storm-mascot-v1/parts/south/foot-right.png",
+      "width": 302,
+      "height": 305,
+      "source": "art-source/characters/storm-mascot-v1/generated/south-kit.png",
+      "sourceSha256": "f271ac810b1b442a5dd6c37a52c2a304829edb0c27598a7045480a3cc0e259ae",
+      "sourceRect": [
+        501,
+        886,
+        803,
+        1191
+      ],
+      "sha256": "9fd3d66660986e63311e6c923aa9cc9645bfa96a9cd90e2895975e6ee27e159a"
+    },
+    "east/head": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/head.png",
+      "width": 398,
+      "height": 350,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        38,
+        80,
+        436,
+        430
+      ],
+      "sha256": "c178958865fc6f6741575dda0bc97ac15d7b064ef16bfada970b88c21c5c3335"
+    },
+    "east/comb": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/comb.png",
+      "width": 365,
+      "height": 343,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        448,
+        47,
+        813,
+        390
+      ],
+      "sha256": "3e67f50e56944fa0742dbd8b1dc021716d713499d9cc40d3dd1fbfc87f9f63f9"
+    },
+    "east/body": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/body.png",
+      "width": 350,
+      "height": 347,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        868,
+        98,
+        1218,
+        445
+      ],
+      "sha256": "7008f2b1fcf6cdf9a7e51871f611f5a30aa0cbb06e75d1433f539305dd690c4e"
+    },
+    "east/wing-left": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/wing-left.png",
+      "width": 311,
+      "height": 316,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        58,
+        488,
+        369,
+        804
+      ],
+      "sha256": "152834b8b7e0f4c05f7ceb8f487f089dffe74b15fe131545a57eb4c0f93ebb07"
+    },
+    "east/wing-right": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/wing-right.png",
+      "width": 254,
+      "height": 320,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        500,
+        484,
+        754,
+        804
+      ],
+      "sha256": "939010e4f109c42765dfb81f2bac46038671877b8a739daaee8b6e6e8226e98a"
+    },
+    "east/tail": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/tail.png",
+      "width": 411,
+      "height": 336,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        808,
+        465,
+        1219,
+        801
+      ],
+      "sha256": "8ad1cda28c4de0a09645c5116830c8769cc9f8041e45185e0b7ff810ceb59673"
+    },
+    "east/foot-left": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/foot-left.png",
+      "width": 360,
+      "height": 289,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        43,
+        894,
+        403,
+        1183
+      ],
+      "sha256": "73cf72b00238331e6501f21f06b5edfbf670645cd1ca00684e5284539931feab"
+    },
+    "east/foot-right": {
+      "file": "art-source/characters/storm-mascot-v1/parts/east/foot-right.png",
+      "width": 321,
+      "height": 282,
+      "source": "art-source/characters/storm-mascot-v1/generated/east-kit.png",
+      "sourceSha256": "09989bda868b1d7604dfca229892f2f647fb7ab2f7a3ae41fdf5f4d71b3c206b",
+      "sourceRect": [
+        487,
+        899,
+        808,
+        1181
+      ],
+      "sha256": "bb26d32cee194f9f48ff68682c5cdeb2cd0877d67ae8bb267befba9970300f80"
+    },
+    "north/head": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/head.png",
+      "width": 387,
+      "height": 336,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        29,
+        91,
+        416,
+        427
+      ],
+      "sha256": "4a4e36c8dc7e52e5e7b0a6b5fe51a8e63d2b8b1a58426725d6520a58fab24923"
+    },
+    "north/comb": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/comb.png",
+      "width": 367,
+      "height": 339,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        446,
+        48,
+        813,
+        387
+      ],
+      "sha256": "b80bb1e4ea1aaade56a11f7b394a519e849a9fe0cf7dd0e8319fd74f8ffd604c"
+    },
+    "north/body": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/body.png",
+      "width": 398,
+      "height": 344,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        844,
+        97,
+        1242,
+        441
+      ],
+      "sha256": "dca9ec5d0ae04aa4ab260ccac0de34bb1d159faad46f2503bb601616042f355c"
+    },
+    "north/wing-left": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/wing-left.png",
+      "width": 291,
+      "height": 326,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        77,
+        480,
+        368,
+        806
+      ],
+      "sha256": "3ce1a48d9557b9a0f3267680097135e79e9bd4f610398c6d8a1b3d5129064f43"
+    },
+    "north/wing-right": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/wing-right.png",
+      "width": 282,
+      "height": 326,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        503,
+        480,
+        785,
+        806
+      ],
+      "sha256": "ad67c359cc6b23836c881e4d66efdf938d47a0063d7a5890cb51291ec431cf73"
+    },
+    "north/tail": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/tail.png",
+      "width": 416,
+      "height": 352,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        815,
+        454,
+        1231,
+        806
+      ],
+      "sha256": "fe79cee2d3932234228def49c874c411f4386afaf4d088cd035d933a7007bb90"
+    },
+    "north/foot-left": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/foot-left.png",
+      "width": 299,
+      "height": 324,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        66,
+        894,
+        365,
+        1218
+      ],
+      "sha256": "9d868ff6d36ffcb1a4b5532d2eabc2f684318d39397258eebf08725b2e23d2b5"
+    },
+    "north/foot-right": {
+      "file": "art-source/characters/storm-mascot-v1/parts/north/foot-right.png",
+      "width": 298,
+      "height": 324,
+      "source": "art-source/characters/storm-mascot-v1/generated/north-kit.png",
+      "sourceSha256": "36f33902c291dc734d23095125bf633c770c8c0d02265f413516e976a22da644",
+      "sourceRect": [
+        490,
+        894,
+        788,
+        1218
+      ],
+      "sha256": "ef6acdc370df0f367de6b2c87ddd09b911063baac1e7bdb30edef484c8d72d1e"
+    }
+  },
+  "directions": [
+    "south",
+    "east",
+    "north"
+  ],
+  "west": "exact mirror of east"
+}

@@ -31,7 +31,8 @@ async function run() {
       'menu-theme', 'run-theme', 'boss-theme', 'menu-coop',
       'egg-launch-ace', 'egg-launch-artillery', 'egg-launch-storm', 'egg-impact-1',
       'level-up', 'evolution', 'upgrade-select', 'chest-latch', 'chest-open', 'chest-reward', 'victory',
-      'spitter-shot', 'brute-stomp', 'summoner-charge', 'boss-phase', 'boss-fireball'
+      'spitter-shot', 'brute-stomp', 'summoner-charge', 'boss-phase', 'boss-fireball',
+      'enemy-dash', 'blast-shell-impact', 'orbit-contact'
     ];
     assert(requiredAssets.every((key) => manifest.includes(key)),
       'Production audio manifest is incomplete.', { requiredAssets, manifest });

@@ -463,6 +463,33 @@
       "bytes": 1830
     },
     {
+      "source": "art-source/ui/stickers/pickup-heal-sticker-v2.png",
+      "sourceSha256": "d71f4012a846ef706f842a8812859380412e4f2c4c070c1fbf311c613a3c3daa",
+      "runtime": "src/assets/ui/stickers/pickup-heal-sticker-v2.webp",
+      "runtimeSha256": "281dedda8c726d79a0e463ede2c37ea5b6628a81caa6a43d409d9c40c0e047f6",
+      "width": 256,
+      "height": 256,
+      "bytes": 25950
+    },
+    {
+      "source": "art-source/ui/stickers/pickup-bomb-sticker-v2.png",
+      "sourceSha256": "5cd0a15f57c2fa91f7ab38bb01036bfbf3839cbf445be8045458dae9dea80ea1",
+      "runtime": "src/assets/ui/stickers/pickup-bomb-sticker-v2.webp",
+      "runtimeSha256": "f7a5caac90f9b780464673e4bafee5cdd548c7b55eccd1c09883d84bc545a4d7",
+      "width": 256,
+      "height": 256,
+      "bytes": 34494
+    },
+    {
+      "source": "art-source/ui/stickers/pickup-magnet-sticker-v2.png",
+      "sourceSha256": "b7769d77dba6fb4b0212315167fdcf5c956679b06f1c92ff059cca0f6c9cb62b",
+      "runtime": "src/assets/ui/stickers/pickup-magnet-sticker-v2.webp",
+      "runtimeSha256": "c4888e076bd4ebcec892fd68b76e431837cb0a8ff0423929a3d523e816df5ac5",
+      "width": 256,
+      "height": 256,
+      "bytes": 31252
+    },
+    {
       "source": "art-source/pickups/pickup-elite-chest.png",
       "sourceSha256": "f482a71054bc703a1ec171e83e59efc0a9f2660780a391f9def4c9e6ce86898d",
       "runtime": "src/assets/pickups/pickup-elite-chest.webp",
@@ -1199,6 +1226,51 @@
       "width": 768,
       "height": 1024,
       "bytes": 340310
+    },
+    {
+      "source": "art-source/map/portal-v3/crate.png",
+      "sourceSha256": "56fde39a74d6dfba894c59f302f52dfb9994d64871083da4a3fe11da776e504d",
+      "runtime": "src/assets/map/portal-v3/crate.webp",
+      "runtimeSha256": "e063cca5f48780d49064d3327ad39c823c18cdcde1ef278d7e5d5e7fe9190db6",
+      "width": 128,
+      "height": 128,
+      "bytes": 7404
+    },
+    {
+      "source": "art-source/map/portal-v3/bale.png",
+      "sourceSha256": "8f93c92d77f447677a998b502f6fde1f99c7985d0068eb6d6ba2c6c98427a286",
+      "runtime": "src/assets/map/portal-v3/bale.webp",
+      "runtimeSha256": "2c518db5e21a8b29a218d4f337956c0cd356e4addd37f3b916bfa29564eb9886",
+      "width": 192,
+      "height": 96,
+      "bytes": 11966
+    },
+    {
+      "source": "art-source/map/portal-v3/ground-a.png",
+      "sourceSha256": "b8dd8bd02847f606e7000a79d8fa7f358d5943756c5fafc7fe9bad089f24a480",
+      "runtime": "src/assets/map/portal-v3/ground-a.webp",
+      "runtimeSha256": "60362a52cf6648f82d27f557ce1a762333f12547987b6d44ea5dc46f6511bf08",
+      "width": 700,
+      "height": 700,
+      "bytes": 76534
+    },
+    {
+      "source": "art-source/map/portal-v3/ground-b.png",
+      "sourceSha256": "e77988db1d061d0a483acfe67b5a802882f18ece0d3dab735de96413205fef68",
+      "runtime": "src/assets/map/portal-v3/ground-b.webp",
+      "runtimeSha256": "2fe6e74118c802845532c6faca8e9feeb05f6808b483044b7a44c05cc003bf70",
+      "width": 700,
+      "height": 700,
+      "bytes": 80740
+    },
+    {
+      "source": "art-source/map/portal-v3/ground-c.png",
+      "sourceSha256": "df4751354c7e69bc7a9d92e997b6b0a2b546a2663ff7cd88e6a17e39db50506d",
+      "runtime": "src/assets/map/portal-v3/ground-c.webp",
+      "runtimeSha256": "17fd044facd5a1294a3340ed0ec6011e7ba2f1304e5f42fb3a3ff6ea85c4fd6d",
+      "width": 700,
+      "height": 700,
+      "bytes": 80366
     }
   ]
 }

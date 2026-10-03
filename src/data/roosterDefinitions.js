@@ -281,7 +281,7 @@ export const ROOSTER_DEFINITIONS = [
       'support-chick': 1.18
     },
     visual: {
-      scale: STORM_VISUAL_VERSION === 'final' ? 0.255 : 0.235,
+      scale: STORM_VISUAL_VERSION === 'final' || STORM_VISUAL_VERSION === 'mascot' ? 0.255 : 0.235,
       texture: 'rooster-storm-walk',
       tint: null,
       accent: 0x5ad7ff

@@ -1,0 +1,7149 @@
+{
+  "config": {
+    "id": "storm-alley-late",
+    "rooster": "storm",
+    "arena": "vertical-run",
+    "seed": "portal-p0-alley-late-e",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "advanced": true,
+    "strategy": "evasive",
+    "clips": true
+  },
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "dpr": 1,
+    "renderer": "WebGL",
+    "canvas": {
+      "width": 960,
+      "height": 540
+    },
+    "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "testApiExposed": false,
+    "instrumented": true
+  },
+  "initialSave": {
+    "version": 2,
+    "kernels": 45,
+    "lifetimeKernels": 500,
+    "talentRanks": {
+      "sturdy-nest": 3,
+      "swift-spurs": 3,
+      "polished-yolk": 3,
+      "wide-wings": 2,
+      "second-choice": 1,
+      "royal-instinct": 1
+    },
+    "roosterMastery": {
+      "ace": {
+        "xp": 950
+      },
+      "artillery": {
+        "xp": 950
+      },
+      "storm": {
+        "xp": 950
+      }
+    },
+    "totalRuns": 8,
+    "victories": 3,
+    "totalKills": 1300,
+    "bossDefeats": 3,
+    "roosterRuns": {
+      "ace": 4,
+      "artillery": 2,
+      "storm": 2
+    },
+    "roosterWins": {
+      "ace": 1,
+      "artillery": 1,
+      "storm": 1
+    },
+    "unlockedRoosters": [
+      "ace",
+      "artillery",
+      "storm"
+    ],
+    "unlockedChallenges": [
+      "standard",
+      "rush-hour",
+      "featherweight",
+      "royal-gauntlet"
+    ],
+    "selectedChallenge": "standard",
+    "selectedCosmetics": {},
+    "discoveredEnemies": [
+      "slime",
+      "runner",
+      "brute",
+      "spitter",
+      "boss"
+    ],
+    "discoveredEvolutions": [
+      "evo-sunshot-array"
+    ],
+    "firstClearClaims": [
+      "standard"
+    ],
+    "history": [],
+    "bests": {
+      "highestKills": 450,
+      "longestRunMs": 440000,
+      "fastestVictoryMs": 440000
+    }
+  },
+  "method": "Unaccelerated production run; built-in evasive bot; no direct stats, enemies, wave times or upgrades granted. Valid capped talent progression applied by normal game logic. Concurrent contexts: frame times not hardware acceptance.",
+  "wallMs": 261938,
+  "ended": true,
+  "errors": [],
+  "wavePeaks": {
+    "7": {
+      "pressure": 32,
+      "time": 235376.90000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65406.01449829841,
+      "y": 64252.42869107917,
+      "enemies": 30,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 3,
+      "frames": 5797,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64926,
+        "y": 63999,
+        "zoom": 1
+      }
+    },
+    "8": {
+      "pressure": 8,
+      "time": 253192.90000000002,
+      "wave": 8,
+      "ended": false,
+      "selection": null,
+      "hp": 21,
+      "maxHp": 90,
+      "x": 65502.604674938746,
+      "y": 64897.14759467437,
+      "enemies": 5,
+      "enemyProjectiles": 0,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 6322,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64999,
+        "y": 64571,
+        "zoom": 1
+      }
+    }
+  },
+  "report": {
+    "seed": 4274169351,
+    "profile": "evasive",
+    "roosterId": "storm",
+    "startedAt": 3886.2,
+    "endedAt": 262159.30000000005,
+    "frames": 6601,
+    "shots": 838,
+    "hits": 1831,
+    "kills": 680,
+    "enemiesSpawned": 722,
+    "damageDealt": 21550,
+    "effectiveDamage": 17682.37352,
+    "overkillDamage": 3867.6264799999994,
+    "damageBySource": {
+      "base-egg": 8835,
+      "base-egg:chain": 8928,
+      "support-chick": 2193,
+      "pickup:bomb": 1594
+    },
+    "shotsBySource": {
+      "base-egg": 672,
+      "support-chick": 166
+    },
+    "hitsBySource": {
+      "base-egg": 587,
+      "base-egg:chain": 1080,
+      "support-chick": 129,
+      "pickup:bomb": 35
+    },
+    "effectiveDamageBySource": {
+      "base-egg": 6650.4591199999995,
+      "base-egg:chain": 8018.29876,
+      "support-chick": 1667.63268,
+      "pickup:bomb": 1345.9829599999998
+    },
+    "overkillBySource": {
+      "base-egg": 2184.54088,
+      "base-egg:chain": 909.7012400000001,
+      "support-chick": 525.3673200000001,
+      "pickup:bomb": 248.0170400000001
+    },
+    "killsBySource": {
+      "base-egg": 257,
+      "base-egg:chain": 337,
+      "support-chick": 51,
+      "pickup:bomb": 35
+    },
+    "damageTaken": 123,
+    "healingReceived": 33,
+    "damageTakenBySource": {
+      "contact:runner": 28,
+      "contact:kornkrabbler": 4,
+      "contact:slime": 5,
+      "contact:champion-charger": 81,
+      "fan-spitter-shot": 5
+    },
+    "playerDamageEvents": 14,
+    "projectileHitsTaken": 1,
+    "projectileDamageTaken": 5,
+    "projectileDeaths": 0,
+    "enemyAttacksDeferred": 7,
+    "deathCause": "contact:champion-charger",
+    "xpCollected": 1312.063820224719,
+    "xpSpawned": 1320.7101123595496,
+    "xpOrbsRemoved": 1312.063820224719,
+    "levelUps": 7,
+    "upgradeOffers": 7,
+    "upgradeChoices": 7,
+    "upgradePauseMs": 2008.2999999970198,
+    "chestsFound": 2,
+    "chestChoices": 2,
+    "chestPauseMs": 556.5,
+    "pickupsSpawned": 10,
+    "pickupsCollected": 7,
+    "pickupsSpawnedByKind": {
+      "heal": 3,
+      "magnet": 2,
+      "bomb": 2,
+      "elite-chest": 2,
+      "golden-chest": 1
+    },
+    "pickupsCollectedByKind": {
+      "heal": 2,
+      "magnet": 1,
+      "elite-chest": 2,
+      "bomb": 2
+    },
+    "maxEnemiesAlive": 45,
+    "enemyPopulationSamples": 6601,
+    "enemyPopulationTotal": 97023,
+    "visibleEnemyTotal": 24445,
+    "targetableEnemyTotal": 44631,
+    "targetableOffscreenTotal": 20186,
+    "maxVisibleEnemies": 24,
+    "maxTargetableEnemies": 31,
+    "zeroVisibleMs": 0,
+    "totalZeroVisibleMs": 60281.100000000006,
+    "maxZeroVisibleMs": 3149.899999999994,
+    "zeroVisibleStartedAt": null,
+    "zeroVisibleWindows": [
+      {
+        "startedAt": 218127.60000000003,
+        "durationMs": 450
+      },
+      {
+        "startedAt": 221394.10000000003,
+        "durationMs": 150
+      },
+      {
+        "startedAt": 224927.40000000002,
+        "durationMs": 1049.8999999999942
+      },
+      {
+        "startedAt": 227410.60000000003,
+        "durationMs": 1099.8999999999942
+      },
+      {
+        "startedAt": 242159.90000000002,
+        "durationMs": 50.10000000000582
+      },
+      {
+        "startedAt": 243343.30000000002,
+        "durationMs": 416.6000000000058
+      },
+      {
+        "startedAt": 243793.2,
+        "durationMs": 800.1000000000058
+      },
+      {
+        "startedAt": 245443.20000000004,
+        "durationMs": 966.6999999999825
+      },
+      {
+        "startedAt": 246476.50000000003,
+        "durationMs": 2633.2999999999884
+      },
+      {
+        "startedAt": 250209.80000000002,
+        "durationMs": 783.3000000000175
+      },
+      {
+        "startedAt": 251826.30000000002,
+        "durationMs": 600
+      },
+      {
+        "startedAt": 253026.30000000002,
+        "durationMs": 1550
+      }
+    ],
+    "offscreenKills": 245,
+    "firstVisibleSamples": 435,
+    "spawnToFirstVisibleTotalMs": 1541442.2000000014,
+    "combatPressureSamples": 6601,
+    "combatPressureTotal": 29948.45000000062,
+    "maxScheduleDebt": 9,
+    "adaptiveSpawnAdvances": 38,
+    "adaptiveSpawnAdvanceMs": 13247.600000000042,
+    "peakMicroFodder": 19,
+    "peakSpecialEnemies": 25,
+    "maxProjectilesAlive": 16,
+    "enemyProjectileSamples": 6601,
+    "enemyProjectileTotal": 17320,
+    "peakEnemyProjectiles": 12,
+    "playerDistanceTravelled": 47233.33571403617,
+    "peakEnemyHazards": 15,
+    "peakObjects": {
+      "enemies": 45,
+      "projectiles": 6,
+      "enemyProjectiles": 12,
+      "enemyTelegraphs": 3,
+      "enemyDangerZones": 5,
+      "xpOrbs": 29,
+      "pickups": 5,
+      "abilities": 1,
+      "fx": 9,
+      "total": 84
+    },
+    "maxIdleMs": 750,
+    "idleMs": 0,
+    "maxDangerMs": 78663.70000000004,
+    "dangerMs": 78663.70000000004,
+    "minHpRatio": 0,
+    "droppedObjects": 0,
+    "lastError": null,
+    "outcome": "gameOver",
+    "challengeId": "standard",
+    "targetAcquisitionMargin": 0.15,
+    "adaptiveSpawnsEnabled": true,
+    "averageEnemyProjectiles": 2.6238448719890926,
+    "averagePlayerSpeed": 182.88135974685773,
+    "adaptive": {
+      "enabled": true,
+      "spawnAdvances": 38,
+      "totalAdvanceMs": 13247.600000000042,
+      "maxScheduleDebt": 9
+    },
+    "visibility": {
+      "averageAlive": 14.698227541281623,
+      "averageVisible": 3.703226783820633,
+      "averageTargetable": 6.761248295712771,
+      "averageTargetableOffscreen": 3.0580215118921377,
+      "maxVisible": 24,
+      "maxTargetable": 31,
+      "totalZeroVisibleMs": 60281.100000000006,
+      "maxZeroVisibleMs": 3149.899999999994,
+      "zeroVisibleWindows": [
+        {
+          "startedAt": 218127.60000000003,
+          "durationMs": 450
+        },
+        {
+          "startedAt": 221394.10000000003,
+          "durationMs": 150
+        },
+        {
+          "startedAt": 224927.40000000002,
+          "durationMs": 1049.8999999999942
+        },
+        {
+          "startedAt": 227410.60000000003,
+          "durationMs": 1099.8999999999942
+        },
+        {
+          "startedAt": 242159.90000000002,
+          "durationMs": 50.10000000000582
+        },
+        {
+          "startedAt": 243343.30000000002,
+          "durationMs": 416.6000000000058
+        },
+        {
+          "startedAt": 243793.2,
+          "durationMs": 800.1000000000058
+        },
+        {
+          "startedAt": 245443.20000000004,
+          "durationMs": 966.6999999999825
+        },
+        {
+          "startedAt": 246476.50000000003,
+          "durationMs": 2633.2999999999884
+        },
+        {
+          "startedAt": 250209.80000000002,
+          "durationMs": 783.3000000000175
+        },
+        {
+          "startedAt": 251826.30000000002,
+          "durationMs": 600
+        },
+        {
+          "startedAt": 253026.30000000002,
+          "durationMs": 1550
+        }
+      ],
+      "offscreenKills": 245,
+      "averageSpawnToFirstVisibleMs": 3543.545287356325,
+      "averageVisiblePressure": 4.536956521739224,
+      "maxScheduleDebt": 9
+    },
+    "frameTimes": {
+      "samples": 3600,
+      "averageMs": 39.48916666666668,
+      "p95Ms": 50.10000000000582,
+      "p99Ms": 66.70000000001164,
+      "maxMs": 416.6000000000058,
+      "over16Ms": 3462,
+      "over33Ms": 1501
+    },
+    "ttkByEnemyType": {
+      "kornkrabbler": {
+        "count": 231,
+        "averageMs": 0,
+        "minMs": 0,
+        "maxMs": 0
+      },
+      "slime": {
+        "count": 188,
+        "averageMs": 1357.5749999999998,
+        "minMs": 0,
+        "maxMs": 23299
+      },
+      "brute": {
+        "count": 15,
+        "averageMs": 21840.253333333334,
+        "minMs": 4233.200000000012,
+        "maxMs": 38515.19999999998
+      },
+      "elite-runner": {
+        "count": 2,
+        "averageMs": 7299.700000000004,
+        "minMs": 6983.099999999991,
+        "maxMs": 7616.3000000000175
+      },
+      "runner": {
+        "count": 57,
+        "averageMs": 1714.5473684210533,
+        "minMs": 466.6000000000058,
+        "maxMs": 10282.799999999988
+      },
+      "spitter": {
+        "count": 5,
+        "averageMs": 3439.8600000000006,
+        "minMs": 783.3000000000029,
+        "maxMs": 6833.100000000006
+      },
+      "fan-spitter": {
+        "count": 16,
+        "averageMs": 12065.168750000004,
+        "minMs": 0,
+        "maxMs": 45865.00000000003
+      },
+      "champion-charger": {
+        "count": 1,
+        "averageMs": 21532.5,
+        "minMs": 21532.5,
+        "maxMs": 21532.5
+      },
+      "bomber": {
+        "count": 20,
+        "averageMs": 2585.7250000000013,
+        "minMs": 0,
+        "maxMs": 4733.100000000006
+      },
+      "support": {
+        "count": 6,
+        "averageMs": 1830.5,
+        "minMs": 0,
+        "maxMs": 5033.200000000012
+      },
+      "summoner": {
+        "count": 3,
+        "averageMs": 3099.9333333333393,
+        "minMs": 2116.600000000006,
+        "maxMs": 4449.899999999994
+      }
+    },
+    "progression": {
+      "choices": [
+        "support-chick",
+        "primary-storm-rank",
+        "primary-storm-rank",
+        "storm-tailwind-training",
+        "primary-storm-rank",
+        "shell-shock",
+        "storm-tailwind-training"
+      ],
+      "choiceCounts": {
+        "support-chick": 1,
+        "primary-storm-rank": 3,
+        "storm-tailwind-training": 2,
+        "shell-shock": 1
+      },
+      "offerCounts": {
+        "storm-tailwind-training": 2,
+        "faster-eggs": 1,
+        "laser-comb": 1,
+        "critical-yolk": 1,
+        "max-hp": 1,
+        "primary-storm-rank": 1,
+        "shell-shock": 1,
+        "bigger-eggs": 1,
+        "swift-shells": 2,
+        "support-chick": 1
+      },
+      "firstUpgradeAtMs": 25682.3,
+      "firstSpectacleAtMs": 25682.3,
+      "intervalsMs": [
+        20765.900000000005,
+        32432.000000000007,
+        29932.199999999997,
+        45231.39999999998,
+        48314.70000000001,
+        38315.20000000001
+      ],
+      "averageIntervalMs": 35831.9,
+      "medianIntervalMs": 38315.20000000001,
+      "p90IntervalMs": 48314.70000000001,
+      "minIntervalMs": 20765.900000000005,
+      "maxIntervalMs": 48314.70000000001,
+      "totalPauseMs": 2564.7999999970198,
+      "pauseRatio": 0.009930573489833124
+    },
+    "combatSources": [
+      {
+        "source": "base-egg",
+        "shots": 672,
+        "hits": 1667,
+        "hitRate": 1,
+        "damage": 17763,
+        "effectiveDamage": 14668.75788,
+        "damageShare": 0.8295695067977502,
+        "overkill": 3094.24212,
+        "overkillRatio": 0.1741959196081743,
+        "kills": 594,
+        "firstAt": 89149.5,
+        "lastAt": 262092.50000000003,
+        "usageMs": 172943.00000000003
+      },
+      {
+        "source": "support-chick",
+        "shots": 166,
+        "hits": 129,
+        "hitRate": 0.7771084337349398,
+        "damage": 2193,
+        "effectiveDamage": 1667.63268,
+        "damageShare": 0.09431045431280992,
+        "overkill": 525.3673200000001,
+        "overkillRatio": 0.23956558139534886,
+        "kills": 51,
+        "firstAt": 88882.8,
+        "lastAt": 260992.6,
+        "usageMs": 172109.8
+      },
+      {
+        "source": "pickup",
+        "shots": 0,
+        "hits": 35,
+        "hitRate": null,
+        "damage": 1594,
+        "effectiveDamage": 1345.9829599999998,
+        "damageShare": 0.07612003888943976,
+        "overkill": 248.0170400000001,
+        "overkillRatio": 0.15559412797992478,
+        "kills": 35,
+        "firstAt": 117148.3,
+        "lastAt": 224277.40000000002,
+        "usageMs": 107129.10000000002
+      }
+    ],
+    "elapsedMs": 258273.10000000003,
+    "waves": [
+      {
+        "wave": 1,
+        "startedAt": 3802.8,
+        "endedAt": 26785.3,
+        "durationMs": 22982.5,
+        "enemiesSpawned": 24,
+        "kills": 24,
+        "shots": 36,
+        "hits": 39,
+        "damageDealt": 333,
+        "damageTaken": 0,
+        "xpCollected": 43.999999999999986,
+        "xpSpawned": 43.999999999999986,
+        "xpOrbsRemoved": 43.999999999999986,
+        "levelUps": 0,
+        "upgradeOffers": 0,
+        "upgradeChoices": 0,
+        "maxEnemiesAlive": 3,
+        "enemyPopulationSamples": 673,
+        "enemyPopulationTotal": 871,
+        "visibleEnemyTotal": 365,
+        "targetableEnemyTotal": 871,
+        "targetableOffscreenTotal": 506,
+        "maxVisibleEnemies": 2,
+        "maxTargetableEnemies": 3,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 10949.100000000002,
+        "maxZeroVisibleMs": 3116.5,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 8769.4,
+            "durationMs": 399.89999999999964
+          },
+          {
+            "startedAt": 9319.3,
+            "durationMs": 250
+          },
+          {
+            "startedAt": 9886,
+            "durationMs": 416.60000000000036
+          },
+          {
+            "startedAt": 10552.6,
+            "durationMs": 433.2999999999993
+          },
+          {
+            "startedAt": 11852.6,
+            "durationMs": 3116.3999999999996
+          },
+          {
+            "startedAt": 15669,
+            "durationMs": 650.1000000000004
+          },
+          {
+            "startedAt": 17102.3,
+            "durationMs": 333.40000000000146
+          },
+          {
+            "startedAt": 17819,
+            "durationMs": 1083.2999999999993
+          },
+          {
+            "startedAt": 19385.6,
+            "durationMs": 316.6000000000022
+          },
+          {
+            "startedAt": 20302.2,
+            "durationMs": 533.2999999999993
+          },
+          {
+            "startedAt": 21618.8,
+            "durationMs": 1149.9000000000015
+          },
+          {
+            "startedAt": 24635.3,
+            "durationMs": 33.400000000001455
+          }
+        ],
+        "offscreenKills": 7,
+        "firstVisibleSamples": 17,
+        "spawnToFirstVisibleTotalMs": 9916.000000000004,
+        "combatPressureSamples": 673,
+        "combatPressureTotal": 347,
+        "maxScheduleDebt": 4,
+        "adaptiveSpawnAdvances": 12,
+        "adaptiveSpawnAdvanceMs": 3577.5999999999976,
+        "peakMicroFodder": 1,
+        "peakSpecialEnemies": 0,
+        "enemyProjectileSamples": 673,
+        "enemyProjectileTotal": 0,
+        "peakEnemyProjectiles": 0,
+        "peakEnemyHazards": 0,
+        "peakObjects": {
+          "enemies": 3,
+          "projectiles": 2,
+          "enemyProjectiles": 0,
+          "enemyTelegraphs": 0,
+          "enemyDangerZones": 0,
+          "xpOrbs": 3,
+          "pickups": 1,
+          "abilities": 0,
+          "fx": 1,
+          "total": 6
+        },
+        "minHpRatio": 1,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 0,
+        "visibility": {
+          "averageAlive": 1.2942050520059436,
+          "averageVisible": 0.5423476968796433,
+          "averageTargetable": 1.2942050520059436,
+          "averageTargetableOffscreen": 0.7518573551263001,
+          "maxVisible": 2,
+          "maxTargetable": 3,
+          "totalZeroVisibleMs": 10949.100000000002,
+          "maxZeroVisibleMs": 3116.5,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 8769.4,
+              "durationMs": 399.89999999999964
+            },
+            {
+              "startedAt": 9319.3,
+              "durationMs": 250
+            },
+            {
+              "startedAt": 9886,
+              "durationMs": 416.60000000000036
+            },
+            {
+              "startedAt": 10552.6,
+              "durationMs": 433.2999999999993
+            },
+            {
+              "startedAt": 11852.6,
+              "durationMs": 3116.3999999999996
+            },
+            {
+              "startedAt": 15669,
+              "durationMs": 650.1000000000004
+            },
+            {
+              "startedAt": 17102.3,
+              "durationMs": 333.40000000000146
+            },
+            {
+              "startedAt": 17819,
+              "durationMs": 1083.2999999999993
+            },
+            {
+              "startedAt": 19385.6,
+              "durationMs": 316.6000000000022
+            },
+            {
+              "startedAt": 20302.2,
+              "durationMs": 533.2999999999993
+            },
+            {
+              "startedAt": 21618.8,
+              "durationMs": 1149.9000000000015
+            },
+            {
+              "startedAt": 24635.3,
+              "durationMs": 33.400000000001455
+            }
+          ],
+          "offscreenKills": 7,
+          "averageSpawnToFirstVisibleMs": 583.294117647059,
+          "averageVisiblePressure": 0.5156017830609212,
+          "maxScheduleDebt": 4
+        }
+      },
+      {
+        "wave": 2,
+        "startedAt": 26785.3,
+        "endedAt": 58750.700000000004,
+        "durationMs": 31965.400000000005,
+        "enemiesSpawned": 62,
+        "kills": 62,
+        "shots": 70,
+        "hits": 120,
+        "damageDealt": 1068,
+        "damageTaken": 9,
+        "xpCollected": 160.00000000000003,
+        "xpSpawned": 160.0000000000001,
+        "xpOrbsRemoved": 160.00000000000003,
+        "levelUps": 2,
+        "upgradeOffers": 2,
+        "upgradeChoices": 2,
+        "maxEnemiesAlive": 23,
+        "enemyPopulationSamples": 794,
+        "enemyPopulationTotal": 9673,
+        "visibleEnemyTotal": 4795,
+        "targetableEnemyTotal": 6815,
+        "targetableOffscreenTotal": 2020,
+        "maxVisibleEnemies": 16,
+        "maxTargetableEnemies": 20,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 2316.399999999998,
+        "maxZeroVisibleMs": 800,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 27551.9,
+            "durationMs": 799.8999999999978
+          },
+          {
+            "startedAt": 28785.2,
+            "durationMs": 533.2999999999993
+          },
+          {
+            "startedAt": 31551.800000000003,
+            "durationMs": 33.29999999999927
+          },
+          {
+            "startedAt": 39801.4,
+            "durationMs": 766.6999999999971
+          },
+          {
+            "startedAt": 58567.3,
+            "durationMs": 183.40000000000146
+          }
+        ],
+        "offscreenKills": 2,
+        "firstVisibleSamples": 60,
+        "spawnToFirstVisibleTotalMs": 165594.69999999995,
+        "combatPressureSamples": 794,
+        "combatPressureTotal": 5853.600000000006,
+        "maxScheduleDebt": 6,
+        "adaptiveSpawnAdvances": 2,
+        "adaptiveSpawnAdvanceMs": 757.0999999999985,
+        "peakMicroFodder": 10,
+        "peakSpecialEnemies": 6,
+        "enemyProjectileSamples": 794,
+        "enemyProjectileTotal": 0,
+        "peakEnemyProjectiles": 0,
+        "peakEnemyHazards": 0,
+        "peakObjects": {
+          "enemies": 23,
+          "projectiles": 2,
+          "enemyProjectiles": 0,
+          "enemyTelegraphs": 0,
+          "enemyDangerZones": 0,
+          "xpOrbs": 14,
+          "pickups": 2,
+          "abilities": 1,
+          "fx": 2,
+          "total": 37
+        },
+        "minHpRatio": 0.9,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 0,
+        "visibility": {
+          "averageAlive": 12.182619647355164,
+          "averageVisible": 6.03904282115869,
+          "averageTargetable": 8.583123425692696,
+          "averageTargetableOffscreen": 2.544080604534005,
+          "maxVisible": 16,
+          "maxTargetable": 20,
+          "totalZeroVisibleMs": 2316.399999999998,
+          "maxZeroVisibleMs": 800,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 27551.9,
+              "durationMs": 799.8999999999978
+            },
+            {
+              "startedAt": 28785.2,
+              "durationMs": 533.2999999999993
+            },
+            {
+              "startedAt": 31551.800000000003,
+              "durationMs": 33.29999999999927
+            },
+            {
+              "startedAt": 39801.4,
+              "durationMs": 766.6999999999971
+            },
+            {
+              "startedAt": 58567.3,
+              "durationMs": 183.40000000000146
+            }
+          ],
+          "offscreenKills": 2,
+          "averageSpawnToFirstVisibleMs": 2759.911666666666,
+          "averageVisiblePressure": 7.3722921914357755,
+          "maxScheduleDebt": 6
+        }
+      },
+      {
+        "wave": 3,
+        "startedAt": 58750.700000000004,
+        "endedAt": 100915.70000000001,
+        "durationMs": 42165.00000000001,
+        "enemiesSpawned": 78,
+        "kills": 78,
+        "shots": 123,
+        "hits": 226,
+        "damageDealt": 2208,
+        "damageTaken": 0,
+        "xpCollected": 138.00000000000003,
+        "xpSpawned": 138.00000000000003,
+        "xpOrbsRemoved": 138.00000000000003,
+        "levelUps": 1,
+        "upgradeOffers": 1,
+        "upgradeChoices": 1,
+        "maxEnemiesAlive": 32,
+        "enemyPopulationSamples": 1082,
+        "enemyPopulationTotal": 18659,
+        "visibleEnemyTotal": 4749,
+        "targetableEnemyTotal": 7502,
+        "targetableOffscreenTotal": 2753,
+        "maxVisibleEnemies": 20,
+        "maxTargetableEnemies": 21,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 4200.299999999988,
+        "maxZeroVisibleMs": 1066.699999999997,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 59384,
+            "durationMs": 700
+          },
+          {
+            "startedAt": 61983.9,
+            "durationMs": 933.3000000000029
+          },
+          {
+            "startedAt": 63233.9,
+            "durationMs": 1066.5999999999985
+          },
+          {
+            "startedAt": 64500.5,
+            "durationMs": 533.2999999999956
+          },
+          {
+            "startedAt": 82483.1,
+            "durationMs": 233.3000000000029
+          },
+          {
+            "startedAt": 90982.8,
+            "durationMs": 750
+          }
+        ],
+        "offscreenKills": 13,
+        "firstVisibleSamples": 65,
+        "spawnToFirstVisibleTotalMs": 365518.09999999986,
+        "combatPressureSamples": 1082,
+        "combatPressureTotal": 4956.499999999976,
+        "maxScheduleDebt": 5,
+        "adaptiveSpawnAdvances": 3,
+        "adaptiveSpawnAdvanceMs": 883.5000000000073,
+        "peakMicroFodder": 12,
+        "peakSpecialEnemies": 13,
+        "enemyProjectileSamples": 1082,
+        "enemyProjectileTotal": 0,
+        "peakEnemyProjectiles": 0,
+        "peakEnemyHazards": 2,
+        "peakObjects": {
+          "enemies": 32,
+          "projectiles": 4,
+          "enemyProjectiles": 0,
+          "enemyTelegraphs": 1,
+          "enemyDangerZones": 1,
+          "xpOrbs": 12,
+          "pickups": 3,
+          "abilities": 1,
+          "fx": 4,
+          "total": 45
+        },
+        "minHpRatio": 1,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 0,
+        "visibility": {
+          "averageAlive": 17.244916820702404,
+          "averageVisible": 4.38909426987061,
+          "averageTargetable": 6.933456561922366,
+          "averageTargetableOffscreen": 2.544362292051756,
+          "maxVisible": 20,
+          "maxTargetable": 21,
+          "totalZeroVisibleMs": 4200.299999999988,
+          "maxZeroVisibleMs": 1066.699999999997,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 59384,
+              "durationMs": 700
+            },
+            {
+              "startedAt": 61983.9,
+              "durationMs": 933.3000000000029
+            },
+            {
+              "startedAt": 63233.9,
+              "durationMs": 1066.5999999999985
+            },
+            {
+              "startedAt": 64500.5,
+              "durationMs": 533.2999999999956
+            },
+            {
+              "startedAt": 82483.1,
+              "durationMs": 233.3000000000029
+            },
+            {
+              "startedAt": 90982.8,
+              "durationMs": 750
+            }
+          ],
+          "offscreenKills": 13,
+          "averageSpawnToFirstVisibleMs": 5623.355384615383,
+          "averageVisiblePressure": 4.580868761552658,
+          "maxScheduleDebt": 5
+        }
+      },
+      {
+        "wave": 4,
+        "startedAt": 100915.70000000001,
+        "endedAt": 132514.4,
+        "durationMs": 31598.699999999983,
+        "enemiesSpawned": 92,
+        "kills": 92,
+        "shots": 107,
+        "hits": 191,
+        "damageDealt": 1751,
+        "damageTaken": 0,
+        "xpCollected": 165.00000000000006,
+        "xpSpawned": 164.99999999999997,
+        "xpOrbsRemoved": 165.00000000000006,
+        "levelUps": 1,
+        "upgradeOffers": 1,
+        "upgradeChoices": 1,
+        "maxEnemiesAlive": 20,
+        "enemyPopulationSamples": 769,
+        "enemyPopulationTotal": 6496,
+        "visibleEnemyTotal": 1531,
+        "targetableEnemyTotal": 3072,
+        "targetableOffscreenTotal": 1541,
+        "maxVisibleEnemies": 12,
+        "maxTargetableEnemies": 16,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 15816.299999999988,
+        "maxZeroVisibleMs": 3149.899999999994,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 105715.50000000001,
+            "durationMs": 1016.5999999999913
+          },
+          {
+            "startedAt": 117148.3,
+            "durationMs": 800
+          },
+          {
+            "startedAt": 118031.6,
+            "durationMs": 1333.300000000003
+          },
+          {
+            "startedAt": 120764.90000000001,
+            "durationMs": 2799.899999999994
+          },
+          {
+            "startedAt": 123948.1,
+            "durationMs": 583.3000000000029
+          },
+          {
+            "startedAt": 124564.70000000001,
+            "durationMs": 150
+          },
+          {
+            "startedAt": 125098,
+            "durationMs": 633.4000000000087
+          },
+          {
+            "startedAt": 125781.40000000001,
+            "durationMs": 1316.5999999999913
+          },
+          {
+            "startedAt": 127514.6,
+            "durationMs": 3133.2000000000116
+          },
+          {
+            "startedAt": 130831.1,
+            "durationMs": 133.39999999999418
+          },
+          {
+            "startedAt": 131031.20000000001,
+            "durationMs": 199.89999999999418
+          },
+          {
+            "startedAt": 131597.80000000002,
+            "durationMs": 916.5999999999767
+          }
+        ],
+        "offscreenKills": 41,
+        "firstVisibleSamples": 51,
+        "spawnToFirstVisibleTotalMs": 107345.79999999999,
+        "combatPressureSamples": 769,
+        "combatPressureTotal": 1649.8000000000004,
+        "maxScheduleDebt": 6,
+        "adaptiveSpawnAdvances": 8,
+        "adaptiveSpawnAdvanceMs": 2168.4999999999854,
+        "peakMicroFodder": 6,
+        "peakSpecialEnemies": 8,
+        "enemyProjectileSamples": 769,
+        "enemyProjectileTotal": 784,
+        "peakEnemyProjectiles": 5,
+        "peakEnemyHazards": 6,
+        "peakObjects": {
+          "enemies": 20,
+          "projectiles": 6,
+          "enemyProjectiles": 5,
+          "enemyTelegraphs": 2,
+          "enemyDangerZones": 0,
+          "xpOrbs": 11,
+          "pickups": 3,
+          "abilities": 1,
+          "fx": 5,
+          "total": 36
+        },
+        "minHpRatio": 1,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 1.0195058517555267,
+        "visibility": {
+          "averageAlive": 8.447334200260078,
+          "averageVisible": 1.9908972691807543,
+          "averageTargetable": 3.9947984395318596,
+          "averageTargetableOffscreen": 2.003901170351105,
+          "maxVisible": 12,
+          "maxTargetable": 16,
+          "totalZeroVisibleMs": 15816.299999999988,
+          "maxZeroVisibleMs": 3149.899999999994,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 105715.50000000001,
+              "durationMs": 1016.5999999999913
+            },
+            {
+              "startedAt": 117148.3,
+              "durationMs": 800
+            },
+            {
+              "startedAt": 118031.6,
+              "durationMs": 1333.300000000003
+            },
+            {
+              "startedAt": 120764.90000000001,
+              "durationMs": 2799.899999999994
+            },
+            {
+              "startedAt": 123948.1,
+              "durationMs": 583.3000000000029
+            },
+            {
+              "startedAt": 124564.70000000001,
+              "durationMs": 150
+            },
+            {
+              "startedAt": 125098,
+              "durationMs": 633.4000000000087
+            },
+            {
+              "startedAt": 125781.40000000001,
+              "durationMs": 1316.5999999999913
+            },
+            {
+              "startedAt": 127514.6,
+              "durationMs": 3133.2000000000116
+            },
+            {
+              "startedAt": 130831.1,
+              "durationMs": 133.39999999999418
+            },
+            {
+              "startedAt": 131031.20000000001,
+              "durationMs": 199.89999999999418
+            },
+            {
+              "startedAt": 131597.80000000002,
+              "durationMs": 916.5999999999767
+            }
+          ],
+          "offscreenKills": 41,
+          "averageSpawnToFirstVisibleMs": 2104.819607843137,
+          "averageVisiblePressure": 2.145383615084526,
+          "maxScheduleDebt": 6
+        }
+      },
+      {
+        "wave": 5,
+        "startedAt": 132514.4,
+        "endedAt": 165163,
+        "durationMs": 32648.600000000006,
+        "enemiesSpawned": 112,
+        "kills": 112,
+        "shots": 128,
+        "hits": 287,
+        "damageDealt": 2605,
+        "damageTaken": 12,
+        "xpCollected": 195.00000000000006,
+        "xpSpawned": 195.00000000000003,
+        "xpOrbsRemoved": 195.00000000000006,
+        "levelUps": 1,
+        "upgradeOffers": 1,
+        "upgradeChoices": 1,
+        "maxEnemiesAlive": 29,
+        "enemyPopulationSamples": 786,
+        "enemyPopulationTotal": 11511,
+        "visibleEnemyTotal": 2454,
+        "targetableEnemyTotal": 5392,
+        "targetableOffscreenTotal": 2938,
+        "maxVisibleEnemies": 13,
+        "maxTargetableEnemies": 19,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 7899.600000000035,
+        "maxZeroVisibleMs": 3133.2000000000116,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 133181.1,
+            "durationMs": 2383.2000000000116
+          },
+          {
+            "startedAt": 146830.5,
+            "durationMs": 100
+          },
+          {
+            "startedAt": 147213.80000000002,
+            "durationMs": 83.29999999998836
+          },
+          {
+            "startedAt": 147830.5,
+            "durationMs": 516.6000000000058
+          },
+          {
+            "startedAt": 149580.4,
+            "durationMs": 266.6000000000058
+          },
+          {
+            "startedAt": 150147.1,
+            "durationMs": 166.60000000000582
+          },
+          {
+            "startedAt": 151297,
+            "durationMs": 50
+          },
+          {
+            "startedAt": 159179.9,
+            "durationMs": 3116.600000000006
+          },
+          {
+            "startedAt": 163196.5,
+            "durationMs": 183.20000000001164
+          },
+          {
+            "startedAt": 164129.7,
+            "durationMs": 1033.2999999999884
+          }
+        ],
+        "offscreenKills": 53,
+        "firstVisibleSamples": 59,
+        "spawnToFirstVisibleTotalMs": 225708.69999999995,
+        "combatPressureSamples": 786,
+        "combatPressureTotal": 2974.8499999999844,
+        "maxScheduleDebt": 7,
+        "adaptiveSpawnAdvances": 2,
+        "adaptiveSpawnAdvanceMs": 1733.2000000000116,
+        "peakMicroFodder": 8,
+        "peakSpecialEnemies": 13,
+        "enemyProjectileSamples": 786,
+        "enemyProjectileTotal": 4248,
+        "peakEnemyProjectiles": 9,
+        "peakEnemyHazards": 10,
+        "peakObjects": {
+          "enemies": 29,
+          "projectiles": 4,
+          "enemyProjectiles": 9,
+          "enemyTelegraphs": 1,
+          "enemyDangerZones": 0,
+          "xpOrbs": 22,
+          "pickups": 2,
+          "abilities": 1,
+          "fx": 6,
+          "total": 52
+        },
+        "minHpRatio": 0.8666666666666667,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 5.404580152671755,
+        "visibility": {
+          "averageAlive": 14.645038167938932,
+          "averageVisible": 3.122137404580153,
+          "averageTargetable": 6.860050890585241,
+          "averageTargetableOffscreen": 3.737913486005089,
+          "maxVisible": 13,
+          "maxTargetable": 19,
+          "totalZeroVisibleMs": 7899.600000000035,
+          "maxZeroVisibleMs": 3133.2000000000116,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 133181.1,
+              "durationMs": 2383.2000000000116
+            },
+            {
+              "startedAt": 146830.5,
+              "durationMs": 100
+            },
+            {
+              "startedAt": 147213.80000000002,
+              "durationMs": 83.29999999998836
+            },
+            {
+              "startedAt": 147830.5,
+              "durationMs": 516.6000000000058
+            },
+            {
+              "startedAt": 149580.4,
+              "durationMs": 266.6000000000058
+            },
+            {
+              "startedAt": 150147.1,
+              "durationMs": 166.60000000000582
+            },
+            {
+              "startedAt": 151297,
+              "durationMs": 50
+            },
+            {
+              "startedAt": 159179.9,
+              "durationMs": 3116.600000000006
+            },
+            {
+              "startedAt": 163196.5,
+              "durationMs": 183.20000000001164
+            },
+            {
+              "startedAt": 164129.7,
+              "durationMs": 1033.2999999999884
+            }
+          ],
+          "offscreenKills": 53,
+          "averageSpawnToFirstVisibleMs": 3825.571186440677,
+          "averageVisiblePressure": 3.784796437659013,
+          "maxScheduleDebt": 7
+        }
+      },
+      {
+        "wave": 6,
+        "startedAt": 165163,
+        "endedAt": 217311.00000000003,
+        "durationMs": 52148.00000000003,
+        "enemiesSpawned": 132,
+        "kills": 132,
+        "shots": 206,
+        "hits": 492,
+        "damageDealt": 4533,
+        "damageTaken": 81,
+        "xpCollected": 228.0000000000001,
+        "xpSpawned": 228,
+        "xpOrbsRemoved": 228.0000000000001,
+        "levelUps": 1,
+        "upgradeOffers": 1,
+        "upgradeChoices": 1,
+        "maxEnemiesAlive": 45,
+        "enemyPopulationSamples": 1187,
+        "enemyPopulationTotal": 27436,
+        "visibleEnemyTotal": 6797,
+        "targetableEnemyTotal": 10406,
+        "targetableOffscreenTotal": 3609,
+        "maxVisibleEnemies": 23,
+        "maxTargetableEnemies": 31,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 8499.799999999988,
+        "maxZeroVisibleMs": 2566.600000000006,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 165796.3,
+            "durationMs": 766.6000000000058
+          },
+          {
+            "startedAt": 189062.1,
+            "durationMs": 533.1999999999825
+          },
+          {
+            "startedAt": 190062,
+            "durationMs": 1116.7000000000116
+          },
+          {
+            "startedAt": 193611.8,
+            "durationMs": 1200.1000000000058
+          },
+          {
+            "startedAt": 194895.1,
+            "durationMs": 2583.1999999999825
+          },
+          {
+            "startedAt": 197511.8,
+            "durationMs": 366.5
+          },
+          {
+            "startedAt": 207894.6,
+            "durationMs": 283.3999999999942
+          },
+          {
+            "startedAt": 209761.2,
+            "durationMs": 1716.6000000000058
+          }
+        ],
+        "offscreenKills": 45,
+        "firstVisibleSamples": 87,
+        "spawnToFirstVisibleTotalMs": 380702.60000000003,
+        "combatPressureSamples": 1187,
+        "combatPressureTotal": 9206.799999999901,
+        "maxScheduleDebt": 8,
+        "adaptiveSpawnAdvances": 1,
+        "adaptiveSpawnAdvanceMs": 866.7000000000116,
+        "peakMicroFodder": 13,
+        "peakSpecialEnemies": 25,
+        "enemyProjectileSamples": 1187,
+        "enemyProjectileTotal": 10000,
+        "peakEnemyProjectiles": 12,
+        "peakEnemyHazards": 14,
+        "peakObjects": {
+          "enemies": 45,
+          "projectiles": 6,
+          "enemyProjectiles": 12,
+          "enemyTelegraphs": 2,
+          "enemyDangerZones": 1,
+          "xpOrbs": 26,
+          "pickups": 5,
+          "abilities": 1,
+          "fx": 6,
+          "total": 84
+        },
+        "minHpRatio": 0.1,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 8.424599831508003,
+        "visibility": {
+          "averageAlive": 23.113732097725357,
+          "averageVisible": 5.7262005054759895,
+          "averageTargetable": 8.766638584667229,
+          "averageTargetableOffscreen": 3.0404380791912384,
+          "maxVisible": 23,
+          "maxTargetable": 31,
+          "totalZeroVisibleMs": 8499.799999999988,
+          "maxZeroVisibleMs": 2566.600000000006,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 165796.3,
+              "durationMs": 766.6000000000058
+            },
+            {
+              "startedAt": 189062.1,
+              "durationMs": 533.1999999999825
+            },
+            {
+              "startedAt": 190062,
+              "durationMs": 1116.7000000000116
+            },
+            {
+              "startedAt": 193611.8,
+              "durationMs": 1200.1000000000058
+            },
+            {
+              "startedAt": 194895.1,
+              "durationMs": 2583.1999999999825
+            },
+            {
+              "startedAt": 197511.8,
+              "durationMs": 366.5
+            },
+            {
+              "startedAt": 207894.6,
+              "durationMs": 283.3999999999942
+            },
+            {
+              "startedAt": 209761.2,
+              "durationMs": 1716.6000000000058
+            }
+          ],
+          "offscreenKills": 45,
+          "averageSpawnToFirstVisibleMs": 4375.891954022989,
+          "averageVisiblePressure": 7.756360572872705,
+          "maxScheduleDebt": 8
+        }
+      },
+      {
+        "wave": 7,
+        "startedAt": 217311.00000000003,
+        "endedAt": 252426.30000000002,
+        "durationMs": 35115.29999999999,
+        "enemiesSpawned": 162,
+        "kills": 162,
+        "shots": 132,
+        "hits": 374,
+        "damageDealt": 4182.19552,
+        "damageTaken": 0,
+        "xpCollected": 357.9999999999999,
+        "xpSpawned": 357.99999999999994,
+        "xpOrbsRemoved": 357.9999999999999,
+        "levelUps": 1,
+        "upgradeOffers": 1,
+        "upgradeChoices": 1,
+        "maxEnemiesAlive": 33,
+        "enemyPopulationSamples": 1003,
+        "enemyPopulationTotal": 16559,
+        "visibleEnemyTotal": 2375,
+        "targetableEnemyTotal": 8271,
+        "targetableOffscreenTotal": 5896,
+        "maxVisibleEnemies": 14,
+        "maxTargetableEnemies": 23,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 9066.300000000017,
+        "maxZeroVisibleMs": 2649.899999999994,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 218127.60000000003,
+            "durationMs": 450
+          },
+          {
+            "startedAt": 221394.10000000003,
+            "durationMs": 150
+          },
+          {
+            "startedAt": 224927.40000000002,
+            "durationMs": 1049.8999999999942
+          },
+          {
+            "startedAt": 227410.60000000003,
+            "durationMs": 1099.8999999999942
+          },
+          {
+            "startedAt": 242159.90000000002,
+            "durationMs": 50.10000000000582
+          },
+          {
+            "startedAt": 243343.30000000002,
+            "durationMs": 416.6000000000058
+          },
+          {
+            "startedAt": 243793.2,
+            "durationMs": 800.1000000000058
+          },
+          {
+            "startedAt": 245443.20000000004,
+            "durationMs": 966.6999999999825
+          },
+          {
+            "startedAt": 246476.50000000003,
+            "durationMs": 2633.2999999999884
+          },
+          {
+            "startedAt": 250209.80000000002,
+            "durationMs": 783.3000000000175
+          },
+          {
+            "startedAt": 251826.30000000002,
+            "durationMs": 600
+          }
+        ],
+        "offscreenKills": 76,
+        "firstVisibleSamples": 86,
+        "spawnToFirstVisibleTotalMs": 266073.60000000015,
+        "combatPressureSamples": 1003,
+        "combatPressureTotal": 3195.799999999992,
+        "maxScheduleDebt": 9,
+        "adaptiveSpawnAdvances": 9,
+        "adaptiveSpawnAdvanceMs": 2361.000000000029,
+        "peakMicroFodder": 19,
+        "peakSpecialEnemies": 16,
+        "enemyProjectileSamples": 1003,
+        "enemyProjectileTotal": 1290,
+        "peakEnemyProjectiles": 9,
+        "peakEnemyHazards": 15,
+        "peakObjects": {
+          "enemies": 33,
+          "projectiles": 6,
+          "enemyProjectiles": 9,
+          "enemyTelegraphs": 2,
+          "enemyDangerZones": 5,
+          "xpOrbs": 29,
+          "pickups": 4,
+          "abilities": 1,
+          "fx": 6,
+          "total": 63
+        },
+        "minHpRatio": 0.16666666666666666,
+        "outcome": "completed",
+        "averageEnemyProjectiles": 1.2861415752741774,
+        "visibility": {
+          "averageAlive": 16.509471585244267,
+          "averageVisible": 2.3678963110667994,
+          "averageTargetable": 8.246261216350947,
+          "averageTargetableOffscreen": 5.878364905284148,
+          "maxVisible": 14,
+          "maxTargetable": 23,
+          "totalZeroVisibleMs": 9066.300000000017,
+          "maxZeroVisibleMs": 2649.899999999994,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 218127.60000000003,
+              "durationMs": 450
+            },
+            {
+              "startedAt": 221394.10000000003,
+              "durationMs": 150
+            },
+            {
+              "startedAt": 224927.40000000002,
+              "durationMs": 1049.8999999999942
+            },
+            {
+              "startedAt": 227410.60000000003,
+              "durationMs": 1099.8999999999942
+            },
+            {
+              "startedAt": 242159.90000000002,
+              "durationMs": 50.10000000000582
+            },
+            {
+              "startedAt": 243343.30000000002,
+              "durationMs": 416.6000000000058
+            },
+            {
+              "startedAt": 243793.2,
+              "durationMs": 800.1000000000058
+            },
+            {
+              "startedAt": 245443.20000000004,
+              "durationMs": 966.6999999999825
+            },
+            {
+              "startedAt": 246476.50000000003,
+              "durationMs": 2633.2999999999884
+            },
+            {
+              "startedAt": 250209.80000000002,
+              "durationMs": 783.3000000000175
+            },
+            {
+              "startedAt": 251826.30000000002,
+              "durationMs": 600
+            }
+          ],
+          "offscreenKills": 76,
+          "averageSpawnToFirstVisibleMs": 3093.8790697674435,
+          "averageVisiblePressure": 3.1862412761714776,
+          "maxScheduleDebt": 9
+        }
+      },
+      {
+        "wave": 8,
+        "startedAt": 252426.30000000002,
+        "endedAt": null,
+        "durationMs": 10449.600000000064,
+        "enemiesSpawned": 60,
+        "kills": 18,
+        "shots": 36,
+        "hits": 102,
+        "damageDealt": 1002.1780000000001,
+        "damageTaken": 21,
+        "xpCollected": 24.063820224719105,
+        "xpSpawned": 32.71011235955057,
+        "xpOrbsRemoved": 24.063820224719105,
+        "levelUps": 0,
+        "upgradeOffers": 0,
+        "upgradeChoices": 0,
+        "maxEnemiesAlive": 42,
+        "enemyPopulationSamples": 307,
+        "enemyPopulationTotal": 5818,
+        "visibleEnemyTotal": 1379,
+        "targetableEnemyTotal": 2302,
+        "targetableOffscreenTotal": 923,
+        "maxVisibleEnemies": 24,
+        "maxTargetableEnemies": 28,
+        "zeroVisibleMs": 0,
+        "totalZeroVisibleMs": 1533.2999999999884,
+        "maxZeroVisibleMs": 1533.2999999999884,
+        "zeroVisibleStartedAt": null,
+        "zeroVisibleWindows": [
+          {
+            "startedAt": 253026.30000000002,
+            "durationMs": 1550
+          }
+        ],
+        "offscreenKills": 8,
+        "firstVisibleSamples": 10,
+        "spawnToFirstVisibleTotalMs": 20582.699999999983,
+        "combatPressureSamples": 307,
+        "combatPressureTotal": 1764.1000000000017,
+        "maxScheduleDebt": 8,
+        "adaptiveSpawnAdvances": 1,
+        "adaptiveSpawnAdvanceMs": 900,
+        "peakMicroFodder": 5,
+        "peakSpecialEnemies": 21,
+        "enemyProjectileSamples": 307,
+        "enemyProjectileTotal": 998,
+        "peakEnemyProjectiles": 8,
+        "peakEnemyHazards": 11,
+        "peakObjects": {
+          "enemies": 42,
+          "projectiles": 4,
+          "enemyProjectiles": 8,
+          "enemyTelegraphs": 3,
+          "enemyDangerZones": 1,
+          "xpOrbs": 6,
+          "pickups": 3,
+          "abilities": 1,
+          "fx": 9,
+          "total": 65
+        },
+        "minHpRatio": 0,
+        "outcome": "running",
+        "averageEnemyProjectiles": 3.250814332247557,
+        "visibility": {
+          "averageAlive": 18.95114006514658,
+          "averageVisible": 4.49185667752443,
+          "averageTargetable": 7.498371335504886,
+          "averageTargetableOffscreen": 3.006514657980456,
+          "maxVisible": 24,
+          "maxTargetable": 28,
+          "totalZeroVisibleMs": 1533.2999999999884,
+          "maxZeroVisibleMs": 1533.2999999999884,
+          "zeroVisibleWindows": [
+            {
+              "startedAt": 253026.30000000002,
+              "durationMs": 1550
+            }
+          ],
+          "offscreenKills": 8,
+          "averageSpawnToFirstVisibleMs": 2058.269999999998,
+          "averageVisiblePressure": 5.746254071661244,
+          "maxScheduleDebt": 8
+        }
+      }
+    ],
+    "segments": [
+      {
+        "wave": 1,
+        "segment": "build",
+        "enemiesSpawned": 6,
+        "kills": 6,
+        "pulses": 6,
+        "effectiveSpawnCadenceMs": 976.64,
+        "killsPerSecond": 1.104341904253557,
+        "adaptiveAdvances": 3,
+        "adaptiveAdvanceMs": 899.9999999999991,
+        "activeMs": 5433.099999999999
+      },
+      {
+        "wave": 1,
+        "segment": "escalate",
+        "enemiesSpawned": 8,
+        "kills": 8,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 916.6285714285714,
+        "killsPerSecond": 1.088479801896676,
+        "adaptiveAdvances": 4,
+        "adaptiveAdvanceMs": 890.2000000000007,
+        "activeMs": 7349.700000000001
+      },
+      {
+        "wave": 1,
+        "segment": "recover",
+        "enemiesSpawned": 3,
+        "kills": 3,
+        "pulses": 3,
+        "effectiveSpawnCadenceMs": 1208.300000000001,
+        "killsPerSecond": 0.9944641495674079,
+        "adaptiveAdvances": 2,
+        "adaptiveAdvanceMs": 895.3999999999978,
+        "activeMs": 3016.7000000000007
+      },
+      {
+        "wave": 1,
+        "segment": "finale",
+        "enemiesSpawned": 7,
+        "kills": 7,
+        "pulses": 7,
+        "effectiveSpawnCadenceMs": 919.4166666666666,
+        "killsPerSecond": 0.8842403112525898,
+        "adaptiveAdvances": 3,
+        "adaptiveAdvanceMs": 892,
+        "activeMs": 7916.399999999998
+      },
+      {
+        "wave": 2,
+        "segment": "build",
+        "enemiesSpawned": 14,
+        "kills": 14,
+        "pulses": 7,
+        "effectiveSpawnCadenceMs": 869.4166666666666,
+        "killsPerSecond": 1.14290379199151,
+        "adaptiveAdvances": 2,
+        "adaptiveAdvanceMs": 757.0999999999985,
+        "activeMs": 12249.5
+      },
+      {
+        "wave": 2,
+        "segment": "escalate",
+        "enemiesSpawned": 22,
+        "kills": 22,
+        "pulses": 6,
+        "effectiveSpawnCadenceMs": 1313.3,
+        "killsPerSecond": 1.1786135219114968,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 18666
+      },
+      {
+        "wave": 2,
+        "segment": "recover",
+        "enemiesSpawned": 8,
+        "kills": 8,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 642.8285714285719,
+        "killsPerSecond": 0.7100948864291993,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 11266.099999999999
+      },
+      {
+        "wave": 2,
+        "segment": "finale",
+        "enemiesSpawned": 18,
+        "kills": 18,
+        "pulses": 3,
+        "effectiveSpawnCadenceMs": 2099.9500000000007,
+        "killsPerSecond": 1.3517369820218978,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 13316.200000000004
+      },
+      {
+        "wave": 3,
+        "segment": "build",
+        "enemiesSpawned": 18,
+        "kills": 18,
+        "pulses": 6,
+        "effectiveSpawnCadenceMs": 1413.2800000000018,
+        "killsPerSecond": 0.44945615804876093,
+        "adaptiveAdvances": 3,
+        "adaptiveAdvanceMs": 883.5000000000073,
+        "activeMs": 40048.40000000001
+      },
+      {
+        "wave": 3,
+        "segment": "escalate",
+        "enemiesSpawned": 28,
+        "kills": 28,
+        "pulses": 7,
+        "effectiveSpawnCadenceMs": 1572.1500000000015,
+        "killsPerSecond": 0.8425639220146904,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 33231.90000000001
+      },
+      {
+        "wave": 3,
+        "segment": "recover",
+        "enemiesSpawned": 10,
+        "kills": 10,
+        "pulses": 10,
+        "effectiveSpawnCadenceMs": 711.0888888888876,
+        "killsPerSecond": 0.6608206070298098,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 15132.699999999997
+      },
+      {
+        "wave": 3,
+        "segment": "finale",
+        "enemiesSpawned": 22,
+        "kills": 22,
+        "pulses": 5,
+        "effectiveSpawnCadenceMs": 1770.7749999999978,
+        "killsPerSecond": 1.292900799247767,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 17016
+      },
+      {
+        "wave": 4,
+        "segment": "build",
+        "enemiesSpawned": 22,
+        "kills": 22,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 911.8571428571429,
+        "killsPerSecond": 1.767153437113436,
+        "adaptiveAdvances": 3,
+        "adaptiveAdvanceMs": 800.1999999999971,
+        "activeMs": 12449.399999999994
+      },
+      {
+        "wave": 4,
+        "segment": "escalate",
+        "enemiesSpawned": 33,
+        "kills": 33,
+        "pulses": 7,
+        "effectiveSpawnCadenceMs": 1352.7166666666672,
+        "killsPerSecond": 3.8005735410980224,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 8682.899999999994
+      },
+      {
+        "wave": 4,
+        "segment": "recover",
+        "enemiesSpawned": 11,
+        "kills": 11,
+        "pulses": 11,
+        "effectiveSpawnCadenceMs": 504.9800000000003,
+        "killsPerSecond": 0.7158615393626233,
+        "adaptiveAdvances": 3,
+        "adaptiveAdvanceMs": 484.8999999999942,
+        "activeMs": 15366.099999999991
+      },
+      {
+        "wave": 4,
+        "segment": "finale",
+        "enemiesSpawned": 26,
+        "kills": 26,
+        "pulses": 5,
+        "effectiveSpawnCadenceMs": 1287.425000000003,
+        "killsPerSecond": 2.965903516877126,
+        "adaptiveAdvances": 2,
+        "adaptiveAdvanceMs": 883.3999999999942,
+        "activeMs": 8766.300000000017
+      },
+      {
+        "wave": 5,
+        "segment": "build",
+        "enemiesSpawned": 26,
+        "kills": 26,
+        "pulses": 9,
+        "effectiveSpawnCadenceMs": 937.4500000000007,
+        "killsPerSecond": 0.8401026217664125,
+        "adaptiveAdvances": 1,
+        "adaptiveAdvanceMs": 833.2999999999884,
+        "activeMs": 30948.600000000006
+      },
+      {
+        "wave": 5,
+        "segment": "escalate",
+        "enemiesSpawned": 40,
+        "kills": 40,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 1378.5,
+        "killsPerSecond": 2.5614754098360657,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 15616
+      },
+      {
+        "wave": 5,
+        "segment": "recover",
+        "enemiesSpawned": 14,
+        "kills": 14,
+        "pulses": 14,
+        "effectiveSpawnCadenceMs": 517.9153846153841,
+        "killsPerSecond": 1.6536344522926438,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 8466.200000000012
+      },
+      {
+        "wave": 5,
+        "segment": "finale",
+        "enemiesSpawned": 32,
+        "kills": 32,
+        "pulses": 5,
+        "effectiveSpawnCadenceMs": 1545.7749999999942,
+        "killsPerSecond": 4.961394151756653,
+        "adaptiveAdvances": 1,
+        "adaptiveAdvanceMs": 899.9000000000233,
+        "activeMs": 6449.799999999988
+      },
+      {
+        "wave": 6,
+        "segment": "build",
+        "enemiesSpawned": 31,
+        "kills": 31,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 1380.9000000000026,
+        "killsPerSecond": 0.6017699802192379,
+        "adaptiveAdvances": 1,
+        "adaptiveAdvanceMs": 866.7000000000116,
+        "activeMs": 51514.70000000004
+      },
+      {
+        "wave": 6,
+        "segment": "escalate",
+        "enemiesSpawned": 48,
+        "kills": 48,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 1764.2142857142858,
+        "killsPerSecond": 1.3967537115819983,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 34365.399999999994
+      },
+      {
+        "wave": 6,
+        "segment": "recover",
+        "enemiesSpawned": 16,
+        "kills": 16,
+        "pulses": 16,
+        "effectiveSpawnCadenceMs": 585.5333333333333,
+        "killsPerSecond": 1.076274207761282,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 14866.100000000006
+      },
+      {
+        "wave": 6,
+        "segment": "finale",
+        "enemiesSpawned": 37,
+        "kills": 37,
+        "pulses": 5,
+        "effectiveSpawnCadenceMs": 2274.925000000003,
+        "killsPerSecond": 2.0944186573078194,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 17666.00000000003
+      },
+      {
+        "wave": 7,
+        "segment": "build",
+        "enemiesSpawned": 43,
+        "kills": 43,
+        "pulses": 12,
+        "effectiveSpawnCadenceMs": 693.9090909090909,
+        "killsPerSecond": 2.921969815372284,
+        "adaptiveAdvances": 4,
+        "adaptiveAdvanceMs": 753.5,
+        "activeMs": 14716.099999999977
+      },
+      {
+        "wave": 7,
+        "segment": "escalate",
+        "enemiesSpawned": 56,
+        "kills": 56,
+        "pulses": 8,
+        "effectiveSpawnCadenceMs": 1266.614285714284,
+        "killsPerSecond": 3.5937289429944785,
+        "adaptiveAdvances": 1,
+        "adaptiveAdvanceMs": 722.7000000000116,
+        "activeMs": 15582.699999999983
+      },
+      {
+        "wave": 7,
+        "segment": "recover",
+        "enemiesSpawned": 19,
+        "kills": 19,
+        "pulses": 19,
+        "effectiveSpawnCadenceMs": 392.5777777777791,
+        "killsPerSecond": 2.5561340490508653,
+        "adaptiveAdvances": 1,
+        "adaptiveAdvanceMs": 1.3000000000174623,
+        "activeMs": 7433.100000000006
+      },
+      {
+        "wave": 7,
+        "segment": "finale",
+        "enemiesSpawned": 44,
+        "kills": 44,
+        "pulses": 5,
+        "effectiveSpawnCadenceMs": 1533.2750000000015,
+        "killsPerSecond": 4.84421446658593,
+        "adaptiveAdvances": 3,
+        "adaptiveAdvanceMs": 883.5,
+        "activeMs": 9083
+      },
+      {
+        "wave": 8,
+        "segment": "build",
+        "enemiesSpawned": 52,
+        "kills": 18,
+        "pulses": 12,
+        "effectiveSpawnCadenceMs": 783.309090909093,
+        "killsPerSecond": 2.0810210876803468,
+        "adaptiveAdvances": 1,
+        "adaptiveAdvanceMs": 900,
+        "activeMs": 8649.600000000035
+      },
+      {
+        "wave": 8,
+        "segment": "escalate",
+        "enemiesSpawned": 8,
+        "kills": 0,
+        "pulses": 1,
+        "effectiveSpawnCadenceMs": null,
+        "killsPerSecond": null,
+        "adaptiveAdvances": 0,
+        "adaptiveAdvanceMs": 0,
+        "activeMs": 0
+      }
+    ],
+    "eventCount": 6000,
+    "rooster": {
+      "id": "storm",
+      "name": "Stormcrest"
+    },
+    "arena": {
+      "id": "vertical-run",
+      "name": "Feed Alley"
+    },
+    "challenge": {
+      "id": "standard",
+      "name": "Standard Run",
+      "arenaId": "vertical-run",
+      "modifiers": {}
+    },
+    "build": {
+      "active": [
+        {
+          "id": "primary-storm",
+          "sourceId": "primary-storm",
+          "name": "Storm Egg",
+          "slotType": "active",
+          "rank": 4,
+          "maxRank": 4,
+          "startWeapon": true,
+          "evolved": false,
+          "evolutionId": null,
+          "rankUpgradeId": "primary-storm-rank",
+          "cooldown": {
+            "ratio": 0,
+            "remainingMs": 0,
+            "durationMs": 537
+          }
+        },
+        {
+          "id": "support-chick",
+          "sourceId": "support-chick",
+          "name": "Support Chick",
+          "slotType": "active",
+          "rank": 1,
+          "maxRank": 5,
+          "startWeapon": false,
+          "evolved": false,
+          "evolutionId": null,
+          "cooldown": {
+            "ratio": 0,
+            "remainingMs": 0,
+            "durationMs": 0
+          }
+        }
+      ],
+      "passive": [
+        {
+          "id": "swift-shells",
+          "sourceId": "swift-shells",
+          "name": "Swift Shells",
+          "slotType": "passive",
+          "rank": 1,
+          "maxRank": 3,
+          "startWeapon": false,
+          "evolved": false,
+          "evolutionId": null,
+          "cooldown": null
+        },
+        {
+          "id": "storm-tailwind-training",
+          "sourceId": "storm-tailwind-training",
+          "name": "Tailwind Training",
+          "slotType": "passive",
+          "rank": 2,
+          "maxRank": 3,
+          "startWeapon": false,
+          "evolved": false,
+          "evolutionId": null,
+          "cooldown": null
+        },
+        {
+          "id": "shell-shock",
+          "sourceId": "shell-shock",
+          "name": "Shell Shock",
+          "slotType": "passive",
+          "rank": 1,
+          "maxRank": 3,
+          "startWeapon": false,
+          "evolved": false,
+          "evolutionId": null,
+          "cooldown": null
+        },
+        {
+          "id": "armor",
+          "sourceId": "armor",
+          "name": "Armor",
+          "slotType": "passive",
+          "rank": 1,
+          "maxRank": 4,
+          "startWeapon": false,
+          "evolved": false,
+          "evolutionId": null,
+          "cooldown": null
+        }
+      ],
+      "evolutions": []
+    }
+  },
+  "samples": [
+    {
+      "time": 4836.2,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65532.9952306811,
+      "y": 65532.983644643566,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 30,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65052,
+        "y": 65262,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 6502.8,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65472.6764121879,
+      "y": 65426.07185863379,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 82,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65008,
+        "y": 65188,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 7536,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65411.86719937056,
+      "y": 65376.746356705895,
+      "enemies": 0,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 117,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64924,
+        "y": 65127,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 8569.3,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65550.72102941216,
+      "y": 65348.27519866892,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 152,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65039,
+        "y": 65060,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 9586,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65616.45950680145,
+      "y": 65259.36661244389,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 186,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65123,
+        "y": 65002,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 10636,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65604.86742996165,
+      "y": 65200.602180645816,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 219,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64940,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 11652.5,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65609.84462756949,
+      "y": 65232.81921478956,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 251,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64926,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 12685.9,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65609.06245098577,
+      "y": 65144.02888879682,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 282,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64865,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 13702.5,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65607.58757451065,
+      "y": 65266.58070162103,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 314,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64995,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 14735.8,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65607.48168141194,
+      "y": 65221.700804658314,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 345,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64975,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 15769,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65607.85356821255,
+      "y": 65209.74220954196,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 375,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64945,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 16802.4,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65606.32869771178,
+      "y": 65199.80711117687,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 404,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 64893,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 17852.3,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65605.55440759953,
+      "y": 65329.17214904021,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 434,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65124,
+        "y": 65043,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 18902.3,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65571.04178680276,
+      "y": 65274.03147225118,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 463,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65102,
+        "y": 65016,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 19952.2,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65549.97858641893,
+      "y": 65177.53629314906,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 492,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65069,
+        "y": 64909,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 20985.5,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65561.00114351846,
+      "y": 65136.60656065449,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 517,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65073,
+        "y": 64866,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 22052.1,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65562.78086155123,
+      "y": 65116.274698445675,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 545,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65079,
+        "y": 64882,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 23068.7,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65560.3171871889,
+      "y": 65108.53380254125,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 572,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65079,
+        "y": 64831,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 24118.7,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65562.70067283128,
+      "y": 65029.03174128721,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 600,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65079,
+        "y": 64767,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 25168.7,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65541.89449768112,
+      "y": 65042.6094745793,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 629,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65068,
+        "y": 64728,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 26218.6,
+      "wave": 1,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65695.40967201858,
+      "y": 65118.30808268691,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 658,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65171,
+        "y": 64828,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 27268.6,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65655.53186410008,
+      "y": 65065.39582763778,
+      "enemies": 0,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 688,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65206,
+        "y": 64826,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 28718.5,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65562.0687843437,
+      "y": 64972.42216210997,
+      "enemies": 4,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 728,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65082,
+        "y": 64702,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 29568.5,
+      "wave": 2,
+      "ended": false,
+      "selection": {
+        "type": "level",
+        "index": 1,
+        "remaining": 0
+      },
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65650.85003339425,
+      "y": 64840.28588274694,
+      "enemies": 5,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 751,
+      "error": null,
+      "choosing": true,
+      "camera": {
+        "x": 65146,
+        "y": 64599,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 30485.2,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65684.33935976338,
+      "y": 64910.69522365806,
+      "enemies": 6,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 773,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65185,
+        "y": 64622,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 31518.5,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65725.89126400618,
+      "y": 64868.80909963344,
+      "enemies": 6,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 802,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65228,
+        "y": 64591,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 32585.1,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65749.30793574231,
+      "y": 64877.97273781931,
+      "enemies": 5,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 831,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65240,
+        "y": 64600,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 33635,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65774.62038847836,
+      "y": 64845.72754168998,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 3,
+      "frames": 860,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64582,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 34668.3,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65783.94055484454,
+      "y": 64874.27316045056,
+      "enemies": 10,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 888,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64582,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 35701.700000000004,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65871.44671225539,
+      "y": 64789.12941831082,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 6,
+      "frames": 916,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64521,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 36751.6,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 64822.718158337106,
+      "enemies": 11,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 7,
+      "frames": 945,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64549,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 37818.200000000004,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 64939.50278506097,
+      "enemies": 15,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 7,
+      "frames": 974,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64619,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 38851.5,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65868.89332002385,
+      "y": 65194.862771964385,
+      "enemies": 16,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 1002,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64852,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 39884.8,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65783.22724769046,
+      "y": 65280.60621998454,
+      "enemies": 16,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 1029,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65001,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 40951.4,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65785.25996604313,
+      "y": 65258.3784685791,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 1058,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64964,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 42001.4,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65745.15951812606,
+      "y": 65291.83534141845,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 1085,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65272,
+        "y": 65002,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 43034.700000000004,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65559.07835099315,
+      "y": 65300.966076275334,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 10,
+      "frames": 1113,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65126,
+        "y": 65028,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 44118,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65419.203714285424,
+      "y": 65328.40881220557,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 11,
+      "frames": 1139,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64975,
+        "y": 65043,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 45167.9,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65325.71931658404,
+      "y": 65326.198686889365,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 13,
+      "frames": 1164,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64874,
+        "y": 65041,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 46234.6,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65261.62795450133,
+      "y": 65374.23521587699,
+      "enemies": 20,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 10,
+      "frames": 1188,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65084,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 47384.5,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65402.15716734689,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 10,
+      "frames": 1213,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65122,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 48501.1,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65208.846599758595,
+      "y": 65484.744857235324,
+      "enemies": 20,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 12,
+      "frames": 1236,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65185,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 49534.4,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65460.27397182749,
+      "enemies": 19,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 14,
+      "frames": 1254,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65189,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 50334.4,
+      "wave": 2,
+      "ended": false,
+      "selection": {
+        "type": "level",
+        "index": 2,
+        "remaining": 0
+      },
+      "hp": 83,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65471.137808326035,
+      "enemies": 22,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 14,
+      "frames": 1271,
+      "error": null,
+      "choosing": true,
+      "camera": {
+        "x": 64836,
+        "y": 65193,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 51351,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 81,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65473.79061294778,
+      "enemies": 19,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 13,
+      "frames": 1294,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65198,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 52417.6,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 81,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65297.57967721167,
+      "enemies": 16,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 16,
+      "frames": 1320,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65076,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 53467.6,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 81,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65081.53631363507,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 10,
+      "frames": 1345,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64877,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 54550.8,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 81,
+      "maxHp": 90,
+      "x": 65266.2922730137,
+      "y": 64848.164084750664,
+      "enemies": 10,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 1370,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64629,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 55617.5,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 81,
+      "maxHp": 90,
+      "x": 65488.158742082276,
+      "y": 64893.08359656793,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 1396,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64949,
+        "y": 64595,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 56717.5,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 81,
+      "maxHp": 90,
+      "x": 65638.55877326473,
+      "y": 65112.677031823696,
+      "enemies": 6,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 6,
+      "frames": 1421,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65120,
+        "y": 64764,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 58617.4,
+      "wave": 2,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65678.08627121424,
+      "y": 65576.1063270599,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 1465,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65205,
+        "y": 65222,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 60267.3,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65508.71005758052,
+      "y": 65455.4437298911,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 1503,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65035,
+        "y": 65191,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 61983.9,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65411.38970724338,
+      "y": 65425.850217144914,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 1546,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64941,
+        "y": 65132,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 63050.5,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65489.348334834634,
+      "y": 65319.94092262433,
+      "enemies": 4,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 1569,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64976,
+        "y": 65047,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 64100.5,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65490.97320523396,
+      "y": 65216.19869247195,
+      "enemies": 6,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 1594,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65022,
+        "y": 64967,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 65400.50000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65546.06235165746,
+      "y": 65134.221357258444,
+      "enemies": 8,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 1626,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65037,
+        "y": 64883,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 66450.40000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65652.4481654124,
+      "y": 65129.06419142454,
+      "enemies": 11,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 1653,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65130,
+        "y": 64862,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 67517.00000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65708.97932453663,
+      "y": 64965.07344270763,
+      "enemies": 13,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 1679,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65219,
+        "y": 64746,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 68566.90000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65702.94171159076,
+      "y": 64825.49771504178,
+      "enemies": 15,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 1704,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65229,
+        "y": 64584,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 69616.90000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65780.70647861907,
+      "y": 64769.00520490246,
+      "enemies": 15,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 3,
+      "frames": 1730,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64516,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 70683.6,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65776.21377015469,
+      "y": 64634.567395626415,
+      "enemies": 19,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 3,
+      "frames": 1757,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 64400,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 71716.90000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65744.08927212353,
+      "y": 64528.83184896966,
+      "enemies": 22,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 1783,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65271,
+        "y": 64285,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 72766.90000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65613.64411317589,
+      "y": 64458.64758621404,
+      "enemies": 21,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 1810,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65168,
+        "y": 64194,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 73866.8,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65374.70597538318,
+      "y": 64522.501733980665,
+      "enemies": 25,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 8,
+      "frames": 1839,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64951,
+        "y": 64216,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 74916.70000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65251.08891415347,
+      "y": 64713.797870710456,
+      "enemies": 29,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 19,
+      "frames": 1867,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64383,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 75933.40000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65257.56149905981,
+      "y": 64965.12119638742,
+      "enemies": 24,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 16,
+      "frames": 1892,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64621,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 76966.70000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65252.003359564515,
+      "y": 65121.902068840456,
+      "enemies": 28,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 14,
+      "frames": 1920,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64806,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 78016.6,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65277.148053107405,
+      "y": 65262.41361496091,
+      "enemies": 29,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 7,
+      "frames": 1948,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64949,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 79049.90000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65293.48039518091,
+      "y": 65360.13480187737,
+      "enemies": 30,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 7,
+      "frames": 1976,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65056,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 80099.8,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65340.59235399519,
+      "y": 65496.30713913082,
+      "enemies": 29,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 3,
+      "frames": 2004,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64840,
+        "y": 65176,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 81149.8,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65479.85688638888,
+      "y": 65562.69822146447,
+      "enemies": 29,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 2033,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64974,
+        "y": 65281,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 82183.1,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65565.38962824088,
+      "y": 65600.50054938777,
+      "enemies": 27,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 2061,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65047,
+        "y": 65293,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 82933,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65583.48309524936,
+      "y": 65574.23869679954,
+      "enemies": 27,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 5,
+      "frames": 2081,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65107,
+        "y": 65326,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 83966.40000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65651.71695817026,
+      "y": 65655.10015933351,
+      "enemies": 31,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 9,
+      "frames": 2108,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65147,
+        "y": 65361,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 84999.70000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65719.74735393106,
+      "y": 65682.78549479839,
+      "enemies": 28,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 11,
+      "frames": 2135,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65218,
+        "y": 65405,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 86049.6,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65801.56450431685,
+      "y": 65666.92061952766,
+      "enemies": 28,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 13,
+      "frames": 2162,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65389,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 87099.6,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65854.00263752328,
+      "y": 65742.38595001414,
+      "enemies": 25,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 11,
+      "frames": 2190,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65443,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 88132.90000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65748.87877128103,
+      "y": 65887.86549911986,
+      "enemies": 23,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 2218,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65268,
+        "y": 65594,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 89149.5,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65806.6057068045,
+      "y": 65899.50278021993,
+      "enemies": 17,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 2,
+      "frames": 2244,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65619,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 90199.5,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65575.00667757093,
+      "y": 65985.53919485943,
+      "enemies": 20,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2271,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65153,
+        "y": 65703,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 91232.8,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65387.869338430064,
+      "y": 66076.68472544162,
+      "enemies": 18,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 0,
+      "frames": 2298,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64932,
+        "y": 65794,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 92266.1,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65371.61343310101,
+      "y": 66114.52658743678,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2323,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64892,
+        "y": 65827,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 93299.3,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65339.76530620078,
+      "y": 66236.6623554903,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2350,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64866,
+        "y": 65928,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 94299.3,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65298.17761875991,
+      "y": 66381.53795758556,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2377,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 66067,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 95349.20000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65380.42563258707,
+      "y": 66524.80810421357,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 1,
+      "frames": 2405,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64859,
+        "y": 66216,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 96382.5,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65512.59421566715,
+      "y": 66386.51371410405,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2434,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65013,
+        "y": 66169,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 97399.20000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65712.62524314506,
+      "y": 66338.59018913338,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 2459,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65164,
+        "y": 66089,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 98415.8,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65791.52821900598,
+      "y": 66207.94164964977,
+      "enemies": 7,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 2486,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65967,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 99432.40000000001,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65822.53286885645,
+      "y": 66042.34925209297,
+      "enemies": 4,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 3,
+      "frames": 2512,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65831,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 100449.1,
+      "wave": 3,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65811.76287552813,
+      "y": 66073.7209632565,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2538,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65769,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 101482.40000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65762.00244328716,
+      "y": 66201.25552593172,
+      "enemies": 0,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 2564,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65911,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 102782.3,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65675.69031118485,
+      "y": 66081.70263557619,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 0,
+      "frames": 2597,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65207,
+        "y": 65844,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 103832.20000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65555.7311407892,
+      "y": 66045.36507648158,
+      "enemies": 6,
+      "enemyProjectiles": 2,
+      "hazards": 2,
+      "visibleEnemies": 1,
+      "frames": 2621,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65112,
+        "y": 65774,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 104898.90000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65517.85405802354,
+      "y": 65946.0565537602,
+      "enemies": 6,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 2644,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65019,
+        "y": 65709,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 105948.70000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65553.07164577564,
+      "y": 65904.2079738757,
+      "enemies": 6,
+      "enemyProjectiles": 2,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 2668,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65040,
+        "y": 65656,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 106982.1,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65635.95707617856,
+      "y": 65895.97333469662,
+      "enemies": 8,
+      "enemyProjectiles": 3,
+      "hazards": 4,
+      "visibleEnemies": 2,
+      "frames": 2689,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65119,
+        "y": 65620,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 108048.70000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65692.48751509472,
+      "y": 65838.9152131158,
+      "enemies": 9,
+      "enemyProjectiles": 4,
+      "hazards": 4,
+      "visibleEnemies": 3,
+      "frames": 2714,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65197,
+        "y": 65572,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 109148.70000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65779.88487390403,
+      "y": 65866.0448875982,
+      "enemies": 12,
+      "enemyProjectiles": 4,
+      "hazards": 5,
+      "visibleEnemies": 3,
+      "frames": 2741,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65247,
+        "y": 65596,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 110265.3,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65833.60556793638,
+      "y": 65860.66189508916,
+      "enemies": 15,
+      "enemyProjectiles": 4,
+      "hazards": 4,
+      "visibleEnemies": 9,
+      "frames": 2769,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65592,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 111315.3,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65840.72355101499,
+      "y": 65924.92641104886,
+      "enemies": 18,
+      "enemyProjectiles": 4,
+      "hazards": 4,
+      "visibleEnemies": 8,
+      "frames": 2794,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65667,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 112365.20000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 66048.94287119964,
+      "enemies": 14,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 7,
+      "frames": 2821,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65723,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 113115.20000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65809.00477232749,
+      "y": 66138.45005058698,
+      "enemies": 17,
+      "enemyProjectiles": 2,
+      "hazards": 3,
+      "visibleEnemies": 5,
+      "frames": 2836,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65822,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 114165.20000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65571.23498600083,
+      "y": 66183.13540748534,
+      "enemies": 18,
+      "enemyProjectiles": 1,
+      "hazards": 1,
+      "visibleEnemies": 1,
+      "frames": 2861,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65157,
+        "y": 65909,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 115198.40000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65385.067362674214,
+      "y": 66081.60626633036,
+      "enemies": 13,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 10,
+      "frames": 2886,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64934,
+        "y": 65830,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 116231.8,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65362.00158193566,
+      "y": 66101.1342672573,
+      "enemies": 15,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 10,
+      "frames": 2911,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64883,
+        "y": 65822,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 117281.70000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65376.77943701654,
+      "y": 66048.68969061009,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 2933,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64878,
+        "y": 65799,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 118348.3,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65545.46017610561,
+      "y": 65931.16891502842,
+      "enemies": 2,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 2959,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65008,
+        "y": 65681,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 119364.90000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65685.17607155688,
+      "y": 65855.94223665043,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 2985,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65158,
+        "y": 65612,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 120398.3,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65678.94821468301,
+      "y": 65724.21679640179,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 3011,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65214,
+        "y": 65463,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 121431.5,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65539.34052546727,
+      "y": 65677.43018598577,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3036,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65108,
+        "y": 65422,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 122498.1,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65419.430936486744,
+      "y": 65498.19876326343,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3061,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64970,
+        "y": 65277,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 123531.5,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65466.65948316899,
+      "y": 65415.16112264987,
+      "enemies": 12,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 3087,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64964,
+        "y": 65159,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 124564.70000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65477.96227770867,
+      "y": 65394.99542180949,
+      "enemies": 7,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3112,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64990,
+        "y": 65115,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 125614.70000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65446.27396211327,
+      "y": 65271.3640301142,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3135,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64971,
+        "y": 65036,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 126647.90000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65412.360780003604,
+      "y": 65093.54360481178,
+      "enemies": 13,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3162,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64939,
+        "y": 64873,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 127664.6,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65337.19381828187,
+      "y": 65071.14601194198,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3187,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64868,
+        "y": 64817,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 128697.90000000001,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65361.377168783605,
+      "y": 64956.81583849854,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3214,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64861,
+        "y": 64704,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 129747.9,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65369.82980460872,
+      "y": 64910.004269000034,
+      "enemies": 9,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3243,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64882,
+        "y": 64605,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 130797.80000000002,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65374.16064441953,
+      "y": 64965.81265847231,
+      "enemies": 7,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 3272,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64884,
+        "y": 64699,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 131814.4,
+      "wave": 4,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65366.90614915183,
+      "y": 64992.1426087457,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3300,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64886,
+        "y": 64696,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 132864.4,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65310.2977854085,
+      "y": 65052.92381665309,
+      "enemies": 0,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 3327,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64862,
+        "y": 64801,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 134431,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65366.31371063074,
+      "y": 64861.05144244808,
+      "enemies": 5,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 0,
+      "frames": 3371,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64856,
+        "y": 64620,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 135480.9,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65381.118026642114,
+      "y": 64958.28217041875,
+      "enemies": 8,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 0,
+      "frames": 3396,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64880,
+        "y": 64645,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 136514.30000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65511.18379019497,
+      "y": 64870.09098996117,
+      "enemies": 8,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 4,
+      "frames": 3422,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64986,
+        "y": 64609,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 137564.30000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65482.76626637864,
+      "y": 64960.38033662178,
+      "enemies": 9,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 4,
+      "frames": 3447,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65005,
+        "y": 64669,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 138614.2,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65443.278458086366,
+      "y": 64923.28591339015,
+      "enemies": 9,
+      "enemyProjectiles": 3,
+      "hazards": 4,
+      "visibleEnemies": 3,
+      "frames": 3473,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64957,
+        "y": 64661,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 139630.80000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65361.65960128656,
+      "y": 64965.71239762859,
+      "enemies": 11,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 6,
+      "frames": 3497,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64903,
+        "y": 64669,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 140680.7,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65230.3924790803,
+      "y": 65144.11102133814,
+      "enemies": 14,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 4,
+      "frames": 3521,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64800,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 141747.30000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65171.2414847899,
+      "enemies": 19,
+      "enemyProjectiles": 3,
+      "hazards": 4,
+      "visibleEnemies": 5,
+      "frames": 3546,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64905,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 142847.30000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65173.0829325157,
+      "enemies": 22,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 8,
+      "frames": 3573,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64886,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 143997.30000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 85,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65287.632502871325,
+      "enemies": 27,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 13,
+      "frames": 3602,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64988,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 145030.6,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 78,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65328.43959296375,
+      "enemies": 24,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 12,
+      "frames": 3627,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65021,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 146047.2,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 78,
+      "maxHp": 90,
+      "x": 65219.081525375586,
+      "y": 65586.74292678374,
+      "enemies": 26,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 7,
+      "frames": 3652,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65236,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 147097.2,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 78,
+      "maxHp": 90,
+      "x": 65342.05991794559,
+      "y": 65686.88776235752,
+      "enemies": 29,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 1,
+      "frames": 3680,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64846,
+        "y": 65424,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 148263.80000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65330.075792239586,
+      "y": 65676.22534005746,
+      "enemies": 29,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 0,
+      "frames": 3710,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64843,
+        "y": 65430,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 149297.1,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65310.36536860316,
+      "y": 65771.21325547279,
+      "enemies": 24,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 2,
+      "frames": 3737,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65451,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 150347,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65373.25151893484,
+      "y": 65766.23186606615,
+      "enemies": 23,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 2,
+      "frames": 3765,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64871,
+        "y": 65498,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 151397,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65402.659907059686,
+      "y": 65807.19804583733,
+      "enemies": 25,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 2,
+      "frames": 3792,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64905,
+        "y": 65544,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 152446.9,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65450.924756876855,
+      "y": 65855.6320113586,
+      "enemies": 21,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 2,
+      "frames": 3819,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64957,
+        "y": 65570,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 153480.2,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65533.29248842139,
+      "y": 65892.12024451121,
+      "enemies": 17,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 2,
+      "frames": 3844,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65025,
+        "y": 65604,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 154530.2,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65559.11838712046,
+      "y": 65871.60997824563,
+      "enemies": 15,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 6,
+      "frames": 3868,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65056,
+        "y": 65614,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 155596.80000000002,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65614.20026853088,
+      "y": 65910.08771559791,
+      "enemies": 11,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 5,
+      "frames": 3893,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65126,
+        "y": 65633,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 156663.5,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65699.64398828706,
+      "y": 65931.90803613634,
+      "enemies": 11,
+      "enemyProjectiles": 3,
+      "hazards": 4,
+      "visibleEnemies": 6,
+      "frames": 3919,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65195,
+        "y": 65661,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 157680.1,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65690.31630372874,
+      "y": 65880.9591927422,
+      "enemies": 6,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 2,
+      "frames": 3942,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65196,
+        "y": 65604,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 158429.9,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65764.56409017796,
+      "y": 65983.03276958667,
+      "enemies": 6,
+      "enemyProjectiles": 3,
+      "hazards": 4,
+      "visibleEnemies": 1,
+      "frames": 3959,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65268,
+        "y": 65658,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 159479.9,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65778.68731911026,
+      "y": 65992.65167733218,
+      "enemies": 6,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 3983,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65727,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 160496.5,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65724.09562604968,
+      "y": 66023.202275314,
+      "enemies": 8,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 0,
+      "frames": 4006,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65258,
+        "y": 65777,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 161579.8,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65643.0013454998,
+      "y": 66002.96411470535,
+      "enemies": 9,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 4030,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65188,
+        "y": 65736,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 162679.8,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65649.05772789524,
+      "y": 65961.94158737602,
+      "enemies": 3,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 4054,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65159,
+        "y": 65682,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 163746.4,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65697.59339249434,
+      "y": 65932.22752789619,
+      "enemies": 9,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 1,
+      "frames": 4076,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65199,
+        "y": 65647,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 164829.7,
+      "wave": 5,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65742.38751916136,
+      "y": 65910.48821036781,
+      "enemies": 2,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 4098,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65237,
+        "y": 65655,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 165879.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65639.61574556663,
+      "y": 65698.43742116152,
+      "enemies": 4,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 0,
+      "frames": 4122,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65203,
+        "y": 65481,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 167446.3,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65363.10306200386,
+      "y": 65834.39075266224,
+      "enemies": 7,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 2,
+      "frames": 4153,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64957,
+        "y": 65542,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 168529.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65263.70610620336,
+      "y": 65907.47745543996,
+      "enemies": 6,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 2,
+      "frames": 4178,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65593,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 169596.2,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65209.283421790344,
+      "y": 66019.21065154592,
+      "enemies": 8,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 4,
+      "frames": 4199,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65725,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 170612.7,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 90,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65934.71009402504,
+      "enemies": 12,
+      "enemyProjectiles": 6,
+      "hazards": 8,
+      "visibleEnemies": 4,
+      "frames": 4219,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65689,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 171646.1,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 75,
+      "maxHp": 90,
+      "x": 65208.924084673774,
+      "y": 65808.06084548208,
+      "enemies": 14,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 8,
+      "frames": 4238,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65558,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 172696.1,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 60,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65789.64616079515,
+      "enemies": 18,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 10,
+      "frames": 4260,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65524,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 173746,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65964.3584638139,
+      "enemies": 17,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 14,
+      "frames": 4282,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65634,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 174812.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 66163.615833619,
+      "enemies": 19,
+      "enemyProjectiles": 12,
+      "hazards": 14,
+      "visibleEnemies": 10,
+      "frames": 4300,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 65801,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 175862.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 66439.98509340228,
+      "enemies": 19,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 5,
+      "frames": 4321,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 66076,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 176945.8,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65279.76228910396,
+      "y": 66586.34331818539,
+      "enemies": 25,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 4,
+      "frames": 4345,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 66269,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 177995.9,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65364.78378111184,
+      "y": 66807.00670222053,
+      "enemies": 29,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 2,
+      "frames": 4369,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64854,
+        "y": 66485,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 179029.1,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65557.92561625506,
+      "y": 66710.38676018215,
+      "enemies": 27,
+      "enemyProjectiles": 12,
+      "hazards": 14,
+      "visibleEnemies": 2,
+      "frames": 4394,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65008,
+        "y": 66463,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 180079.1,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65798.21659429754,
+      "y": 66663.78742159705,
+      "enemies": 32,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 5,
+      "frames": 4419,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65261,
+        "y": 66419,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 181112.3,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65839.92802826132,
+      "y": 66412.18042697245,
+      "enemies": 32,
+      "enemyProjectiles": 9,
+      "hazards": 10,
+      "visibleEnemies": 19,
+      "frames": 4443,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 66215,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 182179,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 66375.27222118115,
+      "enemies": 34,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 18,
+      "frames": 4465,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 66090,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 183179,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 53,
+      "maxHp": 90,
+      "x": 65860.96041493533,
+      "y": 66300.33467782092,
+      "enemies": 35,
+      "enemyProjectiles": 9,
+      "hazards": 11,
+      "visibleEnemies": 14,
+      "frames": 4485,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 66080,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 184278.9,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 38,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 66145.23247698313,
+      "enemies": 33,
+      "enemyProjectiles": 8,
+      "hazards": 8,
+      "visibleEnemies": 18,
+      "frames": 4507,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65905,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 185328.9,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 16,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 66082.26043121246,
+      "enemies": 39,
+      "enemyProjectiles": 11,
+      "hazards": 11,
+      "visibleEnemies": 18,
+      "frames": 4528,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65855,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 186395.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 11,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 65942.40729318133,
+      "enemies": 39,
+      "enemyProjectiles": 7,
+      "hazards": 7,
+      "visibleEnemies": 21,
+      "frames": 4551,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65709,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 187395.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65852.24120362084,
+      "y": 65736.98755038713,
+      "enemies": 41,
+      "enemyProjectiles": 6,
+      "hazards": 9,
+      "visibleEnemies": 10,
+      "frames": 4573,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65534,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 188445.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65775.51983797619,
+      "y": 65510.90311628746,
+      "enemies": 44,
+      "enemyProjectiles": 9,
+      "hazards": 10,
+      "visibleEnemies": 3,
+      "frames": 4593,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65322,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 189528.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65768.323825915,
+      "y": 65421.67494965416,
+      "enemies": 43,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 1,
+      "frames": 4614,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65171,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 190595.3,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65753.5736868365,
+      "y": 65437.869575543555,
+      "enemies": 43,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 0,
+      "frames": 4636,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65275,
+        "y": 65191,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 191628.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65720.55636685317,
+      "y": 65396.37226744888,
+      "enemies": 41,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 3,
+      "frames": 4659,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65236,
+        "y": 65149,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 192728.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65737.47316552437,
+      "y": 65325.580683193155,
+      "enemies": 39,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 4,
+      "frames": 4681,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65239,
+        "y": 65073,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 193778.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65706.53994892923,
+      "y": 65209.27269365488,
+      "enemies": 35,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 0,
+      "frames": 4704,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65228,
+        "y": 64970,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 194895.1,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65511.2966567815,
+      "y": 65087.713732614895,
+      "enemies": 34,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 0,
+      "frames": 4730,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65094,
+        "y": 64841,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 195978.4,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65340.49811915635,
+      "y": 65011.71,
+      "enemies": 35,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 0,
+      "frames": 4753,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64892,
+        "y": 64749,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 197061.7,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65320.08384919961,
+      "y": 65011.71,
+      "enemies": 31,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 0,
+      "frames": 4776,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64741,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 198145,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65340.99967462144,
+      "y": 65011.71,
+      "enemies": 29,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 2,
+      "frames": 4798,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64853,
+        "y": 64741,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 199194.9,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65372.86055024505,
+      "y": 65011.71,
+      "enemies": 34,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 3,
+      "frames": 4821,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64867,
+        "y": 64741,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 200011.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65399.60963007494,
+      "y": 65015.89596464979,
+      "enemies": 30,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 7,
+      "frames": 4837,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64918,
+        "y": 64737,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 201378.2,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65280.533177584446,
+      "y": 65051.77194746071,
+      "enemies": 34,
+      "enemyProjectiles": 9,
+      "hazards": 10,
+      "visibleEnemies": 10,
+      "frames": 4855,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64869,
+        "y": 64752,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 202444.8,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65193.11491737457,
+      "y": 65103.39685704653,
+      "enemies": 30,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 16,
+      "frames": 4876,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64828,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 203478.2,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 65047.85157867352,
+      "enemies": 35,
+      "enemyProjectiles": 6,
+      "hazards": 6,
+      "visibleEnemies": 21,
+      "frames": 4904,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64801,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 204511.4,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 64984.06505088074,
+      "enemies": 27,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 20,
+      "frames": 4931,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64736,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 205561.4,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65190.79,
+      "y": 64870.10622517003,
+      "enemies": 25,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 8,
+      "frames": 4958,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64636,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 206378,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65233.28865220985,
+      "y": 64836.198041854914,
+      "enemies": 22,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 3,
+      "frames": 4977,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64568,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 207411.30000000002,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65201.32637446119,
+      "y": 64761.11545134374,
+      "enemies": 25,
+      "enemyProjectiles": 9,
+      "hazards": 12,
+      "visibleEnemies": 1,
+      "frames": 5006,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64498,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 208511.30000000002,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65333.12169484865,
+      "y": 64652.66505126587,
+      "enemies": 19,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 1,
+      "frames": 5037,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64845,
+        "y": 64412,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 209544.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65279.50613567946,
+      "y": 64500.586298006594,
+      "enemies": 14,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 1,
+      "frames": 5067,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64277,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 210594.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65299.74080340389,
+      "y": 64288.48787009153,
+      "enemies": 7,
+      "enemyProjectiles": 6,
+      "hazards": 8,
+      "visibleEnemies": 0,
+      "frames": 5099,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 64046,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 211644.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65430.281962581466,
+      "y": 64330.86552918395,
+      "enemies": 7,
+      "enemyProjectiles": 9,
+      "hazards": 11,
+      "visibleEnemies": 1,
+      "frames": 5132,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64900,
+        "y": 64047,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 212694.5,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65654.50313221528,
+      "y": 64416.67812984904,
+      "enemies": 7,
+      "enemyProjectiles": 12,
+      "hazards": 12,
+      "visibleEnemies": 1,
+      "frames": 5164,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65130,
+        "y": 64107,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 213744.40000000002,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65678.90154699844,
+      "y": 64567.929965443815,
+      "enemies": 5,
+      "enemyProjectiles": 6,
+      "hazards": 7,
+      "visibleEnemies": 1,
+      "frames": 5195,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65201,
+        "y": 64279,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 214761.1,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65554.10994982846,
+      "y": 64612.089184278135,
+      "enemies": 3,
+      "enemyProjectiles": 9,
+      "hazards": 9,
+      "visibleEnemies": 2,
+      "frames": 5221,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65121,
+        "y": 64338,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 215811,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65669.60442189856,
+      "y": 64695.17521661113,
+      "enemies": 3,
+      "enemyProjectiles": 9,
+      "hazards": 10,
+      "visibleEnemies": 3,
+      "frames": 5251,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65136,
+        "y": 64393,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 216827.6,
+      "wave": 6,
+      "ended": false,
+      "selection": null,
+      "hp": 9,
+      "maxHp": 90,
+      "x": 65644.38447840358,
+      "y": 64651.086131536955,
+      "enemies": 1,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 1,
+      "frames": 5280,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65164,
+        "y": 64381,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 217594.30000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65644.76475206667,
+      "y": 64677.68444970023,
+      "enemies": 0,
+      "enemyProjectiles": 3,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 5300,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65163,
+        "y": 64398,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 228327.2,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65417.000296951875,
+      "y": 64710.28576682753,
+      "enemies": 22,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 5598,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64907,
+        "y": 64448,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 229777.10000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65438.39882829722,
+      "y": 64603.61549266392,
+      "enemies": 24,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 5642,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64947,
+        "y": 64351,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 231410.40000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65444.89646891518,
+      "y": 64484.235602503446,
+      "enemies": 28,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 3,
+      "frames": 5687,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64957,
+        "y": 64226,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 232843.7,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65436.84495973381,
+      "y": 64411.58034487389,
+      "enemies": 26,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 3,
+      "frames": 5726,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64956,
+        "y": 64163,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 233876.90000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65437.675316068584,
+      "y": 64356.730496310905,
+      "enemies": 30,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 4,
+      "frames": 5755,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64956,
+        "y": 64106,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 235376.90000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65406.01449829841,
+      "y": 64252.42869107917,
+      "enemies": 30,
+      "enemyProjectiles": 0,
+      "hazards": 2,
+      "visibleEnemies": 3,
+      "frames": 5797,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64926,
+        "y": 63999,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 236826.90000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65353.9622527794,
+      "y": 64178.23692995825,
+      "enemies": 31,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 2,
+      "frames": 5837,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64881,
+        "y": 63912,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 237876.80000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65284.62589323653,
+      "y": 64130.598857268065,
+      "enemies": 25,
+      "enemyProjectiles": 0,
+      "hazards": 1,
+      "visibleEnemies": 7,
+      "frames": 5867,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 63872,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 238960.10000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65287.994994975874,
+      "y": 64074.821768197515,
+      "enemies": 18,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 6,
+      "frames": 5895,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 63826,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 240010.00000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65276.11100328154,
+      "y": 64047.87581904591,
+      "enemies": 15,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 5924,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 63775,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 241043.30000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65294.31611339937,
+      "y": 63988.098720451686,
+      "enemies": 15,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 8,
+      "frames": 5953,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 63719,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 242093.30000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65313.11041053787,
+      "y": 64024.45100784507,
+      "enemies": 5,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 5982,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 63707,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 243126.60000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65299.970386841174,
+      "y": 64159.33437983956,
+      "enemies": 0,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 6011,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64836,
+        "y": 63842,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 244159.90000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65359.24108396176,
+      "y": 64375.032422775774,
+      "enemies": 6,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 6042,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64864,
+        "y": 64048,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 244910.00000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65364.96731960458,
+      "y": 64460.321298814124,
+      "enemies": 14,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 6064,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64885,
+        "y": 64184,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 245959.90000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65399.73122417147,
+      "y": 64606.87516551293,
+      "enemies": 20,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 6096,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64906,
+        "y": 64275,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 247009.80000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65418.283079483524,
+      "y": 64704.60067595715,
+      "enemies": 18,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 6127,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64930,
+        "y": 64430,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 248059.80000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65422.17290650059,
+      "y": 64720.441885262226,
+      "enemies": 26,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 6155,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64931,
+        "y": 64438,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 249093.10000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65412.74630271785,
+      "y": 64702.246672020585,
+      "enemies": 20,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 1,
+      "frames": 6188,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64933,
+        "y": 64435,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 250126.40000000002,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65409.79572714792,
+      "y": 64785.91218945897,
+      "enemies": 20,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 4,
+      "frames": 6221,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64929,
+        "y": 64493,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 251159.70000000004,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65404.633801455435,
+      "y": 64706.78226598474,
+      "enemies": 7,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 3,
+      "frames": 6253,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64931,
+        "y": 64437,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 252193.00000000003,
+      "wave": 7,
+      "ended": false,
+      "selection": null,
+      "hp": 15,
+      "maxHp": 90,
+      "x": 65406.13400562978,
+      "y": 64709.075242528204,
+      "enemies": 1,
+      "enemyProjectiles": 0,
+      "hazards": 0,
+      "visibleEnemies": 0,
+      "frames": 6287,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64930,
+        "y": 64439,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 253192.90000000002,
+      "wave": 8,
+      "ended": false,
+      "selection": null,
+      "hp": 21,
+      "maxHp": 90,
+      "x": 65502.604674938746,
+      "y": 64897.14759467437,
+      "enemies": 5,
+      "enemyProjectiles": 0,
+      "hazards": 3,
+      "visibleEnemies": 0,
+      "frames": 6322,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 64999,
+        "y": 64571,
+        "zoom": 1
+      }
+    },
+    {
+      "time": 262875.9000000001,
+      "wave": 8,
+      "ended": true,
+      "selection": null,
+      "hp": 0,
+      "maxHp": 90,
+      "x": 65881.20999999999,
+      "y": 65315.93742957798,
+      "enemies": 42,
+      "enemyProjectiles": 8,
+      "hazards": 9,
+      "visibleEnemies": 23,
+      "frames": 6601,
+      "error": null,
+      "choosing": false,
+      "camera": {
+        "x": 65276,
+        "y": 65038,
+        "zoom": 1
+      }
+    }
+  ]
+}

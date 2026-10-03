@@ -1,8 +1,8 @@
-import { mergeConfig } from 'vite';
+import { defineConfig, mergeConfig } from 'vite';
 import gameConfig from './vite.config.js';
 
 // Separate verification build. The default release entry and assets stay intact.
-export default mergeConfig(gameConfig, {
+export default defineConfig((environment) => mergeConfig(gameConfig(environment), {
   build: {
     outDir: 'test-results/character-lab-build',
     rolldownOptions: {
@@ -15,4 +15,4 @@ export default mergeConfig(gameConfig, {
       }
     }
   }
-});
+}));

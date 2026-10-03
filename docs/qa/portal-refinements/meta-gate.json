@@ -1,0 +1,4025 @@
+{
+  "generatedAt": "2026-10-01T20:25:48.220Z",
+  "fresh": {
+    "title": "Henhouse",
+    "roosterCards": 3,
+    "enabledRoosters": 1,
+    "challengeCards": 4,
+    "enabledChallenges": 1,
+    "talentNodes": 6,
+    "talentTiers": 3,
+    "talentBranches": 2,
+    "talentTierNodeCounts": [
+      3,
+      2,
+      1
+    ],
+    "cosmeticPanels": 3,
+    "cosmeticPreviews": 6,
+    "cosmeticClarity": [
+      "Barnyard Ace · VISUAL ONLY No stat changes Show",
+      "Boombardier · VISUAL ONLY No stat changes Show",
+      "Stormcrest · VISUAL ONLY No stat changes Show"
+    ],
+    "cosmeticUnlocks": [
+      "Unlock: Defeat 100 enemies",
+      "Unlock: Win with Boombardier",
+      "Unlock: Win with Stormcrest"
+    ],
+    "masteryBadges": 3,
+    "archiveSummary": [
+      "Runs",
+      "Victories",
+      "Kills"
+    ],
+    "archiveRecords": [
+      "Most kills",
+      "Fastest victory",
+      "Longest run"
+    ],
+    "archiveDrawers": [
+      "Run History",
+      "Enemy Lexicon",
+      "EVO Lexicon"
+    ],
+    "analyticsInArchive": false,
+    "currencyText": "0 kernels",
+    "enemyEntries": 12,
+    "evolutionEntries": 11,
+    "state": {
+      "version": 2,
+      "kernels": 0,
+      "lifetimeKernels": 0,
+      "talentRanks": {},
+      "roosterMastery": {},
+      "firstClearClaims": [],
+      "totalRuns": 0,
+      "victories": 0,
+      "totalKills": 0,
+      "bossDefeats": 0,
+      "roosterRuns": {},
+      "roosterWins": {},
+      "unlockedRoosters": [
+        "ace"
+      ],
+      "unlockedChallenges": [
+        "standard"
+      ],
+      "unlockedCosmetics": [],
+      "selectedChallenge": "standard",
+      "selectedCosmetics": {},
+      "discoveredEnemies": [],
+      "discoveredEvolutions": [],
+      "bests": {
+        "highestKills": 0,
+        "longestRunMs": 0,
+        "fastestVictoryMs": null
+      },
+      "history": []
+    },
+    "layout": {
+      "left": 0,
+      "right": 390,
+      "width": 390,
+      "scrollHeight": 844,
+      "clientHeight": 844,
+      "bodyOverflow": 0,
+      "primaryAction": {
+        "top": 761,
+        "bottom": 821
+      }
+    }
+  },
+  "compactMobile": {
+    "viewport": {
+      "width": 400,
+      "height": 711
+    },
+    "panel": {
+      "left": 0,
+      "right": 400,
+      "top": 0,
+      "bottom": 711,
+      "width": 400,
+      "height": 711
+    },
+    "hero": {
+      "left": 10,
+      "right": 390,
+      "top": 613,
+      "bottom": 703,
+      "width": 380,
+      "height": 90
+    },
+    "runCard": {
+      "left": 10,
+      "right": 390,
+      "top": 125,
+      "bottom": 603,
+      "width": 380,
+      "height": 478
+    },
+    "start": {
+      "left": 283,
+      "right": 383,
+      "top": 628,
+      "bottom": 688,
+      "width": 100,
+      "height": 60
+    },
+    "fullscreen": {
+      "left": 297,
+      "right": 341,
+      "top": 12,
+      "bottom": 56,
+      "width": 44,
+      "height": 44
+    },
+    "settings": {
+      "left": 346,
+      "right": 390,
+      "top": 12,
+      "bottom": 56,
+      "width": 44,
+      "height": 44
+    },
+    "challenges": {
+      "left": 19,
+      "right": 381,
+      "top": 611.234375,
+      "bottom": 687.234375,
+      "width": 362,
+      "height": 76,
+      "clientWidth": 362,
+      "scrollWidth": 861,
+      "clientHeight": 76,
+      "scrollHeight": 76,
+      "columns": "repeat(4, minmax(0px, 1fr))",
+      "cards": [
+        {
+          "left": 19,
+          "right": 229,
+          "top": 611.234375,
+          "bottom": 687.234375
+        },
+        {
+          "left": 236,
+          "right": 446,
+          "top": 611.234375,
+          "bottom": 687.234375
+        },
+        {
+          "left": 453,
+          "right": 663,
+          "top": 611.234375,
+          "bottom": 687.234375
+        },
+        {
+          "left": 670,
+          "right": 880,
+          "top": 611.234375,
+          "bottom": 687.234375
+        }
+      ]
+    },
+    "startText": "START RUNEnter the yard",
+    "startVisible": true,
+    "fullscreenVisible": true,
+    "settingsVisible": true,
+    "horizontalOverflow": 0
+  },
+  "compactTalent": {
+    "overflowY": "auto",
+    "maxScroll": 330,
+    "horizontalOverflow": 0,
+    "tree": {
+      "left": 12,
+      "right": 388
+    },
+    "frame": {
+      "width": 62,
+      "height": 62
+    },
+    "nodes": [
+      {
+        "left": 21,
+        "right": 132.328125
+      },
+      {
+        "left": 144.328125,
+        "right": 255.65625
+      },
+      {
+        "left": 267.65625,
+        "right": 379
+      },
+      {
+        "left": 71.125,
+        "right": 194
+      },
+      {
+        "left": 206,
+        "right": 328.875
+      },
+      {
+        "left": 131.984375,
+        "right": 268.015625
+      }
+    ],
+    "nodeCounts": [
+      3,
+      2,
+      1
+    ],
+    "reachesLastTier": true
+  },
+  "mobileTabScrolling": {
+    "carousel": [
+      {
+        "arena": "open-yard",
+        "status": "1 / 3 · SWIPE",
+        "selectedDot": 0,
+        "dots": 3
+      },
+      {
+        "arena": "vertical-run",
+        "status": "2 / 3 · SWIPE",
+        "selectedDot": 1,
+        "dots": 3
+      },
+      {
+        "arena": "square-coop",
+        "status": "3 / 3 · SWIPE",
+        "selectedDot": 2,
+        "dots": 3
+      },
+      {
+        "arena": "vertical-run",
+        "status": "2 / 3 · SWIPE",
+        "selectedDot": 1,
+        "dots": 3
+      }
+    ],
+    "tabs": [
+      {
+        "tab": "Roosters",
+        "touchScrollTop": 341,
+        "scrollTop": 390,
+        "maxScroll": 390,
+        "overflowY": "auto",
+        "targetVisible": true
+      },
+      {
+        "tab": "Talents",
+        "touchScrollTop": 197,
+        "scrollTop": 197,
+        "maxScroll": 197,
+        "overflowY": "auto",
+        "targetVisible": true
+      },
+      {
+        "tab": "Archive",
+        "touchScrollTop": 0,
+        "scrollTop": 0,
+        "maxScroll": 0,
+        "overflowY": "auto",
+        "targetVisible": true
+      }
+    ]
+  },
+  "talentPreview": {
+    "preview": {
+      "state": {
+        "version": 2,
+        "kernels": 12,
+        "lifetimeKernels": 12,
+        "talentRanks": {},
+        "roosterMastery": {},
+        "firstClearClaims": [],
+        "totalRuns": 0,
+        "victories": 0,
+        "totalKills": 0,
+        "bossDefeats": 0,
+        "roosterRuns": {},
+        "roosterWins": {},
+        "unlockedRoosters": [
+          "ace"
+        ],
+        "unlockedChallenges": [
+          "standard"
+        ],
+        "unlockedCosmetics": [],
+        "selectedChallenge": "standard",
+        "selectedCosmetics": {},
+        "discoveredEnemies": [],
+        "discoveredEvolutions": [],
+        "bests": {
+          "highestKills": 0,
+          "longestRunMs": 0,
+          "fastestVictoryMs": null
+        },
+        "history": []
+      },
+      "enabledNodes": 6,
+      "name": "Sturdy Nest",
+      "description": "+2% maximum HP per rank.",
+      "current": "0 %",
+      "next": "+2 %",
+      "max": "+6 %",
+      "action": "Upgrade for 12 kernels",
+      "actionDisabled": false
+    },
+    "purchased": {
+      "state": {
+        "version": 2,
+        "kernels": 0,
+        "lifetimeKernels": 12,
+        "talentRanks": {
+          "sturdy-nest": 1
+        },
+        "roosterMastery": {},
+        "firstClearClaims": [],
+        "totalRuns": 0,
+        "victories": 0,
+        "totalKills": 0,
+        "bossDefeats": 0,
+        "roosterRuns": {},
+        "roosterWins": {},
+        "unlockedRoosters": [
+          "ace"
+        ],
+        "unlockedChallenges": [
+          "standard"
+        ],
+        "unlockedCosmetics": [],
+        "selectedChallenge": "standard",
+        "selectedCosmetics": {},
+        "discoveredEnemies": [],
+        "discoveredEvolutions": [],
+        "bests": {
+          "highestKills": 0,
+          "longestRunMs": 0,
+          "fastestVictoryMs": null
+        },
+        "history": []
+      },
+      "current": "+2 %",
+      "next": "+4 %",
+      "actionDisabled": true,
+      "status": "You need 22 more kernels for the next rank."
+    },
+    "locked": {
+      "name": "Wide Wings",
+      "description": "+6% XP magnet radius per rank.",
+      "status": "Locked · 3 talent ranks required. You can still preview its effect and maximum value.",
+      "actionDisabled": true
+    }
+  },
+  "progression": {
+    "newUnlocks": [
+      {
+        "type": "rooster",
+        "id": "artillery"
+      },
+      {
+        "type": "rooster",
+        "id": "storm"
+      },
+      {
+        "type": "challenge",
+        "id": "rush-hour"
+      },
+      {
+        "type": "challenge",
+        "id": "featherweight"
+      },
+      {
+        "type": "challenge",
+        "id": "royal-gauntlet"
+      },
+      {
+        "type": "cosmetic",
+        "id": "ace-sunrise"
+      },
+      {
+        "type": "mastery",
+        "id": "ace-2",
+        "roosterId": "ace",
+        "level": 2,
+        "amount": 15
+      },
+      {
+        "type": "first-clear",
+        "id": "standard",
+        "amount": 40
+      }
+    ],
+    "state": {
+      "version": 2,
+      "kernels": 75,
+      "lifetimeKernels": 75,
+      "talentRanks": {},
+      "roosterMastery": {
+        "ace": {
+          "xp": 166
+        }
+      },
+      "firstClearClaims": [
+        "standard"
+      ],
+      "totalRuns": 1,
+      "victories": 1,
+      "totalKills": 180,
+      "bossDefeats": 1,
+      "roosterRuns": {
+        "ace": 1
+      },
+      "roosterWins": {
+        "ace": 1
+      },
+      "unlockedRoosters": [
+        "ace",
+        "artillery",
+        "storm"
+      ],
+      "unlockedChallenges": [
+        "standard",
+        "rush-hour",
+        "featherweight",
+        "royal-gauntlet"
+      ],
+      "unlockedCosmetics": [
+        "ace-sunrise"
+      ],
+      "selectedChallenge": "standard",
+      "selectedCosmetics": {},
+      "discoveredEnemies": [],
+      "discoveredEvolutions": [
+        "evo-sunshot-array"
+      ],
+      "bests": {
+        "highestKills": 180,
+        "longestRunMs": 480000,
+        "fastestVictoryMs": 480000
+      },
+      "history": [
+        {
+          "id": "1790886375148-1",
+          "playedAt": "2026-10-01T20:26:15.148Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "standard",
+          "arenaName": "Open Yard",
+          "elapsedMs": 480000,
+          "kills": 180,
+          "kernels": 75,
+          "evolutions": [
+            "Sunshot Array"
+          ]
+        }
+      ]
+    },
+    "hub": {
+      "currency": {
+        "kernels": 75,
+        "lifetimeKernels": 75
+      },
+      "talents": {
+        "totalRanks": 0,
+        "nodes": [
+          {
+            "id": "sturdy-nest",
+            "name": "Sturdy Nest",
+            "icon": "max-hp",
+            "maxRank": 3,
+            "costs": [
+              12,
+              22,
+              36
+            ],
+            "description": "+2% maximum HP per rank.",
+            "effect": {
+              "label": "Maximum HP",
+              "perRank": 2,
+              "unit": "%"
+            },
+            "unlockAt": 0,
+            "rank": 0,
+            "complete": false,
+            "unlocked": true,
+            "nextCost": 12,
+            "affordable": true,
+            "unlockLabel": ""
+          },
+          {
+            "id": "swift-spurs",
+            "name": "Swift Spurs",
+            "icon": "move-speed",
+            "maxRank": 3,
+            "costs": [
+              12,
+              22,
+              36
+            ],
+            "description": "+1.5% movement speed per rank.",
+            "effect": {
+              "label": "Movement speed",
+              "perRank": 1.5,
+              "unit": "%"
+            },
+            "unlockAt": 0,
+            "rank": 0,
+            "complete": false,
+            "unlocked": true,
+            "nextCost": 12,
+            "affordable": true,
+            "unlockLabel": ""
+          },
+          {
+            "id": "polished-yolk",
+            "name": "Polished Yolk",
+            "icon": "bigger-eggs",
+            "maxRank": 3,
+            "costs": [
+              12,
+              22,
+              36
+            ],
+            "description": "+2% starting weapon damage per rank.",
+            "effect": {
+              "label": "Starting weapon damage",
+              "perRank": 2,
+              "unit": "%"
+            },
+            "unlockAt": 0,
+            "rank": 0,
+            "complete": false,
+            "unlocked": true,
+            "nextCost": 12,
+            "affordable": true,
+            "unlockLabel": ""
+          },
+          {
+            "id": "wide-wings",
+            "name": "Wide Wings",
+            "icon": "xp-magnet",
+            "maxRank": 2,
+            "costs": [
+              35,
+              55
+            ],
+            "description": "+6% XP magnet radius per rank.",
+            "effect": {
+              "label": "XP magnet radius",
+              "perRank": 6,
+              "unit": "%"
+            },
+            "unlockAt": 3,
+            "rank": 0,
+            "complete": false,
+            "unlocked": false,
+            "nextCost": 35,
+            "affordable": false,
+            "unlockLabel": "3 talent ranks required"
+          },
+          {
+            "id": "second-choice",
+            "name": "Second Choice",
+            "icon": "restart",
+            "maxRank": 1,
+            "costs": [
+              65
+            ],
+            "description": "+1 reroll per run.",
+            "effect": {
+              "label": "Rerolls per run",
+              "perRank": 1,
+              "unit": ""
+            },
+            "unlockAt": 5,
+            "rank": 0,
+            "complete": false,
+            "unlocked": false,
+            "nextCost": 65,
+            "affordable": false,
+            "unlockLabel": "5 talent ranks required"
+          },
+          {
+            "id": "royal-instinct",
+            "name": "Royal Instinct",
+            "icon": "critical-yolk",
+            "maxRank": 1,
+            "costs": [
+              90
+            ],
+            "description": "+1% critical hit chance.",
+            "effect": {
+              "label": "Critical hit chance",
+              "perRank": 1,
+              "unit": "%"
+            },
+            "unlockAt": 8,
+            "rank": 0,
+            "complete": false,
+            "unlocked": false,
+            "nextCost": 90,
+            "affordable": false,
+            "unlockLabel": "8 talent ranks required"
+          }
+        ],
+        "bonuses": {
+          "maxHpMultiplier": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "xpMagnetMultiplier": 1,
+          "rerolls": 0,
+          "critChance": 0
+        }
+      },
+      "progress": {
+        "totalRuns": 1,
+        "victories": 1,
+        "totalKills": 180,
+        "bossDefeats": 1
+      },
+      "bests": {
+        "highestKills": 180,
+        "longestRunMs": 480000,
+        "fastestVictoryMs": 480000
+      },
+      "selectedChallenge": "standard",
+      "roosters": [
+        {
+          "id": "ace",
+          "unlocked": true,
+          "unlockLabel": "Starting rooster",
+          "runs": 1,
+          "wins": 1,
+          "mastery": {
+            "xp": 166,
+            "level": 2,
+            "maxLevel": 5,
+            "currentFloor": 120,
+            "nextTarget": 320,
+            "progress": 0.23,
+            "badgeUnlocked": true
+          },
+          "selectedCosmetic": null,
+          "cosmetics": [
+            {
+              "id": "ace-sunrise",
+              "name": "Sunrise Comb",
+              "tint": 16769690,
+              "unlocked": true,
+              "unlockLabel": "Defeat 100 enemies"
+            }
+          ]
+        },
+        {
+          "id": "artillery",
+          "unlocked": true,
+          "unlockLabel": "Defeat 75 enemies",
+          "runs": 0,
+          "wins": 0,
+          "mastery": {
+            "xp": 0,
+            "level": 1,
+            "maxLevel": 5,
+            "currentFloor": 0,
+            "nextTarget": 120,
+            "progress": 0,
+            "badgeUnlocked": false
+          },
+          "selectedCosmetic": null,
+          "cosmetics": [
+            {
+              "id": "artillery-ironclad",
+              "name": "Ironclad Plating",
+              "tint": 13097445,
+              "unlocked": false,
+              "unlockLabel": "Win with Boombardier"
+            }
+          ]
+        },
+        {
+          "id": "storm",
+          "unlocked": true,
+          "unlockLabel": "Win one run",
+          "runs": 0,
+          "wins": 0,
+          "mastery": {
+            "xp": 0,
+            "level": 1,
+            "maxLevel": 5,
+            "currentFloor": 0,
+            "nextTarget": 120,
+            "progress": 0,
+            "badgeUnlocked": false
+          },
+          "selectedCosmetic": null,
+          "cosmetics": [
+            {
+              "id": "storm-violet",
+              "name": "Violet Arc",
+              "tint": 13871359,
+              "unlocked": false,
+              "unlockLabel": "Win with Stormcrest"
+            }
+          ]
+        }
+      ],
+      "challenges": [
+        {
+          "id": "standard",
+          "name": "Standard Run",
+          "description": "Survive ten escalating waves and defeat the Brood King.",
+          "arenaId": null,
+          "unlocked": true,
+          "unlockLabel": "Always available",
+          "firstClearReward": 40,
+          "firstClearClaimed": true,
+          "rewardMultiplier": 1,
+          "modifiers": {}
+        },
+        {
+          "id": "rush-hour",
+          "name": "Rush Hour",
+          "description": "A vertical arena with faster enemies and shorter pressure phases.",
+          "arenaId": "vertical-run",
+          "unlocked": true,
+          "unlockLabel": "Win 1 Standard Run",
+          "firstClearReward": 60,
+          "firstClearClaimed": false,
+          "rewardMultiplier": 1.15,
+          "modifiers": {
+            "targetDurationScale": 0.82,
+            "enemySpeedMultiplier": 1.12,
+            "xpMultiplier": 1.08
+          }
+        },
+        {
+          "id": "featherweight",
+          "name": "Featherweight",
+          "description": "A tight square with less HP, more speed, and higher player damage.",
+          "arenaId": "square-coop",
+          "unlocked": true,
+          "unlockLabel": "Defeat 150 enemies",
+          "firstClearReward": 75,
+          "firstClearClaimed": false,
+          "rewardMultiplier": 1.25,
+          "modifiers": {
+            "playerHpMultiplier": 0.72,
+            "playerSpeedMultiplier": 1.12,
+            "playerDamageMultiplier": 1.15,
+            "enemyDamageMultiplier": 1.15
+          }
+        },
+        {
+          "id": "royal-gauntlet",
+          "name": "Royal Gauntlet",
+          "description": "An open yard with a tougher royal court and more valuable XP.",
+          "arenaId": "open-yard",
+          "unlocked": true,
+          "unlockLabel": "Defeat THE BROOD KING",
+          "firstClearReward": 100,
+          "firstClearClaimed": false,
+          "rewardMultiplier": 1.35,
+          "modifiers": {
+            "targetDurationScale": 0.92,
+            "enemyHpMultiplier": 1.18,
+            "enemyDamageMultiplier": 1.12,
+            "eliteHpMultiplier": 1.22,
+            "xpMultiplier": 1.18
+          }
+        }
+      ],
+      "lexicon": {
+        "enemies": [
+          {
+            "id": "fodder",
+            "purpose": "Crowd density and resource flow",
+            "primaryDanger": false,
+            "counterplay": "Keep moving and use area damage",
+            "seen": true
+          },
+          {
+            "id": "runner",
+            "purpose": "Fast positional pressure",
+            "primaryDanger": true,
+            "counterplay": "Cut sideways early",
+            "seen": true
+          },
+          {
+            "id": "tank",
+            "purpose": "Blocks firing lanes",
+            "primaryDanger": true,
+            "counterplay": "Prioritize or evade",
+            "seen": true
+          },
+          {
+            "id": "shooter",
+            "purpose": "Forces ranged movement",
+            "primaryDanger": true,
+            "counterplay": "Leave the telegraphed line",
+            "seen": true
+          },
+          {
+            "id": "area-denial",
+            "purpose": "Locks down movement sectors",
+            "primaryDanger": true,
+            "counterplay": "Choose an open route before the volley",
+            "seen": true
+          },
+          {
+            "id": "exploder",
+            "purpose": "Punishes close-range kills",
+            "primaryDanger": true,
+            "counterplay": "Leave the blast ring after the kill",
+            "seen": true
+          },
+          {
+            "id": "support",
+            "purpose": "Empowers enemy groups",
+            "primaryDanger": false,
+            "counterplay": "Eliminate the aura source first",
+            "seen": true
+          },
+          {
+            "id": "summoner",
+            "purpose": "Creates controlled extra density",
+            "primaryDanger": true,
+            "counterplay": "Interrupt the summon telegraph",
+            "seen": true
+          },
+          {
+            "id": "elite-runner",
+            "purpose": "Gilded Talon: speed aura and dash",
+            "counterplay": "Leave the dash line early",
+            "seen": false
+          },
+          {
+            "id": "elite-brute",
+            "purpose": "Iron Brooder: armor aura and slam",
+            "counterplay": "Clear the slam ring",
+            "seen": false
+          },
+          {
+            "id": "elite-spitter",
+            "purpose": "Violet Matron: regeneration and fan shots",
+            "counterplay": "Prioritize the Matron",
+            "seen": false
+          },
+          {
+            "id": "boss",
+            "purpose": "THE BROOD KING: three phases",
+            "counterplay": "Read the fans and lead the fireball wide",
+            "seen": false
+          }
+        ],
+        "evolutions": [
+          {
+            "id": "evo-sunshot-array",
+            "name": "Sunshot Array",
+            "base": "primary-ace",
+            "passive": "ace-deadeye-drill",
+            "discovered": true
+          },
+          {
+            "id": "evo-siegebreaker-shell",
+            "name": "Siegebreaker Shell",
+            "base": "primary-artillery",
+            "passive": "artillery-reinforced-breech",
+            "discovered": false
+          },
+          {
+            "id": "evo-tempest-crown",
+            "name": "Tempest Crown",
+            "base": "primary-storm",
+            "passive": "storm-static-plumage",
+            "discovered": false
+          },
+          {
+            "id": "evo-solar-scramble",
+            "name": "Solar Scramble",
+            "base": "golden-egg",
+            "passive": "fire-eggs",
+            "discovered": false
+          },
+          {
+            "id": "evo-thunder-roost",
+            "name": "Thunder Roost",
+            "base": "lightning-comb",
+            "passive": "critical-yolk",
+            "discovered": false
+          },
+          {
+            "id": "evo-shell-halo",
+            "name": "Shell Halo",
+            "base": "orbit-eggs",
+            "passive": "armor",
+            "discovered": false
+          },
+          {
+            "id": "evo-broodstorm",
+            "name": "Broodstorm Battery",
+            "base": "rocket-egg",
+            "passive": "bigger-eggs",
+            "discovered": false
+          },
+          {
+            "id": "evo-singularity-nest",
+            "name": "Singularity Nest",
+            "base": "void-nest",
+            "passive": "xp-magnet",
+            "discovered": false
+          },
+          {
+            "id": "evo-phoenix-pan",
+            "name": "Phoenix Pan",
+            "base": "molotov-egg",
+            "passive": "regen",
+            "discovered": false
+          },
+          {
+            "id": "evo-dawn-laser",
+            "name": "Dawn Prism",
+            "base": "laser-comb",
+            "passive": "swift-shells",
+            "discovered": false
+          },
+          {
+            "id": "evo-chick-squadron",
+            "name": "Chick Squadron",
+            "base": "support-chick",
+            "passive": "faster-eggs",
+            "discovered": false
+          }
+        ]
+      },
+      "history": [
+        {
+          "id": "1790886375148-1",
+          "playedAt": "2026-10-01T20:26:15.148Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "standard",
+          "arenaName": "Open Yard",
+          "elapsedMs": 480000,
+          "kills": 180,
+          "kernels": 75,
+          "evolutions": [
+            "Sunshot Array"
+          ]
+        }
+      ]
+    }
+  },
+  "tenRuns": {
+    "beforePurchases": {
+      "version": 2,
+      "kernels": 600,
+      "lifetimeKernels": 600,
+      "talentRanks": {},
+      "roosterMastery": {
+        "ace": {
+          "xp": 1552
+        }
+      },
+      "firstClearClaims": [
+        "standard",
+        "rush-hour",
+        "featherweight",
+        "royal-gauntlet"
+      ],
+      "totalRuns": 10,
+      "victories": 10,
+      "totalKills": 1560,
+      "bossDefeats": 10,
+      "roosterRuns": {
+        "ace": 10
+      },
+      "roosterWins": {
+        "ace": 10
+      },
+      "unlockedRoosters": [
+        "ace",
+        "artillery",
+        "storm"
+      ],
+      "unlockedChallenges": [
+        "standard",
+        "rush-hour",
+        "royal-gauntlet",
+        "featherweight"
+      ],
+      "unlockedCosmetics": [
+        "ace-sunrise"
+      ],
+      "selectedChallenge": "standard",
+      "selectedCosmetics": {},
+      "discoveredEnemies": [],
+      "discoveredEvolutions": [],
+      "bests": {
+        "highestKills": 192,
+        "longestRunMs": 510000,
+        "fastestVictoryMs": 478500
+      },
+      "history": [
+        {
+          "id": "1790886383654-10",
+          "playedAt": "2026-10-01T20:26:23.654Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "rush-hour",
+          "arenaName": "Open Yard",
+          "elapsedMs": 478500,
+          "kills": 192,
+          "kernels": 23,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-9",
+          "playedAt": "2026-10-01T20:26:23.654Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "standard",
+          "arenaName": "Open Yard",
+          "elapsedMs": 482000,
+          "kills": 184,
+          "kernels": 20,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-8",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "royal-gauntlet",
+          "arenaName": "Open Yard",
+          "elapsedMs": 485500,
+          "kills": 176,
+          "kernels": 26,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-7",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "featherweight",
+          "arenaName": "Open Yard",
+          "elapsedMs": 489000,
+          "kills": 168,
+          "kernels": 69,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-6",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "rush-hour",
+          "arenaName": "Open Yard",
+          "elapsedMs": 492500,
+          "kills": 160,
+          "kernels": 22,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-5",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "standard",
+          "arenaName": "Open Yard",
+          "elapsedMs": 496000,
+          "kills": 152,
+          "kernels": 48,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-4",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "royal-gauntlet",
+          "arenaName": "Open Yard",
+          "elapsedMs": 499500,
+          "kills": 144,
+          "kernels": 124,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-3",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "featherweight",
+          "arenaName": "Open Yard",
+          "elapsedMs": 503000,
+          "kills": 136,
+          "kernels": 116,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383653-2",
+          "playedAt": "2026-10-01T20:26:23.653Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "rush-hour",
+          "arenaName": "Open Yard",
+          "elapsedMs": 506500,
+          "kills": 128,
+          "kernels": 80,
+          "evolutions": []
+        },
+        {
+          "id": "1790886383652-1",
+          "playedAt": "2026-10-01T20:26:23.652Z",
+          "outcome": "victory",
+          "roosterId": "ace",
+          "roosterName": "Barnyard Ace",
+          "challengeId": "standard",
+          "arenaName": "Open Yard",
+          "elapsedMs": 510000,
+          "kills": 120,
+          "kernels": 72,
+          "evolutions": []
+        }
+      ]
+    },
+    "applied": {
+      "state": {
+        "version": 2,
+        "kernels": 145,
+        "lifetimeKernels": 600,
+        "talentRanks": {
+          "sturdy-nest": 3,
+          "swift-spurs": 3,
+          "polished-yolk": 3,
+          "wide-wings": 2,
+          "second-choice": 1,
+          "royal-instinct": 1
+        },
+        "roosterMastery": {
+          "ace": {
+            "xp": 1552
+          },
+          "artillery": {
+            "xp": 0
+          },
+          "storm": {
+            "xp": 0
+          }
+        },
+        "firstClearClaims": [
+          "standard",
+          "rush-hour",
+          "featherweight",
+          "royal-gauntlet"
+        ],
+        "totalRuns": 10,
+        "victories": 10,
+        "totalKills": 1560,
+        "bossDefeats": 10,
+        "roosterRuns": {
+          "ace": 10,
+          "artillery": 0,
+          "storm": 0
+        },
+        "roosterWins": {
+          "ace": 10,
+          "artillery": 0,
+          "storm": 0
+        },
+        "unlockedRoosters": [
+          "ace",
+          "artillery",
+          "storm"
+        ],
+        "unlockedChallenges": [
+          "standard",
+          "rush-hour",
+          "royal-gauntlet",
+          "featherweight"
+        ],
+        "unlockedCosmetics": [
+          "ace-sunrise"
+        ],
+        "selectedChallenge": "standard",
+        "selectedCosmetics": {
+          "ace": null,
+          "artillery": null,
+          "storm": null
+        },
+        "discoveredEnemies": [],
+        "discoveredEvolutions": [],
+        "bests": {
+          "highestKills": 192,
+          "longestRunMs": 510000,
+          "fastestVictoryMs": 478500
+        },
+        "history": [
+          {
+            "id": "1790886383654-10",
+            "playedAt": "2026-10-01T20:26:23.654Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "rush-hour",
+            "arenaName": "Open Yard",
+            "elapsedMs": 478500,
+            "kills": 192,
+            "kernels": 23,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-9",
+            "playedAt": "2026-10-01T20:26:23.654Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "standard",
+            "arenaName": "Open Yard",
+            "elapsedMs": 482000,
+            "kills": 184,
+            "kernels": 20,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-8",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "royal-gauntlet",
+            "arenaName": "Open Yard",
+            "elapsedMs": 485500,
+            "kills": 176,
+            "kernels": 26,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-7",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "featherweight",
+            "arenaName": "Open Yard",
+            "elapsedMs": 489000,
+            "kills": 168,
+            "kernels": 69,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-6",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "rush-hour",
+            "arenaName": "Open Yard",
+            "elapsedMs": 492500,
+            "kills": 160,
+            "kernels": 22,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-5",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "standard",
+            "arenaName": "Open Yard",
+            "elapsedMs": 496000,
+            "kills": 152,
+            "kernels": 48,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-4",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "royal-gauntlet",
+            "arenaName": "Open Yard",
+            "elapsedMs": 499500,
+            "kills": 144,
+            "kernels": 124,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-3",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "featherweight",
+            "arenaName": "Open Yard",
+            "elapsedMs": 503000,
+            "kills": 136,
+            "kernels": 116,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383653-2",
+            "playedAt": "2026-10-01T20:26:23.653Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "rush-hour",
+            "arenaName": "Open Yard",
+            "elapsedMs": 506500,
+            "kills": 128,
+            "kernels": 80,
+            "evolutions": []
+          },
+          {
+            "id": "1790886383652-1",
+            "playedAt": "2026-10-01T20:26:23.652Z",
+            "outcome": "victory",
+            "roosterId": "ace",
+            "roosterName": "Barnyard Ace",
+            "challengeId": "standard",
+            "arenaName": "Open Yard",
+            "elapsedMs": 510000,
+            "kills": 120,
+            "kernels": 72,
+            "evolutions": []
+          }
+        ]
+      },
+      "stats": {
+        "hp": 106,
+        "roosterId": "ace",
+        "maxHp": 106,
+        "spriteDepth": 6,
+        "speed": 219,
+        "fireRate": 800,
+        "projectileDamage": 21,
+        "shotCount": 1,
+        "fireEggs": false,
+        "armor": 0,
+        "regenPerSecond": 0,
+        "xpMagnetRadius": 246,
+        "projectilePierce": 0,
+        "projectileSizeBonus": 0,
+        "projectileSpeedBonus": 0,
+        "projectileRicochets": 0,
+        "projectileKnockback": 0,
+        "critChance": 0.09,
+        "critMultiplier": 2,
+        "primaryEvolution": null,
+        "secondWindCharges": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "goldenEggRank": 0,
+        "molotovEggRank": 0,
+        "lightningCombRank": 0,
+        "voidNestRank": 0,
+        "rocketEggRank": 0,
+        "laserCombRank": 0,
+        "upgradeRanks": {}
+      },
+      "loadout": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0,
+              "remainingMs": 0,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4,
+        "rerollsRemaining": 2
+      },
+      "bonuses": {
+        "maxHpMultiplier": 1.06,
+        "speedMultiplier": 1.045,
+        "damageMultiplier": 1.06,
+        "xpMagnetMultiplier": 1.12,
+        "rerolls": 1,
+        "critChance": 0.01
+      }
+    },
+    "reset": {
+      "version": 2,
+      "kernels": 0,
+      "lifetimeKernels": 0,
+      "talentRanks": {},
+      "roosterMastery": {},
+      "firstClearClaims": [],
+      "totalRuns": 0,
+      "victories": 0,
+      "totalKills": 0,
+      "bossDefeats": 0,
+      "roosterRuns": {},
+      "roosterWins": {},
+      "unlockedRoosters": [
+        "ace"
+      ],
+      "unlockedChallenges": [
+        "standard"
+      ],
+      "unlockedCosmetics": [],
+      "selectedChallenge": "standard",
+      "selectedCosmetics": {},
+      "discoveredEnemies": [],
+      "discoveredEvolutions": [],
+      "bests": {
+        "highestKills": 0,
+        "longestRunMs": 0,
+        "fastestVictoryMs": null
+      },
+      "history": []
+    }
+  },
+  "migration": {
+    "migrated": {
+      "state": {
+        "version": 2,
+        "kernels": 80,
+        "lifetimeKernels": 80,
+        "talentRanks": {},
+        "roosterMastery": {
+          "ace": {
+            "xp": 0
+          },
+          "artillery": {
+            "xp": 0
+          },
+          "storm": {
+            "xp": 0
+          }
+        },
+        "firstClearClaims": [],
+        "totalRuns": 5,
+        "victories": 2,
+        "totalKills": 420,
+        "bossDefeats": 2,
+        "roosterRuns": {
+          "ace": 4,
+          "artillery": 1,
+          "storm": 0
+        },
+        "roosterWins": {
+          "ace": 2,
+          "artillery": 0,
+          "storm": 0
+        },
+        "unlockedRoosters": [
+          "ace",
+          "artillery",
+          "storm"
+        ],
+        "unlockedChallenges": [
+          "standard",
+          "rush-hour",
+          "featherweight",
+          "royal-gauntlet"
+        ],
+        "unlockedCosmetics": [
+          "ace-sunrise"
+        ],
+        "selectedChallenge": "rush-hour",
+        "selectedCosmetics": {
+          "ace": "ace-sunrise",
+          "artillery": null,
+          "storm": null
+        },
+        "discoveredEnemies": [
+          "boss"
+        ],
+        "discoveredEvolutions": [
+          "evo-sunshot-array"
+        ],
+        "bests": {
+          "highestKills": 190,
+          "longestRunMs": 520000,
+          "fastestVictoryMs": 470000
+        },
+        "history": [
+          {
+            "id": "legacy-run",
+            "roosterName": "Barnyard Ace",
+            "outcome": "victory",
+            "kills": 190,
+            "elapsedMs": 470000
+          }
+        ]
+      },
+      "stored": {
+        "version": 2,
+        "kernels": 80,
+        "lifetimeKernels": 80,
+        "talentRanks": {},
+        "roosterMastery": {
+          "ace": {
+            "xp": 0
+          },
+          "artillery": {
+            "xp": 0
+          },
+          "storm": {
+            "xp": 0
+          }
+        },
+        "firstClearClaims": [],
+        "totalRuns": 5,
+        "victories": 2,
+        "totalKills": 420,
+        "bossDefeats": 2,
+        "roosterRuns": {
+          "ace": 4,
+          "artillery": 1,
+          "storm": 0
+        },
+        "roosterWins": {
+          "ace": 2,
+          "artillery": 0,
+          "storm": 0
+        },
+        "unlockedRoosters": [
+          "ace",
+          "artillery",
+          "storm"
+        ],
+        "unlockedChallenges": [
+          "standard",
+          "rush-hour",
+          "featherweight",
+          "royal-gauntlet"
+        ],
+        "unlockedCosmetics": [
+          "ace-sunrise"
+        ],
+        "selectedChallenge": "rush-hour",
+        "selectedCosmetics": {
+          "ace": "ace-sunrise",
+          "artillery": null,
+          "storm": null
+        },
+        "discoveredEnemies": [
+          "boss"
+        ],
+        "discoveredEvolutions": [
+          "evo-sunshot-array"
+        ],
+        "bests": {
+          "highestKills": 190,
+          "longestRunMs": 520000,
+          "fastestVictoryMs": 470000
+        },
+        "history": [
+          {
+            "id": "legacy-run",
+            "roosterName": "Barnyard Ace",
+            "outcome": "victory",
+            "kills": 190,
+            "elapsedMs": 470000
+          }
+        ]
+      }
+    },
+    "recovered": {
+      "version": 2,
+      "kernels": 0,
+      "lifetimeKernels": 0,
+      "talentRanks": {},
+      "roosterMastery": {},
+      "firstClearClaims": [],
+      "totalRuns": 0,
+      "victories": 0,
+      "totalKills": 0,
+      "bossDefeats": 0,
+      "roosterRuns": {},
+      "roosterWins": {},
+      "unlockedRoosters": [
+        "ace"
+      ],
+      "unlockedChallenges": [
+        "standard"
+      ],
+      "unlockedCosmetics": [],
+      "selectedChallenge": "standard",
+      "selectedCosmetics": {},
+      "discoveredEnemies": [],
+      "discoveredEvolutions": [],
+      "bests": {
+        "highestKills": 0,
+        "longestRunMs": 0,
+        "fastestVictoryMs": null
+      },
+      "history": []
+    }
+  },
+  "challenges": {
+    "rush": {
+      "state": {
+        "frames": 0,
+        "elapsed": 0,
+        "playerHp": 100,
+        "enemies": 0,
+        "projectiles": 0,
+        "enemyProjectiles": 0,
+        "molotovProjectiles": 0,
+        "rocketProjectiles": 0,
+        "lightningBolts": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "hazardZones": 0,
+        "enemyDangerZones": 0,
+        "voidZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "arenaId": "vertical-run",
+        "challengeId": "rush-hour",
+        "wave": 1,
+        "waveName": "First Peck",
+        "roosterId": "ace",
+        "shots": 0,
+        "hits": 0,
+        "kills": 0,
+        "xpCollected": 0,
+        "levelUps": 0,
+        "specialShots": 0,
+        "enemyTelegraphs": 0,
+        "cameraZoom": 0.54,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rendering": {
+          "renderScale": 1,
+          "renderWidth": 390,
+          "renderHeight": 844,
+          "renderer": "canvas"
+        },
+        "audio": {
+          "enabled": true,
+          "unlocked": false,
+          "activeVoices": 2,
+          "activeVoicesByCategory": {
+            "ui": 1,
+            "sfx": 1
+          },
+          "maxGlobalVoices": 7,
+          "loops": {
+            "music": "run-theme"
+          },
+          "volumes": {
+            "enabled": true,
+            "master": 0.8,
+            "sfx": 0.9,
+            "ui": 0.85,
+            "music": 0.65,
+            "ambience": 0.35
+          },
+          "priorities": {
+            "critical": [
+              "player-hurt",
+              "second-wind",
+              "level-up",
+              "evolution",
+              "boss-phase"
+            ],
+            "reward": [
+              "xp-pickup",
+              "upgrade-select",
+              "chest-reward",
+              "pickup-heal",
+              "pickup-magnet",
+              "pickup-bomb",
+              "victory"
+            ],
+            "ability": [
+              "rocket-launch",
+              "rocket-explosion",
+              "lightning",
+              "lightning-chain",
+              "laser",
+              "void-open",
+              "molotov-impact"
+            ],
+            "weapon": [
+              "egg-launch-ace",
+              "egg-launch-artillery",
+              "egg-launch-storm",
+              "egg-impact"
+            ],
+            "impact": [
+              "enemy-hit",
+              "enemy-pop",
+              "spitter-shot",
+              "brute-stomp",
+              "bomber-explosion"
+            ]
+          }
+        },
+        "abilitySynergies": {
+          "rocketFire": false,
+          "orbitLightning": false,
+          "molotovVoid": false
+        },
+        "choosingUpgrade": false,
+        "choosingRooster": false,
+        "gameEnded": false,
+        "pause": {
+          "paused": false,
+          "reasons": [],
+          "freezesTime": false,
+          "freezesTweens": false,
+          "pausesPhysics": false
+        },
+        "lastShotAt": 0,
+        "lastHitAt": 0,
+        "lastError": null,
+        "telemetry": {
+          "seed": 655275618,
+          "profile": "manual",
+          "roosterId": "ace",
+          "startedAt": 0,
+          "endedAt": null,
+          "frames": 0,
+          "shots": 0,
+          "hits": 0,
+          "kills": 0,
+          "enemiesSpawned": 0,
+          "damageDealt": 0,
+          "effectiveDamage": 0,
+          "overkillDamage": 0,
+          "damageBySource": {},
+          "shotsBySource": {},
+          "hitsBySource": {},
+          "effectiveDamageBySource": {},
+          "overkillBySource": {},
+          "killsBySource": {},
+          "damageTaken": 0,
+          "healingReceived": 0,
+          "damageTakenBySource": {},
+          "playerDamageEvents": 0,
+          "projectileHitsTaken": 0,
+          "projectileDamageTaken": 0,
+          "projectileDeaths": 0,
+          "enemyAttacksDeferred": 0,
+          "deathCause": null,
+          "xpCollected": 0,
+          "xpSpawned": 0,
+          "xpOrbsRemoved": 0,
+          "levelUps": 0,
+          "upgradeOffers": 0,
+          "upgradeChoices": 0,
+          "upgradePauseMs": 0,
+          "chestsFound": 0,
+          "chestChoices": 0,
+          "chestPauseMs": 0,
+          "pickupsSpawned": 0,
+          "pickupsCollected": 0,
+          "pickupsSpawnedByKind": {},
+          "pickupsCollectedByKind": {},
+          "maxEnemiesAlive": 0,
+          "enemyPopulationSamples": 0,
+          "enemyPopulationTotal": 0,
+          "visibleEnemyTotal": 0,
+          "targetableEnemyTotal": 0,
+          "targetableOffscreenTotal": 0,
+          "maxVisibleEnemies": 0,
+          "maxTargetableEnemies": 0,
+          "zeroVisibleMs": 0,
+          "totalZeroVisibleMs": 0,
+          "maxZeroVisibleMs": 0,
+          "zeroVisibleStartedAt": null,
+          "zeroVisibleWindows": [],
+          "offscreenKills": 0,
+          "firstVisibleSamples": 0,
+          "spawnToFirstVisibleTotalMs": 0,
+          "combatPressureSamples": 0,
+          "combatPressureTotal": 0,
+          "maxScheduleDebt": 0,
+          "adaptiveSpawnAdvances": 0,
+          "adaptiveSpawnAdvanceMs": 0,
+          "peakMicroFodder": 0,
+          "peakSpecialEnemies": 0,
+          "maxProjectilesAlive": 0,
+          "enemyProjectileSamples": 0,
+          "enemyProjectileTotal": 0,
+          "peakEnemyProjectiles": 0,
+          "playerDistanceTravelled": 0,
+          "peakEnemyHazards": 0,
+          "peakObjects": {},
+          "maxIdleMs": 0,
+          "idleMs": 0,
+          "maxDangerMs": 0,
+          "dangerMs": 0,
+          "minHpRatio": 1,
+          "droppedObjects": 0,
+          "lastError": null,
+          "outcome": "running",
+          "challengeId": "rush-hour",
+          "targetAcquisitionMargin": 0.2,
+          "adaptiveSpawnsEnabled": true,
+          "averageEnemyProjectiles": 0,
+          "averagePlayerSpeed": 0,
+          "adaptive": {
+            "enabled": true,
+            "spawnAdvances": 0,
+            "totalAdvanceMs": 0,
+            "maxScheduleDebt": 0
+          },
+          "visibility": {
+            "averageAlive": 0,
+            "averageVisible": 0,
+            "averageTargetable": 0,
+            "averageTargetableOffscreen": 0,
+            "maxVisible": 0,
+            "maxTargetable": 0,
+            "totalZeroVisibleMs": 0,
+            "maxZeroVisibleMs": 0,
+            "zeroVisibleWindows": [],
+            "offscreenKills": 0,
+            "averageSpawnToFirstVisibleMs": null,
+            "averageVisiblePressure": 0,
+            "maxScheduleDebt": 0
+          },
+          "frameTimes": {
+            "samples": 0,
+            "averageMs": 0,
+            "p95Ms": 0,
+            "p99Ms": 0,
+            "maxMs": 0,
+            "over16Ms": 0,
+            "over33Ms": 0
+          },
+          "ttkByEnemyType": {},
+          "progression": {
+            "choices": [],
+            "choiceCounts": {},
+            "offerCounts": {},
+            "firstUpgradeAtMs": null,
+            "firstSpectacleAtMs": null,
+            "intervalsMs": [],
+            "averageIntervalMs": null,
+            "medianIntervalMs": null,
+            "p90IntervalMs": null,
+            "minIntervalMs": null,
+            "maxIntervalMs": null,
+            "totalPauseMs": 0,
+            "pauseRatio": 0
+          },
+          "combatSources": [],
+          "elapsedMs": 2599.6,
+          "waves": [
+            {
+              "wave": 1,
+              "startedAt": 2599.6,
+              "endedAt": null,
+              "durationMs": 0,
+              "enemiesSpawned": 0,
+              "kills": 0,
+              "shots": 0,
+              "hits": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "xpCollected": 0,
+              "xpSpawned": 0,
+              "xpOrbsRemoved": 0,
+              "levelUps": 0,
+              "upgradeOffers": 0,
+              "upgradeChoices": 0,
+              "maxEnemiesAlive": 0,
+              "enemyPopulationSamples": 0,
+              "enemyPopulationTotal": 0,
+              "visibleEnemyTotal": 0,
+              "targetableEnemyTotal": 0,
+              "targetableOffscreenTotal": 0,
+              "maxVisibleEnemies": 0,
+              "maxTargetableEnemies": 0,
+              "zeroVisibleMs": 0,
+              "totalZeroVisibleMs": 0,
+              "maxZeroVisibleMs": 0,
+              "zeroVisibleStartedAt": null,
+              "zeroVisibleWindows": [],
+              "offscreenKills": 0,
+              "firstVisibleSamples": 0,
+              "spawnToFirstVisibleTotalMs": 0,
+              "combatPressureSamples": 0,
+              "combatPressureTotal": 0,
+              "maxScheduleDebt": 0,
+              "adaptiveSpawnAdvances": 0,
+              "adaptiveSpawnAdvanceMs": 0,
+              "peakMicroFodder": 0,
+              "peakSpecialEnemies": 0,
+              "enemyProjectileSamples": 0,
+              "enemyProjectileTotal": 0,
+              "peakEnemyProjectiles": 0,
+              "peakEnemyHazards": 0,
+              "peakObjects": {},
+              "minHpRatio": 1,
+              "outcome": "running",
+              "averageEnemyProjectiles": 0,
+              "visibility": {
+                "averageAlive": 0,
+                "averageVisible": 0,
+                "averageTargetable": 0,
+                "averageTargetableOffscreen": 0,
+                "maxVisible": 0,
+                "maxTargetable": 0,
+                "totalZeroVisibleMs": 0,
+                "maxZeroVisibleMs": 0,
+                "zeroVisibleWindows": [],
+                "offscreenKills": 0,
+                "averageSpawnToFirstVisibleMs": null,
+                "averageVisiblePressure": 0,
+                "maxScheduleDebt": 0
+              }
+            }
+          ],
+          "segments": [],
+          "eventCount": 2
+        },
+        "pools": {
+          "fx": {
+            "limit": 90,
+            "created": null,
+            "reused": null,
+            "dropped": 0,
+            "peak": 0,
+            "active": 0,
+            "free": null
+          },
+          "total": {
+            "limit": 1040,
+            "created": 0,
+            "reused": 0,
+            "dropped": 0,
+            "peak": 0,
+            "active": 0,
+            "free": 0
+          }
+        },
+        "seed": 655275618,
+        "profile": "offense",
+        "botEnabled": false,
+        "player": {
+          "x": 65536,
+          "y": 65536,
+          "rotation": 0,
+          "velocityX": 0,
+          "velocityY": 0
+        }
+      },
+      "challenge": {
+        "id": "rush-hour",
+        "name": "Rush Hour",
+        "arenaId": "vertical-run",
+        "modifiers": {
+          "targetDurationScale": 0.82,
+          "enemySpeedMultiplier": 1.12,
+          "xpMultiplier": 1.08
+        }
+      },
+      "player": {
+        "hp": 100,
+        "roosterId": "ace",
+        "maxHp": 100,
+        "spriteDepth": 6,
+        "speed": 210,
+        "fireRate": 800,
+        "projectileDamage": 20,
+        "shotCount": 1,
+        "fireEggs": false,
+        "armor": 0,
+        "regenPerSecond": 0,
+        "xpMagnetRadius": 220,
+        "projectilePierce": 0,
+        "projectileSizeBonus": 0,
+        "projectileSpeedBonus": 0,
+        "projectileRicochets": 0,
+        "projectileKnockback": 0,
+        "critChance": 0.08,
+        "critMultiplier": 2,
+        "primaryEvolution": null,
+        "secondWindCharges": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "goldenEggRank": 0,
+        "molotovEggRank": 0,
+        "lightningCombRank": 0,
+        "voidNestRank": 0,
+        "rocketEggRank": 0,
+        "laserCombRank": 0,
+        "upgradeRanks": {}
+      },
+      "wave": {
+        "wave": 1,
+        "name": "First Peck",
+        "intent": "Fodder only: learn movement and auto-aim as the flock thickens",
+        "count": 24,
+        "interval": 500,
+        "targetDuration": [
+          18,
+          23
+        ],
+        "spawnMinDistance": 220,
+        "bossWave": false,
+        "targetPeak": 18,
+        "mobileActiveCap": 18,
+        "primaryRoles": [],
+        "pressureCurve": [
+          {
+            "id": "build",
+            "share": 0.25,
+            "durationShare": 0.25,
+            "batch": 1,
+            "pattern": "scatter",
+            "pauseAfter": 300
+          },
+          {
+            "id": "escalate",
+            "share": 0.35,
+            "durationShare": 0.3,
+            "batch": 1,
+            "pattern": "pulse",
+            "pauseAfter": 420
+          },
+          {
+            "id": "recover",
+            "share": 0.15,
+            "durationShare": 0.18,
+            "batch": 1,
+            "pattern": "scatter",
+            "pauseAfter": 480
+          },
+          {
+            "id": "finale",
+            "share": 0.25,
+            "durationShare": 0.27,
+            "batch": 1,
+            "pattern": "surround",
+            "pauseAfter": 0
+          }
+        ],
+        "xpCurve": {
+          "budget": 44,
+          "bossXp": 0,
+          "segmentShares": [
+            0.4,
+            0.34,
+            0.1,
+            0.16
+          ]
+        },
+        "allocatedXp": 43.999999999999986,
+        "typeCounts": {
+          "slime": 15,
+          "kornkrabbler": 9
+        },
+        "roleCounts": {
+          "fodder": 15,
+          "micro-fodder": 9
+        },
+        "queue": [
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "slime",
+          "slime",
+          "slime",
+          "slime",
+          "slime"
+        ]
+      },
+      "probe": {
+        "raw": {
+          "slime": {
+            "hp": 18,
+            "speed": 78,
+            "damage": 5,
+            "xp": 3
+          },
+          "elite": {
+            "hp": 450,
+            "speed": 66,
+            "damage": 18,
+            "xp": 42
+          },
+          "boss": {
+            "abilityDamage": 12,
+            "heavyDamage": 24
+          }
+        },
+        "modified": {
+          "slime": {
+            "type": "slime",
+            "role": "fodder",
+            "hp": 18,
+            "speed": 87,
+            "damage": 5,
+            "xp": 3,
+            "texture": "enemy-slime-hop-v2",
+            "animation": "enemy-slime-hop-loop",
+            "animationPhaseFrames": 8,
+            "scale": 0.2,
+            "radius": 23,
+            "bodyOffsetX": 105,
+            "bodyOffsetY": 123,
+            "hpBarWidth": 34,
+            "hpBarYOffset": 27,
+            "ability": null,
+            "heavyProjectile": null
+          },
+          "elite": {
+            "type": "elite-brute",
+            "role": "tank",
+            "hp": 450,
+            "speed": 74,
+            "damage": 18,
+            "xp": 45,
+            "texture": "enemy-elite-brute-stomp",
+            "animation": null,
+            "directionalAnimationPrefix": null,
+            "animationSet": {
+              "move": "enemy-elite-brute-move",
+              "windup": "enemy-elite-brute-windup",
+              "resolve": "enemy-elite-brute-resolve",
+              "recovery": "enemy-elite-brute-recovery"
+            },
+            "scale": 0.39,
+            "radius": 41,
+            "bodyOffsetX": 87,
+            "bodyOffsetY": 91,
+            "hpBarWidth": 74,
+            "hpBarYOffset": 56,
+            "displayName": "Iron Brooder",
+            "elite": true,
+            "eliteTint": false,
+            "aura": {
+              "kind": "armor",
+              "label": "Armor Aura",
+              "radius": 205,
+              "reduction": 0.22,
+              "color": 7067903
+            },
+            "ability": {
+              "kind": "slam",
+              "label": "Iron Stomp",
+              "cooldown": 4400,
+              "telegraphMs": 620,
+              "heavy": true,
+              "radius": 165,
+              "damage": 21,
+              "color": 16738866
+            },
+            "heavyProjectile": null
+          },
+          "boss": {
+            "type": "boss",
+            "role": "boss",
+            "hp": 10000,
+            "speed": 65,
+            "damage": 24,
+            "xp": 130,
+            "texture": "enemy-boss-run",
+            "animation": "enemy-boss-run-left",
+            "directionalAnimationPrefix": "enemy-boss-run",
+            "animationSet": null,
+            "scale": 0.58,
+            "radius": 58,
+            "bodyOffsetX": 70,
+            "bodyOffsetY": 72,
+            "hpBarWidth": 130,
+            "hpBarYOffset": 88,
+            "displayName": "THE BROOD KING",
+            "boss": true,
+            "elite": true,
+            "entryProtectionMs": 1300,
+            "eliteTint": false,
+            "ability": {
+              "kind": "fan",
+              "cooldown": 1900,
+              "speed": 280,
+              "damage": 12,
+              "source": "boss-fan",
+              "texture": "enemy-shot",
+              "radius": 8,
+              "count": 5,
+              "spread": 1.15,
+              "color": 16742963,
+              "trailColor": 16726056,
+              "scale": 1.15,
+              "muzzleDistance": 72
+            },
+            "heavyAttackDelay": 1350,
+            "heavyProjectile": {
+              "cooldown": 3900,
+              "speed": 238,
+              "damage": 24,
+              "radius": 19,
+              "life": 4600,
+              "color": 16738340,
+              "trailColor": 16722464,
+              "trailAlpha": 0.44,
+              "scale": 1.55,
+              "muzzleDistance": 82,
+              "depth": 8,
+              "pulse": true,
+              "tint": false
+            },
+            "bossSequences": [
+              {
+                "name": "Learn the King",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "telegraphMs": 460
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 950
+                  },
+                  {
+                    "kind": "chase",
+                    "duration": 900
+                  },
+                  {
+                    "kind": "fireball",
+                    "telegraphMs": 620
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1200
+                  }
+                ]
+              },
+              {
+                "name": "Royal Fury",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "count": 6,
+                    "spread": 1.3,
+                    "telegraphMs": 520
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1000
+                  },
+                  {
+                    "kind": "chase",
+                    "duration": 850
+                  },
+                  {
+                    "kind": "fireball",
+                    "telegraphMs": 640
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1300
+                  }
+                ]
+              },
+              {
+                "name": "Last Hatch",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "count": 7,
+                    "spread": 1.45,
+                    "telegraphMs": 680
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 950
+                  },
+                  {
+                    "kind": "dash",
+                    "speed": 440,
+                    "duration": 520,
+                    "telegraphMs": 620
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 900
+                  },
+                  {
+                    "kind": "fireball",
+                    "speed": 255,
+                    "telegraphMs": 680
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1100
+                  },
+                  {
+                    "kind": "add-pulse",
+                    "maxActive": 6,
+                    "groups": [
+                      {
+                        "kind": "runner",
+                        "count": 4,
+                        "multiplier": 1
+                      },
+                      {
+                        "kind": "spitter",
+                        "count": 2,
+                        "multiplier": 1
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1300
+                  }
+                ]
+              }
+            ],
+            "bossPhases": [
+              {
+                "name": "Phase 2: Royal Fury",
+                "subtitle": "Wider fan shots, six adds, and a clear breathing window.",
+                "threshold": 0.65,
+                "speedMultiplier": 1.08,
+                "transitionMs": 1000,
+                "adds": [
+                  {
+                    "kind": "slime",
+                    "count": 6,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "name": "Phase 3: Last Hatch",
+                "subtitle": "Seven-shot fan, charge, and a limited add squad.",
+                "threshold": 0.32,
+                "speedMultiplier": 1.12,
+                "transitionMs": 1100,
+                "adds": [
+                  {
+                    "kind": "runner",
+                    "count": 4,
+                    "multiplier": 1
+                  },
+                  {
+                    "kind": "spitter",
+                    "count": 2,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "wave": {
+            "targetDuration": [
+              21,
+              29
+            ]
+          }
+        }
+      },
+      "waveLabel": "Wave 1/10 · Rush Hour1/10"
+    },
+    "feather": {
+      "state": {
+        "frames": 0,
+        "elapsed": 0,
+        "playerHp": 72,
+        "enemies": 0,
+        "projectiles": 0,
+        "enemyProjectiles": 0,
+        "molotovProjectiles": 0,
+        "rocketProjectiles": 0,
+        "lightningBolts": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "hazardZones": 0,
+        "enemyDangerZones": 0,
+        "voidZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "arenaId": "square-coop",
+        "challengeId": "featherweight",
+        "wave": 1,
+        "waveName": "First Peck",
+        "roosterId": "ace",
+        "shots": 0,
+        "hits": 0,
+        "kills": 0,
+        "xpCollected": 0,
+        "levelUps": 0,
+        "specialShots": 0,
+        "enemyTelegraphs": 0,
+        "cameraZoom": 0.85,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rendering": {
+          "renderScale": 1,
+          "renderWidth": 390,
+          "renderHeight": 844,
+          "renderer": "canvas"
+        },
+        "audio": {
+          "enabled": true,
+          "unlocked": false,
+          "activeVoices": 2,
+          "activeVoicesByCategory": {
+            "ui": 1,
+            "sfx": 1
+          },
+          "maxGlobalVoices": 7,
+          "loops": {
+            "music": "run-theme"
+          },
+          "volumes": {
+            "enabled": true,
+            "master": 0.8,
+            "sfx": 0.9,
+            "ui": 0.85,
+            "music": 0.65,
+            "ambience": 0.35
+          },
+          "priorities": {
+            "critical": [
+              "player-hurt",
+              "second-wind",
+              "level-up",
+              "evolution",
+              "boss-phase"
+            ],
+            "reward": [
+              "xp-pickup",
+              "upgrade-select",
+              "chest-reward",
+              "pickup-heal",
+              "pickup-magnet",
+              "pickup-bomb",
+              "victory"
+            ],
+            "ability": [
+              "rocket-launch",
+              "rocket-explosion",
+              "lightning",
+              "lightning-chain",
+              "laser",
+              "void-open",
+              "molotov-impact"
+            ],
+            "weapon": [
+              "egg-launch-ace",
+              "egg-launch-artillery",
+              "egg-launch-storm",
+              "egg-impact"
+            ],
+            "impact": [
+              "enemy-hit",
+              "enemy-pop",
+              "spitter-shot",
+              "brute-stomp",
+              "bomber-explosion"
+            ]
+          }
+        },
+        "abilitySynergies": {
+          "rocketFire": false,
+          "orbitLightning": false,
+          "molotovVoid": false
+        },
+        "choosingUpgrade": false,
+        "choosingRooster": false,
+        "gameEnded": false,
+        "pause": {
+          "paused": false,
+          "reasons": [],
+          "freezesTime": false,
+          "freezesTweens": false,
+          "pausesPhysics": false
+        },
+        "lastShotAt": 0,
+        "lastHitAt": 0,
+        "lastError": null,
+        "telemetry": {
+          "seed": 861176962,
+          "profile": "manual",
+          "roosterId": "ace",
+          "startedAt": 0,
+          "endedAt": null,
+          "frames": 0,
+          "shots": 0,
+          "hits": 0,
+          "kills": 0,
+          "enemiesSpawned": 0,
+          "damageDealt": 0,
+          "effectiveDamage": 0,
+          "overkillDamage": 0,
+          "damageBySource": {},
+          "shotsBySource": {},
+          "hitsBySource": {},
+          "effectiveDamageBySource": {},
+          "overkillBySource": {},
+          "killsBySource": {},
+          "damageTaken": 0,
+          "healingReceived": 0,
+          "damageTakenBySource": {},
+          "playerDamageEvents": 0,
+          "projectileHitsTaken": 0,
+          "projectileDamageTaken": 0,
+          "projectileDeaths": 0,
+          "enemyAttacksDeferred": 0,
+          "deathCause": null,
+          "xpCollected": 0,
+          "xpSpawned": 0,
+          "xpOrbsRemoved": 0,
+          "levelUps": 0,
+          "upgradeOffers": 0,
+          "upgradeChoices": 0,
+          "upgradePauseMs": 0,
+          "chestsFound": 0,
+          "chestChoices": 0,
+          "chestPauseMs": 0,
+          "pickupsSpawned": 0,
+          "pickupsCollected": 0,
+          "pickupsSpawnedByKind": {},
+          "pickupsCollectedByKind": {},
+          "maxEnemiesAlive": 0,
+          "enemyPopulationSamples": 0,
+          "enemyPopulationTotal": 0,
+          "visibleEnemyTotal": 0,
+          "targetableEnemyTotal": 0,
+          "targetableOffscreenTotal": 0,
+          "maxVisibleEnemies": 0,
+          "maxTargetableEnemies": 0,
+          "zeroVisibleMs": 0,
+          "totalZeroVisibleMs": 0,
+          "maxZeroVisibleMs": 0,
+          "zeroVisibleStartedAt": null,
+          "zeroVisibleWindows": [],
+          "offscreenKills": 0,
+          "firstVisibleSamples": 0,
+          "spawnToFirstVisibleTotalMs": 0,
+          "combatPressureSamples": 0,
+          "combatPressureTotal": 0,
+          "maxScheduleDebt": 0,
+          "adaptiveSpawnAdvances": 0,
+          "adaptiveSpawnAdvanceMs": 0,
+          "peakMicroFodder": 0,
+          "peakSpecialEnemies": 0,
+          "maxProjectilesAlive": 0,
+          "enemyProjectileSamples": 0,
+          "enemyProjectileTotal": 0,
+          "peakEnemyProjectiles": 0,
+          "playerDistanceTravelled": 0,
+          "peakEnemyHazards": 0,
+          "peakObjects": {},
+          "maxIdleMs": 0,
+          "idleMs": 0,
+          "maxDangerMs": 0,
+          "dangerMs": 0,
+          "minHpRatio": 1,
+          "droppedObjects": 0,
+          "lastError": null,
+          "outcome": "running",
+          "challengeId": "featherweight",
+          "targetAcquisitionMargin": 0.2,
+          "adaptiveSpawnsEnabled": true,
+          "averageEnemyProjectiles": 0,
+          "averagePlayerSpeed": 0,
+          "adaptive": {
+            "enabled": true,
+            "spawnAdvances": 0,
+            "totalAdvanceMs": 0,
+            "maxScheduleDebt": 0
+          },
+          "visibility": {
+            "averageAlive": 0,
+            "averageVisible": 0,
+            "averageTargetable": 0,
+            "averageTargetableOffscreen": 0,
+            "maxVisible": 0,
+            "maxTargetable": 0,
+            "totalZeroVisibleMs": 0,
+            "maxZeroVisibleMs": 0,
+            "zeroVisibleWindows": [],
+            "offscreenKills": 0,
+            "averageSpawnToFirstVisibleMs": null,
+            "averageVisiblePressure": 0,
+            "maxScheduleDebt": 0
+          },
+          "frameTimes": {
+            "samples": 0,
+            "averageMs": 0,
+            "p95Ms": 0,
+            "p99Ms": 0,
+            "maxMs": 0,
+            "over16Ms": 0,
+            "over33Ms": 0
+          },
+          "ttkByEnemyType": {},
+          "progression": {
+            "choices": [],
+            "choiceCounts": {},
+            "offerCounts": {},
+            "firstUpgradeAtMs": null,
+            "firstSpectacleAtMs": null,
+            "intervalsMs": [],
+            "averageIntervalMs": null,
+            "medianIntervalMs": null,
+            "p90IntervalMs": null,
+            "minIntervalMs": null,
+            "maxIntervalMs": null,
+            "totalPauseMs": 0,
+            "pauseRatio": 0
+          },
+          "combatSources": [],
+          "elapsedMs": 2554.5,
+          "waves": [
+            {
+              "wave": 1,
+              "startedAt": 2554.5,
+              "endedAt": null,
+              "durationMs": 0,
+              "enemiesSpawned": 0,
+              "kills": 0,
+              "shots": 0,
+              "hits": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "xpCollected": 0,
+              "xpSpawned": 0,
+              "xpOrbsRemoved": 0,
+              "levelUps": 0,
+              "upgradeOffers": 0,
+              "upgradeChoices": 0,
+              "maxEnemiesAlive": 0,
+              "enemyPopulationSamples": 0,
+              "enemyPopulationTotal": 0,
+              "visibleEnemyTotal": 0,
+              "targetableEnemyTotal": 0,
+              "targetableOffscreenTotal": 0,
+              "maxVisibleEnemies": 0,
+              "maxTargetableEnemies": 0,
+              "zeroVisibleMs": 0,
+              "totalZeroVisibleMs": 0,
+              "maxZeroVisibleMs": 0,
+              "zeroVisibleStartedAt": null,
+              "zeroVisibleWindows": [],
+              "offscreenKills": 0,
+              "firstVisibleSamples": 0,
+              "spawnToFirstVisibleTotalMs": 0,
+              "combatPressureSamples": 0,
+              "combatPressureTotal": 0,
+              "maxScheduleDebt": 0,
+              "adaptiveSpawnAdvances": 0,
+              "adaptiveSpawnAdvanceMs": 0,
+              "peakMicroFodder": 0,
+              "peakSpecialEnemies": 0,
+              "enemyProjectileSamples": 0,
+              "enemyProjectileTotal": 0,
+              "peakEnemyProjectiles": 0,
+              "peakEnemyHazards": 0,
+              "peakObjects": {},
+              "minHpRatio": 1,
+              "outcome": "running",
+              "averageEnemyProjectiles": 0,
+              "visibility": {
+                "averageAlive": 0,
+                "averageVisible": 0,
+                "averageTargetable": 0,
+                "averageTargetableOffscreen": 0,
+                "maxVisible": 0,
+                "maxTargetable": 0,
+                "totalZeroVisibleMs": 0,
+                "maxZeroVisibleMs": 0,
+                "zeroVisibleWindows": [],
+                "offscreenKills": 0,
+                "averageSpawnToFirstVisibleMs": null,
+                "averageVisiblePressure": 0,
+                "maxScheduleDebt": 0
+              }
+            }
+          ],
+          "segments": [],
+          "eventCount": 2
+        },
+        "pools": {
+          "fx": {
+            "limit": 90,
+            "created": null,
+            "reused": null,
+            "dropped": 0,
+            "peak": 0,
+            "active": 0,
+            "free": null
+          },
+          "total": {
+            "limit": 1040,
+            "created": 0,
+            "reused": 0,
+            "dropped": 0,
+            "peak": 0,
+            "active": 0,
+            "free": 0
+          }
+        },
+        "seed": 861176962,
+        "profile": "offense",
+        "botEnabled": false,
+        "player": {
+          "x": 700,
+          "y": 450,
+          "rotation": 0,
+          "velocityX": 0,
+          "velocityY": 0
+        }
+      },
+      "challenge": {
+        "id": "featherweight",
+        "name": "Featherweight",
+        "arenaId": "square-coop",
+        "modifiers": {
+          "playerHpMultiplier": 0.72,
+          "playerSpeedMultiplier": 1.12,
+          "playerDamageMultiplier": 1.15,
+          "enemyDamageMultiplier": 1.15
+        }
+      },
+      "player": {
+        "hp": 72,
+        "roosterId": "ace",
+        "maxHp": 72,
+        "spriteDepth": 6,
+        "speed": 235,
+        "fireRate": 800,
+        "projectileDamage": 23,
+        "shotCount": 1,
+        "fireEggs": false,
+        "armor": 0,
+        "regenPerSecond": 0,
+        "xpMagnetRadius": 220,
+        "projectilePierce": 0,
+        "projectileSizeBonus": 0,
+        "projectileSpeedBonus": 0,
+        "projectileRicochets": 0,
+        "projectileKnockback": 0,
+        "critChance": 0.08,
+        "critMultiplier": 2,
+        "primaryEvolution": null,
+        "secondWindCharges": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "goldenEggRank": 0,
+        "molotovEggRank": 0,
+        "lightningCombRank": 0,
+        "voidNestRank": 0,
+        "rocketEggRank": 0,
+        "laserCombRank": 0,
+        "upgradeRanks": {}
+      },
+      "wave": {
+        "wave": 1,
+        "name": "First Peck",
+        "intent": "Fodder only: learn movement and auto-aim as the flock thickens",
+        "count": 24,
+        "interval": 500,
+        "targetDuration": [
+          22,
+          28
+        ],
+        "spawnMinDistance": 220,
+        "bossWave": false,
+        "targetPeak": 18,
+        "mobileActiveCap": 18,
+        "primaryRoles": [],
+        "pressureCurve": [
+          {
+            "id": "build",
+            "share": 0.25,
+            "durationShare": 0.25,
+            "batch": 1,
+            "pattern": "scatter",
+            "pauseAfter": 300
+          },
+          {
+            "id": "escalate",
+            "share": 0.35,
+            "durationShare": 0.3,
+            "batch": 1,
+            "pattern": "pulse",
+            "pauseAfter": 420
+          },
+          {
+            "id": "recover",
+            "share": 0.15,
+            "durationShare": 0.18,
+            "batch": 1,
+            "pattern": "scatter",
+            "pauseAfter": 480
+          },
+          {
+            "id": "finale",
+            "share": 0.25,
+            "durationShare": 0.27,
+            "batch": 1,
+            "pattern": "surround",
+            "pauseAfter": 0
+          }
+        ],
+        "xpCurve": {
+          "budget": 44,
+          "bossXp": 0,
+          "segmentShares": [
+            0.4,
+            0.34,
+            0.1,
+            0.16
+          ]
+        },
+        "allocatedXp": 43.999999999999986,
+        "typeCounts": {
+          "slime": 15,
+          "kornkrabbler": 9
+        },
+        "roleCounts": {
+          "fodder": 15,
+          "micro-fodder": 9
+        },
+        "queue": [
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "slime",
+          "slime",
+          "slime",
+          "slime",
+          "slime"
+        ]
+      },
+      "probe": {
+        "raw": {
+          "slime": {
+            "hp": 18,
+            "speed": 78,
+            "damage": 5,
+            "xp": 3
+          },
+          "elite": {
+            "hp": 450,
+            "speed": 66,
+            "damage": 18,
+            "xp": 42
+          },
+          "boss": {
+            "abilityDamage": 12,
+            "heavyDamage": 24
+          }
+        },
+        "modified": {
+          "slime": {
+            "type": "slime",
+            "role": "fodder",
+            "hp": 18,
+            "speed": 78,
+            "damage": 6,
+            "xp": 3,
+            "texture": "enemy-slime-hop-v2",
+            "animation": "enemy-slime-hop-loop",
+            "animationPhaseFrames": 8,
+            "scale": 0.2,
+            "radius": 23,
+            "bodyOffsetX": 105,
+            "bodyOffsetY": 123,
+            "hpBarWidth": 34,
+            "hpBarYOffset": 27,
+            "ability": null,
+            "heavyProjectile": null
+          },
+          "elite": {
+            "type": "elite-brute",
+            "role": "tank",
+            "hp": 450,
+            "speed": 66,
+            "damage": 21,
+            "xp": 42,
+            "texture": "enemy-elite-brute-stomp",
+            "animation": null,
+            "directionalAnimationPrefix": null,
+            "animationSet": {
+              "move": "enemy-elite-brute-move",
+              "windup": "enemy-elite-brute-windup",
+              "resolve": "enemy-elite-brute-resolve",
+              "recovery": "enemy-elite-brute-recovery"
+            },
+            "scale": 0.39,
+            "radius": 41,
+            "bodyOffsetX": 87,
+            "bodyOffsetY": 91,
+            "hpBarWidth": 74,
+            "hpBarYOffset": 56,
+            "displayName": "Iron Brooder",
+            "elite": true,
+            "eliteTint": false,
+            "aura": {
+              "kind": "armor",
+              "label": "Armor Aura",
+              "radius": 205,
+              "reduction": 0.22,
+              "color": 7067903
+            },
+            "ability": {
+              "kind": "slam",
+              "label": "Iron Stomp",
+              "cooldown": 4400,
+              "telegraphMs": 620,
+              "heavy": true,
+              "radius": 165,
+              "damage": 24,
+              "color": 16738866
+            },
+            "heavyProjectile": null
+          },
+          "boss": {
+            "type": "boss",
+            "role": "boss",
+            "hp": 10000,
+            "speed": 58,
+            "damage": 28,
+            "xp": 120,
+            "texture": "enemy-boss-run",
+            "animation": "enemy-boss-run-left",
+            "directionalAnimationPrefix": "enemy-boss-run",
+            "animationSet": null,
+            "scale": 0.58,
+            "radius": 58,
+            "bodyOffsetX": 70,
+            "bodyOffsetY": 72,
+            "hpBarWidth": 130,
+            "hpBarYOffset": 88,
+            "displayName": "THE BROOD KING",
+            "boss": true,
+            "elite": true,
+            "entryProtectionMs": 1300,
+            "eliteTint": false,
+            "ability": {
+              "kind": "fan",
+              "cooldown": 1900,
+              "speed": 280,
+              "damage": 14,
+              "source": "boss-fan",
+              "texture": "enemy-shot",
+              "radius": 8,
+              "count": 5,
+              "spread": 1.15,
+              "color": 16742963,
+              "trailColor": 16726056,
+              "scale": 1.15,
+              "muzzleDistance": 72
+            },
+            "heavyAttackDelay": 1350,
+            "heavyProjectile": {
+              "cooldown": 3900,
+              "speed": 238,
+              "damage": 28,
+              "radius": 19,
+              "life": 4600,
+              "color": 16738340,
+              "trailColor": 16722464,
+              "trailAlpha": 0.44,
+              "scale": 1.55,
+              "muzzleDistance": 82,
+              "depth": 8,
+              "pulse": true,
+              "tint": false
+            },
+            "bossSequences": [
+              {
+                "name": "Learn the King",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "telegraphMs": 460
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 950
+                  },
+                  {
+                    "kind": "chase",
+                    "duration": 900
+                  },
+                  {
+                    "kind": "fireball",
+                    "telegraphMs": 620
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1200
+                  }
+                ]
+              },
+              {
+                "name": "Royal Fury",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "count": 6,
+                    "spread": 1.3,
+                    "telegraphMs": 520
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1000
+                  },
+                  {
+                    "kind": "chase",
+                    "duration": 850
+                  },
+                  {
+                    "kind": "fireball",
+                    "telegraphMs": 640
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1300
+                  }
+                ]
+              },
+              {
+                "name": "Last Hatch",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "count": 7,
+                    "spread": 1.45,
+                    "telegraphMs": 680
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 950
+                  },
+                  {
+                    "kind": "dash",
+                    "speed": 440,
+                    "duration": 520,
+                    "telegraphMs": 620
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 900
+                  },
+                  {
+                    "kind": "fireball",
+                    "speed": 255,
+                    "telegraphMs": 680
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1100
+                  },
+                  {
+                    "kind": "add-pulse",
+                    "maxActive": 6,
+                    "groups": [
+                      {
+                        "kind": "runner",
+                        "count": 4,
+                        "multiplier": 1
+                      },
+                      {
+                        "kind": "spitter",
+                        "count": 2,
+                        "multiplier": 1
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1300
+                  }
+                ]
+              }
+            ],
+            "bossPhases": [
+              {
+                "name": "Phase 2: Royal Fury",
+                "subtitle": "Wider fan shots, six adds, and a clear breathing window.",
+                "threshold": 0.65,
+                "speedMultiplier": 1.08,
+                "transitionMs": 1000,
+                "adds": [
+                  {
+                    "kind": "slime",
+                    "count": 6,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "name": "Phase 3: Last Hatch",
+                "subtitle": "Seven-shot fan, charge, and a limited add squad.",
+                "threshold": 0.32,
+                "speedMultiplier": 1.12,
+                "transitionMs": 1100,
+                "adds": [
+                  {
+                    "kind": "runner",
+                    "count": 4,
+                    "multiplier": 1
+                  },
+                  {
+                    "kind": "spitter",
+                    "count": 2,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "wave": {
+            "targetDuration": [
+              25,
+              35
+            ]
+          }
+        }
+      },
+      "waveLabel": "Wave 1/10 · Featherweight1/10"
+    },
+    "royal": {
+      "state": {
+        "frames": 0,
+        "elapsed": 0,
+        "playerHp": 100,
+        "enemies": 0,
+        "projectiles": 0,
+        "enemyProjectiles": 0,
+        "molotovProjectiles": 0,
+        "rocketProjectiles": 0,
+        "lightningBolts": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "hazardZones": 0,
+        "enemyDangerZones": 0,
+        "voidZones": 0,
+        "xpOrbs": 0,
+        "pickups": 0,
+        "arenaId": "open-yard",
+        "challengeId": "royal-gauntlet",
+        "wave": 1,
+        "waveName": "First Peck",
+        "roosterId": "ace",
+        "shots": 0,
+        "hits": 0,
+        "kills": 0,
+        "xpCollected": 0,
+        "levelUps": 0,
+        "specialShots": 0,
+        "enemyTelegraphs": 0,
+        "cameraZoom": 0.85,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rendering": {
+          "renderScale": 1,
+          "renderWidth": 390,
+          "renderHeight": 844,
+          "renderer": "canvas"
+        },
+        "audio": {
+          "enabled": true,
+          "unlocked": false,
+          "activeVoices": 2,
+          "activeVoicesByCategory": {
+            "ui": 1,
+            "sfx": 1
+          },
+          "maxGlobalVoices": 7,
+          "loops": {
+            "music": "run-theme"
+          },
+          "volumes": {
+            "enabled": true,
+            "master": 0.8,
+            "sfx": 0.9,
+            "ui": 0.85,
+            "music": 0.65,
+            "ambience": 0.35
+          },
+          "priorities": {
+            "critical": [
+              "player-hurt",
+              "second-wind",
+              "level-up",
+              "evolution",
+              "boss-phase"
+            ],
+            "reward": [
+              "xp-pickup",
+              "upgrade-select",
+              "chest-reward",
+              "pickup-heal",
+              "pickup-magnet",
+              "pickup-bomb",
+              "victory"
+            ],
+            "ability": [
+              "rocket-launch",
+              "rocket-explosion",
+              "lightning",
+              "lightning-chain",
+              "laser",
+              "void-open",
+              "molotov-impact"
+            ],
+            "weapon": [
+              "egg-launch-ace",
+              "egg-launch-artillery",
+              "egg-launch-storm",
+              "egg-impact"
+            ],
+            "impact": [
+              "enemy-hit",
+              "enemy-pop",
+              "spitter-shot",
+              "brute-stomp",
+              "bomber-explosion"
+            ]
+          }
+        },
+        "abilitySynergies": {
+          "rocketFire": false,
+          "orbitLightning": false,
+          "molotovVoid": false
+        },
+        "choosingUpgrade": false,
+        "choosingRooster": false,
+        "gameEnded": false,
+        "pause": {
+          "paused": false,
+          "reasons": [],
+          "freezesTime": false,
+          "freezesTweens": false,
+          "pausesPhysics": false
+        },
+        "lastShotAt": 0,
+        "lastHitAt": 0,
+        "lastError": null,
+        "telemetry": {
+          "seed": 2962201195,
+          "profile": "manual",
+          "roosterId": "ace",
+          "startedAt": 0,
+          "endedAt": null,
+          "frames": 0,
+          "shots": 0,
+          "hits": 0,
+          "kills": 0,
+          "enemiesSpawned": 0,
+          "damageDealt": 0,
+          "effectiveDamage": 0,
+          "overkillDamage": 0,
+          "damageBySource": {},
+          "shotsBySource": {},
+          "hitsBySource": {},
+          "effectiveDamageBySource": {},
+          "overkillBySource": {},
+          "killsBySource": {},
+          "damageTaken": 0,
+          "healingReceived": 0,
+          "damageTakenBySource": {},
+          "playerDamageEvents": 0,
+          "projectileHitsTaken": 0,
+          "projectileDamageTaken": 0,
+          "projectileDeaths": 0,
+          "enemyAttacksDeferred": 0,
+          "deathCause": null,
+          "xpCollected": 0,
+          "xpSpawned": 0,
+          "xpOrbsRemoved": 0,
+          "levelUps": 0,
+          "upgradeOffers": 0,
+          "upgradeChoices": 0,
+          "upgradePauseMs": 0,
+          "chestsFound": 0,
+          "chestChoices": 0,
+          "chestPauseMs": 0,
+          "pickupsSpawned": 0,
+          "pickupsCollected": 0,
+          "pickupsSpawnedByKind": {},
+          "pickupsCollectedByKind": {},
+          "maxEnemiesAlive": 0,
+          "enemyPopulationSamples": 0,
+          "enemyPopulationTotal": 0,
+          "visibleEnemyTotal": 0,
+          "targetableEnemyTotal": 0,
+          "targetableOffscreenTotal": 0,
+          "maxVisibleEnemies": 0,
+          "maxTargetableEnemies": 0,
+          "zeroVisibleMs": 0,
+          "totalZeroVisibleMs": 0,
+          "maxZeroVisibleMs": 0,
+          "zeroVisibleStartedAt": null,
+          "zeroVisibleWindows": [],
+          "offscreenKills": 0,
+          "firstVisibleSamples": 0,
+          "spawnToFirstVisibleTotalMs": 0,
+          "combatPressureSamples": 0,
+          "combatPressureTotal": 0,
+          "maxScheduleDebt": 0,
+          "adaptiveSpawnAdvances": 0,
+          "adaptiveSpawnAdvanceMs": 0,
+          "peakMicroFodder": 0,
+          "peakSpecialEnemies": 0,
+          "maxProjectilesAlive": 0,
+          "enemyProjectileSamples": 0,
+          "enemyProjectileTotal": 0,
+          "peakEnemyProjectiles": 0,
+          "playerDistanceTravelled": 0,
+          "peakEnemyHazards": 0,
+          "peakObjects": {},
+          "maxIdleMs": 0,
+          "idleMs": 0,
+          "maxDangerMs": 0,
+          "dangerMs": 0,
+          "minHpRatio": 1,
+          "droppedObjects": 0,
+          "lastError": null,
+          "outcome": "running",
+          "challengeId": "royal-gauntlet",
+          "targetAcquisitionMargin": 0.2,
+          "adaptiveSpawnsEnabled": true,
+          "averageEnemyProjectiles": 0,
+          "averagePlayerSpeed": 0,
+          "adaptive": {
+            "enabled": true,
+            "spawnAdvances": 0,
+            "totalAdvanceMs": 0,
+            "maxScheduleDebt": 0
+          },
+          "visibility": {
+            "averageAlive": 0,
+            "averageVisible": 0,
+            "averageTargetable": 0,
+            "averageTargetableOffscreen": 0,
+            "maxVisible": 0,
+            "maxTargetable": 0,
+            "totalZeroVisibleMs": 0,
+            "maxZeroVisibleMs": 0,
+            "zeroVisibleWindows": [],
+            "offscreenKills": 0,
+            "averageSpawnToFirstVisibleMs": null,
+            "averageVisiblePressure": 0,
+            "maxScheduleDebt": 0
+          },
+          "frameTimes": {
+            "samples": 0,
+            "averageMs": 0,
+            "p95Ms": 0,
+            "p99Ms": 0,
+            "maxMs": 0,
+            "over16Ms": 0,
+            "over33Ms": 0
+          },
+          "ttkByEnemyType": {},
+          "progression": {
+            "choices": [],
+            "choiceCounts": {},
+            "offerCounts": {},
+            "firstUpgradeAtMs": null,
+            "firstSpectacleAtMs": null,
+            "intervalsMs": [],
+            "averageIntervalMs": null,
+            "medianIntervalMs": null,
+            "p90IntervalMs": null,
+            "minIntervalMs": null,
+            "maxIntervalMs": null,
+            "totalPauseMs": 0,
+            "pauseRatio": 0
+          },
+          "combatSources": [],
+          "elapsedMs": 2199.7,
+          "waves": [
+            {
+              "wave": 1,
+              "startedAt": 2199.7,
+              "endedAt": null,
+              "durationMs": 0,
+              "enemiesSpawned": 0,
+              "kills": 0,
+              "shots": 0,
+              "hits": 0,
+              "damageDealt": 0,
+              "damageTaken": 0,
+              "xpCollected": 0,
+              "xpSpawned": 0,
+              "xpOrbsRemoved": 0,
+              "levelUps": 0,
+              "upgradeOffers": 0,
+              "upgradeChoices": 0,
+              "maxEnemiesAlive": 0,
+              "enemyPopulationSamples": 0,
+              "enemyPopulationTotal": 0,
+              "visibleEnemyTotal": 0,
+              "targetableEnemyTotal": 0,
+              "targetableOffscreenTotal": 0,
+              "maxVisibleEnemies": 0,
+              "maxTargetableEnemies": 0,
+              "zeroVisibleMs": 0,
+              "totalZeroVisibleMs": 0,
+              "maxZeroVisibleMs": 0,
+              "zeroVisibleStartedAt": null,
+              "zeroVisibleWindows": [],
+              "offscreenKills": 0,
+              "firstVisibleSamples": 0,
+              "spawnToFirstVisibleTotalMs": 0,
+              "combatPressureSamples": 0,
+              "combatPressureTotal": 0,
+              "maxScheduleDebt": 0,
+              "adaptiveSpawnAdvances": 0,
+              "adaptiveSpawnAdvanceMs": 0,
+              "peakMicroFodder": 0,
+              "peakSpecialEnemies": 0,
+              "enemyProjectileSamples": 0,
+              "enemyProjectileTotal": 0,
+              "peakEnemyProjectiles": 0,
+              "peakEnemyHazards": 0,
+              "peakObjects": {},
+              "minHpRatio": 1,
+              "outcome": "running",
+              "averageEnemyProjectiles": 0,
+              "visibility": {
+                "averageAlive": 0,
+                "averageVisible": 0,
+                "averageTargetable": 0,
+                "averageTargetableOffscreen": 0,
+                "maxVisible": 0,
+                "maxTargetable": 0,
+                "totalZeroVisibleMs": 0,
+                "maxZeroVisibleMs": 0,
+                "zeroVisibleWindows": [],
+                "offscreenKills": 0,
+                "averageSpawnToFirstVisibleMs": null,
+                "averageVisiblePressure": 0,
+                "maxScheduleDebt": 0
+              }
+            }
+          ],
+          "segments": [],
+          "eventCount": 2
+        },
+        "pools": {
+          "fx": {
+            "limit": 90,
+            "created": null,
+            "reused": null,
+            "dropped": 0,
+            "peak": 0,
+            "active": 0,
+            "free": null
+          },
+          "total": {
+            "limit": 1040,
+            "created": 0,
+            "reused": 0,
+            "dropped": 0,
+            "peak": 0,
+            "active": 0,
+            "free": 0
+          }
+        },
+        "seed": 2962201195,
+        "profile": "offense",
+        "botEnabled": false,
+        "player": {
+          "x": 65536,
+          "y": 65536,
+          "rotation": 0,
+          "velocityX": 0,
+          "velocityY": 0
+        }
+      },
+      "challenge": {
+        "id": "royal-gauntlet",
+        "name": "Royal Gauntlet",
+        "arenaId": "open-yard",
+        "modifiers": {
+          "targetDurationScale": 0.92,
+          "enemyHpMultiplier": 1.18,
+          "enemyDamageMultiplier": 1.12,
+          "eliteHpMultiplier": 1.22,
+          "xpMultiplier": 1.18
+        }
+      },
+      "player": {
+        "hp": 100,
+        "roosterId": "ace",
+        "maxHp": 100,
+        "spriteDepth": 6,
+        "speed": 210,
+        "fireRate": 800,
+        "projectileDamage": 20,
+        "shotCount": 1,
+        "fireEggs": false,
+        "armor": 0,
+        "regenPerSecond": 0,
+        "xpMagnetRadius": 220,
+        "projectilePierce": 0,
+        "projectileSizeBonus": 0,
+        "projectileSpeedBonus": 0,
+        "projectileRicochets": 0,
+        "projectileKnockback": 0,
+        "critChance": 0.08,
+        "critMultiplier": 2,
+        "primaryEvolution": null,
+        "secondWindCharges": 0,
+        "orbitEggs": 0,
+        "supportChickens": 0,
+        "goldenEggRank": 0,
+        "molotovEggRank": 0,
+        "lightningCombRank": 0,
+        "voidNestRank": 0,
+        "rocketEggRank": 0,
+        "laserCombRank": 0,
+        "upgradeRanks": {}
+      },
+      "wave": {
+        "wave": 1,
+        "name": "First Peck",
+        "intent": "Fodder only: learn movement and auto-aim as the flock thickens",
+        "count": 24,
+        "interval": 500,
+        "targetDuration": [
+          20,
+          26
+        ],
+        "spawnMinDistance": 220,
+        "bossWave": false,
+        "targetPeak": 18,
+        "mobileActiveCap": 18,
+        "primaryRoles": [],
+        "pressureCurve": [
+          {
+            "id": "build",
+            "share": 0.25,
+            "durationShare": 0.25,
+            "batch": 1,
+            "pattern": "scatter",
+            "pauseAfter": 300
+          },
+          {
+            "id": "escalate",
+            "share": 0.35,
+            "durationShare": 0.3,
+            "batch": 1,
+            "pattern": "pulse",
+            "pauseAfter": 420
+          },
+          {
+            "id": "recover",
+            "share": 0.15,
+            "durationShare": 0.18,
+            "batch": 1,
+            "pattern": "scatter",
+            "pauseAfter": 480
+          },
+          {
+            "id": "finale",
+            "share": 0.25,
+            "durationShare": 0.27,
+            "batch": 1,
+            "pattern": "surround",
+            "pauseAfter": 0
+          }
+        ],
+        "xpCurve": {
+          "budget": 44,
+          "bossXp": 0,
+          "segmentShares": [
+            0.4,
+            0.34,
+            0.1,
+            0.16
+          ]
+        },
+        "allocatedXp": 43.999999999999986,
+        "typeCounts": {
+          "slime": 15,
+          "kornkrabbler": 9
+        },
+        "roleCounts": {
+          "fodder": 15,
+          "micro-fodder": 9
+        },
+        "queue": [
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "kornkrabbler",
+          "slime",
+          "slime",
+          "slime",
+          "slime",
+          "slime",
+          "slime"
+        ]
+      },
+      "probe": {
+        "raw": {
+          "slime": {
+            "hp": 18,
+            "speed": 78,
+            "damage": 5,
+            "xp": 3
+          },
+          "elite": {
+            "hp": 450,
+            "speed": 66,
+            "damage": 18,
+            "xp": 42
+          },
+          "boss": {
+            "abilityDamage": 12,
+            "heavyDamage": 24
+          }
+        },
+        "modified": {
+          "slime": {
+            "type": "slime",
+            "role": "fodder",
+            "hp": 21,
+            "speed": 78,
+            "damage": 6,
+            "xp": 4,
+            "texture": "enemy-slime-hop-v2",
+            "animation": "enemy-slime-hop-loop",
+            "animationPhaseFrames": 8,
+            "scale": 0.2,
+            "radius": 23,
+            "bodyOffsetX": 105,
+            "bodyOffsetY": 123,
+            "hpBarWidth": 34,
+            "hpBarYOffset": 27,
+            "ability": null,
+            "heavyProjectile": null
+          },
+          "elite": {
+            "type": "elite-brute",
+            "role": "tank",
+            "hp": 648,
+            "speed": 66,
+            "damage": 20,
+            "xp": 50,
+            "texture": "enemy-elite-brute-stomp",
+            "animation": null,
+            "directionalAnimationPrefix": null,
+            "animationSet": {
+              "move": "enemy-elite-brute-move",
+              "windup": "enemy-elite-brute-windup",
+              "resolve": "enemy-elite-brute-resolve",
+              "recovery": "enemy-elite-brute-recovery"
+            },
+            "scale": 0.39,
+            "radius": 41,
+            "bodyOffsetX": 87,
+            "bodyOffsetY": 91,
+            "hpBarWidth": 74,
+            "hpBarYOffset": 56,
+            "displayName": "Iron Brooder",
+            "elite": true,
+            "eliteTint": false,
+            "aura": {
+              "kind": "armor",
+              "label": "Armor Aura",
+              "radius": 205,
+              "reduction": 0.22,
+              "color": 7067903
+            },
+            "ability": {
+              "kind": "slam",
+              "label": "Iron Stomp",
+              "cooldown": 4400,
+              "telegraphMs": 620,
+              "heavy": true,
+              "radius": 165,
+              "damage": 24,
+              "color": 16738866
+            },
+            "heavyProjectile": null
+          },
+          "boss": {
+            "type": "boss",
+            "role": "boss",
+            "hp": 14396,
+            "speed": 58,
+            "damage": 27,
+            "xp": 142,
+            "texture": "enemy-boss-run",
+            "animation": "enemy-boss-run-left",
+            "directionalAnimationPrefix": "enemy-boss-run",
+            "animationSet": null,
+            "scale": 0.58,
+            "radius": 58,
+            "bodyOffsetX": 70,
+            "bodyOffsetY": 72,
+            "hpBarWidth": 130,
+            "hpBarYOffset": 88,
+            "displayName": "THE BROOD KING",
+            "boss": true,
+            "elite": true,
+            "entryProtectionMs": 1300,
+            "eliteTint": false,
+            "ability": {
+              "kind": "fan",
+              "cooldown": 1900,
+              "speed": 280,
+              "damage": 13,
+              "source": "boss-fan",
+              "texture": "enemy-shot",
+              "radius": 8,
+              "count": 5,
+              "spread": 1.15,
+              "color": 16742963,
+              "trailColor": 16726056,
+              "scale": 1.15,
+              "muzzleDistance": 72
+            },
+            "heavyAttackDelay": 1350,
+            "heavyProjectile": {
+              "cooldown": 3900,
+              "speed": 238,
+              "damage": 27,
+              "radius": 19,
+              "life": 4600,
+              "color": 16738340,
+              "trailColor": 16722464,
+              "trailAlpha": 0.44,
+              "scale": 1.55,
+              "muzzleDistance": 82,
+              "depth": 8,
+              "pulse": true,
+              "tint": false
+            },
+            "bossSequences": [
+              {
+                "name": "Learn the King",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "telegraphMs": 460
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 950
+                  },
+                  {
+                    "kind": "chase",
+                    "duration": 900
+                  },
+                  {
+                    "kind": "fireball",
+                    "telegraphMs": 620
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1200
+                  }
+                ]
+              },
+              {
+                "name": "Royal Fury",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "count": 6,
+                    "spread": 1.3,
+                    "telegraphMs": 520
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1000
+                  },
+                  {
+                    "kind": "chase",
+                    "duration": 850
+                  },
+                  {
+                    "kind": "fireball",
+                    "telegraphMs": 640
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1300
+                  }
+                ]
+              },
+              {
+                "name": "Last Hatch",
+                "steps": [
+                  {
+                    "kind": "fan",
+                    "count": 7,
+                    "spread": 1.45,
+                    "telegraphMs": 680
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 950
+                  },
+                  {
+                    "kind": "dash",
+                    "speed": 440,
+                    "duration": 520,
+                    "telegraphMs": 620
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 900
+                  },
+                  {
+                    "kind": "fireball",
+                    "speed": 255,
+                    "telegraphMs": 680
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1100
+                  },
+                  {
+                    "kind": "add-pulse",
+                    "maxActive": 6,
+                    "groups": [
+                      {
+                        "kind": "runner",
+                        "count": 4,
+                        "multiplier": 1
+                      },
+                      {
+                        "kind": "spitter",
+                        "count": 2,
+                        "multiplier": 1
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "recovery",
+                    "duration": 1300
+                  }
+                ]
+              }
+            ],
+            "bossPhases": [
+              {
+                "name": "Phase 2: Royal Fury",
+                "subtitle": "Wider fan shots, six adds, and a clear breathing window.",
+                "threshold": 0.65,
+                "speedMultiplier": 1.08,
+                "transitionMs": 1000,
+                "adds": [
+                  {
+                    "kind": "slime",
+                    "count": 6,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              {
+                "name": "Phase 3: Last Hatch",
+                "subtitle": "Seven-shot fan, charge, and a limited add squad.",
+                "threshold": 0.32,
+                "speedMultiplier": 1.12,
+                "transitionMs": 1100,
+                "adds": [
+                  {
+                    "kind": "runner",
+                    "count": 4,
+                    "multiplier": 1
+                  },
+                  {
+                    "kind": "spitter",
+                    "count": 2,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            ]
+          },
+          "wave": {
+            "targetDuration": [
+              23,
+              32
+            ]
+          }
+        }
+      },
+      "waveLabel": "Wave 1/10 · Royal Gauntlet1/10"
+    },
+    "base": {
+      "hp": 100,
+      "roosterId": "ace",
+      "maxHp": 100,
+      "spriteDepth": 6,
+      "speed": 210,
+      "fireRate": 800,
+      "projectileDamage": 20,
+      "shotCount": 1,
+      "fireEggs": false,
+      "armor": 0,
+      "regenPerSecond": 0,
+      "xpMagnetRadius": 220,
+      "projectilePierce": 0,
+      "projectileSizeBonus": 0,
+      "projectileSpeedBonus": 0,
+      "projectileRicochets": 0,
+      "projectileKnockback": 0,
+      "critChance": 0.08,
+      "critMultiplier": 2,
+      "primaryEvolution": null,
+      "secondWindCharges": 0,
+      "orbitEggs": 0,
+      "supportChickens": 0,
+      "goldenEggRank": 0,
+      "molotovEggRank": 0,
+      "lightningCombRank": 0,
+      "voidNestRank": 0,
+      "rocketEggRank": 0,
+      "laserCombRank": 0,
+      "upgradeRanks": {}
+    }
+  }
+}

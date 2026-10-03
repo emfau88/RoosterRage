@@ -25,6 +25,8 @@ export class Enemy {
 
   reset(x, y, config) {
     const { scene } = this;
+    if (this.animationPausedByGame) this.sprite.anims.resume();
+    this.animationPausedByGame = false;
     this.activationId += 1;
     this.id = scene.nextEnemyId = (scene.nextEnemyId ?? 0) + 1;
     this.maxHp = config.hp;
@@ -36,6 +38,9 @@ export class Enemy {
     this.microFodder = config.microFodder ?? false;
     this.directionalAnimationPrefix = config.directionalAnimationPrefix ?? null;
     this.animationSet = config.animationSet ? { ...config.animationSet } : null;
+    this.directionalStateAnimations = config.directionalStateAnimations ?? false;
+    this.facing = 'left';
+    this.attackMovement = config.attackMovement ?? null;
     this.animationState = 'move';
     this.resolveAnimationUntil = 0;
     this.recoveryAnimationUntil = 0;
@@ -79,6 +84,7 @@ export class Enemy {
     this.hpBarWidth = config.hpBarWidth ?? 42;
     this.hpBarYOffset = config.hpBarYOffset ?? 30;
     this.showHpBar = config.showHpBar ?? true;
+    this.hpBarVisibleUntil = 0;
     this.baseTint = config.tint ?? null;
     this.statusBaseTint = this.elite && config.eliteTint !== false ? 0xfff2a6 : this.baseTint;
     this.baseRenderScale = config.scale ?? 0.24;
@@ -90,6 +96,7 @@ export class Enemy {
     this.sprite.setScale(this.baseRenderScale);
     this.sprite.setCircle(config.radius ?? 28, config.bodyOffsetX ?? 100, config.bodyOffsetY ?? 118);
     this.sprite.setDepth(4);
+    this.sprite.setFlipX(false);
     this.sprite.clearTint();
     if (config.tint) {
       this.sprite.setTint(config.tint);
@@ -143,6 +150,7 @@ export class Enemy {
       .setAlpha(1)
       .setVisible(this.showHpBar)
       .setActive(this.showHpBar);
+    this.updateHpBarVisibility();
     return this;
   }
 
@@ -160,7 +168,8 @@ export class Enemy {
         direction.normalize();
       }
       this.updateDirectionalAnimation(direction);
-      const movementSpeed = this.speed * this.auraSpeedMultiplier;
+      const movementState = this.getAnimationState();
+      const movementSpeed = this.speed * this.auraSpeedMultiplier * (this.attackMovement?.[movementState] ?? 1);
       this.sprite.setVelocity(direction.x * movementSpeed, direction.y * movementSpeed);
     }
     this.updateAbility(player);
@@ -183,6 +192,17 @@ export class Enemy {
     this.hpBarBack.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.setPosition(this.sprite.x - this.hpBarWidth / 2, this.sprite.y - this.hpBarYOffset);
     this.hpBarFill.scaleX = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
+    this.updateHpBarVisibility();
+  }
+
+  updateHpBarVisibility() {
+    // Full ordinary bars compete with warnings in crowded late waves. Damage
+    // briefly reveals them; priority enemies retain their permanent identity.
+    const visible = this.showHpBar && (this.elite || this.boss || this.champion
+      || this.scene.effects.enabled('enemyHealthBarsAlways')
+      || this.scene.time.now < this.hpBarVisibleUntil);
+    this.hpBarBack.setVisible(visible);
+    this.hpBarFill.setVisible(visible);
   }
 
   updateDirectionalAnimation(direction) {
@@ -194,6 +214,8 @@ export class Enemy {
     const facing = horizontal
       ? (direction.x < 0 ? 'left' : 'right')
       : (direction.y < 0 ? 'up' : 'down');
+    this.facing = facing;
+    if (this.directionalStateAnimations) this.sprite.setFlipX(facing === 'right');
     const key = `${this.directionalAnimationPrefix}-${facing}`;
     if (this.sprite.anims.currentAnim?.key !== key) {
       this.sprite.play(key);
@@ -213,22 +235,31 @@ export class Enemy {
       this.markAbilityResolved(260, 260);
       this.nextPassiveAnimationAt = now + 2500 + (this.id % 4) * 180;
     }
-    const nextState = this.abilityCharging || this.heavyCharging
-      ? 'windup'
-      : now < this.resolveAnimationUntil
-        ? 'resolve'
-        : now < this.recoveryAnimationUntil
-          ? 'recovery'
-          : 'move';
-    const key = this.animationSet[nextState] ?? this.animationSet.move;
+    const nextState = this.getAnimationState();
+    const baseKey = this.animationSet[nextState] ?? this.animationSet.move;
+    const key = this.directionalStateAnimations && nextState !== 'move'
+      ? `${baseKey}-${this.facing}` : baseKey;
     if (nextState === 'move' && this.directionalAnimationPrefix) {
+      const wasAction = this.animationState !== 'move';
       this.animationState = 'move';
+      if (wasAction) this.sprite.play(`${this.directionalAnimationPrefix}-${this.facing}`);
       return;
     }
     if (this.animationState !== nextState || this.sprite.anims.currentAnim?.key !== key) {
       this.animationState = nextState;
       this.sprite.play(key);
     }
+  }
+
+  getAnimationState() {
+    const now = this.scene.time.now;
+    return this.abilityCharging || this.heavyCharging
+      ? 'windup'
+      : now < this.resolveAnimationUntil
+        ? 'resolve'
+        : now < this.recoveryAnimationUntil
+          ? 'recovery'
+          : 'move';
   }
 
   updateWarningVisual() {
@@ -249,6 +280,8 @@ export class Enemy {
 
   takeDamage(amount, feedback = {}) {
     this.hp -= amount;
+    this.hpBarVisibleUntil = this.scene.time.now + 1600;
+    this.updateHpBarVisibility();
     const healthRatio = Phaser.Math.Clamp(this.hp / this.maxHp, 0, 1);
     this.hpBarFill.scaleX = healthRatio;
     this.sprite.setAlpha(1);
@@ -281,6 +314,7 @@ export class Enemy {
   }
 
   beginDash(angle, speed = 420, duration = 480) {
+    this.scene.audio.play('enemy-dash');
     this.dashVelocity.setToPolar(angle, speed);
     this.dashUntil = this.scene.time.now + duration;
   }

@@ -1,0 +1,258 @@
+[
+  {
+    "pair": "01-spieler-querformat",
+    "side": "before",
+    "source": "portal-package-1/landscape-feed-alley-geometry.png",
+    "width": 844,
+    "height": 390,
+    "sha256": "21b2cc0b627d1d2d5196c1890dae61bfa01093724daca4291146fdc69a5e96ce"
+  },
+  {
+    "pair": "01-spieler-querformat",
+    "side": "after",
+    "source": "portal-package-2/feed-844-ace.png",
+    "width": 844,
+    "height": 390,
+    "sha256": "bd724e5792756052cd24946df0797b0ea4b9b27995d833f4561f447410549dd4"
+  },
+  {
+    "pair": "02-spieler-hochformat",
+    "side": "before",
+    "source": "portal-package-1/portrait-feed-alley-geometry.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "a14691cf2ba751abc56f60b0bf3618947bf7ce79e6c8025dd47b96bd264a388a"
+  },
+  {
+    "pair": "02-spieler-hochformat",
+    "side": "after",
+    "source": "portal-package-2/feed-390-ace.png",
+    "width": 780,
+    "height": 1688,
+    "sha256": "deae24e6585ceb1ac06fc181663ac138dec19ca8bcc715e63e1aedf2dfc7994d"
+  },
+  {
+    "pair": "03-bossmeldung",
+    "side": "before",
+    "source": "portal-package-1/desktop-boss-banner-layout.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "224e368561234ebfdcc7a68b37a1aa74b0bf3d7c126322bc4d0357ed48830dfb"
+  },
+  {
+    "pair": "03-bossmeldung",
+    "side": "after",
+    "source": "portal-package-2/boss-layout-960.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "748c1f44c8f6284bc39772546ca78f4cedee5265c6e10d126f604fddce77d541"
+  },
+  {
+    "pair": "04-bosskampf",
+    "side": "before",
+    "source": "portal-package-0/runs/ace-yard/wave-10-peak.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "511186636f82faa803002e21b987f4cc98d4e2fe01a8a5cc8d0dd85cfbb42bcd"
+  },
+  {
+    "pair": "04-bosskampf",
+    "side": "after",
+    "source": "portal-package-2/runs/ace-yard/wave-10-peak.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "3ce72c92b28905c7c32db121b6d42743770a5be8d11565488b8cc652c9adb04e"
+  },
+  {
+    "pair": "05-gegner-hp",
+    "side": "before",
+    "source": "portal-package-0/runs/storm-alley-late/wave-8-peak.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "4559145654ec6e3600466979759d6680f51dc70e63cf2876ff3386dfd26fc2ab"
+  },
+  {
+    "pair": "05-gegner-hp",
+    "side": "after",
+    "source": "portal-package-2/runs/storm-alley-late/wave-8-peak.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "778b5cc5c291754c959fd737bc231835f2fb0328c3cea752a5d600c16c471098"
+  },
+  {
+    "pair": "06-spieler-am-rand",
+    "side": "before",
+    "source": "portal-package-2/runs/artillery-coop-novice/wave-8-peak.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "bb47d35d3466fbd212bd057f7b1e0d893b5d2c343fe6fcc14c36b5388137bfe2"
+  },
+  {
+    "pair": "06-spieler-am-rand",
+    "side": "after",
+    "source": "portal-package-2/coop-player-edge-clear.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "26eef1659719def524b2abb3b93a74c510c637144b894aaf629e88c845c4ed49"
+  },
+  {
+    "pair": "07-hp-option",
+    "side": "before",
+    "source": "portal-package-1/desktop-first-settings.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "f75ad32becad8ab0bb2ddc682ee10f8891277b86cf970b6fb5855deac7bffe8d"
+  },
+  {
+    "pair": "07-hp-option",
+    "side": "after",
+    "source": "portal-package-2/enemy-hp-settings.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "74a65f2a960755a5fe49a3abd074726115eb7e3ff9f91d4588147f7d2b45bcac"
+  },
+  {
+    "pair": "08-startmenue-desktop",
+    "side": "before",
+    "source": "portal-package-0/desktop-first-play.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "a56229c06e8f6d151f5b615224b7e063cad50341729715e231049d9328dc624b"
+  },
+  {
+    "pair": "08-startmenue-desktop",
+    "side": "after",
+    "source": "portal-package-1/desktop-first-play.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "2996a6cd7a9571cf0f8f29de8c3a55048c25f73fecea14fc17535b5e607f2330"
+  },
+  {
+    "pair": "09-startmenue-hochformat",
+    "side": "before",
+    "source": "portal-package-0/portrait-first-play.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "a95a4b147fc46b6f12f819ec8d81ba378374ed6e881710cec9013e9e2b7d016b"
+  },
+  {
+    "pair": "09-startmenue-hochformat",
+    "side": "after",
+    "source": "portal-package-1/portrait-first-play.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "bc42e50c9b27d4ba4ad1a975e0f2cd4c87916fb0fcf158e980916fec141e0d2b"
+  },
+  {
+    "pair": "10-upgrades-desktop",
+    "side": "before",
+    "source": "portal-package-0/desktop-primary-recipe-details.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "d9bd1d52d397e93903992915304208813a8d75fe8b69b3c1877bb5116a8f06d5"
+  },
+  {
+    "pair": "10-upgrades-desktop",
+    "side": "after",
+    "source": "portal-package-1/desktop-primary-recipe-details.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "814ff517900134b69fb0bc81e7d5a345e6c9dcbffd259ec4ddacff30422bc117"
+  },
+  {
+    "pair": "11-upgrades-querformat",
+    "side": "before",
+    "source": "portal-package-0/landscape-primary-recipe-details.png",
+    "width": 844,
+    "height": 390,
+    "sha256": "39afac605e25e3aafebf61aae4f06c6e2301c66be4de5b555d8321a21083bb86"
+  },
+  {
+    "pair": "11-upgrades-querformat",
+    "side": "after",
+    "source": "portal-package-1/landscape-primary-recipe-details.png",
+    "width": 844,
+    "height": 390,
+    "sha256": "ce71e322a4d80544452f4a90d43abb8c816f1777d9a5b6f8a6d8590a17cc9a53"
+  },
+  {
+    "pair": "12-bossbelohnung-gross",
+    "side": "before",
+    "source": "portal-package-0/large-boss-chest.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "86091953596892d5c5003e6b207c1f168993a2dcf2003fb0d8b13322f716763a"
+  },
+  {
+    "pair": "12-bossbelohnung-gross",
+    "side": "after",
+    "source": "portal-package-1/large-boss-chest.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "01f4ffcba39e2bc75c94ac80a8ccb9dee1207802e2e07e5d5d7a3587513df6e3"
+  },
+  {
+    "pair": "13-bossbelohnung-desktop",
+    "side": "before",
+    "source": "portal-package-0/desktop-boss-chest.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "865d68ae76c992c0c53e3cfe66331fdba4855a1bb32f172edff74edd602efd04"
+  },
+  {
+    "pair": "13-bossbelohnung-desktop",
+    "side": "after",
+    "source": "portal-package-1/desktop-boss-chest.png",
+    "width": 960,
+    "height": 540,
+    "sha256": "524d13341fe98e6334b4d671cc17b4441a1292d945c1b948f67d31d03d5183de"
+  },
+  {
+    "pair": "14-charakterauswahl",
+    "side": "before",
+    "source": "portal-package-0/large-advanced-roosters.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "95ba8f771e528d0ded40d9b46db5808b22eaf6eb9a8fe827f9988c60eaec3012"
+  },
+  {
+    "pair": "14-charakterauswahl",
+    "side": "after",
+    "source": "portal-package-1/large-advanced-roosters.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "0f70b963d17e18f84da6fd226f36f6e49877cedf60e09687a5760945e1c7afea"
+  },
+  {
+    "pair": "15-talente",
+    "side": "before",
+    "source": "portal-package-0/portrait-advanced-talent-detail.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "5f573136e81f62e3ade4266bf830d52e4a67f2d18fd7fc78a62eef71e99f5608"
+  },
+  {
+    "pair": "15-talente",
+    "side": "after",
+    "source": "portal-package-1/portrait-advanced-talent-detail.png",
+    "width": 390,
+    "height": 844,
+    "sha256": "cc57fe3f568bc530038ed9a596be811c3c9623c74e4c30921687d19e5ad2c984"
+  },
+  {
+    "pair": "16-settings-querformat",
+    "side": "before",
+    "source": "portal-package-0/landscape-first-settings.png",
+    "width": 844,
+    "height": 390,
+    "sha256": "e205ed4471189578f1a4151316e294982c43a6578cec938d1c378b82df0ed459"
+  },
+  {
+    "pair": "16-settings-querformat",
+    "side": "after",
+    "source": "portal-package-1/landscape-first-settings.png",
+    "width": 844,
+    "height": 390,
+    "sha256": "186536826f4b6ac39685705d26d78bb7469c69279f0372371da5394590719e8e"
+  }
+]

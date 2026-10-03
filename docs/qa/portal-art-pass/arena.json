@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-10-01T21:55:00.566Z",
+  "arenas": [
+    {
+      "id": "open-yard",
+      "topology": "open",
+      "bounds": {
+        "x": 64736,
+        "y": 64986,
+        "width": 1600,
+        "height": 1100
+      },
+      "destructibles": 51,
+      "preferredWeapon": "projectile"
+    },
+    {
+      "id": "vertical-run",
+      "topology": "corridor",
+      "bounds": {
+        "x": 65256,
+        "y": 64736,
+        "width": 560,
+        "height": 1600
+      },
+      "destructibles": 3,
+      "preferredWeapon": "pierce"
+    },
+    {
+      "id": "square-coop",
+      "topology": "compact-square",
+      "bounds": {
+        "x": 85,
+        "y": 45,
+        "width": 1230,
+        "height": 810
+      },
+      "destructibles": 6,
+      "preferredWeapon": "area"
+    }
+  ],
+  "pickups": {
+    "hpAfterHeal": 65,
+    "budgets": {
+      "heal": 3,
+      "bomb": 2,
+      "magnet": 2
+    },
+    "collected": {
+      "heal": 1,
+      "bomb": 1,
+      "magnet": 1,
+      "elite-chest": 1,
+      "golden-chest": 1,
+      "royal-chest": 1
+    },
+    "magnetRemainingMs": 5583.4
+  },
+  "breakableHint": {
+    "text": "BREAKABLE SUPPLIESCrates and hay can be broken and may contain supplies.",
+    "className": "wave-banner wave-banner--tip is-visible"
+  },
+  "rewardPresentation": [
+    {
+      "kind": "elite-chest",
+      "displayWidth": 59,
+      "displayHeight": 59
+    },
+    {
+      "kind": "golden-chest",
+      "displayWidth": 65,
+      "displayHeight": 65
+    },
+    {
+      "kind": "royal-chest",
+      "displayWidth": 72,
+      "displayHeight": 72
+    }
+  ]
+}

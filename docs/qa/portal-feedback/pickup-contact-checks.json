@@ -1,0 +1,1166 @@
+{
+  "rows": [
+    {
+      "rooster": "ace",
+      "kind": "heal",
+      "direction": "d",
+      "before": {
+        "collected": 0,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 1,
+        "hp": 65,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "+25 HP"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "heal",
+      "direction": "a",
+      "before": {
+        "collected": 1,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 2,
+        "hp": 65,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "+25 HP"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "heal",
+      "direction": "s",
+      "before": {
+        "collected": 2,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 3,
+        "hp": 65,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "+25 HP"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "heal",
+      "direction": "w",
+      "before": {
+        "collected": 3,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 4,
+        "hp": 65,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "+25 HP"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "bomb",
+      "direction": "d",
+      "before": {
+        "collected": 0,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 1,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "bomb",
+      "direction": "a",
+      "before": {
+        "collected": 1,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 2,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "bomb",
+      "direction": "s",
+      "before": {
+        "collected": 2,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 3,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "bomb",
+      "direction": "w",
+      "before": {
+        "collected": 3,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 4,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": false,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "magnet",
+      "direction": "d",
+      "before": {
+        "collected": 0,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 1,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "magnet",
+      "direction": "a",
+      "before": {
+        "collected": 1,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 2,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "magnet",
+      "direction": "s",
+      "before": {
+        "collected": 2,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 3,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "ace",
+      "kind": "magnet",
+      "direction": "w",
+      "before": {
+        "collected": 3,
+        "hp": 40,
+        "maxHp": 100,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 4,
+        "hp": 40,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "heal",
+      "direction": "d",
+      "before": {
+        "collected": 4,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 5,
+        "hp": 55,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+21 HP"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "heal",
+      "direction": "a",
+      "before": {
+        "collected": 5,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 6,
+        "hp": 55,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+21 HP"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "heal",
+      "direction": "s",
+      "before": {
+        "collected": 6,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 7,
+        "hp": 55,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+21 HP"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "heal",
+      "direction": "w",
+      "before": {
+        "collected": 7,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 8,
+        "hp": 55,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+21 HP"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "bomb",
+      "direction": "d",
+      "before": {
+        "collected": 4,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 5,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "bomb",
+      "direction": "a",
+      "before": {
+        "collected": 5,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 6,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "bomb",
+      "direction": "s",
+      "before": {
+        "collected": 6,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 7,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "bomb",
+      "direction": "w",
+      "before": {
+        "collected": 7,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 8,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "magnet",
+      "direction": "d",
+      "before": {
+        "collected": 4,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 5,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "magnet",
+      "direction": "a",
+      "before": {
+        "collected": 5,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 6,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "magnet",
+      "direction": "s",
+      "before": {
+        "collected": 6,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 7,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "storm",
+      "kind": "magnet",
+      "direction": "w",
+      "before": {
+        "collected": 7,
+        "hp": 34,
+        "maxHp": 85,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 8,
+        "hp": 34,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "heal",
+      "direction": "d",
+      "before": {
+        "collected": 8,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 9,
+        "hp": 75,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+29 HP"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "heal",
+      "direction": "a",
+      "before": {
+        "collected": 9,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 10,
+        "hp": 75,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+29 HP"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "heal",
+      "direction": "s",
+      "before": {
+        "collected": 10,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 11,
+        "hp": 75,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+29 HP"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "heal",
+      "direction": "w",
+      "before": {
+        "collected": 11,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 12,
+        "hp": 75,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "+29 HP"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "bomb",
+      "direction": "d",
+      "before": {
+        "collected": 8,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 9,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "bomb",
+      "direction": "a",
+      "before": {
+        "collected": 9,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 10,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "bomb",
+      "direction": "s",
+      "before": {
+        "collected": 10,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 11,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "bomb",
+      "direction": "w",
+      "before": {
+        "collected": 11,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 12,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "EGG BOMB"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "magnet",
+      "direction": "d",
+      "before": {
+        "collected": 8,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 9,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "magnet",
+      "direction": "a",
+      "before": {
+        "collected": 9,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 10,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "magnet",
+      "direction": "s",
+      "before": {
+        "collected": 10,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 11,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    },
+    {
+      "rooster": "artillery",
+      "kind": "magnet",
+      "direction": "w",
+      "before": {
+        "collected": 11,
+        "hp": 46,
+        "maxHp": 115,
+        "center": [
+          700,
+          450
+        ],
+        "anchor": [
+          700,
+          450
+        ],
+        "radius": 21,
+        "visualY": 450
+      },
+      "after": {
+        "collected": 12,
+        "hp": 46,
+        "duplicate": false,
+        "active": false,
+        "visualActive": false,
+        "magnet": true,
+        "title": "MAGNET · 8s"
+      }
+    }
+  ],
+  "fullHp": {
+    "full": {
+      "active": true,
+      "collected": 12,
+      "title": "HP FULL",
+      "anchor": [
+        700,
+        450
+      ],
+      "visualY": 453.17390552304903
+    },
+    "paused": {
+      "time": true,
+      "visual": true,
+      "active": true
+    },
+    "after": {
+      "active": false,
+      "collected": 13,
+      "hp": 115,
+      "maxHp": 115
+    }
+  },
+  "opening": {
+    "reasons": [
+      "chest-opening",
+      "contact-modal"
+    ],
+    "texture": "pickup-elite-chest-ajar",
+    "time": 20459.1
+  },
+  "rewardQueue": {
+    "first": {
+      "type": "chest",
+      "kind": "elite"
+    },
+    "queue": [
+      "golden",
+      "boss"
+    ],
+    "levels": 2,
+    "reasons": [
+      "upgrade"
+    ]
+  },
+  "receipts": [
+    {
+      "id": "double-shot",
+      "rank": 0,
+      "type": "chest",
+      "kind": "elite",
+      "after": {
+        "rank": 1,
+        "paused": true,
+        "choosing": true
+      }
+    },
+    {
+      "id": "fire-eggs",
+      "rank": 0,
+      "type": "chest",
+      "kind": "golden",
+      "after": {
+        "rank": 1,
+        "paused": true,
+        "choosing": true
+      }
+    },
+    {
+      "id": "max-hp",
+      "rank": 0,
+      "type": "chest",
+      "kind": "boss",
+      "after": {
+        "rank": 1,
+        "paused": true,
+        "choosing": true
+      }
+    },
+    {
+      "id": "piercing-eggs",
+      "rank": 0,
+      "type": "level",
+      "after": {
+        "rank": 1,
+        "paused": true,
+        "choosing": true
+      }
+    },
+    {
+      "id": "fire-eggs",
+      "rank": 1,
+      "type": "level",
+      "after": {
+        "rank": 2,
+        "paused": false,
+        "choosing": false
+      }
+    }
+  ],
+  "sounds": [
+    {
+      "key": "enemy-dash",
+      "cached": true,
+      "playing": true
+    },
+    {
+      "key": "blast-shell-impact",
+      "cached": true,
+      "playing": true
+    },
+    {
+      "key": "orbit-contact",
+      "cached": true,
+      "playing": true
+    }
+  ],
+  "errors": []
+}

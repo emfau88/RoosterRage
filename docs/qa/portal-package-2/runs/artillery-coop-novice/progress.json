@@ -1,0 +1,39 @@
+{
+  "config": {
+    "id": "artillery-coop-novice",
+    "rooster": "artillery",
+    "arena": "square-coop",
+    "seed": "portal-p2-coop-novice",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "advanced": true,
+    "strategy": "novice",
+    "clips": true
+  },
+  "latest": {
+    "time": 298986.4000000001,
+    "wave": 8,
+    "ended": false,
+    "selection": null,
+    "hp": 2,
+    "maxHp": 146,
+    "x": 419.8440931816898,
+    "y": 134.4059820025475,
+    "enemies": 47,
+    "enemyProjectiles": 3,
+    "hazards": 7,
+    "visibleEnemies": 10,
+    "frames": 10546,
+    "error": null,
+    "choosing": false,
+    "camera": {
+      "x": 234,
+      "y": 74.47058823529414,
+      "zoom": 0.85
+    }
+  },
+  "wallMs": 297789,
+  "errors": []
+}

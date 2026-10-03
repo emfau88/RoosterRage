@@ -120,10 +120,17 @@ export class PickupSystem {
     const kind = pickup.kind;
     if (kind === 'heal') {
       // A health pickup remains available until it can provide real value.
-      if (scene.player.hp >= scene.player.maxHp) return false;
+      if (scene.player.hp >= scene.player.maxHp) {
+        if (scene.time.now >= (pickup.nextHintAt ?? 0)) {
+          pickup.nextHintAt = scene.time.now + 4000;
+          scene.hud.showPickupFeedback('heal', 'HP FULL', 'Health stays here until needed');
+        }
+        return false;
+      }
       const before = scene.player.hp;
       scene.player.heal(Math.max(12, Math.round(scene.player.maxHp * 0.25)));
       scene.telemetry.addHealing(scene.player.hp - before, scene.time.now, scene.waveSystem.currentWave, 'pickup:heal');
+      scene.hud.showPickupFeedback(kind, `+${scene.player.hp - before} HP`, 'Health restored');
     } else if (kind === 'bomb') {
       [...scene.enemies].forEach((enemy) => {
         const damage = enemy.boss ? Math.max(1, Math.round(enemy.maxHp * 0.05)) : enemy.maxHp;
@@ -132,8 +139,10 @@ export class PickupSystem {
       if (scene.effects.enabled('screenFlash')) {
         scene.cameras.main.flash(120, 255, 202, 88, false);
       }
+      scene.hud.showPickupFeedback(kind, 'EGG BOMB', 'Horde cleared · Boss takes 5% max HP');
     } else if (kind === 'magnet') {
       this.magnetUntil = Math.max(this.magnetUntil, scene.time.now + 8000);
+      scene.hud.showPickupFeedback(kind, 'MAGNET · 8s', 'All XP is pulled towards you');
     }
     this.collected[kind] += 1;
     scene.telemetry.record('pickupCollected', scene.time.now, {
@@ -143,7 +152,7 @@ export class PickupSystem {
     this.items = this.items.filter((item) => item !== pickup);
     this.group.remove(pickup.sprite, false, false);
     if (CHEST_KINDS.includes(kind)) {
-      scene.physics.pause();
+      scene.gamePause.request('chest-opening', { freezeTime: false, freezeTweens: false });
       this.openingChests.add(pickup);
       pickup.playChestOpening(() => {
         this.openingChests.delete(pickup);
@@ -155,10 +164,12 @@ export class PickupSystem {
           pickup.destroy();
           scene.waveSystem.completeFinalWave();
           scene.victory();
+          if (!this.openingChests.size) scene.gamePause.release('chest-opening');
           return;
         }
         scene.runState.startChestReward(CHEST_REWARDS[kind]);
         pickup.destroy();
+        if (!this.openingChests.size) scene.gamePause.release('chest-opening');
       });
     } else {
       scene.audio.play(`pickup-${kind}`);
@@ -222,6 +233,7 @@ export class PickupSystem {
       openingChests: this.openingChests.size,
       openingChestStates: [...this.openingChests].map((pickup) => ({
         texture: pickup.sprite.texture.key,
+        depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight)
       })),
@@ -233,6 +245,7 @@ export class PickupSystem {
         opening: pickup.opening,
         victoryReward: pickup.victoryReward ?? false,
         texture: pickup.sprite.texture.key,
+        depth: pickup.sprite.depth,
         displayWidth: Math.round(pickup.sprite.displayWidth),
         displayHeight: Math.round(pickup.sprite.displayHeight),
         reachable: this.scene.arena.isInsidePlayable(pickup.sprite.x, pickup.sprite.y, 20)

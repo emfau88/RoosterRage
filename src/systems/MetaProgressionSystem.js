@@ -11,6 +11,7 @@ import {
 } from '../data/metaProgressionDefinitions.js';
 import { UPGRADE_DEFINITIONS } from '../data/upgradeDefinitions.js';
 import { safeStorage } from './SafeStorage.js';
+import { isPublicRoosterPreview } from '../config/publicRoosterPreview.js';
 
 const MAX_HISTORY = 10;
 const ROOSTER_IDS = ['ace', 'artillery', 'storm'];
@@ -418,7 +419,6 @@ export class MetaProgressionSystem {
     player.xpMagnetRadius = Math.round(player.xpMagnetRadius * bonuses.xpMagnetMultiplier);
     player.critChance = Math.min(0.5, player.critChance + bonuses.critChance);
     runState.rerollsRemaining += bonuses.rerolls;
-    player.updateHealthBar();
     return bonuses;
   }
 
@@ -444,7 +444,8 @@ export class MetaProgressionSystem {
   }
 
   isRoosterUnlocked(id) {
-    return this.state.unlockedRoosters.includes(id);
+    return this.state.unlockedRoosters.includes(id)
+      || (ROOSTER_IDS.includes(id) && isPublicRoosterPreview());
   }
 
   getMastery(id) {

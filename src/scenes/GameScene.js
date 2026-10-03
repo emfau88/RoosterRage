@@ -641,7 +641,18 @@ export class GameScene extends Phaser.Scene {
 
   updateHud() {
     const boss = this.enemies.find((enemy) => enemy.boss && enemy.sprite.active);
+    const camera = this.cameras.main, sprite = this.player.sprite;
+    const point = camera.matrix.transformPoint(sprite.x - camera.scrollX, sprite.y - camera.scrollY);
+    const cssScale = getSceneViewport(this).width / this.scale.width;
+    const halfWidth = sprite.displayWidth * camera.zoom * cssScale / 2;
+    const halfHeight = sprite.displayHeight * camera.zoom * cssScale / 2;
     this.hud.update({
+      playerScreenRect: {
+        left: point.x * cssScale - halfWidth,
+        right: point.x * cssScale + halfWidth,
+        top: point.y * cssScale - halfHeight,
+        bottom: point.y * cssScale + halfHeight
+      },
       hp: this.player.hp,
       maxHp: this.player.maxHp,
       level: this.player.level,
@@ -803,7 +814,7 @@ export class GameScene extends Phaser.Scene {
     });
     this.lastUpgradeFeedback = {
       id: upgrade.id,
-      rank: rank || 'SOFORT',
+      rank: rank || 'INSTANT',
       milestone: upgrade.momentTitle ?? upgrade.name,
       changes: [...(upgrade.changeItems ?? [])],
       color,

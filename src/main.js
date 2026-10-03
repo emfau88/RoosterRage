@@ -5,6 +5,8 @@ import {
   installDisplayResolution
 } from './systems/DisplayResolutionSystem.js';
 import './styles.css';
+import './menu-layouts.css';
+import './combat-layouts.css';
 
 const displayMetrics = createDisplayMetrics();
 const rendererType = import.meta.env.DEV ? Phaser.CANVAS : Phaser.AUTO;

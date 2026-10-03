@@ -1,8 +1,13 @@
 import Phaser from 'phaser';
+import { playPropBreak } from './PropBreakFeedback.js';
 import { ARENA_DEFINITIONS, getArenaDefinition } from '../data/arenaDefinitions.js';
 import { getSceneViewport } from './DisplayResolutionSystem.js';
+import { getArenaArtTint } from '../config/mapArt.js';
+import { ensureHarvestGroundVariants, harvestGroundTexture } from './assets/HarvestGroundVariants.js';
 
 const SAFE_PADDING = 44;
+const OPEN_YARD_BARN_MODULUS = 19;
+const OPEN_YARD_WELL_MODULUS = 37;
 
 function rectContains(rect, x, y, padding = 0) {
   return x >= rect.x - rect.width / 2 - padding
@@ -17,6 +22,20 @@ function chunkHash(x, y, salt = 0) {
     ^ salt;
   value = Math.imul(value ^ (value >>> 13), 1274126177);
   return (value ^ (value >>> 16)) >>> 0;
+}
+
+function rawOpenYardLandmark(chunkX, chunkY, hash = chunkHash(chunkX, chunkY, 17)) {
+  if (hash % OPEN_YARD_BARN_MODULUS === 0) return { kind: 'barn', hash, chunkX, chunkY };
+  if (hash % OPEN_YARD_WELL_MODULUS === 0) return { kind: 'well', hash, chunkX, chunkY };
+  return null;
+}
+
+function compareLandmarkPriority(a, b) {
+  const kindDifference = (a.kind === 'barn' ? 0 : 1) - (b.kind === 'barn' ? 0 : 1);
+  if (kindDifference) return kindDifference;
+  if (a.hash !== b.hash) return a.hash - b.hash;
+  if (a.chunkY !== b.chunkY) return a.chunkY - b.chunkY;
+  return a.chunkX - b.chunkX;
 }
 
 export class ArenaSystem {
@@ -164,6 +183,7 @@ export class ArenaSystem {
   }
 
   createChunkPool() {
+    if (this.id === 'open-yard') ensureHarvestGroundVariants(this.scene);
     const { radiusX, radiusY } = this.streaming.chunk;
     const count = (radiusX * 2 + 1) * (radiusY * 2 + 1);
     for (let index = 0; index < count; index += 1) {
@@ -260,7 +280,7 @@ export class ArenaSystem {
     record.key = key;
     record.chunkX = chunkX;
     record.chunkY = chunkY;
-    const groundTexture = this.streaming.groundTexture;
+    const groundTexture = this.id === 'open-yard' ? harvestGroundTexture(hash) : this.streaming.groundTexture;
     record.ground.setTexture(groundTexture);
     const groundWidth = this.id === 'vertical-run' ? world.width : width;
     if (this.id === 'vertical-run' && groundWidth < record.ground.frame.realWidth) {
@@ -268,6 +288,7 @@ export class ArenaSystem {
       record.ground.setCrop(cropX, 0, groundWidth, record.ground.frame.realHeight);
     }
     record.ground.setPosition(centerX, centerY)
+      .setTint(getArenaArtTint(this.id))
       .setFlip(false, false);
     if (this.id === 'vertical-run' && groundWidth < record.ground.frame.realWidth) {
       record.ground.setScale(
@@ -281,10 +302,12 @@ export class ArenaSystem {
       const world = this.playableWorldBounds;
       const edgeWidth = 300;
       record.edgeLeft.setTexture('arena-feed-alley-left')
+        .setTint(getArenaArtTint(this.id, 'edge'))
         .setPosition(world.x - edgeWidth / 2, centerY)
         .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
       record.edgeRight.setTexture('arena-feed-alley-right')
+        .setTint(getArenaArtTint(this.id, 'edge'))
         .setPosition(world.x + world.width + edgeWidth / 2, centerY)
         .setFlip(false, false)
         .setDisplaySize(edgeWidth + 2, height + 2).setVisible(true);
@@ -297,7 +320,7 @@ export class ArenaSystem {
   }
 
   configureLandmark(record, centerX, centerY, hash) {
-    const landmarkConfig = this.getLandmarkConfig(hash);
+    const landmarkConfig = this.getLandmarkConfig(hash, record.chunkX, record.chunkY);
     if (!landmarkConfig) {
       record.landmark.setVisible(false);
       this.disableObstacle(record.landmarkCollider);
@@ -324,21 +347,27 @@ export class ArenaSystem {
     });
   }
 
-  getLandmarkConfig(hash) {
+  getLandmarkConfig(hash, chunkX = 0, chunkY = 0) {
     if (this.id === 'open-yard') {
-      if (hash % 19 === 0) {
+      const candidate = rawOpenYardLandmark(chunkX, chunkY, hash);
+      if (!candidate) return null;
+      for (let y = chunkY - 1; y <= chunkY + 1; y += 1) {
+        for (let x = chunkX - 1; x <= chunkX + 1; x += 1) {
+          if (x === chunkX && y === chunkY) continue;
+          const neighbor = rawOpenYardLandmark(x, y);
+          if (neighbor && compareLandmarkPriority(neighbor, candidate) < 0) return null;
+        }
+      }
+      if (candidate.kind === 'barn') {
         return {
           texture: 'landmark-barn', size: 220, kind: 'barn',
           colliderWidth: 154, colliderHeight: 76, colliderOffsetY: 45
         };
       }
-      if (hash % 11 === 0) {
-        return {
-          texture: 'landmark-well', size: 128, kind: 'well',
-          colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
-        };
-      }
-      return null;
+      return {
+        texture: 'landmark-well', size: 128, kind: 'well',
+        colliderWidth: 76, colliderHeight: 54, colliderOffsetY: 18
+      };
     }
     // Feed Alley's large architecture lives outside the playable lane. Keeping
     // the combat strip free of opaque landmarks preserves silhouettes in hordes.
@@ -586,7 +615,7 @@ export class ArenaSystem {
     const { x, y } = obstacle.sprite;
     obstacle.sprite.disableBody(true, true);
     this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
-    this.scene.playFx('fx-rocket-explosion', x, y, { scale: 0.72, depth: 9 });
+    playPropBreak(this.scene, obstacle.kind, x, y);
     this.scene.pickups?.spawnFromProp(x, y, obstacle);
     this.scene.telemetry.record('propDestroyed', this.scene.time.now, {
       wave: this.scene.waveSystem?.currentWave ?? 0,
@@ -603,6 +632,20 @@ export class ArenaSystem {
     } else if (obstacle.damageStage >= 2) {
       obstacle.sprite.setTint(0xe66d42);
     }
+  }
+
+  sampleLandmarks(radius = 30) {
+    if (this.id !== 'open-yard') return [];
+    const safeRadius = Math.max(1, Math.min(80, Math.floor(radius)));
+    const landmarks = [];
+    for (let y = -safeRadius; y <= safeRadius; y += 1) {
+      for (let x = -safeRadius; x <= safeRadius; x += 1) {
+        const hash = chunkHash(x, y, 17);
+        const config = this.getLandmarkConfig(hash, x, y);
+        if (config) landmarks.push({ x, y, kind: config.kind });
+      }
+    }
+    return landmarks;
   }
 
   getState() {
@@ -660,6 +703,9 @@ export class ArenaSystem {
         hp: Number.isFinite(obstacle.hp) ? Math.max(0, obstacle.hp) : null,
         maxHp: Number.isFinite(obstacle.maxHp) ? obstacle.maxHp : null,
         alpha: obstacle.sprite.alpha,
+        depth: obstacle.sprite.depth,
+        markerVisible: false,
+        markerDepth: null,
         active: obstacle.sprite.active
       }))
     };

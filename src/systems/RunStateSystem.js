@@ -1,6 +1,8 @@
 import { getPlayerProfile } from '../data/playerProfiles.js';
+import { safeStorage } from './SafeStorage.js';
 
 const MAX_REGULAR_CHOICES = 11;
+const BREAKABLE_HINT_KEY = 'roosterRage.hints.breakableProps.v1';
 
 function wallClockNow() {
   return globalThis.performance?.now?.() ?? Date.now();
@@ -59,6 +61,7 @@ export class RunStateSystem {
     this.scene.hud.hideOverlay();
     this.scene.gamePause.release('hub');
     this.scene.waveSystem.start();
+    this.scheduleBreakablePropHint();
     this.scene.productAnalytics.startRun({
       roosterId: id,
       challengeId: this.scene.challenge.id,
@@ -254,6 +257,15 @@ export class RunStateSystem {
     this.scene.productAnalytics.finishRun(this.getRunReport());
     this.scene.scene.restart({});
     return true;
+  }
+
+  scheduleBreakablePropHint() {
+    if (this.scene.bot.strategy !== 'manual' || safeStorage.getItem(BREAKABLE_HINT_KEY)) return;
+    this.scene.time.delayedCall(2500, () => {
+      if (this.gameEnded || this.choosingRooster) return;
+      this.scene.hud.showBreakablePropHint();
+      safeStorage.setItem(BREAKABLE_HINT_KEY, 'shown');
+    });
   }
 
   end(outcome, title, message) {

@@ -1,0 +1,26 @@
+
+> rooster-arena@0.1.0 test:pressure
+> node tests/pressure-runner.mjs
+
+Error: ace did not complete Wave 7 before the pressure timeout.
+{
+  "roosterId": "ace",
+  "outcome": "running",
+  "waveOutcome": "running",
+  "elapsedMs": 54747.799999999996,
+  "averageEnemyProjectiles": 4.194584382871536,
+  "peakEnemyProjectiles": 12,
+  "peakEnemyHazards": 14,
+  "averagePlayerSpeed": 186.98290733942184,
+  "distanceTravelled": 10193.27970215491,
+  "damageTaken": 9,
+  "deathCause": null,
+  "deferredAttacks": 7,
+  "gameEnded": false,
+  "timedOut": true,
+  "errors": []
+}
+    at assert (file:///C:/Users/madde/Documents/ChatGPT/Rooster/RoosterRage/tests/pressure-runner.mjs:15:25)
+    at runRooster (file:///C:/Users/madde/Documents/ChatGPT/Rooster/RoosterRage/tests/pressure-runner.mjs:81:5)
+    at async Promise.all (index 0)
+    at async run (file:///C:/Users/madde/Documents/ChatGPT/Rooster/RoosterRage/tests/pressure-runner.mjs:100:21)

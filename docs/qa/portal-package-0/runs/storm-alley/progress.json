@@ -1,0 +1,36 @@
+{
+  "config": {
+    "id": "storm-alley",
+    "rooster": "storm",
+    "arena": "vertical-run",
+    "seed": "portal-p0-alley-c",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    }
+  },
+  "latest": {
+    "time": 225993.5,
+    "wave": 6,
+    "ended": false,
+    "selection": null,
+    "hp": 12,
+    "maxHp": 85,
+    "x": 65414.13679327448,
+    "y": 65522.06596976637,
+    "enemies": 13,
+    "enemyProjectiles": 6,
+    "hazards": 6,
+    "visibleEnemies": 0,
+    "frames": 6597,
+    "error": null,
+    "choosing": false,
+    "camera": {
+      "x": 64963,
+      "y": 65320,
+      "zoom": 1
+    }
+  },
+  "wallMs": 224073,
+  "errors": []
+}

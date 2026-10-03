@@ -4,6 +4,8 @@
 
 Test the current portal candidate directly in your browser. This GitHub-hosted preview uses the same game-only release build as the Kongregate package and follows `codex/kongregate-upload`.
 
+The portal candidate includes the new playable mascot versions of **Barnyard Ace, Boombardier and Stormcrest**, all immediately selectable on this public test page. Previous character artwork remains preserved in the repository for comparison and rollback.
+
 ![Rooster Rage — three battle roosters defend their yard](public/marketing/rooster-rage-key-art-master.png)
 
 **Three battle roosters. Wild egg evolutions. One yard full of monsters.**
@@ -59,6 +61,20 @@ Production build:
 npm run build
 npm run test:production
 ```
+
+## Kongregate upload
+
+The [playable Kongregate preview](https://emfau88.github.io/RoosterRage/kongregate/) follows `codex/kongregate-upload`. GitHub Pages publishes it under `/kongregate/` alongside the standard build from `master`; both builds must pass their production checks before deployment.
+
+Create the verified, self-contained portal package with:
+
+```bash
+npm run package:kongregate
+```
+
+The local recommended upload is `dist/kongregate-upload/rooster-rage-kongregate-complete.zip`. It contains `index.html` and `assets/` at the ZIP root; upload it as the main HTML5/WebGL file and leave an optional **Additional Files** field empty.
+
+For a split upload form, use `releases/kongregate/index.html` as the main file plus `releases/kongregate/rooster-rage-additional-files.zip` as **Additional Files**. These are the two deliberately tracked artifacts in the dedicated GitHub branch; `UPLOAD-INSTRUCTIONS.txt` documents both paths.
 
 ## Quality assurance
 

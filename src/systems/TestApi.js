@@ -99,6 +99,7 @@ export function installTestApi(scene) {
       rerollsRemaining: scene.runState.rerollsRemaining
     }),
     getArenaState: () => scene.arena.getState(),
+    sampleArenaLandmarks: (radius = 30) => scene.arena.sampleLandmarks(radius),
     getArenaCatalog: () => scene.arena.getCatalog(),
     getPickupState: () => scene.pickups.getState(),
     advancePickupSchedule: (wave, progress) => {
@@ -135,6 +136,7 @@ export function installTestApi(scene) {
       if (!obstacle) return false;
       return scene.arena.damageObstacle(obstacle, amount, 'test-api');
     },
+    showBreakablePropHint: () => scene.hud.showBreakablePropHint(),
     forcePropDrop: (wave = 2) => {
       scene.waveSystem.currentWave = Number(wave);
       const obstacle = scene.arena.obstacles.find((item) => item.destructible && item.sprite.active);
@@ -417,6 +419,7 @@ export function installTestApi(scene) {
       hp: scene.player.hp,
       roosterId: scene.player.roosterId,
       maxHp: scene.player.maxHp,
+      spriteDepth: scene.player.sprite.depth,
       speed: scene.player.speed,
       fireRate: scene.player.fireRate,
       projectileDamage: scene.player.projectileDamage,
@@ -782,6 +785,7 @@ export function installTestApi(scene) {
       scene.hud.showUpgradeChoices(choices);
       return choices.map((upgrade) => upgrade.id);
     },
+    closePreviewUpgradeOverlay: () => scene.hud.hideOverlay(),
     getUpgradeCatalog: () => scene.upgradeSystem.upgrades.map((upgrade) => ({
       id: upgrade.id,
       category: upgrade.category,
@@ -847,7 +851,6 @@ export function installTestApi(scene) {
     },
     setPlayerHp: (hp) => {
       scene.player.hp = Phaser.Math.Clamp(hp, 0, scene.player.maxHp);
-      scene.player.updateHealthBar();
       return scene.player.hp;
     },
     damagePlayer: (amount) => {
@@ -872,9 +875,7 @@ export function installTestApi(scene) {
       scene.player.sprite.body?.stop();
       [
         scene.player.sprite,
-        scene.player.hpBarBack,
-        scene.player.hpBarFill,
-        scene.player.hpBarBorder,
+        scene.player.groundMarker,
         scene.arena.title
       ].forEach((object) => object?.setVisible(false));
       scene.cameras.main.centerOn(center.x, center.y);
@@ -1031,7 +1032,7 @@ export function installTestApi(scene) {
       const point = resolveLegacyTestPoint(scene, x, y);
       scene.player.sprite.setPosition(point.x, point.y);
       scene.arena.update(true);
-      scene.player.updateHealthBar();
+      scene.player.updateGroundMarker();
     },
     setShotCount: (count) => {
       scene.player.shotCount = Phaser.Math.Clamp(count, 1, 3);

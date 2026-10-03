@@ -1,0 +1,94 @@
+{
+  "verifiedAt": "2026-10-01T11:58:50.907Z",
+  "baseRevision": "fe755230a3601580dc6bfdcb90fba31893b6913f",
+  "workingTree": "Local uncommitted Package 1 changes; source hashes identify the verified files.",
+  "status": "Package 1 implemented and verified; later release packages remain open.",
+  "sourceHashes": [
+    {
+      "path": "src/main.js",
+      "sha256": "64267047888fb29fa427b2c84db125d0ae112f17d53962a0b24d2e505d0330dd"
+    },
+    {
+      "path": "src/ui/HUD.js",
+      "sha256": "a02ea5df1cd86a3c974df2504611b4ca7ba061cfeb0bee1faa712a418db21577"
+    },
+    {
+      "path": "src/styles.css",
+      "sha256": "6879cf8ca906d6e27af60e0de2213ad22e6fc213f51e4cfc33cef462a5e816fd"
+    },
+    {
+      "path": "src/menu-layouts.css",
+      "sha256": "e5c18669be3d11b3859be7047f29b983bcb44361a52baac416ab30511f48a598"
+    },
+    {
+      "path": "src/systems/UpgradeSystem.js",
+      "sha256": "2b0b8c28d138f3112696c810fb90438424a4cb36676d8c9cd2e02fc82eee13a2"
+    },
+    {
+      "path": "src/scenes/GameScene.js",
+      "sha256": "e193da45c99750ecc0f31b7e0e49f86f30665f9ce34292cda93f3c8db2f0f9f5"
+    },
+    {
+      "path": "tests/responsive-menu-runner.mjs",
+      "sha256": "a71557be1ed0358aab493e05b5134ef2e4f42a413f4933d8b6323170a7db0981"
+    },
+    {
+      "path": "tests/helpers/menu-release-checks.mjs",
+      "sha256": "c52b581df599a67b833cafd7d17e395c75d6ad51aa1c8c244ea81d257516c4fd"
+    },
+    {
+      "path": "scripts/capture-portal-baseline.mjs",
+      "sha256": "7d53f8306ffd01d62bb04f38cb81bbc2d15f003cde9164d75ee703c6744d8124"
+    },
+    {
+      "path": "scripts/verify-portal-package-1.mjs",
+      "sha256": "f4003f5667f7c5d81a1de7d29202a35cad440b4e33032259b080c7fbcfea5592"
+    }
+  ],
+  "checks": {
+    "releaseFilesSha256Matched": 143,
+    "releaseBytes": 19330951,
+    "budgetBytes": 19922944,
+    "headroomBytes": 591993,
+    "bytesSmallerThanPackage0": 15517,
+    "viewportCases": 20,
+    "interactionCases": 4,
+    "productionScreenshots": 100,
+    "productionTextChecks": 271,
+    "productionRecipeChecks": 10,
+    "productionSynergyChecks": 4,
+    "productionEnvironmentCases": 52,
+    "productionFourthBossSelections": 3,
+    "productionTestApiExposed": false,
+    "testsPassed": [
+      "menus.log",
+      "meta.log",
+      "evolution.log",
+      "hud-report.log",
+      "pause.log",
+      "release.log"
+    ],
+    "cssConsolidation": {
+      "retainedRulesBefore": 975,
+      "retainedRulesAfter": 975,
+      "unaffectedRulesUnchanged": true
+    }
+  },
+  "commandsAlreadyExecuted": [
+    "npm.cmd run test:menus",
+    "npm.cmd run test:meta",
+    "npm.cmd run test:evolution",
+    "npm.cmd run test:hud-report",
+    "npm.cmd run test:pause",
+    "npm.cmd run test:release",
+    "node scripts/capture-portal-baseline.mjs --views (Package 1 output)",
+    "node scripts/capture-portal-baseline.mjs --details (Package 1 output)",
+    "node scripts/capture-portal-baseline.mjs --menu-matrix (Package 1 output)",
+    "git diff --check"
+  ],
+  "limitations": [
+    "Chromium on Windows, headless software graphics; no physical Android/iPhone/Safari validation.",
+    "No new natural late-game or ten-minute performance measurement for this menu package.",
+    "Combat messages, icon artwork, result hierarchy and final portal packaging remain in Packages 2–6."
+  ]
+}

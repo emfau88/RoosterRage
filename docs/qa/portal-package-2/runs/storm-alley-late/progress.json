@@ -1,0 +1,39 @@
+{
+  "config": {
+    "id": "storm-alley-late",
+    "rooster": "storm",
+    "arena": "vertical-run",
+    "seed": "portal-p0-alley-late-e",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    },
+    "advanced": true,
+    "strategy": "evasive",
+    "clips": true
+  },
+  "latest": {
+    "time": 249093.10000000003,
+    "wave": 7,
+    "ended": false,
+    "selection": null,
+    "hp": 15,
+    "maxHp": 90,
+    "x": 65412.74630271785,
+    "y": 64702.246672020585,
+    "enemies": 20,
+    "enemyProjectiles": 0,
+    "hazards": 0,
+    "visibleEnemies": 1,
+    "frames": 6188,
+    "error": null,
+    "choosing": false,
+    "camera": {
+      "x": 64933,
+      "y": 64435,
+      "zoom": 1
+    }
+  },
+  "wallMs": 247781,
+  "errors": []
+}

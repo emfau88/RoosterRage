@@ -201,8 +201,8 @@ export class UpgradeSystem {
       rankDeltaLabel: upgrade.evolution
         ? 'EVO'
         : upgrade.consumable
-          ? 'SOFORT'
-          : currentRank > 0 ? `R${currentRank} → R${nextRank}` : `NEU · R${nextRank}`,
+          ? 'INSTANT'
+          : currentRank > 0 ? `R${currentRank} → R${nextRank}` : `NEW · R${nextRank}`,
       rankProgress: nextRank ? {
         current: Math.max(0, nextRank - 1),
         next: nextRank,

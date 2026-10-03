@@ -19,6 +19,9 @@ const AUDIO_TIER_BY_KEY = Object.fromEntries(
 );
 
 const SFX_CONFIG = {
+  'enemy-dash': { volume: 0.3, cooldown: 160, maxVoices: 2, rateJitter: 0.025, priority: true },
+  'blast-shell-impact': { volume: 0.22, cooldown: 160, maxVoices: 2, rateJitter: 0.03 },
+  'orbit-contact': { volume: 0.13, cooldown: 180, maxVoices: 1, rateJitter: 0.025 },
   'egg-launch-ace': { volume: 0.16, cooldown: 70, maxVoices: 2, rateJitter: 0.025 },
   'egg-launch-artillery': { volume: 0.2, cooldown: 100, maxVoices: 2, rateJitter: 0.018 },
   'egg-launch-storm': { volume: 0.13, cooldown: 55, maxVoices: 2, rateJitter: 0.045 },
@@ -164,12 +167,20 @@ export class AudioSystem {
       return null;
     }
     const tier = options.tier ?? AUDIO_TIER_BY_KEY[key] ?? 'impact';
-    const priority = options.priority ?? config.priority ?? ['critical', 'reward'].includes(tier);
-    const categoryVoices = this.activeCategoryVoices.get(category) ?? 0;
+    const priority = options.priority ?? config.priority ?? ['danger', 'critical', 'reward'].includes(tier);
+    let categoryVoices = this.activeCategoryVoices.get(category) ?? 0;
     const baseLimit = CATEGORY_VOICE_LIMITS[category] ?? 2;
     const categoryLimit = baseLimit + (category === 'sfx' && priority ? 2 : category === 'sfx' && tier === 'ability' ? 1 : 0);
     if (categoryVoices >= categoryLimit) {
-      return null;
+      const tierRank = { impact: 0, weapon: 1, ability: 2, reward: 3, critical: 4, danger: 5 };
+      const incomingRank = tierRank[tier] ?? 0;
+      const candidate = [...this.activeSoundMeta].filter(([,meta]) => meta.category === category
+        && (tierRank[meta.tier] ?? 0) < incomingRank)
+        .sort((a,b)=>(tierRank[a[1].tier] ?? 0)-(tierRank[b[1].tier] ?? 0))[0];
+      if (!priority || !candidate) return null;
+      candidate[0].stop();
+      categoryVoices = this.activeCategoryVoices.get(category) ?? 0;
+      if (categoryVoices >= categoryLimit) return null;
     }
 
     const rateJitter = options.rateJitter ?? config.rateJitter ?? 0;
@@ -184,7 +195,7 @@ export class AudioSystem {
     this.activeVoices.set(voiceKey, voices + 1);
     this.activeCategoryVoices.set(category, categoryVoices + 1);
     this.activeSounds.add(sound);
-    this.activeSoundMeta.set(sound, { category, baseVolume });
+    this.activeSoundMeta.set(sound, { category, baseVolume, tier });
     let released = false;
     const release = () => {
       if (released) return;

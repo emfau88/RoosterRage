@@ -1,6 +1,7 @@
 import { WAVE_DEFINITIONS } from '../data/waveDefinitions.js';
 import { ENCOUNTER_STANDARDS, ENEMY_ROLE_MATRIX } from '../data/enemyRoleDefinitions.js';
 import { allocateBudgets, SpawnDirector } from './SpawnDirector.js';
+import { USE_NEW_PORTAL_ELITES } from '../config/eliteVisual.js';
 
 const STRANDED_CLEANUP_GRACE_MS = 10000;
 const OPENING_WAVE_CLEANUP_GRACE_MS = 0;
@@ -535,7 +536,7 @@ export class WaveSystem {
       ...this.makeRunner(10),
       type: 'elite-runner',
       role: 'runner',
-      displayName: 'Gilded Talon',
+      displayName: 'Turbo Goose',
       elite: true,
       eliteTint: false,
       speed: 126,
@@ -551,7 +552,7 @@ export class WaveSystem {
       hpBarWidth: 62,
       hpBarYOffset: 42,
       aura: { kind: 'haste', label: 'Haste Aura', radius: 185, multiplier: 1.2, color: 0xffd35c },
-      ability: { kind: 'dash', label: 'Talon Dash', cooldown: 3900, telegraphMs: 380, speed: 470, duration: 460, color: 0xffd35c }
+      ability: { kind: 'dash', label: 'Goose Rush', cooldown: 3900, telegraphMs: 380, speed: 470, duration: 460, color: 0xffd35c }
     };
   }
 
@@ -560,16 +561,18 @@ export class WaveSystem {
       ...this.makeBrute(3.1),
       type: 'elite-brute',
       role: 'tank',
-      displayName: 'Iron Brooder',
+      displayName: USE_NEW_PORTAL_ELITES ? 'Panzer Turkey' : 'Iron Brooder',
       elite: true,
       eliteTint: false,
       speed: 66,
       damage: 18,
       xp: 42,
-      texture: 'enemy-elite-brute-stomp',
-      animation: null,
+      texture: USE_NEW_PORTAL_ELITES ? 'enemy-elite-brute-run' : 'enemy-elite-brute-stomp',
+      animation: USE_NEW_PORTAL_ELITES ? 'enemy-elite-brute-run-left' : null,
       animationSet: this.makeAnimationSet('enemy-elite-brute'),
-      directionalAnimationPrefix: null,
+      directionalAnimationPrefix: USE_NEW_PORTAL_ELITES ? 'enemy-elite-brute-run' : null,
+      directionalStateAnimations: USE_NEW_PORTAL_ELITES,
+      attackMovement: USE_NEW_PORTAL_ELITES ? { windup: 0.2, resolve: 0, recovery: 0.35 } : null,
       scale: 0.39,
       radius: 41,
       bodyOffsetX: 87,
@@ -577,7 +580,7 @@ export class WaveSystem {
       hpBarWidth: 74,
       hpBarYOffset: 56,
       aura: { kind: 'armor', label: 'Armor Aura', radius: 205, reduction: 0.22, color: 0x6bd8ff },
-      ability: { kind: 'slam', label: 'Iron Stomp', cooldown: 4400, telegraphMs: 620, heavy: true, radius: 165, damage: 21, color: 0xff6a32 }
+      ability: { kind: 'slam', label: USE_NEW_PORTAL_ELITES ? 'Pot-Lid Stomp' : 'Iron Stomp', cooldown: 4400, telegraphMs: 620, heavy: true, radius: 165, damage: 21, color: 0xff6a32 }
     };
   }
 
@@ -586,7 +589,7 @@ export class WaveSystem {
       ...this.makeSpitter(4.8),
       type: 'elite-spitter',
       role: 'shooter',
-      displayName: 'Violet Matron',
+      displayName: USE_NEW_PORTAL_ELITES ? 'Chili Gobbler' : 'Violet Matron',
       elite: true,
       eliteTint: false,
       speed: 48,
@@ -595,6 +598,8 @@ export class WaveSystem {
       animation: 'enemy-elite-spitter-run-left',
       animationSet: this.makeAnimationSet('enemy-elite-spitter'),
       directionalAnimationPrefix: 'enemy-elite-spitter-run',
+      directionalStateAnimations: USE_NEW_PORTAL_ELITES,
+      attackMovement: USE_NEW_PORTAL_ELITES ? { windup: 0, resolve: 0, recovery: 0.25 } : null,
       scale: 0.34,
       radius: 36,
       bodyOffsetX: 92,
@@ -602,7 +607,7 @@ export class WaveSystem {
       hpBarWidth: 68,
       hpBarYOffset: 48,
       aura: { kind: 'regeneration', label: 'Brood Regeneration Aura', radius: 210, healPerSecond: 6, color: 0xc18aff },
-      ability: { kind: 'fan', label: 'Violet Volley', cooldown: 2700, telegraphMs: 420, speed: 245, damage: 7, source: 'elite-spitter-shot', texture: 'enemy-purple-shot', radius: 11, count: 5, spread: 0.92, color: 0xffffff, trailColor: 0x9b5cff, scale: 1.2, muzzleDistance: 42 }
+      ability: { kind: 'fan', label: USE_NEW_PORTAL_ELITES ? 'Hot-Sauce Volley' : 'Violet Volley', cooldown: 2700, telegraphMs: 420, speed: 245, damage: 7, source: 'elite-spitter-shot', texture: 'enemy-purple-shot', radius: 11, count: 5, spread: 0.92, color: 0xffffff, trailColor: 0x9b5cff, scale: 1.2, muzzleDistance: 42 }
     };
   }
 
@@ -708,7 +713,7 @@ export class WaveSystem {
       ...this.makeEliteRunner(),
       type: 'champion-charger',
       role: 'runner',
-      displayName: 'Stormclaw Champion',
+      displayName: 'Golden Goose Champion',
       elite: false,
       champion: true,
       hp: 520,
@@ -723,7 +728,7 @@ export class WaveSystem {
       aura: null,
       ability: {
         kind: 'dash',
-        label: 'Stormclaw Charge',
+        label: 'Champion Rush',
         cooldown: 4200,
         telegraphMs: 520,
         speed: 455,

@@ -1,0 +1,276 @@
+[
+  {
+    "file": "art-source/enemies/turbo-goose-v1/down-body.png",
+    "bytes": 201162,
+    "sha256": "498d909474aca1192593c887e6c982ef805240af297971aed9d84fd8243f6cfb",
+    "dimensions": [
+      457,
+      415
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/down-left-foot.png",
+    "bytes": 28467,
+    "sha256": "dbfbbf9158636ee6b5fd1e7d0e5a81c0a604d00409887747659468249732d8fa",
+    "dimensions": [
+      222,
+      339
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/down-right-foot.png",
+    "bytes": 27881,
+    "sha256": "540197220d1d3e5f6a7fd6532444b4e51b4a437a886d34515e25196111d98c35",
+    "dimensions": [
+      205,
+      389
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/down-walk.gif",
+    "bytes": 45801,
+    "sha256": "26b5a2b8fd19a049c608796c4ef75cfc2ff7548ce71ef1246b22d554455a4841",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "P"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/left-body.png",
+    "bytes": 182648,
+    "sha256": "43e47ebf4c41d071823a61ea7833ae52a68f9c1918776cc22d0170c54533e541",
+    "dimensions": [
+      411,
+      394
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/left-left-foot.png",
+    "bytes": 25520,
+    "sha256": "467d289f444ffc09a6f488cb300840ffcb62d2e02531b9892564e92f1a0ae151",
+    "dimensions": [
+      198,
+      343
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/left-right-foot.png",
+    "bytes": 24129,
+    "sha256": "573f9d09e45279cb5ee2e035f81624df4ea0601f903643f03d76e2656f0946d1",
+    "dimensions": [
+      179,
+      363
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/left-walk.gif",
+    "bytes": 44271,
+    "sha256": "ea62094cd81f32b0d76b4f28c2639e2a126ea920647edde89f15380406c6313d",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "P"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/manifest.json",
+    "bytes": 1804,
+    "sha256": "32a215c79ed8e3831a87e79b4d77f3807eba7ea49d4824ff69d85f25379e687c"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/rig-kit.png",
+    "bytes": 763606,
+    "sha256": "7334194b1e9d735e68bb987b3dc118f7a25dc4543e60cfe75862c4557097efc8",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/right-walk.gif",
+    "bytes": 44368,
+    "sha256": "c737a6248f02bef9d9c4923fb790c4112690af974a4c63fe8c5f25230124181a",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "P"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/up-body.png",
+    "bytes": 186529,
+    "sha256": "b45715073735b42b2b9f866560ed2368cd15c500d0ca7b734912d12c0dfee805",
+    "dimensions": [
+      452,
+      384
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/up-left-foot.png",
+    "bytes": 26613,
+    "sha256": "0e14b055f947921a1cdea81b2b899270d9e913498f6603c34b94496c5195cb68",
+    "dimensions": [
+      224,
+      317
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/up-right-foot.png",
+    "bytes": 26404,
+    "sha256": "00acdd6c0a83b332eca411cb364110bf18d20b0b8fabd0c65c51b8f03be83791",
+    "dimensions": [
+      228,
+      343
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/enemies/turbo-goose-v1/up-walk.gif",
+    "bytes": 41777,
+    "sha256": "6e365859f8afd17a6f44f5ece42805fdbdd0577d97bca0eb975edb44f8417000",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "P"
+  },
+  {
+    "file": "art-source/pickups/portal-v1/bomb.png",
+    "bytes": 643154,
+    "sha256": "38c2da42b12f2cbf3da3dc62b06df5a33d5efcb6e22f0b2acc42dd370176cf4e",
+    "dimensions": [
+      1264,
+      1244
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/pickups/portal-v1/heal.png",
+    "bytes": 1139662,
+    "sha256": "e4cec3b63d4b337c565aa1051ad7dd0eba20f072effecd6ff41b17afe8b68608",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/pickups/portal-v1/magnet.png",
+    "bytes": 888723,
+    "sha256": "e511ec4447d123d357d4f173e6712aeb4fef328fd02cb9f913ff7e4254016968",
+    "dimensions": [
+      1312,
+      1199
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "art-source/pickups/portal-v1/prompts.json",
+    "bytes": 2136,
+    "sha256": "6986ef9582441a391ac25542d5290eed287ebf38ae8de5d3b28faf5376013ab2"
+  },
+  {
+    "file": "src/assets/pickups/portal-v1/pickup-bomb.webp",
+    "bytes": 25378,
+    "sha256": "ccfbf7a8fcebecde9d5d8e1ba97bdad275381f74e74a2da8aa2e58274fab7c22",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/pickups/portal-v1/pickup-heal.webp",
+    "bytes": 41480,
+    "sha256": "5dc934477eecba0e75fd86c3774ba68756234dbcd97cf965e8a357ebeade2729",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/pickups/portal-v1/pickup-magnet.webp",
+    "bytes": 41330,
+    "sha256": "9df1e70f8540fc95c1dbca2ad46c46a7da3472a290b1b2771d88b21caacd6d29",
+    "dimensions": [
+      256,
+      256
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/enemies/portal-v1/enemy-turbo-goose-run.webp",
+    "bytes": 184768,
+    "sha256": "2902d51d4b96bc5e2c606904e3204bd6d84a9ebdd544655e9f66f5706b67c253",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/characters/portraits-mascot/rooster-ace-portrait.webp",
+    "bytes": 198684,
+    "sha256": "d23464343fe3e9fdd16a00a074b5c57cffc62a1e26417d04ae512c991d7b730e",
+    "dimensions": [
+      512,
+      512
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/characters/portraits-mascot/rooster-artillery-portrait.webp",
+    "bytes": 217348,
+    "sha256": "e663619d9d618cad1ea1e5577bcd1400355d0a1ef575e0a26601a8438b249753",
+    "dimensions": [
+      512,
+      512
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/characters/portraits-mascot/rooster-storm-portrait.webp",
+    "bytes": 211372,
+    "sha256": "19854c7df7948afdb5ee9b567fab7857e1905347febbbb007fdd0fcae3e80469",
+    "dimensions": [
+      512,
+      512
+    ],
+    "mode": "RGBA"
+  },
+  {
+    "file": "src/assets/audio/portal-v1/blast-shell-impact.wav",
+    "bytes": 12392,
+    "sha256": "1579723b2164738e25de92f66e731e80385bfadb58ce4fc3dbf8391cd7b72798",
+    "channels": 1,
+    "sampleRate": 22050,
+    "duration": 0.28
+  },
+  {
+    "file": "src/assets/audio/portal-v1/enemy-dash.wav",
+    "bytes": 10628,
+    "sha256": "83a13c5e90a8566671feee04b6739d40ce5999acda1470e5ae9c5fb2497a480f",
+    "channels": 1,
+    "sampleRate": 22050,
+    "duration": 0.24
+  },
+  {
+    "file": "src/assets/audio/portal-v1/orbit-contact.wav",
+    "bytes": 6218,
+    "sha256": "df7720b284ee4cf971dfd438144f39e2b90251f971669d1c2b7513453adf4303",
+    "channels": 1,
+    "sampleRate": 22050,
+    "duration": 0.14
+  }
+]

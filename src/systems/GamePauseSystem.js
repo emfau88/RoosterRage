@@ -84,6 +84,18 @@ export class GamePauseSystem {
     }
 
     this.scene.time.paused = shouldFreezeTime;
+    // New elite attack poses must hold with their telegraph, rather than
+    // advancing to the impact frame while the simulation clock is frozen.
+    for (const enemy of this.scene.enemies ?? []) {
+      if (!enemy.directionalStateAnimations || !enemy.sprite.active) continue;
+      if (shouldFreezeTime && !enemy.sprite.anims.isPaused) {
+        enemy.sprite.anims.pause();
+        enemy.animationPausedByGame = true;
+      } else if (!shouldFreezeTime && enemy.animationPausedByGame) {
+        enemy.sprite.anims.resume();
+        enemy.animationPausedByGame = false;
+      }
+    }
     if (shouldFreezeTweens) {
       this.scene.tweens.pauseAll();
     } else {

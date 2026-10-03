@@ -1,0 +1,2423 @@
+[
+  {
+    "name": "small-play",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 320,
+      "height": 568,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nPlay\nRoosters\nTalents\nArchive\nENDLESS YARD\nHARVEST YARD\nWide & open\nPREPARE RUN\nSTANDARD RUN\n\nSurvive ten escalating waves and defeat the Brood King.\n\nWAVES\n10\nBEST HUNT\n450 kills\nREWARD\nFirst clear complete\n‹\n1 / 3 · SWIPE\n›\nCHOOSE EXPEDITION\nStandard Run\nFirst clear complete\nRush Hour\nFirst clear +60 kernels\nFeatherweight\nFirst clear +75 kernels\nRoyal Gauntlet\nFirst clear +100 kernels\nYOUR ROOSTER\nBARNYARD ACE\nChange\nSTART RUN",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 32,
+              "y": 167,
+              "width": 256,
+              "height": 19.796875
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 20,
+              "y": 368.65625,
+              "width": 280,
+              "height": 191.3125
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 203,
+              "y": 492.109375,
+              "width": 100,
+              "height": 60
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "grid",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "grid",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 147,
+              "y": 75,
+              "width": 26,
+              "height": 16
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "small-storm-preview",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 320,
+      "height": 568,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nPlay\nRoosters\nTalents\nArchive\nROOSTERS\nRoosters\n\nStats, mastery, cosmetics, and unlocks.\n\nAVAILABLE\nBarnyard Ace\nPrecision All-Rounder\nTap for details\nVISUAL ONLY\nNo stat changes\nShow\nAVAILABLE\nBoombardier\nHeavy Area Damage\nTap for details\nVISUAL ONLY\nNo stat changes\nShow\nStormcrest\nFast Chain Attacks\nHP 85\nSPD 245\nDMG 14\nStorm Egg: Very fast storm eggs discharge into a nearby second target.\nStatic Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\nMastery 1/5\n0/120 XP\n2 runs · 1 victories\nSELECT STORMCREST\nReturn to Play\nVISUAL ONLY\nNo stat changes\nShow",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "grid",
+            "visibility": "visible",
+            "rect": {
+              "x": 12,
+              "y": -128.8125,
+              "width": 296,
+              "height": 136
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "grid",
+            "visibility": "visible",
+            "rect": {
+              "x": 12,
+              "y": 96.5625,
+              "width": 296,
+              "height": 136
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 12,
+              "y": 318.9375,
+              "width": 296,
+              "height": 401.3125
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 147,
+              "y": 75,
+              "width": 26,
+              "height": 16
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "small-talent-detail",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 320,
+      "height": 568,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nPlay\nRoosters\nTalents\nArchive\nPERMANENT\nTalents\nINVESTED\n0\nranks\nEARNED\n500\nkernels\n\nChoose a talent to preview its effect, next rank, and cost before upgrading.\n\nI\nTIER I\nNest Foundation\nUnlocked\n0/3\nSturdy Nest\n+2% maximum HP/rank\n12 kernels\n0/3\nSwift Spurs\n+15% movement speed/rank\n12 kernels\n0/3\nPolished Yolk\n+2% starting weapon damage/rank\n12 kernels\nII\nTIER II\nAdvanced Instincts\n3 ranks missing\n0/2\nWide Wings\n+6% XP magnet radius/rank\nLocked\n0/1\nSecond Choice\n+1 reroll per run\nLocked\nIII\nTIER III\nRoyal Path\n8 ranks missing\n0/1\nRoyal Instinct\n+1% critical hit chance\nLocked\n×\nTIER I · Maximum HP\nSturdy Nest\nRank 0/3\n\n+2% maximum HP per rank.\n\nCURRENT\n0 %\n→\nNEXT RANK\n+2 %\nMAXIMUM\n+6 %\n\n250 kernels available · 238 will remain.\n\nUpgrade for 12 kernels\nSelection previews. Only the button upgrades the talent.",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "grid",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "grid",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 147,
+              "y": 75,
+              "width": 26,
+              "height": 16
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "small-settings",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 320,
+      "height": 568,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nSettings\n\nAdjust visuals and audio independently.\n\nVISUALS\nDamage numbers\nON\nScreen shake\nON\nHit flashes\nON\nVibration\nON\nFullscreen\nTOGGLE\nAUDIO\nMaster\n80%\nSound effects\n90%\nUI\n85%\nMusic\n65%\nAmbience\n35%\nPRIVACY\nAnonymous gameplay analytics\nRecords only run flow and key metrics. No accounts, cookies, or advertising IDs.\nOFF\nContinue",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 147,
+              "y": 75,
+              "width": 26,
+              "height": 16
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "small-boss-chest",
+    "kind": "fixture",
+    "viewport": {
+      "width": 320,
+      "height": 568,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Ace L1\n100/100\n00:00\n1/10\n0\n1\nRoyal Boss Chest\n\nChoose a guaranteed build reward.\n\nArmor\nNEW · R1\nPassive\nHARD SHELL\n−3 damage per hit\nMinimum 1\nNew ability\n-3 damage per incoming hit (minimum 1).\nFire Eggs\nNEW · R1\nWeapon\nEMBER SHELL\n+10 damage\nFire projectile\nNew ability\n+10 damage; compact Fire Eggs burn with a smooth, steady flicker.\nPiercing Eggs\nNEW · R1\nWeapon\nPIERCING SHELL\n+1 pierced target\nNew ability\nPrimary eggs pierce +1 enemy.\nMove Speed\nNEW · R1\nPassive\nQUICK FEET\n+24 movement speed\nNew ability\nReroll (1)\nHARVEST YARD\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [
+          {
+            "text": "Armor",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 217.09375,
+              "width": 48.46875,
+              "height": 20
+            }
+          },
+          {
+            "text": "Fire Eggs",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 523.5625,
+              "width": 67.609375,
+              "height": 20
+            }
+          },
+          {
+            "text": "Piercing Eggs",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 800.140625,
+              "width": 100.9375,
+              "height": 20
+            }
+          },
+          {
+            "text": "Move Speed",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 1057.875,
+              "width": 92.796875,
+              "height": 20
+            }
+          }
+        ],
+        ".upgrade-button__rank": [
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 216.828125,
+              "y": 219.09375,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 216.828125,
+              "y": 525.5625,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 216.828125,
+              "y": 802.140625,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 216.828125,
+              "y": 1059.875,
+              "width": 53.171875,
+              "height": 17
+            }
+          }
+        ],
+        ".upgrade-button__changes > span": [
+          {
+            "text": "−3 damage per hit",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 301.09375,
+              "width": 131.578125,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Minimum 1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 330.984375,
+              "width": 85.71875,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+10 damage",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 607.5625,
+              "width": 91.90625,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Fire projectile",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 146.90625,
+              "y": 607.5625,
+              "width": 102.296875,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+1 pierced target",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 884.140625,
+              "width": 123.609375,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+24 movement speed",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 1141.875,
+              "width": 152.625,
+              "height": 24.890625
+            }
+          }
+        ],
+        ".upgrade-button__description": [
+          {
+            "text": "-3 damage per incoming hit (minimum 1).",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 393.875,
+              "width": 220,
+              "height": 37.6875
+            }
+          },
+          {
+            "text": "+10 damage; compact Fire Eggs burn with a smooth, steady flicker.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 670.453125,
+              "width": 220,
+              "height": 37.6875
+            }
+          },
+          {
+            "text": "Primary eggs pierce +1 enemy.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 50,
+              "y": 947.03125,
+              "width": 220,
+              "height": 18.84375
+            }
+          }
+        ],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Harvest YardStandard Run · Wave 1: First Peck",
+            "fontSize": "15px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": -1,
+              "y": 83,
+              "width": 322,
+              "height": 61.296875
+            }
+          }
+        ]
+      },
+      "selection": {
+        "type": "chest",
+        "kind": "boss"
+      },
+      "choices": [
+        {
+          "id": "armor",
+          "name": "Armor",
+          "description": "-3 damage per incoming hit (minimum 1).",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "fire-eggs",
+          "name": "Fire Eggs",
+          "description": "+10 damage; compact Fire Eggs burn with a smooth, steady flicker.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "piercing-eggs",
+          "name": "Piercing Eggs",
+          "description": "Primary eggs pierce +1 enemy.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "move-speed",
+          "name": "Move Speed",
+          "description": "+24 movement speed.",
+          "evolutionHint": null,
+          "synergyActive": false
+        }
+      ],
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.9583749999999998,
+              "remainingMs": 766.6999999999998,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    },
+    "fourthOfferSelectedAndResumed": true
+  },
+  {
+    "name": "boss-grid-boundary-play",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 720,
+      "height": 600,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nFullscreen\nSettings\nPlay\nRoosters\nTalents\nArchive\nENDLESS YARD\nHARVEST YARD\nSTANDARD RUN\n\nSurvive ten escalating waves and defeat the Brood King.\n\nWAVES\n10\nBEST HUNT\n450 kills\nREWARD\nFirst clear complete\n‹\n1 / 3 · SWIPE\n›\nStandard Run\nFirst clear complete\nRush Hour\nFirst clear +60 kernels\nFeatherweight\nFirst clear +75 kernels\nRoyal Gauntlet\nFirst clear +100 kernels\nYOUR ROOSTER\nBARNYARD ACE\nChange\nSTART RUN\nEnter the yard",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 47,
+              "y": 200,
+              "width": 318.375,
+              "height": 19.796875
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 375.375,
+              "y": 172,
+              "width": 307.625,
+              "height": 219.25
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 518,
+              "y": 487,
+              "width": 164,
+              "height": 67
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 343,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-grid-boundary-storm-preview",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 720,
+      "height": 600,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nFullscreen\nSettings\nPlay\nRoosters\nTalents\nArchive\nROOSTERS\nRoosters\n\nStats, mastery, cosmetics, and unlocks.\n\nBarnyard Ace\nPrecision All-Rounder\nHP 100\nSPD 210\nDMG 20\nTarget Egg: Homing eggs with a built-in chance to deal critical damage.\nDeadeye: 8% chance to deal double base-egg damage.\nMastery 1/5\n0/120 XP\n4 runs · 1 victories\nVISUAL ONLY\nNo stat changes\nOriginal\n→\nSunrise Comb\n\nUnlock: Defeat 100 enemies\n\nOriginal\nSunrise Comb\nBoombardier\nHeavy Area Damage\nHP 115\nSPD 185\nDMG 30\nBlast Shell: Slow, heavy eggs explode on impact.\nBlast Shell: Hits deal 55% damage within a 64-unit radius.\nMastery 1/5\n0/120 XP\n2 runs · 1 victories\nVISUAL ONLY\nNo stat changes\nOriginal\n→\nIronclad Plating\n\nUnlock: Win with Boombardier\n\nOriginal\nIronclad Plating\nStormcrest\nFast Chain Attacks\nHP 85\nSPD 245\nDMG 14\nStorm Egg: Very fast storm eggs discharge into a nearby second target.\nStatic Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\nMastery 1/5\n0/120 XP\n2 runs · 1 victories\nSELECT STORMCREST\nReturn to Play\nVISUAL ONLY\nNo stat changes\nOriginal\n→\nViolet Arc\n\nUnlock: Win with Stormcrest\n\nOriginal\nViolet Arc",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 29,
+              "y": 162,
+              "width": 212.65625,
+              "height": 397.6875
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 253.65625,
+              "y": 162,
+              "width": 212.671875,
+              "height": 397.6875
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 478.328125,
+              "y": 159,
+              "width": 212.671875,
+              "height": 434.0625
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 343,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-grid-boundary-talent-detail",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 720,
+      "height": 600,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nFullscreen\nSettings\nPlay\nRoosters\nTalents\nArchive\nPERMANENT\nTalents\nINVESTED\n0\nranks\nEARNED\n500\nkernels\n\nChoose a talent to preview its effect, next rank, and cost before upgrading.\n\nI\nTIER I\nNest Foundation\nUnlocked\n0/3\nSturdy Nest\n+2% maximum HP/rank\n12 kernels\n0/3\nSwift Spurs\n+15% movement speed/rank\n12 kernels\n0/3\nPolished Yolk\n+2% starting weapon damage/rank\n12 kernels\nII\nTIER II\nAdvanced Instincts\n3 ranks missing\n0/2\nWide Wings\n+6% XP magnet radius/rank\nLocked\n0/1\nSecond Choice\n+1 reroll per run\nLocked\nIII\nTIER III\nRoyal Path\n8 ranks missing\n0/1\nRoyal Instinct\n+1% critical hit chance\nLocked\n×\nTIER I · Maximum HP\nSturdy Nest\nRank 0/3\n\n+2% maximum HP per rank.\n\nCURRENT\n0 %\n→\nNEXT RANK\n+2 %\nMAXIMUM\n+6 %\n\n250 kernels available · 238 will remain.\n\nUpgrade for 12 kernels\nSelection previews. Only the button upgrades the talent.",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 343,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-grid-boundary-settings",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 720,
+      "height": 600,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nSettings\n\nAdjust visuals and audio independently.\n\nVISUALS\nDamage numbers\nON\nScreen shake\nON\nHit flashes\nON\nVibration\nON\nFullscreen\nTOGGLE\nAUDIO\nMaster\n80%\nSound effects\n90%\nUI\n85%\nMusic\n65%\nAmbience\n35%\nPRIVACY\nAnonymous gameplay analytics\nRecords only run flow and key metrics. No accounts, cookies, or advertising IDs.\nOFF\nContinue",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 343,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-grid-boundary-boss-chest",
+    "kind": "fixture",
+    "viewport": {
+      "width": 720,
+      "height": 600,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Ace L1\n100/100\n00:00\n1/10\n0\n1\nRoyal Boss Chest\n\nChoose a guaranteed build reward.\n\nArmor\nNEW · R1\nPassive\nHARD SHELL\n−3 damage per hit\nMinimum 1\nNew ability\n-3 damage per incoming hit (minimum 1).\nFire Eggs\nNEW · R1\nWeapon\nEMBER SHELL\n+10 damage\nFire projectile\nNew ability\n+10 damage; compact Fire Eggs burn with a smooth, steady flicker.\nPiercing Eggs\nNEW · R1\nWeapon\nPIERCING SHELL\n+1 pierced target\nNew ability\nPrimary eggs pierce +1 enemy.\nMove Speed\nNEW · R1\nPassive\nQUICK FEET\n+24 movement speed\nNew ability\nReroll (1)\nHARVEST YARD\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [
+          {
+            "text": "Armor",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 121.546875,
+              "width": 48.46875,
+              "height": 20
+            }
+          },
+          {
+            "text": "Fire Eggs",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 449,
+              "y": 121.546875,
+              "width": 67.609375,
+              "height": 20
+            }
+          },
+          {
+            "text": "Piercing Eggs",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 378.015625,
+              "width": 100.9375,
+              "height": 20
+            }
+          },
+          {
+            "text": "Move Speed",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 449,
+              "y": 378.015625,
+              "width": 92.796875,
+              "height": 20
+            }
+          }
+        ],
+        ".upgrade-button__rank": [
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 285.828125,
+              "y": 123.546875,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 610.828125,
+              "y": 123.546875,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 285.828125,
+              "y": 380.015625,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 610.828125,
+              "y": 380.015625,
+              "width": 53.171875,
+              "height": 17
+            }
+          }
+        ],
+        ".upgrade-button__changes > span": [
+          {
+            "text": "−3 damage per hit",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 205.546875,
+              "width": 131.578125,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Minimum 1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 235.4375,
+              "width": 85.71875,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+10 damage",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 449,
+              "y": 205.546875,
+              "width": 91.90625,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Fire projectile",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 545.90625,
+              "y": 205.546875,
+              "width": 102.296875,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+1 pierced target",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 462.015625,
+              "width": 123.609375,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+24 movement speed",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 449,
+              "y": 462.015625,
+              "width": 152.625,
+              "height": 24.890625
+            }
+          }
+        ],
+        ".upgrade-button__description": [
+          {
+            "text": "-3 damage per incoming hit (minimum 1).",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 298.328125,
+              "width": 215,
+              "height": 37.6875
+            }
+          },
+          {
+            "text": "+10 damage; compact Fire Eggs burn with a smooth, steady flicker.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 449,
+              "y": 268.4375,
+              "width": 215,
+              "height": 37.6875
+            }
+          },
+          {
+            "text": "Primary eggs pierce +1 enemy.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 124,
+              "y": 524.90625,
+              "width": 215,
+              "height": 18.84375
+            }
+          }
+        ],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Harvest YardStandard Run · Wave 1: First Peck",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 172,
+              "y": 83,
+              "width": 376,
+              "height": 69.296875
+            }
+          }
+        ]
+      },
+      "selection": {
+        "type": "chest",
+        "kind": "boss"
+      },
+      "choices": [
+        {
+          "id": "armor",
+          "name": "Armor",
+          "description": "-3 damage per incoming hit (minimum 1).",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "fire-eggs",
+          "name": "Fire Eggs",
+          "description": "+10 damage; compact Fire Eggs burn with a smooth, steady flicker.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "piercing-eggs",
+          "name": "Piercing Eggs",
+          "description": "Primary eggs pierce +1 enemy.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "move-speed",
+          "name": "Move Speed",
+          "description": "+24 movement speed.",
+          "evolutionHint": null,
+          "synergyActive": false
+        }
+      ],
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.9375,
+              "remainingMs": 750,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    },
+    "fourthOfferSelectedAndResumed": true
+  },
+  {
+    "name": "boss-list-boundary-play",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 719,
+      "height": 599,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nFullscreen\nSettings\nPlay\nRoosters\nTalents\nArchive\nENDLESS YARD\nHARVEST YARD\nWide & open\nPREPARE RUN\nSTANDARD RUN\n\nSurvive ten escalating waves and defeat the Brood King.\n\nWAVES\n10\nBEST HUNT\n450 kills\nREWARD\nFirst clear complete\n‹\n1 / 3 · SWIPE\n›\nCHOOSE EXPEDITION\nStandard Run\nFirst clear complete\nRush Hour\nFirst clear +60 kernels\nFeatherweight\nFirst clear +75 kernels\nRoyal Gauntlet\nFirst clear +100 kernels\nYOUR ROOSTER\nBARNYARD ACE\nChange\nSTART RUN",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 51,
+              "y": 206,
+              "width": 617,
+              "height": 19.796875
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 39,
+              "y": 648.328125,
+              "width": 641,
+              "height": 156.703125
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 583,
+              "y": 487,
+              "width": 100,
+              "height": 60
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 342.5,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-list-boundary-storm-preview",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 719,
+      "height": 599,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nFullscreen\nSettings\nPlay\nRoosters\nTalents\nArchive\nROOSTERS\nRoosters\n\nStats, mastery, cosmetics, and unlocks.\n\nBarnyard Ace\nPrecision All-Rounder\nHP 100\nSPD 210\nDMG 20\nTarget Egg: Homing eggs with a built-in chance to deal critical damage.\nDeadeye: 8% chance to deal double base-egg damage.\nMastery 1/5\n0/120 XP\n4 runs · 1 victories\nVISUAL ONLY\nNo stat changes\nOriginal\n→\nSunrise Comb\n\nUnlock: Defeat 100 enemies\n\nOriginal\nSunrise Comb\nBoombardier\nHeavy Area Damage\nHP 115\nSPD 185\nDMG 30\nBlast Shell: Slow, heavy eggs explode on impact.\nBlast Shell: Hits deal 55% damage within a 64-unit radius.\nMastery 1/5\n0/120 XP\n2 runs · 1 victories\nVISUAL ONLY\nNo stat changes\nOriginal\n→\nIronclad Plating\n\nUnlock: Win with Boombardier\n\nOriginal\nIronclad Plating\nStormcrest\nFast Chain Attacks\nHP 85\nSPD 245\nDMG 14\nStorm Egg: Very fast storm eggs discharge into a nearby second target.\nStatic Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\nMastery 1/5\n0/120 XP\n2 runs · 1 victories\nSELECT STORMCREST\nReturn to Play\nVISUAL ONLY\nNo stat changes\nOriginal\n→\nViolet Arc\n\nUnlock: Win with Stormcrest\n\nOriginal\nViolet Arc",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 29,
+              "y": 162,
+              "width": 212.328125,
+              "height": 397.6875
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 253.328125,
+              "y": 162,
+              "width": 212.328125,
+              "height": 397.6875
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 477.65625,
+              "y": 159,
+              "width": 212.328125,
+              "height": 434.0625
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 342.5,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-list-boundary-talent-detail",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 719,
+      "height": 599,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nROOSTER RAGE\nHenhouse\n250\nkernels\nFullscreen\nSettings\nPlay\nRoosters\nTalents\nArchive\nPERMANENT\nTalents\nINVESTED\n0\nranks\nEARNED\n500\nkernels\n\nChoose a talent to preview its effect, next rank, and cost before upgrading.\n\nI\nTIER I\nNest Foundation\nUnlocked\n0/3\nSturdy Nest\n+2% maximum HP/rank\n12 kernels\n0/3\nSwift Spurs\n+15% movement speed/rank\n12 kernels\n0/3\nPolished Yolk\n+2% starting weapon damage/rank\n12 kernels\nII\nTIER II\nAdvanced Instincts\n3 ranks missing\n0/2\nWide Wings\n+6% XP magnet radius/rank\nLocked\n0/1\nSecond Choice\n+1 reroll per run\nLocked\nIII\nTIER III\nRoyal Path\n8 ranks missing\n0/1\nRoyal Instinct\n+1% critical hit chance\nLocked\n×\nTIER I · Maximum HP\nSturdy Nest\nRank 0/3\n\n+2% maximum HP per rank.\n\nCURRENT\n0 %\n→\nNEXT RANK\n+2 %\nMAXIMUM\n+6 %\n\n250 kernels available · 238 will remain.\n\nUpgrade for 12 kernels\nSelection previews. Only the button upgrades the talent.",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [
+          {
+            "text": "HARVEST YARD",
+            "fontSize": "18px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-run-summary": [
+          {
+            "text": "PREPARE RUN\n                  STANDARD RUN\n                  Survive ten escalating waves and defeat the Brood King.\n                  \n                    WAVES10\n                    BEST HUNT450 kills\n                    REWARDFirst clear complete",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".hub-start-button": [
+          {
+            "text": "START RUNEnter the yard",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".rooster-card": [
+          {
+            "text": "Barnyard Ace\n            Precision All-Rounder\n            \n            \n          \n        \n        \n          AVAILABLE\n          Barnyard Ace\n          Precision All-Rounder\n          Tap for details\n        \n        \n          HP 100\n          SPD 210\n          DMG 20\n        \n        Target Egg: Homing eggs with a built-in chance to deal critical damage.\n        Deadeye: 8% chance to deal double base-egg damage.\n        \n          Mastery 1/50/120 XP\n          \n        \n        4 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Boombardier\n            Heavy Area Damage\n            \n            \n          \n        \n        \n          AVAILABLE\n          Boombardier\n          Heavy Area Damage\n          Tap for details\n        \n        \n          HP 115\n          SPD 185\n          DMG 30\n        \n        Blast Shell: Slow, heavy eggs explode on impact.\n        Blast Shell: Hits deal 55% damage within a 64-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          },
+          {
+            "text": "Stormcrest\n            Fast Chain Attacks\n            \n            \n          \n        \n        \n          AVAILABLE\n          Stormcrest\n          Fast Chain Attacks\n          Tap for details\n        \n        \n          HP 85\n          SPD 245\n          DMG 14\n        \n        Storm Egg: Very fast storm eggs discharge into a nearby second target.\n        Static Chain: Deals 60% damage to 1 additional target within a 190-unit radius.\n        \n          Mastery 1/50/120 XP\n          \n        \n        2 runs · 1 victories",
+            "fontSize": "13px",
+            "display": "flex",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 342.5,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-list-boundary-settings",
+    "kind": "isolated-save-ui",
+    "viewport": {
+      "width": 719,
+      "height": 599,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Level 1\n100/100\n00:00\n1/10\n0\nSettings\n\nAdjust visuals and audio independently.\n\nVISUALS\nDamage numbers\nON\nScreen shake\nON\nHit flashes\nON\nVibration\nON\nFullscreen\nTOGGLE\nAUDIO\nMaster\n80%\nSound effects\n90%\nUI\n85%\nMusic\n65%\nAmbience\n35%\nPRIVACY\nAnonymous gameplay analytics\nRecords only run flow and key metrics. No accounts, cookies, or advertising IDs.\nOFF\nContinue",
+      "nodes": {
+        ".upgrade-button__heading strong": [],
+        ".upgrade-button__rank": [],
+        ".upgrade-button__changes > span": [],
+        ".upgrade-button__description": [],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 342.5,
+              "y": 75,
+              "width": 34,
+              "height": 20
+            }
+          }
+        ]
+      },
+      "selection": null,
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 5,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    }
+  },
+  {
+    "name": "boss-list-boundary-boss-chest",
+    "kind": "fixture",
+    "viewport": {
+      "width": 719,
+      "height": 599,
+      "dpr": 2
+    },
+    "ui": {
+      "bodyText": "Ace L1\n100/100\n00:00\n1/10\n0\n1\nRoyal Boss Chest\n\nChoose a guaranteed build reward.\n\nArmor\nNEW · R1\nPassive\nHARD SHELL\n−3 damage per hit\nMinimum 1\nNew ability\n-3 damage per incoming hit (minimum 1).\nFire Eggs\nNEW · R1\nWeapon\nEMBER SHELL\n+10 damage\nFire projectile\nNew ability\n+10 damage; compact Fire Eggs burn with a smooth, steady flicker.\nPiercing Eggs\nNEW · R1\nWeapon\nPIERCING SHELL\n+1 pierced target\nNew ability\nPrimary eggs pierce +1 enemy.\nMove Speed\nNEW · R1\nPassive\nQUICK FEET\n+24 movement speed\nNew ability\nReroll (1)\nHARVEST YARD\nStandard Run · Wave 1: First Peck",
+      "nodes": {
+        ".upgrade-button__heading strong": [
+          {
+            "text": "Armor",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 113.546875,
+              "width": 48.46875,
+              "height": 20
+            }
+          },
+          {
+            "text": "Fire Eggs",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 317.28125,
+              "width": 67.609375,
+              "height": 20
+            }
+          },
+          {
+            "text": "Piercing Eggs",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 521.015625,
+              "width": 100.9375,
+              "height": 20
+            }
+          },
+          {
+            "text": "Move Speed",
+            "fontSize": "16px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 724.75,
+              "width": 92.796875,
+              "height": 20
+            }
+          }
+        ],
+        ".upgrade-button__rank": [
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 615.828125,
+              "y": 115.546875,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 615.828125,
+              "y": 319.28125,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 615.828125,
+              "y": 523.015625,
+              "width": 53.171875,
+              "height": 17
+            }
+          },
+          {
+            "text": "NEW · R1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 615.828125,
+              "y": 726.75,
+              "width": 53.171875,
+              "height": 17
+            }
+          }
+        ],
+        ".upgrade-button__changes > span": [
+          {
+            "text": "−3 damage per hit",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 197.546875,
+              "width": 131.578125,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Minimum 1",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 240.578125,
+              "y": 197.546875,
+              "width": 85.71875,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+10 damage",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 401.28125,
+              "width": 91.90625,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "Fire projectile",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 200.90625,
+              "y": 401.28125,
+              "width": 102.296875,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+1 pierced target",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 605.015625,
+              "width": 123.609375,
+              "height": 24.890625
+            }
+          },
+          {
+            "text": "+24 movement speed",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 808.75,
+              "width": 152.625,
+              "height": 24.890625
+            }
+          }
+        ],
+        ".upgrade-button__description": [
+          {
+            "text": "-3 damage per incoming hit (minimum 1).",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 260.4375,
+              "width": 565,
+              "height": 18.84375
+            }
+          },
+          {
+            "text": "+10 damage; compact Fire Eggs burn with a smooth, steady flicker.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 464.171875,
+              "width": 565,
+              "height": 18.84375
+            }
+          },
+          {
+            "text": "Primary eggs pierce +1 enemy.",
+            "fontSize": "13px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 104,
+              "y": 667.90625,
+              "width": 565,
+              "height": 18.84375
+            }
+          }
+        ],
+        ".upgrade-button__synergy": [],
+        ".upgrade-button__evolution-hint": [],
+        "[data-run-arena]": [],
+        ".hub-run-summary": [],
+        ".hub-start-button": [],
+        ".rooster-card": [],
+        "[data-boss]": [
+          {
+            "text": "BROOD KINGPHASE 1/3",
+            "fontSize": "16px",
+            "display": "none",
+            "visibility": "visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        ".wave-banner": [
+          {
+            "text": "Harvest YardStandard Run · Wave 1: First Peck",
+            "fontSize": "14px",
+            "display": "block",
+            "visibility": "visible",
+            "rect": {
+              "x": 171.5,
+              "y": 83,
+              "width": 376,
+              "height": 69.296875
+            }
+          }
+        ]
+      },
+      "selection": {
+        "type": "chest",
+        "kind": "boss"
+      },
+      "choices": [
+        {
+          "id": "armor",
+          "name": "Armor",
+          "description": "-3 damage per incoming hit (minimum 1).",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "fire-eggs",
+          "name": "Fire Eggs",
+          "description": "+10 damage; compact Fire Eggs burn with a smooth, steady flicker.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "piercing-eggs",
+          "name": "Piercing Eggs",
+          "description": "Primary eggs pierce +1 enemy.",
+          "evolutionHint": null,
+          "synergyActive": false
+        },
+        {
+          "id": "move-speed",
+          "name": "Move Speed",
+          "description": "+24 movement speed.",
+          "evolutionHint": null,
+          "synergyActive": false
+        }
+      ],
+      "build": {
+        "activeSlots": 5,
+        "passiveSlots": 4,
+        "active": [
+          {
+            "id": "primary-ace",
+            "sourceId": "primary-ace",
+            "name": "Target Egg",
+            "slotType": "active",
+            "rank": 1,
+            "maxRank": 4,
+            "startWeapon": true,
+            "evolved": false,
+            "evolutionId": null,
+            "cooldown": {
+              "ratio": 0.9375,
+              "remainingMs": 750,
+              "durationMs": 800
+            }
+          }
+        ],
+        "passive": [],
+        "evolutions": [],
+        "activeFree": 4,
+        "passiveFree": 4
+      },
+      "pendingLevels": 0,
+      "rewardQueue": []
+    },
+    "fourthOfferSelectedAndResumed": true
+  }
+]

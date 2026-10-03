@@ -1,0 +1,1275 @@
+{
+  "generatedAt": "2026-10-01T20:44:47.519Z",
+  "cases": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 254,
+            "bottom": 707.140625,
+            "height": 453.140625
+          },
+          "select": {
+            "top": 727.140625,
+            "bottom": 782.9375,
+            "height": 55.796875
+          },
+          "rows": [
+            {
+              "top": 502,
+              "bottom": 530.796875,
+              "height": 28.796875
+            },
+            {
+              "top": 539.796875,
+              "bottom": 576.171875,
+              "height": 36.375
+            },
+            {
+              "top": 585.171875,
+              "bottom": 631.546875,
+              "height": 46.375
+            },
+            {
+              "top": 640.546875,
+              "bottom": 666.34375,
+              "height": 25.796875
+            },
+            {
+              "top": 675.34375,
+              "bottom": 692.140625,
+              "height": 16.796875
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 254,
+            "bottom": 707.140625,
+            "height": 453.140625
+          },
+          "select": {
+            "top": 727.140625,
+            "bottom": 782.9375,
+            "height": 55.796875
+          },
+          "rows": [
+            {
+              "top": 502,
+              "bottom": 530.796875,
+              "height": 28.796875
+            },
+            {
+              "top": 539.796875,
+              "bottom": 576.171875,
+              "height": 36.375
+            },
+            {
+              "top": 585.171875,
+              "bottom": 631.546875,
+              "height": 46.375
+            },
+            {
+              "top": 640.546875,
+              "bottom": 666.34375,
+              "height": 25.796875
+            },
+            {
+              "top": 675.34375,
+              "bottom": 692.140625,
+              "height": 16.796875
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 254,
+            "bottom": 707.140625,
+            "height": 453.140625
+          },
+          "select": {
+            "top": 727.140625,
+            "bottom": 782.9375,
+            "height": 55.796875
+          },
+          "rows": [
+            {
+              "top": 502,
+              "bottom": 530.796875,
+              "height": 28.796875
+            },
+            {
+              "top": 539.796875,
+              "bottom": 576.171875,
+              "height": 36.375
+            },
+            {
+              "top": 585.171875,
+              "bottom": 631.546875,
+              "height": 46.375
+            },
+            {
+              "top": 640.546875,
+              "bottom": 666.34375,
+              "height": 25.796875
+            },
+            {
+              "top": 675.34375,
+              "bottom": 692.140625,
+              "height": 16.796875
+            }
+          ]
+        }
+      ],
+      "compact": false,
+      "offers": {
+        "body": {
+          "top": 273.890625,
+          "bottom": 635.640625
+        },
+        "scrollHeight": 362,
+        "clientHeight": 362,
+        "cards": [
+          {
+            "top": 273.890625,
+            "bottom": 635.640625
+          },
+          {
+            "top": 273.890625,
+            "bottom": 635.640625
+          },
+          {
+            "top": 273.890625,
+            "bottom": 635.640625
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 200,
+            "bottom": 653.140625,
+            "height": 453.140625
+          },
+          "select": {
+            "top": 673.140625,
+            "bottom": 728.9375,
+            "height": 55.796875
+          },
+          "rows": [
+            {
+              "top": 448,
+              "bottom": 476.796875,
+              "height": 28.796875
+            },
+            {
+              "top": 485.796875,
+              "bottom": 522.171875,
+              "height": 36.375
+            },
+            {
+              "top": 531.171875,
+              "bottom": 577.546875,
+              "height": 46.375
+            },
+            {
+              "top": 586.546875,
+              "bottom": 612.34375,
+              "height": 25.796875
+            },
+            {
+              "top": 621.34375,
+              "bottom": 638.140625,
+              "height": 16.796875
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 200,
+            "bottom": 653.140625,
+            "height": 453.140625
+          },
+          "select": {
+            "top": 673.140625,
+            "bottom": 728.9375,
+            "height": 55.796875
+          },
+          "rows": [
+            {
+              "top": 448,
+              "bottom": 476.796875,
+              "height": 28.796875
+            },
+            {
+              "top": 485.796875,
+              "bottom": 522.171875,
+              "height": 36.375
+            },
+            {
+              "top": 531.171875,
+              "bottom": 577.546875,
+              "height": 46.375
+            },
+            {
+              "top": 586.546875,
+              "bottom": 612.34375,
+              "height": 25.796875
+            },
+            {
+              "top": 621.34375,
+              "bottom": 638.140625,
+              "height": 16.796875
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 200,
+            "bottom": 653.140625,
+            "height": 453.140625
+          },
+          "select": {
+            "top": 673.140625,
+            "bottom": 728.9375,
+            "height": 55.796875
+          },
+          "rows": [
+            {
+              "top": 448,
+              "bottom": 476.796875,
+              "height": 28.796875
+            },
+            {
+              "top": 485.796875,
+              "bottom": 522.171875,
+              "height": 36.375
+            },
+            {
+              "top": 531.171875,
+              "bottom": 577.546875,
+              "height": 46.375
+            },
+            {
+              "top": 586.546875,
+              "bottom": 612.34375,
+              "height": 25.796875
+            },
+            {
+              "top": 621.34375,
+              "bottom": 638.140625,
+              "height": 16.796875
+            }
+          ]
+        }
+      ],
+      "compact": false,
+      "offers": {
+        "body": {
+          "top": 106.546875,
+          "bottom": 443
+        },
+        "scrollHeight": 344,
+        "clientHeight": 336,
+        "cards": [
+          {
+            "top": 106.546875,
+            "bottom": 450.296875
+          },
+          {
+            "top": 106.546875,
+            "bottom": 450.296875
+          },
+          {
+            "top": 106.546875,
+            "bottom": 450.296875
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 199,
+            "bottom": 671.5,
+            "height": 472.5
+          },
+          "select": {
+            "top": 691.5,
+            "bottom": 748.6875,
+            "height": 57.1875
+          },
+          "rows": [
+            {
+              "top": 447,
+              "bottom": 477.1875,
+              "height": 30.1875
+            },
+            {
+              "top": 486.1875,
+              "bottom": 522.5625,
+              "height": 36.375
+            },
+            {
+              "top": 531.5625,
+              "bottom": 596.125,
+              "height": 64.5625
+            },
+            {
+              "top": 605.125,
+              "bottom": 632.3125,
+              "height": 27.1875
+            },
+            {
+              "top": 641.3125,
+              "bottom": 659.5,
+              "height": 18.1875
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 199,
+            "bottom": 671.5,
+            "height": 472.5
+          },
+          "select": {
+            "top": 691.5,
+            "bottom": 748.6875,
+            "height": 57.1875
+          },
+          "rows": [
+            {
+              "top": 447,
+              "bottom": 477.1875,
+              "height": 30.1875
+            },
+            {
+              "top": 486.1875,
+              "bottom": 522.5625,
+              "height": 36.375
+            },
+            {
+              "top": 531.5625,
+              "bottom": 596.125,
+              "height": 64.5625
+            },
+            {
+              "top": 605.125,
+              "bottom": 632.3125,
+              "height": 27.1875
+            },
+            {
+              "top": 641.3125,
+              "bottom": 659.5,
+              "height": 18.1875
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 199,
+            "bottom": 671.5,
+            "height": 472.5
+          },
+          "select": {
+            "top": 691.5,
+            "bottom": 748.6875,
+            "height": 57.1875
+          },
+          "rows": [
+            {
+              "top": 447,
+              "bottom": 477.1875,
+              "height": 30.1875
+            },
+            {
+              "top": 486.1875,
+              "bottom": 522.5625,
+              "height": 36.375
+            },
+            {
+              "top": 531.5625,
+              "bottom": 596.125,
+              "height": 64.5625
+            },
+            {
+              "top": 605.125,
+              "bottom": 632.3125,
+              "height": 27.1875
+            },
+            {
+              "top": 641.3125,
+              "bottom": 659.5,
+              "height": 18.1875
+            }
+          ]
+        }
+      ],
+      "compact": true,
+      "offers": {
+        "body": {
+          "top": 94,
+          "bottom": 298
+        },
+        "scrollHeight": 204,
+        "clientHeight": 204,
+        "cards": [
+          {
+            "top": 94,
+            "bottom": 158
+          },
+          {
+            "top": 164,
+            "bottom": 228
+          },
+          {
+            "top": 234,
+            "bottom": 298
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 736,
+        "height": 360
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 199,
+            "bottom": 331,
+            "height": 132
+          },
+          "select": {
+            "top": 337,
+            "bottom": 381,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 393,
+            "bottom": 525,
+            "height": 132
+          },
+          "select": {
+            "top": 531,
+            "bottom": 575,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 587,
+            "bottom": 719,
+            "height": 132
+          },
+          "select": {
+            "top": 725,
+            "bottom": 769,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        }
+      ],
+      "compact": true,
+      "offers": {
+        "body": {
+          "top": 79,
+          "bottom": 283
+        },
+        "scrollHeight": 204,
+        "clientHeight": 204,
+        "cards": [
+          {
+            "top": 79,
+            "bottom": 143
+          },
+          {
+            "top": 149,
+            "bottom": 213
+          },
+          {
+            "top": 219,
+            "bottom": 283
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 640,
+        "height": 360
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 199,
+            "bottom": 331,
+            "height": 132
+          },
+          "select": {
+            "top": 337,
+            "bottom": 381,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 393,
+            "bottom": 525,
+            "height": 132
+          },
+          "select": {
+            "top": 531,
+            "bottom": 575,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 587,
+            "bottom": 719,
+            "height": 132
+          },
+          "select": {
+            "top": 725,
+            "bottom": 769,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        }
+      ],
+      "compact": true,
+      "offers": {
+        "body": {
+          "top": 79,
+          "bottom": 283
+        },
+        "scrollHeight": 204,
+        "clientHeight": 204,
+        "cards": [
+          {
+            "top": 79,
+            "bottom": 143
+          },
+          {
+            "top": 149,
+            "bottom": 213
+          },
+          {
+            "top": 219,
+            "bottom": 283
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 229.1875,
+            "bottom": 361.1875,
+            "height": 132
+          },
+          "select": {
+            "top": 367.1875,
+            "bottom": 411.1875,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 423.1875,
+            "bottom": 555.1875,
+            "height": 132
+          },
+          "select": {
+            "top": 561.1875,
+            "bottom": 605.1875,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 617.1875,
+            "bottom": 749.1875,
+            "height": 132
+          },
+          "select": {
+            "top": 755.1875,
+            "bottom": 799.1875,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        }
+      ],
+      "compact": false,
+      "offers": {
+        "body": {
+          "top": 100.546875,
+          "bottom": 753
+        },
+        "scrollHeight": 799,
+        "clientHeight": 652,
+        "cards": [
+          {
+            "top": 100.546875,
+            "bottom": 412.109375
+          },
+          {
+            "top": 424.109375,
+            "bottom": 605.890625
+          },
+          {
+            "top": 617.890625,
+            "bottom": 899.5625
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "cards": [
+        {
+          "card": {
+            "top": 229.1875,
+            "bottom": 361.1875,
+            "height": 132
+          },
+          "select": {
+            "top": 367.1875,
+            "bottom": 411.1875,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 423.1875,
+            "bottom": 555.1875,
+            "height": 132
+          },
+          "select": {
+            "top": 561.1875,
+            "bottom": 605.1875,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        },
+        {
+          "card": {
+            "top": 617.1875,
+            "bottom": 749.1875,
+            "height": 132
+          },
+          "select": {
+            "top": 755.1875,
+            "bottom": 799.1875,
+            "height": 44
+          },
+          "rows": [
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            },
+            {
+              "top": 0,
+              "bottom": 0,
+              "height": 0
+            }
+          ]
+        }
+      ],
+      "compact": false,
+      "offers": {
+        "body": {
+          "top": 100.546875,
+          "bottom": 477
+        },
+        "scrollHeight": 995,
+        "clientHeight": 376,
+        "cards": [
+          {
+            "top": 100.546875,
+            "bottom": 466.109375
+          },
+          {
+            "top": 478.109375,
+            "bottom": 730.78125
+          },
+          {
+            "top": 742.78125,
+            "bottom": 1096
+          }
+        ]
+      },
+      "errors": []
+    }
+  ],
+  "geometry": [
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "rooster": "ace",
+      "scale": 0.25,
+      "zoom": 1,
+      "cssPerRenderPixel": 1,
+      "radius": 14.5,
+      "shadow": {
+        "texture": "player-contact-shadow",
+        "width": 34,
+        "height": 12,
+        "depth": 5.8,
+        "center": [
+          40,
+          25,
+          13,
+          141
+        ],
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "hasWorldHp": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "rooster": "artillery",
+      "scale": 0.275,
+      "zoom": 1,
+      "cssPerRenderPixel": 1,
+      "radius": 15.950000000000001,
+      "shadow": {
+        "texture": "player-contact-shadow",
+        "width": 37.400000000000006,
+        "height": 13.200000000000001,
+        "depth": 5.8,
+        "center": [
+          40,
+          25,
+          13,
+          141
+        ],
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "hasWorldHp": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "rooster": "storm",
+      "scale": 0.255,
+      "zoom": 1,
+      "cssPerRenderPixel": 1,
+      "radius": 14.790000000000001,
+      "shadow": {
+        "texture": "player-contact-shadow",
+        "width": 34.68,
+        "height": 12.24,
+        "depth": 5.8,
+        "center": [
+          40,
+          25,
+          13,
+          141
+        ],
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "hasWorldHp": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rooster": "ace",
+      "scale": 0.25,
+      "zoom": 1.08,
+      "cssPerRenderPixel": 0.5,
+      "radius": 14.5,
+      "shadow": {
+        "texture": "player-contact-shadow",
+        "width": 34,
+        "height": 12,
+        "depth": 5.8,
+        "center": [
+          40,
+          25,
+          13,
+          141
+        ],
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "hasWorldHp": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rooster": "artillery",
+      "scale": 0.275,
+      "zoom": 1.08,
+      "cssPerRenderPixel": 0.5,
+      "radius": 15.950000000000001,
+      "shadow": {
+        "texture": "player-contact-shadow",
+        "width": 37.400000000000006,
+        "height": 13.200000000000001,
+        "depth": 5.8,
+        "center": [
+          40,
+          25,
+          13,
+          141
+        ],
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "hasWorldHp": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rooster": "storm",
+      "scale": 0.255,
+      "zoom": 1.08,
+      "cssPerRenderPixel": 0.5,
+      "radius": 14.790000000000001,
+      "shadow": {
+        "texture": "player-contact-shadow",
+        "width": 34.68,
+        "height": 12.24,
+        "depth": 5.8,
+        "center": [
+          40,
+          25,
+          13,
+          141
+        ],
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "hasWorldHp": false
+    }
+  ],
+  "screenshots": [
+    "roosters-1440",
+    "upgrades-1440",
+    "boss-rewards-1440",
+    "roosters-960",
+    "upgrades-960",
+    "boss-rewards-960",
+    "roosters-844",
+    "upgrades-844",
+    "upgrade-details-844",
+    "boss-rewards-844",
+    "roosters-736",
+    "rooster-details-736",
+    "upgrades-736",
+    "upgrade-details-736",
+    "boss-rewards-736",
+    "roosters-640",
+    "rooster-details-640",
+    "upgrades-640",
+    "upgrade-details-640",
+    "boss-rewards-640",
+    "roosters-390",
+    "rooster-details-390",
+    "upgrades-390",
+    "boss-rewards-390",
+    "roosters-320",
+    "rooster-details-320",
+    "upgrades-320",
+    "boss-rewards-320",
+    "shadow-844-ace",
+    "shadow-844-artillery",
+    "shadow-844-storm",
+    "shadow-390-ace",
+    "shadow-390-artillery",
+    "shadow-390-storm",
+    "locked-rooster-details-390"
+  ],
+  "sourceHashes": {
+    "src/entities/Player.js": "fafe8ca1f2fa4c970d93ce2f80c9401889127c6bd479a6680b4f7c24baa907e7",
+    "src/systems/assets/PlayerContactShadow.js": "a36d8c734a51b0ee752c974ec5a41d3157d71d0f204dfcb2c791aac122b8005d",
+    "src/ui/HUD.js": "0fff594a6c08b07603f84a31f41c9cae296dbecf9db362a934a3bc61c4dc252e",
+    "src/menu-layouts.css": "9be836c82b709afb9f9beecab6012ddace635943518da0f9e230b3395480a7a0",
+    "src/scenes/GameScene.js": "3404a9eb85cede361f88aa5d657b828e2071086e29f6864aa23cb84ce7b25a17",
+    "src/systems/RoosterClassSystem.js": "3cd121dda2270931c9c6ddf4ddac6d9ad8ee6ac95fe490d90bac3e226668fef9"
+  }
+}

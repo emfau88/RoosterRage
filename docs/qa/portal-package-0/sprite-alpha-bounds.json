@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ace",
+    "frame": "south-idle-0",
+    "alphaThreshold": 16,
+    "alphaBounds": [
+      43,
+      27,
+      214,
+      240
+    ],
+    "visibleHeightPixels": 213
+  },
+  {
+    "id": "artillery",
+    "frame": "south-idle-0",
+    "alphaThreshold": 16,
+    "alphaBounds": [
+      53,
+      41,
+      203,
+      227
+    ],
+    "visibleHeightPixels": 186
+  },
+  {
+    "id": "storm",
+    "frame": "south-idle-0",
+    "alphaThreshold": 16,
+    "alphaBounds": [
+      72,
+      28,
+      184,
+      226
+    ],
+    "visibleHeightPixels": 198
+  }
+]

@@ -35,11 +35,22 @@ export class Pickup {
     this.transientFx = [];
     const texture = this.chest ? 'pickup-elite-chest' : `pickup-${kind}`;
     this.sprite = scene.physics.add.sprite(x, y, texture)
-      .setDepth(9)
+      .setDepth(this.chest ? 9 : 5.5)
       .setScale(this.chest?.scale ?? 1);
+    if (!this.chest) this.sprite.setDisplaySize(44, 44);
     if (this.chest?.tint) this.sprite.setTint(this.chest.tint);
-    this.sprite.setCircle(this.chest ? 18 : 14);
+    // Arcade circles use unscaled texture coordinates. Keep the collection
+    // circle at the ground anchor, centered and sized in world units.
+    const radius = this.chest ? 24 : 21;
+    const sourceRadius = radius / this.sprite.scaleX;
+    this.sprite.setCircle(sourceRadius, this.sprite.width / 2 - sourceRadius, this.sprite.height / 2 - sourceRadius);
+    this.sprite.body.updateFromGameObject();
     this.sprite.entity = this;
+    this.visual = scene.add.image(x, y, texture)
+      .setDepth(this.sprite.depth).setScale(this.sprite.scaleX, this.sprite.scaleY);
+    if (this.chest?.tint) this.visual.setTint(this.chest.tint);
+    this.sprite.setVisible(false);
+    this.shadow = this.chest ? null : scene.add.ellipse(x, y + 11, 23, 8, 0x302515, 0.2).setDepth(5.3);
     this.tierMarker = null;
     if (kind === 'golden-chest' || kind === 'royal-chest') {
       const royal = kind === 'royal-chest';
@@ -61,10 +72,11 @@ export class Pickup {
   update(time) {
     if (!this.sprite.active || this.opening) return;
     const bob = Math.sin((time - this.spawnedAt) * 0.005) * 4;
-    this.sprite.y = this.baseY + bob;
+    this.visual.y = this.baseY + bob;
+    if (this.shadow) this.shadow.setScale(0.94 - bob * 0.015).setAlpha(0.2 - bob * 0.007);
     if (this.tierMarker) {
       this.tierMarker
-        .setPosition(this.sprite.x, this.sprite.y - (this.kind === 'royal-chest' ? 40 : 35))
+        .setPosition(this.sprite.x, this.visual.y - (this.kind === 'royal-chest' ? 40 : 35))
         .setRotation(time * (this.kind === 'royal-chest' ? -0.0012 : 0.0015))
         .setScale(0.94 + Math.sin(time * 0.007) * 0.08);
     }
@@ -105,15 +117,15 @@ export class Pickup {
   playChestOpening(onComplete) {
     if (this.opening || this.destroyed) return false;
     this.opening = true;
-    this.baseY = this.sprite.y;
+    this.baseY = this.visual.y;
     this.sprite.body?.stop();
     if (this.sprite.body) this.sprite.body.enable = false;
-    this.scene.tweens.killTweensOf(this.sprite);
+    this.scene.tweens.killTweensOf(this.visual);
 
     const chestScale = this.chest.scale;
 
     this.scene.tweens.add({
-      targets: this.sprite,
+      targets: this.visual,
       y: this.baseY + 3,
       scaleX: chestScale * 1.07,
       scaleY: chestScale * 0.88,
@@ -125,9 +137,10 @@ export class Pickup {
     this.schedule(120, () => {
       this.scene.audio?.play('chest-latch', { cooldown: 0 });
       this.sprite.setTexture('pickup-elite-chest-ajar');
-      if (this.chest.tint) this.sprite.setTint(this.chest.tint);
+      this.visual.setTexture('pickup-elite-chest-ajar');
+      if (this.chest.tint) { this.sprite.setTint(this.chest.tint); this.visual.setTint(this.chest.tint); }
       this.scene.tweens.add({
-        targets: this.sprite,
+        targets: this.visual,
         y: this.baseY - 4,
         scaleX: chestScale * 1.05,
         scaleY: chestScale * 1.08,
@@ -136,10 +149,11 @@ export class Pickup {
       });
     });
 
-    this.schedule(285, () => {
+    this.schedule(245, () => {
       this.sprite.setTexture('pickup-elite-chest-open');
-      if (this.chest.tint) this.sprite.setTint(this.chest.tint);
-      this.sprite.y = this.baseY - 6;
+      this.visual.setTexture('pickup-elite-chest-open');
+      if (this.chest.tint) { this.sprite.setTint(this.chest.tint); this.visual.setTint(this.chest.tint); }
+      this.visual.y = this.baseY - 6;
       this.playChestRewardBurst();
       this.scene.audio?.play('chest-open', { cooldown: 0 });
       if (this.scene.effects?.enabled('screenShake')) {
@@ -149,7 +163,7 @@ export class Pickup {
         this.scene.cameras.main.flash(90, 255, 222, 118, false);
       }
       this.scene.tweens.add({
-        targets: this.sprite,
+        targets: this.visual,
         scaleX: chestScale * 1.13,
         scaleY: chestScale * 1.13,
         duration: 115,
@@ -158,16 +172,16 @@ export class Pickup {
       });
     });
 
-    this.schedule(500, () => {
+    this.schedule(400, () => {
       this.scene.audio?.play('chest-reward', { cooldown: 0 });
     });
 
-    this.schedule(760, onComplete);
+    this.schedule(520, onComplete);
     return true;
   }
 
   playChestRewardBurst() {
-    const { scene, sprite } = this;
+    const { scene, visual: sprite } = this;
     const centerY = sprite.y - 4;
     const halo = this.trackFx(scene.add.circle(sprite.x, centerY, 14, this.chest.glow, 0.32).setDepth(8));
     const ring = this.trackFx(scene.add.circle(sprite.x, centerY, 25)
@@ -214,12 +228,14 @@ export class Pickup {
     this.destroyed = true;
     this.timers.forEach((timer) => timer.remove(false));
     this.timers = [];
-    this.scene.tweens.killTweensOf([this.sprite, ...this.transientFx]);
+    this.scene.tweens.killTweensOf([this.visual, ...this.transientFx]);
     this.transientFx.forEach((fx) => {
       if (fx?.active) fx.destroy();
     });
     this.transientFx = [];
     if (this.tierMarker?.active) this.tierMarker.destroy();
     if (this.sprite?.active) this.sprite.destroy();
+    this.visual?.destroy();
+    this.shadow?.destroy();
   }
 }

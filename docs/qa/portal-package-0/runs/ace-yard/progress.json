@@ -1,0 +1,36 @@
+{
+  "config": {
+    "id": "ace-yard",
+    "rooster": "ace",
+    "arena": "open-yard",
+    "seed": "portal-p0-yard-a",
+    "viewport": {
+      "width": 960,
+      "height": 540
+    }
+  },
+  "latest": {
+    "time": 548690.1,
+    "wave": 10,
+    "ended": false,
+    "selection": null,
+    "hp": 97,
+    "maxHp": 100,
+    "x": 64609.58248248186,
+    "y": 62264.87133405428,
+    "enemies": 0,
+    "enemyProjectiles": 0,
+    "hazards": 0,
+    "visibleEnemies": 0,
+    "frames": 19374,
+    "error": null,
+    "choosing": false,
+    "camera": {
+      "x": 64155,
+      "y": 62002,
+      "zoom": 1
+    }
+  },
+  "wallMs": 548826,
+  "errors": []
+}
