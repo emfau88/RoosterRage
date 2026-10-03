@@ -25,8 +25,18 @@ try {
       const s = window.__sequenceGame.scene.getScene('GameScene');
       s.chooseRooster('ace'); s.bot.enabled = false; s.waveSystem.active = false; s.pickups.scheduleIndex = 7;
       s.player.armor = 1000; s.player.regenPerSecond = 0;
-      window.__sequenceItems = ['heal', 'magnet', 'bomb', 'heal', 'magnet', 'bomb'].map((kind, i) =>
-        s.pickups.spawn(kind, s.player.sprite.x + 180 + i * 55, s.player.sprite.y + 180));
+      // Use obstacle-free points inside the active window. A line extending
+      // past its edge gets clamped and can stack multiple test pickups.
+      const points = [{ x: s.player.sprite.x, y: s.player.sprite.y }];
+      window.__sequenceItems = ['heal', 'magnet', 'bomb', 'heal', 'magnet', 'bomb'].map((kind, i) => {
+        for (let attempt = 0; attempt < 200; attempt++) {
+          const p = s.arena.findSafePoint(`sequence-${i}`, 130);
+          if (points.some(other => Math.hypot(other.x - p.x, other.y - p.y) < 200)) continue;
+          points.push(p);
+          return s.pickups.spawn(kind, p.x, p.y);
+        }
+        throw new Error(`Could not place isolated pickup ${i}`);
+      });
     });
     const rows = [];
     for (let i = 0; i < 6; i++) {
