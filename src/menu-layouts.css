@@ -1,6 +1,9 @@
 /* Authoritative Play and upgrade layouts. Shared HUD/settings/talent styles stay
    in styles.css; these components no longer inherit a stack of height overrides. */
 .henhouse-panel { --menu-text-size: 12px; height: min(820px, calc(100dvh - 24px)); font-size: 13px; }
+@media (orientation: landscape) and (min-width: 600px) and (max-height: 480px) {
+  .henhouse-panel { height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+}
 .henhouse-nav button { min-height: 44px; font-size: 13px; }
 /* Paused HTML menus allow native scrolling on either axis. The map preview
    keeps pan-y below because it owns its horizontal swipe gesture. */

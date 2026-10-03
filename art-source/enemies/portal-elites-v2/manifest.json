@@ -486,7 +486,39 @@
         "distinctFrames": 4
       }
     },
-    "sourceSha256": "7f73f04bedf064be33dd5df7d818f3b463a7be527312a1c1ed992f762821d715"
+    "sourceSha256": "7f73f04bedf064be33dd5df7d818f3b463a7be527312a1c1ed992f762821d715",
+    "torsoSocketAnchors": {
+      "left": [
+        [
+          0.274,
+          0.948
+        ],
+        [
+          0.512,
+          0.948
+        ]
+      ],
+      "down": [
+        [
+          0.33,
+          0.949
+        ],
+        [
+          0.655,
+          0.949
+        ]
+      ],
+      "up": [
+        [
+          0.324,
+          0.945
+        ],
+        [
+          0.674,
+          0.945
+        ]
+      ]
+    }
   },
   "chili": {
     "frameSize": 256,
