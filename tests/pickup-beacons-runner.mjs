@@ -95,7 +95,7 @@ try {
     assert(indicators.find((i) => i.kind === 'chest').royal);
     assert(indicators.every((i) => i.iconLoaded), 'Every wayfinder icon must load');
     for (const entry of indicators) {
-      assert(['NAH', 'WEIT', 'FERN'].includes(entry.distance));
+      assert(['NEAR', 'FAR', 'DISTANT'].includes(entry.distance));
       for (const box of [entry.box, entry.arrowBox]) {
         assert(box.left >= 0 && box.right <= viewport.width && box.top >= 68
           && box.bottom <= viewport.height - (viewport.width < 760 ? 128 : 32), JSON.stringify({ entry, viewport }));

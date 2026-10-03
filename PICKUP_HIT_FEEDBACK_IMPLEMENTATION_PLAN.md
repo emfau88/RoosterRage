@@ -94,7 +94,18 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Vier Wegweiser am selben Rand ohne Überlappung in Harvest Yard auf Desktop und im Hochformat prüfen; Bilder unter `docs/qa/pickup-hit-feedback/beacons-*.png` und `wayfinders-*.png` ablegen.
 - [x] Bewegung, Pause, Ausblenden beim Truhenöffnen und vollständiges Cleanup prüfen; Pickup-Radien und Belohnungsabläufe unverändert verifizieren.
 - [x] `test:pickup-indicators` (direkter Runner), `test:pickup-beacons` (direkter Runner), `test:pickup-contact`, `test:release` und `test:pages` bestanden. Release weiterhin 18,78 MiB.
-- [ ] Korrektur committen, auf Entwicklungs- und Preview-Branch pushen und erfolgreichen Pages-Deploy samt veröffentlichter Commit-ID prüfen.
+- [x] Korrektur als `1899252` committen, auf Entwicklungs- und Preview-Branch pushen und erfolgreichen Pages-Deploy samt veröffentlichter Commit-ID prüfen (Workflow `37146830952`).
+
+## Kongregate-Integration und englische Wegweiser
+
+- [x] Wegweiser auf NEAR/FAR/DISTANT korrigieren; das übrige Spiel verwendet Englisch.
+- [x] Scope nach Nutzerwunsch auf `Kills` (Max-Bestenliste je abgeschlossenem Run) und `RunsWon` (Add-Zähler, +1 je Sieg) begrenzen.
+- [x] Offizielle JavaScript-API nur im Release-Modus und innerhalb eines Kongregate-Hosts/Embeds laden; Spielstart und GitHub-Preview unabhängig davon halten.
+- [x] Einmalige Meldung pro beendetem Run, Ausschluss von Gästen/Bots/Abbrüchen und Kontowechseln implementieren; Kill-Rekorde pro Konto speichern und erneut melden, Siege niemals beim Neuladen wiederholen.
+- [x] Acht API-Tests, Release-Browserprüfung mit SDK-Mock (Sieg, Niederlage, Neustart und Ausfall), englische Wegweiser und Build-Budgets verifizieren. Release 18,78 MiB, Pages 20,99 MiB.
+- [x] Kongregate-Statistikdefinitionen unter `docs/KONGREGATE_API_SETUP.md` und aktuelles vollständiges Upload-ZIP (18.279.342 Byte) samt aktualisierten Split-Artefakten bereitstellen.
+- [ ] Integration committen/pushen und aktualisierten GitHub-Play-Link überprüfen.
+- [ ] Zwei Statistikdefinitionen im Kongregate-Portal anlegen und echte Servermeldungen im hochgeladenen Preview bestätigen (Statistikverwaltung hier derzeit wegen Netzwerkfehler nicht erreichbar).
 
 ## Bisheriges Laufprotokoll
 

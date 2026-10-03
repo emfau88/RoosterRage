@@ -20,6 +20,7 @@ import { GamePauseSystem } from '../systems/GamePauseSystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
 import { PickupSystem } from '../systems/PickupSystem.js';
 import { PickupIndicatorSystem } from '../systems/PickupIndicatorSystem.js';
+import { kongregate } from '../systems/KongregateSystem.js';
 import { LoadoutSystem } from '../systems/LoadoutSystem.js';
 import { MetaProgressionSystem } from '../systems/MetaProgressionSystem.js';
 import { ObjectPoolSystem } from '../systems/ObjectPoolSystem.js';
@@ -146,6 +147,7 @@ export class GameScene extends Phaser.Scene {
     this.telemetry.summary.targetAcquisitionMargin = this.targetAcquisitionMargin;
     this.telemetry.summary.adaptiveSpawnsEnabled = this.adaptiveSpawnsEnabled;
     this.productAnalytics = new ProductAnalyticsSystem();
+    this.kongregate = kongregate;
     this.effects = new EffectSettingsSystem();
     this.audio = new AudioSystem(this);
     this.bot = {

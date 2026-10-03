@@ -124,7 +124,7 @@ export class PickupIndicatorSystem {
       const threshold = Math.max(view.width, view.height);
       const tier = entry.distance < threshold * 0.75 ? 1 : entry.distance < threshold * 1.5 ? 2 : 3;
       node.dataset.distanceTier = String(tier);
-      node.querySelector('.pickup-indicator__distance b').textContent = ['NAH', 'WEIT', 'FERN'][tier - 1];
+      node.querySelector('.pickup-indicator__distance b').textContent = ['NEAR', 'FAR', 'DISTANT'][tier - 1];
       node.classList.toggle('is-royal', kind === 'chest' && nearest.get(kind).pickup.kind === 'royal-chest');
       node.classList.toggle('is-urgent', kind === 'heal' && scene.player.hp < scene.player.maxHp);
     }

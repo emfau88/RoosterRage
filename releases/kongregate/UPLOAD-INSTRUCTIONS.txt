@@ -9,3 +9,9 @@ Upload index.html as the WebGL/HTML5 file.
 Upload rooster-rage-additional-files.zip as Additional Files.
 
 Do not use rooster-rage-additional-files.zip as the main file: it intentionally has no index.html.
+
+KONGREGATE STATISTICS (create in Manage Statistics; exact case):
+Kills: type Max, Display in Leaderboards enabled.
+RunsWon: type Add, Display in Leaderboards disabled; +1 per victory.
+The client API needs no private API key. Scores submit only on Kongregate.
+See docs/KONGREGATE_API_SETUP.md in the source repository for testing steps.

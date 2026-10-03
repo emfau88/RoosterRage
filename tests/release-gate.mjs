@@ -136,6 +136,10 @@ async function verifyPortalFrame(browser, url, blockedStorage) {
   const page = await context.newPage();
   const errors = [];
   const failedResponses = [];
+  const apiRequests = [];
+  page.on('request', (request) => {
+    if (request.url().includes('kongregate_api.js')) apiRequests.push(request.url());
+  });
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
     if (message.type() === 'error') errors.push(message.text());
@@ -190,9 +194,72 @@ async function verifyPortalFrame(browser, url, blockedStorage) {
 
     assert(errors.length === 0, 'Production iframe reported browser errors.', errors);
     assert(failedResponses.length === 0, 'Production iframe requested missing files.', failedResponses);
+    assert(apiRequests.length === 0, 'An ordinary off-platform visit loaded the Kongregate SDK.', apiRequests);
     return { blockedStorage, boot };
   } finally {
     await page.close();
+    await context.close();
+  }
+}
+
+async function verifyKongregateApi(browser, portalUrl, unavailable = false) {
+  const context = await browser.newContext({ viewport: { width: 1000, height: 580 } });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  let requests = 0;
+  await context.addInitScript(() => {
+    Object.defineProperty(document, 'referrer', { configurable: true,
+      get: () => 'https://www.kongregate.com/en/games/emfau/roosterrage-survivor' });
+    let phaser;
+    Object.defineProperty(window, 'Phaser', { configurable: true, get: () => phaser, set(value) {
+      phaser = value;
+      const boot = value.Game.prototype.boot;
+      value.Game.prototype.boot = function(...args) { window.__portalTestGame = this; return boot.apply(this, args); };
+    } });
+  });
+  await context.route('https://cdn1.kongregate.com/javascripts/kongregate_api.js', async route => {
+    requests++;
+    if (unavailable) { await route.abort(); return; }
+    await route.fulfill({ contentType: 'application/javascript', body: `
+      window.__portalStatCalls = []; window.__portalLoadCalls = 0;
+      const api = { services: { getUserId: () => 42, isGuest: () => false, addEventListener() {} },
+        stats: { submit: (name, value) => window.__portalStatCalls.push([name, value]) } };
+      window.kongregateAPI = { getAPI: () => api, loadAPI: callback => { window.__portalLoadCalls++; callback(); } };
+    ` });
+  });
+  try {
+    await page.goto(portalUrl, { waitUntil: 'domcontentloaded' });
+    const frame = await (await page.locator('iframe').elementHandle()).contentFrame();
+    await frame.waitForSelector('.henhouse-panel');
+    await frame.locator('[data-run-start]').click();
+    await frame.waitForFunction(() => window.__portalTestGame?.scene.getScene('GameScene')?.isChoosingRooster === false);
+    if (!unavailable) {
+      await frame.waitForFunction(() => window.__portalLoadCalls === 1);
+      await frame.evaluate(() => {
+        const s = window.__portalTestGame.scene.getScene('GameScene');
+        s.telemetry.summary.kills = 123; s.victory(); s.victory();
+      });
+      let calls = await frame.evaluate(() => window.__portalStatCalls);
+      assert(JSON.stringify(calls) === JSON.stringify([['Kills', 123], ['RunsWon', 1]]),
+        'The production victory hook submitted incorrect or duplicate stats.', calls);
+      await frame.evaluate(() => window.__portalTestGame.scene.getScene('GameScene').scene.restart());
+      await frame.waitForSelector('.henhouse-panel');
+      await frame.locator('[data-run-start]').click();
+      await frame.waitForFunction(() => !window.__portalTestGame.scene.getScene('GameScene').isChoosingRooster);
+      await frame.evaluate(() => {
+        const s = window.__portalTestGame.scene.getScene('GameScene');
+        s.telemetry.summary.kills = 150; s.gameOver(); s.gameOver();
+      });
+      calls = await frame.evaluate(() => window.__portalStatCalls);
+      assert(JSON.stringify(calls) === JSON.stringify([['Kills', 123], ['RunsWon', 1], ['Kills', 150]]),
+        'Defeat/restart incorrectly added wins or lost the best kill score.', calls);
+      assert(await frame.evaluate(() => window.__portalLoadCalls === 1), 'Scene restart initialized the SDK twice.');
+    }
+    assert(requests === 1, 'The portal SDK must be requested only once.', requests);
+    assert(errors.length === 0, 'Kongregate integration raised gameplay errors.', errors);
+    return { sdkUnavailable: unavailable, sdkRequests: requests, playable: true };
+  } finally {
     await context.close();
   }
 }
@@ -206,8 +273,10 @@ async function run() {
   try {
     const normal = await verifyPortalFrame(browser, url, false);
     const withoutStorage = await verifyPortalFrame(browser, url, true);
+    const kongregateScenarios = !expectMarketing && distributionName === 'dist-release'
+      ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
     console.log('Release gate passed.');
-    console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage] }, null, 2));
+    console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage], kongregateScenarios }, null, 2));
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));
