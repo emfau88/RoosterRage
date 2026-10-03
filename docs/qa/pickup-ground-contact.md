@@ -2,6 +2,10 @@
 
 Date: 2026-10-04. Baseline: `916f01b`, clean working tree before investigation.
 
+Follow-up: this corrected the ground anchor but was incomplete. The separate
+loss of valid player-body overlaps is reproduced and corrected in
+[pickup-body-contact.md](pickup-body-contact.md).
+
 ## Cause
 
 Normal pickups draw their ground field and shadow at `sprite.y + 11`. Their

@@ -31,7 +31,7 @@ try {
       for (const kind of ['heal', 'bomb', 'magnet']) {
         // All paths are defined relative to the visible ground field, with
         // the original small radii. Both sides must agree on what is contact.
-        for (const path of ['south-contact', 'north-contact', 'south-miss', 'north-miss', 'sprite-center']) {
+        for (const path of ['south-contact', 'north-contact', 'body-contact', 'south-miss', 'north-miss', 'sprite-center']) {
           const contact = !path.endsWith('miss');
           const before = await page.evaluate(({ rooster, kind, path }) => {
             const s = window.__groundContactGame.scene.getScene('GameScene');
@@ -47,9 +47,17 @@ try {
             const reach = pickup.contactRadius + s.player.sprite.body.halfWidth;
             const distance = path.endsWith('miss') ? reach + 5 : reach - 4;
             const direction = path.startsWith('north') ? -1 : 1;
-            const playerY = path === 'sprite-center'
+            let playerY = path === 'sprite-center'
               ? pickup.visual.y
               : pickup.field.y + direction * distance - footOffset;
+            if (path === 'body-contact') playerY = pickup.field.y + reach + 5 - footOffset;
+            // A miss must clear both accepted contact points. The former
+            // south-miss path overlaps the player's body and is tested above
+            // as body-contact, preserving the actual reported regression.
+            if (path === 'south-miss') {
+              s.player.sprite.body.updateFromGameObject();
+              playerY += s.player.groundMarker.y - s.player.sprite.body.center.y;
+            }
             s.player.sprite.body.reset(pickup.field.x - 60, playerY);
             s.player.updateGroundMarker();
             if (kind === 'bomb') {
@@ -98,5 +106,5 @@ try {
   }
   await fs.mkdir('test-results', { recursive: true });
   await fs.writeFile('test-results/pickup-ground-contact.json', JSON.stringify(report, null, 2));
-  console.log('Pickup ground contact passed: 90 real crossings, all roosters and pickup kinds, desktop + portrait DPR 3, both contact edges, both near-miss edges, sprite-center crossings, immediate effects and exactly once.');
+  console.log('Pickup ground contact passed: 108 real crossings, all roosters and pickup kinds, desktop + portrait DPR 3, foot and body contact, misses outside both, sprite-center crossings, immediate effects and exactly once.');
 } finally { await browser.close(); await stopTestServer(server.server); }

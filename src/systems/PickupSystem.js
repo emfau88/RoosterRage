@@ -37,6 +37,8 @@ export class PickupSystem {
     const foot = this.scene.player?.groundMarker;
     const playerRadius = this.scene.player?.sprite.body?.halfWidth ?? 0;
     if (!foot || !playerRadius) return;
+    // Supplement Arcade body contact with the visible feet. Both routes use
+    // collect(), whose active guard ensures each pickup applies only once.
     for (const pickup of this.items) {
       if (pickup.chest || !pickup.sprite.active) continue;
       const reach = pickup.contactRadius + playerRadius;
