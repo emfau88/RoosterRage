@@ -70,6 +70,9 @@ export class Pickup {
     this.destroyed = false;
     this.timers = [];
     this.transientFx = [];
+    // The floating icon is centered above its field/shadow. Collection must
+    // compare ground to ground, rather than the rooster's feet to the icon.
+    this.groundOffsetY = this.chest ? 0 : 11;
     const texture = this.chest ? 'pickup-elite-chest' : `pickup-${kind}`;
     this.sprite = scene.physics.add.sprite(x, y, texture)
       .setDepth(this.chest ? 9 : 5.5)
@@ -83,16 +86,18 @@ export class Pickup {
     // Arcade floors halfWidth, which can turn an exact 15 into 14 through
     // floating-point rounding after scaling. Keep the intended world radius.
     const sourceRadius = (radius + 0.05) / this.sprite.scaleX;
-    this.sprite.setCircle(sourceRadius, this.sprite.width / 2 - sourceRadius, this.sprite.height / 2 - sourceRadius);
+    this.sprite.setCircle(sourceRadius, this.sprite.width / 2 - sourceRadius,
+      this.sprite.height / 2 - sourceRadius + this.groundOffsetY / this.sprite.scaleY);
     this.sprite.body.updateFromGameObject();
     this.sprite.entity = this;
     this.visual = scene.add.image(x, y, texture)
       .setDepth(this.sprite.depth).setScale(this.sprite.scaleX, this.sprite.scaleY);
     if (this.chest?.tint) this.visual.setTint(this.chest.tint);
     this.sprite.setVisible(false);
+    const ground = this.getGroundPosition();
     this.fieldBaseAlpha = kind === 'magnet' ? 0.46 : 0.67;
     this.beamBaseAlpha = this.chest ? 0.95 : 0.88;
-    this.field = this.chest || CLASSIC_FEEDBACK ? null : scene.add.image(x, y + 11, `pickup-${kind}-ground`)
+    this.field = this.chest || CLASSIC_FEEDBACK ? null : scene.add.image(ground.x, ground.y, `pickup-${kind}-ground`)
       .setDisplaySize(68, 34).setDepth(5.1).setAlpha(this.fieldBaseAlpha);
     const beamColor = this.chest?.glow ?? PICKUP_COLORS[kind];
     const coreColor = this.chest?.burst ?? PICKUP_COLORS[kind];
@@ -113,7 +118,7 @@ export class Pickup {
         this.beaconParticles.push(spark);
       }
     }
-    this.shadow = this.chest ? null : scene.add.ellipse(x, y + 11, 23, 8, 0x302515, 0.2).setDepth(5.3);
+    this.shadow = this.chest ? null : scene.add.ellipse(ground.x, ground.y, 23, 8, 0x302515, 0.2).setDepth(5.3);
     this.tierMarker = null;
     if (kind === 'golden-chest' || kind === 'royal-chest') {
       const royal = kind === 'royal-chest';
@@ -130,6 +135,10 @@ export class Pickup {
     if (this.chest) {
       this.playChestSpawnFx();
     }
+  }
+
+  getGroundPosition() {
+    return { x: this.sprite.x, y: this.sprite.y + this.groundOffsetY };
   }
 
   update(time) {

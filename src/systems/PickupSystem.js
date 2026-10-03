@@ -40,8 +40,9 @@ export class PickupSystem {
     for (const pickup of this.items) {
       if (pickup.chest || !pickup.sprite.active) continue;
       const reach = pickup.contactRadius + playerRadius;
-      const dx = foot.x - pickup.sprite.x;
-      const dy = foot.y - pickup.sprite.y;
+      const ground = pickup.getGroundPosition();
+      const dx = foot.x - ground.x;
+      const dy = foot.y - ground.y;
       if (dx * dx + dy * dy <= reach * reach) this.collect(pickup);
     }
   }
@@ -183,7 +184,8 @@ export class PickupSystem {
       });
     } else {
       scene.audio.play(`pickup-${kind}`);
-      this.playCollectFx(kind, pickup.sprite.x, pickup.sprite.y);
+      const ground = pickup.getGroundPosition();
+      this.playCollectFx(kind, ground.x, ground.y);
       pickup.destroy();
     }
     return true;

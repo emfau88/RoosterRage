@@ -41,9 +41,10 @@ try {
           const b = p.sprite.body;
           return {collected:s.pickups.collected[kind], hp:s.player.hp, maxHp:s.player.maxHp,
             center:[b.center.x,b.center.y], anchor:[p.sprite.x,p.sprite.y], radius:b.halfWidth,
-            footOffset, visualY:p.visual.y};
+            ground:[p.field.x,p.field.y], footOffset, visualY:p.visual.y};
         }, {rooster,kind,dx,dy});
-        assert(Math.hypot(before.center[0]-700,before.center[1]-450) <= 1.5, 'Pickup body is not centered');
+        assert(Math.hypot(before.center[0]-before.ground[0],before.center[1]-before.ground[1]) <= 1.5,
+          'Pickup body is not centered on its ground field');
         assert.equal(before.radius, expectedRadii[kind], `${kind} contact radius changed`);
         await page.keyboard.down(key);
         await page.waitForFunction(({kind,n}) => window.__pickupGame.scene.getScene('GameScene').pickups.collected[kind] > n,
@@ -88,10 +89,10 @@ try {
             s.pickups.spawned[kind] = 0;
             s.player.updateGroundMarker();
             const footOffset = s.player.groundMarker.y - s.player.sprite.y;
-            s.player.sprite.body.reset(startX, startY - footOffset);
-            s.player.updateGroundMarker();
             const pickup = s.pickups.spawn(kind, 700, 450);
             if (!pickup) throw new Error(`Could not spawn ${kind}`);
+            s.player.sprite.body.reset(startX, startY + pickup.field.y - 450 - footOffset);
+            s.player.updateGroundMarker();
             const body = s.player.sprite.body;
             return {
               collected: s.pickups.collected[kind],
