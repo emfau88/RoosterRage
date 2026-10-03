@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { getCombatFeedbackProfile, getMultiKillTier } from '../data/combatFeedbackProfiles.js';
 import { getSceneViewport } from './DisplayResolutionSystem.js';
+import { BombConfettiSystem } from './BombConfettiSystem.js';
 
 const DEATH_BURST_LIMIT = 24;
 const PRIORITY_DEATH_BURST_LIMIT = 28;
@@ -21,6 +22,7 @@ export class CombatFeedbackSystem {
     this.deathsInBurstWindow = 0;
     this.killChain = { count: 0, lastAt: -Infinity, announced: 0, source: null };
     this.lastMultiKill = null;
+    this.bombConfetti = new BombConfettiSystem(scene);
   }
 
   showHit(x, y, damage, enemy = null, options = {}) {
@@ -175,6 +177,10 @@ export class CombatFeedbackSystem {
     if (!enemy?.sprite?.active) {
       return null;
     }
+    // Every bomb kill gets paper confetti instead of the ordinary blast echo.
+    const bombKill = source === 'pickup:bomb';
+    const confettiCount = bombKill
+      ? this.bombConfetti.burst(enemy.sprite.x, enemy.sprite.y) : 0;
     const now = this.scene.time.now;
     if (now - this.deathBurstWindowAt > DEATH_BURST_WINDOW_MS) {
       this.deathBurstWindowAt = now;
@@ -191,18 +197,19 @@ export class CombatFeedbackSystem {
     const burstLimit = priority ? PRIORITY_DEATH_BURST_LIMIT : DEATH_BURST_LIMIT;
     const canRender = aggregateSample && this.activeDeathEchoes.size < burstLimit;
     const weight = this.getDeathWeight(enemy);
-    const particleCount = canRender ? this.getDeathParticleCount(weight, detail) : 0;
+    const particleCount = !bombKill && canRender ? this.getDeathParticleCount(weight, detail) : 0;
     this.lastDeathFeedback = {
       source,
       profile: profile.id,
-      style: profile.death,
+      style: bombKill ? 'confetti' : profile.death,
       detail,
       intensity: weight.id,
       particleCount,
-      rendered: canRender,
+      confettiCount,
+      rendered: bombKill ? confettiCount > 0 : canRender,
       at: now
     };
-    if (!canRender) {
+    if (bombKill || !canRender) {
       return null;
     }
 
@@ -514,7 +521,7 @@ export class CombatFeedbackSystem {
     if (tier.threshold >= 8) {
       this.shake(tier.threshold >= 15 ? 145 : 105, tier.threshold >= 15 ? 0.0042 : 0.0028, 260);
     }
-    if (tier.threshold >= 15 && this.scene.effects.enabled('screenFlash')) {
+    if (tier.threshold >= 15 && source !== 'pickup:bomb' && this.scene.effects.enabled('screenFlash')) {
       this.scene.cameras.main.flash(75, 255, 221, 126, false);
     }
     this.scene.telemetry.record('multiKillReached', now, {
@@ -531,6 +538,7 @@ export class CombatFeedbackSystem {
       activeHitVisuals: this.activeHitVisuals.size,
       activeDamageTexts: this.activeDamageTexts.size,
       activeDeathEchoes: this.activeDeathEchoes.size,
+      bombConfetti: this.bombConfetti.getState(),
       killChain: { ...this.killChain },
       lastMultiKill: this.lastMultiKill ? { ...this.lastMultiKill } : null,
       lastDeathFeedback: this.lastDeathFeedback ? { ...this.lastDeathFeedback } : null,
@@ -673,6 +681,7 @@ export class CombatFeedbackSystem {
   }
 
   destroy() {
+    this.bombConfetti.destroy();
     [this.activeHitVisuals, this.activeDamageTexts].forEach((collection) => {
       collection.forEach((visual) => visual.destroy());
       collection.clear();

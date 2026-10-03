@@ -7,6 +7,7 @@ const STRANDED_CLEANUP_GRACE_MS = 10000;
 const OPENING_WAVE_CLEANUP_GRACE_MS = 0;
 const STRANDED_CLEANUP_MAX_ENEMIES = 3;
 const STRANDED_CLEANUP_ATTEMPTS = 12;
+const ELITE_HP_MULTIPLIER = 3;
 
 export class WaveSystem {
   constructor(scene) {
@@ -533,8 +534,10 @@ export class WaveSystem {
   }
 
   makeEliteRunner() {
+    const runner = this.makeRunner(10);
     return {
-      ...this.makeRunner(10),
+      ...runner,
+      hp: runner.hp * ELITE_HP_MULTIPLIER,
       type: 'elite-runner',
       role: 'runner',
       displayName: 'Turbo Goose',
@@ -561,7 +564,7 @@ export class WaveSystem {
     const brute = this.makeBrute(3.1);
     return {
       ...brute,
-      hp: Math.round(brute.hp * hpMultiplier),
+      hp: Math.round(brute.hp * hpMultiplier) * ELITE_HP_MULTIPLIER,
       type: 'elite-brute',
       role: 'tank',
       displayName: USE_NEW_PORTAL_ELITES ? 'Panzer Turkey' : 'Iron Brooder',
@@ -588,8 +591,10 @@ export class WaveSystem {
   }
 
   makeEliteSpitter() {
+    const spitter = this.makeSpitter(4.8);
     return {
-      ...this.makeSpitter(4.8),
+      ...spitter,
+      hp: spitter.hp * ELITE_HP_MULTIPLIER,
       type: 'elite-spitter',
       role: 'shooter',
       displayName: USE_NEW_PORTAL_ELITES ? 'Chili Gobbler' : 'Violet Matron',
@@ -720,7 +725,7 @@ export class WaveSystem {
       displayName: 'Chili Gobbler Champion',
       elite: false,
       champion: true,
-      hp: 360,
+      hp: 360 * ELITE_HP_MULTIPLIER,
       speed: 84,
       damage: 15,
       xp: 30,
@@ -749,7 +754,7 @@ export class WaveSystem {
       displayName: 'Golden Goose Champion',
       elite: false,
       champion: true,
-      hp: 520,
+      hp: 520 * ELITE_HP_MULTIPLIER,
       speed: 112,
       damage: 15,
       xp: 30,

@@ -116,6 +116,25 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Aktuelles Kongregate-HTML und ZIP erstellen (Komplett-ZIP 18.279.288 Byte) und als `9d92c33` auf Entwicklungs- und Preview-Branch pushen.
 - [x] Pages-Deploy `37148954040` erfolgreich; öffentliche `build-info.json` bestätigt `9d92c33fd65c620a79cc6db1f113b8e10dc13c37`. Play-Link antwortet mit HTTP 200 und dem erwarteten Release-Bundle `index-um8BKMUC.js`.
 
+## Release: stärkere Elites und Pickup-Nachprüfung
+
+- [x] Elites und goldene Champions erhalten dreifache HP: Turbo Goose 1.080, Panzer Turkey 1.350 (erster Auftritt 1.080), Chili Gobbler 978, Chili Champion 1.080 und Goose Champion 1.560.
+- [x] Elites und Champions nehmen keinen Schaden durch das Bomben-Pickup; gewöhnliche Gegner und die bisherigen 5% Boss-Schaden bleiben erhalten. Englischen Pickup-Text anpassen.
+- [x] Echte Gegner auf dreifache HP, vollständige Bomben-Immunität, Überleben zweier starker Treffer und fünf korrekte Truhendrops prüfen.
+- [x] Zwölf aufeinanderfolgende Pickup-Aufnahmen mit Ace in Harvest Yard im WebGL-Release auf Desktop und im Mobilformat mit DPR 3 prüfen. Alle sechs vorhandenen Items je Format werden vor/nach später Ausrüstung unmittelbar am Fußkontakt gesammelt; keine verzögerte Heilung oder Magnet-Aktivierung, keine verbleibenden Item-Grafiken.
+- [x] Neuesten lokalen Release unter `http://127.0.0.1:5176/` für den Nutzertest bereitstellen.
+- [x] Nutzer hat die Pickup-Aufnahme am neuesten lokalen Release am 2026-10-03 als korrekt bestätigt. Die Ursache im vorher getesteten Stand ist nicht abschließend nachgewiesen; kein separater spekulativer Kontakt-Fix.
+- [ ] Elite-Update mit aktuellem Kongregate-Paket committen/pushen und öffentlichen Deploy prüfen.
+
+## Bomben-Konfetti
+
+- [x] Für jeden tatsächlich durch das Bomben-Pickup getöteten Gegner einen bunten Papier-Ausbruch ergänzen; kein Konfetti bei anderen Waffen oder überlebenden Elites.
+- [x] Einen wiederverwendeten Partikel-Emitter mit sechs eingebrannten Farben und maximal 512 Partikeln verwenden; je nach Hordengröße 3–14 Schnipsel pro Gegner.
+- [x] Animationen beim Pausieren einfrieren und Emitter beim Neustart vollständig entfernen.
+- [x] Feuerexplosion, Ring und Kern direkt beim Aufheben entfernen; Bomben-Kills zeigen ausschließlich Konfetti, ohne bisherigen orangefarbenen Todes-Blast oder Bildschirmblitz.
+- [x] Desktop und Mobilformat prüfen: 12, 170 und erneut 170 aufeinanderfolgende Bomben-Tode, jeder mit Konfetti, Pool-Limit, Farbvielfalt, Pause, Ablauf, andere Waffen und Neustart.
+- [ ] Abschließende Release-/Pages-Prüfung, Paket, Commit/Push und öffentlicher Play-Link bestätigen.
+
 ## Bisheriges Laufprotokoll
 
 - 2026-10-03: Plan erstellt; Git-Stand, Einstiegspunkte und vorhandene Testskripte geprüft. Noch keine Spieländerung und keine vollständigen Testläufe.

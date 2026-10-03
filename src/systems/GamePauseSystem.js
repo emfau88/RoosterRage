@@ -84,6 +84,7 @@ export class GamePauseSystem {
     }
 
     this.scene.time.paused = shouldFreezeTime;
+    this.scene.combatFeedback?.bombConfetti?.setPaused(shouldFreezeTime);
     // New elite attack poses must hold with their telegraph, rather than
     // advancing to the impact frame while the simulation clock is frozen.
     for (const enemy of this.scene.enemies ?? []) {

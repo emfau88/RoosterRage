@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import http from 'node:http';
 import path from 'node:path';
+import { spawn } from 'node:child_process';
 import { loadPlaywright, projectRoot } from './helpers/test-runtime.mjs';
 
 const [distributionName = 'dist-release', requestedPrefix = '/nested/game/', marketingFlag] = process.argv.slice(2);
@@ -324,6 +325,20 @@ async function run() {
     const kongregateScenarios = !expectMarketing && distributionName === 'dist-release'
       ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
     const originalColors = await verifyOriginalRoosterColors(browser, url);
+    if (!expectMarketing) {
+      for (const runner of ['elite-balance', 'pickup-sequence', 'bomb-confetti']) {
+        console.log(`Checking release gameplay: ${runner} …`);
+        await new Promise((resolve, reject) => {
+          const child = spawn(process.execPath, [path.join(projectRoot, 'tests', `${runner}-runner.mjs`)], {
+            cwd: projectRoot,
+            env: { ...process.env, ROOSTER_TEST_URL: new URL(gamePrefix, url).href },
+            stdio: 'inherit'
+          });
+          child.once('error', reject);
+          child.once('exit', code => code === 0 ? resolve() : reject(new Error(`${runner} release gate failed (${code})`)));
+        });
+      }
+    }
     console.log('Release gate passed.');
     console.log(JSON.stringify({ package: packageReport, scenarios: [normal, withoutStorage], kongregateScenarios, originalColors }, null, 2));
   } finally {
