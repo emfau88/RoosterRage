@@ -19,7 +19,8 @@ Kein pauschaler Assettausch und keine behauptete komplette Portalfreigabe. Jeder
 
 ## Nach jüngstem Feedback weiterhin offen
 
-- [ ] Zwei weitere eigenständige Elite-Typen (Panzertruthahn und Chili-Puter) sowie stärkere Unterschiede der Champions in Darstellung und Angriffsrhythmus. Das erste Muster allein erfüllt diesen erweiterten Wunsch noch nicht.
+- [x] Zwei weitere eigenständige Elite-Typen (Panzertruthahn und Chili-Puter), mit unterschiedlicher Darstellung und Angriffsrhythmus. [Vergleich und Abnahme](qa/portal-elites-v2/README.md).
+- [ ] Stärkere grafische/spielerische Unterschiede weiterer Champions; bislang bleibt die goldene Goose-Variante.
 - [ ] Akustische und visuelle Abnahme auf echten Mobilgeräten, Kamera/Figurengröße in Feed Alley und Erstspielerfeedback.
 
 Die sechs Schritte des oben abgegrenzten Passes sind geprüft. [Umsetzungsbericht](PORTAL_FEEDBACK_POLISH_REPORT_2026-10-03.md) und [Direktvergleich](qa/portal-feedback/index.html) enthalten die Belege.

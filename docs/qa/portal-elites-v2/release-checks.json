@@ -1,0 +1,286 @@
+[
+  {
+    "version": "before",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "configs": [
+      {
+        "type": "elite-brute",
+        "hp": 450,
+        "speed": 66,
+        "damage": 18,
+        "xp": 42,
+        "scale": 0.39,
+        "radius": 41,
+        "bodyOffsetX": 87,
+        "bodyOffsetY": 91,
+        "aura": {
+          "kind": "armor",
+          "label": "Armor Aura",
+          "radius": 205,
+          "reduction": 0.22,
+          "color": 7067903
+        },
+        "ability": {
+          "kind": "slam",
+          "cooldown": 4400,
+          "telegraphMs": 620,
+          "heavy": true,
+          "radius": 165,
+          "damage": 21,
+          "color": 16738866
+        }
+      },
+      {
+        "type": "elite-spitter",
+        "hp": 326,
+        "speed": 48,
+        "damage": 7,
+        "xp": 40,
+        "scale": 0.34,
+        "radius": 36,
+        "bodyOffsetX": 92,
+        "bodyOffsetY": 93,
+        "aura": {
+          "kind": "regeneration",
+          "label": "Brood Regeneration Aura",
+          "radius": 210,
+          "healPerSecond": 6,
+          "color": 12684031
+        },
+        "ability": {
+          "kind": "fan",
+          "cooldown": 2700,
+          "telegraphMs": 420,
+          "speed": 245,
+          "damage": 7,
+          "source": "elite-spitter-shot",
+          "texture": "enemy-purple-shot",
+          "radius": 11,
+          "count": 5,
+          "spread": 0.92,
+          "color": 16777215,
+          "trailColor": 10181887,
+          "scale": 1.2,
+          "muzzleDistance": 42
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "version": "before",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "configs": [
+      {
+        "type": "elite-brute",
+        "hp": 450,
+        "speed": 66,
+        "damage": 18,
+        "xp": 42,
+        "scale": 0.39,
+        "radius": 41,
+        "bodyOffsetX": 87,
+        "bodyOffsetY": 91,
+        "aura": {
+          "kind": "armor",
+          "label": "Armor Aura",
+          "radius": 205,
+          "reduction": 0.22,
+          "color": 7067903
+        },
+        "ability": {
+          "kind": "slam",
+          "cooldown": 4400,
+          "telegraphMs": 620,
+          "heavy": true,
+          "radius": 165,
+          "damage": 21,
+          "color": 16738866
+        }
+      },
+      {
+        "type": "elite-spitter",
+        "hp": 326,
+        "speed": 48,
+        "damage": 7,
+        "xp": 40,
+        "scale": 0.34,
+        "radius": 36,
+        "bodyOffsetX": 92,
+        "bodyOffsetY": 93,
+        "aura": {
+          "kind": "regeneration",
+          "label": "Brood Regeneration Aura",
+          "radius": 210,
+          "healPerSecond": 6,
+          "color": 12684031
+        },
+        "ability": {
+          "kind": "fan",
+          "cooldown": 2700,
+          "telegraphMs": 420,
+          "speed": 245,
+          "damage": 7,
+          "source": "elite-spitter-shot",
+          "texture": "enemy-purple-shot",
+          "radius": 11,
+          "count": 5,
+          "spread": 0.92,
+          "color": 16777215,
+          "trailColor": 10181887,
+          "scale": 1.2,
+          "muzzleDistance": 42
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "version": "after",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "configs": [
+      {
+        "type": "elite-brute",
+        "hp": 450,
+        "speed": 66,
+        "damage": 18,
+        "xp": 42,
+        "scale": 0.39,
+        "radius": 41,
+        "bodyOffsetX": 87,
+        "bodyOffsetY": 91,
+        "aura": {
+          "kind": "armor",
+          "label": "Armor Aura",
+          "radius": 205,
+          "reduction": 0.22,
+          "color": 7067903
+        },
+        "ability": {
+          "kind": "slam",
+          "cooldown": 4400,
+          "telegraphMs": 620,
+          "heavy": true,
+          "radius": 165,
+          "damage": 21,
+          "color": 16738866
+        }
+      },
+      {
+        "type": "elite-spitter",
+        "hp": 326,
+        "speed": 48,
+        "damage": 7,
+        "xp": 40,
+        "scale": 0.34,
+        "radius": 36,
+        "bodyOffsetX": 92,
+        "bodyOffsetY": 93,
+        "aura": {
+          "kind": "regeneration",
+          "label": "Brood Regeneration Aura",
+          "radius": 210,
+          "healPerSecond": 6,
+          "color": 12684031
+        },
+        "ability": {
+          "kind": "fan",
+          "cooldown": 2700,
+          "telegraphMs": 420,
+          "speed": 245,
+          "damage": 7,
+          "source": "elite-spitter-shot",
+          "texture": "enemy-purple-shot",
+          "radius": 11,
+          "count": 5,
+          "spread": 0.92,
+          "color": 16777215,
+          "trailColor": 10181887,
+          "scale": 1.2,
+          "muzzleDistance": 42
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "version": "after",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "configs": [
+      {
+        "type": "elite-brute",
+        "hp": 450,
+        "speed": 66,
+        "damage": 18,
+        "xp": 42,
+        "scale": 0.39,
+        "radius": 41,
+        "bodyOffsetX": 87,
+        "bodyOffsetY": 91,
+        "aura": {
+          "kind": "armor",
+          "label": "Armor Aura",
+          "radius": 205,
+          "reduction": 0.22,
+          "color": 7067903
+        },
+        "ability": {
+          "kind": "slam",
+          "cooldown": 4400,
+          "telegraphMs": 620,
+          "heavy": true,
+          "radius": 165,
+          "damage": 21,
+          "color": 16738866
+        }
+      },
+      {
+        "type": "elite-spitter",
+        "hp": 326,
+        "speed": 48,
+        "damage": 7,
+        "xp": 40,
+        "scale": 0.34,
+        "radius": 36,
+        "bodyOffsetX": 92,
+        "bodyOffsetY": 93,
+        "aura": {
+          "kind": "regeneration",
+          "label": "Brood Regeneration Aura",
+          "radius": 210,
+          "healPerSecond": 6,
+          "color": 12684031
+        },
+        "ability": {
+          "kind": "fan",
+          "cooldown": 2700,
+          "telegraphMs": 420,
+          "speed": 245,
+          "damage": 7,
+          "source": "elite-spitter-shot",
+          "texture": "enemy-purple-shot",
+          "radius": 11,
+          "count": 5,
+          "spread": 0.92,
+          "color": 16777215,
+          "trailColor": 10181887,
+          "scale": 1.2,
+          "muzzleDistance": 42
+        }
+      }
+    ],
+    "errors": []
+  }
+]

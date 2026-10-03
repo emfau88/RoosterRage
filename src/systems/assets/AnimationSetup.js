@@ -4,6 +4,7 @@ import {
   NEXT_ROOSTER_WALK_FRAME_RATE,
   USE_NEXT_ROOSTER_VISUAL
 } from '../../config/aceVisual.js';
+import { USE_NEW_PORTAL_ELITES } from '../../config/eliteVisual.js';
 
 export function createGameAnimations(scene) {
   const roosterTextures = ['ace', 'artillery', 'storm'];
@@ -76,8 +77,10 @@ export function createGameAnimations(scene) {
     ['enemy-spitter', 'enemy-spitter-pulse', 7],
     ['enemy-fan-spitter', 'enemy-fan-spitter-recoil', 7],
     ['enemy-bomber', 'enemy-bomber-bob', 8],
-    ['enemy-elite-brute', 'enemy-elite-brute-stomp', 6],
-    ['enemy-elite-spitter', 'enemy-elite-spitter-pulse', 7]
+    ...(!USE_NEW_PORTAL_ELITES ? [
+      ['enemy-elite-brute', 'enemy-elite-brute-stomp', 6],
+      ['enemy-elite-spitter', 'enemy-elite-spitter-pulse', 7]
+    ] : [])
   ];
   [
     ['enemy-kornkrabbler-run', 11],
@@ -90,14 +93,16 @@ export function createGameAnimations(scene) {
     ['enemy-spitter-run', 7],
     ['enemy-fan-spitter-run', 7],
     ['enemy-bomber-run', 10],
-    ['enemy-elite-spitter-run', 7]
+    ['enemy-elite-spitter-run', 7],
+    ...(USE_NEW_PORTAL_ELITES ? [['enemy-elite-brute-run', 7]] : [])
   ].forEach(([texture, frameRate]) => {
-    [
+    const compactElite = USE_NEW_PORTAL_ELITES && ['enemy-elite-brute-run','enemy-elite-spitter-run'].includes(texture);
+    (compactElite ? [['left',0],['right',0],['up',4],['down',8]] : [
       ['left', 0],
       ['right', 4],
       ['up', 8],
       ['down', 12]
-    ].forEach(([direction, start]) => {
+    ]).forEach(([direction, start]) => {
       const key = `${texture}-${direction}`;
       if (!scene.anims.exists(key)) {
         scene.anims.create({
@@ -109,6 +114,23 @@ export function createGameAnimations(scene) {
       }
     });
   });
+
+  if (USE_NEW_PORTAL_ELITES) {
+    for (const [prefix,texture,windupMs,resolveMs] of [
+      ['enemy-elite-brute','enemy-elite-brute-stomp',620,220],
+      ['enemy-elite-spitter','enemy-elite-spitter-pulse',420,150]
+    ]) {
+      [['left',0],['right',0],['up',1],['down',2]].forEach(([direction,row]) => {
+        ['windup','resolve','recovery'].forEach((state,column) => {
+          const key = `${prefix}-${state}-${direction}`;
+          if (scene.anims.exists(key)) return;
+          scene.anims.create({key,frames:scene.anims.generateFrameNumbers(texture,{
+            start:row*12+column*4,end:row*12+column*4+3}),
+            frameRate:4000/(state==='windup' ? windupMs : state==='resolve' ? resolveMs : 240),repeat:0});
+        });
+      });
+    }
+  }
 
   [1, 2, 3, 4, 5, 'evo'].forEach((rank) => {
     const texture = `support-chick-${rank === 'evo' ? 'evo' : `r${rank}`}-sheet`;

@@ -48,6 +48,8 @@ Das Elite-Muster ist ein Anfang. Nach dem neuesten Feedback sind vor Release **d
 
 Brute und Spitter liefern bereits unterschiedliche mechanische Rollen. Ihre neuen Grafiken und Bewegungszustände sind noch nicht umgesetzt. Zusätzliche Champion-Unterschiede sollen diese Rollen stärker ausdrücken, statt nur umzufärben. Neue Schadenswerte, Dash-Distanzen oder zusätzliche Projektile benötigen anschließend einen begrenzten Balancetest.
 
+**Nachtrag 3. Oktober:** Die zwei zusätzlich freigegebenen Typen sind inzwischen umgesetzt: Panzer Turkey und Chili Gobbler mit vier Laufrichtungen und eigenen Vorbereitungs-/Angriffs-/Erholungsposen. Ihre bisherigen Angriffswerte und Auren bleiben erhalten, während die Bewegung während des Angriffs langsamer wird bzw. anhält. [Neue Elite-Abnahme und Direktvergleich](qa/portal-elites-v2/README.md). Die obige Aussage zum offenen Brute-/Spitter-Art-Pass beschreibt den vorherigen Stand; zusätzliche Champion-Varianten bleiben offen.
+
 AOE-Bombenkisten, Combo-Punkte/Multiplikatoren und ein längerer Streak-Timer bleiben getrennte Versuche. Außerdem offen: Feed-Alley-Kamera/Figurengröße, Orientierungsvorgabe, echte Geräte- und Erstspielerabnahme. Dieser Pass ist keine pauschale Portal-Freigabe.
 
 ## Vergleich und Reversibilität

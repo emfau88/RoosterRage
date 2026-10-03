@@ -16,9 +16,10 @@ import enemyBomberBobUrl from '../../assets/enemies/animations/enemy-bomber-bob.
 import enemyBomberRunUrl from '../../assets/enemies/animations/enemy-bomber-run.webp';
 import enemySupportRunUrl from '../../assets/enemies/animations/enemy-support-run.webp';
 import enemySummonerRunUrl from '../../assets/enemies/animations/enemy-summoner-run.webp';
-import enemyEliteBruteStompUrl from '../../assets/enemies/animations/enemy-elite-brute-stomp.webp';
-import enemyEliteSpitterPulseUrl from '../../assets/enemies/animations/enemy-elite-spitter-pulse.webp';
-import enemyEliteSpitterRunUrl from '../../assets/enemies/animations/enemy-elite-spitter-run.webp';
+import enemyEliteBruteStompUrl from '@portal-elite-tank-actions';
+import enemyEliteBruteRunUrl from '@portal-elite-tank-run';
+import enemyEliteSpitterPulseUrl from '@portal-elite-chili-actions';
+import enemyEliteSpitterRunUrl from '@portal-elite-chili-run';
 import fxAtlasUrl from '../../assets/fx/fx-atlas-v1-sheet.webp';
 import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.webp';
 import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
@@ -183,6 +184,7 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-support-run', enemySupportRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-summoner-run', enemySummonerRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-brute-stomp', enemyEliteBruteStompUrl, { frameWidth: 256, frameHeight: 256 });
+  scene.load.spritesheet('enemy-elite-brute-run', enemyEliteBruteRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-pulse', enemyEliteSpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-elite-spitter-run', enemyEliteSpitterRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('fx-atlas-v1', fxAtlasUrl, { frameWidth: 256, frameHeight: 256 });

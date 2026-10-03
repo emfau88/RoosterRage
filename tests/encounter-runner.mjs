@@ -97,7 +97,7 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
         .forEach((type, index) => {
           const movementOnly = [
             'runner', 'brute', 'spitter', 'fan-spitter', 'bomber',
-            'elite-runner', 'elite-spitter', 'champion-charger', 'boss'
+            'elite-runner', 'elite-brute', 'elite-spitter', 'champion-charger', 'boss'
           ]
             .includes(type);
           ids[type] = api.spawnEnemyType(type, 840 + (index % 4) * 90, 220 + Math.floor(index / 4) * 120, {
@@ -119,13 +119,14 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
       && byType['fan-spitter'].texture === 'enemy-fan-spitter-run'
       && byType.bomber.texture === 'enemy-bomber-run'
       && byType['elite-runner'].texture === 'enemy-elite-runner-run'
+      && byType['elite-brute'].texture === 'enemy-elite-brute-run'
       && byType['elite-spitter'].texture === 'enemy-elite-spitter-run'
       && byType['champion-charger'].texture === 'enemy-elite-runner-run'
       && byType.boss.texture === 'enemy-boss-run',
     'Movement-bulk enemies did not enter their directional sheets.', byType);
     ['elite-brute']
       .forEach((type) => assert(
-        byType[type].animation?.endsWith('-move') && byType[type].animationState === 'move',
+        byType[type].animation?.startsWith('enemy-elite-brute-run-') && byType[type].animationState === 'move',
         `${type} did not enter a dedicated movement state.`, byType[type]
       ));
     const directionalPrefixes = {
@@ -137,6 +138,7 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
       'fan-spitter': 'enemy-fan-spitter-run',
       bomber: 'enemy-bomber-run',
       'elite-runner': 'enemy-elite-runner-run',
+      'elite-brute': 'enemy-elite-brute-run',
       'elite-spitter': 'enemy-elite-spitter-run',
       'champion-charger': 'enemy-elite-runner-run',
       boss: 'enemy-boss-run'
@@ -206,7 +208,9 @@ async function verifyStateDrivenEnemyArt(browser, serverUrl) {
     };
     Object.entries(combatActionTextures).forEach(([type, texture]) => assert(
       combatActionStates[type]?.texture === texture
-        && combatActionStates[type]?.animation === `enemy-${type}-windup`
+        && (type === 'elite-spitter'
+          ? combatActionStates[type]?.animation?.startsWith(`enemy-${type}-windup-`)
+          : combatActionStates[type]?.animation === `enemy-${type}-windup`)
         && combatActionStates[type]?.animationState === 'windup',
       `${type} directional locomotion prevented its action sheet from taking over.`,
       combatActionStates[type]
@@ -498,7 +502,7 @@ async function verifyChampion(browser, serverUrl) {
     assert(combat.events.some((event) => event.type === 'enemyTelegraphShown'
       && event.enemyType === 'champion-charger' && event.duration >= 500),
     'Stormclaw Charge is missing its heavy readable telegraph.', combat.events);
-    assert(combat.banner.includes('Stormclaw Champion'),
+    assert(combat.banner.includes(combat.enemy.name),
       'Champion arrival is not announced.', combat.banner);
     const reward = await page.evaluate((championId) => {
       const api = window.__ROOSTER_TEST__;
