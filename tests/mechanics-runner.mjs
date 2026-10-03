@@ -1187,6 +1187,19 @@ async function testHordeCombatFeedback(browser) {
   );
   try {
     await page.waitForFunction(() => !document.querySelector('.wave-banner')?.classList.contains('is-visible'), null, { timeout: 6500 });
+    const clearedAt = await page.evaluate(() => {
+      const api = window.__ROOSTER_TEST__;
+      api.resumeIfUpgradeOpen();
+      api.pauseWaves();
+      api.clearEnemies();
+      api.clearProjectiles();
+      return api.getState().elapsed;
+    });
+    // The opening auto-shot can already have started a kill chain. Allow it
+    // to expire in simulation time before testing a separate 50-kill burst.
+    await page.waitForFunction((elapsed) => (
+      window.__ROOSTER_TEST__.getState().elapsed >= elapsed + 0.75
+    ), clearedAt);
     const immediate = await page.evaluate(() => {
       const api = window.__ROOSTER_TEST__;
       api.resumeIfUpgradeOpen();
