@@ -113,8 +113,8 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - [x] Gespeicherte Skin-Auswahlen ignorieren; vorhandenen Besitz und übrigen Fortschritt für eine spätere Überarbeitung erhalten.
 - [x] Unit-Test und Meta-/Challenge-Test bestehen; alle drei Originalfarben mit alten Spielständen im mobilen WebGL-Release und Pages-Build prüfen.
 - [x] `test:release` und `test:pages` bestehen; Kongregate-API bleibt optional und Spielstart bei API-Ausfall funktioniert.
-- [ ] Aktuelles Kongregate-HTML und ZIP erstellen und auf beide GitHub-Branches pushen.
-- [ ] Pages-Deploy und tatsächlich veröffentlichte Commit-ID am Play-Link bestätigen.
+- [x] Aktuelles Kongregate-HTML und ZIP erstellen (Komplett-ZIP 18.279.288 Byte) und als `9d92c33` auf Entwicklungs- und Preview-Branch pushen.
+- [x] Pages-Deploy `37148954040` erfolgreich; öffentliche `build-info.json` bestätigt `9d92c33fd65c620a79cc6db1f113b8e10dc13c37`. Play-Link antwortet mit HTTP 200 und dem erwarteten Release-Bundle `index-um8BKMUC.js`.
 
 ## Bisheriges Laufprotokoll
 
@@ -124,3 +124,4 @@ Bestehende Rooster- und Elite-Grafiken bleiben erhalten. Die Molotov-Fläche beh
 - 2026-10-03: Vorher/Nachher-Bilder liegen unter `docs/qa/pickup-hit-feedback/`; die Seite `feedback-comparison.html` zeigt beide Varianten gleichzeitig und animiert. Die beiden noch offenen Checklistenpunkte betreffen eine im aktuellen Spiel fehlende dunkle Map-Variante und ein Bildzeitenprofil auf schwächerer Mobilhardware. Sie blockieren die lokale Spielbarkeit nicht, bleiben aber für ein späteres QA-Paket sichtbar.
 - 2026-10-03: Lokaler Vite-Server unter `http://127.0.0.1:5173/` gestartet; Vergleich unter `http://127.0.0.1:5173/feedback-comparison.html` mit HTTP 200 geprüft. Kein öffentlicher Deploy im Rahmen dieses Passes.
 - 2026-10-03: Die „Vorher“-Spalte nutzt einen nur im Dev-Modus aktiven Vergleichsschalter für die bisherigen Pickup- und Brand-Visuals auf demselben Spielzustand. Sie ist kein zweiter historischer Build; die Gegenüberstellung bewertet gezielt die Darstellung.
+- 2026-10-03: Zweitskins vorerst deaktiviert und bestehende Skin-Auswahlen ignoriert, Besitz und Fortschritt bleiben gespeichert. Unit-, Meta-/Challenge-, Release- und Pages-Prüfungen bestanden; alle drei Rooster im mobilen WebGL mit alten Skin-Spielständen ohne Tint bestätigt. Release `9d92c33` auf beiden Branches; GitHub-Pages-Workflow `37148954040` erfolgreich und öffentliche Commit-ID geprüft. Aktuelles HTML und Upload-ZIPs unter `dist/kongregate-upload/`, Split-Dateien zusätzlich unter `releases/kongregate/`.
