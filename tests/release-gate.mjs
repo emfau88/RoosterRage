@@ -326,16 +326,24 @@ async function run() {
       ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
-      for (const runner of ['elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence', 'pickup-diagnostics', 'bomb-confetti']) {
-        console.log(`Checking release gameplay: ${runner} …`);
+      const gameplayRunners = [
+        ...['elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
+          'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
+          name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
+        })),
+        { name: 'pickup-streaming', script: path.join(projectRoot, 'scripts', 'diagnose-pickup-streaming.mjs'),
+          args: ['--expect-fixed'] }
+      ];
+      for (const runner of gameplayRunners) {
+        console.log(`Checking release gameplay: ${runner.name} …`);
         await new Promise((resolve, reject) => {
-          const child = spawn(process.execPath, [path.join(projectRoot, 'tests', `${runner}-runner.mjs`)], {
+          const child = spawn(process.execPath, [runner.script, ...runner.args], {
             cwd: projectRoot,
             env: { ...process.env, ROOSTER_TEST_URL: new URL(gamePrefix, url).href },
             stdio: 'inherit'
           });
           child.once('error', reject);
-          child.once('exit', code => code === 0 ? resolve() : reject(new Error(`${runner} release gate failed (${code})`)));
+          child.once('exit', code => code === 0 ? resolve() : reject(new Error(`${runner.name} release gate failed (${code})`)));
         });
       }
     }

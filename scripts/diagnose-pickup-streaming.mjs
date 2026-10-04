@@ -54,14 +54,19 @@ try {
         // below is real keyboard movement through the normal physics loop.
         s.player.sprite.body.reset(obstacle.x, obstacle.y + 6000); s.arena.update();
         const unloaded = !s.arena.obstacles.some(o => o.sprite.active && o.id === window.__crate.id);
+        const otherWorldPropActive = s.arena.obstacles.some(o => o.destructible && o.sprite.active
+          && o.id !== window.__crate.id);
         s.player.sprite.body.reset(window.__crate.x, window.__crate.y - 160);
         s.arena.update(); s.player.updateGroundMarker();
-        return { ...before, unloaded, blockedAfter: s.arena.overlapsObstacle(p.sprite.x, p.sprite.y, 0),
+        return { ...before, unloaded, otherWorldPropActive,
+          destroyedObstacleCount: s.arena.getState().destroyedObstacleCount,
+          blockedAfter: s.arena.overlapsObstacle(p.sprite.x, p.sprite.y, 0),
           restored: s.arena.obstacles.filter(o => o.sprite.active && o.id === window.__crate.id)
             .map(o => ({ id: o.id, x: o.x, y: o.y, hp: o.hp })) };
       }, kind);
       assert.equal(setup.blocked, false, 'Pickup started inside an obstacle');
       assert.equal(setup.unloaded, true, 'Fixture failed to unload the original chunk');
+      assert.equal(setup.otherWorldPropActive, true, 'Recycled chunks lost their other props');
       const readState = () => page.evaluate(() => {
         const s = window.__streamGame.scene.getScene('GameScene'), p = window.__streamPickup;
         return { active: p.sprite.active, artActive: p.visual.active,
@@ -90,6 +95,26 @@ try {
       assert.equal(afterIntervention.active, false, 'Removing the obstacle did not restore pickup access');
       assert.equal(afterIntervention.counts[kind], 1, 'Pickup effect was not applied exactly once');
       assert.deepEqual(errors, []);
+      if (expectFixed) {
+        assert.equal(setup.destroyedObstacleCount, 1, 'Destroyed prop was not remembered by world ID');
+        const previousRun = await page.evaluate(() => {
+          const s = window.__streamGame.scene.getScene('GameScene');
+          const run = s.pickupDiagnostics.run;
+          s.scene.restart({ roosterId: 'ace' });
+          return run;
+        });
+        await page.waitForFunction(run => window.__streamGame.scene.getScene('GameScene')
+          .pickupDiagnostics?.run > run, previousRun);
+        const newRun = await page.evaluate(() => {
+          const s = window.__streamGame.scene.getScene('GameScene');
+          s.player.sprite.body.reset(window.__crate.x, window.__crate.y - 160);
+          s.arena.update();
+          return { destroyedObstacleCount: s.arena.getState().destroyedObstacleCount,
+            originalCrateActive: s.arena.obstacles.some(o => o.id === window.__crate.id && o.sprite.active) };
+        });
+        assert.deepEqual(newRun, { destroyedObstacleCount: 0, originalCrateActive: true },
+          'A new run should restore the original crate');
+      }
       await page.close();
     }
   }

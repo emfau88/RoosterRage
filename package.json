@@ -33,6 +33,7 @@
     "test:audio": "node tests/audio-settings-runner.mjs",
     "test:pickup-contact": "node tests/pickup-contact-runner.mjs",
     "test:pickup-diagnostics": "node tests/pickup-diagnostics-runner.mjs",
+    "test:pickup-streaming": "node scripts/diagnose-pickup-streaming.mjs --expect-fixed",
     "test:pickup-ground-contact": "node tests/pickup-ground-contact-runner.mjs",
     "test:pickup-body-contact": "node tests/pickup-body-contact-runner.mjs",
     "test:pickup-sequence": "node tests/pickup-sequence-runner.mjs",

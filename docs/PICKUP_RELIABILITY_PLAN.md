@@ -2,8 +2,18 @@
 
 Stand: 4. Oktober 2026. Ausgangsstand: `2e0522d`, anfangs sauberer Arbeitsbaum.
 Status: Phase A implementiert: ein lokal exportierbarer Pickup-Bericht ohne
-Änderung an Kontaktregeln oder Effekten. Der reproduzierte Streaming-Fehler ist
-weiterhin offen; der gemeldete Live-Ausfall ist noch nicht aufgezeichnet.
+Änderung an Kontaktregeln oder Effekten. Der reproduzierte Streaming-Fehler
+wurde anschließend gezielt behoben; ob er jeden gemeldeten Live-Ausfall erklärt,
+ist ohne Mitschnitt weiterhin offen.
+
+Der Vergleich mit dem 2.-Oktober-Stand `124f853` zeigt eine Kontakt-Regression
+vom 3. Oktober: `f9bd8ec` ließ normale Pickups nur noch über den Fußpunkt
+prüfen und entfernte sie aus dem bisherigen Phaser-Körperkontakt. `8942c59`
+korrigierte den 11-Pixel-Versatz zum Bodenfeld; `2e0522d` stellte den
+Körperkontakt wieder her. Der am 4. Oktober live geladene Kongregate-Build
+`index-gy77w4LB.js` enthält beide Korrekturen. Der Fehler beim erneuten Laden
+zerstörter Props stammt aus älterem Streaming-Code (`206d5f0`, August) und
+ist keine Folge der jüngsten Pickup-Darstellung.
 
 Im Spiel nach einem Ausfall **Einstellungen → Pickup report → Save pickup report**
 öffnen und die JSON-Datei sichern. Wenn der eingebettete Browser den Download
@@ -28,13 +38,12 @@ weiterhin nur Truhen (`entity?.chest`) und enthält keinen `getGroundPosition()`
 Helfer. Das wurde anhand der geladenen JavaScript-Datei geprüft, nicht nur anhand
 des Dateinamens vermutet.
 
-Die zuletzt bereitgestellten Kongregate-Dateien und der lokal geprüfte Release
-enthalten `index-gy77w4LB.js` aus `2e0522d`. Ein Push auf den Arbeitsbranch
-aktualisiert die öffentliche Vorschau nicht automatisch. Ob das die vom Nutzer
-besuchte Adresse betrifft, ist noch offen. Der Stand eines separaten Kongregate-
-Uploads wurde in dieser Untersuchung nicht festgestellt.
+Der tatsächlich live geladene Kongregate-Build wurde anschließend direkt auf
+der öffentlichen Spielseite geprüft: `index-gy77w4LB.js` aus `2e0522d`. Die
+GitHub-Vorschau ist daher kein Beleg für den Kongregate-Stand. Ein Push auf
+den Arbeitsbranch aktualisiert Kongregate nicht automatisch.
 
-### 2. Im neuesten Build existiert ein weiterer, anderer Fehler
+### 2. Im vorherigen Build existierte ein weiterer, anderer Fehler
 
 Eine zerstörte Kiste kann nach dem Entladen und erneuten Laden ihres
 Kartenabschnitts wieder erscheinen. Ein dort liegen gebliebenes Pickup bleibt
@@ -66,7 +75,11 @@ Reproduktion im **gebauten WebGL-Release `index-gy77w4LB.js`**, Seed
 
 Die Diagnose prüft Health mit fehlenden HP, Magnet und Bombe einzeln auf beiden
 Karten. Das ist ein Hindernis-/Weltzustandsfehler, kein Beweis für einen globalen
-Pickup-Lock. Ob genau dieser Ablauf den gemeldeten Live-Ausfall erklärt, ist offen.
+Pickup-Lock. Der gezielte Fix hält zerstörte Welt-IDs für einen Run vor; alle
+sechs Fälle sammeln danach ohne zweites Kistenzerstören. Auch ein anderes
+aktives Prop im recycelten Abschnitt und die Rücksetzung beim nächsten Run
+werden geprüft. Ob genau dieser Ablauf den gemeldeten Live-Ausfall erklärt,
+ist offen.
 
 Ausführbarer Nachweis:
 
@@ -128,12 +141,12 @@ im Bericht unterscheidbar sein. Aufzeichnung an/aus darf denselben deterministis
 Run nicht in Spielzustand oder Zufallsfolge verändern. Ein Export muss im echten
 Kongregate-Iframe funktionieren.
 
-### Phase B: Den belegten Weltzustandsfehler isoliert korrigieren
+### Phase B: Den belegten Weltzustandsfehler isoliert korrigieren (umgesetzt)
 
-Zerstörte Props nach stabiler Welt-ID für die Dauer eines Runs speichern. Beim
-Reaktivieren eines Chunk-Slots den Zustand der neuen Welt-ID anwenden; beim
-Run-Neustart den Verlauf zurücksetzen. Kein pauschales Entfernen anderer
-Hindernisse und kein Vergrößern der Pickup-Radien als Ersatz.
+Zerstörte Props werden nach stabiler Welt-ID für die Dauer eines Runs gespeichert.
+Beim Reaktivieren eines Chunk-Slots wird der Zustand der neuen Welt-ID angewendet;
+ein Run-Neustart setzt ihn zurück. Andere Hindernisse und Pickup-Radien bleiben
+unverändert.
 
 Für die derzeit endlichen virtuellen Arenen kann der Speicher nach eindeutigen
 Prop-IDs begrenzt werden. Pool-Slot-IDs dürfen nicht als Weltschlüssel dienen.
@@ -141,11 +154,10 @@ Zusätzliche Spawn-Prüfungen müssen ein tatsächlich freies Ergebnis garantier
 der bisherige `findSafePoint()`-Fallback auf den Kartenmittelpunkt garantiert das
 nicht. Letzteres ist ein Code-Risiko, noch kein separat reproduzierter Ausfall.
 
-Abnahme: Die sechs Diagnosefälle müssen ohne erneutes Kistenzerstören sammeln.
-`node scripts/diagnose-pickup-streaming.mjs --expect-fixed` dient als prüfbarer
-Vertrag. Ergänzend einen zweiten Chunk mit wiederverwendetem Slot und den nächsten
-Run prüfen: Dort dürfen unzerstörte Kisten nicht versehentlich fehlen. Bestehende
-Map-Streaming-, Prop-Drop- und Pickup-Tests bleiben erforderlich.
+Abnahme: `node scripts/diagnose-pickup-streaming.mjs --expect-fixed` prüft
+alle sechs Fälle ohne erneutes Kistenzerstören, ein anderes aktives Prop nach
+Chunk-Recycling und die Rücksetzung im nächsten Run. Karten-Streaming- und
+Pickup-Tests ergänzen diesen Vertrag.
 
 ### Phase C: Aufnahme-Kern gezielt ersetzen, falls der Live-Nachweis es erfordert
 
@@ -210,7 +222,7 @@ ablehnen. Ein Umbau darf das nicht beiläufig in eine andere Balanceregel änder
   ihren Inhalt gegen den getesteten Build prüfen und den live geladenen Build
   nach dem Upload bestätigen. Danach Commit/Push des freigegebenen Stands.
 
-Empfehlung: Zuerst A und B. Den Aufnahme-Kern nur dann ersetzen, wenn der konkrete
+Empfehlung: Den Aufnahme-Kern nur dann ersetzen, wenn der konkrete
 Live-Nachweis oder die Zustandsprüfung diesen zusätzlichen Eingriff rechtfertigt.
 Eine garantierte Fehlerfreiheit lässt sich auch mit einem kompletten Neubau nicht
 versprechen; diese Nachweise machen die Behebung überprüfbar und verhindern weitere
