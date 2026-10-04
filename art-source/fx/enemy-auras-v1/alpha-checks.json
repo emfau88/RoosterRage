@@ -1,0 +1,82 @@
+[
+  {
+    "file": "aura-danger-ellipse-v1.png",
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "bounds": [
+      23,
+      0,
+      1760,
+      887
+    ],
+    "center_alpha": 0,
+    "transparent_fraction": 0.759
+  },
+  {
+    "file": "aura-regen-ellipse-v1.png",
+    "size": [
+      1891,
+      832
+    ],
+    "mode": "RGBA",
+    "bounds": [
+      33,
+      9,
+      1853,
+      808
+    ],
+    "center_alpha": 0,
+    "transparent_fraction": 0.762
+  },
+  {
+    "file": "aura-royal-ellipse-v1.png",
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "bounds": [
+      27,
+      21,
+      1758,
+      863
+    ],
+    "center_alpha": 0,
+    "transparent_fraction": 0.744
+  },
+  {
+    "file": "aura-shield-ellipse-v1.png",
+    "size": [
+      1671,
+      941
+    ],
+    "mode": "RGBA",
+    "bounds": [
+      31,
+      21,
+      1651,
+      941
+    ],
+    "center_alpha": 0,
+    "transparent_fraction": 0.778
+  },
+  {
+    "file": "aura-wind-ellipse-v1.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "bounds": [
+      0,
+      21,
+      1254,
+      1254
+    ],
+    "center_alpha": 0,
+    "transparent_fraction": 0.807
+  }
+]

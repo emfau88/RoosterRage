@@ -1,0 +1,50 @@
+[
+  {
+    "id": "regen-slim",
+    "file": "aura-regen-ellipse-v2.png",
+    "size": [
+      1890,
+      832
+    ],
+    "crop": [
+      78,
+      164,
+      1810,
+      694
+    ],
+    "centerAlpha": 0,
+    "transparentFraction": 0.8129101800976801
+  },
+  {
+    "id": "shield-slim",
+    "file": "aura-shield-ellipse-v2.png",
+    "size": [
+      1670,
+      941
+    ],
+    "crop": [
+      110,
+      214,
+      1564,
+      773
+    ],
+    "centerAlpha": 0,
+    "transparentFraction": 0.8377570045880609
+  },
+  {
+    "id": "wind-slim",
+    "file": "aura-wind-ellipse-v2.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      28,
+      410,
+      1231,
+      866
+    ],
+    "centerAlpha": 0,
+    "transparentFraction": 0.8715612432560305
+  }
+]

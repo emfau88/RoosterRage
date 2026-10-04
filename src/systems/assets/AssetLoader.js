@@ -1,4 +1,5 @@
 import { ROOSTER_ASSET_URLS } from '@rooster-assets';
+import { ENEMY_AURA_ASSETS } from './EnemyAuraAssets.js';
 import enemySlimeUrl from '../../assets/enemy-slime.webp';
 import enemySlimeWobbleUrl from '../../assets/enemies/animations/enemy-slime-wobble.webp';
 import enemySlimeHopUrl from '../../assets/enemies/animations/enemy-slime-hop-v2.webp';
@@ -123,6 +124,7 @@ const audioAssetUrls = { ...import.meta.glob('../../assets/audio/**/*.mp3', {
 }), ...import.meta.glob('../../assets/audio/portal-v1/*.wav', { eager: true, query: '?url', import: 'default' }) };
 
 export function preloadGameAssets(scene) {
+  for (const [id, url] of Object.entries(ENEMY_AURA_ASSETS)) scene.load.image(`enemy-aura-${id}`, url);
   document.body.dataset.roosterLoadState = 'loading';
   scene.cameras.main.setZoom(getSceneRenderScale(scene));
   const loadingUi = document.querySelector('#boot-loader');

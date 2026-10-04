@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { EnemyProjectile } from '../entities/EnemyProjectile.js';
 import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
+import { EnemyAuraVisual, getEnemyAuraGround } from './EnemyAuraVisual.js';
 
 const DANGER_RECOVERY_MS = 180;
 
@@ -304,9 +305,8 @@ export class EnemyAttackSystem {
     }
     this.spawnBossTransitionAdds(enemy, phase.adds ?? [], 6);
 
-    const ring = this.scene.add.circle(enemy.sprite.x, enemy.sprite.y, 62, 0xff6a28, 0.12)
-      .setStrokeStyle(5, 0xffd35a, 0.9)
-      .setDepth(9);
+    const ground = getEnemyAuraGround(enemy);
+    const ring = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'royal', 62, { follow: enemy });
     this.scene.tweens.add({
       targets: ring,
       alpha: 0,
@@ -377,9 +377,8 @@ export class EnemyAttackSystem {
   performSlam(enemy, player, ability) {
     this.scene.audio.play('brute-stomp');
     const radius = ability.radius ?? 150;
-    const ring = this.scene.add.circle(enemy.sprite.x, enemy.sprite.y, radius, 0xff5b32, 0.13)
-      .setStrokeStyle(6, 0xffd35c, 0.9)
-      .setDepth(11);
+    const ground = getEnemyAuraGround(enemy);
+    const ring = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'danger', radius);
     this.scene.tweens.add({
       targets: ring,
       alpha: 0,
@@ -577,9 +576,10 @@ export class EnemyAttackSystem {
       expiresAt: this.scene.time.now + ENCOUNTER_STANDARDS.heavyTelegraphMs + DANGER_RECOVERY_MS,
       source
     });
-    const ring = this.scene.add.circle(x, y, radius, 0xff3048, 0.12)
-      .setStrokeStyle(4, 0xffd8dc, 0.92)
-      .setDepth(9);
+    // Keep the death warning fixed at the killed bomber, independent of the
+    // pooled enemy's next activation. Damage continues to use the original x/y.
+    const ground = getEnemyAuraGround(enemy);
+    const ring = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'danger', radius);
     this.scene.tweens.add({
       targets: ring,
       alpha: { from: 0.22, to: 0.8 },

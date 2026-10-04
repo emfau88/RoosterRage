@@ -327,7 +327,7 @@ async function run() {
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
       const gameplayRunners = [
-        ...['elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
+        ...['enemy-auras', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
           'pickup-spawn-frame', 'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
           name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
         })),

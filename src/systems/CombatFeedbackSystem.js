@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { getCombatFeedbackProfile, getMultiKillTier } from '../data/combatFeedbackProfiles.js';
 import { getSceneViewport } from './DisplayResolutionSystem.js';
 import { BombConfettiSystem } from './BombConfettiSystem.js';
+import { EnemyAuraVisual, getEnemyAuraGround } from './EnemyAuraVisual.js';
 
 const DEATH_BURST_LIMIT = 24;
 const PRIORITY_DEATH_BURST_LIMIT = 28;
@@ -13,6 +14,7 @@ export class CombatFeedbackSystem {
     this.lastDamageTextAt = new WeakMap();
     this.lastShakeAt = -Infinity;
     this.activeTelegraphs = 0;
+    this.enemyTelegraphCleanups = new Set();
     this.activeHitVisuals = new Set();
     this.activeDamageTexts = new Set();
     this.activeDeathEchoes = new Set();
@@ -575,9 +577,9 @@ export class CombatFeedbackSystem {
     const heavy = options.heavy ?? false;
     const radial = options.radial ?? false;
     const dangerColor = heavy ? 0xff3048 : 0xff5268;
-    const accentColor = config.color ?? 0xffd35c;
     const angle = Math.atan2(player.sprite.y - enemy.sprite.y, player.sprite.x - enemy.sprite.x);
     const graphics = this.scene.add.graphics().setDepth(12);
+    let radialWarning = null;
     if (radial) {
       this.scene.enemyDangerZones.push({
         x: enemy.sprite.x,
@@ -586,10 +588,8 @@ export class CombatFeedbackSystem {
         expiresAt: this.scene.time.now + duration,
         source: `telegraph:${enemy.type}`
       });
-      graphics.lineStyle(5, dangerColor, 0.68);
-      graphics.strokeCircle(enemy.sprite.x, enemy.sprite.y, options.radius ?? 150);
-      graphics.fillStyle(dangerColor, 0.08);
-      graphics.fillCircle(enemy.sprite.x, enemy.sprite.y, options.radius ?? 150);
+      const ground = getEnemyAuraGround(enemy);
+      radialWarning = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'danger', options.radius ?? 150);
     } else {
       if (config.kind === 'dash') {
         this.scene.enemyDangerZones.push({
@@ -616,22 +616,29 @@ export class CombatFeedbackSystem {
         );
       }
     }
-    const charge = this.scene.add.circle(
-      enemy.sprite.x,
-      enemy.sprite.y,
-      heavy ? 34 : 22,
-      accentColor,
-      0.12
-    ).setStrokeStyle(heavy ? 5 : 3, dangerColor, 0.95).setDepth(13);
+    const ground = getEnemyAuraGround(enemy);
+    const charge = new EnemyAuraVisual(this.scene, ground.x, ground.y,
+      enemy.boss ? 'royal' : 'danger', heavy ? 34 : 22, { follow: enemy });
+    let cleaned = false;
+    let cleanupTimer;
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      cleanupTimer?.remove(false);
+      this.enemyTelegraphCleanups.delete(cleanup);
+      this.activeTelegraphs = Math.max(0, this.activeTelegraphs - 1);
+      this.scene.tweens.killTweensOf(graphics);
+      graphics.destroy(); charge.destroy(); radialWarning?.destroy();
+    };
+    this.enemyTelegraphCleanups.add(cleanup);
+    charge.once('destroy', cleanup);
+    // A killed/reused enemy can destroy its charge before the tween finishes.
+    // Cleanup must not depend solely on that tween's completion callback.
+    cleanupTimer = this.scene.time.delayedCall(Math.max(80, duration - 35), cleanup);
     this.scene.tweens.add({
-      targets: [graphics, charge],
+      targets: [graphics, charge, ...(radialWarning ? [radialWarning] : [])],
       alpha: { from: 0.28, to: 1 },
-      duration: Math.max(80, duration - 35),
-      onComplete: () => {
-        this.activeTelegraphs = Math.max(0, this.activeTelegraphs - 1);
-        graphics.destroy();
-        charge.destroy();
-      }
+      duration: Math.max(80, duration - 35)
     });
     this.scene.tweens.add({
       targets: charge,
@@ -681,6 +688,7 @@ export class CombatFeedbackSystem {
   }
 
   destroy() {
+    [...this.enemyTelegraphCleanups].forEach(cleanup => cleanup());
     this.bombConfetti.destroy();
     [this.activeHitVisuals, this.activeDamageTexts].forEach((collection) => {
       collection.forEach((visual) => visual.destroy());

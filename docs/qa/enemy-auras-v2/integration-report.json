@@ -1,0 +1,144 @@
+[
+  {
+    "renderer": "WEBGL",
+    "rows": [
+      {
+        "type": "elite-runner",
+        "style": "wind",
+        "radius": 148,
+        "physicsAuraRadius": 185,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "elite-brute",
+        "style": "shield",
+        "radius": 164,
+        "physicsAuraRadius": 205,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "elite-spitter",
+        "style": "regen-violet",
+        "radius": 168,
+        "physicsAuraRadius": 210,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "support",
+        "style": "regen-green",
+        "radius": 185,
+        "physicsAuraRadius": 185,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "bomber",
+        "style": "danger",
+        "radius": 86,
+        "explosionRadius": 86,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "boss",
+        "style": "royal",
+        "radius": 125,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      }
+    ],
+    "lifecycle": {
+      "oldDestroyed": true,
+      "reusedSameEnemy": true,
+      "ordinaryHasNoAura": true,
+      "warningStayedAtDeath": true,
+      "listenerBaseline": 8,
+      "listenersAfter": 8
+    },
+    "buffs": {
+      "visualRadius": 148,
+      "inside": 1.2,
+      "outside": 1
+    },
+    "killedCharge": {
+      "baseline": 0,
+      "after": 0,
+      "graphicsDestroyed": true,
+      "radialRemoved": true
+    },
+    "errors": []
+  },
+  {
+    "renderer": "CANVAS",
+    "rows": [
+      {
+        "type": "elite-runner",
+        "style": "wind",
+        "radius": 148,
+        "physicsAuraRadius": 185,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "elite-brute",
+        "style": "shield",
+        "radius": 164,
+        "physicsAuraRadius": 205,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "elite-spitter",
+        "style": "regen-violet",
+        "radius": 168,
+        "physicsAuraRadius": 210,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "support",
+        "style": "regen-green",
+        "radius": 185,
+        "physicsAuraRadius": 185,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "bomber",
+        "style": "danger",
+        "radius": 86,
+        "explosionRadius": 86,
+        "ellipseRotation": 0
+      },
+      {
+        "type": "boss",
+        "style": "royal",
+        "radius": 125,
+        "explosionRadius": 0,
+        "ellipseRotation": 0
+      }
+    ],
+    "lifecycle": {
+      "oldDestroyed": true,
+      "reusedSameEnemy": true,
+      "ordinaryHasNoAura": true,
+      "warningStayedAtDeath": true,
+      "listenerBaseline": 7,
+      "listenersAfter": 7
+    },
+    "buffs": {
+      "visualRadius": 148,
+      "inside": 1.2,
+      "outside": 1
+    },
+    "killedCharge": {
+      "baseline": 0,
+      "after": 0,
+      "graphicsDestroyed": true,
+      "radialRemoved": true
+    },
+    "errors": []
+  }
+]

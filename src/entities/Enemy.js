@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { EnemyAuraVisual, getEnemyAuraGround, getEnemyAuraStyle } from '../systems/EnemyAuraVisual.js';
 
 const CLASSIC_FEEDBACK = import.meta.env?.DEV
   && new URLSearchParams(globalThis.location?.search ?? '').get('feedbackCompare') === 'before';
@@ -123,16 +124,15 @@ export class Enemy {
       this.sprite.anims.setProgress(phaseFrame / (config.animationPhaseFrames - 1));
     }
     if (this.explodeOnDeath) {
-      this.warning = scene.add.circle(x, y, this.explosionRadius || 42, 0xff7a33, 0.08)
-        .setStrokeStyle(3, 0xffb347, 0.7)
-        .setDepth(3);
+      const ground = getEnemyAuraGround(this);
+      this.warning = new EnemyAuraVisual(scene, ground.x, ground.y, 'danger', this.explosionRadius || 42, { follow: this });
     }
     this.auraVisual?.destroy();
     this.auraVisual = null;
-    if (this.aura) {
-      this.auraVisual = scene.add.circle(x, y, this.aura.radius, this.aura.color ?? 0x7cff67, 0.035)
-        .setStrokeStyle(3, this.aura.color ?? 0x7cff67, 0.48)
-        .setDepth(3);
+    const auraStyle = getEnemyAuraStyle(this);
+    if (auraStyle) {
+      const ground = getEnemyAuraGround(this);
+      this.auraVisual = new EnemyAuraVisual(scene, ground.x, ground.y, auraStyle.style, auraStyle.radius, { follow: this });
     }
     this.championVisual?.destroy();
     this.championVisual = null;
@@ -181,13 +181,6 @@ export class Enemy {
     this.updateStateAnimation();
     this.updateBurn();
     this.updateWarningVisual();
-    if (this.auraVisual) {
-      this.auraVisual.setPosition(this.sprite.x, this.sprite.y);
-      const resolving = this.animationState === 'resolve';
-      this.auraVisual
-        .setAlpha((resolving ? 0.27 : 0.16) + Math.sin(this.scene.time.now * 0.005) * 0.05)
-        .setScale(resolving ? 1.08 : 1);
-    }
     if (this.championVisual) {
       this.championVisual
         .setPosition(this.sprite.x, this.sprite.y - this.hpBarYOffset - 12)
@@ -271,12 +264,7 @@ export class Enemy {
     if (!this.warning) {
       return;
     }
-    this.warningPulse += 0.08;
-    const pulse = 0.5 + Math.sin(this.warningPulse) * 0.5;
     this.sprite.setAlpha(1);
-    this.warning.setPosition(this.sprite.x, this.sprite.y);
-    this.warning.setScale(0.92 + pulse * 0.12);
-    this.warning.setAlpha(0.3 + pulse * 0.45);
   }
 
   updateAbility(player) {
@@ -477,6 +465,8 @@ export class Enemy {
   }
 
   deactivate() {
+    this.warning?.destroy(); this.warning = null;
+    this.auraVisual?.destroy(); this.auraVisual = null;
     this.clearBurn();
     this.slowUntil = 0;
     this.hitReactionToken += 1;

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "wind",
+    "source": "art-source/fx/enemy-auras-v2/aura-wind-ellipse-v2.png",
+    "file": "src/assets/fx/enemy-auras/aura-wind.webp",
+    "visibleWidthFraction": 0.9709443099273608,
+    "visibleHeightFraction": 0.926829268292683,
+    "bytes": 38144
+  },
+  {
+    "id": "shield",
+    "source": "art-source/fx/enemy-auras-v2/aura-shield-ellipse-v2.png",
+    "file": "src/assets/fx/enemy-auras/aura-shield.webp",
+    "visibleWidthFraction": 0.9758389261744966,
+    "visibleHeightFraction": 0.9394957983193277,
+    "bytes": 32200
+  },
+  {
+    "id": "regen-violet",
+    "source": "art-source/fx/enemy-auras-v2/aura-regen-ellipse-v2.png",
+    "file": "src/assets/fx/enemy-auras/aura-regen-violet.webp",
+    "visibleWidthFraction": 0.9796380090497737,
+    "visibleHeightFraction": 0.9363957597173145,
+    "bytes": 25846
+  },
+  {
+    "id": "regen-green",
+    "source": "art-source/fx/enemy-auras-v1/aura-regen-ellipse-v1.png",
+    "file": "src/assets/fx/enemy-auras/aura-regen-green.webp",
+    "visibleWidthFraction": 0.9798432250839866,
+    "visibleHeightFraction": 0.9372822299651568,
+    "bytes": 26942
+  },
+  {
+    "id": "danger",
+    "source": "art-source/fx/enemy-auras-v1/aura-danger-ellipse-v1.png",
+    "file": "src/assets/fx/enemy-auras/aura-danger.webp",
+    "visibleWidthFraction": 0.9787610619469026,
+    "visibleHeightFraction": 0.9311663479923518,
+    "bytes": 27394
+  },
+  {
+    "id": "royal",
+    "source": "art-source/fx/enemy-auras-v1/aura-royal-ellipse-v1.png",
+    "file": "src/assets/fx/enemy-auras/aura-royal.webp",
+    "visibleWidthFraction": 0.9790575916230366,
+    "visibleHeightFraction": 0.9401993355481728,
+    "bytes": 34842
+  }
+]

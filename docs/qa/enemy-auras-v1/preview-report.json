@@ -1,0 +1,137 @@
+{
+  "rows": [
+    {
+      "id": "wind",
+      "make": "makeEliteRunner",
+      "title": "TURBO GOOSE",
+      "label": "Tempo · goldener Windkranz",
+      "tint": null,
+      "radius": 185,
+      "alpha": 0.7,
+      "screen": {
+        "x": 320,
+        "y": 365
+      },
+      "enemyTexture": "enemy-elite-runner-run",
+      "enemySize": {
+        "width": 87.04,
+        "height": 87.04
+      },
+      "displayedAura": {
+        "width": 370,
+        "height": 155.4
+      }
+    },
+    {
+      "id": "shield",
+      "make": "makeEliteBrute",
+      "title": "PANZER TURKEY",
+      "label": "Rüstung · blauer Schildkranz",
+      "tint": null,
+      "radius": 205,
+      "alpha": 0.65,
+      "screen": {
+        "x": 870,
+        "y": 365
+      },
+      "enemyTexture": "enemy-elite-brute-run",
+      "enemySize": {
+        "width": 99.84,
+        "height": 99.84
+      },
+      "displayedAura": {
+        "width": 410,
+        "height": 172.2
+      }
+    },
+    {
+      "id": "regen",
+      "make": "makeEliteSpitter",
+      "title": "CHILI GOBBLER",
+      "label": "Regeneration · violetter Kranz",
+      "tint": 12684031,
+      "radius": 210,
+      "alpha": 0.65,
+      "screen": {
+        "x": 1420,
+        "y": 365
+      },
+      "enemyTexture": "enemy-elite-spitter-run",
+      "enemySize": {
+        "width": 87.04,
+        "height": 87.04
+      },
+      "displayedAura": {
+        "width": 420,
+        "height": 176.4
+      }
+    },
+    {
+      "id": "regen",
+      "make": "makeSupport",
+      "title": "BROOD TENDER",
+      "label": "Regeneration · grüner Kranz",
+      "tint": 6680459,
+      "radius": 185,
+      "alpha": 0.65,
+      "screen": {
+        "x": 320,
+        "y": 750
+      },
+      "enemyTexture": "enemy-support-run",
+      "enemySize": {
+        "width": 71.68,
+        "height": 71.68
+      },
+      "displayedAura": {
+        "width": 370,
+        "height": 155.4
+      }
+    },
+    {
+      "id": "danger",
+      "make": "makeBomber",
+      "title": "BOMBER",
+      "label": "Explosion · roter Gefahrenkranz",
+      "tint": null,
+      "radius": 86,
+      "alpha": 0.85,
+      "screen": {
+        "x": 870,
+        "y": 750
+      },
+      "enemyTexture": "enemy-bomber-run",
+      "enemySize": {
+        "width": 71.68,
+        "height": 71.68
+      },
+      "displayedAura": {
+        "width": 172,
+        "height": 72.24
+      }
+    },
+    {
+      "id": "royal",
+      "make": "makeBoss",
+      "title": "THE BROOD KING",
+      "label": "Boss-Effekt · königlicher Kranz",
+      "tint": null,
+      "radius": 125,
+      "alpha": 0.8,
+      "screen": {
+        "x": 1420,
+        "y": 750
+      },
+      "enemyTexture": "enemy-boss-run",
+      "enemySize": {
+        "width": 148.48,
+        "height": 148.48
+      },
+      "displayedAura": {
+        "width": 250,
+        "height": 105
+      }
+    }
+  ],
+  "errors": []
+}
