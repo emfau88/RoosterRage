@@ -50,6 +50,7 @@
     "assets:enemy-auras": "node scripts/prepare-enemy-auras.mjs",
     "test:enemy-auras": "node tests/enemy-auras-runner.mjs",
     "test:enemy-aura-layers": "node tests/enemy-aura-layers-runner.mjs",
+    "test:display-projectiles": "node tests/display-projectile-runner.mjs",
     "test:elite-balance": "node tests/elite-balance-runner.mjs",
     "test:bomb-confetti": "node tests/bomb-confetti-runner.mjs",
     "test:pause": "node tests/pause-runner.mjs",

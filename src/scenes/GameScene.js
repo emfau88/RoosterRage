@@ -409,7 +409,12 @@ export class GameScene extends Phaser.Scene {
     const isPortraitMobile = width <= PORTRAIT_MOBILE_MAX_WIDTH && height > width;
     let logicalZoom;
     if (!isPortraitMobile) {
-      logicalZoom = 1;
+      // The enclosed arena has no streamed ground beyond its artwork. On
+      // larger screens fit it to the limiting dimension instead of leaving
+      // its original 1400x900 footprint in a corner of the viewport.
+      logicalZoom = this.arena?.id === 'square-coop'
+        ? Math.max(1, Math.min(width / ARENA_WIDTH, height / ARENA_HEIGHT))
+        : 1;
     } else if (this.arena?.id === 'vertical-run' && width <= FEED_ALLEY_PORTRAIT_MAX_WIDTH) {
       logicalZoom = FEED_ALLEY_PORTRAIT_ZOOM;
     } else {
@@ -419,23 +424,34 @@ export class GameScene extends Phaser.Scene {
     }
     this.logicalCameraZoom = logicalZoom;
     this.cameras.main.setZoom(this.logicalCameraZoom * renderScale);
-    this.applyResponsiveCameraBounds(width);
+    this.applyResponsiveCameraBounds(width, height);
     this.roosterClasses?.applyResponsiveVisualScale();
   }
 
-  applyResponsiveCameraBounds(viewportWidth) {
+  applyResponsiveCameraBounds(viewportWidth, viewportHeight) {
     if (!this.arena) return;
     const world = this.arena.worldBounds;
     let x = world.x;
+    let y = world.y;
     let width = world.width;
-    if (this.arena.id === 'vertical-run') {
+    let height = world.height;
+    if (this.arena.id === 'vertical-run' || !this.arena.streaming) {
       const visibleWorldWidth = viewportWidth / this.logicalCameraZoom;
       if (visibleWorldWidth > world.width) {
         x -= (visibleWorldWidth - world.width) / 2;
         width = visibleWorldWidth;
       }
     }
-    this.cameras.main.setBounds(x, world.y, width, world.height);
+    if (!this.arena.streaming) {
+      const visibleWorldHeight = viewportHeight / this.logicalCameraZoom;
+      if (visibleWorldHeight > world.height) {
+        y -= (visibleWorldHeight - world.height) / 2;
+        height = visibleWorldHeight;
+      }
+    }
+    // Phaser clamps an undersized bound to its top-left edge. Expanding only
+    // the camera bounds centers excess space without changing arena physics.
+    this.cameras.main.setBounds(x, y, width, height);
   }
 
   updatePointerVector(pointer) {

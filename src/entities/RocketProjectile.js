@@ -31,6 +31,9 @@ export class RocketProjectile {
     this.life = 3000;
     this.active = true;
     this.angle = Phaser.Math.Angle.Between(x, y, target.sprite.x, target.sprite.y);
+    this.visualAngle = this.angle;
+    this.previousVisualX = x;
+    this.previousVisualY = y;
     this.textureKey = evolved ? 'rocket-egg-evo' : `rocket-egg-r${rank}`;
 
     this.shadow = scene.add.ellipse(x, y + 9, config.width * 0.54, config.height * 0.3, 0x160d08, 0.16)
@@ -47,6 +50,10 @@ export class RocketProjectile {
       .setRotation(this.angle)
       .setDepth(7);
     this.updateVisualPositions();
+    // Arcade applies this frame's displacement in postUpdate, after steering
+    // has selected the next step's velocity. Render the nose and exhaust from
+    // the completed movement rather than showing the next turn early.
+    scene.events.on(Phaser.Scenes.Events.POST_UPDATE, this.updateVisualPositions, this);
   }
 
   update(delta) {
@@ -57,9 +64,7 @@ export class RocketProjectile {
       const desired = Phaser.Math.Angle.Between(this.sprite.x, this.sprite.y, this.target.sprite.x, this.target.sprite.y);
       this.angle = Phaser.Math.Angle.RotateTo(this.angle, desired, this.turnRate);
     }
-    this.sprite.rotation = this.angle;
     this.scene.physics.velocityFromRotation(this.angle, this.speed, this.sprite.body.velocity);
-    this.updateVisualPositions();
 
     const hit = this.scene.enemies.find((enemy) => enemy.sprite.active && Phaser.Math.Distance.Between(
       this.sprite.x,
@@ -84,16 +89,25 @@ export class RocketProjectile {
   }
 
   updateVisualPositions() {
+    const dx = this.sprite.x - this.previousVisualX;
+    const dy = this.sprite.y - this.previousVisualY;
+    if (dx * dx + dy * dy > 0.000001) {
+      this.visualAngle = Math.atan2(dy, dx);
+    }
+    this.previousVisualX = this.sprite.x;
+    this.previousVisualY = this.sprite.y;
+    this.sprite.setRotation(this.visualAngle);
     const nozzleOffset = this.sprite.displayWidth * 0.32;
-    const trailX = this.sprite.x - Math.cos(this.angle) * nozzleOffset;
-    const trailY = this.sprite.y - Math.sin(this.angle) * nozzleOffset;
-    this.trail.setPosition(trailX, trailY).setRotation(this.angle);
+    const trailX = this.sprite.x - Math.cos(this.visualAngle) * nozzleOffset;
+    const trailY = this.sprite.y - Math.sin(this.visualAngle) * nozzleOffset;
+    this.trail.setPosition(trailX, trailY).setRotation(this.visualAngle);
     this.shadow.setPosition(this.sprite.x, this.sprite.y + 10);
   }
 
   destroy() {
     if (!this.active) return;
     this.active = false;
+    this.scene.events.off(Phaser.Scenes.Events.POST_UPDATE, this.updateVisualPositions, this);
     this.shadow.destroy();
     this.trail.destroy();
     this.sprite.destroy();
