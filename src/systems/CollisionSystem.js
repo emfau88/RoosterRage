@@ -57,7 +57,7 @@ export class CollisionSystem {
       // A real body overlap is valid contact for every pickup. The additional
       // foot check in PickupSystem also covers the visible ground contact;
       // it must not replace the player's existing collision footprint.
-      scene.pickups.collect(pickupSprite.entity);
+      scene.pickups.collect(pickupSprite.entity, 'body');
     });
 
     scene.physics.add.overlap(scene.player.sprite, scene.enemyProjectileGroup, (_playerSprite, projectileSprite) => {

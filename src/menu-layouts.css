@@ -224,6 +224,10 @@ html.has-ui-overlay, html.has-ui-overlay body, html.has-ui-overlay #game-root,
 .settings-content { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #bc9441 #112126; }
 .settings-panel > p, .settings-privacy small, .settings-run-exit small { display: block; font-size: 13px; line-height: 1.4; }
 .settings-section h3 { font-size: 13px; }
+.settings-section--diagnostics { grid-column: 1 / -1; }
+.settings-section--diagnostics p { font-size: 12px; line-height: 1.35; }
+.settings-section--diagnostics > button { width: 100%; color: #fff4cf; background: #3b3340; border: 1px solid #c9a75f; border-radius: 6px; }
+.settings-section--diagnostics textarea { box-sizing: border-box; width: 100%; height: 80px; font: 11px/1.3 monospace; }
 .settings-panel button { min-height: 44px; min-width: 44px; align-items: center; }
 .settings-volume { min-height: 44px; }
 .settings-volume input { min-height: 44px; }
