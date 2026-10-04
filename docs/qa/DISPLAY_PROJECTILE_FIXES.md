@@ -31,3 +31,13 @@ bundled release as part of `test:release`.
 `npm run test:mechanics` verifies existing weapons and map behavior. The full
 Kongregate release gate still includes aura layering and pickup regressions.
 No sounds or additional flame/smoke assets were changed in this fix.
+
+The first CI deployment passed the new display/rocket tests but failed the
+existing streaming diagnostic's fixed 1.6-second keyboard segment. CI's saved
+Heal fixture still had its player foot at Y=65920.924, before the pickup at
+Y=65955; no obstacle had returned. An 8x CPU slowdown reproduced this failure.
+That diagnostic now waits for actual collection or crossing (bounded at 10s)
+instead of assuming wall time guarantees sufficient travel. Exactly-once
+effects, obstacle persistence and restart assertions remain required. Use
+`node scripts/diagnose-pickup-streaming.mjs --expect-fixed --cpu-slowdown=8`
+to exercise the slow-renderer case. This changes no game or upload bundle.

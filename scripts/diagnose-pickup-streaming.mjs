@@ -5,6 +5,7 @@ import { ensureTestServer, loadPlaywright, stopTestServer } from '../tests/helpe
 // Diagnostic fixture, not a gameplay fix. --expect-fixed turns the observed
 // failure into an acceptance assertion for a future world-state correction.
 const expectFixed = process.argv.includes('--expect-fixed');
+const cpuSlowdown = Number(process.argv.find(arg => arg.startsWith('--cpu-slowdown='))?.split('=')[1] ?? 1);
 const server = await ensureTestServer();
 const { chromium } = loadPlaywright();
 const browser = await chromium.launch();
@@ -13,6 +14,10 @@ try {
   for (const arena of ['open-yard', 'vertical-run']) {
     for (const kind of ['heal', 'magnet', 'bomb']) {
       const page = await browser.newPage({ viewport: { width: 1280, height: 830 } });
+      if (cpuSlowdown > 1) {
+        const cdp = await page.context().newCDPSession(page);
+        await cdp.send('Emulation.setCPUThrottlingRate', { rate: cpuSlowdown });
+      }
       const errors = [];
       page.on('pageerror', error => errors.push(error.stack));
       await page.addInitScript(() => {
@@ -75,21 +80,36 @@ try {
           pickup: [p.sprite.x, p.sprite.y], counts: { ...s.pickups.collected },
           hp: s.player.hp, magnet: s.pickups.isMagnetActive(), error: s.debugStats.lastError };
       });
-      await page.keyboard.down('s');
-      await page.waitForTimeout(1600);
-      await page.keyboard.up('s');
+      const crossPickup = async () => {
+        await page.keyboard.down('s');
+        try {
+          // On software-rendered CI, 1.6 seconds of wall time did not move
+          // the player far enough to touch the item. Require actual travel,
+          // while retaining a bounded observation for the blocked diagnostic.
+          await page.waitForFunction(() => {
+            const s = window.__streamGame.scene.getScene('GameScene'), p = window.__streamPickup;
+            return !p.sprite.active || s.player.sprite.body.center.y >= p.sprite.y + 50;
+          }, undefined, { timeout: 10000 });
+          return 'completed';
+        } catch (error) {
+          if (error.name !== 'TimeoutError') throw error;
+          return 'blocked-or-stalled';
+        } finally {
+          await page.keyboard.up('s');
+        }
+      };
+      const firstCrossing = await crossPickup();
       const beforeIntervention = await readState();
       await page.evaluate(() => {
         const s = window.__streamGame.scene.getScene('GameScene');
         const obstacle = s.arena.obstacles.find(o => o.sprite.active && o.id === window.__crate.id);
         if (obstacle) s.arena.damageObstacle(obstacle, obstacle.hp, 'diagnosis');
       });
-      await page.keyboard.down('s');
-      await page.waitForTimeout(1000);
-      await page.keyboard.up('s');
+      const secondCrossing = await crossPickup();
       const afterIntervention = await readState();
       const blockedByRestoredProp = setup.blockedAfter && beforeIntervention.active && !afterIntervention.active;
-      reports.push({ arena, kind, setup, beforeIntervention, afterIntervention, blockedByRestoredProp, errors });
+      reports.push({ arena, kind, setup, firstCrossing, secondCrossing,
+        beforeIntervention, afterIntervention, blockedByRestoredProp, errors });
       console.log(JSON.stringify({ arena, kind, bundle: setup.bundle, blockedByRestoredProp,
         activeBeforeBreaking: beforeIntervention.active, activeAfterBreaking: afterIntervention.active }));
       assert.equal(afterIntervention.active, false, 'Removing the obstacle did not restore pickup access');
