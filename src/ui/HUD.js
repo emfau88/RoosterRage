@@ -1204,7 +1204,8 @@ export class HUD {
     onAudioChange,
     onAnalyticsChange,
     onClose,
-    onReturnToHub
+    onReturnToHub,
+    onPickupReport
   ) {
     const labels = {
       damageNumbers: 'Damage numbers',
@@ -1260,6 +1261,15 @@ export class HUD {
               <button type="button" data-analytics-toggle aria-pressed="${Boolean(analyticsSettings?.enabled)}">${analyticsSettings?.enabled ? 'ON' : 'OFF'}</button>
             </div>
           </section>
+          <section class="settings-section settings-section--diagnostics">
+            <h3>Pickup report</h3>
+            <p>Save the recent pickup contacts, map obstacles and camera state if an item fails to collect. The report stays on this device.</p>
+            <button type="button" data-pickup-report>Save pickup report</button>
+            <div data-pickup-report-fallback hidden>
+              <p>If the download is blocked, copy the report text below.</p>
+              <textarea readonly aria-label="Pickup report text"></textarea>
+            </div>
+          </section>
         </div>
         <div class="settings-actions">
           ${onReturnToHub ? `
@@ -1308,6 +1318,25 @@ export class HUD {
       const state = onAnalyticsChange?.(next) ?? { enabled: next };
       button.setAttribute('aria-pressed', String(state.enabled));
       button.textContent = state.enabled ? 'ON' : 'OFF';
+    });
+    this.overlay.querySelector('[data-pickup-report]')?.addEventListener('click', () => {
+      const report = onPickupReport?.();
+      if (!report) return;
+      const fallback = panel.querySelector('[data-pickup-report-fallback]');
+      fallback.hidden = false;
+      fallback.querySelector('textarea').value = report.json;
+      try {
+        const url = URL.createObjectURL(new Blob([report.json], { type: 'application/json' }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = report.filename;
+        panel.append(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+      } catch {
+        fallback.querySelector('textarea').focus();
+      }
     });
     this.overlay.querySelector('[data-return-hub]')?.addEventListener('click', () => onReturnToHub?.());
     this.overlay.querySelector('.settings-close').addEventListener('click', closeSettings, { once: true });

@@ -1,0 +1,16 @@
+{
+  "bundle": "index-CnIL5ms2.js",
+  "verifiedFiles": 161,
+  "auraFiles": [
+    "assets/aura-danger-D-vmVx6b.webp",
+    "assets/aura-regen-green-B1BUs6dD.webp",
+    "assets/aura-regen-violet-Ei4f_MiA.webp",
+    "assets/aura-royal-BlHrCzOO.webp",
+    "assets/aura-shield-BDc33Cp0.webp",
+    "assets/aura-wind-D65KCkXE.webp"
+  ],
+  "indexSha256": "183e70616e792f00b08a30b249f683430e9569c99735d3a2c999c10908a7f58c",
+  "additionalFilesSha256": "bd17b12c11ca89385a9fdd05a774f4c52f7369fd475781133866e5e52ae0940e",
+  "completeZipSha256": "20d6c4fc291595ee3ec4cd59094d1ec035fe25ecda3fafa69416b45ed43a26db",
+  "validation": "Both archives and both split index files match the tested dist-release byte for byte."
+}

@@ -1,0 +1,16 @@
+{
+  "width": 1305,
+  "height": 780,
+  "frames": 160,
+  "loop": 0,
+  "bytes": 1926439,
+  "animatedRegions": {
+    "wind": true,
+    "shield": true,
+    "violet regen": true,
+    "green regen": true,
+    "danger": true,
+    "royal": true
+  },
+  "loopSeamMeanChannelDelta": 0.06850214493892655
+}

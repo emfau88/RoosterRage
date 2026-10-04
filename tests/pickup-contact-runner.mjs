@@ -91,7 +91,11 @@ try {
             const footOffset = s.player.groundMarker.y - s.player.sprite.y;
             const pickup = s.pickups.spawn(kind, 700, 450);
             if (!pickup) throw new Error(`Could not spawn ${kind}`);
-            s.player.sprite.body.reset(startX, startY + pickup.field.y - 450 - footOffset);
+            s.player.sprite.body.updateFromGameObject();
+            // These paths pass south of the item. Clear the body as well as
+            // the lower foot marker so this remains a genuine near miss.
+            const bodyOffset = s.player.sprite.body.center.y - s.player.sprite.y;
+            s.player.sprite.body.reset(startX, startY + pickup.field.y - 450 - bodyOffset);
             s.player.updateGroundMarker();
             const body = s.player.sprite.body;
             return {

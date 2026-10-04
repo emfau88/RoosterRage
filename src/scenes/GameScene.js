@@ -20,6 +20,7 @@ import { GamePauseSystem } from '../systems/GamePauseSystem.js';
 import { PlayerInputSystem } from '../systems/PlayerInputSystem.js';
 import { PickupSystem } from '../systems/PickupSystem.js';
 import { PickupIndicatorSystem } from '../systems/PickupIndicatorSystem.js';
+import { PickupDiagnostics } from '../systems/PickupDiagnostics.js';
 import { kongregate } from '../systems/KongregateSystem.js';
 import { LoadoutSystem } from '../systems/LoadoutSystem.js';
 import { MetaProgressionSystem } from '../systems/MetaProgressionSystem.js';
@@ -206,6 +207,7 @@ export class GameScene extends Phaser.Scene {
       }
     );
     this.pickupIndicators = new PickupIndicatorSystem(this);
+    this.pickupDiagnostics = new PickupDiagnostics(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
     this.setupTouchInput();
@@ -251,6 +253,7 @@ export class GameScene extends Phaser.Scene {
       this.projectileLifecycle.update(delta);
       this.activeAbilities.update(simulationTime);
       this.pickups.update(simulationTime);
+      this.pickupDiagnostics.update(simulationTime);
       this.checkProjectileHits();
       this.projectileLifecycle.cleanup();
       this.xpOrbs.forEach((orb) => orb.update(this.player));
@@ -324,7 +327,8 @@ export class GameScene extends Phaser.Scene {
           this.hud.hideOverlay();
         }
       },
-      returnToHub ? null : () => this.confirmReturnToHub()
+      returnToHub ? null : () => this.confirmReturnToHub(),
+      () => this.pickupDiagnostics.exportReport()
     );
     return true;
   }
@@ -901,6 +905,7 @@ export class GameScene extends Phaser.Scene {
     removeTestApi();
     this.hud?.destroy();
     this.pickupIndicators?.destroy();
+    this.pickupDiagnostics?.destroy();
     this.objectPools?.destroy();
     this.pickups?.destroy();
     this.arena?.destroy();

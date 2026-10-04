@@ -37,13 +37,15 @@ export class PickupSystem {
     const foot = this.scene.player?.groundMarker;
     const playerRadius = this.scene.player?.sprite.body?.halfWidth ?? 0;
     if (!foot || !playerRadius) return;
+    // Supplement Arcade body contact with the visible feet. Both routes use
+    // collect(), whose active guard ensures each pickup applies only once.
     for (const pickup of this.items) {
       if (pickup.chest || !pickup.sprite.active) continue;
       const reach = pickup.contactRadius + playerRadius;
       const ground = pickup.getGroundPosition();
       const dx = foot.x - ground.x;
       const dy = foot.y - ground.y;
-      if (dx * dx + dy * dy <= reach * reach) this.collect(pickup);
+      if (dx * dx + dy * dy <= reach * reach) this.collect(pickup, 'feet');
     }
   }
 
@@ -90,7 +92,7 @@ export class PickupSystem {
       .sort((a, b) => (this.spawned[a] / PICKUP_BUDGETS[a]) - (this.spawned[b] / PICKUP_BUDGETS[b]));
     const kind = candidates[0];
     if (!kind) return null;
-    const pickup = this.spawn(kind, x, y, { fromProp: true });
+    const pickup = this.spawn(kind, x, y, { fromProp: true, originId: obstacle?.id ?? null });
     if (!pickup) return null;
     this.propDrops += 1;
     this.propDropWaves.add(wave);
@@ -113,9 +115,12 @@ export class PickupSystem {
     const pickup = new Pickup(this.scene, kind, point.x, point.y);
     pickup.guaranteed = options.guaranteed ?? false;
     pickup.victoryReward = options.victoryReward ?? false;
+    pickup.fromProp = Boolean(options.fromProp);
+    pickup.originId = options.originId ?? null;
     this.items.push(pickup);
     this.group.add(pickup.sprite);
     this.spawned[kind] += 1;
+    this.scene.pickupDiagnostics?.recordPickup('spawned', pickup);
     this.scene.telemetry.record('pickupSpawned', this.scene.time.now, {
       wave: this.scene.waveSystem?.currentWave ?? 0,
       kind,
@@ -125,13 +130,16 @@ export class PickupSystem {
     return pickup;
   }
 
-  collect(pickup) {
+  collect(pickup, source = 'direct') {
     if (!pickup?.sprite?.active || pickup.opening) return false;
     const { scene } = this;
     const kind = pickup.kind;
+    let effect = null;
+    scene.pickupDiagnostics?.recordPickup('contact', pickup, { source });
     if (kind === 'heal') {
       // A health pickup remains available until it can provide real value.
       if (scene.player.hp >= scene.player.maxHp) {
+        scene.pickupDiagnostics?.recordPickup('deferred-full-health', pickup, { source });
         if (scene.time.now >= (pickup.nextHintAt ?? 0)) {
           pickup.nextHintAt = scene.time.now + 4000;
           scene.hud.showPickupFeedback('heal', 'HP FULL', 'Health stays here until needed');
@@ -140,9 +148,13 @@ export class PickupSystem {
       }
       const before = scene.player.hp;
       scene.player.heal(Math.max(12, Math.round(scene.player.maxHp * 0.25)));
+      effect = { healed: scene.player.hp - before };
       scene.telemetry.addHealing(scene.player.hp - before, scene.time.now, scene.waveSystem.currentWave, 'pickup:heal');
       scene.hud.showPickupFeedback(kind, `+${scene.player.hp - before} HP`, 'Health restored');
     } else if (kind === 'bomb') {
+      const beforeHits = scene.debugStats.hits;
+      const beforeKills = scene.debugStats.kills;
+      const enemiesBefore = scene.enemies.filter(enemy => enemy.sprite.active).length;
       scene.combatFeedback.bombConfetti.prepareBomb(scene.enemies.filter(enemy =>
         enemy.sprite.active && (enemy.boss || (!enemy.elite && !enemy.champion))).length);
       [...scene.enemies].forEach((enemy) => {
@@ -150,12 +162,16 @@ export class PickupSystem {
         const damage = enemy.boss ? Math.max(1, Math.round(enemy.maxHp * 0.05)) : enemy.maxHp;
         scene.damageEnemy(enemy, damage, enemy.sprite.x, enemy.sprite.y, { source: 'pickup:bomb', quiet: true });
       });
+      effect = { enemiesBefore, enemiesAfter: scene.enemies.filter(enemy => enemy.sprite.active).length,
+        hits: scene.debugStats.hits - beforeHits, kills: scene.debugStats.kills - beforeKills };
       scene.hud.showPickupFeedback(kind, 'EGG BOMB', 'Elites immune · Boss takes 5% max HP');
     } else if (kind === 'magnet') {
       this.magnetUntil = Math.max(this.magnetUntil, scene.time.now + 8000);
+      effect = { magnetUntil: this.magnetUntil };
       scene.hud.showPickupFeedback(kind, 'MAGNET · 8s', 'All XP is pulled towards you');
     }
     this.collected[kind] += 1;
+    scene.pickupDiagnostics?.recordPickup(CHEST_KINDS.includes(kind) ? 'chest-claimed' : 'effect-applied', pickup, { source, effect });
     scene.telemetry.record('pickupCollected', scene.time.now, {
       wave: scene.waveSystem.currentWave,
       kind
@@ -187,6 +203,7 @@ export class PickupSystem {
       const ground = pickup.getGroundPosition();
       this.playCollectFx(kind, ground.x, ground.y);
       pickup.destroy();
+      scene.pickupDiagnostics?.recordPickup('removed', pickup, { source });
     }
     return true;
   }

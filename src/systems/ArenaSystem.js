@@ -49,6 +49,7 @@ export class ArenaSystem {
     this.obstacleGroup = scene.physics.add.staticGroup();
     this.chunkRecords = [];
     this.chunkByKey = new Map();
+    this.destroyedObstacleIds = new Set();
     this.chunkAnchor = null;
     this.recycledChunks = 0;
     this.renderTopology();
@@ -500,6 +501,14 @@ export class ArenaSystem {
       destructible: !config.solid,
       damageStage: 0
     });
+    // Chunk records reuse sprites for different world objects. A destroyed
+    // prop must stay gone when its original world ID returns to a pool slot.
+    if (!config.solid && this.destroyedObstacleIds.has(config.id)) {
+      obstacle.hp = 0;
+      obstacle.damageStage = 2;
+      obstacle.sprite.disableBody(true, true);
+      return;
+    }
     obstacle.sprite.enableBody(true, config.x, config.y, true, true);
     obstacle.sprite.setTexture(texture)
       .setPosition(config.x, config.y)
@@ -613,6 +622,7 @@ export class ArenaSystem {
       return false;
     }
     const { x, y } = obstacle.sprite;
+    this.destroyedObstacleIds.add(obstacle.id);
     obstacle.sprite.disableBody(true, true);
     this.scene.audio.play(obstacle.kind === 'bale' ? 'bale-break' : 'crate-break');
     playPropBreak(this.scene, obstacle.kind, x, y);
@@ -690,6 +700,7 @@ export class ArenaSystem {
       })),
       chunkAnchor: this.chunkAnchor ? { ...this.chunkAnchor } : null,
       recycledChunks: this.recycledChunks,
+      destroyedObstacleCount: this.destroyedObstacleIds.size,
       weaponRatings: { ...this.definition.weaponRatings },
       obstacles: this.obstacles.map((obstacle) => ({
         id: obstacle.id,
@@ -722,6 +733,7 @@ export class ArenaSystem {
     this.obstacleGroup.destroy(true);
     this.chunkRecords = [];
     this.chunkByKey.clear();
+    this.destroyedObstacleIds.clear();
     this.obstacles = [];
   }
 }

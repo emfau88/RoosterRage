@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "generator": "built-in image_gen",
+  "status": "approved revised top-row art, integrated into the production enemy aura renderer",
+  "previewRadiusScale": 0.8,
+  "assets": [
+    {
+      "id": "wind-slim",
+      "file": "aura-wind-ellipse-v2.png",
+      "source": "exec-7c69cbe6-4b18-48cb-bd63-e7f1b769e342.png",
+      "reference": "exec-94eb54bc-ca5d-4c55-9200-9574bef300ef.png",
+      "prompt": "Visibly slim down this golden wind aura texture. The reference is too thick. REDUCE ALL RIBBON WIDTHS BY TWO THIRDS. Maintain the same outer horizontal ellipse dimensions and perspective but greatly enlarge its transparent hole. Use just two or three fine tapered gold wind strokes tracing a narrow elliptical outline, with two SMALL slender feather tips. At the bottom the total material band should only be around 3 percent of the overall ellipse width. Elegant airy painterly game VFX; lots of alpha gaps between strokes. Keep amber/gold/cream colors. Eliminate the chunky glowing belt appearance. The reference image is EDIT TARGET, not required thickness. True transparent alpha center and background, no floor patches, no opaque disc, no shadows, no characters."
+    },
+    {
+      "id": "shield-slim",
+      "file": "aura-shield-ellipse-v2.png",
+      "source": "exec-292e36f3-43a0-4c4c-9b3a-4b4e1bec568e.png",
+      "reference": "../enemy-auras-v1/aura-shield-ellipse-v1.png",
+      "prompt": "Edit the provided game aura to be visibly much more slender. Keep blue icy armor theme, transparent alpha background, perfectly empty transparent center, and the same flat horizontal ellipse ground perspective. Replace the broad chunky shield rim with eight delicate thin icy arcs following a SINGLE narrow elliptical outline, like an elegant luminous wire with small crystalline accents. Band thickness must be about ONE THIRD of the reference, not a wide belt; open gaps between fine arcs. Remove bulky plates and dense glow. Same outer ellipse proportions. Do not fill any floor or center. Polished high quality hand-painted game VFX."
+    },
+    {
+      "id": "regen-slim",
+      "file": "aura-regen-ellipse-v2.png",
+      "source": "exec-d674c456-9437-4abe-877c-fc525ed59465.png",
+      "reference": "../enemy-auras-v1/aura-regen-ellipse-v1.png",
+      "prompt": "Edit this transparent grayscale regeneration aura. Preserve grayscale so it can be tinted purple in game, transparent alpha background, empty hollow center and flat horizontal elliptical ground perspective. Make the ribbon and teardrop ornament edges about half the thickness: a delicate narrow wisp ring with a few small luminous droplets, light elegant outline instead of broad smoke belt. Strongly reduce thick material and dense glow. Keep the overall ellipse proportions and outer dimensions. Absolutely no filled center, no ground texture or background. Crisp polished 2D game VFX."
+    }
+  ],
+  "windIntermediate": {
+    "source": "exec-94eb54bc-ca5d-4c55-9200-9574bef300ef.png",
+    "reference": "../enemy-auras-v1/aura-wind-ellipse-v1.png",
+    "prompt": "Edit this transparent game aura asset. Preserve its yellow/golden wind palette, flat ground-plane elliptical perspective, hollow transparent center, transparent background and overall ellipse outline dimensions. Make only the ring band and all wind ribbons approximately 45 percent thinner and more delicate, with slender elegant energetic wind streaks. Reduce the visual bulk of the side ornaments. Crisp polished 2D game VFX, no filled ground, no disc, no background, no shadows or characters. Retain a horizontal ellipse and genuine alpha transparency."
+  }
+}

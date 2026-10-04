@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { Enemy } from '../entities/Enemy.js';
+import { EnemyAuraVisual, getEnemyAuraGround } from './EnemyAuraVisual.js';
 import { XPOrb } from '../entities/XPOrb.js';
 import { DEFAULT_TARGET_ACQUISITION_MARGIN } from './CombatSystem.js';
 import { getSceneViewport } from './DisplayResolutionSystem.js';
@@ -210,9 +211,8 @@ export class EntitySystem {
     if (enemy.boss && enemy.invulnerableUntil > this.scene.time.now) {
       const finalScale = enemy.sprite.scaleX;
       enemy.sprite.setScale(finalScale * 0.55).setAlpha(0.35);
-      const shield = this.scene.add.circle(x, y, 82, 0x65d7ff, 0.08)
-        .setStrokeStyle(6, 0xcaf5ff, 0.82)
-        .setDepth(9);
+      const ground = getEnemyAuraGround(enemy);
+      const shield = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'shield', 82, { follow: enemy });
       this.scene.tweens.add({
         targets: enemy.sprite,
         alpha: 1,
