@@ -328,7 +328,7 @@ async function run() {
     if (!expectMarketing) {
       const gameplayRunners = [
         ...['elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
-          'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
+          'pickup-spawn-frame', 'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
           name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
         })),
         { name: 'pickup-streaming', script: path.join(projectRoot, 'scripts', 'diagnose-pickup-streaming.mjs'),

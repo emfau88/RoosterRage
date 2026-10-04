@@ -88,7 +88,11 @@ export class Pickup {
     const sourceRadius = (radius + 0.05) / this.sprite.scaleX;
     this.sprite.setCircle(sourceRadius, this.sprite.width / 2 - sourceRadius,
       this.sprite.height / 2 - sourceRadius + this.groundOffsetY / this.sprite.scaleY);
-    this.sprite.body.updateFromGameObject();
+    // Drops can spawn after Arcade's preUpdate (e.g. inside a projectile hit).
+    // Initialize the previous frame position along with the scaled/offset body;
+    // otherwise postUpdate treats the setup offset as motion and displaces the
+    // invisible collider from the stationary artwork. Do not advance physics.
+    this.sprite.body.preUpdate(false, 0);
     this.sprite.entity = this;
     this.visual = scene.add.image(x, y, texture)
       .setDepth(this.sprite.depth).setScale(this.sprite.scaleX, this.sprite.scaleY);
