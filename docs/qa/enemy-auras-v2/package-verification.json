@@ -1,5 +1,5 @@
 {
-  "bundle": "index-CnIL5ms2.js",
+  "bundle": "index-DL40Nkuj.js",
   "verifiedFiles": 161,
   "auraFiles": [
     "assets/aura-danger-D-vmVx6b.webp",
@@ -9,8 +9,8 @@
     "assets/aura-shield-BDc33Cp0.webp",
     "assets/aura-wind-D65KCkXE.webp"
   ],
-  "indexSha256": "183e70616e792f00b08a30b249f683430e9569c99735d3a2c999c10908a7f58c",
-  "additionalFilesSha256": "bd17b12c11ca89385a9fdd05a774f4c52f7369fd475781133866e5e52ae0940e",
-  "completeZipSha256": "20d6c4fc291595ee3ec4cd59094d1ec035fe25ecda3fafa69416b45ed43a26db",
+  "indexSha256": "0adec97a76027cda2d1ce00e8c5447a54fca6b41e8242e99037dc9635690f449",
+  "additionalFilesSha256": "8efc92c48c418974b77ec9da3400b6ed01e6c485568cbd3fa06b0d5a5a4b99a4",
+  "completeZipSha256": "cadf592360ff631998f1ead5f550da90f004b585e257d36bdd6081f5ae1ef2d7",
   "validation": "Both archives and both split index files match the tested dist-release byte for byte."
 }

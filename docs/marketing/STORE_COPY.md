@@ -45,7 +45,7 @@ Der Slice ist auf kurze 7-9-Minuten-Runs ausgelegt und funktioniert mit Touch, T
 
 | Asset | Pfad | Format |
 | --- | --- | --- |
-| Key Art Master | `public/marketing/rooster-rage-key-art-master.png` | 1672 x 941 PNG, 16:9 |
+| Key Art Master | `art-source/marketing/rooster-rage-key-art-master.png` | 1672 x 941 PNG, 16:9 |
 | Hennenhuette | `docs/marketing/screenshots/01-hennenhuette-desktop.png` | 1440 x 810 PNG |
 | Blitzkamm-Schwarm | `docs/marketing/screenshots/02-stormcrest-swarm-desktop.png` | 1440 x 810 PNG |
 | Brood King | `docs/marketing/screenshots/03-brood-king-desktop.png` | 1440 x 810 PNG |

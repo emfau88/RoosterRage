@@ -24,7 +24,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          ref: master
+          ref: ${{ github.ref_name == 'master' && github.sha || 'master' }}
+
+      - name: Record shared build revision
+        id: build-revision
+        run: echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -59,7 +63,7 @@ jobs:
       - name: Checkout Kongregate candidate
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.ref_name == 'codex/kongregate-upload' && github.sha || 'codex/kongregate-upload' }}
+          ref: ${{ steps.build-revision.outputs.commit }}
           path: kongregate-source
 
       - name: Install Kongregate candidate dependencies
@@ -77,7 +81,7 @@ jobs:
       - name: Add Kongregate preview to GitHub Pages
         run: |
           cp -R kongregate-source/dist-release dist-pages/kongregate
-          node --input-type=module -e "import { execFileSync } from 'node:child_process'; import { writeFileSync } from 'node:fs'; const commit = execFileSync('git', ['-C', 'kongregate-source', 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(); writeFileSync('dist-pages/kongregate/build-info.json', JSON.stringify({ branch: 'codex/kongregate-upload', commit }, null, 2) + '\n');"
+          node --input-type=module -e "import { execFileSync } from 'node:child_process'; import { writeFileSync } from 'node:fs'; const commit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(); const candidate = execFileSync('git', ['-C', 'kongregate-source', 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(); if (candidate !== commit) throw new Error('Pages and Kongregate revisions differ'); const info = JSON.stringify({ branch: 'master', commit }, null, 2) + '\n'; writeFileSync('dist-pages/build-info.json', info); writeFileSync('dist-pages/kongregate/build-info.json', info);"
 
       - name: Upload failed test artifacts
         if: failure()

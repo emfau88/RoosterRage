@@ -35,7 +35,7 @@ Alle Sheets sind 1024 x 1024 Pixel gross. Jede der 16 Zellen ist 256 x 256 Pixel
 
 Verwendet wurde der eingebaute ImageGen-Modus. Es wurde kein CLI-/API-Fallback eingesetzt.
 
-- `public/marketing/rooster-rage-key-art-master.png`: Identitaet, Farben, Kleidung und Premium-Stil.
+- `art-source/marketing/rooster-rage-key-art-master.png`: Identitaet, Farben, Kleidung und Premium-Stil.
 - `art-source/characters/rooster-walk-v2.png`: verbindliche Proportion, Blickwinkel, Zellbelegung und Richtungsreihenfolge.
 - Das jeweils final ausgewaehlte Klassensheet diente zusaetzlich als Identitaetsreferenz fuer das zugehoerige Portraet.
 

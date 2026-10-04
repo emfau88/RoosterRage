@@ -15,6 +15,7 @@ const mimeTypes = new Map([
   ['.json', 'application/json; charset=utf-8'],
   ['.mp3', 'audio/mpeg'],
   ['.png', 'image/png'],
+  ['.jpg', 'image/jpeg'],
   ['.webp', 'image/webp']
 ]);
 
@@ -327,7 +328,7 @@ async function run() {
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
       const gameplayRunners = [
-        ...['enemy-auras', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
+        ...['enemy-auras', 'enemy-aura-layers', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
           'pickup-spawn-frame', 'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
           name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
         })),

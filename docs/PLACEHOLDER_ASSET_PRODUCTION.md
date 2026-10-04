@@ -18,7 +18,7 @@ Die 19 zuvor mit Phaser-Primitiven erzeugten Fallback-Texturen wurden durch fina
 
 Verwendet wurde der eingebaute ImageGen-Modus. Es wurde kein CLI-/API-Fallback eingesetzt.
 
-- `public/marketing/rooster-rage-key-art-master.png`: Premium-Stil, Welt, Licht und Materialqualitaet.
+- `art-source/marketing/rooster-rage-key-art-master.png`: Premium-Stil, Welt, Licht und Materialqualitaet.
 - `art-source/ui/ui-icons-v1-sheet.png`: Icon-Rendering, Konturen und Lesbarkeit bei kleinen Groessen.
 - `docs/marketing/screenshots/02-stormcrest-swarm-desktop.png`: echte Gameplay-Kamera und Bildschirmmassstab.
 - `docs/marketing/screenshots/03-brood-king-desktop.png`: Bosskampf und Projektil-Hierarchie.

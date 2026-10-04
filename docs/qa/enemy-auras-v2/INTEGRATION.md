@@ -8,6 +8,13 @@ All are hollow ground ellipses, height 42% of width, centered at the enemy's
 ground contact (sprite Y + display height × 0.28). Buff radii remain 185/205/210/185;
 identity artwork is decorative, not a new gameplay area calculation.
 
+Ground auras use the distinct depth 2.5: above floor details (<=2), below solid
+props (3), hay/crates and mobs (4). The previous shared depth 3 let late-created
+auras paint over existing solid props. A real tractor overlap reproduced this
+in both renderers; the opaque core now matches the no-aura image exactly.
+`test:enemy-aura-layers` checks all six styles against foreground props/mobs,
+and is part of the release gate. See `layer-audit/` for before/after captures.
+
 The same textures replace the boss entry shield/phase pulse, attack charge,
 radial stomp warning/impact and delayed bomber explosion warning. Directional
 attack paths remain visible. Damage, buff values, targeting and attack timing

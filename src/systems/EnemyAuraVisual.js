@@ -48,7 +48,9 @@ function auraTexture(scene, style) {
 
 /** Hollow artwork plus moving light sectors; never rotate the ground ellipse. */
 export class EnemyAuraVisual extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, style, radius, { follow = null, depth = 3 } = {}) {
+  // Floor details/borders use <=2, solid props 3 and destructible props/mobs 4.
+  // A distinct depth prevents creation/pool order from painting over props.
+  constructor(scene, x, y, style, radius, { follow = null, depth = 2.5 } = {}) {
     super(scene, x, y);
     this.style = style;
     this.radius = radius;

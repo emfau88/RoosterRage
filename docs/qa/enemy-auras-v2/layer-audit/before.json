@@ -1,0 +1,158 @@
+[
+  {
+    "renderer": "WEBGL",
+    "rows": [
+      {
+        "style": "wind",
+        "foreground": "Traktor (fest)",
+        "auraDepth": 3,
+        "foregroundDepth": 3,
+        "roi": [
+          310,
+          302,
+          330,
+          318
+        ]
+      },
+      {
+        "style": "shield",
+        "foreground": "Heuballen",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          860,
+          302,
+          880,
+          318
+        ]
+      },
+      {
+        "style": "regen-violet",
+        "foreground": "Kiste",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          1410,
+          302,
+          1430,
+          318
+        ]
+      },
+      {
+        "style": "regen-green",
+        "foreground": "Anderer Mob",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          310,
+          722,
+          330,
+          738
+        ]
+      },
+      {
+        "style": "danger",
+        "foreground": "Anderer Mob",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          860,
+          722,
+          880,
+          738
+        ]
+      },
+      {
+        "style": "royal",
+        "foreground": "Anderer Mob",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          1410,
+          722,
+          1430,
+          738
+        ]
+      }
+    ],
+    "errors": []
+  },
+  {
+    "renderer": "CANVAS",
+    "rows": [
+      {
+        "style": "wind",
+        "foreground": "Traktor (fest)",
+        "auraDepth": 3,
+        "foregroundDepth": 3,
+        "roi": [
+          310,
+          302,
+          330,
+          318
+        ]
+      },
+      {
+        "style": "shield",
+        "foreground": "Heuballen",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          860,
+          302,
+          880,
+          318
+        ]
+      },
+      {
+        "style": "regen-violet",
+        "foreground": "Kiste",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          1410,
+          302,
+          1430,
+          318
+        ]
+      },
+      {
+        "style": "regen-green",
+        "foreground": "Anderer Mob",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          310,
+          722,
+          330,
+          738
+        ]
+      },
+      {
+        "style": "danger",
+        "foreground": "Anderer Mob",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          860,
+          722,
+          880,
+          738
+        ]
+      },
+      {
+        "style": "royal",
+        "foreground": "Anderer Mob",
+        "auraDepth": 3,
+        "foregroundDepth": 4,
+        "roi": [
+          1410,
+          722,
+          1430,
+          738
+        ]
+      }
+    ],
+    "errors": []
+  }
+]
