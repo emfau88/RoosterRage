@@ -197,6 +197,7 @@ export class EntitySystem {
       this.scene.waveSystem.director.getState().segment
     );
     if (enemy.elite || enemy.champion) {
+      if (!enemy.boss) this.scene.audio.play('elite-entry');
       const subtitle = enemy.boss
         ? 'Three phases. Read the fan volleys and the heavy fireball.'
         : enemy.champion
@@ -247,6 +248,8 @@ export class EntitySystem {
     } else if (enemy.type === 'boss') {
       this.scene.audio.play('boss-roar', { rate: 0.82, volume: 0.32, cooldown: 0 });
       this.scene.audio.play('boss-phase', { rate: 0.72, volume: 0.2, cooldown: 0 });
+    } else if (enemy.elite || enemy.champion) {
+      this.scene.audio.play('elite-death');
     } else {
       this.scene.audio.play('enemy-pop');
     }

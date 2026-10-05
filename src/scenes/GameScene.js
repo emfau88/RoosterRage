@@ -728,9 +728,7 @@ export class GameScene extends Phaser.Scene {
       this.audio.stopAmbience(350);
       this.audio.playMusic('boss-theme', { fadeMs: 850 });
       this.audio.play('boss-roar');
-    } else if (config.elites?.length) {
-      this.audio.play('elite-entry', { cooldown: 800 });
-    } else if (wave > 1) {
+    } else if (wave > 1 && !config.elites?.length) {
       this.audio.play('ui-navigate', { volume: 0.12, cooldown: 300 });
     }
     this.telemetry.record('waveStarted', this.time.now, {

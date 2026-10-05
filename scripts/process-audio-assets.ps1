@@ -63,7 +63,6 @@ Convert-Audio (Source '512471__michael_grinnell__electric-zap.wav') (Join-Path $
 # Player and chicken character accents.
 Convert-Audio (Source '316920__rudmer_rotteveel__chicken-single-alarm-call.wav') (Join-Path $outputRoot 'sfx\player\player-hurt.mp3') 0 0.82 "highpass=f=180,lowpass=f=10000,loudnorm=I=-17:TP=-1.5:LRA=7,afade=t=out:st=0.72:d=0.08"
 Convert-Audio (Source '43381__agfx__rooster-chicken-calls_1.wav') (Join-Path $outputRoot 'sfx\player\rooster-crow.mp3') 0 2.48 "highpass=f=120,lowpass=f=12000,loudnorm=I=-19:TP=-1.8:LRA=8,afade=t=out:st=2.30:d=0.16"
-Convert-Audio (Source '596521__eugeneeverett__wings-flapping.wav') (Join-Path $outputRoot 'sfx\player\support-flap.mp3') 0 1.24 "$softPolish,afade=t=out:st=1.08:d=0.12"
 Convert-Audio (Source '562292__colorscrimsontears__heal-rpg.wav') (Join-Path $outputRoot 'sfx\player\second-wind.mp3') 0 1.18 "asetrate=96000*0.94,aresample=44100,$shortPolish,afade=t=out:st=1.04:d=0.10"
 
 # Rewards, chest and pickups.
@@ -117,5 +116,11 @@ Convert-Audio (Source 'wackywobblings.ogg') (Join-Path $outputRoot 'music\menu-t
 Convert-Audio (Source 'space_ranger_seamless_loop.wav') (Join-Path $outputRoot 'music\run-theme.mp3') 0 0 'highpass=f=45,lowpass=f=11500,loudnorm=I=-20:TP=-2:LRA=7' 2 5
 Convert-Audio (Source 'urban_boss_battle_bpm135.mp3') (Join-Path $outputRoot 'music\boss-theme.mp3') 0 0 'loudnorm=I=-16:TP=-1.2:LRA=10' 2 5
 Convert-Audio (Source '536693__fthgurdy__chickens-in-the-coop-morning.mp3') (Join-Path $outputRoot 'ambience\menu-coop.mp3') 12 28 "highpass=f=140,lowpass=f=9000,loudnorm=I=-29:TP=-5:LRA=10,afade=t=in:st=0:d=1.2,afade=t=out:st=26.5:d=1.2" 2 6
+
+# Keep the later user-approved replacements when regenerating the original pack.
+if (Test-Path -LiteralPath (Join-Path $projectRoot 'art-source\audio\user-sounds')) {
+  & python (Join-Path $PSScriptRoot 'prepare-user-sounds.py')
+  if ($LASTEXITCODE -ne 0) { throw 'User sound preparation failed.' }
+}
 
 Write-Output "Processed audio assets written to $outputRoot"

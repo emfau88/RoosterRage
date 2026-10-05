@@ -31,6 +31,7 @@
     "test:pages": "npm run build:pages && node tests/release-gate.mjs dist-pages /RoosterRage/ --marketing",
     "test:smoke": "node tests/rooster-smoke.mjs",
     "test:audio": "node tests/audio-settings-runner.mjs",
+    "test:user-sounds": "node tests/user-sounds-runner.mjs",
     "test:pickup-contact": "node tests/pickup-contact-runner.mjs",
     "test:pickup-diagnostics": "node tests/pickup-diagnostics-runner.mjs",
     "test:pickup-streaming": "node scripts/diagnose-pickup-streaming.mjs --expect-fixed",

@@ -62,7 +62,7 @@ export class CompanionAbilitySystem {
     this.scene.supportChickens = [];
     const evolved = Boolean(this.supportEvolutionId);
     const count = evolved ? 4 : rank >= 5 ? 3 : rank >= 4 ? 2 : 1;
-    this.scene.audio.play('support-flap');
+    this.scene.audio.play('support-chirp');
     for (let index = 0; index < count; index += 1) {
       this.scene.supportChickens.push(new SupportChicken(this.scene, index, count, rank, evolved));
     }
