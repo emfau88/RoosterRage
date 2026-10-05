@@ -1,0 +1,19 @@
+{
+  "generatedAtUtc": "2026-10-05T12:12:06.288050+00:00",
+  "releaseBytes": 19869161,
+  "files": {
+    "index.html": {
+      "bytes": 1646,
+      "sha256": "2c067e4ed337f208e004cc4383d04986426bcded7baa0d22e9d1a2cda2217798"
+    },
+    "rooster-rage-additional-files.zip": {
+      "bytes": 18430819,
+      "sha256": "9cf49d332b0cf270f927f09d87748f4187652b38774a886d550f555611fd9954"
+    },
+    "rooster-rage-kongregate-complete.zip": {
+      "bytes": 18431730,
+      "sha256": "72a5bc12a9ea03a25a13c86dd58001b9dfcb488840d027a333f15e09d932fd43"
+    }
+  },
+  "verification": "Every archived file equals dist-release; new menu, all three fullbody figures and supplied sounds included."
+}

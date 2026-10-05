@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rooster Rage – Loading screen preview</title>
+  </head>
+  <body>
+    <!-- Static design preview, independent of the real game's loading timing. -->
+    <div id="boot-loader" class="boot-loader" role="status" aria-label="Loading screen design preview">
+      <div class="boot-loader__card">
+        <small>ROOSTER RAGE</small>
+        <h1>Loading the coop.</h1>
+        <p>Getting the coop combat-ready …</p>
+        <div class="boot-loader__track" role="progressbar" aria-label="Example loading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68">
+          <span style="width:68%"></span>
+        </div>
+        <strong>68 %</strong>
+      </div>
+    </div>
+    <script type="module">
+      import '/src/styles.css';
+      import { installMenuPresentation } from '/src/ui/MenuPresentation.js';
+      installMenuPresentation();
+    </script>
+  </body>
+</html>

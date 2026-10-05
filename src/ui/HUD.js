@@ -13,6 +13,7 @@ import harvestYardPosterUrl from '../assets/map/posters/arena-poster-open-yard.w
 import feedAlleyPosterUrl from '../assets/map/posters/arena-poster-vertical-run.webp';
 import coopSquarePosterUrl from '../assets/map/posters/arena-poster-square-coop.webp';
 import { getArenaDefinition } from '../data/arenaDefinitions.js';
+import { MENU_HERO_PORTRAITS } from './MenuPresentation.js';
 
 const ROOSTER_PORTRAITS = {
   ace: acePortraitUrl,
@@ -533,6 +534,8 @@ export class HUD {
         data-hub-rooster="${definition.id}" ${meta.unlocked ? '' : 'disabled'}
         aria-label="Select ${definition.name}">${definition.name}</button>`;
     }).join('');
+    const sceneMenu = document.body.classList.contains('menu-preview');
+    const startButton = '<button type="button" class="hub-start-button" data-run-start><span>START RUN</span><small>Enter the yard</small></button>';
     this.setOverlayVisible(true);
     this.overlay.innerHTML = `
       <div class="panel rooster-panel henhouse-panel">
@@ -608,9 +611,10 @@ export class HUD {
               </div>
               <div class="hub-rooster-switches hub-rooster-switches--desktop">${roosterSwitches}</div>
               <button type="button" class="hub-rooster-change" data-rooster-picker-open aria-expanded="false">Change</button>
-              <button type="button" class="hub-start-button" data-run-start><span>START RUN</span><small>Enter the yard</small></button>
+              ${sceneMenu ? '' : startButton}
             </article>
           </div>
+          ${sceneMenu ? `<footer class="menu-launch-bar"><div class="menu-launch-selection"><small>READY FOR THE YARD</small><strong data-launch-selection></strong></div>${startButton}</footer>` : ''}
           <button type="button" class="hub-rooster-picker__scrim" data-rooster-picker-close aria-label="Close rooster selection" hidden></button>
           <aside class="hub-rooster-picker" data-rooster-picker aria-label="Choose rooster" hidden>
             <header><span><small>YOUR ROOSTER</small><strong>Choose rooster</strong></span><button type="button" data-rooster-picker-close aria-label="Close rooster selection">×</button></header>
@@ -911,13 +915,17 @@ export class HUD {
       }
       list.append(entry);
     });
+    const updateLaunchSelection = () => {
+      const selection = this.overlay.querySelector('[data-launch-selection]');
+      if (selection) selection.textContent = `${this.overlay.querySelector('[data-hero-name]').textContent} · ${this.overlay.querySelector('[data-run-arena]').textContent}`;
+    };
     const updateSelectedRooster = () => {
       const definition = definitions.find((candidate) => candidate.id === selectedRoosterId) ?? definitions[0];
       const meta = hub.roosters?.find((rooster) => rooster.id === definition.id)
         ?? { mastery: { level: 1, maxLevel: 5, progress: 0 } };
       const mastery = meta.mastery ?? { level: 1, maxLevel: 5, progress: 0 };
       const portrait = this.overlay.querySelector('[data-hero-portrait]');
-      portrait.src = ROOSTER_PORTRAITS[definition.id];
+      portrait.src = sceneMenu ? MENU_HERO_PORTRAITS[definition.id] : ROOSTER_PORTRAITS[definition.id];
       portrait.alt = `${definition.name} portrait`;
       portrait.style.objectPosition = PORTRAIT_FOCUS[definition.id];
       portrait.parentElement.dataset.rooster = definition.id;
@@ -940,6 +948,7 @@ export class HUD {
         candidate.setAttribute('aria-expanded', `${candidate.classList.contains('is-selected')}`)
       ));
       refreshCharacterDetails(definition.id);
+      updateLaunchSelection();
     };
     const updateChallenge = () => {
       const challenge = (hub.challenges ?? []).find((candidate) => candidate.id === selectedChallenge)
@@ -980,6 +989,7 @@ export class HUD {
         else dot.removeAttribute('aria-current');
       });
       this.overlay.querySelector('.hub-run-spotlight')?.style.setProperty('--carousel-index', carouselIndex);
+      updateLaunchSelection();
     };
     const selectCarouselIndex = (index) => {
       if (!arenaCarouselChallenges.length) return;

@@ -309,7 +309,12 @@ def optimize_assets():
             raise SystemExit(f"Missing source asset: {source.relative_to(PROJECT_ROOT)}")
         target.parent.mkdir(parents=True, exist_ok=True)
         with Image.open(source) as source_image:
-            if relative_name in RUNTIME_SHEET_SIZES:
+            if relative_name.startswith("map/posters/"):
+                # UI posters are shown at less than 800 CSS pixels wide. Keep
+                # sufficient detail without shipping their 1536-pixel masters.
+                image = source_image.convert("RGBA")
+                image.thumbnail((1024, 684), Image.Resampling.LANCZOS)
+            elif relative_name in RUNTIME_SHEET_SIZES:
                 image = source_image.convert("RGBA").resize(
                     RUNTIME_SHEET_SIZES[relative_name], Image.Resampling.LANCZOS
                 )

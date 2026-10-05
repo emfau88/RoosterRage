@@ -8,6 +8,9 @@ import {
 import './styles.css';
 import './menu-layouts.css';
 import './combat-layouts.css';
+import { installMenuPresentation } from './ui/MenuPresentation.js';
+
+installMenuPresentation();
 
 const displayMetrics = createDisplayMetrics();
 const rendererType = import.meta.env.DEV ? Phaser.CANVAS : Phaser.AUTO;

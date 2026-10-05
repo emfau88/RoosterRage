@@ -100,7 +100,11 @@ async function verifyViewport(browser, url, viewport) {
       const start = document.querySelector('[data-run-start]').getBoundingClientRect();
       const controls = [...document.querySelectorAll('[data-hub-rooster], [data-rooster-picker-open]')].filter((button) => button.getBoundingClientRect().height > 0);
       return { separated: map.right <= summary.left + 1 || map.bottom <= summary.top + 1,
-        controlsClear: controls.every((button) => button.getBoundingClientRect().right <= start.left + 1),
+        controlsClear: controls.every((button) => {
+          const r = button.getBoundingClientRect();
+          return r.right <= start.left + 1 || r.left >= start.right - 1
+            || r.bottom <= start.top + 1 || r.top >= start.bottom - 1;
+        }),
         importantLoaded: [...document.querySelectorAll('.hub-run-card img, .hub-rooster-hero__portrait > img:first-child')].every((image) => image.complete && image.naturalWidth > 0) };
     });
     assert(playContent.separated && playContent.importantLoaded,
