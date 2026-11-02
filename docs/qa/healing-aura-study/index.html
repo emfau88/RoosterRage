@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rooster Rage · Heilungs-Aura · Vergleich</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#17201e;color:#f5f0df;font-family:Arial,sans-serif}
+    main{width:min(1120px,100%);margin:auto;background:#17201e}
+    header{height:94px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid #344039}
+    .eyebrow{font-size:11px;letter-spacing:2px;color:#a7b8a3;margin-bottom:9px}h1{font-size:24px;line-height:1.15;margin:0;font-weight:600}
+    .badge{font-size:12px;padding:9px 12px;border:1px solid #566752;border-radius:20px;color:#c9d8c1}
+    .labels{display:grid;grid-template-columns:1fr 1fr;height:74px;align-items:center;text-align:center}
+    .labels>div+div{border-left:1px solid #3b463d}.labels strong{display:block;font-size:16px;font-weight:600;letter-spacing:.4px}
+    .labels span{display:block;font-size:12px;color:#b4bead;margin-top:7px}
+    #stage{width:100%;position:relative;overflow:hidden}#stage canvas{display:block;width:100%!important;height:auto!important}
+    .divider{position:absolute;left:50%;top:0;bottom:0;width:1px;background:#17201e55;pointer-events:none}
+    footer{height:64px;padding:0 32px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#b4bead}
+    .phase{color:#e2ebd3}.capture button{display:none}button{font:inherit;color:#ecf3e3;background:#2b3a2e;border:1px solid #53674d;border-radius:6px;padding:7px 13px;cursor:pointer}
+    @media(max-width:600px){header{padding:0 16px;height:82px}h1{font-size:20px}.badge{display:none}.labels strong{font-size:14px}.labels span{font-size:11px}footer{padding:0 16px}.technical{display:none}}
+  </style>
+</head>
+<body>
+<main>
+  <header><div><div class="eyebrow">ROOSTER RAGE · VFX-STUDIE</div><h1>Heilung, die in Bewegung entsteht.</h1></div><div class="badge">Isolierter Entwurf · nicht eingebaut</div></header>
+  <div class="labels"><div><strong>VORHER</strong><span>Aktuelle Aura · Originalanimation</span></div><div><strong>NACHHER</strong><span>Lichtfäden · sanftes Bodenlicht · kompakter</span></div></div>
+  <div id="stage" aria-label="Animierter Vorher-nachher-Vergleich am grünen Support-Gegner"><div class="divider"></div></div>
+  <footer><span class="phase" id="phase">Im Stand</span><span class="technical">Gleiche Figur · gleicher Hintergrund · gleicher Maßstab</span><button id="pause" type="button">Pause</button></footer>
+</main>
+<script type="module" src="./study.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+{
+  "groups": [
+    {
+      "group": "healing",
+      "renderer": "WEBGL",
+      "cycleMs": 8000,
+      "comparison": "Previous isolated proposal versus strengthened proposal. Neither is integrated.",
+      "adjustment": {
+        "greenVisualRangeMultiplier": 1.5,
+        "violetVisualRangeMultiplier": 1.2916666666666667,
+        "bossOuterArcRadius": {
+          "before": 95,
+          "after": 166
+        },
+        "bossMotes": {
+          "before": 18,
+          "after": 56
+        },
+        "bomberWarningRadius": 86
+      },
+      "gameplayModified": false,
+      "rows": [
+        {
+          "id": "green",
+          "scales": [
+            0.28,
+            0.28
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "previousCenter": {
+            "x": 280,
+            "y": 300
+          },
+          "enemy": "Brood Tender",
+          "previousEffect": "../aura-suite-study/effects.js",
+          "proposalEffect": "./effects.js"
+        },
+        {
+          "id": "violet",
+          "scales": [
+            0.34,
+            0.34
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "previousCenter": {
+            "x": 280,
+            "y": 740
+          },
+          "enemy": "Chili Gobbler",
+          "previousEffect": "../aura-suite-study/effects.js",
+          "proposalEffect": "./effects.js"
+        }
+      ],
+      "canvasRenderer": "CANVAS",
+      "fps": 30,
+      "seconds": 8,
+      "loopPixelIdentical": true
+    },
+    {
+      "group": "defense",
+      "renderer": "WEBGL",
+      "cycleMs": 8000,
+      "comparison": "Previous isolated proposal versus strengthened proposal. Neither is integrated.",
+      "adjustment": {
+        "greenVisualRangeMultiplier": 1.5,
+        "violetVisualRangeMultiplier": 1.2916666666666667,
+        "bossOuterArcRadius": {
+          "before": 95,
+          "after": 166
+        },
+        "bossMotes": {
+          "before": 18,
+          "after": 56
+        },
+        "bomberWarningRadius": 86
+      },
+      "gameplayModified": false,
+      "rows": [
+        {
+          "id": "wind",
+          "scales": [
+            0.34,
+            0.34
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "previousCenter": {
+            "x": 280,
+            "y": 300
+          },
+          "enemy": "Turbo Goose",
+          "previousEffect": "../aura-suite-study/effects.js",
+          "proposalEffect": "./effects.js"
+        },
+        {
+          "id": "shield",
+          "scales": [
+            0.39,
+            0.39
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "previousCenter": {
+            "x": 280,
+            "y": 740
+          },
+          "enemy": "Panzer Turkey",
+          "previousEffect": "../aura-suite-study/effects.js",
+          "proposalEffect": "./effects.js"
+        }
+      ],
+      "canvasRenderer": "CANVAS",
+      "fps": 30,
+      "seconds": 8,
+      "loopPixelIdentical": true
+    },
+    {
+      "group": "royal",
+      "renderer": "WEBGL",
+      "cycleMs": 8000,
+      "comparison": "Previous isolated proposal versus strengthened proposal. Neither is integrated.",
+      "adjustment": {
+        "greenVisualRangeMultiplier": 1.5,
+        "violetVisualRangeMultiplier": 1.2916666666666667,
+        "bossOuterArcRadius": {
+          "before": 95,
+          "after": 166
+        },
+        "bossMotes": {
+          "before": 18,
+          "after": 56
+        },
+        "bomberWarningRadius": 86
+      },
+      "gameplayModified": false,
+      "rows": [
+        {
+          "id": "danger",
+          "scales": [
+            0.28,
+            0.28
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "previousCenter": {
+            "x": 280,
+            "y": 300
+          },
+          "enemy": "Bomber",
+          "previousEffect": "../aura-suite-study/effects.js",
+          "proposalEffect": "./effects.js"
+        },
+        {
+          "id": "royal",
+          "scales": [
+            0.58,
+            0.58
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "previousCenter": {
+            "x": 280,
+            "y": 740
+          },
+          "enemy": "The Brood King",
+          "previousEffect": "../aura-suite-study/effects.js",
+          "proposalEffect": "./effects.js"
+        }
+      ],
+      "canvasRenderer": "CANVAS",
+      "fps": 30,
+      "seconds": 8,
+      "loopPixelIdentical": true
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "trackedSourceUnchanged": true,
+  "originalHealingStudyUnchanged": true,
+  "previousSuiteUnchanged": true,
+  "productionAuraSourceSha256": "518b2dfb4b1bc5c5ffcc5b845b2301451c367d339aae113fcba3127a31c31d44",
+  "scope": "Isolated art preview only. No gameplay, build, release or deployment changes."
+}

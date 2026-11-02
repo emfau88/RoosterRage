@@ -1,0 +1,178 @@
+{
+  "groups": [
+    {
+      "group": "healing",
+      "renderer": "WEBGL",
+      "cycleMs": 8000,
+      "healingAdjustment": {
+        "spatialScale": 1.2,
+        "ribbonWidthScale": 1.2,
+        "hslSaturationScale": 1.1,
+        "relativeTo": "healing-aura-study"
+      },
+      "gameplayModified": false,
+      "rows": [
+        {
+          "id": "green",
+          "originalStyle": "regen-green",
+          "originalRadius": 185,
+          "scales": [
+            0.28,
+            0.28
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "oldCenter": {
+            "x": 280,
+            "y": 211
+          },
+          "enemy": "Brood Tender",
+          "proposalClass": "AuraProposal"
+        },
+        {
+          "id": "violet",
+          "originalStyle": "regen-violet",
+          "originalRadius": 168,
+          "scales": [
+            0.34,
+            0.34
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "oldCenter": {
+            "x": 280,
+            "y": 547
+          },
+          "enemy": "Chili Gobbler",
+          "proposalClass": "AuraProposal"
+        }
+      ],
+      "canvasRenderer": "CANVAS",
+      "fps": 30,
+      "seconds": 8,
+      "loopPixelIdentical": true
+    },
+    {
+      "group": "defense",
+      "renderer": "WEBGL",
+      "cycleMs": 8000,
+      "healingAdjustment": {
+        "spatialScale": 1.2,
+        "ribbonWidthScale": 1.2,
+        "hslSaturationScale": 1.1,
+        "relativeTo": "healing-aura-study"
+      },
+      "gameplayModified": false,
+      "rows": [
+        {
+          "id": "wind",
+          "originalStyle": "wind",
+          "originalRadius": 148,
+          "scales": [
+            0.34,
+            0.34
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "oldCenter": {
+            "x": 280,
+            "y": 211
+          },
+          "enemy": "Turbo Goose",
+          "proposalClass": "AuraProposal"
+        },
+        {
+          "id": "shield",
+          "originalStyle": "shield",
+          "originalRadius": 164,
+          "scales": [
+            0.39,
+            0.39
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "oldCenter": {
+            "x": 280,
+            "y": 547
+          },
+          "enemy": "Panzer Turkey",
+          "proposalClass": "AuraProposal"
+        }
+      ],
+      "canvasRenderer": "CANVAS",
+      "fps": 30,
+      "seconds": 8,
+      "loopPixelIdentical": true
+    },
+    {
+      "group": "royal",
+      "renderer": "WEBGL",
+      "cycleMs": 8000,
+      "healingAdjustment": {
+        "spatialScale": 1.2,
+        "ribbonWidthScale": 1.2,
+        "hslSaturationScale": 1.1,
+        "relativeTo": "healing-aura-study"
+      },
+      "gameplayModified": false,
+      "rows": [
+        {
+          "id": "danger",
+          "originalStyle": "danger",
+          "originalRadius": 86,
+          "scales": [
+            0.28,
+            0.28
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "oldCenter": {
+            "x": 280,
+            "y": 211
+          },
+          "enemy": "Bomber",
+          "proposalClass": "AuraProposal"
+        },
+        {
+          "id": "royal",
+          "originalStyle": "royal",
+          "originalRadius": 125,
+          "scales": [
+            0.58,
+            0.58
+          ],
+          "frames": [
+            0,
+            0
+          ],
+          "oldCenter": {
+            "x": 280,
+            "y": 547
+          },
+          "enemy": "The Brood King",
+          "proposalClass": "AuraProposal"
+        }
+      ],
+      "canvasRenderer": "CANVAS",
+      "fps": 30,
+      "seconds": 8,
+      "loopPixelIdentical": true
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "trackedSourceUnchanged": true,
+  "originalHealingStudyUnchanged": true,
+  "productionAuraSourceSha256": "518b2dfb4b1bc5c5ffcc5b845b2301451c367d339aae113fcba3127a31c31d44",
+  "scope": "Isolated art preview only. No gameplay, build, release or deployment changes."
+}

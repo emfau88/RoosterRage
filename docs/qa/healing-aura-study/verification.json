@@ -1,0 +1,31 @@
+{
+  "renderer": "WEBGL",
+  "originalClass": "src/systems/EnemyAuraVisual.js",
+  "originalRadius": 185,
+  "originalScale": 1,
+  "subjectScale": [
+    0.28,
+    0.28
+  ],
+  "subjectFrame": [
+    0,
+    0
+  ],
+  "subjectCount": 2,
+  "originalGroundPosition": {
+    "x": 280,
+    "y": 221.0704
+  },
+  "proposedDecorativeWidth": 220,
+  "gameplayModified": false,
+  "effect": "Procedural tapered ribbons and motes; no generated ring bitmap",
+  "cycleMs": 8000,
+  "canvasRenderer": "CANVAS",
+  "fps": 30,
+  "seconds": 8,
+  "loopPixelIdentical": true,
+  "sourceUnchanged": true,
+  "errors": [],
+  "failures": [],
+  "originalSourceSha256": "518b2dfb4b1bc5c5ffcc5b845b2301451c367d339aae113fcba3127a31c31d44"
+}
