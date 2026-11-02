@@ -1,5 +1,6 @@
 import { spawnSync } from 'node:child_process';
-import { cp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -102,6 +103,28 @@ await Promise.all([
   cp(additionalZipPath, `${trackedReleaseDirectory}/${additionalZipName}`),
   writeFile(`${trackedReleaseDirectory}/UPLOAD-INSTRUCTIONS.txt`, instructions, 'utf8')
 ]);
+
+// Recreate provenance when refreshing the tracked package; never leave behind
+// stale hashes or silently remove BUILD-INFO.json during the directory cleanup.
+async function directoryBytes(directory) {
+  let total = 0;
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const file = path.join(directory, entry.name);
+    total += entry.isDirectory() ? await directoryBytes(file) : (await stat(file)).size;
+  }
+  return total;
+}
+const packageFiles = {};
+for (const [name, file] of [['index.html', splitIndexPath],
+  [additionalZipName, additionalZipPath], [completeZipName, completeZipPath]]) {
+  const bytes = await readFile(file);
+  packageFiles[name] = { bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
+}
+const buildInfo = JSON.stringify({ generatedAtUtc: new Date().toISOString(),
+  releaseBytes: await directoryBytes(releaseDirectory), files: packageFiles,
+  verification: 'Portable root paths checked; build and full release-gate checks precede packaging.' }, null, 2) + '\n';
+await writeFile(`${uploadDirectory}/BUILD-INFO.json`, buildInfo);
+await writeFile(`${trackedReleaseDirectory}/BUILD-INFO.json`, buildInfo);
 await rm(stagingDirectory, { recursive: true, force: true });
 
 console.log('Kongregate packages created successfully:');

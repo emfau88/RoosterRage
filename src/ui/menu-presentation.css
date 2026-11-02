@@ -12,15 +12,19 @@ body.menu-preview .boot-loader__card {
 }
 body.menu-preview .boot-loader__card > small { display: none; }
 .menu-loading-logo { display: block; width: min(460px, 90%); height: auto; margin: 0 auto 20px; filter: drop-shadow(0 8px 12px #16191b80); }
-.menu-loading-flock { position: relative; width: min(580px, 100%); height: clamp(150px, 32dvh, 300px); margin: 0 auto 20px; }
-.menu-loading-rooster { position: absolute; bottom: 0; width: 36%; height: 84%; object-fit: contain; filter: drop-shadow(0 10px 14px #111c2280); }
-.menu-loading-rooster--storm { left: 0; }
-.menu-loading-rooster--artillery { right: 0; }
-.menu-loading-rooster--ace { width: 48%; height: 100%; left: 26%; z-index: 1; }
+.menu-loading-flock { display: block; width: min(580px, 100%); height: clamp(150px, 38dvh, 340px); margin: 0 auto 12px; object-fit: contain; filter: drop-shadow(0 8px 10px #111c2266); }
 body.menu-preview .boot-loader__card h1 { font-size: clamp(21px, 4vw, 28px); }
 body.menu-preview .boot-loader__card p { color: #fff5dc; }
 body.menu-preview .boot-loader__track { max-width: 380px; height: 8px; margin: 22px auto 0; background: #07151dd1; border-color: #efd28b80; }
 body.menu-preview .boot-loader__card > strong { color: #fff1bd; font-size: 13px; }
+
+@media (max-height: 540px) {
+  body.menu-preview .boot-loader__card { padding: 8px 12px; }
+  .menu-loading-logo { width: min(300px, 58%); max-height: 15dvh; object-fit: contain; margin-bottom: 4px; }
+  .menu-loading-flock { height: 36dvh; min-height: 0; margin-bottom: 4px; }
+  body.menu-preview .boot-loader__card p { margin-bottom: 6px; }
+  body.menu-preview .boot-loader__track { margin-top: 10px; }
+}
 
 /* An open scene, with shading placed behind the information rather than a
    stack of framed panels. Other hub sections retain their readable surface. */

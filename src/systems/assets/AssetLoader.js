@@ -1,5 +1,4 @@
 import { ROOSTER_ASSET_URLS } from '@rooster-assets';
-import { ENEMY_AURA_ASSETS } from './EnemyAuraAssets.js';
 import enemySlimeUrl from '../../assets/enemy-slime.webp';
 import enemySlimeWobbleUrl from '../../assets/enemies/animations/enemy-slime-wobble.webp';
 import enemySlimeHopUrl from '../../assets/enemies/animations/enemy-slime-hop-v2.webp';
@@ -26,10 +25,8 @@ import molotovEmbersUrl from '../../assets/fx/molotov-modular/molotov-embers.web
 import molotovIgnitionUrl from '../../assets/fx/molotov-modular/molotov-ignition.webp';
 import molotovGroundFlameOrangeUrl from '../../assets/fx/molotov-modular/molotov-ground-flame-orange.png';
 import molotovGroundFlameBlueUrl from '../../assets/fx/molotov-modular/molotov-ground-flame-blue.png';
-import rocketImpactR1Url from '../../assets/fx/rocket-modular/rocket-impact-r1.webp';
-import rocketImpactR2Url from '../../assets/fx/rocket-modular/rocket-impact-r2.webp';
-import rocketImpactR3Url from '../../assets/fx/rocket-modular/rocket-impact-r3.webp';
-import rocketImpactR4Url from '../../assets/fx/rocket-modular/rocket-impact-r4.webp';
+import rocketImpactBlastUrl from '../../assets/fx/rocket-modular/impact-blast.webp';
+import rocketImpactEruptionUrl from '../../assets/fx/rocket-modular/impact-eruption.webp';
 import rocketImpactEvoUrl from '../../assets/fx/rocket-modular/rocket-impact-evo.webp';
 import rocketExhaustUrl from '../../assets/fx/rocket-modular/rocket-exhaust.webp';
 import rocketFlameFlipbookUrl from '../../assets/fx/rocket-modular/rocket-flame-flipbook-v2.webp';
@@ -125,7 +122,6 @@ const audioAssetUrls = { ...import.meta.glob('../../assets/audio/**/*.mp3', {
 }), ...import.meta.glob('../../assets/audio/portal-v1/*.wav', { eager: true, query: '?url', import: 'default' }) };
 
 export function preloadGameAssets(scene) {
-  for (const [id, url] of Object.entries(ENEMY_AURA_ASSETS)) scene.load.image(`enemy-aura-${id}`, url);
   document.body.dataset.roosterLoadState = 'loading';
   scene.cameras.main.setZoom(getSceneRenderScale(scene));
   const loadingUi = document.querySelector('#boot-loader');
@@ -209,11 +205,9 @@ export function preloadGameAssets(scene) {
     frameHeight: 256
   }));
   [
-    ['rocket-impact-r1', rocketImpactR1Url],
-    ['rocket-impact-r2', rocketImpactR2Url],
-    ['rocket-impact-r3', rocketImpactR3Url],
-    ['rocket-impact-r4', rocketImpactR4Url],
     ['rocket-impact-evo', rocketImpactEvoUrl],
+    ['rocket-impact-blast', rocketImpactBlastUrl],
+    ['rocket-impact-eruption', rocketImpactEruptionUrl],
     ['rocket-exhaust', rocketExhaustUrl],
     ['rocket-flame-source', rocketFlameFlipbookUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));

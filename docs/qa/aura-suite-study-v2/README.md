@@ -1,9 +1,10 @@
 # Stronger aura proposals — second suite study
 
-Created 2 November 2026. This remains an isolated visual prototype. No game
-module, ability range, damage value, production asset, release or deployment
-has been changed. The earlier `healing-aura-study` and `aura-suite-study` are
-preserved in place.
+Created 2 November 2026. The approved choreography has now been integrated
+into `src/systems/EnemyAuraAnimation.js` and `EnemyAuraVisual.js`, including
+the stronger healing and boss variants. Gameplay ranges and damage remain
+unchanged. This preview and the earlier `healing-aura-study` and
+`aura-suite-study` are preserved as historical comparisons.
 
 ## Comparison baseline
 

@@ -1,0 +1,20 @@
+[
+  {
+    "platform": "kongregate",
+    "files": 161,
+    "zip": "dist/kongregate-upload/rooster-rage-kongregate-complete.zip",
+    "zipBytes": 20313537,
+    "unpackedBytes": 21764456,
+    "sha256": "3d5e36d492834cd28e9510b46baecaedf97841b8f9d62369306a25584016eeec",
+    "allBytesMatchTestedBuild": true
+  },
+  {
+    "platform": "y8",
+    "files": 161,
+    "zip": "dist/y8-upload/rooster-rage-y8-complete.zip",
+    "zipBytes": 20302082,
+    "unpackedBytes": 21765098,
+    "sha256": "f6371fd3d257888769495b6aa419b1d1e2e23d721a0904e8f5e5e06dbaf69f64",
+    "allBytesMatchTestedBuild": true
+  }
+]

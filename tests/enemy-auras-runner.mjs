@@ -62,8 +62,8 @@ try {
     assert.equal(rows[4].explosionRadius, 86);
     const sample = () => page.evaluate(() => window.__auraEnemies.map(e => {
       const a = e.auraVisual ?? e.warning;
-      return { x: a.x, y: a.y, alpha: a.ring.alpha,
-        particles: a.particles.map(p => [p.x, p.y, p.alpha]), rotation: a.rotation };
+      return { x: a.x, y: a.y, alpha: a.animation.ground.alpha,
+        particles: a.animation.motes.map(p => [p.x, p.y, p.alpha]), rotation: a.rotation };
     }));
     await page.waitForTimeout(150);
     const first = await sample();

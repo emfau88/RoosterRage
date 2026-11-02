@@ -184,11 +184,11 @@ export function installTestApi(scene) {
       })),
       rocketImpacts: [...scene.rocketEgg.activeImpactVisuals]
         .filter((impact) => impact.active)
-        .map((impact) => ({
-          texture: impact.texture?.key,
-          width: impact.displayWidth,
-          height: impact.displayHeight,
-          alpha: impact.alpha
+        .map((impact) => ({ ...impact.describe(),
+          texture: impact.bursts[0].sprite.texture.key,
+          width: impact.bursts[0].sprite.displayWidth,
+          height: impact.bursts[0].sprite.displayHeight,
+          alpha: impact.bursts[0].sprite.alpha
         })),
       molotovFlights: scene.molotovProjectiles.filter((projectile) => projectile.active).map((projectile) => ({
         rank: projectile.rank,

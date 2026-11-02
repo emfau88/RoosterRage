@@ -1,0 +1,104 @@
+{
+  "sdk": "Simulated SDK responses plus optional live CDN smoke; live Y8 authentication still requires portal preview",
+  "results": [
+    {
+      "kind": "late",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "ready",
+      "playable": true
+    },
+    {
+      "kind": "preloaded",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "blockedStorage": false,
+      "sdkRequests": 0,
+      "sdkState": "ready",
+      "playable": true
+    },
+    {
+      "kind": "blocked",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "unavailable",
+      "playable": true
+    },
+    {
+      "kind": "auth-error",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "blockedStorage": true,
+      "sdkRequests": 1,
+      "sdkState": "ready",
+      "playable": true
+    },
+    {
+      "kind": "reject",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "unavailable",
+      "playable": true
+    },
+    {
+      "kind": "no-event",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "unavailable",
+      "playable": true
+    },
+    {
+      "kind": "no-fill",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "ready",
+      "playable": true
+    },
+    {
+      "kind": "ad-error",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "ready",
+      "playable": true
+    },
+    {
+      "kind": "real",
+      "viewport": {
+        "width": 960,
+        "height": 540
+      },
+      "blockedStorage": false,
+      "sdkRequests": 1,
+      "sdkState": "ready",
+      "playable": true
+    }
+  ]
+}

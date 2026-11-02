@@ -1,13 +1,13 @@
 import Phaser from 'phaser';
-import { ENEMY_AURA_METRICS } from './assets/EnemyAuraAssets.js';
+import { EnemyAuraAnimation } from './EnemyAuraAnimation.js';
 
 const STYLES = {
-  wind: { effect: 'wind', alpha: .7, color: 0xffd55f, period: 2000 },
-  shield: { effect: 'shield', alpha: .65, color: 0x9eeaff, period: 4000 },
-  'regen-violet': { effect: 'regen', alpha: .65, color: 0xc18aff, tint: 0xc18aff, period: 4000 },
-  'regen-green': { effect: 'regen', alpha: .65, color: 0x65ef8b, tint: 0x65ef8b, period: 4000 },
-  danger: { effect: 'danger', alpha: .85, color: 0xff8638, period: 1000 },
-  royal: { effect: 'royal', alpha: .8, color: 0xffd477, period: 4000 }
+  wind: { kind: 'wind', radius: 148 },
+  shield: { kind: 'shield', radius: 164 },
+  'regen-violet': { kind: 'violet', radius: 168 },
+  'regen-green': { kind: 'green', radius: 185 },
+  danger: { kind: 'danger', radius: 86 },
+  royal: { kind: 'royal', radius: 125 }
 };
 
 export function getEnemyAuraGround(enemy) {
@@ -23,62 +23,25 @@ export function getEnemyAuraStyle(enemy) {
   return { style, radius: enemy.aura.radius * (enemy.elite ? .8 : 1) };
 }
 
-function auraTexture(scene, style) {
-  const key = `enemy-aura-${style}`;
-  const tint = STYLES[style].tint;
-  if (!tint) return key;
-  // Phaser Canvas ignores sprite tint. Bake each grayscale tint once so both
-  // renderers show the exact same green/violet art, including alpha edges.
-  const tintedKey = `${key}-tinted`;
-  if (!scene.textures.exists(tintedKey)) {
-    const source = scene.textures.get(key).getSourceImage();
-    const texture = scene.textures.createCanvas(tintedKey, source.width, source.height);
-    const ctx = texture.getContext();
-    ctx.drawImage(source, 0, 0);
-    ctx.globalCompositeOperation = 'multiply';
-    ctx.fillStyle = `#${tint.toString(16).padStart(6, '0')}`;
-    ctx.fillRect(0, 0, source.width, source.height);
-    ctx.globalCompositeOperation = 'destination-in';
-    ctx.drawImage(source, 0, 0);
-    ctx.globalCompositeOperation = 'source-over';
-    texture.refresh();
-  }
-  return tintedKey;
-}
-
-/** Hollow artwork plus moving light sectors; never rotate the ground ellipse. */
+/** Animated volume around the enemy, with the ground light below solid props.
+ * The controller remains tweenable for attack warnings and boss transitions.
+ * Radius is a visual input only; damage and buff calculations remain separate.
+ */
 export class EnemyAuraVisual extends Phaser.GameObjects.Container {
-  // Floor details/borders use <=2, solid props 3 and destructible props/mobs 4.
-  // A distinct depth prevents creation/pool order from painting over props.
   constructor(scene, x, y, style, radius, { follow = null, depth = 2.5 } = {}) {
     super(scene, x, y);
-    this.style = style;
-    this.radius = radius;
-    this.follow = follow;
-    this.activationId = follow?.activationId;
-    this.startedAt = scene.time.now;
-    const config = STYLES[style], metrics = ENEMY_AURA_METRICS[style];
-    this.config = config;
-    const width = radius * 2 / metrics.visibleWidthFraction;
-    const height = radius * 2 * .42 / metrics.visibleHeightFraction;
-    const texture = auraTexture(scene, style);
-    this.ring = scene.add.image(0, 0, texture).setDisplaySize(width, height).setAlpha(config.alpha);
-    this.highlight = scene.add.image(0, 0, texture).setDisplaySize(width, height).setBlendMode(Phaser.BlendModes.ADD);
-    this.lightMask = scene.make.graphics({ x, y, add: false });
-    this.highlight.setMask(this.lightMask.createGeometryMask());
-    // Tint glow through a shared texture too, for the Canvas fallback.
-    const glintKey = `enemy-aura-glint-${style}`;
-    if (!scene.textures.exists(glintKey)) {
-      const glow = scene.make.graphics({ add: false });
-      for (const [r, alpha] of [[7, .035], [5, .075], [3, .22], [1.5, .95]]) {
-        glow.fillStyle(config.color, alpha); glow.fillCircle(8, 8, r);
-      }
-      glow.generateTexture(glintKey, 16, 16); glow.destroy();
-    }
-    this.particles = Array.from({ length: config.effect === 'regen' ? 8 : 4 }, () =>
-      scene.add.image(0, 0, glintKey).setBlendMode(Phaser.BlendModes.ADD));
-    this.add([this.ring, this.highlight, ...this.particles]);
-    scene.add.existing(this); this.setDepth(depth);
+    Object.assign(this, { style, radius, follow, activationId: follow?.activationId,
+      startedAt: scene.time.now, previousAt: scene.time.now, previousX: x, previousY: y });
+    const config = STYLES[style];
+    this.visualScale = radius / config.radius;
+    this.animation = new EnemyAuraAnimation(scene, config.kind);
+    const a = this.animation;
+    this.floorLayer = scene.add.container(0, 0, [a.ground, a.floor]).setScale(this.visualScale);
+    this.add(this.floorLayer);
+    this.rearLayer = scene.add.container(x, y, [a.halo, a.rear]).setDepth(depth + .9);
+    this.frontLayer = scene.add.container(x, y, [a.front, ...a.motes]).setDepth(depth + 2);
+    scene.add.existing(this);
+    this.setDepth(depth);
     scene.events.on(Phaser.Scenes.Events.POST_UPDATE, this.updateVisual, this);
     this.updateVisual();
   }
@@ -92,41 +55,27 @@ export class EnemyAuraVisual extends Phaser.GameObjects.Container {
       const ground = getEnemyAuraGround(this.follow);
       this.setPosition(ground.x, ground.y);
     }
-    const { effect, period, alpha } = this.config;
-    const elapsed = this.scene.time.now - this.startedAt;
-    const phase = elapsed / period * Math.PI * 2;
-    const pulse = (Math.sin(phase) + 1) / 2;
-    this.ring.setAlpha(alpha * (effect === 'danger' ? .76 + .24 * pulse : .9 + .1 * pulse));
-    this.highlight.setAlpha(effect === 'danger' ? .12 + .24 * pulse : .23);
-    this.lightMask.setPosition(this.x, this.y).setScale(this.scaleX, this.scaleY);
-    const mask = this.lightMask;
-    mask.clear(); mask.fillStyle(0xffffff, 1);
-    const sectors = effect === 'wind' ? 2 : 1;
-    const sweep = effect === 'shield' ? .65 : 1;
-    for (let sector = 0; sector < sectors; sector++) {
-      const start = phase + sector * Math.PI;
-      mask.beginPath(); mask.moveTo(0, 0);
-      for (let j = 0; j <= 16; j++) {
-        const angle = start + j / 16 * sweep;
-        mask.lineTo(Math.cos(angle) * this.radius * 1.35, Math.sin(angle) * this.radius * .42 * 1.6);
-      }
-      mask.closePath(); mask.fillPath();
+    const now = this.scene.time.now;
+    const dt = Math.max(1, now - this.previousAt);
+    const vx = (this.x - this.previousX) / dt * 1000;
+    const vy = (this.y - this.previousY) / dt * 1000;
+    this.previousAt = now; this.previousX = this.x; this.previousY = this.y;
+    this.animation.draw(now - this.startedAt, 0, 0, { vx, vy });
+    for (const mote of this.animation.motes) {
+      const layer = mote.depth < 4 ? this.rearLayer : this.frontLayer;
+      if (mote.parentContainer !== layer) layer.add(mote);
     }
-    this.particles.forEach((particle, index) => {
-      const offset = index / this.particles.length;
-      if (effect === 'regen') {
-        const life = (elapsed / 2000 + offset) % 1;
-        const angle = offset * Math.PI * 2 + phase;
-        particle.setPosition(Math.cos(angle) * this.radius * .95,
-          Math.sin(angle) * this.radius * .42 * .95 - life * 22);
-        particle.setAlpha(Math.sin(life * Math.PI) * .7).setScale(.5 + .4 * (1 - life));
-      } else {
-        const angle = phase + offset * Math.PI * 2;
-        particle.setPosition(Math.cos(angle) * this.radius * .95, Math.sin(angle) * this.radius * .42 * .95);
-        particle.setAlpha((effect === 'danger' ? .4 + .5 * pulse : .65) * (index < 2 ? 1 : .55));
-        particle.setScale(effect === 'wind' ? 1 : .8);
-      }
-    });
+    for (const layer of [this.rearLayer, this.frontLayer]) {
+      layer.setPosition(this.x, this.y).setScale(this.scaleX * this.visualScale, this.scaleY * this.visualScale)
+        .setAlpha(this.alpha).setVisible(this.visible);
+    }
+  }
+
+  setVisible(value) {
+    super.setVisible(value);
+    this.rearLayer?.setVisible(value);
+    this.frontLayer?.setVisible(value);
+    return this;
   }
 
   destroy(fromScene) {
@@ -134,8 +83,8 @@ export class EnemyAuraVisual extends Phaser.GameObjects.Container {
     this.disposing = true;
     this.scene.events.off(Phaser.Scenes.Events.POST_UPDATE, this.updateVisual, this);
     this.scene.tweens.killTweensOf(this);
-    this.highlight.clearMask(true);
-    this.lightMask.destroy();
+    this.rearLayer.destroy(fromScene);
+    this.frontLayer.destroy(fromScene);
     super.destroy(fromScene);
   }
 }

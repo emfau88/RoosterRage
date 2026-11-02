@@ -305,11 +305,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   }
   if (weapon.id === 'rocket-egg') {
     const visualExpectations = {
-      r1: { count: 1, texture: 'rocket-hull-r1', impact: 'rocket-impact-r1', size: [48, 30], engines: 1, damage: 48, radius: 82 },
-      r2: { count: 1, texture: 'rocket-hull-r2', impact: 'rocket-impact-r2', size: [56, 34], engines: 1, damage: 64, radius: 100 },
-      r3: { count: 1, texture: 'rocket-hull-r3', impact: 'rocket-impact-r3', size: [66, 42], engines: 3, damage: 80, radius: 118 },
-      r4: { count: 2, texture: 'rocket-hull-r4', impact: 'rocket-impact-r4', size: [72, 44], engines: 2, damage: 96, radius: 132 },
-      evo: { count: 3, texture: 'rocket-hull-evo', impact: 'rocket-impact-evo', size: [84, 52], engines: 3, damage: 112, radius: 158 }
+      r1: { count: 1, texture: 'rocket-hull-r1', impact: 'rocket-impact-blast-frames', size: [48, 30], engines: 1, damage: 48, radius: 82 },
+      r2: { count: 1, texture: 'rocket-hull-r2', impact: 'rocket-impact-blast-frames', size: [56, 34], engines: 1, damage: 64, radius: 100 },
+      r3: { count: 1, texture: 'rocket-hull-r3', impact: 'rocket-impact-blast-frames', size: [66, 42], engines: 3, damage: 80, radius: 118 },
+      r4: { count: 2, texture: 'rocket-hull-r4', impact: 'rocket-impact-blast-frames', size: [72, 44], engines: 2, damage: 96, radius: 132 },
+      evo: { count: 3, texture: 'rocket-hull-evo', impact: 'rocket-impact-eruption-frames', size: [84, 52], engines: 3, damage: 112, radius: 158 }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.rocketFlights.length === 1
@@ -340,7 +340,9 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     const impactState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(impactState.rocketImpacts.some((impact) => (
       impact.texture === expected.impact
-      && impact.width > impact.height * 1.5
+      && impact.stage === stage
+      && impact.volumeScales.length > 0
+      && impact.volumeScales.every(scale => Math.abs(scale.x - scale.y) < 0.00001)
     )), `Rocket Egg ${stage} did not use its perspective-correct impact asset.`, {
       expected,
       impactState

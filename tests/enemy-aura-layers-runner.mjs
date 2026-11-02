@@ -61,6 +61,7 @@ try {
           fontFamily: 'Arial', fontSize: '18px', color: '#fff8de', backgroundColor: '#182018', padding: {x:12,y:8}
         }).setOrigin(.5).setDepth(30);
         rows.push({ style: aura.style, foreground: label, auraDepth: aura.depth, foregroundDepth: foreground.depth,
+          rearDepth: aura.rearLayer.depth, frontDepth: aura.frontLayer.depth,
           roi: [screen.x - 10, screen.y - 8, screen.x + 10, screen.y + 8] });
       });
       s.children.depthSort(); s.gamePause.request('layer-capture');
@@ -78,6 +79,8 @@ try {
     assert.deepEqual(report.errors, []);
     for (const row of report.rows) assert(row.auraDepth < row.foregroundDepth,
       `${report.renderer}: ${row.style} aura shares/overlays ${row.foreground} layer (${row.auraDepth} >= ${row.foregroundDepth})`);
+    for (const row of report.rows) assert(row.rearDepth < 4 && row.frontDepth > 4,
+      `${report.renderer}: ${row.style} lost its rear/front volume around the enemy`);
   }
-  console.log('Aura layers passed: all six styles beneath solid props, hay, crates and other mobs in WebGL + Canvas.');
+  console.log('Aura layers passed: all six ground lights beneath props/mobs; raised effects behind/in front of enemies in WebGL + Canvas.');
 } finally { await browser.close(); await stopTestServer(server); }

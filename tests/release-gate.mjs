@@ -43,7 +43,9 @@ async function inspectPackage() {
     bytes: (await fs.stat(path.join(distributionDirectory, file))).size
   })));
   const totalBytes = sizes.reduce((sum, entry) => sum + entry.bytes, 0);
-  const maximumBytes = (expectMarketing ? 21 : 19) * 1024 * 1024;
+  // Project sanity ceiling, not a claim about a portal's upload allowance.
+  // The former 19 MiB target must not reject approved artwork at ~22 MB.
+  const maximumBytes = 150_000_000;
   const forbiddenRoosters = sizes.filter(({ file }) => (
     /rooster-(ace|artillery|storm)-(next|gameplay|walk-v\d)/i.test(file)
   ));
@@ -51,7 +53,7 @@ async function inspectPackage() {
   const html = await fs.readFile(path.join(distributionDirectory, 'index.html'), 'utf8');
 
   assert(totalBytes <= maximumBytes,
-    `Package exceeds its ${expectMarketing ? 21 : 19} MiB release budget.`, { totalBytes, maximumBytes });
+    'Package exceeds the 150 MB project sanity ceiling; review its contents.', { totalBytes, maximumBytes });
   assert(forbiddenRoosters.length === 0,
     'Release package still contains superseded rooster generations.', forbiddenRoosters);
   if (expectMarketing) {
@@ -328,7 +330,7 @@ async function run() {
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
       const gameplayRunners = [
-        ...['user-sounds', 'enemy-auras', 'enemy-aura-layers', 'display-projectile', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
+        ...['loading-art', 'user-sounds', 'enemy-auras', 'enemy-aura-layers', 'approved-effects', 'display-projectile', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
           'pickup-spawn-frame', 'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
           name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
         })),

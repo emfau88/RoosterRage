@@ -1,0 +1,142 @@
+[
+  {
+    "width": 1056,
+    "height": 704,
+    "art": {
+      "left": 350,
+      "top": 263.78125,
+      "right": 930,
+      "bottom": 567.78125,
+      "fit": "contain"
+    },
+    "card": {
+      "left": 310,
+      "top": 71.3125,
+      "right": 970,
+      "bottom": 728.671875,
+      "fit": "fill"
+    },
+    "bar": {
+      "left": 449,
+      "top": 659.671875,
+      "right": 831,
+      "bottom": 669.671875,
+      "fit": "fill"
+    },
+    "complete": false,
+    "src": "http://127.0.0.1:49702/nested/game/assets/loading-rooster-trio-v2-b8Z5j8vV.webp",
+    "errors": []
+  },
+  {
+    "width": 1056,
+    "height": 704,
+    "art": {
+      "left": 190,
+      "top": 160.359375,
+      "right": 770,
+      "bottom": 354.75,
+      "fit": "contain"
+    },
+    "card": {
+      "left": 150,
+      "top": 67.359375,
+      "right": 810,
+      "bottom": 472.640625,
+      "fit": "fill"
+    },
+    "bar": {
+      "left": 289,
+      "top": 429.640625,
+      "right": 671,
+      "bottom": 439.640625,
+      "fit": "fill"
+    },
+    "complete": false,
+    "src": "http://127.0.0.1:49702/nested/game/assets/loading-rooster-trio-v2-b8Z5j8vV.webp",
+    "errors": []
+  },
+  {
+    "width": 1056,
+    "height": 704,
+    "art": {
+      "left": 40,
+      "top": 254.859375,
+      "right": 350,
+      "bottom": 575.578125,
+      "fit": "contain"
+    },
+    "card": {
+      "left": 18,
+      "top": 128.875,
+      "right": 372,
+      "bottom": 715.109375,
+      "fit": "fill"
+    },
+    "bar": {
+      "left": 40,
+      "top": 658.109375,
+      "right": 350,
+      "bottom": 668.109375,
+      "fit": "fill"
+    },
+    "complete": false,
+    "src": "http://127.0.0.1:49702/nested/game/assets/loading-rooster-trio-v2-b8Z5j8vV.webp",
+    "errors": []
+  },
+  {
+    "width": 1056,
+    "height": 704,
+    "art": {
+      "left": 132,
+      "top": 101.109375,
+      "right": 712,
+      "bottom": 241.5,
+      "fit": "contain"
+    },
+    "card": {
+      "left": 92,
+      "top": 30.609375,
+      "right": 752,
+      "bottom": 359.390625,
+      "fit": "fill"
+    },
+    "bar": {
+      "left": 231,
+      "top": 316.390625,
+      "right": 613,
+      "bottom": 326.390625,
+      "fit": "fill"
+    },
+    "complete": false,
+    "src": "http://127.0.0.1:49702/nested/game/assets/loading-rooster-trio-v2-b8Z5j8vV.webp",
+    "errors": []
+  },
+  {
+    "width": 1056,
+    "height": 704,
+    "art": {
+      "left": 36,
+      "top": 162.15625,
+      "right": 284,
+      "bottom": 377.984375,
+      "fit": "contain"
+    },
+    "card": {
+      "left": 18,
+      "top": 54.96875,
+      "right": 302,
+      "bottom": 513.03125,
+      "fit": "fill"
+    },
+    "bar": {
+      "left": 36,
+      "top": 458.03125,
+      "right": 284,
+      "bottom": 468.03125,
+      "fit": "fill"
+    },
+    "complete": false,
+    "src": "http://127.0.0.1:49702/nested/game/assets/loading-rooster-trio-v2-b8Z5j8vV.webp",
+    "errors": []
+  }
+]

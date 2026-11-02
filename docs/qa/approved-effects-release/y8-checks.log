@@ -1,0 +1,256 @@
+> rooster-arena@0.1.0 test:y8
+> node --test tests/y8.test.mjs && node tests/y8-ads-runner.mjs && npm run build:y8 && node tests/y8-package-runner.mjs
+
+TAP version 13
+# Subtest: late SDK readiness initializes once with the correct ad configuration
+ok 1 - late SDK readiness initializes once with the correct ad configuration
+  ---
+  duration_ms: 2.9513
+  type: 'test'
+  ...
+# Subtest: already loaded SDK replays readiness and needs no second script
+ok 2 - already loaded SDK replays readiness and needs no second script
+  ---
+  duration_ms: 0.4215
+  type: 'test'
+  ...
+# Subtest: blocked script and absent ready event settle without throwing
+ok 3 - blocked script and absent ready event settle without throwing
+  ---
+  duration_ms: 41.8384
+  type: 'test'
+  ...
+# Subtest: throwing or rejected SDK initialization never escapes to game startup
+ok 4 - throwing or rejected SDK initialization never escapes to game startup
+  ---
+  duration_ms: 0.8762
+  type: 'test'
+  ...
+# Subtest: only actual ads pause; resolved SDK promises do not end ads; cooldown starts at ad end
+ok 5 - only actual ads pause; resolved SDK promises do not end ads; cooldown starts at ad end
+  ---
+  duration_ms: 0.8177
+  type: 'test'
+  ...
+# Subtest: no fill, platform cap and errors do not pause or start the local cooldown
+ok 6 - no fill, platform cap and errors do not pause or start the local cooldown
+  ---
+  duration_ms: 0.5867
+  type: 'test'
+  ...
+# Subtest: unavailable ads bypass immediately; missing callbacks recover and late callbacks are ignored
+ok 7 - unavailable ads bypass immediately; missing callbacks recover and late callbacks are ignored
+  ---
+  duration_ms: 73.6744
+  type: 'test'
+  ...
+# Subtest: SDK rejection after an ad starts releases its pause
+ok 8 - SDK rejection after an ad starts releases its pause
+  ---
+  duration_ms: 0.5335
+  type: 'test'
+  ...
+# Subtest: scene adapter preserves other pauses, mute preferences and only resumes its own sounds
+ok 9 - scene adapter preserves other pauses, mute preferences and only resumes its own sounds
+  ---
+  duration_ms: 1.139
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 575.2625
+Y8 ad gameplay passed: 960x540
+Y8 ad gameplay passed: 390x844
+
+> rooster-arena@0.1.0 build:y8
+> vite build --mode y8
+
+vite v8.2.1 building client environment for y8...
+
+transforming...✓ 299 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-y8/index.html                                                1.64 kB │ gzip:   0.76 kB
+dist-y8/assets/molotov-egg-r1-CzjKBoYm.webp                       4.44 kB
+dist-y8/assets/mastery-ace-C--5WbH6.webp                          4.52 kB
+dist-y8/assets/ui-reroll-D5y23vQS.mp3                             4.73 kB
+dist-y8/assets/molotov-egg-r2-HY_GYbTD.webp                       5.19 kB
+dist-y8/assets/mastery-artillery-BEoOm3Y_.webp                    5.23 kB
+dist-y8/assets/egg-launch-ace-B-qH1pp1.mp3                        5.86 kB
+dist-y8/assets/egg-impact-3-DPkax1-x.mp3                          5.95 kB
+dist-y8/assets/molotov-egg-r4-CroySRhx.webp                       5.96 kB
+dist-y8/assets/mastery-storm-CL7V6pY3.webp                        5.97 kB
+dist-y8/assets/molotov-egg-r3-CYsFFkH7.webp                       6.03 kB
+dist-y8/assets/lightning-chain-DKPnkl_9.mp3                       6.06 kB
+dist-y8/assets/egg-launch-storm-DadibcsR.mp3                      6.07 kB
+dist-y8/assets/arena-crate-DIVmkmzo.webp                          6.07 kB
+dist-y8/assets/rocket-egg-r2-BQIsn0KR.webp                        6.13 kB
+dist-y8/assets/orbit-contact-BhqiXhG1.wav                         6.21 kB
+dist-y8/assets/molotov-egg-evo-Cz2WLz-X.webp                      6.29 kB
+dist-y8/assets/chest-reward-QQV4WSa5.mp3                          6.68 kB
+dist-y8/assets/elite-death-CDtaH8zh.mp3                           6.73 kB
+dist-y8/assets/rocket-egg-r1-BdWz7uwq.webp                        7.00 kB
+dist-y8/assets/enemy-slime-B-gu3cyg.webp                          7.06 kB
+dist-y8/assets/rocket-launch-C5zdeU1o.mp3                         7.34 kB
+dist-y8/assets/crate-CXIZMeP0.webp                                7.40 kB
+dist-y8/assets/elite-entry-DImChh1s.mp3                           8.40 kB
+dist-y8/assets/egg-impact-2-Cmg1n6O9.mp3                          8.43 kB
+dist-y8/assets/egg-launch-artillery-dFRY8lGG.mp3                  8.44 kB
+dist-y8/assets/bale-break-D10P3BKg.mp3                            8.67 kB
+dist-y8/assets/arena-wall-BsGPuE81.webp                           8.75 kB
+dist-y8/assets/molotov-ignition-DaTms_oW.webp                     9.08 kB
+dist-y8/assets/pickup-heal-CCwW21Ja.mp3                           9.44 kB
+dist-y8/assets/second-wind-Cwe6JBqL.mp3                           9.47 kB
+dist-y8/assets/player-hurt-nj6U-4E2.mp3                           9.94 kB
+dist-y8/assets/pickup-magnet-BdQjjtTV.mp3                         9.96 kB
+dist-y8/assets/arena-bale-BC5ognpw.webp                          10.00 kB
+dist-y8/assets/crate-break-CTuKNJgq.mp3                          10.03 kB
+dist-y8/assets/bomber-explosion-BhmHnGqL.mp3                     10.21 kB
+dist-y8/assets/rocket-explosion-UDDb_fAh.mp3                     10.46 kB
+dist-y8/assets/enemy-dash-B6wAMQvV.wav                           10.62 kB
+dist-y8/assets/egg-impact-1-BywdUrwx.mp3                         10.88 kB
+dist-y8/assets/rocket-egg-r4-B4AkqpmY.webp                       10.93 kB
+dist-y8/assets/boss-fireball-CIny0Klc.mp3                        11.47 kB
+dist-y8/assets/rocket-egg-r3-Dc_Nodtk.webp                       11.78 kB
+dist-y8/assets/bale-CfuB0ysa.webp                                11.96 kB
+dist-y8/assets/blast-shell-impact-M3ga2NB7.wav                   12.39 kB
+dist-y8/assets/molotov-impact-D90PigMx.mp3                       12.58 kB
+dist-y8/assets/chest-latch-Dj0GAGOi.mp3                          12.79 kB
+dist-y8/assets/brute-stomp-cFKOPClK.mp3                          12.97 kB
+dist-y8/assets/lightning-DQP-ZJJZ.mp3                            13.99 kB
+dist-y8/assets/support-chirp-C3T3qB9E.mp3                        14.67 kB
+dist-y8/assets/spitter-shot-dKm5L2gm.mp3                         15.37 kB
+dist-y8/assets/void-open-C38jSwnD.mp3                            15.70 kB
+dist-y8/assets/chest-open-FtLPPFyP.mp3                           16.14 kB
+dist-y8/assets/summoner-charge-BW0wEfDI.mp3                      17.45 kB
+dist-y8/assets/boss-roar-CUx1S0Vo.mp3                            17.77 kB
+dist-y8/assets/boss-phase-BCzCgE6K.mp3                           18.15 kB
+dist-y8/assets/pickup-bomb-CYk6RKPe.mp3                          19.68 kB
+dist-y8/assets/enemy-slime-wobble-Cjtg9LM3.webp                  21.12 kB
+dist-y8/assets/coop-square-trough-YcuzEMz2.webp                  21.90 kB
+dist-y8/assets/arena-ground-road-Bp1WNt-a.webp                   22.94 kB
+dist-y8/assets/evo-sunshot-array-impact-6NjaS55z.webp            23.35 kB
+dist-y8/assets/evo-dawn-laser-impact-CXanI2-u.webp               23.58 kB
+dist-y8/assets/evo-tempest-crown-impact-DByZs9bD.webp            24.38 kB
+dist-y8/assets/pickup-bomb-DtFN8Uty.webp                         25.37 kB
+dist-y8/assets/rooster-crow-B34Jzrwg.mp3                         27.06 kB
+dist-y8/assets/evo-phoenix-pan-impact-C1xlMneR.webp              29.19 kB
+dist-y8/assets/rocket-impact-evo-CVPgGlCl.webp                   29.49 kB
+dist-y8/assets/evo-thunder-roost-impact-DJvRrYkx.webp            30.67 kB
+dist-y8/assets/evo-chick-squadron-impact-DAiaNphw.webp           31.66 kB
+dist-y8/assets/evo-siegebreaker-shell-impact-B_kUUkbH.webp       31.82 kB
+dist-y8/assets/evo-shell-halo-impact-DIUVpfQZ.webp               32.50 kB
+dist-y8/assets/evo-solar-scramble-impact-CUi6raXi.webp           33.77 kB
+dist-y8/assets/coop-square-hay-stack-BgCkUaKc.webp               35.03 kB
+dist-y8/assets/enemy-brute-stomp-BEkn7__y.webp                   37.19 kB
+dist-y8/assets/enemy-bomber-bob-C9gDZOUb.webp                    38.76 kB
+dist-y8/assets/coop-square-tractor-DA841NMf.webp                 41.27 kB
+dist-y8/assets/pickup-magnet-B9wz0VgE.webp                       41.33 kB
+dist-y8/assets/pickup-heal-jW_RGuGh.webp                         41.48 kB
+dist-y8/assets/enemy-fan-spitter-recoil-wDhsy3yH.webp            42.81 kB
+dist-y8/assets/arena-feed-alley-left-v2-Bm8t0I7w.webp            45.80 kB
+dist-y8/assets/level-up-BySnR0g9.mp3                             50.44 kB
+dist-y8/assets/evolution-CndJtJqi.mp3                            50.84 kB
+dist-y8/assets/rooster-ace-fullbody-v1-CV5oj5uD.webp             51.41 kB
+dist-y8/assets/rooster-artillery-fullbody-v1-DFKqG4CO.webp       53.36 kB
+dist-y8/assets/rooster-rage-logo-CagrwLhI.webp                   54.23 kB
+dist-y8/assets/rooster-storm-fullbody-v1-Cu-oyZX9.webp           55.10 kB
+dist-y8/assets/killstreak-sticker-v1-FVTKfe7H.png                55.80 kB
+dist-y8/assets/arena-feed-alley-right-v2-Bmf4LZYc.webp           64.15 kB
+dist-y8/assets/enemy-spitter-pulse-C666a7oo.webp                 69.60 kB
+dist-y8/assets/arena-ground-farm-Cju24Dh-.webp                   72.03 kB
+dist-y8/assets/upgrade-panel-frame-v1-right-xfpjZj2V.png         73.53 kB
+dist-y8/assets/upgrade-panel-frame-v1-left-D0Oa9QG9.png          75.56 kB
+dist-y8/assets/landmark-barn-NQhtOO6A.webp                       76.06 kB
+dist-y8/assets/ground-a-BI-QIpme.webp                            76.53 kB
+dist-y8/assets/arena-feed-alley-right-Bv_H8gUm.webp              79.63 kB
+dist-y8/assets/ground-c-DmBDr5aN.webp                            80.36 kB
+dist-y8/assets/ground-b-DtSoNYzk.webp                            80.74 kB
+dist-y8/assets/arena-feed-alley-left-CAwqho-U.webp               81.08 kB
+dist-y8/assets/landmark-well-BhNxH61I.webp                       91.00 kB
+dist-y8/assets/enemy-chili-run-BQv5YAyZ.webp                     94.96 kB
+dist-y8/assets/storm-G0so035H.webp                               96.54 kB
+dist-y8/assets/artillery-DyFvx4it.webp                           96.59 kB
+dist-y8/assets/enemy-tank-run-CNhprb0Q.webp                     102.60 kB
+dist-y8/assets/rocket-hull-evo-v2-BIULSCEP.webp                 103.92 kB
+dist-y8/assets/upgrade-panel-frame-v1-corner-bl-BSx1iIBl.png    105.25 kB
+dist-y8/assets/upgrade-panel-frame-v1-corner-tr-DTP1fMqw.png    107.37 kB
+dist-y8/assets/upgrade-panel-frame-v1-corner-br-Xg2rOiuP.png    112.73 kB
+dist-y8/assets/upgrade-panel-frame-v1-corner-tl-CUNKdMWc.png    114.04 kB
+dist-y8/assets/enemy-kornkrabbler-run-Dgt1G2SK.webp             114.92 kB
+dist-y8/assets/victory-BAKxU7Qo.mp3                             118.88 kB
+dist-y8/assets/arena-ground-TWZv6I37.webp                       121.49 kB
+dist-y8/assets/ace-DjOXEeAj.webp                                130.32 kB
+dist-y8/assets/upgrade-panel-frame-v1-bottom-CSfUl4gP.png       132.09 kB
+dist-y8/assets/upgrade-panel-frame-v1-top-CCn7Sjd_.png          136.82 kB
+dist-y8/assets/support-chick-r1-sheet-Dp-UwiU5.webp             150.62 kB
+dist-y8/assets/support-chick-r2-sheet-CMsyuZCq.webp             151.74 kB
+dist-y8/assets/enemy-slime-hop-v2-BzIX9XHb.webp                 151.98 kB
+dist-y8/assets/enemy-summoner-run-DYoxuYtW.webp                 153.88 kB
+dist-y8/assets/enemy-support-run-tbVBGA7B.webp                  154.58 kB
+dist-y8/assets/support-chick-r3-sheet-rRPxQ6Ku.webp             155.26 kB
+dist-y8/assets/support-chick-r4-sheet-DBL_Zqeq.webp             166.08 kB
+dist-y8/assets/support-chick-r5-sheet-taquZzCO.webp             176.94 kB
+dist-y8/assets/enemy-brute-run-BELIL_f8.webp                    180.86 kB
+dist-y8/assets/arena-poster-open-yard-CBkswwFt.webp             183.18 kB
+dist-y8/assets/enemy-turbo-goose-run-D1kASHV5.webp              184.76 kB
+dist-y8/assets/arena-poster-square-coop-BQCpZ1hK.webp           190.52 kB
+dist-y8/assets/loading-rooster-trio-v2-b8Z5j8vV.webp            190.58 kB
+dist-y8/assets/support-chick-evo-sheet-CF4nsXuR.webp            192.99 kB
+dist-y8/assets/enemy-runner-run-BccZ7Wi0.webp                   197.13 kB
+dist-y8/assets/rooster-ace-portrait-BgNl2hWb.webp               198.68 kB
+dist-y8/assets/farm-sunset-B00ktWQ2.webp                        198.83 kB
+dist-y8/assets/rooster-storm-portrait-EeXHD5vr.webp             211.37 kB
+dist-y8/assets/arena-poster-vertical-run-AsTMflXN.webp          215.86 kB
+dist-y8/assets/rooster-artillery-portrait-BhgUy88s.webp         217.34 kB
+dist-y8/assets/enemy-fan-spitter-run-_iCF9es8.webp              221.41 kB
+dist-y8/assets/enemy-bomber-run-D9pEx1Xr.webp                   221.55 kB
+dist-y8/assets/molotov-ground-flame-blue-BjrFwubY.png           248.95 kB
+dist-y8/assets/enemy-spitter-run-Bvy0qLNt.webp                  256.17 kB
+dist-y8/assets/rocket-flame-flipbook-v2-B-Adp584.webp           256.71 kB
+dist-y8/assets/molotov-ground-flame-orange-rdBSOzAy.png         261.40 kB
+dist-y8/assets/fx-atlas-v1-sheet-D-bzqyXo.webp                  293.70 kB
+dist-y8/assets/enemy-boss-run-BDKT3vA-.webp                     297.45 kB
+dist-y8/assets/enemy-chili-actions-MlMdsB_p.webp                301.72 kB
+dist-y8/assets/coop-square-ground-CxoanA35.webp                 305.86 kB
+dist-y8/assets/enemy-tank-actions-C6D_gq-G.webp                 307.74 kB
+dist-y8/assets/ui-icons-v1-sheet-VM0aBjz7.webp                  340.31 kB
+dist-y8/assets/menu-coop-m8yZxZke.mp3                           381.06 kB
+dist-y8/assets/menu-theme-CKxmxW6S.mp3                          388.15 kB
+dist-y8/assets/rooster-ace-mascot-idle-CS4fjW_V.webp            497.67 kB
+dist-y8/assets/rooster-ace-mascot-walk-tlFdHWZA.webp            512.10 kB
+dist-y8/assets/rooster-artillery-mascot-idle-CNYBXss-.webp      515.50 kB
+dist-y8/assets/rooster-artillery-mascot-walk-aBB9Z0i5.webp      526.20 kB
+dist-y8/assets/rooster-storm-mascot-idle-CsyrtdQZ.webp          546.90 kB
+dist-y8/assets/rooster-storm-mascot-walk-T1VR-WRy.webp          558.92 kB
+dist-y8/assets/impact-blast-waFn__-S.webp                       704.53 kB
+dist-y8/assets/impact-eruption-XZ2gpNdd.webp                    892.89 kB
+dist-y8/assets/run-theme-DXaiNGyI.mp3                         1,134.69 kB
+dist-y8/assets/boss-theme-DikIQNT3.mp3                        1,981.14 kB
+dist-y8/assets/index-TgXoW-Xe.css                               133.17 kB │ gzip:  25.57 kB
+dist-y8/assets/rolldown-runtime-CbXtAM7H.js                       0.58 kB │ gzip:   0.36 kB
+dist-y8/assets/index-CYv3ZQfl.js                                612.00 kB │ gzip: 219.39 kB
+dist-y8/assets/phaser-CUdU0QcG.js                             1,197.17 kB │ gzip: 318.90 kB
+
+✓ built in 1.31s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Y8 production iframe: late, 960x540, storage blocked=false
+Y8 production iframe: preloaded, 960x540, storage blocked=false
+Y8 production iframe: blocked, 390x844, storage blocked=false
+Y8 production iframe: auth-error, 320x568, storage blocked=true
+Y8 production iframe: reject, 960x540, storage blocked=false
+Y8 production iframe: no-event, 960x540, storage blocked=false
+Y8 production iframe: no-fill, 960x540, storage blocked=false
+Y8 production iframe: ad-error, 390x844, storage blocked=false
+Y8 production iframe: real, 960x540, storage blocked=false
+Y8 production checks passed (9 scenarios).

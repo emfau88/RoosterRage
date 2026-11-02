@@ -1,8 +1,6 @@
 import farmUrl from '../assets/ui/menu-preview-v1/farm-sunset.webp';
 import logoUrl from '../assets/ui/menu-preview-v1/rooster-rage-logo.webp';
-import aceUrl from '@portal-portrait-ace';
-import artilleryUrl from '@portal-portrait-artillery';
-import stormUrl from '@portal-portrait-storm';
+import loadingTrioUrl from '../assets/ui/menu-preview-v1/loading-rooster-trio-v2.webp';
 import aceFullbodyUrl from '../assets/ui/menu-preview-v1/rooster-ace-fullbody-v1.webp';
 import artilleryFullbodyUrl from '../assets/ui/menu-preview-v1/rooster-artillery-fullbody-v1.webp';
 import stormFullbodyUrl from '../assets/ui/menu-preview-v1/rooster-storm-fullbody-v1.webp';
@@ -23,15 +21,12 @@ export function installMenuPresentation() {
   logo.src = logoUrl;
   logo.alt = 'Rooster Rage';
   card.prepend(logo);
-  const flock = document.createElement('div');
+  const flock = document.createElement('img');
   flock.className = 'menu-loading-flock';
-  flock.setAttribute('aria-hidden', 'true');
-  for (const [id, src] of [['storm', stormUrl], ['artillery', artilleryUrl], ['ace', aceUrl]]) {
-    const rooster = document.createElement('img');
-    rooster.className = `menu-loading-rooster menu-loading-rooster--${id}`;
-    rooster.src = src;
-    rooster.alt = '';
-    flock.append(rooster);
-  }
+  flock.src = loadingTrioUrl;
+  flock.alt = 'Storm, Ace and Artillery ready for the barnyard';
+  flock.width = 1056;
+  flock.height = 704;
+  flock.fetchPriority = 'high';
   logo.after(flock);
 }

@@ -65,7 +65,9 @@ try {
         const targetIds = flights.map(p => p.target?.id);
         const p = flights[0];
         const before = p.exhaust.flames.map(f => [f.displayWidth, f.displayHeight, f.alpha]);
-        const puff = [...p.exhaust.particles].find(p => p.texture.key === 'rocket-smoke-puff');
+        // Observe a fresh puff: the oldest one may correctly expire during the
+        // sample on a slower browser, which is not evidence of a following wake.
+        const puff = [...p.exhaust.particles].filter(p => p.texture.key === 'rocket-smoke-puff').at(-1);
         const oldPuff = puff ? [puff.x, puff.y] : null;
         const oldRocket = [p.sprite.x, p.sprite.y];
         await window.__delay(125);

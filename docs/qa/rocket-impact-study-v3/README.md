@@ -1,6 +1,6 @@
 # Raketen-Einschläge – korrigierte Vorschau 3
 
-Am 02.11.2026 zur Versionierung freigegebene separate Vorschau nach dem Feedback zu gequetschten Proportionen und übergroßen geschlossenen Flächen. Die vorherige Comic-Studie in `../rocket-impact-study-v2/` bleibt für den Vergleich erhalten. Die neuen Impacts sind weiterhin nicht in die Spielklassen eingebaut; die Freigabe umfasst das Speichern und Pushen dieses Entwurfs. Es wurde keine neue Portalversion veröffentlicht.
+Am 02.11.2026 freigegebene Vorschau nach dem Feedback zu gequetschten Proportionen und übergroßen geschlossenen Flächen. Die bestätigte Gestaltung ist inzwischen über `src/systems/RocketImpactVisual.js` und `RocketEggAbility` ins Spiel integriert. Diese Vorschau und die vorherige Comic-Studie in `../rocket-impact-study-v2/` bleiben als Vergleich erhalten. Commit und Push veröffentlichen noch kein Portal-Update.
 
 ## Korrektur
 

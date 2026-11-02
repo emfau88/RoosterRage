@@ -1,0 +1,132 @@
+Release package inspected: 20.76 MiB.
+Checking production iframe (normal storage) …
+Henhouse loaded (normal storage).
+Checking production iframe (blocked storage) …
+Henhouse loaded (blocked storage).
+Checking release gameplay: loading-art …
+Loading art passed: complete new trio, no cropping, five desktop/portal/mobile sizes, actual loading completes to hub.
+Checking release gameplay: user-sounds …
+User sounds: real playback, Support Chick ranks + EVO, Molotov, bomb, elite/champion spawns and deaths, repeat damage, cleanup, cooldown and mute passed.
+Checking release gameplay: enemy-auras …
+Enemy auras passed in WEBGL: six styles, fixed ellipses, animation/pause/follow, 50 pool reuses, fixed death warning and unchanged buff range.
+Enemy auras passed in CANVAS: six styles, fixed ellipses, animation/pause/follow, 50 pool reuses, fixed death warning and unchanged buff range.
+Checking release gameplay: enemy-aura-layers …
+Aura layers passed: all six ground lights beneath props/mobs; raised effects behind/in front of enemies in WebGL + Canvas.
+Checking release gameplay: approved-effects …
+WEBGL: all 5 impacts, 24 uncropped frames, uniform scales, exact damage/cluster timing, pause, budget and restart cleanup passed.
+CANVAS: all 5 impacts, 24 uncropped frames, uniform scales, exact damage/cluster timing, pause, budget and restart cleanup passed.
+Checking release gameplay: display-projectile …
+Display/projectiles passed in WEBGL: large-screen arena fit/center, resize + fullscreen, unchanged physics, 40 steering rockets, exhaust follow, pause and cleanup.
+Display/projectiles passed in CANVAS: large-screen arena fit/center, resize + fullscreen, unchanged physics, 40 steering rockets, exhaust follow, pause and cleanup.
+Checking release gameplay: elite-balance …
+Elite balance passed: 3× HP, bomb immunity, ordinary enemy clear, boss 5%, surviving strong hits and five chest drops.
+Checking release gameplay: pickup-ground-contact …
+Pickup ground contact passed: 108 real crossings, all roosters and pickup kinds, desktop + portrait DPR 3, foot and body contact, misses outside both, sprite-center crossings, immediate effects and exactly once.
+Checking release gameplay: pickup-body-contact …
+Pickup body contact passed: 60 real crossings, 12 sequential runs, all roosters, desktop + portrait, two bombs, fifth-item XP magnet, retained full-HP health and scene restarts.
+Checking release gameplay: pickup-sequence …
+Sequential pickups passed: Ace, Harvest Yard, desktop + mobile DPR 3, 6 existing items each, early + late combat, immediate effects and removed artwork.
+Checking release gameplay: pickup-spawn-frame …
+Checked open-yard 1280px: six drops from real projectile kills.
+Checked vertical-run 1280px: six drops from real projectile kills.
+Checked square-coop 1280px: six drops from real projectile kills.
+Checked open-yard 390px CPU x6: six drops from real projectile kills.
+test-results/pickup-spawn-frame-release.json: 0 failures.
+Checking release gameplay: pickup-diagnostics …
+Pickup diagnostics passed: real health refusal and collection, download and text fallback, portrait iframe, map zoom and build identity.
+Checking release gameplay: bomb-confetti …
+Bomb confetti passed: every kill in 12/170/170-enemy bursts, pooled limit 512, colorful frames, frozen pause, expiry, weapon distinction and restart; desktop + portrait.
+Checking release gameplay: pickup-streaming …
+{"arena":"open-yard","kind":"heal","bundle":"index-dmYUtVZC.js","blockedByRestoredProp":false,"activeBeforeBreaking":false,"activeAfterBreaking":false}
+{"arena":"open-yard","kind":"magnet","bundle":"index-dmYUtVZC.js","blockedByRestoredProp":false,"activeBeforeBreaking":false,"activeAfterBreaking":false}
+{"arena":"open-yard","kind":"bomb","bundle":"index-dmYUtVZC.js","blockedByRestoredProp":false,"activeBeforeBreaking":false,"activeAfterBreaking":false}
+{"arena":"vertical-run","kind":"heal","bundle":"index-dmYUtVZC.js","blockedByRestoredProp":false,"activeBeforeBreaking":false,"activeAfterBreaking":false}
+{"arena":"vertical-run","kind":"magnet","bundle":"index-dmYUtVZC.js","blockedByRestoredProp":false,"activeBeforeBreaking":false,"activeAfterBreaking":false}
+{"arena":"vertical-run","kind":"bomb","bundle":"index-dmYUtVZC.js","blockedByRestoredProp":false,"activeBeforeBreaking":false,"activeAfterBreaking":false}
+Release gate passed.
+{
+  "package": {
+    "files": 161,
+    "totalBytes": 21764456,
+    "totalMiB": 20.76,
+    "largest": [
+      {
+        "file": "assets/boss-theme-DikIQNT3.mp3",
+        "bytes": 1981143
+      },
+      {
+        "file": "assets/phaser-CUdU0QcG.js",
+        "bytes": 1197177
+      },
+      {
+        "file": "assets/run-theme-DXaiNGyI.mp3",
+        "bytes": 1134690
+      },
+      {
+        "file": "assets/impact-eruption-XZ2gpNdd.webp",
+        "bytes": 892896
+      },
+      {
+        "file": "assets/impact-blast-waFn__-S.webp",
+        "bytes": 704534
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "blockedStorage": false,
+      "boot": {
+        "testApiExposed": false,
+        "roosterCards": 3,
+        "canvas": true,
+        "renderer": "webgl",
+        "loadState": "ready"
+      }
+    },
+    {
+      "blockedStorage": true,
+      "boot": {
+        "testApiExposed": false,
+        "roosterCards": 3,
+        "canvas": true,
+        "renderer": "webgl",
+        "loadState": "ready"
+      }
+    }
+  ],
+  "kongregateScenarios": [
+    {
+      "sdkUnavailable": false,
+      "sdkRequests": 1,
+      "playable": true
+    },
+    {
+      "sdkUnavailable": true,
+      "sdkRequests": 1,
+      "playable": true
+    }
+  ],
+  "originalColors": {
+    "viewport": "portrait",
+    "oldSkinsIgnored": [
+      {
+        "id": "ace",
+        "tinted": false,
+        "tint": 16777215,
+        "selectedSkin": null
+      },
+      {
+        "id": "artillery",
+        "tinted": false,
+        "tint": 16777215,
+        "selectedSkin": null
+      },
+      {
+        "id": "storm",
+        "tinted": false,
+        "tint": 16777215,
+        "selectedSkin": null
+      }
+    ]
+  }
+}

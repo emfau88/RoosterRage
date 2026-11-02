@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { RocketProjectile } from '../../entities/RocketProjectile.js';
+import { RocketImpactVisual, STAGES, prepareRocketImpactTextures } from '../RocketImpactVisual.js';
 import { TimedAbility } from './TimedAbility.js';
 
 export class RocketEggAbility extends TimedAbility {
@@ -7,6 +8,7 @@ export class RocketEggAbility extends TimedAbility {
     super(scene, 750);
     this.lastSynergyActive = false;
     this.activeImpactVisuals = new Set();
+    prepareRocketImpactTextures(scene);
   }
 
   activate(time) {
@@ -67,9 +69,15 @@ export class RocketEggAbility extends TimedAbility {
 
   createExplosion(x, y, damage, radius, evolved = false, rank = this.rank) {
     this.scene.audio.play('rocket-explosion');
-    const texture = evolved ? 'rocket-impact-evo' : `rocket-impact-r${rank}`;
-    const duration = evolved ? 440 : 240 + rank * 38;
-    this.showImpact(x, y, radius, texture, duration, evolved ? 1 : 0.94);
+    // The approved animation owns all three timed cluster visuals. Damage below
+    // keeps the existing radii, delays and multipliers; no second visual pass.
+    const stage = STAGES[evolved ? 4 : Math.max(0, Math.min(3, rank - 1))];
+    // Bound transient visuals even if several debug/burst sources fire together.
+    // This never suppresses or changes gameplay damage.
+    if (this.activeImpactVisuals.size >= 12) this.activeImpactVisuals.values().next().value.destroy();
+    const effect = new RocketImpactVisual(this.scene, x, y, { ...stage, radius },
+      (finished) => this.activeImpactVisuals.delete(finished));
+    this.activeImpactVisuals.add(effect);
 
     this.scene.enemies.forEach((enemy) => {
       if (enemy.sprite.active && Phaser.Math.Distance.Between(x, y, enemy.sprite.x, enemy.sprite.y) <= radius) {
@@ -87,15 +95,6 @@ export class RocketEggAbility extends TimedAbility {
           const clusterX = x + Math.cos(angle) * radius * 0.52;
           const clusterY = y + Math.sin(angle) * radius * 0.4;
           const clusterRadius = radius * 0.4;
-          this.showImpact(
-            clusterX,
-            clusterY,
-            clusterRadius,
-            'rocket-impact-r1',
-            230,
-            0.82,
-            false
-          );
           this.scene.enemies.forEach((enemy) => {
             if (
               enemy.sprite.active
@@ -111,53 +110,4 @@ export class RocketEggAbility extends TimedAbility {
     }
   }
 
-  showImpact(x, y, radius, texture, duration, alpha, showShockwave = true) {
-    const impact = this.trackImpact(this.scene.add.image(x, y, texture)
-      .setDisplaySize(radius * 2.16, radius * 1.34)
-      .setAlpha(alpha)
-      .setDepth(11));
-    const baseScaleX = impact.scaleX;
-    const baseScaleY = impact.scaleY;
-    impact.setScale(baseScaleX * 0.7, baseScaleY * 0.7);
-    this.scene.tweens.add({
-      targets: impact,
-      scaleX: baseScaleX * 1.04,
-      scaleY: baseScaleY * 1.04,
-      alpha: 0,
-      duration,
-      ease: 'Cubic.Out',
-      onComplete: () => this.destroyImpact(impact)
-    });
-    if (!showShockwave) return;
-
-    const shockwave = this.scene.add.ellipse(
-      x,
-      y + radius * 0.04,
-      radius * 1.32,
-      radius * 0.62,
-      0xff8a28,
-      0.08
-    )
-      .setStrokeStyle(2, 0xffd878, 0.34)
-      .setDepth(9.5);
-    this.scene.tweens.add({
-      targets: shockwave,
-      alpha: 0,
-      scaleX: 1.58,
-      scaleY: 1.4,
-      duration: Math.min(duration, 310),
-      ease: 'Sine.Out',
-      onComplete: () => shockwave.destroy()
-    });
-  }
-
-  trackImpact(impact) {
-    this.activeImpactVisuals.add(impact);
-    return impact;
-  }
-
-  destroyImpact(impact) {
-    this.activeImpactVisuals.delete(impact);
-    if (impact?.active) impact.destroy();
-  }
 }
