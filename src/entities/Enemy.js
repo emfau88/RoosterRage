@@ -160,6 +160,14 @@ export class Enemy {
   }
 
   update(player) {
+    // Resolve status expiry against the same simulation clock as movement.
+    // A delayed callback can run just before slowUntil and never retry; using
+    // the frame update also avoids one timer per companion projectile hit.
+    if (this.slowUntil > 0 && this.scene.time.now >= this.slowUntil) {
+      this.slowUntil = 0;
+      this.speed = this.baseSpeed;
+      this.restoreStatusTint();
+    }
     if (this.scene.time.now < this.dashUntil) {
       this.sprite.setVelocity(this.dashVelocity.x, this.dashVelocity.y);
     } else if (this.scene.time.now < this.knockbackUntil) {
@@ -317,20 +325,9 @@ export class Enemy {
   }
 
   applySlow(ratio, duration) {
-    const activationId = this.activationId;
     this.slowUntil = Math.max(this.slowUntil, this.scene.time.now + duration);
     this.speed = Math.min(this.speed, this.baseSpeed * ratio);
     this.sprite.setTint(0x8deaff);
-    this.scene.time.delayedCall(duration, () => {
-      if (
-        this.sprite.active
-        && this.activationId === activationId
-        && this.scene.time.now >= this.slowUntil
-      ) {
-        this.speed = this.baseSpeed;
-        this.restoreStatusTint();
-      }
-    });
   }
 
   restoreStatusTint() {

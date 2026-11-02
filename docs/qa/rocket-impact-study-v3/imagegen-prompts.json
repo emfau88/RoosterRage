@@ -1,0 +1,20 @@
+{
+  "mode": "Built-in image_gen tool",
+  "created": "2026-11-02",
+  "scope": "Isolated review; no production integration",
+  "assets": [
+    {
+      "source": "assets/blast-flipbook-source.png",
+      "preview": "assets/blast-flipbook.webp",
+      "input": "../rocket-impact-study-v2/assets/blast-flipbook-source.png",
+      "prompt": "Use case: precise-object-edit. Edit target: this 12-frame CARTOON explosion sprite sheet for Rooster Rage. Keep its hand-drawn comic style, simple 2-3 tone shading, gold/yellow/orange palette, chronological animation and slightly elevated game-camera angle. Correct the visual defects: soften and thin the dark outer outline to about HALF its thickness, use warm orange/brown selective edges rather than a closed heavy sticker border. Break the fire and especially the smoke into separated moving curls with visible transparent gaps by frames 5-8, then scatter and dissolve in frames 9-12. No photographic fire, no photorealistic smoke texture. Keep the shapes naturally proportioned, with full-height rising fire and puffs, NOT horizontally stretched or flattened. The base rests on a modest ellipse in the ground plane; the rising flames are three-dimensional upright volume, not compressed into the ground. Exactly FOUR columns and THREE rows on a square sheet. Each cell must be the same size and contain one complete frame with at least 15% empty gutter, never cross a cell boundary. Fixed bottom-center anchor per cell, constant camera and object scale. Full silhouettes unclipped. True alpha transparency outside all shapes and within gaps, no semiopaque white film or background glow. No text, no labels, no grid, no floor, no ground shadow, no characters. This is the ordinary low, compact rocket blast. Keep its compact irregular puffy fire silhouette."
+    },
+    {
+      "source": "assets/evo-eruption-flipbook-source.png",
+      "preview": "assets/evo-eruption-flipbook.webp",
+      "input": "../rocket-impact-study-v2/assets/evo-eruption-flipbook-source.png",
+      "prompt": "Use case: precise-object-edit. Edit target: this 12-frame CARTOON explosion sprite sheet for Rooster Rage. Keep its hand-drawn comic style, simple 2-3 tone shading, gold/yellow/orange palette, chronological animation and slightly elevated game-camera angle. Correct the visual defects: soften and thin the dark outer outline to about HALF its thickness, use warm orange/brown selective edges rather than a closed heavy sticker border. Break the fire and especially the smoke into separated moving curls with visible transparent gaps by frames 5-8, then scatter and dissolve in frames 9-12. No photographic fire, no photorealistic smoke texture. Keep the shapes naturally proportioned, with full-height rising fire and puffs, NOT horizontally stretched or flattened. The base rests on a modest ellipse in the ground plane; the rising flames are three-dimensional upright volume, not compressed into the ground. Exactly FOUR columns and THREE rows on a square sheet. Each cell must be the same size and contain one complete frame with at least 15% empty gutter, never cross a cell boundary. Fixed bottom-center anchor per cell, constant camera and object scale. Full silhouettes unclipped. True alpha transparency outside all shapes and within gaps, no semiopaque white film or background glow. No text, no labels, no grid, no floor, no ground shadow, no characters. This is the evolved rocket blast. Keep a brief three-tongued golden eruption, but REMOVE THE ENTIRE CONTINUOUS BROWN STONE-LIKE RING around its base. It must never resemble a campfire surrounded by stones, nest, donut, badge or bowl. Replace that closed base with several separated wisps and flying flame scraps, leaving clear transparent gaps through and around the perimeter. The fire expands explosively and breaks apart."
+    }
+  ],
+  "export": "Lossless WebP, width 1200, aspect ratio preserved. inspect-layout.py reads alpha to produce layout.json; effects.js registers frames with a common uniform scale. Runtime fire scaleX equals scaleY."
+}

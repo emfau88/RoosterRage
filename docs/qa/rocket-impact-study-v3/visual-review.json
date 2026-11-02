@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-02",
+  "status": "reviewed",
+  "scope": "Isolated preview; no production integration",
+  "inspected": [
+    "all-webgl-110.png",
+    "all-webgl-185.png",
+    "all-webgl-280.png",
+    "all-webgl-650.png",
+    "all-canvas-185.png",
+    "compare-webgl-280.png",
+    "salvo-webgl-280.png",
+    "salvo-webgl-650.png",
+    "salvo-canvas-390.png",
+    "Temporal contact sheets extracted from all-in-motion.mp4 and salvo-in-motion.mp4"
+  ],
+  "findings": [
+    "R4 and EVO retain upright fire volume; no horizontal squeezing of the artwork. Runtime volume scales are uniform.",
+    "Opaque kernels occupy less of the ground next to the unchanged reference enemy. Maximum silhouette widths: R1 93.0, R2 125.1, R3 107.5, R4 139.6, EVO 193.1 pixels; these exclude the surrounding clusters/particles.",
+    "EVO has no continuous brown perimeter. The source artwork breaks into separate flame and smoke fragments; opacity decreases during the second half.",
+    "Three EVO instances at one point are visibly brighter early on, but retain a compact footprint and disperse promptly. No attenuation was added only for the comparison.",
+    "Beginning, peak, smoke transition and fade inspected on the real farm ground in both renderers; source/frame silhouette boundaries and panel clearance checked.",
+    "The previous side uses the exact previous stage definitions, source artwork and animation class."
+  ],
+  "remainingLimits": [
+    "This is visual approval material, not a gameplay performance benchmark or a completed in-game integration.",
+    "Directly overlapping a blast may briefly obscure an actor at its center; the current study evaluates scale and effect overlap, not full combat readability."
+  ],
+  "futureReviewRule": "../../../AGENTS.md"
+}

@@ -305,11 +305,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   }
   if (weapon.id === 'rocket-egg') {
     const visualExpectations = {
-      r1: { count: 1, texture: 'rocket-egg-r1', impact: 'rocket-impact-r1', size: [48, 30], trail: 40, damage: 48, radius: 82 },
-      r2: { count: 1, texture: 'rocket-egg-r2', impact: 'rocket-impact-r2', size: [56, 34], trail: 46, damage: 64, radius: 100 },
-      r3: { count: 1, texture: 'rocket-egg-r3', impact: 'rocket-impact-r3', size: [66, 42], trail: 52, damage: 80, radius: 118 },
-      r4: { count: 2, texture: 'rocket-egg-r4', impact: 'rocket-impact-r4', size: [72, 44], trail: 58, damage: 96, radius: 132 },
-      evo: { count: 3, texture: 'rocket-egg-evo', impact: 'rocket-impact-evo', size: [84, 52], trail: 70, damage: 112, radius: 158 }
+      r1: { count: 1, texture: 'rocket-hull-r1', impact: 'rocket-impact-r1', size: [48, 30], engines: 1, damage: 48, radius: 82 },
+      r2: { count: 1, texture: 'rocket-hull-r2', impact: 'rocket-impact-r2', size: [56, 34], engines: 1, damage: 64, radius: 100 },
+      r3: { count: 1, texture: 'rocket-hull-r3', impact: 'rocket-impact-r3', size: [66, 42], engines: 3, damage: 80, radius: 118 },
+      r4: { count: 2, texture: 'rocket-hull-r4', impact: 'rocket-impact-r4', size: [72, 44], engines: 2, damage: 96, radius: 132 },
+      evo: { count: 3, texture: 'rocket-hull-evo', impact: 'rocket-impact-evo', size: [84, 52], engines: 3, damage: 112, radius: 158 }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.rocketFlights.length === 1
@@ -327,8 +327,9 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
         flight.texture === expected.texture
         && Math.abs(flight.width - expected.size[0]) < 0.01
         && Math.abs(flight.height - expected.size[1]) < 0.01
-        && flight.trailTexture === 'rocket-exhaust'
-        && Math.abs(flight.trailWidth - expected.trail) < 0.01
+        && flight.trailTexture === 'rocket-live-flame'
+        && flight.trailWidth > 10
+        && flight.engineCount === expected.engines
         && flight.damage === expected.damage
         && flight.radius === expected.radius
       )), `Rocket Egg ${stage} has the wrong staged flight profile.`, { expected, flightState });

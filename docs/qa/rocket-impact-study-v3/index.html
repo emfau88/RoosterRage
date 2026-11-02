@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rooster Rage · Raketen-Einschläge · Entwurf 3</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#141e1b;color:#f3eedf;font-family:Arial,sans-serif}main{width:min(1440px,100%);margin:auto}
+    header{height:100px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid #38473b}.eyebrow{font-size:11px;letter-spacing:2px;color:#b5c0ac;margin-bottom:9px}h1{font-size:26px;font-weight:600;margin:0}.badge{font-size:12px;padding:8px 12px;border:1px solid #58674d;border-radius:20px;color:#d4dfc7}
+    nav{display:flex;gap:12px;align-items:center;justify-content:center;height:62px}a,button,select{font:inherit;font-size:13px;color:#ecf2e4;background:#26392c;border:1px solid #53674d;border-radius:7px;padding:8px 14px;text-decoration:none;cursor:pointer}a[aria-current]{background:#485c36}label{font-size:13px;display:flex;align-items:center;gap:8px}
+    canvas{display:block;width:100%!important;height:auto!important}footer{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;font-size:12px;color:#bec9b3}.capture nav{display:none}.capture footer{height:40px}
+    @media(max-width:700px){header{height:90px;padding:0 15px}h1{font-size:19px}.badge{display:none}nav{height:auto;padding:12px;flex-wrap:wrap}footer{padding:0 15px}.technical{display:none}}
+  </style>
+</head>
+<body><main>
+  <header><div><div class="eyebrow">ROOSTER RAGE · RAKETEN-EINSCHLÄGE</div><h1 id="title">Kompakte Einschläge · natürliche Proportionen</h1></div><span class="badge">Entwurf 3 · noch nicht eingebaut</span></header>
+  <nav aria-label="Vorschau"><a href="?view=all" data-view="all">Alle fünf Stufen</a><a href="?view=compare" data-view="compare">R4 & EVO vergleichen</a><a href="?view=salvo" data-view="salvo">Salvenprüfung</a><button id="pause">Pause</button><label>Tempo <select id="speed"><option value="1">Normal</option><option value="0.5">½ Geschwindigkeit</option></select></label></nav>
+  <div id="stage" aria-label="Animierte Raketen-Einschläge auf dem Spieluntergrund"></div>
+  <footer><span id="phase">Zündung · Feuer · Nachglut</span><span class="technical">Spielperspektive und Maßstab · rein optischer Entwurf</span></footer>
+</main><script type="module" src="./study.js"></script></body>
+</html>

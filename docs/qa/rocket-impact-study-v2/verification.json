@@ -1,0 +1,2063 @@
+{
+  "generatedAt": "2026-11-02T19:03:33.892Z",
+  "status": "passed",
+  "story": "Open isolated study → load local assets → animate five impact stages in game perspective → compare EVO before/after.",
+  "gameplayModified": false,
+  "trackedSourceUnchanged": true,
+  "controls": [
+    "pause",
+    "half speed",
+    "resume",
+    "EVO navigation"
+  ],
+  "results": [
+    {
+      "view": "all",
+      "renderer": "webgl",
+      "objects": 173,
+      "errors": [],
+      "unclippedFrames": 24,
+      "paintedFrames": {
+        "r1": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          10
+        ],
+        "r2": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          9
+        ],
+        "r3": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          4,
+          8,
+          7,
+          10,
+          6,
+          11,
+          9
+        ],
+        "r4": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          4,
+          7,
+          6,
+          9,
+          10
+        ],
+        "evo": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          8,
+          11
+        ]
+      },
+      "samples": [
+        {
+          "time": 0,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 0,
+              "objects": 13,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 0,
+              "objects": 20,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 0,
+              "objects": 28,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 0,
+              "objects": 36,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 0,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 55,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 55,
+              "objects": 13,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 55,
+              "objects": 20,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 55,
+              "objects": 28,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 55,
+              "objects": 36,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 55,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 110,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 110,
+              "objects": 13,
+              "visibleFrames": [
+                3
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 110,
+              "objects": 20,
+              "visibleFrames": [
+                2
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 110,
+              "objects": 28,
+              "visibleFrames": [
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 110,
+              "objects": 36,
+              "visibleFrames": [
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 110,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 185,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 185,
+              "objects": 13,
+              "visibleFrames": [
+                5
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 185,
+              "objects": 20,
+              "visibleFrames": [
+                4
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 185,
+              "objects": 28,
+              "visibleFrames": [
+                3,
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 185,
+              "objects": 36,
+              "visibleFrames": [
+                3,
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 185,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 280,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 280,
+              "objects": 13,
+              "visibleFrames": [
+                7
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 280,
+              "objects": 20,
+              "visibleFrames": [
+                6
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 280,
+              "objects": 28,
+              "visibleFrames": [
+                5,
+                4,
+                3,
+                1
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 280,
+              "objects": 36,
+              "visibleFrames": [
+                5,
+                4,
+                2,
+                1
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 280,
+              "objects": 46,
+              "visibleFrames": [
+                3
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 390,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 390,
+              "objects": 13,
+              "visibleFrames": [
+                10
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 390,
+              "objects": 20,
+              "visibleFrames": [
+                9
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 390,
+              "objects": 28,
+              "visibleFrames": [
+                8,
+                7,
+                5,
+                4
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 390,
+              "objects": 36,
+              "visibleFrames": [
+                7,
+                6,
+                5,
+                3
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 390,
+              "objects": 46,
+              "visibleFrames": [
+                4
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 510,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 510,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 510,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 510,
+              "objects": 28,
+              "visibleFrames": [
+                10,
+                10,
+                8,
+                6
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 510,
+              "objects": 36,
+              "visibleFrames": [
+                9,
+                9,
+                7,
+                6
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 510,
+              "objects": 46,
+              "visibleFrames": [
+                5
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 650,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 650,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 650,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 650,
+              "objects": 28,
+              "visibleFrames": [
+                11,
+                9
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 650,
+              "objects": 36,
+              "visibleFrames": [
+                10,
+                9
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 650,
+              "objects": 46,
+              "visibleFrames": [
+                6
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 800,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 800,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 800,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 800,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 800,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 800,
+              "objects": 46,
+              "visibleFrames": [
+                8
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1030,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 1030,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 1030,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 1030,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 1030,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 1030,
+              "objects": 46,
+              "visibleFrames": [
+                11
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1260,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 1260,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 1260,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 1260,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 1260,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 1260,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1600,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 1600,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 1600,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 1600,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 1600,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 1600,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2200,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 2200,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 2200,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 2200,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 2200,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 2200,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2700,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 2700,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 2700,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 2700,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 2700,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 2700,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 2350
+            }
+          ]
+        }
+      ],
+      "elapsedPlayback": 441.0800000000018,
+      "expiredAt2700": true,
+      "stableObjectCount": true
+    },
+    {
+      "view": "all",
+      "renderer": "canvas",
+      "objects": 173,
+      "errors": [],
+      "unclippedFrames": 24,
+      "paintedFrames": {
+        "r1": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          10
+        ],
+        "r2": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          9
+        ],
+        "r3": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          4,
+          8,
+          7,
+          10,
+          6,
+          11,
+          9
+        ],
+        "r4": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          4,
+          7,
+          6,
+          9,
+          10
+        ],
+        "evo": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          8,
+          11
+        ]
+      },
+      "samples": [
+        {
+          "time": 0,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 0,
+              "objects": 13,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 0,
+              "objects": 20,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 0,
+              "objects": 28,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 0,
+              "objects": 36,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 0,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 55,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 55,
+              "objects": 13,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 55,
+              "objects": 20,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 55,
+              "objects": 28,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 55,
+              "objects": 36,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 55,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 110,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 110,
+              "objects": 13,
+              "visibleFrames": [
+                3
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 110,
+              "objects": 20,
+              "visibleFrames": [
+                2
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 110,
+              "objects": 28,
+              "visibleFrames": [
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 110,
+              "objects": 36,
+              "visibleFrames": [
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 110,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 185,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 185,
+              "objects": 13,
+              "visibleFrames": [
+                5
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 185,
+              "objects": 20,
+              "visibleFrames": [
+                4
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 185,
+              "objects": 28,
+              "visibleFrames": [
+                3,
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 185,
+              "objects": 36,
+              "visibleFrames": [
+                3,
+                2,
+                0
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 185,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 280,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 280,
+              "objects": 13,
+              "visibleFrames": [
+                7
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 280,
+              "objects": 20,
+              "visibleFrames": [
+                6
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 280,
+              "objects": 28,
+              "visibleFrames": [
+                5,
+                4,
+                3,
+                1
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 280,
+              "objects": 36,
+              "visibleFrames": [
+                5,
+                4,
+                2,
+                1
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 280,
+              "objects": 46,
+              "visibleFrames": [
+                3
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 390,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 390,
+              "objects": 13,
+              "visibleFrames": [
+                10
+              ],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 390,
+              "objects": 20,
+              "visibleFrames": [
+                9
+              ],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 390,
+              "objects": 28,
+              "visibleFrames": [
+                8,
+                7,
+                5,
+                4
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 390,
+              "objects": 36,
+              "visibleFrames": [
+                7,
+                6,
+                5,
+                3
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 390,
+              "objects": 46,
+              "visibleFrames": [
+                4
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 510,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 510,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 510,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 510,
+              "objects": 28,
+              "visibleFrames": [
+                10,
+                10,
+                8,
+                6
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 510,
+              "objects": 36,
+              "visibleFrames": [
+                9,
+                9,
+                7,
+                6
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 510,
+              "objects": 46,
+              "visibleFrames": [
+                5
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 650,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 650,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 650,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 650,
+              "objects": 28,
+              "visibleFrames": [
+                11,
+                9
+              ],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 650,
+              "objects": 36,
+              "visibleFrames": [
+                10,
+                9
+              ],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 650,
+              "objects": 46,
+              "visibleFrames": [
+                6
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 800,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 800,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 800,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 800,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 800,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 800,
+              "objects": 46,
+              "visibleFrames": [
+                8
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1030,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 1030,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 1030,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 1030,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 1030,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 1030,
+              "objects": 46,
+              "visibleFrames": [
+                11
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1260,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 1260,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 1260,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 1260,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 1260,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 1260,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1600,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 1600,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 1600,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 1600,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 1600,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 1600,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2200,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 2200,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 2200,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 2200,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 2200,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 2200,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2700,
+          "effects": [
+            {
+              "stage": "r1",
+              "age": 2700,
+              "objects": 13,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1250
+            },
+            {
+              "stage": "r2",
+              "age": 2700,
+              "objects": 20,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1450
+            },
+            {
+              "stage": "r3",
+              "age": 2700,
+              "objects": 28,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1650
+            },
+            {
+              "stage": "r4",
+              "age": 2700,
+              "objects": 36,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 1900
+            },
+            {
+              "stage": "evo",
+              "age": 2700,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 2350
+            }
+          ]
+        }
+      ],
+      "elapsedPlayback": 376.3199999999996,
+      "expiredAt2700": true,
+      "stableObjectCount": true
+    },
+    {
+      "view": "evo",
+      "renderer": "webgl",
+      "objects": 61,
+      "errors": [],
+      "unclippedFrames": 24,
+      "paintedFrames": {
+        "evo": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          8,
+          11
+        ]
+      },
+      "samples": [
+        {
+          "time": 0,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 0,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 55,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 55,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 110,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 110,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 185,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 185,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 280,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 280,
+              "objects": 46,
+              "visibleFrames": [
+                3
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 390,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 390,
+              "objects": 46,
+              "visibleFrames": [
+                4
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 510,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 510,
+              "objects": 46,
+              "visibleFrames": [
+                5
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 650,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 650,
+              "objects": 46,
+              "visibleFrames": [
+                6
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 800,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 800,
+              "objects": 46,
+              "visibleFrames": [
+                8
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1030,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 1030,
+              "objects": 46,
+              "visibleFrames": [
+                11
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1260,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 1260,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1600,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 1600,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2200,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 2200,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2700,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 2700,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 2350
+            }
+          ]
+        }
+      ],
+      "elapsedPlayback": 374.9899999999995,
+      "expiredAt2700": true,
+      "stableObjectCount": true
+    },
+    {
+      "view": "evo",
+      "renderer": "canvas",
+      "objects": 61,
+      "errors": [],
+      "unclippedFrames": 24,
+      "paintedFrames": {
+        "evo": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          8,
+          11
+        ]
+      },
+      "samples": [
+        {
+          "time": 0,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 0,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 55,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 55,
+              "objects": 46,
+              "visibleFrames": [
+                0
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 110,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 110,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 185,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 185,
+              "objects": 46,
+              "visibleFrames": [
+                1
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 280,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 280,
+              "objects": 46,
+              "visibleFrames": [
+                3
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 390,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 390,
+              "objects": 46,
+              "visibleFrames": [
+                4
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 510,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 510,
+              "objects": 46,
+              "visibleFrames": [
+                5
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 650,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 650,
+              "objects": 46,
+              "visibleFrames": [
+                6
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 800,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 800,
+              "objects": 46,
+              "visibleFrames": [
+                8
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1030,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 1030,
+              "objects": 46,
+              "visibleFrames": [
+                11
+              ],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1260,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 1260,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 1600,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 1600,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2200,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 2200,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": true,
+              "duration": 2350
+            }
+          ]
+        },
+        {
+          "time": 2700,
+          "effects": [
+            {
+              "stage": "evo",
+              "age": 2700,
+              "objects": 46,
+              "visibleFrames": [],
+              "active": false,
+              "duration": 2350
+            }
+          ]
+        }
+      ],
+      "elapsedPlayback": 358.30000000000047,
+      "expiredAt2700": true,
+      "stableObjectCount": true
+    }
+  ]
+}

@@ -38,8 +38,8 @@ export class SupportChicken {
     this.damage = (evolved ? 19 : 12) + rank * 5;
     this.salvoCount = evolved || rank >= 2 ? 2 : 1;
     this.pierce = evolved || rank >= 2 ? 1 : 0;
-    this.slowRatio = evolved ? 0.68 : rank >= 5 ? 0.78 : rank >= 3 ? 0.86 : 1;
-    this.slowMs = evolved ? 1200 : rank >= 5 ? 950 : rank >= 3 ? 700 : 0;
+    this.slowRatio = evolved ? 0.68 : rank >= 5 ? 0.78 : rank >= 3 ? 0.86 : 0.9;
+    this.slowMs = evolved ? 1200 : rank >= 5 ? 950 : rank >= 3 ? 700 : 500;
     this.ricochet = evolved || rank >= 5 ? 1 : 0;
     this.lastDirection = scene.player.lastMoveDirection ?? 'south';
 

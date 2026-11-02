@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
+import { prepareRocketHull, RocketExhaustVisual } from '../systems/RocketExhaustVisual.js';
 
 const RANK_CONFIG = {
-  1: { damage: 48, radius: 82, speed: 280, turnRate: 0.064, width: 48, height: 30, trailWidth: 40 },
-  2: { damage: 64, radius: 100, speed: 305, turnRate: 0.074, width: 56, height: 34, trailWidth: 46 },
-  3: { damage: 80, radius: 118, speed: 330, turnRate: 0.084, width: 66, height: 42, trailWidth: 52 },
-  4: { damage: 96, radius: 132, speed: 355, turnRate: 0.094, width: 72, height: 44, trailWidth: 58 }
+  1: { damage: 48, radius: 82, speed: 280, turnRate: 0.064, width: 48, height: 30 },
+  2: { damage: 64, radius: 100, speed: 305, turnRate: 0.074, width: 56, height: 34 },
+  3: { damage: 80, radius: 118, speed: 330, turnRate: 0.084, width: 66, height: 42 },
+  4: { damage: 96, radius: 132, speed: 355, turnRate: 0.094, width: 72, height: 44 }
 };
 const EVOLVED_CONFIG = {
   damage: 112,
@@ -12,14 +13,14 @@ const EVOLVED_CONFIG = {
   speed: 380,
   turnRate: 0.11,
   width: 84,
-  height: 52,
-  trailWidth: 70
+  height: 52
 };
 
 export class RocketProjectile {
   constructor(scene, x, y, target, rank, evolved = false) {
     this.scene = scene;
     this.target = target;
+    this.targetActivationId = target.activationId;
     this.rank = rank;
     this.evolved = evolved;
     this.synergyActive = scene.player.fireEggs;
@@ -29,26 +30,23 @@ export class RocketProjectile {
     this.speed = config.speed;
     this.turnRate = config.turnRate;
     this.life = 3000;
+    this.ageMs = 0;
     this.active = true;
     this.angle = Phaser.Math.Angle.Between(x, y, target.sprite.x, target.sprite.y);
     this.visualAngle = this.angle;
     this.previousVisualX = x;
     this.previousVisualY = y;
-    this.textureKey = evolved ? 'rocket-egg-evo' : `rocket-egg-r${rank}`;
+    this.textureKey = prepareRocketHull(scene, rank, evolved);
 
     this.shadow = scene.add.ellipse(x, y + 9, config.width * 0.54, config.height * 0.3, 0x160d08, 0.16)
       .setDepth(3.8);
-    this.trail = scene.add.image(x, y, 'rocket-exhaust')
-      .setDisplaySize(config.trailWidth, config.height * 0.58)
-      .setOrigin(0.88, 0.5)
-      .setFlipX(true)
-      .setAlpha(evolved ? 0.58 : 0.38 + rank * 0.035)
-      .setDepth(4.2);
     this.sprite = scene.physics.add.sprite(x, y, this.textureKey)
       .setDisplaySize(config.width, config.height)
       .setCircle(42, 86, 38)
       .setRotation(this.angle)
       .setDepth(7);
+    this.exhaust = new RocketExhaustVisual(scene, this.sprite, rank, evolved);
+    this.trail = this.exhaust.flames[0];
     this.updateVisualPositions();
     // Arcade applies this frame's displacement in postUpdate, after steering
     // has selected the next step's velocity. Render the nose and exhaust from
@@ -60,9 +58,14 @@ export class RocketProjectile {
     if (!this.active || !this.sprite.active) return;
 
     this.life -= delta;
+    this.ageMs += delta;
+    if (!this.target?.sprite?.active || this.target.activationId !== this.targetActivationId) {
+      this.target = this.scene.findNearestEnemyFrom(this.sprite.x, this.sprite.y);
+      this.targetActivationId = this.target?.activationId;
+    }
     if (this.target?.sprite?.active) {
       const desired = Phaser.Math.Angle.Between(this.sprite.x, this.sprite.y, this.target.sprite.x, this.target.sprite.y);
-      this.angle = Phaser.Math.Angle.RotateTo(this.angle, desired, this.turnRate);
+      this.angle = Phaser.Math.Angle.RotateTo(this.angle, desired, this.turnRate * Math.min(delta, 100) / (1000 / 60));
     }
     this.scene.physics.velocityFromRotation(this.angle, this.speed, this.sprite.body.velocity);
 
@@ -89,6 +92,7 @@ export class RocketProjectile {
   }
 
   updateVisualPositions() {
+    if (!this.active || !this.sprite.active) return;
     const dx = this.sprite.x - this.previousVisualX;
     const dy = this.sprite.y - this.previousVisualY;
     if (dx * dx + dy * dy > 0.000001) {
@@ -97,10 +101,7 @@ export class RocketProjectile {
     this.previousVisualX = this.sprite.x;
     this.previousVisualY = this.sprite.y;
     this.sprite.setRotation(this.visualAngle);
-    const nozzleOffset = this.sprite.displayWidth * 0.32;
-    const trailX = this.sprite.x - Math.cos(this.visualAngle) * nozzleOffset;
-    const trailY = this.sprite.y - Math.sin(this.visualAngle) * nozzleOffset;
-    this.trail.setPosition(trailX, trailY).setRotation(this.visualAngle);
+    this.exhaust.update(this.ageMs);
     this.shadow.setPosition(this.sprite.x, this.sprite.y + 10);
   }
 
@@ -109,7 +110,7 @@ export class RocketProjectile {
     this.active = false;
     this.scene.events.off(Phaser.Scenes.Events.POST_UPDATE, this.updateVisualPositions, this);
     this.shadow.destroy();
-    this.trail.destroy();
+    this.exhaust.destroy();
     this.sprite.destroy();
   }
 }

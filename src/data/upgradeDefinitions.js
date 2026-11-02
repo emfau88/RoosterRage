@@ -255,11 +255,11 @@ export const UPGRADE_DEFINITIONS = [
   {
     id: 'support-chick',
     name: 'Support Chick',
-    description: 'A companion starts an upgradeable projectile and debuff path.',
+    description: 'A companion fires slowing eggs and grows into a supporting flock.',
     rankDescriptions: [
-      '1 companion fires for 17 damage.',
+      '1 companion fires for 17 damage and slows enemies by 10% for 0.5 s.',
       'The companion fires a two-shot volley with 1 pierce.',
-      'Hits slow enemies for 0.7 s.',
+      'Hits now slow enemies by 14% for 0.7 s.',
       'A second companion joins the flock.',
       'Three companions fire faster and apply a stronger slow.'
     ],

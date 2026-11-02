@@ -22,38 +22,27 @@ export class UpgradeSystem {
   getChoices(count = 3, player) {
     const available = this.upgrades.filter((upgrade) => this.isAvailable(upgrade, player));
     const choices = [];
-    const startWeaponProgress = this.pickWeighted(
-      available.filter((upgrade) => upgrade.startWeaponUpgrade),
-      player
-    );
-    if (startWeaponProgress) {
-      choices.push(startWeaponProgress);
-    }
-    const evolution = this.pickWeighted(
-      available.filter((upgrade) => upgrade.evolution && !choices.includes(upgrade)),
-      player
-    );
-    if (evolution) {
-      choices.push(evolution);
-    }
+    const addChoice = (candidates) => {
+      if (choices.length >= count) return;
+      const picked = this.pickWeighted(candidates.filter((upgrade) => !choices.includes(upgrade)), player);
+      if (picked) choices.push(picked);
+    };
+    // Keep promised choices inside the requested count. Shuffling four
+    // priorities and slicing to three could previously discard a ready EVO.
+    addChoice(available.filter((upgrade) => upgrade.evolution));
+    addChoice(available.filter((upgrade) => upgrade.startWeaponUpgrade));
     if (this.shouldGuaranteeSpectacle(player)) {
-      const spectacle = this.pickWeighted(
-        available.filter((upgrade) => (
-          SPECTACLE_CATEGORIES.includes(upgrade.category) && !choices.includes(upgrade)
-        )),
-        player
-      );
-      if (spectacle) {
-        choices.push(spectacle);
-      }
+      addChoice(available.filter((upgrade) => SPECTACLE_CATEGORIES.includes(upgrade.category)));
+    } else {
+      const rankUps = available.filter((upgrade) => (
+        SPECTACLE_CATEGORIES.includes(upgrade.category)
+        && player?.getUpgradeRank(upgrade.id) > 0
+      ));
+      const partners = this.getBuildPartnerIds(player);
+      addChoice(rankUps.length ? rankUps : available.filter((upgrade) => partners.has(upgrade.id)));
     }
-
-    const weapon = this.pickWeighted(
-      available.filter((upgrade) => upgrade.category === 'weapon' && !choices.includes(upgrade)),
-      player
-    );
-    if (weapon) {
-      choices.push(weapon);
+    if (!choices.some((upgrade) => SPECTACLE_CATEGORIES.includes(upgrade.category))) {
+      addChoice(available.filter((upgrade) => upgrade.category === 'weapon'));
     }
 
     while (choices.length < count && choices.length < available.length) {
@@ -160,6 +149,30 @@ export class UpgradeSystem {
       SPECTACLE_CATEGORIES.includes(upgrade.category)
       && player.getUpgradeRank(upgrade.id) > 0
     ));
+  }
+
+  getBuildPartnerIds(player) {
+    const partners = new Set();
+    if (!player) return partners;
+    const owns = (id) => player.getUpgradeRank(id) > 0;
+    for (const upgrade of this.upgrades) {
+      // Synergies work in both directions, including Fire Eggs -> Rocket Egg.
+      if (upgrade.synergy) {
+        if (owns(upgrade.id) && !owns(upgrade.synergy.with)) partners.add(upgrade.synergy.with);
+        if (owns(upgrade.synergy.with) && !owns(upgrade.id)) partners.add(upgrade.id);
+      }
+      const recipe = upgrade.evolution;
+      if (!recipe || owns(upgrade.id) || owns(recipe.passive)) continue;
+      const base = this.upgrades.find((candidate) => (
+        candidate.id === recipe.base || candidate.baseWeaponId === recipe.base
+      ));
+      // Offer the missing ingredient as the weapon approaches its final rank,
+      // rather than filling scarce passive slots with distant recipes early.
+      if (base && player.getUpgradeRank(base.id) >= Math.max(1, base.maxRank - 1)) {
+        partners.add(recipe.passive);
+      }
+    }
+    return partners;
   }
 
   presentUpgrade(upgrade, player) {
@@ -273,8 +286,9 @@ export class UpgradeSystem {
       weight *= 0.8;
     }
     if (!upgrade.consumable && player.getUpgradeRank(upgrade.id) > 0) {
-      weight *= 1.12;
+      weight *= SPECTACLE_CATEGORIES.includes(upgrade.category) ? 1.6 : 1.12;
     }
+    if (this.getBuildPartnerIds(player).has(upgrade.id)) weight *= 1.8;
     weight *= player.upgradeAffinities?.[upgrade.id] ?? 1;
     return Math.max(0.1, weight);
   }

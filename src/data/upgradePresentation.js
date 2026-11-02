@@ -52,9 +52,9 @@ const MOMENTS = {
     { title: 'STORM DISCHARGE', changes: ['5 → 6 targets', 'Central discharge'] }
   ],
   'support-chick': [
-    { title: 'WINGMATE', changes: ['1 companion', '17 damage'] },
+    { title: 'WINGMATE', changes: ['1 companion · 17 damage', '10% slow · 0.5 s'] },
     { title: 'DOUBLE TAP', changes: ['2 shots/volley', '+1 pierce'] },
-    { title: 'CRIPPLING YOLK', changes: ['Hits slow', '0.7 s debuff'] },
+    { title: 'CRIPPLING YOLK', changes: ['10% → 14% slow', '0.5 → 0.7 s debuff'] },
     { title: 'SECOND WINGMATE', changes: ['1 → 2 companions'] },
     { title: 'CHICK FORMATION', changes: ['2 → 3 companions', 'Faster volleys'] }
   ],

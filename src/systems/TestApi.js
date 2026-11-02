@@ -175,6 +175,11 @@ export function installTestApi(scene) {
         trailTexture: projectile.trail.texture?.key,
         trailWidth: projectile.trail.displayWidth,
         trailAlpha: projectile.trail.alpha,
+        engineCount: projectile.exhaust.engines.length,
+        engineFlames: projectile.exhaust.flames.map((flame) => ({
+          x: flame.x, y: flame.y, width: flame.displayWidth, height: flame.displayHeight, alpha: flame.alpha
+        })),
+        wakeParticles: projectile.exhaust.particles.size,
         rotation: projectile.sprite.rotation
       })),
       rocketImpacts: [...scene.rocketEgg.activeImpactVisuals]

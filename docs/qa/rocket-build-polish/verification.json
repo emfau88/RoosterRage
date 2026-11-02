@@ -1,0 +1,791 @@
+{
+  "generatedAt": "2026-11-02T19:40:48.4417925+01:00",
+  "status": "passed",
+  "scope": "Uncommitted local review; no push or publication",
+  "latestAssets": [
+    {
+      "path": "src/assets/projectiles/rocket-modular/rocket-hull-evo-v2.webp",
+      "sha256": "8CC6363AB0751AB335283316BEB7D799E426E378AD0E9844974EDA51AEDE1C25"
+    },
+    {
+      "path": "src/assets/fx/rocket-modular/rocket-flame-flipbook-v2.webp",
+      "sha256": "D19410D80375D315C002BB039F9072A1F9BCC9FD12D2A82DEF6C691EDB074269"
+    }
+  ],
+  "productionBuild": "passed; existing large-bundle warning",
+  "buildContinuationTests": {
+    "failed": 0,
+    "passed": 6
+  },
+  "runtimeChecks": [
+    {
+      "renderer": "WEBGL",
+      "rockets": [
+        {
+          "stage": 1,
+          "count": 1,
+          "targetIds": [
+            1
+          ],
+          "enemyId": 1,
+          "engineCount": 1,
+          "smoke": 11,
+          "before": [
+            [
+              18.947415105701744,
+              14.181468262269313,
+              0.8913818613401399
+            ]
+          ],
+          "after": [
+            [
+              19.267562378095022,
+              14.031789018033495,
+              0.8991776553107554
+            ]
+          ],
+          "rocketMovement": 37.33333333333303,
+          "puffMovement": 2.9597531296024573,
+          "pauseHeld": true,
+          "animationFrames": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1
+          ],
+          "damage": 48,
+          "shots": 1,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 2,
+          "count": 1,
+          "targetIds": [
+            2
+          ],
+          "enemyId": 2,
+          "engineCount": 1,
+          "smoke": 14,
+          "before": [
+            [
+              24.84431727410716,
+              15.516374793203079,
+              0.9169313054594174
+            ]
+          ],
+          "after": [
+            [
+              24.49212169088563,
+              15.66657946005435,
+              0.9100285174607375
+            ]
+          ],
+          "rocketMovement": 40.66666666666697,
+          "puffMovement": 3.2183230565370815,
+          "pauseHeld": true,
+          "animationFrames": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1
+          ],
+          "damage": 64,
+          "shots": 1,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 3,
+          "count": 1,
+          "targetIds": [
+            3
+          ],
+          "enemyId": 3,
+          "engineCount": 3,
+          "smoke": 13,
+          "before": [
+            [
+              30.80324512963253,
+              19.27808104883194,
+              0.9128094847904785
+            ],
+            [
+              17.597419052181,
+              12.584634982403992,
+              0.8748735729644301
+            ],
+            [
+              16.77260418583623,
+              12.93214318941571,
+              0.8540217460268033
+            ]
+          ],
+          "after": [
+            [
+              31.571087488138335,
+              18.954576305937955,
+              0.9248446314755225
+            ],
+            [
+              16.835065053118335,
+              12.90582738827867,
+              0.8556007951541698
+            ],
+            [
+              17.31241830216709,
+              12.704710533507033,
+              0.8676685787786199
+            ]
+          ],
+          "rocketMovement": 44,
+          "puffMovement": 3.4247733641581517,
+          "pauseHeld": true,
+          "animationFrames": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0
+          ],
+          "damage": 99,
+          "shots": 1,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 4,
+          "count": 2,
+          "targetIds": [
+            4,
+            4
+          ],
+          "enemyId": 4,
+          "engineCount": 2,
+          "smoke": 16,
+          "before": [
+            [
+              30.51300686670727,
+              18.062418242303302,
+              0.9011123836880446
+            ],
+            [
+              26.49061974719752,
+              19.601418531507033,
+              0.8390078394762464
+            ]
+          ],
+          "after": [
+            [
+              29.44398089636985,
+              18.471436874432406,
+              0.8846069184839712
+            ],
+            [
+              26.837301099128517,
+              19.468775231637782,
+              0.8443605036303193
+            ]
+          ],
+          "rocketMovement": 47.333333333333385,
+          "puffMovement": 3.8795728483123955,
+          "pauseHeld": true,
+          "animationFrames": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2
+          ],
+          "damage": 238,
+          "shots": 2,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 5,
+          "count": 3,
+          "targetIds": [
+            5,
+            5,
+            5
+          ],
+          "enemyId": 5,
+          "engineCount": 3,
+          "smoke": 25,
+          "before": [
+            [
+              33.9146118047539,
+              22.71709309551295,
+              0.8362733013922411
+            ],
+            [
+              46.529649076719835,
+              23.982977459410343,
+              0.9093576484552182
+            ],
+            [
+              37.949305295171435,
+              21.33376961308408,
+              0.8846061041940101
+            ]
+          ],
+          "after": [
+            [
+              34.17989486439759,
+              22.626138903635113,
+              0.8394512066876149
+            ],
+            [
+              47.465853695499604,
+              23.66199301868585,
+              0.9190026136212185
+            ],
+            [
+              36.61113665130024,
+              21.792570290982773,
+              0.868575780866266
+            ]
+          ],
+          "rocketMovement": 44.33333333333373,
+          "puffMovement": 4.5359850123996805,
+          "pauseHeld": true,
+          "animationFrames": [
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "damage": 336,
+          "shots": 3,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        }
+      ],
+      "retarget": {
+        "count": 2,
+        "currentTargets": [
+          8,
+          8
+        ],
+        "replacementId": 8,
+        "activationChanged": true,
+        "secondLaunchDistance": 18.67339821425399,
+        "emptyShots": 0,
+        "emptyFlights": 0
+      },
+      "support": [
+        {
+          "stage": 1,
+          "count": 1,
+          "ratio": 0.9,
+          "duration": 500,
+          "hitSpeed": 90,
+          "hp": 99983,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 2,
+          "count": 1,
+          "ratio": 0.9,
+          "duration": 500,
+          "hitSpeed": 90,
+          "hp": 99956,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 3,
+          "count": 1,
+          "ratio": 0.86,
+          "duration": 700,
+          "hitSpeed": 86,
+          "hp": 99946,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 4,
+          "count": 2,
+          "ratio": 0.86,
+          "duration": 700,
+          "hitSpeed": 86,
+          "hp": 99936,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 5,
+          "count": 3,
+          "ratio": 0.78,
+          "duration": 950,
+          "hitSpeed": 78,
+          "hp": 99926,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 6,
+          "count": 4,
+          "ratio": 0.68,
+          "duration": 1200,
+          "hitSpeed": 68,
+          "hp": 99912,
+          "slowed": true,
+          "restoredSpeed": 100
+        }
+      ],
+      "ui": {
+        "rank": 2,
+        "choosing": false,
+        "text": {
+          "visible": true,
+          "title": "Support Chick",
+          "rank": "R2",
+          "milestone": "DOUBLE TAP",
+          "changes": [
+            "2 shots/volley",
+            "+1 pierce"
+          ],
+          "recent": {
+            "id": "support-chick",
+            "key": "support-chick",
+            "until": 34223.5
+          },
+          "messageState": {
+            "paused": false,
+            "playerHeld": false,
+            "active": "upgrade",
+            "queued": false
+          }
+        }
+      },
+      "final": {
+        "error": null,
+        "fx": {
+          "limit": 90,
+          "created": null,
+          "reused": null,
+          "dropped": 0,
+          "peak": 71,
+          "active": 0,
+          "free": null
+        }
+      },
+      "errors": []
+    },
+    {
+      "renderer": "CANVAS",
+      "rockets": [
+        {
+          "stage": 1,
+          "count": 1,
+          "targetIds": [
+            1
+          ],
+          "enemyId": 1,
+          "engineCount": 1,
+          "smoke": 12,
+          "before": [
+            [
+              16.252915630245838,
+              15.441234250794153,
+              0.8257690494378045
+            ]
+          ],
+          "after": [
+            [
+              17.119449922207263,
+              15.03610133507193,
+              0.8468697221316703
+            ]
+          ],
+          "rocketMovement": 37.33333333333303,
+          "puffMovement": 4.684870391084955,
+          "pauseHeld": true,
+          "animationFrames": [
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "damage": 48,
+          "shots": 1,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 2,
+          "count": 1,
+          "targetIds": [
+            2
+          ],
+          "enemyId": 2,
+          "engineCount": 1,
+          "smoke": 12,
+          "before": [
+            [
+              21.18647413092775,
+              17.076374795729766,
+              0.8452401288727129
+            ]
+          ],
+          "after": [
+            [
+              20.74264863519151,
+              17.26565786429463,
+              0.8365414584423424
+            ]
+          ],
+          "rocketMovement": 40.66666666666697,
+          "puffMovement": 4.179104444177083,
+          "pauseHeld": true,
+          "animationFrames": [
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "damage": 64,
+          "shots": 1,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 3,
+          "count": 1,
+          "targetIds": [
+            3
+          ],
+          "enemyId": 3,
+          "engineCount": 3,
+          "smoke": 15,
+          "before": [
+            [
+              28.509661235292466,
+              20.244406050083676,
+              0.8768598939701013
+            ],
+            [
+              16.54113270430125,
+              13.02966597035082,
+              0.8481700046592489
+            ],
+            [
+              19.60218273072208,
+              11.739994736648752,
+              0.9255552313358804
+            ]
+          ],
+          "after": [
+            [
+              27.466713282125095,
+              20.683817350728486,
+              0.8605127473687318
+            ],
+            [
+              17.315563927558923,
+              12.703385229266711,
+              0.8677481021225332
+            ],
+            [
+              19.216840553311886,
+              11.902345798228474,
+              0.9158135441731188
+            ]
+          ],
+          "rocketMovement": 44,
+          "puffMovement": 4.354468374744532,
+          "pauseHeld": true,
+          "animationFrames": [
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3
+          ],
+          "damage": 99,
+          "shots": 1,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 4,
+          "count": 2,
+          "targetIds": [
+            4,
+            4
+          ],
+          "enemyId": 4,
+          "engineCount": 2,
+          "smoke": 16,
+          "before": [
+            [
+              26.6362858838221,
+              19.545685400972413,
+              0.8412568843228462
+            ],
+            [
+              31.18236232445383,
+              17.80631702368723,
+              0.9114470467584892
+            ]
+          ],
+          "after": [
+            [
+              26.267847063479383,
+              19.686653297451368,
+              0.8355682908763492
+            ],
+            [
+              32.16235613828134,
+              17.43136286883149,
+              0.9265778800994524
+            ]
+          ],
+          "rocketMovement": 47.333333333333385,
+          "puffMovement": 3.8740700376696258,
+          "pauseHeld": true,
+          "animationFrames": [
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "damage": 238,
+          "shots": 2,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        },
+        {
+          "stage": 5,
+          "count": 3,
+          "targetIds": [
+            5,
+            5,
+            5
+          ],
+          "enemyId": 5,
+          "engineCount": 3,
+          "smoke": 23,
+          "before": [
+            [
+              39.02800443229174,
+              20.96392990892855,
+              0.8975281645192117
+            ],
+            [
+              45.58893546280361,
+              24.305507841324477,
+              0.8996662307294327
+            ],
+            [
+              33.91396553664507,
+              22.717314673150266,
+              0.8362655595528335
+            ]
+          ],
+          "after": [
+            [
+              40.00938752536155,
+              20.627455705590325,
+              0.9092844467803023
+            ],
+            [
+              43.7523366590734,
+              24.93519885974626,
+              0.8807452265701244
+            ],
+            [
+              35.03731504263026,
+              22.3321662710982,
+              0.8497225000315087
+            ]
+          ],
+          "rocketMovement": 50.666666666667126,
+          "puffMovement": 3.0070515139725886,
+          "pauseHeld": true,
+          "animationFrames": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0
+          ],
+          "damage": 336,
+          "shots": 3,
+          "remainingFlights": 0,
+          "remainingWake": 0,
+          "error": null
+        }
+      ],
+      "retarget": {
+        "count": 2,
+        "currentTargets": [
+          8,
+          8
+        ],
+        "replacementId": 8,
+        "activationChanged": true,
+        "secondLaunchDistance": 18.67339821425399,
+        "emptyShots": 0,
+        "emptyFlights": 0
+      },
+      "support": [
+        {
+          "stage": 1,
+          "count": 1,
+          "ratio": 0.9,
+          "duration": 500,
+          "hitSpeed": 90,
+          "hp": 99983,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 2,
+          "count": 1,
+          "ratio": 0.9,
+          "duration": 500,
+          "hitSpeed": 90,
+          "hp": 99956,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 3,
+          "count": 1,
+          "ratio": 0.86,
+          "duration": 700,
+          "hitSpeed": 86,
+          "hp": 99946,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 4,
+          "count": 2,
+          "ratio": 0.86,
+          "duration": 700,
+          "hitSpeed": 86,
+          "hp": 99936,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 5,
+          "count": 3,
+          "ratio": 0.78,
+          "duration": 950,
+          "hitSpeed": 78,
+          "hp": 99926,
+          "slowed": true,
+          "restoredSpeed": 100
+        },
+        {
+          "stage": 6,
+          "count": 4,
+          "ratio": 0.68,
+          "duration": 1200,
+          "hitSpeed": 68,
+          "hp": 99912,
+          "slowed": true,
+          "restoredSpeed": 100
+        }
+      ],
+      "ui": {
+        "rank": 2,
+        "choosing": false,
+        "text": {
+          "visible": true,
+          "title": "Support Chick",
+          "rank": "R2",
+          "milestone": "DOUBLE TAP",
+          "changes": [
+            "2 shots/volley",
+            "+1 pierce"
+          ],
+          "recent": {
+            "id": "support-chick",
+            "key": "support-chick",
+            "until": 26950.699999999255
+          },
+          "messageState": {
+            "paused": false,
+            "playerHeld": false,
+            "active": "upgrade",
+            "queued": false
+          }
+        }
+      },
+      "final": {
+        "error": null,
+        "fx": {
+          "limit": 90,
+          "created": null,
+          "reused": null,
+          "dropped": 0,
+          "peak": 71,
+          "active": 0,
+          "free": null
+        }
+      },
+      "errors": []
+    }
+  ],
+  "visualReview": [
+    "All five flight stages recorded; EVO nose intact",
+    "Animated flame frames and trailing smoke visible",
+    "Existing five impact variants recorded at normal and half speed"
+  ],
+  "additionalRegressionChecks": [
+    "display-projectile-runner: passed before final artwork replacement",
+    "weapon-progression-runner: passed before final artwork replacement"
+  ]
+}

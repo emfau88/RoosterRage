@@ -32,6 +32,7 @@ import rocketImpactR3Url from '../../assets/fx/rocket-modular/rocket-impact-r3.w
 import rocketImpactR4Url from '../../assets/fx/rocket-modular/rocket-impact-r4.webp';
 import rocketImpactEvoUrl from '../../assets/fx/rocket-modular/rocket-impact-evo.webp';
 import rocketExhaustUrl from '../../assets/fx/rocket-modular/rocket-exhaust.webp';
+import rocketFlameFlipbookUrl from '../../assets/fx/rocket-modular/rocket-flame-flipbook-v2.webp';
 import arenaGroundUrl from '../../assets/map/arena-ground.webp';
 import supportChickR1SheetUrl from '../../assets/companions/support-chick-r1-sheet.webp';
 import supportChickR2SheetUrl from '../../assets/companions/support-chick-r2-sheet.webp';
@@ -57,7 +58,7 @@ import rocketEggR1Url from '../../assets/projectiles/rocket-modular/rocket-egg-r
 import rocketEggR2Url from '../../assets/projectiles/rocket-modular/rocket-egg-r2.webp';
 import rocketEggR3Url from '../../assets/projectiles/rocket-modular/rocket-egg-r3.webp';
 import rocketEggR4Url from '../../assets/projectiles/rocket-modular/rocket-egg-r4.webp';
-import rocketEggEvoUrl from '../../assets/projectiles/rocket-modular/rocket-egg-evo.webp';
+import rocketEggEvoUrl from '../../assets/projectiles/rocket-modular/rocket-hull-evo-v2.webp';
 import evoSunshotArrayProjectileUrl from '../../assets/projectiles/evolutions/evo-sunshot-array-projectile.webp';
 import evoSiegebreakerShellProjectileUrl from '../../assets/projectiles/evolutions/evo-siegebreaker-shell-projectile.webp';
 import evoTempestCrownProjectileUrl from '../../assets/projectiles/evolutions/evo-tempest-crown-projectile.webp';
@@ -213,7 +214,8 @@ export function preloadGameAssets(scene) {
     ['rocket-impact-r3', rocketImpactR3Url],
     ['rocket-impact-r4', rocketImpactR4Url],
     ['rocket-impact-evo', rocketImpactEvoUrl],
-    ['rocket-exhaust', rocketExhaustUrl]
+    ['rocket-exhaust', rocketExhaustUrl],
+    ['rocket-flame-source', rocketFlameFlipbookUrl]
   ].forEach(([key, url]) => scene.load.image(key, url));
   scene.load.image('arena-ground', arenaGroundUrl);
   [

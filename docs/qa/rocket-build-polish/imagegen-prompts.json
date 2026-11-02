@@ -1,0 +1,22 @@
+{
+  "mode": "Built-in image_gen tool",
+  "created": "2026-11-02",
+  "scope": "Local review only; not committed, pushed or published",
+  "assets": [
+    {
+      "source": "art-source/projectiles/rocket-modular/rocket-hull-evo-v2.png",
+      "runtime": "src/assets/projectiles/rocket-modular/rocket-hull-evo-v2.webp",
+      "prompt": "Use case: precise-object-edit. Asset type: transparent 2D game projectile sprite for Rooster Rage. Input image 1 is the edit target: the existing evolved black-and-gold egg rocket; its nose on the right was visibly chopped off. Input image 2 is supporting style/shape reference for a complete pointed rocket nose. Reconstruct the entire right-facing EVO rocket with a fully visible pointed red-orange nose, continuing the existing rounded obsidian eggshell body, glowing gold seams and gold metal bands. Preserve the existing rich hand-painted cartoon game style, red swept fins, left-facing THREE vertically stacked exhaust nozzles, and nearly side-on slight top-down viewing angle. This is a SINGLE rocket hull, not three missiles. Remove all fire, flames, smoke, glow halos and exhaust from the nozzles, because they will be animated separately in the game. Keep the nozzle mouths dark and fully visible. Center the complete silhouette on a genuine transparent canvas, with at least 12% empty transparent padding on every side, especially beyond the pointed nose. No cropping anywhere, no text, no ground shadow, no background, no extra objects. Landscape composition, full object intact."
+    },
+    {
+      "source": "art-source/fx/rocket-modular/rocket-flame-flipbook-v2.png",
+      "runtime": "src/assets/fx/rocket-modular/rocket-flame-flipbook-v2.webp",
+      "prompt": "Use case: stylized-concept. Asset type: game VFX animation sprite sheet, actual transparent background. Create EIGHT consecutive animation frames of one lively rocket engine jet, arranged in a precise 4-column by 2-row regular grid, equal-sized cells, no visible grid lines. Each cell contains only the flame, not a rocket, nozzle, machinery, smoke cloud or any text. The narrow nozzle attachment is at the RIGHT end of each flame, tail streams horizontally LEFT. Side view. Every flame is centered at the same position, on a transparent background, with ample padding, fully isolated within its own cell. White-hot short core near the right root, luminous buttery yellow through the center, golden orange and amber wisps at the long left tail. Rich hand-painted cartoon fantasy game VFX matching polished egg rockets; textured, irregular flickering lobes and curled delicate tapered wisps, soft feathered transparent edges. Avoid flat triangles, hard vector edges, solid geometric cones or stickers. Eight subtly different flame shapes with consistent root location, each frame has a narrower root and expands a little then tapers to several flowing tails; plausible seamless looping animation. Compact horizontal jets approximately 3:1 width to height. A single clean 4x2 sprite sheet, wide canvas, no labels, no outer glow filling the empty cells, preserve alpha transparency.",
+      "alphaCorrectionPrompt": "Use case: background-extraction. Edit target: the provided eight-frame flame sprite sheet. Remove its unwanted semi-opaque white background COMPLETELY. The entire space outside the eight flame silhouettes must have true alpha=0, not white, gray, checkerboard pixels, or translucent white film. Preserve the eight hand-painted gold-orange flame shapes, their bright white-hot centers, four columns and two rows, and the right-side nozzle roots exactly. Preserve soft feathered transparent orange wisps at the edges. Do not change the 4 by 2 equal-cell layout or add anything. This image is a production animation sprite sheet to composite over dark game scenery. Background must be genuinely transparent."
+    }
+  ],
+  "export": {
+    "hull": "ffmpeg crop=920:824:394:76, scale=-1:288, pad=512:320 centered with alpha; lossless WebP",
+    "flames": "ffmpeg scale=1024:512; lossless WebP; 4x2 cells, original alpha preserved"
+  }
+}

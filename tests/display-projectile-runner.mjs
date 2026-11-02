@@ -116,10 +116,9 @@ try {
               f.moves++;
               f.maxAngleError = Math.max(f.maxAngleError, angleError(p.sprite.rotation, Math.atan2(dy,dx)));
             }
-            const rear = p.sprite.displayWidth * .32;
+            const nozzle = p.exhaust.getNozzlePosition();
             f.maxExhaustError = Math.max(f.maxExhaustError,
-              Math.hypot(p.trail.x - (p.sprite.x - Math.cos(p.sprite.rotation)*rear),
-                p.trail.y - (p.sprite.y - Math.sin(p.sprite.rotation)*rear)));
+              Math.hypot(p.trail.x - nozzle.x, p.trail.y - nozzle.y));
             f.previous = {x:p.sprite.x,y:p.sprite.y};
             // Moving targets require continued steering, including diagonal
             // and reverse turns rather than only testing straight launches.
