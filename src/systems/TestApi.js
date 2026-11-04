@@ -247,14 +247,12 @@ export function installTestApi(scene) {
         life: zone.life,
         maxLife: zone.maxLife,
         collapsing: zone.collapsing,
-        alpha: zone.portal.alpha,
-        frame: Number(zone.portal.frame?.name ?? -1),
-        portalWidth: zone.portal.displayWidth,
-        portalHeight: zone.portal.displayHeight,
-        fieldWidth: zone.outer.displayWidth,
-        fieldHeight: zone.outer.displayHeight,
-        coreWidth: zone.core.displayWidth,
-        coreHeight: zone.core.displayHeight,
+        visualVariant: zone.visual.kind === 'a' ? 'vortex' : 'rift',
+        alpha: zone.visual.envelope,
+        fieldWidth: zone.visual.ground.displayWidth,
+        fieldHeight: zone.visual.ground.displayHeight,
+        coreWidth: zone.visual.coreWidth * zone.visual.size,
+        coreHeight: zone.visual.coreHeight * zone.visual.size,
         pullOuter: zone.pullOuter,
         pullInner: zone.pullInner,
         pullSamples: {
@@ -262,8 +260,7 @@ export function installTestApi(scene) {
           middle: zone.getPullSpeed(zone.radius * 0.5),
           inner: zone.getPullSpeed(zone.radius * 0.15)
         },
-        moteCount: zone.motes.length,
-        accentRingCount: zone.accentRings.length
+        moteCount: zone.visual.sparks.length
       })),
       laserVisuals: scene.laserComb.activeVisuals.size,
       burningEnemies: scene.enemies.filter((enemy) => enemy.sprite.active && enemy.burnUntil > scene.time.now)

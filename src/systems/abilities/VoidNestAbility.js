@@ -14,19 +14,8 @@ export class VoidNestAbility extends TimedAbility {
       this.nextAt = time + 900;
       return;
     }
-    const openingSize = this.evolved ? 92 : 58 + this.rank * 6;
-    const ring = this.scene.add.ellipse(target.x, target.y, openingSize, openingSize * 0.58, 0x9b5cff, 0.08)
-      .setStrokeStyle(this.evolved ? 3 : 2, 0xc9a8ff, 0.72)
-      .setDepth(8);
-    this.scene.tweens.add({
-      targets: ring,
-      alpha: 0,
-      scale: 1.65,
-      duration: 240,
-      onComplete: () => ring.destroy()
-    });
     this.scene.audio.play('void-open');
-    this.scene.voidZones.filter((activeZone) => activeZone.active).forEach((activeZone) => activeZone.destroy());
+    this.scene.voidZones.filter((activeZone) => activeZone.active).forEach((activeZone) => activeZone.destroy(true));
     const zone = new VoidZone(this.scene, target.x, target.y, this.rank, this.evolved);
     this.lastSynergyActive = zone.synergyActive;
     this.scene.voidZones.push(zone);

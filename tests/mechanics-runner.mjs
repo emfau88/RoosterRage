@@ -1068,9 +1068,9 @@ async function testAreaEffectReadability(browser) {
     assert(charge.voids[0]?.maxLife === 4200
       && charge.voids[0]?.radius === 132
       && charge.voids[0]?.renderStyle === 'gravity-field'
-      && charge.voids[0]?.alpha >= 0.3
-      && charge.voids[0]?.portalWidth > charge.voids[0]?.portalHeight * 1.55
-      && charge.voids[0]?.portalWidth < charge.voids[0]?.fieldWidth * 0.4
+      && charge.voids[0]?.visualVariant === 'vortex'
+      && charge.voids[0]?.coreWidth > charge.voids[0]?.coreHeight * 1.55
+      && charge.voids[0]?.coreWidth < charge.voids[0]?.fieldWidth * 0.4
       && charge.voids[0]?.pullSamples.outer < charge.voids[0]?.pullSamples.middle
       && charge.voids[0]?.pullSamples.middle < charge.voids[0]?.pullSamples.inner,
     'Void Nest did not start its perspective-correct 4.2 second pull presentation.', charge);
@@ -1078,6 +1078,7 @@ async function testAreaEffectReadability(browser) {
     await page.waitForTimeout(210);
     const beam = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(beam.laserVisuals >= 1, 'Laser disappeared before its readable beam phase.', beam);
+    assert(beam.voids[0]?.alpha > 0.3, 'Void did not open visibly.', beam);
     await page.screenshot({ path: path.join(artifactDir, 'laser-readability-runtime.png') });
 
     await page.waitForTimeout(700);
@@ -1096,7 +1097,8 @@ async function testAreaEffectReadability(browser) {
       && Math.abs(settled.hazards[0]?.groundWidth - 181.8) < 3
       && Math.abs(settled.hazards[0]?.groundHeight - 100.8) < 2,
     'Molotov did not enter the simple rank-one ground-fire presentation.', settled);
-    assert(settled.voids[0]?.frame === -1 && settled.voids[0]?.alpha >= 0.3,
+    assert(settled.voids[0]?.visualVariant === 'vortex' && settled.voids[0]?.alpha >= 0.3
+      && settled.voids[0]?.coreWidth < settled.voids[0]?.fieldWidth * 0.25,
       'Void Nest did not hold its compact gravity core.', settled);
     assert(settled.burningEnemies[0]?.overlay === 'molotov-ground-flame-orange'
       && settled.burningEnemies[0]?.animation === 'molotov-ground-flame-orange-loop'

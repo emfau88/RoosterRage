@@ -333,10 +333,10 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
         && flight.damage === expected.damage
         && flight.radius === expected.radius
       )), `Rocket Egg ${stage} has the wrong staged flight profile.`, { expected, flightState });
-    await page.waitForFunction((impactTexture) => (
+    await page.waitForFunction(({ impactTexture, stage }) => (
       window.__ROOSTER_TEST__.getAreaEffectState().rocketImpacts
-        .some((impact) => impact.texture === impactTexture)
-    ), expected.impact, { timeout: 1400 });
+        .some((impact) => impact.texture === impactTexture && impact.stage === stage && impact.volumeScales.length > 0)
+    ), { impactTexture: expected.impact, stage }, { timeout: 1400 });
     const impactState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(impactState.rocketImpacts.some((impact) => (
       impact.texture === expected.impact
@@ -354,11 +354,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   }
   if (weapon.id === 'void-nest') {
     const visualExpectations = {
-      r1: { zones: 1, radius: 132, life: 4200, motes: 4, rings: 0 },
-      r2: { zones: 1, radius: 150, life: 4800, motes: 5, rings: 1 },
-      r3: { zones: 1, radius: 170, life: 5400, motes: 6, rings: 1 },
-      r4: { zones: 1, radius: 190, life: 6000, motes: 7, rings: 2 },
-      evo: { zones: 1, radius: 225, life: 7200, motes: 8, rings: 2 }
+      r1: { zones: 1, radius: 132, life: 4200 },
+      r2: { zones: 1, radius: 150, life: 4800 },
+      r3: { zones: 1, radius: 170, life: 5400 },
+      r4: { zones: 1, radius: 190, life: 6000 },
+      evo: { zones: 1, radius: 225, life: 7200 }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.voids.length === expected.zones
@@ -366,11 +366,10 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
         zone.renderStyle === 'gravity-field'
         && zone.radius === expected.radius
         && zone.maxLife === expected.life
-        && zone.moteCount === expected.motes
-        && zone.accentRingCount === expected.rings
+        && zone.visualVariant === (stage === 'evo' ? 'rift' : 'vortex')
+        && zone.moteCount > 0
         && zone.fieldWidth > zone.fieldHeight * 1.55
-        && zone.portalWidth > zone.portalHeight * 1.55
-        && zone.portalWidth < zone.fieldWidth * 0.4
+        && (stage === 'evo' ? zone.coreHeight > zone.coreWidth * 2 : zone.coreWidth > zone.coreHeight * 1.55)
         && zone.coreWidth < zone.fieldWidth * 0.25
         && zone.pullSamples.outer < zone.pullSamples.middle
         && zone.pullSamples.middle < zone.pullSamples.inner

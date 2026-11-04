@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rooster Rage · Void-Entwürfe</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#131d1a;color:#f5efdf;font-family:Arial,sans-serif}main{max-width:1280px;margin:auto}
+    header{height:92px;padding:0 26px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #3e4547}.eyebrow{font-size:11px;letter-spacing:2px;color:#c3b5e0;margin-bottom:9px}h1{font-size:27px;margin:0;font-weight:600}.badge{font-size:12px;border:1px solid #695e7b;border-radius:20px;padding:8px 12px;color:#dfd2ec}
+    nav{min-height:62px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px}a,button,select{font:inherit;font-size:13px;background:#2b2836;color:#f6eefa;border:1px solid #62566d;border-radius:6px;padding:8px 12px;text-decoration:none;cursor:pointer}a[aria-current]{background:#625175}label{font-size:13px;display:flex;gap:8px;align-items:center}input{width:150px;accent-color:#c6a6ec}
+    canvas{display:block;width:100%!important;height:auto!important}footer{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:12px;color:#c2c7ba}.capture nav{display:none}.capture footer{height:44px}
+    @media(max-width:700px){header{padding:0 15px;height:92px}h1{font-size:20px}.badge,.technical{display:none}footer{padding:0 15px;font-size:11px}}
+  </style>
+</head>
+<body><main>
+  <header><div><div class="eyebrow">ROOSTER RAGE · VOID-EFFEKTE</div><h1 id="title">A · Sogwirbel</h1></div><span class="badge">Freigegebene Entwürfe · Vergleich</span></header>
+  <nav aria-label="Vorschau">
+    <a href="?view=a" data-view="a">A · Sogwirbel</a><a href="?view=b" data-view="b">B · Void-Spalt</a><a href="?view=compare" data-view="compare">EVO direkt vergleichen</a><a href="?view=current" data-view="current">Bisheriger Effekt</a>
+    <button id="pause">Pause</button><label>Tempo <select id="speed"><option value="1">Normal</option><option value="0.5">½ Geschwindigkeit</option></select></label><label>Zeit <input id="scrub" type="range" min="0" max="8399" value="0" step="1"></label>
+  </nav>
+  <div id="stage" aria-label="Zwei Void-Stufen auf dem Spieluntergrund, im originalen Figurenmaßstab"></div>
+  <footer><span id="phase">Öffnung → Sog → Zusammenfallen</span><span class="technical">Spielmaßstab · illustrative Gegnerbewegung · isolierte Vorschau</span></footer>
+</main><script type="module" src="./study.js"></script></body></html>

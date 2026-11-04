@@ -1,0 +1,150 @@
+[
+  {
+    "id": "laser-r4",
+    "elapsed": 0.2163466666666665,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 2,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "laser-evo",
+    "elapsed": 0.23304999999999987,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 4,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "lightning-r4",
+    "elapsed": 0.033273333333333294,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [
+      {
+        "rank": 4,
+        "evolved": false,
+        "age": 33.2733333333333,
+        "life": 220,
+        "segments": 6
+      }
+    ],
+    "laserVisuals": 0,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "lightning-evo",
+    "elapsed": 0.03329333333333328,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [
+      {
+        "rank": 4,
+        "evolved": true,
+        "age": 33.29333333333328,
+        "life": 245,
+        "segments": 5
+      }
+    ],
+    "laserVisuals": 0,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "golden-r4",
+    "elapsed": 0.1997866666666667,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 0,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "orbit-evo",
+    "elapsed": 0.5660166666666665,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 0,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "molotov-evo",
+    "elapsed": 1.1149066666666663,
+    "enemies": 5,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 0,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "boss-fireball",
+    "elapsed": 0.18308666666666687,
+    "enemies": 6,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 0,
+    "enemyProjectiles": [
+      {
+        "texture": "boss-fireball",
+        "width": 65.88912714907748,
+        "age": 183.08666666666687
+      }
+    ],
+    "error": null
+  },
+  {
+    "id": "evo-impacts",
+    "elapsed": 0.06655333333333338,
+    "enemies": 0,
+    "renderer": 1,
+    "voids": [],
+    "lightning": [],
+    "laserVisuals": 0,
+    "enemyProjectiles": [],
+    "error": null
+  },
+  {
+    "id": "void-overlap",
+    "elapsed": 1.2979266666666682,
+    "enemies": 6,
+    "renderer": 1,
+    "voids": [
+      {
+        "kind": "b",
+        "evolved": true,
+        "radius": 225,
+        "age": 1297.9266666666692,
+        "active": true,
+        "opacity": 1,
+        "objects": 60,
+        "coreWidth": 46,
+        "coreHeight": 118,
+        "retiring": false,
+        "particles": 54,
+        "finite": true,
+        "particleScalesUniform": true
+      }
+    ],
+    "lightning": [],
+    "laserVisuals": 4,
+    "enemyProjectiles": [],
+    "error": null
+  }
+]

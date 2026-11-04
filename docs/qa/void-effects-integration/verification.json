@@ -1,0 +1,355 @@
+{
+  "status": "passed",
+  "results": [
+    {
+      "renderer": "WEBGL",
+      "parity": {
+        "results": [
+          {
+            "stage": 1,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 132,
+              "damage": 11,
+              "maxLife": 4200,
+              "tickMs": 360,
+              "pullOuter": 24,
+              "pullInner": 110
+            },
+            "ticks": 33
+          },
+          {
+            "stage": 2,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 150,
+              "damage": 15,
+              "maxLife": 4800,
+              "tickMs": 360,
+              "pullOuter": 28,
+              "pullInner": 135
+            },
+            "ticks": 52
+          },
+          {
+            "stage": 3,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 170,
+              "damage": 19,
+              "maxLife": 5400,
+              "tickMs": 360,
+              "pullOuter": 32,
+              "pullInner": 165
+            },
+            "ticks": 56
+          },
+          {
+            "stage": 4,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 190,
+              "damage": 23,
+              "maxLife": 6000,
+              "tickMs": 360,
+              "pullOuter": 38,
+              "pullInner": 205
+            },
+            "ticks": 64
+          },
+          {
+            "stage": 5,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 225,
+              "damage": 28,
+              "maxLife": 7200,
+              "tickMs": 290,
+              "pullOuter": 44,
+              "pullInner": 255
+            },
+            "ticks": 92
+          },
+          {
+            "stage": 1,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 132,
+              "damage": 11,
+              "maxLife": 4200,
+              "tickMs": 360,
+              "pullOuter": 30,
+              "pullInner": 137.5
+            },
+            "ticks": 33
+          },
+          {
+            "stage": 2,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 150,
+              "damage": 15,
+              "maxLife": 4800,
+              "tickMs": 360,
+              "pullOuter": 35,
+              "pullInner": 168.75
+            },
+            "ticks": 52
+          },
+          {
+            "stage": 3,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 170,
+              "damage": 19,
+              "maxLife": 5400,
+              "tickMs": 360,
+              "pullOuter": 40,
+              "pullInner": 206.25
+            },
+            "ticks": 56
+          },
+          {
+            "stage": 4,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 190,
+              "damage": 23,
+              "maxLife": 6000,
+              "tickMs": 360,
+              "pullOuter": 47.5,
+              "pullInner": 256.25
+            },
+            "ticks": 64
+          },
+          {
+            "stage": 5,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 225,
+              "damage": 28,
+              "maxLife": 7200,
+              "tickMs": 290,
+              "pullOuter": 55,
+              "pullInner": 318.75
+            },
+            "ticks": 92
+          }
+        ],
+        "objectsClean": true,
+        "listenersClean": true
+      },
+      "lifecycle": {
+        "before": {
+          "kind": "b",
+          "evolved": true,
+          "radius": 225,
+          "age": 916.4599999999986,
+          "active": true,
+          "opacity": 1,
+          "objects": 60,
+          "coreWidth": 46,
+          "coreHeight": 118,
+          "retiring": false,
+          "particles": 54,
+          "finite": true,
+          "particleScalesUniform": true
+        },
+        "pauseHeld": true,
+        "tailPauseHeld": true,
+        "replaces": true,
+        "tailClean": true,
+        "listenerClean": true,
+        "activeFields": 1,
+        "secondAge": 959.9966666666667
+      },
+      "restartClean": true,
+      "errors": []
+    },
+    {
+      "renderer": "CANVAS",
+      "parity": {
+        "results": [
+          {
+            "stage": 1,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 132,
+              "damage": 11,
+              "maxLife": 4200,
+              "tickMs": 360,
+              "pullOuter": 24,
+              "pullInner": 110
+            },
+            "ticks": 33
+          },
+          {
+            "stage": 2,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 150,
+              "damage": 15,
+              "maxLife": 4800,
+              "tickMs": 360,
+              "pullOuter": 28,
+              "pullInner": 135
+            },
+            "ticks": 52
+          },
+          {
+            "stage": 3,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 170,
+              "damage": 19,
+              "maxLife": 5400,
+              "tickMs": 360,
+              "pullOuter": 32,
+              "pullInner": 165
+            },
+            "ticks": 56
+          },
+          {
+            "stage": 4,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 190,
+              "damage": 23,
+              "maxLife": 6000,
+              "tickMs": 360,
+              "pullOuter": 38,
+              "pullInner": 205
+            },
+            "ticks": 64
+          },
+          {
+            "stage": 5,
+            "synergy": false,
+            "equal": true,
+            "config": {
+              "radius": 225,
+              "damage": 28,
+              "maxLife": 7200,
+              "tickMs": 290,
+              "pullOuter": 44,
+              "pullInner": 255
+            },
+            "ticks": 92
+          },
+          {
+            "stage": 1,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 132,
+              "damage": 11,
+              "maxLife": 4200,
+              "tickMs": 360,
+              "pullOuter": 30,
+              "pullInner": 137.5
+            },
+            "ticks": 33
+          },
+          {
+            "stage": 2,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 150,
+              "damage": 15,
+              "maxLife": 4800,
+              "tickMs": 360,
+              "pullOuter": 35,
+              "pullInner": 168.75
+            },
+            "ticks": 52
+          },
+          {
+            "stage": 3,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 170,
+              "damage": 19,
+              "maxLife": 5400,
+              "tickMs": 360,
+              "pullOuter": 40,
+              "pullInner": 206.25
+            },
+            "ticks": 56
+          },
+          {
+            "stage": 4,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 190,
+              "damage": 23,
+              "maxLife": 6000,
+              "tickMs": 360,
+              "pullOuter": 47.5,
+              "pullInner": 256.25
+            },
+            "ticks": 64
+          },
+          {
+            "stage": 5,
+            "synergy": true,
+            "equal": true,
+            "config": {
+              "radius": 225,
+              "damage": 28,
+              "maxLife": 7200,
+              "tickMs": 290,
+              "pullOuter": 55,
+              "pullInner": 318.75
+            },
+            "ticks": 92
+          }
+        ],
+        "objectsClean": true,
+        "listenersClean": true
+      },
+      "lifecycle": {
+        "before": {
+          "kind": "b",
+          "evolved": true,
+          "radius": 225,
+          "age": 915.3633333333323,
+          "active": true,
+          "opacity": 1,
+          "objects": 60,
+          "coreWidth": 46,
+          "coreHeight": 118,
+          "retiring": false,
+          "particles": 54,
+          "finite": true,
+          "particleScalesUniform": true
+        },
+        "pauseHeld": true,
+        "tailPauseHeld": true,
+        "replaces": true,
+        "tailClean": true,
+        "listenerClean": true,
+        "activeFields": 1,
+        "secondAge": 949.8100000000003
+      },
+      "restartClean": true,
+      "errors": []
+    }
+  ]
+}
