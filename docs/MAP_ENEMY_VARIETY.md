@@ -21,6 +21,8 @@ Alle bisherigen neuen Auren, Raketen mit stufenabhängigen Impacts, Void A für 
 
 `CombatEffectVisuals.js` übernimmt die geprüfte Comic-Choreografie. Die originale Boss-Projektilphysik bleibt erhalten; Pooling stellt bei normalen Projektilen die Sichtbarkeit wieder her. Laser behalten ihre Schadenszeitpunkte, Richtungen, Reichweiten und Trefferbreiten. Molotov behält Tickrate, Lebensdauer, Radius, Schaden und Burn-Regeln. Die Darstellung verwendet weniger, unabhängig animierte Flammen und einen offenen Rand. Timer und Darstellung respektieren Pause und Szenenwechsel.
 
+Die zusätzliche Paketprüfung deckte beim kalten Start einen Unterschied zwischen Szenenzeit und geglätteter Phaser-Timerzeit auf. Zeitlich begrenzte Laser-/Treffereffekte verwenden deshalb denselben Timer-Fortschritt wie die Schadensauslösung; ein stockender Frame kann den Effekt nicht mehr vor einem noch ausstehenden Treffer aufräumen. `timed-combat-visual.test.mjs` sichert diesen Fall und das Aufräumen beim Szenenwechsel ab. `portal-effects-runner.mjs` prüft alle Laser-/Molotov-/Void-Stufen und Boss-Feuerball direkt an den ausgelieferten Objekten, ohne Quellimporte oder öffentliche Test-API.
+
 ## Prüfungen
 
 - `map-enemy-variety.test.mjs`: 1800 Wellenfälle sowie Verteilung über 750 Map-/Seed-Kombinationen, Grenzwerte, Einführungswellen, alte Besetzung, Skins, Boss-Ausnahme und Zufallszustand.

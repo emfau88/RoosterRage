@@ -330,7 +330,7 @@ async function run() {
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
       const gameplayRunners = [
-        ...['loading-art', 'user-sounds', 'enemy-auras', 'enemy-aura-layers', 'approved-effects', 'void-effects', 'display-projectile', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
+        ...['loading-art', 'user-sounds', 'enemy-auras', 'enemy-aura-layers', 'approved-effects', 'portal-effects', 'display-projectile', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
           'pickup-spawn-frame', 'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
           name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
         })),
