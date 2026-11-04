@@ -35,11 +35,11 @@ try {
         s.molotovEgg.createImpact(p.x + 190, p.y + 80, rank, evolved);
         const nearest = !!s.findNearestEnemy();
         s.laserComb.rank = rank; s.laserComb.evolved = evolved; s.laserComb.activate(s.time.now);
+        const laser = [...s.laserComb.activeVisuals].at(-1)?.visual;
         s.voidNest.rank = rank; s.voidNest.evolved = evolved; s.voidNest.activate(s.time.now);
         await delay(210);
         const zone = s.hazardZones[0], voidZone = s.voidZones.find(zone => zone.active);
         const frames = zone.heatSpots.map(flame => flame.sprite.frame.name);
-        const laser = [...s.laserComb.activeVisuals][0]?.visual;
         const laserDrawing = !!laser?.beam.commandBuffer.length;
         await delay(130);
         stages.push({ stage, flameCount: zone.heatSpots.length, style: zone.renderStyle,
