@@ -3,6 +3,8 @@ dist/
 dist-pages/
 dist-release/
 dist-standalone/
+dist-y8/
+portal-updates/
 test-results/
 debug.log
 .tmp-audio-audit/

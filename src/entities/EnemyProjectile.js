@@ -1,3 +1,6 @@
+import { BossFireballVisual } from '../systems/CombatEffectVisuals.js';
+import { runCombatVisual } from '../systems/TimedCombatVisual.js';
+
 export class EnemyProjectile {
   constructor(scene) {
     this.scene = scene;
@@ -36,6 +39,7 @@ export class EnemyProjectile {
       this.sprite.setTint(this.color);
     }
     this.sprite.setScale(this.baseScale);
+    this.sprite.setAlpha(1);
     this.sprite.setDepth(config.depth ?? 5);
     if (config.tint === false) {
       this.sprite.clearTint();
@@ -59,6 +63,13 @@ export class EnemyProjectile {
       .setScale(1)
       .setActive(true)
       .setVisible(true);
+    this.fireballVisual?.destroy();this.fireballVisual=null;
+    if(config.texture==='boss-fireball') {
+      this.fireballVisual=new BossFireballVisual(this.scene);
+      // Keep the original Arcade body, radius and pulsing scale for collisions.
+      this.sprite.setAlpha(0);this.trail.setVisible(false);this.dangerRing.setVisible(false);
+      this.fireballVisual.draw(0,{x,y},angle,Infinity,this.speed/1000,{x,y});
+    }
     this.setVelocity();
     return this;
   }
@@ -84,6 +95,7 @@ export class EnemyProjectile {
     this.trail.setAlpha(Math.max(0.08, this.life / 2600) * this.trailAlpha);
     this.dangerRing.setPosition(this.sprite.x, this.sprite.y);
     this.dangerRing.setScale(this.heavy ? 1 + Math.sin(this.age * 0.014) * 0.13 : 1);
+    this.fireballVisual?.draw(this.age,this.sprite,this.angle,Infinity,this.speed/1000,this.sprite);
     if (this.life <= 0) {
       this.destroy();
     }
@@ -96,15 +108,20 @@ export class EnemyProjectile {
     this.sprite.setVelocity(Math.cos(this.angle) * this.speed, Math.sin(this.angle) * this.speed);
   }
 
-  destroy() {
+  destroy({ impact = false } = {}) {
     if (this.destroyed) {
       return;
     }
     this.destroyed = true;
+    if(impact&&this.fireballVisual) {
+      const visual=new BossFireballVisual(this.scene),point={x:this.sprite.x,y:this.sprite.y},angle=this.angle,speed=this.speed;
+      runCombatVisual(this.scene,visual,600,age=>visual.draw(age,point,angle,0,speed/1000,point));
+    }
     this.scene.objectPools.release(this);
   }
 
   deactivate() {
+    this.fireballVisual?.destroy();this.fireballVisual=null;
     this.sprite.setVelocity(0, 0);
     this.sprite.disableBody(true, true);
     this.trail.setActive(false).setVisible(false);
@@ -112,6 +129,7 @@ export class EnemyProjectile {
   }
 
   dispose() {
+    this.fireballVisual?.destroy();this.fireballVisual=null;
     this.trail.destroy();
     this.dangerRing.destroy();
     this.sprite.destroy();

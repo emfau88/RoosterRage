@@ -13,12 +13,13 @@ export default defineConfig(({ command, mode }) => {
   const stormVersion = (process.env.VITE_STORM_VISUAL_VERSION ?? loadEnv(mode, projectRoot, 'VITE_').VITE_STORM_VISUAL_VERSION) === 'final' ? 'Final' : 'Mascot';
   const standaloneBuild = mode === 'standalone';
   const releaseBuild = mode === 'release';
-  const gameOnlyBuild = standaloneBuild || releaseBuild;
+  const y8Build = mode === 'y8';
+  const gameOnlyBuild = standaloneBuild || releaseBuild || y8Build;
   const outputDirectory = pagesBuild
     ? 'dist-pages'
     : standaloneBuild
       ? 'dist-standalone'
-      : releaseBuild ? 'dist-release' : 'dist';
+      : releaseBuild ? 'dist-release' : y8Build ? 'dist-y8' : 'dist';
 
   return {
     base: pagesBuild ? '/RoosterRage/' : './',

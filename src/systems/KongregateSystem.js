@@ -160,4 +160,6 @@ export class KongregateSystem {
   }
 }
 
-export const kongregate = new KongregateSystem({ enabled: import.meta.env?.MODE === 'release' });
+// Keep the dedicated Y8 distribution free of another portal's SDK and score code.
+export const kongregate = import.meta.env?.MODE === 'y8'
+  ? null : new KongregateSystem({ enabled: import.meta.env?.MODE === 'release' });

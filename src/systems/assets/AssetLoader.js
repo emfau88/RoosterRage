@@ -8,6 +8,11 @@ import enemyEliteRunnerRunUrl from '@portal-elite-runner';
 import enemyBruteRunUrl from '../../assets/enemies/animations/enemy-brute-run.webp';
 import enemyBossRunUrl from '../../assets/enemies/animations/enemy-boss-run.webp';
 import enemyBruteStompUrl from '../../assets/enemies/animations/enemy-brute-stomp.webp';
+import mapRammerUrl from '../../assets/enemies/map-variants/alley-rammer.webp';
+import mapStomperRunUrl from '../../assets/enemies/map-variants/coop-stomper-run.webp';
+import mapStomperStompUrl from '../../assets/enemies/map-variants/coop-stomper-stomp.webp';
+import alleyKornkrabblerUrl from '../../assets/enemies/map-variants/alley-kornkrabbler.webp';
+import coopKornkrabblerUrl from '../../assets/enemies/map-variants/coop-kornkrabbler.webp';
 import enemySpitterPulseUrl from '../../assets/enemies/animations/enemy-spitter-pulse.webp';
 import enemySpitterRunUrl from '../../assets/enemies/animations/enemy-spitter-run.webp';
 import enemyFanSpitterRecoilUrl from '../../assets/enemies/animations/enemy-fan-spitter-recoil.webp';
@@ -180,6 +185,13 @@ export function preloadGameAssets(scene) {
   scene.load.spritesheet('enemy-brute-run', enemyBruteRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-boss-run', enemyBossRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-brute-stomp', enemyBruteStompUrl, { frameWidth: 256, frameHeight: 256 });
+  [
+    ['enemy-map-rammer-run', mapRammerUrl],
+    ['enemy-map-stomper-run', mapStomperRunUrl],
+    ['enemy-map-stomper-stomp', mapStomperStompUrl],
+    ['enemy-kornkrabbler-alley-run', alleyKornkrabblerUrl],
+    ['enemy-kornkrabbler-coop-run', coopKornkrabblerUrl]
+  ].forEach(([key, url]) => scene.load.spritesheet(key, url, { frameWidth: 256, frameHeight: 256 }));
   scene.load.spritesheet('enemy-spitter-pulse', enemySpitterPulseUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-spitter-run', enemySpitterRunUrl, { frameWidth: 256, frameHeight: 256 });
   scene.load.spritesheet('enemy-fan-spitter-recoil', enemyFanSpitterRecoilUrl, { frameWidth: 256, frameHeight: 256 });

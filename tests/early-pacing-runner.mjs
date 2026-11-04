@@ -100,9 +100,11 @@ async function runScenario(browser, serverUrl, scenario) {
       const api = window.__ROOSTER_TEST__;
       api.unlockAllMeta();
       api.selectMetaChallenge('standard');
+      window.__previousPacingApi = api;
       api.restart();
     });
-    await page.waitForFunction(() => window.__ROOSTER_TEST__?.getChallengeState().id === 'standard');
+    await page.waitForFunction(() => window.__ROOSTER_TEST__ !== window.__previousPacingApi
+      && window.__ROOSTER_TEST__?.getChallengeState().id === 'standard');
     await page.evaluate((rooster) => {
       const api = window.__ROOSTER_TEST__;
       api.selectRooster(rooster);
@@ -167,7 +169,7 @@ async function run() {
   await fs.mkdir(artifactDir, { recursive: true });
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, args: ['--disable-features=NetworkChangeNotifierWin'] });
   try {
     const results = [];
     const failures = [];

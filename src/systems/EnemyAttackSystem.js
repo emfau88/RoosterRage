@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { EnemyProjectile } from '../entities/EnemyProjectile.js';
 import { ENCOUNTER_STANDARDS } from '../data/enemyRoleDefinitions.js';
 import { EnemyAuraVisual, getEnemyAuraGround } from './EnemyAuraVisual.js';
+import { showMapEnemyImpact } from './MapEnemyAbilityVisual.js';
 
 const DANGER_RECOVERY_MS = 180;
 
@@ -61,6 +62,9 @@ export class EnemyAttackSystem {
 
   beginAbility(enemy, player) {
     const ability = enemy.ability;
+    if (Number.isFinite(ability.triggerRange)
+      && !this.withinAbilityRange(enemy, player, ability, ability.triggerRange)) return;
+    if (ability.minRange && this.withinAbilityRange(enemy, player, ability, ability.minRange)) return;
     const projectileCost = this.getNormalProjectileCost(enemy, ability);
     if (projectileCost > 0 && !this.reserveNormalProjectiles(projectileCost)) {
       enemy.nextAbilityAt = this.scene.time.now + 260;
@@ -78,6 +82,10 @@ export class EnemyAttackSystem {
       : ENCOUNTER_STANDARDS.normalTelegraphMs;
     const telegraphMs = Math.max(minimumTelegraph, ability.telegraphMs ?? minimumTelegraph);
     enemy.abilityCharging = true;
+    enemy.abilityAimAngle = ability.lockAim
+      ? Phaser.Math.Angle.Between(enemy.sprite.x, enemy.sprite.y, player.sprite.x, player.sprite.y)
+      : null;
+    if (enemy.attackMovement?.windup === 0) enemy.sprite.setVelocity(0, 0);
     enemy.nextAbilityAt = this.scene.time.now + ability.cooldown;
     this.scene.combatFeedback.showEnemyTelegraph(enemy, player, ability, {
       duration: telegraphMs,
@@ -90,18 +98,20 @@ export class EnemyAttackSystem {
     if (ability.kind === 'summon') {
       this.scene.audio.play('summoner-charge');
     }
+    const activationId = enemy.activationId;
+    const lockedAngle = enemy.abilityAimAngle;
     this.scene.time.delayedCall(telegraphMs, () => {
       this.releaseNormalProjectiles(projectileCost);
-      if (!enemy.sprite.active || !player.sprite.active || enemy.ability !== ability) {
+      if (!enemy.sprite.active || !player.sprite.active || enemy.ability !== ability || enemy.activationId !== activationId) {
         return;
       }
       enemy.abilityCharging = false;
       enemy.markAbilityResolved?.(
-        ability.kind === 'summon' || ability.kind === 'slam' ? 220 : 150,
-        ability.kind === 'dash' ? 160 : 240
+        ability.resolveMs ?? (ability.kind === 'summon' || ability.kind === 'slam' ? 220 : 150),
+        ability.recoveryMs ?? (ability.kind === 'dash' ? 160 : 240)
       );
 
-      const angle = Phaser.Math.Angle.Between(
+      const angle = lockedAngle ?? Phaser.Math.Angle.Between(
         enemy.sprite.x,
         enemy.sprite.y,
         player.sprite.x,
@@ -119,6 +129,7 @@ export class EnemyAttackSystem {
         this.spawnAddsNear(enemy.sprite.x, enemy.sprite.y, ability.count ?? 2);
       } else if (ability.kind === 'dash') {
         enemy.beginDash(angle, ability.speed ?? 430, ability.duration ?? 480);
+        if (ability.visual === 'map-rammer') showMapEnemyImpact(this.scene, enemy, ability, angle);
       } else if (ability.kind === 'slam') {
         this.performSlam(enemy, player, ability);
       }
@@ -128,6 +139,15 @@ export class EnemyAttackSystem {
         ability: ability.kind
       });
     });
+  }
+
+  withinAbilityRange(enemy, player, ability, radius) {
+    if (ability.groundRadiusYRatio) {
+      // Match the compact projected warning exactly, including its foot anchor.
+      const from = getEnemyAuraGround(enemy), to = getEnemyAuraGround(player);
+      return Math.hypot(to.x-from.x, (to.y-from.y)/ability.groundRadiusYRatio) <= radius;
+    }
+    return Phaser.Math.Distance.Between(enemy.sprite.x,enemy.sprite.y,player.sprite.x,player.sprite.y) <= radius;
   }
 
   getNormalProjectileCost(enemy, ability) {
@@ -378,20 +398,13 @@ export class EnemyAttackSystem {
     this.scene.audio.play('brute-stomp');
     const radius = ability.radius ?? 150;
     const ground = getEnemyAuraGround(enemy);
-    const ring = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'danger', radius);
-    this.scene.tweens.add({
-      targets: ring,
-      alpha: 0,
-      scale: 1.12,
-      duration: 260,
-      onComplete: () => ring.destroy()
-    });
-    if (Phaser.Math.Distance.Between(
-      enemy.sprite.x,
-      enemy.sprite.y,
-      player.sprite.x,
-      player.sprite.y
-    ) > radius) {
+    if (ability.visual === 'map-stomper') {
+      showMapEnemyImpact(this.scene, enemy, ability);
+    } else {
+      const ring = new EnemyAuraVisual(this.scene, ground.x, ground.y, 'danger', radius);
+      this.scene.tweens.add({ targets: ring, alpha: 0, scale: 1.12, duration: 260, onComplete: () => ring.destroy() });
+    }
+    if (!this.withinAbilityRange(enemy, player, ability, radius)) {
       return;
     }
     const hpBefore = player.hp;

@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-11-04T19:23:54.815Z",
+  "status": "passed",
+  "headUnchanged": true,
+  "productionDiffUnchanged": true,
+  "indexEmpty": true,
+  "rendererChecks": [
+    {
+      "map": "alley",
+      "renderer": "webgl",
+      "status": "passed"
+    },
+    {
+      "map": "alley",
+      "renderer": "canvas",
+      "status": "passed"
+    },
+    {
+      "map": "coop",
+      "renderer": "webgl",
+      "status": "passed"
+    },
+    {
+      "map": "coop",
+      "renderer": "canvas",
+      "status": "passed"
+    }
+  ],
+  "visualReview": {
+    "views": [
+      "left/right/up/down detail views",
+      "native size on both actual map grounds",
+      "warning",
+      "dash",
+      "stomp impact",
+      "recovery"
+    ],
+    "limitations": [
+      "Preview choreography has no collision or damage simulation; unchanged at user request.",
+      "AI behavior, spawn shares and balance require separate integration and gameplay checks."
+    ]
+  },
+  "media": {
+    "alley-before-after.mp4": {
+      "bytes": 1597576,
+      "sha256": "d59749a3752ae01270d5a450732dd60480f9af45aaadc5b6a1941cdf5465f390",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 732,
+          "nb_read_frames": "154",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "6.416667"
+      }
+    },
+    "alley-before-after.gif": {
+      "bytes": 5062407,
+      "sha256": "d053440be337106f35dcb2514fad2bb6edc8d767a27ec8fe2ed7d723fd30bd02",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1120,
+          "height": 641,
+          "nb_read_frames": "103"
+        }
+      ],
+      "format": {
+        "duration": "6.440000"
+      }
+    },
+    "coop-before-after.mp4": {
+      "bytes": 1877652,
+      "sha256": "99c9aa4a54c103ee167a2309605c167885f6b612758b25b36f899dc3e05abda7",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 732,
+          "nb_read_frames": "154",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "6.416667"
+      }
+    },
+    "coop-before-after.gif": {
+      "bytes": 4739584,
+      "sha256": "082f3c6170c8415f8a166f91505c56a717c6f903bab28ec52c9e16de6184ea10",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1120,
+          "height": 641,
+          "nb_read_frames": "103"
+        }
+      ],
+      "format": {
+        "duration": "6.440000"
+      }
+    }
+  }
+}

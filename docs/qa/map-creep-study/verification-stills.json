@@ -1,0 +1,2661 @@
+{
+  "generatedAt": "2026-11-04T19:12:12.898Z",
+  "status": "passed",
+  "previewOnly": true,
+  "productionDiffUnchanged": true,
+  "controls": [
+    "pause",
+    "resume",
+    "half speed",
+    "scrub",
+    "map navigation"
+  ],
+  "sourceHashes": {
+    "study.js": "6c5802c5f838fba55e8c2990e04c6776d90c94cbf7ca9ad719f62281d9d8c664",
+    "index.html": "ffdb5cb125b7fa9de04259422dfcb6d167bb99b4d3cd02c4a56f688ad920b194",
+    "frame-layout.json": "63da28c679ee20ca73e426d2607ea720ec24e096bf3bcf541eacb50550504d57",
+    "assets/alley-rammer.png": "f256a3badec33f03926e0085724ed9351634ad1ac42f6cdf419324360b578cfb",
+    "assets/coop-stomper-run.png": "ecf68b96aa9e6e63b1cd5441e5960de6ef9e673bfba4744f0a4fa7124cc842ae",
+    "assets/alley-kornkrabbler.png": "54cb507c59476c28ec2c4352cb88f4b3b00ea10bda8cabb73fcbfe2c3a29125b",
+    "assets/coop-kornkrabbler.png": "07bae93ef96d57933e65a163a22df25a22be232d55a6bd4a633fe72a6b138b83",
+    "assets/coop-stomper-stomp.png": "f39571dc36459f3c0f04223cab66116794d47e2862e287f93c2835bdf34003ff"
+  },
+  "results": [
+    {
+      "map": "alley",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "stableObjectCount": 56,
+      "errors": [],
+      "samples": [
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 7,
+                "x": 172.05882352941177,
+                "y": 462.3529411764706,
+                "width": 56.32
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 7,
+                "x": 165,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 6,
+                "x": 251.52941176470588,
+                "y": 456.1764705882353,
+                "width": 56.32
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 227.8171136273387,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 6,
+                "x": 296.94117647058823,
+                "y": 452.6470588235294,
+                "width": 56.32
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 228.43991419204394,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1660,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 4,
+                "x": 326.45882352941175,
+                "y": 450.3529411764706,
+                "width": 56.32
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 227.51868214408967,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1740,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 5,
+                "x": 332.9,
+                "y": 448.4,
+                "width": 56.32
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Sprint · feste Richtung",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 244,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 7,
+                "x": 340.5,
+                "y": 442,
+                "width": 56.32
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            },
+            {
+              "state": "Sprint · feste Richtung",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 7,
+                "x": 308,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 5,
+                "x": 350,
+                "y": 434,
+                "width": 56.32
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Sprint · feste Richtung",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 388,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 2400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 4,
+                "x": 364.25,
+                "y": 422,
+                "width": 56.32
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Erholungsfenster",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 4,
+                "x": 448,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 4,
+                "x": 402.25,
+                "y": 390,
+                "width": 56.32
+              },
+              "detailFrame": 8,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 0,
+                "x": 413.68421052631584,
+                "y": 450.4736842105263,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 8,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 4800,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 0,
+                "x": 279.258064516129,
+                "y": 386.96774193548384,
+                "width": 56.32
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 0,
+                "x": 283.12711111111116,
+                "y": 396.8791111111111,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 5850,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 2,
+                "x": 165.1603498542274,
+                "y": 449.536443148688,
+                "width": 56.32
+              },
+              "detailFrame": 14,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 2,
+                "x": 158.27511111111107,
+                "y": 455.4831111111111,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 14,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 6300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 7,
+                "x": 138,
+                "y": 465,
+                "width": 56.32
+              },
+              "detailFrame": 15,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 7,
+                "x": 138,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 15,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "previewOnly": true
+        }
+      ]
+    },
+    {
+      "map": "alley",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "stableObjectCount": 56,
+      "errors": [],
+      "samples": [
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 7,
+                "x": 172.05882352941177,
+                "y": 462.3529411764706,
+                "width": 56.32
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 7,
+                "x": 165,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 6,
+                "x": 251.52941176470588,
+                "y": 456.1764705882353,
+                "width": 56.32
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 227.8171136273387,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 6,
+                "x": 296.94117647058823,
+                "y": 452.6470588235294,
+                "width": 56.32
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 228.43991419204394,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1660,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 4,
+                "x": 326.45882352941175,
+                "y": 450.3529411764706,
+                "width": 56.32
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 227.51868214408967,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1740,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 5,
+                "x": 332.9,
+                "y": 448.4,
+                "width": 56.32
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Sprint · feste Richtung",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 244,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 1900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 7,
+                "x": 340.5,
+                "y": 442,
+                "width": 56.32
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            },
+            {
+              "state": "Sprint · feste Richtung",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 7,
+                "x": 308,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 5,
+                "x": 350,
+                "y": 434,
+                "width": 56.32
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Sprint · feste Richtung",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 5,
+                "x": 388,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 2400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 4,
+                "x": 364.25,
+                "y": 422,
+                "width": 56.32
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Erholungsfenster",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 4,
+                "x": 448,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 4,
+                "x": 402.25,
+                "y": 390,
+                "width": 56.32
+              },
+              "detailFrame": 8,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 0,
+                "x": 413.68421052631584,
+                "y": 450.4736842105263,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 8,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 4800,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 0,
+                "x": 279.258064516129,
+                "y": 386.96774193548384,
+                "width": 56.32
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 0,
+                "x": 283.12711111111116,
+                "y": 396.8791111111111,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 5850,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 2,
+                "x": 165.1603498542274,
+                "y": 449.536443148688,
+                "width": 56.32
+              },
+              "detailFrame": 14,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 2,
+                "x": 158.27511111111107,
+                "y": 455.4831111111111,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 14,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "alley",
+          "cycle": 6400,
+          "elapsed": 6300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 56,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "runner",
+                "frame": 7,
+                "x": 138,
+                "y": 465,
+                "width": 56.32
+              },
+              "detailFrame": 15,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "alley-rammer",
+                "frame": 7,
+                "x": 138,
+                "y": 465,
+                "width": 56.32000000000001
+              },
+              "detailFrame": 15,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "previewOnly": true
+        }
+      ]
+    },
+    {
+      "map": "coop",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "stableObjectCount": 60,
+      "errors": [],
+      "samples": [
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 6,
+                "x": 220.94117647058823,
+                "y": 460.70588235294116,
+                "width": 71.68
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 6,
+                "x": 221.70000000000005,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 7,
+                "x": 260.47058823529414,
+                "y": 455.3529411764706,
+                "width": 71.68
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 0,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 5,
+                "x": 283.05882352941177,
+                "y": 452.29411764705884,
+                "width": 71.68
+              },
+              "detailFrame": 1,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 1,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1660,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 7,
+                "x": 297.74117647058824,
+                "y": 450.3058823529412,
+                "width": 71.68
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1740,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 4,
+                "x": 302.675,
+                "y": 448.4,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Nahbereich · Bodenstoß",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 2,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 5,
+                "x": 313.375,
+                "y": 442,
+                "width": 71.68
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            },
+            {
+              "state": "Nahbereich · Bodenstoß",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 2,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 6,
+                "x": 326.75,
+                "y": 434,
+                "width": 71.68
+              },
+              "detailFrame": 6,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Nahbereich · Bodenstoß",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 6,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 2400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 4,
+                "x": 346.8125,
+                "y": 422,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Erholungsfenster",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 6,
+                "x": 400.3125,
+                "y": 390,
+                "width": 71.68
+              },
+              "detailFrame": 10,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 10,
+                "x": 267.63157894736844,
+                "y": 448.89473684210526,
+                "width": 71.68
+              },
+              "detailFrame": 10,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 4800,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 1,
+                "x": 279.258064516129,
+                "y": 386.96774193548384,
+                "width": 71.68
+              },
+              "detailFrame": 13,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 1,
+                "x": 283.9680000000001,
+                "y": 396.8536296296296,
+                "width": 71.68
+              },
+              "detailFrame": 13,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 5850,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 12,
+                "x": 218.07580174927114,
+                "y": 447.93294460641397,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 0,
+                "x": 215.17200000000003,
+                "y": 453.758962962963,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 6300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 4,
+                "x": 204,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 4,
+                "x": 204,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "previewOnly": true
+        }
+      ]
+    },
+    {
+      "map": "coop",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "stableObjectCount": 60,
+      "errors": [],
+      "samples": [
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 6,
+                "x": 220.94117647058823,
+                "y": 460.70588235294116,
+                "width": 71.68
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 6,
+                "x": 221.70000000000005,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 2,
+              "commonFrames": [
+                7,
+                4,
+                1,
+                2,
+                3,
+                0,
+                1
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 7,
+                "x": 260.47058823529414,
+                "y": 455.3529411764706,
+                "width": 71.68
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 0,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 3,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                0,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 5,
+                "x": 283.05882352941177,
+                "y": 452.29411764705884,
+                "width": 71.68
+              },
+              "detailFrame": 1,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 1,
+              "commonFrames": [
+                7,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1660,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 7,
+                "x": 297.74117647058824,
+                "y": 450.3058823529412,
+                "width": 71.68
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Vorwarnung · 0,7 s",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 7,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                2,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1740,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 4,
+                "x": 302.675,
+                "y": 448.4,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Nahbereich · Bodenstoß",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 2,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 1900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 5,
+                "x": 313.375,
+                "y": 442,
+                "width": 71.68
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            },
+            {
+              "state": "Nahbereich · Bodenstoß",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 2,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 5,
+              "commonFrames": [
+                0,
+                1,
+                2,
+                3,
+                0,
+                5,
+                6
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 6,
+                "x": 326.75,
+                "y": 434,
+                "width": 71.68
+              },
+              "detailFrame": 6,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Nahbereich · Bodenstoß",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 6,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                2,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 2400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 4,
+                "x": 346.8125,
+                "y": 422,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            },
+            {
+              "state": "Erholungsfenster",
+              "special": {
+                "key": "coop-stomper-stomp",
+                "frame": 1,
+                "x": 263,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 4,
+              "commonFrames": [
+                2,
+                3,
+                0,
+                1,
+                6,
+                7,
+                4
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 6,
+                "x": 400.3125,
+                "y": 390,
+                "width": 71.68
+              },
+              "detailFrame": 10,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 10,
+                "x": 267.63157894736844,
+                "y": 448.89473684210526,
+                "width": 71.68
+              },
+              "detailFrame": 10,
+              "commonFrames": [
+                3,
+                0,
+                1,
+                6,
+                7,
+                4,
+                5
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 4800,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 1,
+                "x": 279.258064516129,
+                "y": 386.96774193548384,
+                "width": 71.68
+              },
+              "detailFrame": 13,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 1,
+                "x": 283.9680000000001,
+                "y": 396.8536296296296,
+                "width": 71.68
+              },
+              "detailFrame": 13,
+              "commonFrames": [
+                0,
+                5,
+                6,
+                7,
+                4,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 5850,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 12,
+                "x": 218.07580174927114,
+                "y": 447.93294460641397,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 0,
+                "x": 215.17200000000003,
+                "y": 453.758962962963,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                4,
+                5,
+                6,
+                7,
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "previewOnly": true
+        },
+        {
+          "map": "coop",
+          "cycle": 6400,
+          "elapsed": 6300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 60,
+          "finite": true,
+          "uniform": true,
+          "panels": [
+            {
+              "state": "Verfolgen",
+              "special": {
+                "key": "brute",
+                "frame": 4,
+                "x": 204,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            {
+              "state": "Normales Verfolgen",
+              "special": {
+                "key": "coop-stomper-run",
+                "frame": 4,
+                "x": 204,
+                "y": 463,
+                "width": 71.68
+              },
+              "detailFrame": 12,
+              "commonFrames": [
+                5,
+                6,
+                7,
+                0,
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "previewOnly": true
+        }
+      ]
+    }
+  ]
+}

@@ -45,6 +45,7 @@ export class Enemy {
     this.directionalAnimationPrefix = config.directionalAnimationPrefix ?? null;
     this.animationSet = config.animationSet ? { ...config.animationSet } : null;
     this.directionalStateAnimations = config.directionalStateAnimations ?? false;
+    this.mirrorDirectionalRight = config.mirrorDirectionalRight ?? true;
     this.facing = 'left';
     this.attackMovement = config.attackMovement ?? null;
     this.animationState = 'move';
@@ -63,7 +64,8 @@ export class Enemy {
     this.explodeOnDeath = config.explodeOnDeath ?? false;
     this.explosionRadius = config.explosionRadius ?? 0;
     this.explosionDamage = config.explosionDamage ?? 0;
-    this.nextAbilityAt = 0;
+    this.nextAbilityAt = scene.time.now + (this.ability?.initialDelay ?? 0);
+    this.abilityAimAngle = null;
     this.abilityCharging = false;
     this.heavyCharging = false;
     this.nextHeavyAttackAt = scene.time.now + (config.heavyAttackDelay ?? 1700);
@@ -180,6 +182,9 @@ export class Enemy {
       if (direction.lengthSq() > 0) {
         direction.normalize();
       }
+      if (this.abilityCharging && this.ability?.lockAim && Number.isFinite(this.abilityAimAngle)) {
+        direction.setToPolar(this.abilityAimAngle, 1);
+      }
       this.updateDirectionalAnimation(direction);
       const movementState = this.getAnimationState();
       const movementSpeed = this.speed * this.auraSpeedMultiplier * (this.attackMovement?.[movementState] ?? 1);
@@ -221,7 +226,7 @@ export class Enemy {
       ? (direction.x < 0 ? 'left' : 'right')
       : (direction.y < 0 ? 'up' : 'down');
     this.facing = facing;
-    if (this.directionalStateAnimations) this.sprite.setFlipX(facing === 'right');
+    if (this.directionalStateAnimations) this.sprite.setFlipX(this.mirrorDirectionalRight && facing === 'right');
     const key = `${this.directionalAnimationPrefix}-${facing}`;
     if (this.sprite.anims.currentAnim?.key !== key) {
       this.sprite.play(key);

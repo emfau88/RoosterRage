@@ -321,16 +321,16 @@ async function run() {
   console.log(`Release package inspected: ${packageReport.totalMiB} MiB.`);
   const { server, url } = await createPortalServer();
   const { chromium } = loadPlaywright();
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ args: ['--disable-features=NetworkChangeNotifierWin'] });
   try {
     const normal = await verifyPortalFrame(browser, url, false);
     const withoutStorage = await verifyPortalFrame(browser, url, true);
-    const kongregateScenarios = !expectMarketing && distributionName === 'dist-release'
+    const kongregateScenarios = !expectMarketing && (distributionName === 'dist-release' || process.argv.includes('--kongregate'))
       ? [await verifyKongregateApi(browser, url), await verifyKongregateApi(browser, url, true)] : [];
     const originalColors = await verifyOriginalRoosterColors(browser, url);
     if (!expectMarketing) {
       const gameplayRunners = [
-        ...['loading-art', 'user-sounds', 'enemy-auras', 'enemy-aura-layers', 'approved-effects', 'display-projectile', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
+        ...['loading-art', 'user-sounds', 'enemy-auras', 'enemy-aura-layers', 'approved-effects', 'void-effects', 'display-projectile', 'elite-balance', 'pickup-ground-contact', 'pickup-body-contact', 'pickup-sequence',
           'pickup-spawn-frame', 'pickup-diagnostics', 'bomb-confetti'].map((name) => ({
           name, script: path.join(projectRoot, 'tests', `${name}-runner.mjs`), args: []
         })),

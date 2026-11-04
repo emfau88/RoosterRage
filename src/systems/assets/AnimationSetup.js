@@ -73,6 +73,7 @@ export function createGameAnimations(scene) {
     ['enemy-slime-hop-loop', 'enemy-slime-hop-v2', 0, 7, 7, false]
   ];
   const stateDrivenEnemies = [
+    ['enemy-map-stomper', 'enemy-map-stomper-stomp', 6],
     ['enemy-brute', 'enemy-brute-stomp', 6],
     ['enemy-spitter', 'enemy-spitter-pulse', 7],
     ['enemy-fan-spitter', 'enemy-fan-spitter-recoil', 7],
@@ -84,6 +85,10 @@ export function createGameAnimations(scene) {
   ];
   [
     ['enemy-kornkrabbler-run', 11],
+    ['enemy-kornkrabbler-alley-run', 11],
+    ['enemy-kornkrabbler-coop-run', 11],
+    ['enemy-map-rammer-run', 10],
+    ['enemy-map-stomper-run', 7],
     ['enemy-runner-run', 10],
     ['enemy-elite-runner-run', 12],
     ['enemy-brute-run', 7],
@@ -113,6 +118,19 @@ export function createGameAnimations(scene) {
         });
       }
     });
+  });
+
+  [['left',0], ['right',4], ['up',8], ['down',12]].forEach(([direction,start]) => {
+    for (const [state, frames, frameRate] of [
+      ['windup', [start+1], 10],
+      ['resolve', [start,start+1,start+2,start+3], 14],
+      ['recovery', [start], 10]
+    ]) {
+      const key = `enemy-map-rammer-${state}-${direction}`;
+      if (!scene.anims.exists(key)) scene.anims.create({
+        key, frames: frames.map(frame => ({key:'enemy-map-rammer-run',frame})), frameRate, repeat:-1
+      });
+    }
   });
 
   if (USE_NEW_PORTAL_ELITES) {

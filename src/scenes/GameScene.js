@@ -38,6 +38,8 @@ import {
 } from '../systems/DisplayResolutionSystem.js';
 import { installTestApi, removeTestApi } from '../systems/TestApi.js';
 import { WaveSystem } from '../systems/WaveSystem.js';
+import { y8Portal } from '../systems/Y8System.js';
+import { Y8AdBreakSystem } from '../systems/Y8AdBreakSystem.js';
 import { getArenaDefinition } from '../data/arenaDefinitions.js';
 import { HUD } from '../ui/HUD.js';
 
@@ -207,6 +209,8 @@ export class GameScene extends Phaser.Scene {
       }
     );
     this.pickupIndicators = new PickupIndicatorSystem(this);
+    this.y8Ads = y8Portal ? new Y8AdBreakSystem(this, y8Portal) : null;
+    this.runStartPending = false;
     this.pickupDiagnostics = new PickupDiagnostics(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.shutdown());
 
@@ -218,12 +222,13 @@ export class GameScene extends Phaser.Scene {
     this.audio.playAmbience('menu-coop', { fadeMs: 900, volume: 0.52 });
     this.runState.startRoosterSelection(this.roosterClasses.getDefinitions());
     if (this.launchConfig.roosterId) {
-      this.chooseRooster(this.launchConfig.roosterId);
+      this.startRunFromHub(this.launchConfig.roosterId);
     }
     document.body.dataset.roosterLoadState = 'ready';
   }
 
   update(time, delta) {
+    if (this.y8Ads?.playing) return;
     const simulationTime = this.time.now;
     if (this.gameEnded || this.isChoosingRooster || this.isSettingsOpen) {
       this.pickupIndicators?.hide();
@@ -263,6 +268,7 @@ export class GameScene extends Phaser.Scene {
         return;
       }
       this.waveSystem.update(simulationTime, this.enemies.length);
+      if (this.gamePause.isPaused) return;
       this.autoShoot(simulationTime);
       this.telemetry.sample(simulationTime, this.getTelemetrySample());
       this.updateHud();
@@ -294,7 +300,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   openSettings() {
-    if (this.gameEnded || this.isChoosingUpgrade) return false;
+    if (this.gameEnded || this.isChoosingUpgrade || this.y8Ads?.pending) return false;
     const returnToHub = this.isChoosingRooster;
     this.audio.play('ui-navigate');
     this.isSettingsOpen = true;
@@ -375,6 +381,7 @@ export class GameScene extends Phaser.Scene {
     this.playerInput?.clearInput();
     if (
       this.gameEnded
+      || this.y8Ads?.pending
       || this.isChoosingRooster
       || this.isChoosingUpgrade
       || this.isSettingsOpen
@@ -648,6 +655,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   startRunFromHub(roosterId, challengeId = this.challenge.id) {
+    if (this.runStartPending || !this.isChoosingRooster || this.isSettingsOpen) return false;
     if (!this.meta.isRoosterUnlocked(roosterId) || !this.meta.selectChallenge(challengeId)) {
       return false;
     }
@@ -655,7 +663,16 @@ export class GameScene extends Phaser.Scene {
       this.scene.restart({ challengeId, roosterId });
       return true;
     }
-    return this.chooseRooster(roosterId);
+    if (!this.y8Ads) return this.chooseRooster(roosterId);
+    this.runStartPending = true;
+    const ads = this.y8Ads;
+    return ads.run('start', 'run-start').then(() => {
+      if (ads.destroyed) return false;
+      this.runStartPending = false;
+      const started = this.chooseRooster(roosterId);
+      if (document.hidden) this.handleFocusLost(true);
+      return started;
+    });
   }
 
   maybeChooseBotUpgrade() {
@@ -908,6 +925,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   shutdown() {
+    this.y8Ads?.destroy();
+    this.hazardZones?.forEach(zone => zone.destroy());
+    this.laserComb?.activeVisuals.forEach(visual => visual.destroy());
     this.scale.off(Phaser.Scale.Events.RESIZE, this.applyResponsiveCameraZoom, this);
     window.removeEventListener('blur', this.onFocusLost);
     document.removeEventListener('visibilitychange', this.onFocusLost);

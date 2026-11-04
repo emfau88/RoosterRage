@@ -83,7 +83,7 @@ export class CollisionSystem {
           projectile
         );
       }
-      projectile.destroy();
+      projectile.destroy({ impact: true });
     });
 
     scene.physics.add.overlap(scene.player.sprite, scene.xpGroup, (_playerSprite, orbSprite) => {

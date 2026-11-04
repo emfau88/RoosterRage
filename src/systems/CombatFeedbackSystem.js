@@ -3,6 +3,7 @@ import { getCombatFeedbackProfile, getMultiKillTier } from '../data/combatFeedba
 import { getSceneViewport } from './DisplayResolutionSystem.js';
 import { BombConfettiSystem } from './BombConfettiSystem.js';
 import { EnemyAuraVisual, getEnemyAuraGround } from './EnemyAuraVisual.js';
+import { showMapEnemyTelegraph } from './MapEnemyAbilityVisual.js';
 
 const DEATH_BURST_LIMIT = 24;
 const PRIORITY_DEATH_BURST_LIMIT = 28;
@@ -570,6 +571,9 @@ export class CombatFeedbackSystem {
   }
 
   showEnemyTelegraph(enemy, player, config = {}, options = {}) {
+    if (config.visual === 'map-rammer' || config.visual === 'map-stomper') {
+      return showMapEnemyTelegraph(this, enemy, player, config, options);
+    }
     this.activeTelegraphs += 1;
     const duration = options.duration ?? 220;
     const count = options.count ?? 1;

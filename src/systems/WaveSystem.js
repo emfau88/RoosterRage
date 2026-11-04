@@ -2,6 +2,7 @@ import { WAVE_DEFINITIONS } from '../data/waveDefinitions.js';
 import { ENCOUNTER_STANDARDS, ENEMY_ROLE_MATRIX } from '../data/enemyRoleDefinitions.js';
 import { allocateBudgets, SpawnDirector } from './SpawnDirector.js';
 import { USE_NEW_PORTAL_ELITES } from '../config/eliteVisual.js';
+import { addMapVarietyToWave, applyMapVariety, applyKornkrabblerSkin } from '../data/mapEnemyVariety.js';
 
 const STRANDED_CLEANUP_GRACE_MS = 10000;
 const OPENING_WAVE_CLEANUP_GRACE_MS = 0;
@@ -22,7 +23,9 @@ export class WaveSystem {
     this.cleanupRecoveries = 0;
     this.spawnQueue = [];
     this.director = new SpawnDirector(scene);
-    this.waves = WAVE_DEFINITIONS.map((wave) => this.hydrateWave(wave));
+    this.waves = WAVE_DEFINITIONS.map((wave, index) => this.hydrateWave(
+      addMapVarietyToWave(wave, index + 1, scene.rng.seed, scene.arena.id)
+    ));
   }
 
   get totalWaves() {
@@ -61,12 +64,14 @@ export class WaveSystem {
     return this.scene.challenge?.modifyWave(hydrated) ?? hydrated;
   }
 
-  makeEnemyFromSpec({ kind, multiplier = 1 }) {
+  makeEnemyFromSpec({ kind, multiplier = 1, skin = null }) {
     const makers = {
       kornkrabbler: () => this.makeKornkrabbler(multiplier),
       slime: () => this.makeSlime(multiplier),
       runner: () => this.makeRunner(multiplier),
       brute: () => this.makeBrute(multiplier),
+      'map-rammer': () => this.makeMapRammer(multiplier),
+      'map-stomper': () => this.makeMapStomper(multiplier),
       spitter: () => this.makeSpitter(multiplier),
       'fan-spitter': () => this.makeFanSpitter(multiplier),
       bomber: () => this.makeBomber(multiplier),
@@ -83,7 +88,7 @@ export class WaveSystem {
     if (!makeEnemy) {
       throw new Error(`Unknown enemy kind in wave definition: ${kind}`);
     }
-    const enemy = makeEnemy();
+    const enemy = applyKornkrabblerSkin(makeEnemy(), skin);
     return this.scene.challenge?.modifyEnemy(enemy) ?? enemy;
   }
 
@@ -100,7 +105,7 @@ export class WaveSystem {
   }
 
   update(time, enemiesAlive) {
-    if (!this.active || this.completed) {
+    if (!this.active || this.completed || this.transitionPending) {
       return;
     }
 
@@ -128,18 +133,32 @@ export class WaveSystem {
       }
 
       this.scene.onWaveCompleted?.(this.currentWave);
-      this.currentWave += 1;
-      this.scene.onWaveStarted?.(this.currentWave, this.waves[this.currentWave - 1]);
-      this.spawnQueue = this.buildSpawnQueue(this.waves[this.currentWave - 1]);
-      this.spawned = 0;
-      this.director.start(
-        this.waves[this.currentWave - 1],
-        this.spawnQueue,
-        time + (this.waves[this.currentWave - 1].intermission ?? 1500)
-      );
-      this.waitingForClear = false;
-      this.resetCleanupWatch();
+      if (this.scene.y8Ads) {
+        this.transitionPending = true;
+        const ads = this.scene.y8Ads;
+        void ads.run('next', 'wave-transition').then(() => {
+          if (ads.destroyed || this.scene.gameEnded) return;
+          this.transitionPending = false;
+          this.advanceWave(this.scene.time.now);
+        });
+      } else {
+        this.advanceWave(time);
+      }
     }
+  }
+
+  advanceWave(time) {
+    this.currentWave += 1;
+    this.scene.onWaveStarted?.(this.currentWave, this.waves[this.currentWave - 1]);
+    this.spawnQueue = this.buildSpawnQueue(this.waves[this.currentWave - 1]);
+    this.spawned = 0;
+    this.director.start(
+      this.waves[this.currentWave - 1],
+      this.spawnQueue,
+      time + (this.waves[this.currentWave - 1].intermission ?? 1500)
+    );
+    this.waitingForClear = false;
+    this.resetCleanupWatch();
   }
 
   resetCleanupWatch() {
@@ -285,17 +304,18 @@ export class WaveSystem {
       });
     }
 
-    while (queue.length < wave.count && wave.pool?.length) {
+    while (queue.length < (wave.baseCount ?? wave.count) && wave.pool?.length) {
       queue.push(this.pickFromPool(wave.pool));
     }
 
     (wave.elites ?? []).forEach((enemy) => queue.push(this.cloneEnemyConfig(enemy)));
 
-    if (queue.length !== wave.count) {
-      throw new Error(`Wave ${wave.name} defines ${queue.length} enemies but count is ${wave.count}.`);
+    const variedQueue = applyMapVariety(queue, wave.variety, spec => this.makeEnemyFromSpec(spec));
+    if (variedQueue.length !== wave.count) {
+      throw new Error(`Wave ${wave.name} defines ${variedQueue.length} enemies but count is ${wave.count}.`);
     }
 
-    return this.applyXpBudget(queue, wave).map((enemy) => ({
+    return this.applyXpBudget(variedQueue, wave).map((enemy) => ({
       ...enemy,
       spawnMinDistance: wave.spawnMinDistance
     }));
@@ -393,6 +413,15 @@ export class WaveSystem {
         name: wave.name,
         intent: wave.intent,
         count: wave.count,
+        baseCount: wave.baseCount ?? wave.count,
+        variety: wave.variety ? {
+          extraCount: wave.variety.extraCount,
+          specialCount: wave.variety.specialCount,
+          skins: queue.reduce((counts, enemy) => {
+            if (enemy.variantSkin) counts[enemy.variantSkin] = (counts[enemy.variantSkin] ?? 0) + 1;
+            return counts;
+          }, {})
+        } : null,
         interval: wave.interval,
         targetDuration: [...wave.targetDuration],
         spawnMinDistance: wave.spawnMinDistance,
@@ -457,6 +486,31 @@ export class WaveSystem {
 
   makeBrute(multiplier = 1) {
     return { type: 'brute', role: 'tank', hp: Math.round(145 * multiplier), speed: 68, damage: 12, xp: 12, texture: 'enemy-brute-run', animation: 'enemy-brute-run-left', directionalAnimationPrefix: 'enemy-brute-run', animationSet: this.makeAnimationSet('enemy-brute'), scale: 0.28, radius: 35, bodyOffsetX: 93, bodyOffsetY: 107, hpBarWidth: 56, hpBarYOffset: 43 };
+  }
+
+  makeMapRammer(multiplier = 1) {
+    return {
+      ...this.makeRunner(multiplier), type: 'map-rammer', displayName: 'Alley Rammer',
+      speed: 90, texture: 'enemy-map-rammer-run', animation: 'enemy-map-rammer-run-left',
+      directionalAnimationPrefix: 'enemy-map-rammer-run', animationSet: this.makeAnimationSet('enemy-map-rammer'),
+      directionalStateAnimations: true, mirrorDirectionalRight: false,
+      attackMovement: { windup: 0, resolve: 0, recovery: 0 },
+      ability: { kind: 'dash', visual: 'map-rammer', cooldown: 4800, initialDelay: 900,
+        telegraphMs: 700, minRange: 70, triggerRange: 230, lockAim: true,
+        speed: 400, duration: 550, resolveMs: 550, recoveryMs: 450 }
+    };
+  }
+
+  makeMapStomper(multiplier = 1) {
+    return {
+      ...this.makeBrute(multiplier), type: 'map-stomper', displayName: 'Coop Stomper',
+      speed: 60, texture: 'enemy-map-stomper-run', animation: 'enemy-map-stomper-run-left',
+      directionalAnimationPrefix: 'enemy-map-stomper-run', animationSet: this.makeAnimationSet('enemy-map-stomper'),
+      attackMovement: { windup: 0, resolve: 0, recovery: 0 },
+      ability: { kind: 'slam', visual: 'map-stomper', cooldown: 5000, initialDelay: 900,
+        telegraphMs: 700, triggerRange: 90, radius: 76, groundRadiusYRatio: 0.6,
+        damage: 12, resolveMs: 220, recoveryMs: 450 }
+    };
   }
 
   makeSpitter(multiplier = 1) {

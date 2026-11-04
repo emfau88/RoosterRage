@@ -26,7 +26,9 @@ async function openGame(browser, label, roosterId = 'ace', viewport = { width: 9
       errors.push(message.text());
     }
   });
-  await page.goto(gameUrl, { waitUntil: 'domcontentloaded' });
+  const url = new URL(gameUrl);
+  url.searchParams.set('seed', `mechanics-${label}`);
+  await page.goto(url.href, { waitUntil: 'domcontentloaded' });
   try {
     await page.waitForFunction(() => window.__ROOSTER_TEST__?.getState, null, { timeout: 5000 });
   } catch (error) {
@@ -143,7 +145,10 @@ async function testUpgradeOffers(browser) {
     assert(guaranteeBefore, 'A spectacle upgrade should be guaranteed before the player owns one.');
     assert(choices.some((choice) => spectacleCategories.has(choice.category)), 'Early offer contains no spectacle upgrade.', choices);
     assert(choices.every((choice) => choice.rankLabel && /Rank|Instant/.test(choice.rankLabel)), 'Cards need rank labels.', choices);
-    assert(choices.every((choice) => /\d/.test(choice.description)), 'Cards should communicate concrete numeric effects.', choices);
+    // Guidance/targeting passives describe a qualitative behavior change; weapon
+    // cards still need concrete quantities in their approved description.
+    assert(choices.filter(choice => choice.category !== 'passive').every((choice) => /\d/.test(choice.description)),
+      'Weapon cards should communicate concrete numeric effects.', choices);
     assert(choices.every((choice) => choice.momentTitle), 'Cards need a named upgrade milestone.', choices);
     assert(choices.every((choice) => choice.changeItems?.length > 0), 'Cards need scan-friendly change facts.', choices);
     assert(!availableAtFullHp.includes('heal'), 'Heal should not be offered at full HP.', availableAtFullHp);
@@ -480,7 +485,17 @@ async function testWaveCuration(browser) {
       assert(wave.targetDuration[0] >= 22 && wave.targetDuration[1] <= 76, `Wave ${wave.wave} has an invalid duration target.`, wave);
       assert(wave.pressureCurve.length >= 1, `Wave ${wave.wave} is missing a pressure curve.`, wave);
       assert(wave.mobileActiveCap <= wave.targetPeak, `Wave ${wave.wave} mobile cap exceeds target peak.`, wave);
-      assert(JSON.stringify(wave.typeCounts) === JSON.stringify(expectedTypes[index]), `Wave ${wave.wave} composition changed unexpectedly.`, wave);
+      const expected = { ...expectedTypes[index] };
+      if (wave.variety) {
+        expected.kornkrabbler += wave.variety.extraCount - wave.variety.specialCount;
+        const specialTotal = (wave.typeCounts['map-rammer'] ?? 0) + (wave.typeCounts['map-stomper'] ?? 0);
+        assert(specialTotal === wave.variety.specialCount, `Wave ${wave.wave} special-enemy count drifted.`, wave);
+        assert(wave.count === wave.baseCount + wave.variety.extraCount, `Wave ${wave.wave} extra count drifted.`, wave);
+      }
+      const ordinaryTypes = Object.fromEntries(Object.entries(wave.typeCounts).filter(([type]) => !type.startsWith('map-')));
+      assert(Object.keys(ordinaryTypes).length === Object.keys(expected).length
+        && Object.entries(expected).every(([type, count]) => ordinaryTypes[type] === count),
+        `Wave ${wave.wave} original composition changed unexpectedly.`, wave);
       assert(Math.abs(wave.allocatedXp - expectedXpBudgets[index]) < 0.001,
         `Wave ${wave.wave} XP allocation drifted away from its fixed budget.`, wave);
     });
@@ -1086,17 +1101,17 @@ async function testAreaEffectReadability(browser) {
     assert(settled.laserVisuals === 0, 'Laser visuals outlived their bounded afterglow.', settled);
     assert(settled.hazards[0]?.maxLife === 3000
       && settled.hazards[0]?.radius === 90
-      && settled.hazards[0]?.renderStyle === 'simple-burn-field'
-      && settled.hazards[0]?.texture === null
+      && settled.hazards[0]?.renderStyle === 'animated-burn-field'
+      && settled.hazards[0]?.texture === 'combat-effect-light'
       && settled.hazards[0]?.animation === null
-      && settled.hazards[0]?.flameCount === 0
-      && settled.hazards[0]?.lobeCount === 1
-      && settled.hazards[0]?.heatSpotCount === 32
+      && settled.hazards[0]?.flameCount === 10
+      && settled.hazards[0]?.lobeCount === 0
+      && settled.hazards[0]?.heatSpotCount === 10
       && settled.hazards[0]?.heatSpotTextures.every((texture) => texture === 'molotov-ground-flame-orange')
-      && settled.hazards[0]?.heatSpotAnimations.every((animation) => animation === 'molotov-ground-flame-orange-loop')
-      && Math.abs(settled.hazards[0]?.groundWidth - 181.8) < 3
-      && Math.abs(settled.hazards[0]?.groundHeight - 100.8) < 2,
-    'Molotov did not enter the simple rank-one ground-fire presentation.', settled);
+      && settled.hazards[0]?.heatSpotAnimations.every((animation) => animation === null)
+      && Math.abs(settled.hazards[0]?.groundWidth - 189) < 3
+      && Math.abs(settled.hazards[0]?.groundHeight - 106.2) < 2,
+    'Molotov did not enter the approved animated rank-one fire presentation.', settled);
     assert(settled.voids[0]?.visualVariant === 'vortex' && settled.voids[0]?.alpha >= 0.3
       && settled.voids[0]?.coreWidth < settled.voids[0]?.fieldWidth * 0.25,
       'Void Nest did not hold its compact gravity core.', settled);
@@ -1113,7 +1128,7 @@ async function testAreaEffectReadability(browser) {
     assert(Math.abs(settled.hazards[0].groundWidth - settledMotion.hazards[0].groundWidth) < 4
       && Math.abs(settled.hazards[0].groundHeight - settledMotion.hazards[0].groundHeight) < 3
       && settledMotion.hazards[0].rimAlpha <= 0.6
-      && settledMotion.hazards[0].emberAlpha <= 0.3,
+      && settledMotion.hazards[0].emberAlpha <= 0.75,
     'Molotov ground field moved or flickered between samples.', { settled, settledMotion });
 
     await page.waitForTimeout(1370);
@@ -1140,11 +1155,11 @@ async function testAreaEffectReadability(browser) {
       && rankFour.hazards.every((zone) => (
         zone.maxLife === 4000
         && zone.radius === 112
-        && zone.renderStyle === 'simple-burn-field'
-        && zone.texture === null
-        && zone.flameCount === 0
+        && zone.renderStyle === 'animated-burn-field'
+        && zone.texture === 'combat-effect-light'
+        && zone.flameCount === 16
         && zone.heatSpotTextures.every((texture) => texture === 'molotov-ground-flame-blue')
-        && zone.heatSpotAnimations.every((animation) => animation === 'molotov-ground-flame-blue-loop')
+        && zone.heatSpotAnimations.every((animation) => animation === null)
       )),
     'Rank-four Molotov did not create two compact four-second fields.', rankFour);
     await page.evaluate(() => {

@@ -49,35 +49,7 @@ export class MolotovEggAbility extends TimedAbility {
 
   createImpact(x, y, rank = this.rank, evolved = this.evolved) {
     this.scene.audio.play('molotov-impact');
-    const ignitionScale = evolved ? 0.74 : 0.48 + rank * 0.055;
-    const ignition = this.scene.add.image(x, y, 'molotov-ignition')
-      .setScale(ignitionScale * 0.45)
-      .setBlendMode(Phaser.BlendModes.ADD)
-      .setDepth(8);
-    const embersScale = evolved ? 1.12 : 0.68 + rank * 0.08;
-    const embers = this.scene.add.image(x, y, 'molotov-embers')
-      .setScale(embersScale)
-      .setBlendMode(Phaser.BlendModes.ADD)
-      .setAlpha(evolved ? 0.7 : 0.5)
-      .setDepth(7.8);
-    this.scene.tweens.add({
-      targets: ignition,
-      alpha: 0,
-      scaleX: ignitionScale,
-      scaleY: ignitionScale,
-      duration: evolved ? 260 : 220,
-      ease: 'Quad.Out',
-      onComplete: () => ignition.destroy()
-    });
-    this.scene.tweens.add({
-      targets: embers,
-      alpha: 0,
-      scaleX: embersScale * 1.24,
-      scaleY: embersScale * 0.96,
-      duration: evolved ? 360 : 300,
-      ease: 'Sine.Out',
-      onComplete: () => embers.destroy()
-    });
+    // The field visual owns its approved comic ignition and ember decay.
     this.scene.hazardZones.push(new HazardZone(this.scene, x, y, rank, evolved));
   }
 }

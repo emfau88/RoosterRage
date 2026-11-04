@@ -1,6 +1,6 @@
 # Boss-Feuerball, Laser und Molotov – animierte Entwürfe
 
-04.11.2026. Ausschließlich Vorschau, **noch nicht ins Spiel eingebaut und nicht veröffentlicht**. Alle neuen Dateien liegen in diesem Verzeichnis. Bestehende Produktionsdateien, Portalpakete und die bereits freigegebenen Auren, Raketen und Void-Effekte bleiben unverändert.
+04.11.2026. Archiv der isolierten Vorschau. **Die bestätigten Nachher-Effekte sind inzwischen in die Produktionsquellen übernommen.** Dieser Vergleich und seine Vorher-Klassen bleiben unverändert erhalten. Integrationsdetails und Prüfungen: [Map- und Effekt-Update](../../MAP_ENEMY_VARIETY.md). Die folgenden Angaben beschreiben den ursprünglichen Vorschauauftrag.
 
 ## Vergleiche
 

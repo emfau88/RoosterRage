@@ -23,7 +23,9 @@ async function openGame(browser, serverUrl, suffix, arena = 'open-yard', rooster
   await page.goto(`${serverUrl}?seed=phase-13-${suffix}&profile=average&arena=${arena}`, {
     waitUntil: 'domcontentloaded'
   });
-  await page.waitForFunction(() => window.__ROOSTER_TEST__?.getEncounterEvents);
+  await page.waitForFunction(() => window.__ROOSTER_TEST__?.getEncounterEvents).catch(error => {
+    throw new Error(`${error.message}\nStartup errors: ${JSON.stringify(errors)}`);
+  });
   await page.evaluate((selectedRooster) => {
     const api = window.__ROOSTER_TEST__;
     api.selectRooster(selectedRooster);
@@ -536,7 +538,7 @@ async function verifyChampion(browser, serverUrl, type = 'champion-charger') {
 async function run() {
   const serverState = await ensureTestServer();
   const { chromium } = loadPlaywright();
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, args: ['--disable-features=NetworkChangeNotifierWin'] });
   try {
     const report = {
       generatedAt: new Date().toISOString(),

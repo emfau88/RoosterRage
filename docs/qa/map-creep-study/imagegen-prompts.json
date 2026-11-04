@@ -1,0 +1,26 @@
+{
+  "tool": "built-in image_gen",
+  "previewOnly": true,
+  "specs": [
+    {
+      "id": "alley-rammer",
+      "file": "enemy-runner-run.webp",
+      "prompt": "Edit this exact sprite animation atlas with the smallest possible skin change. Keep the original 4 columns × 4 rows, all 16 poses, each pose in the exact same cell, identical padding, anchors, silhouette, scale, facial expression, line weight and perspective. Square 1024×1024 image, sixteen 256×256 cells. Preserve all limbs and animation differences. ONLY recolor the existing drawn surfaces as specified. Preserve white eyes, dark pupils, dark outlines and original shading. True transparent background. No text, borders, glows, shadows, backdrop, extra props, equipment, or enlarged hero pose. Match the original hand-drawn cartoon game style, do not redesign or render in 3D. The orange spiked runner becomes a cool slate-blue creature: body medium dusty blue (#668aaf), darker indigo spots, warm ivory spikes and claws, pale blue belly highlight. Keep saturated blue readable on brown dirt. No new clothing. This is the Feed Alley rammer variant."
+    },
+    {
+      "id": "coop-stomper-run",
+      "file": "enemy-brute-run.webp",
+      "prompt": "Edit this exact sprite animation atlas with the smallest possible skin change. Keep the original 4 columns × 4 rows, all 16 poses, each pose in the exact same cell, identical padding, anchors, silhouette, scale, facial expression, line weight and perspective. Square 1024×1024 image, sixteen 256×256 cells. Preserve all limbs and animation differences. ONLY recolor the existing drawn surfaces as specified. Preserve white eyes, dark pupils, dark outlines and original shading. True transparent background. No text, borders, glows, shadows, backdrop, extra props, equipment, or enlarged hero pose. Match the original hand-drawn cartoon game style, do not redesign or render in 3D. The red brute becomes a warm stone-grey brute: skin medium slate-grey with a faint violet undertone (#807d92), darker grey spots, warm beige belly and ivory horns, original brown belt and wrist cuffs unchanged. Keep a strong clear silhouette. This is the Coop Square stomper variant."
+    },
+    {
+      "id": "alley-kornkrabbler",
+      "file": "enemy-kornkrabbler-run.webp",
+      "prompt": "Edit this exact sprite animation atlas with the smallest possible skin change. Keep the original 4 columns × 4 rows, all 16 poses, each pose in the exact same cell, identical padding, anchors, silhouette, scale, facial expression, line weight and perspective. Square 1024×1024 image, sixteen 256×256 cells. Preserve all limbs and animation differences. ONLY recolor the existing drawn surfaces as specified. Preserve white eyes, dark pupils, dark outlines and original shading. True transparent background. No text, borders, glows, shadows, backdrop, extra props, equipment, or enlarged hero pose. Match the original hand-drawn cartoon game style, do not redesign or render in 3D. The orange hatchling becomes a pale buttery-cream chick with warm honey shading. Its cracked eggshell cap becomes muted slate-blue with darker blue existing speckles; keep all original shell cracks black. Keep yellow beak and feet. Clearly separated cream body and blue cap. This is the frequently appearing Feed Alley fodder skin, no behavior change."
+    },
+    {
+      "id": "coop-kornkrabbler",
+      "file": "enemy-kornkrabbler-run.webp",
+      "prompt": "Edit this exact sprite animation atlas with the smallest possible skin change. Keep the original 4 columns × 4 rows, all 16 poses, each pose in the exact same cell, identical padding, anchors, silhouette, scale, facial expression, line weight and perspective. Square 1024×1024 image, sixteen 256×256 cells. Preserve all limbs and animation differences. ONLY recolor the existing drawn surfaces as specified. Preserve white eyes, dark pupils, dark outlines and original shading. True transparent background. No text, borders, glows, shadows, backdrop, extra props, equipment, or enlarged hero pose. Match the original hand-drawn cartoon game style, do not redesign or render in 3D. The orange hatchling becomes a deep plum-purple chick with softer lilac highlights; its cracked eggshell cap becomes muted warm terracotta with beige highlights and darker existing speckles. Keep all original shell cracks black, yellow beak and feet, white eyes. This is the frequently appearing Coop Square fodder skin, no behavior change."
+    }
+  ]
+}

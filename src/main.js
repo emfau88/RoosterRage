@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { GameScene } from './scenes/GameScene.js';
 import { kongregate } from './systems/KongregateSystem.js';
+import { y8Portal } from './systems/Y8System.js';
 import {
   createDisplayMetrics,
   installDisplayResolution
@@ -45,5 +46,6 @@ const config = {
   scene: [GameScene]
 };
 
-void kongregate.init();
+void kongregate?.init();
+void y8Portal?.init();
 new Phaser.Game(config);

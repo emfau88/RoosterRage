@@ -235,11 +235,11 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
   await page.screenshot({ path: path.join(artifactDir, screenshot) });
   if (weapon.id === 'molotov-egg') {
     const visualExpectations = {
-      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, lobes: 1, flames: 32, flamePalette: ['molotov-ground-flame-orange'] },
-      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, lobes: 2, flames: 40, flamePalette: ['molotov-ground-flame-orange'] },
-      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, lobes: 3, flames: 48, flamePalette: ['molotov-ground-flame-orange'] },
-      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, lobes: 3, flames: 42, flamePalette: ['molotov-ground-flame-blue'] },
-      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, lobes: 4, flames: 56, flamePalette: ['molotov-ground-flame-orange', 'molotov-ground-flame-blue'] }
+      r1: { count: 1, texture: 'molotov-egg-r1', size: 28, fields: 1, radius: 90, lobes: 0, flames: 10, flamePalette: ['molotov-ground-flame-orange'] },
+      r2: { count: 1, texture: 'molotov-egg-r2', size: 32, fields: 1, radius: 108, lobes: 0, flames: 12, flamePalette: ['molotov-ground-flame-orange'] },
+      r3: { count: 1, texture: 'molotov-egg-r3', size: 36, fields: 1, radius: 124, lobes: 0, flames: 15, flamePalette: ['molotov-ground-flame-orange'] },
+      r4: { count: 2, texture: 'molotov-egg-r4', size: 40, fields: 2, radius: 112, lobes: 0, flames: 16, flamePalette: ['molotov-ground-flame-blue'] },
+      evo: { count: 2, texture: 'molotov-egg-evo', size: 44, fields: 2, radius: 136, lobes: 0, flames: 21, flamePalette: ['molotov-ground-flame-orange', 'molotov-ground-flame-blue'] }
     };
     const expected = visualExpectations[stage];
     assert(areaAtFlight.molotovFlights.length === expected.count
@@ -258,34 +258,26 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
     const fieldState = await page.evaluate(() => window.__ROOSTER_TEST__.getAreaEffectState());
     assert(fieldState.hazards.length === expected.fields
       && fieldState.hazards.every((zone) => (
-        zone.renderStyle === 'simple-burn-field'
-        && zone.texture === null
-        && zone.flameCount === 0
+        zone.renderStyle === 'animated-burn-field'
+        && zone.texture === 'combat-effect-light'
+        && zone.flameCount === expected.flames
         && zone.lobeCount === expected.lobes
         && zone.heatSpotCount === expected.flames
         && expected.flamePalette.every((texture) => zone.heatSpotTextures.includes(texture))
         && zone.heatSpotTextures.every((texture) => expected.flamePalette.includes(texture))
         && zone.heatSpotAnimations.every((animation, index) => (
-          animation === `${zone.heatSpotTextures[index]}-loop`
+          animation === null
         ))
         && zone.radius === expected.radius
         && zone.groundWidth > zone.groundHeight * 1.5
         && zone.heatSpotPositions.every((spot) => Math.hypot(spot.x, spot.y) < expected.radius)
         && Math.max(...zone.heatSpotPositions.map((spot) => spot.width))
-          > Math.min(...zone.heatSpotPositions.map((spot) => spot.width)) * 1.5
-        && Array.from({ length: 121 }, (_, index) => ({
-          x: (index % 11 - 5) * 0.18, y: (Math.floor(index / 11) - 5) * 0.18
-        })).filter((sample) => Math.hypot(sample.x, sample.y) <= 0.9).every((sample) => (
-          zone.heatSpotPositions.some((spot) => Math.hypot(
-            sample.x - spot.x / expected.radius, sample.y - spot.y / (expected.radius * 0.5)
-          ) <= 0.32)
-        ))
-        && new Set(zone.heatSpotPositions.filter((spot) => spot.edge).map((spot) => (
-          Math.round((Math.atan2(spot.y / 0.5, spot.x) + Math.PI * 2) / (Math.PI / 4)) % 8
-        ))).size === 8
+          > Math.min(...zone.heatSpotPositions.map((spot) => spot.width)) * 1.2
+        && zone.heatSpotPositions.every(spot => Math.abs(spot.width-spot.height)<0.001)
+        && zone.heatSpotPositions.some(spot => Math.hypot(spot.x,spot.y) < expected.radius*.4)
         && zone.rimAlpha <= 0.6
-        && zone.emberAlpha <= 0.3
-      )), `Molotov ${stage} must retain the oval perspective and fill its center and all eight edge sectors.`, {
+        && zone.emberAlpha <= 0.75
+      )), `Molotov ${stage} must retain native flame proportions, varied phases and the approved open field layout.`, {
       expected,
       fieldState
     });
@@ -298,7 +290,7 @@ async function captureStage(page, weapon, stage, expectedRank, source) {
       return Math.abs(zone.groundWidth - after.groundWidth) < 4
         && Math.abs(zone.groundHeight - after.groundHeight) < 3
         && after.rimAlpha <= 0.6
-        && after.emberAlpha <= 0.3;
+        && after.emberAlpha <= 0.75;
     }), `Molotov ${stage} ground field moved or flickered between samples.`, { fieldState, motionState });
     molotovVisuals = { flight: areaAtFlight.molotovFlights, field: fieldState.hazards };
     remainingDelay -= 490;
