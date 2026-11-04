@@ -4,6 +4,7 @@ import { ensureTestServer, loadPlaywright, stopTestServer } from '../../../tests
 const output = import.meta.dirname;
 const server = await ensureTestServer(), browser = await loadPlaywright().chromium.launch({ headless: true });
 const report = [];
+const selected = process.argv.find(arg => arg.startsWith('--view='))?.split('=')[1];
 try {
   for (const spec of [
     ['laser-r4', 'laserComb', 4, false, 210], ['laser-evo', 'laserComb', 4, true, 230],
@@ -12,6 +13,7 @@ try {
     ['molotov-evo', 'molotovEgg', 4, true, 1100], ['boss-fireball', 'boss', 4, true, 170],
     ['evo-impacts', 'impacts', 4, true, 45], ['void-overlap', 'overlap', 4, true, 0]
   ]) {
+    if (selected && spec[0] !== selected) continue;
     const [id] = spec, errors = [];
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
     page.on('pageerror', e => errors.push(e.message));
@@ -72,6 +74,10 @@ try {
     await page.screenshot({ path: `${output}/${id}.png` });
     if (errors.length || snapshot.error) throw Error(JSON.stringify({ id, errors, snapshot }));
     report.push(snapshot); await page.close(); console.log(`Inspected runtime: ${id}`);
+  }
+  if (selected) {
+    const previous = JSON.parse(await fs.readFile(`${output}/runtime.json`, 'utf8'));
+    report.unshift(...previous.filter(item => item.id !== selected));
   }
   await fs.writeFile(`${output}/runtime.json`, JSON.stringify(report, null, 2));
 } finally { await browser.close(); await stopTestServer(server.server); }

@@ -11,6 +11,7 @@ Die Animationen entstehen aus zeitgesteuerten Phaser-Ebenen, gezeichneten Bände
 
 ## Ansehen
 
+- **Aktueller Einbau nach Größenkorrektur am 04.11.:** `approved-in-motion.gif` / `approved-in-motion.mp4`, R4 links und EVO rechts. Gleichmäßig 18 % kleiner als die zwischenzeitlich vergrößerte Fassung, mit den zusätzlichen Partikeln. Interaktiv: `?view=approved`. Prüfung: `verification-approved.json`.
 - `a-in-motion.gif` / `a-in-motion.mp4`
 - `b-in-motion.gif` / `b-in-motion.mp4`
 - Jeweils R4 links, EVO rechts. Die Videos enthalten 252 Frames bei 30 fps, 1280 × 700 Pixel, Laufzeit 8,4 Sekunden. GIFs sind für die direkte Ansicht kleiner exportiert; MP4s zeigen Lichtverläufe sauberer.

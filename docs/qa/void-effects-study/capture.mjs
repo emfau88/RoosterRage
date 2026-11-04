@@ -8,8 +8,11 @@ import { ensureTestServer, loadPlaywright, stopTestServer, projectRoot } from '.
 const output = import.meta.dirname, still = process.argv.includes('--still'), results = [];
 const selection = process.argv.find(arg => arg.startsWith('--view='))?.split('=')[1];
 const views = selection ? [selection] : ['a', 'b', 'compare', 'current'];
-assert(views.every(v => ['a', 'b', 'compare', 'current'].includes(v)));
-const hashDiff = () => crypto.createHash('sha256').update(execFileSync('git', ['diff', '--binary'], { cwd: projectRoot, stdio: ['ignore', 'pipe', 'ignore'] })).digest('hex');
+assert(views.every(v => ['a', 'b', 'compare', 'current', 'approved'].includes(v)));
+// Captured QA images/reports are expected outputs, including on subsequent runs.
+const hashDiff = () => crypto.createHash('sha256').update(execFileSync('git', ['diff', '--binary', '--', '.', ':(exclude)docs/qa/**'], {
+  cwd: projectRoot, stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 16 * 1024 * 1024
+})).digest('hex');
 const baseline = hashDiff();
 const server = await ensureTestServer();
 const browser = await loadPlaywright().chromium.launch({ headless: true,
@@ -43,7 +46,7 @@ try {
     await page.evaluate(() => window.voidStudy.setTime(2150));
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     assert(!held.equals(await page.screenshot()), 'Effect is static');
-    if (!still && renderer === 'webgl' && ['a', 'b'].includes(view)) {
+    if (!still && renderer === 'webgl' && ['a', 'b', 'approved'].includes(view)) {
       const frameDir = path.join(projectRoot, 'test-results/void-effects-study', `${view}-frames`);
       await fs.mkdir(frameDir, { recursive: true });
       for (let i = 0; i < 252; i++) {
@@ -77,8 +80,8 @@ try {
   }
   await page.close();
   assert.equal(hashDiff(), baseline, 'Tracked production files changed');
-  await fs.writeFile(path.join(output, still ? 'verification-stills.json' : 'verification.json'), JSON.stringify({
+  await fs.writeFile(path.join(output, selection === 'approved' ? 'verification-approved.json' : still ? 'verification-stills.json' : 'verification.json'), JSON.stringify({
     generatedAt: new Date().toISOString(), status: 'passed', previewOnly: true, gameplayModified: false,
-    trackedDiffUnchanged: true, trackedDiffSha256: baseline, controls: ['pause', 'half speed', 'resume', 'scrub', 'view navigation'], results
+    trackedDiffUnchanged: true, trackedDiffScope: 'tracked files outside docs/qa', trackedDiffSha256: baseline, controls: ['pause', 'half speed', 'resume', 'scrub', 'view navigation'], results
   }, null, 2));
 } finally { await browser.close(); await stopTestServer(server.server); }

@@ -166,12 +166,17 @@ dist-release/assets/run-theme-DXaiNGyI.mp3                         1,134.69 kB
 dist-release/assets/boss-theme-DikIQNT3.mp3                        1,981.14 kB
 dist-release/assets/index-TgXoW-Xe.css                               133.17 kB │ gzip:  25.57 kB
 dist-release/assets/rolldown-runtime-CbXtAM7H.js                       0.58 kB │ gzip:   0.36 kB
-dist-release/assets/index-CKsA2ZXG.js                                617.52 kB │ gzip: 221.61 kB
+dist-release/assets/index-pW9H-7DA.js                                617.90 kB │ gzip: 221.67 kB
 dist-release/assets/phaser-CUdU0QcG.js                             1,197.17 kB │ gzip: 318.90 kB
 
-✓ built in 1.13s
+✓ built in 3.76s
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] Your build spent 44% of 3.7s inside plugin hooks (1.6s).
+Not measurable — 2 hooks whose calls overlap, so elapsed time covers work other calls were doing. Profile with `node --cpu-prof`:
+  - vite:asset load (191 calls)
+  - vite:css transform (4 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.

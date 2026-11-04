@@ -22,8 +22,11 @@ function feather(g, x, y, size, angle, color, alpha) {
 export class VoidZoneVisual {
   constructor(scene, x, y, rank, evolved, { radius, maxLife }) {
     Object.assign(this, { scene, x, y, rank, kind: evolved ? 'b' : 'a', evolved, radius, maxLife });
-    this.coreWidth = evolved ? 46 : [42, 50, 58, 65][rank - 1];
-    this.coreHeight = evolved ? 118 : this.coreWidth * .48;
+    // Final size adjustment after in-game review: uniformly 18% below the larger draft.
+    this.presentationScale = evolved || rank === 4 ? .82 : 1;
+    this.visualRadius = radius * (evolved ? 1.12 : rank === 4 ? 1.08 : 1);
+    this.coreWidth = evolved ? 62 : [42, 50, 58, 85][rank - 1];
+    this.coreHeight = evolved ? 170 : this.coreWidth * .48;
     this.armCount = evolved ? 7 : rank + 3;
     this.frontDepth = 5.5;
     this.rearDepth = 3.5;
@@ -36,7 +39,7 @@ export class VoidZoneVisual {
     this.rear = scene.add.graphics().setDepth(this.rearDepth);
     this.body = scene.add.graphics().setDepth(evolved ? 4.5 : 3.4);
     this.front = scene.add.graphics().setDepth(this.frontDepth);
-    this.sparks = Array.from({ length: evolved ? 54 : [18, 24, 30, 38][rank - 1] }, () => scene.add.image(x, y, 'void-live-spark').setBlendMode(Phaser.BlendModes.ADD));
+    this.sparks = Array.from({ length: evolved ? 70 : [18, 24, 30, 44][rank - 1] }, () => scene.add.image(x, y, 'void-live-spark').setBlendMode(Phaser.BlendModes.ADD));
     this.objects = [this.ground, this.glow, this.floor, this.rear, this.body, this.front, ...this.sparks];
     this.active = true;
     scene.events.once(Phaser.Scenes.Events.SHUTDOWN, this.destroy, this);
@@ -53,11 +56,11 @@ export class VoidZoneVisual {
     const entry = ease(age / 480), remain = remaining;
     const collapse = ease(1 - remain / 700);
     const envelope = entry * (1 - ease(1 - remain / 260));
-    const size = (.20 + .80 * entry) * (1 - collapse * .86);
+    const size = (.20 + .80 * entry) * (1 - collapse * .86) * this.presentationScale;
     Object.assign(this, { age, remaining, collapse, envelope, size, t: age / 1000, tick: Math.pow(1 - fract(age / (this.evolved ? 290 : 360)), 3) });
-    this.ground.setDisplaySize(this.radius * 1.98 * size, this.radius * 1.98 * .58 * size).setAlpha(envelope);
-    this.glow.setPosition(this.x, this.y - (this.kind === 'b' ? 24 : 0) * size)
-      .setDisplaySize(this.radius * 1.55 * size, this.radius * (this.kind === 'b' ? .84 : .88) * size)
+    this.ground.setDisplaySize(this.visualRadius * 1.98 * size, this.visualRadius * 1.98 * .58 * size).setAlpha(envelope);
+    this.glow.setPosition(this.x, this.y - (this.kind === 'b' ? 42 : 0) * size)
+      .setDisplaySize(this.visualRadius * 1.55 * size, this.visualRadius * (this.kind === 'b' ? 1.04 : .88) * size)
       .setAlpha(envelope * (.80 + this.tick * .16));
     if (this.kind === 'a') this.vortex(); else this.rift();
     this.particles();
@@ -77,7 +80,7 @@ export class VoidZoneVisual {
       const flow = fract(t * (.31 + i % 3 * .045) + i * .163);
       const strength = Math.pow(Math.sin(flow * Math.PI), .8);
       const sample = u => this.projected(phase + u * (2.6 + Math.sin(t * .8 + i) * .16),
-        28 + Math.pow(1 - u, 1.12) * this.radius * (.70 + (i % 3) * .07));
+        28 + Math.pow(1 - u, 1.12) * this.visualRadius * (.70 + (i % 3) * .07));
       // Short bands continuously travel inwards and dissolve; there is no persistent pinwheel.
       const lo = clamp(flow - .32), hi = clamp(flow + .16);
       const p = path(32, v => sample(lo + (hi - lo) * v));
@@ -100,10 +103,10 @@ export class VoidZoneVisual {
       ribbon(b, p, 4.4 * s, 0x9f5fe5, a * .9);
       ribbon(b, p, 1.45 * s, 0xf0d8ff, a * (.58 + tick * .2));
     }
-    for (let i = 0; i < (this.rank >= 3 ? 2 : 1); i++) {
+    for (let i = 0; i < (this.rank === 4 ? 3 : this.rank >= 3 ? 2 : 1); i++) {
       const life = fract(t * .46 + i * .237);
       const base = i * 2.39 + t * .35;
-      const p = path(28, u => this.projected(base + u * 2.25, 18 + u * (34 + life * 20), Math.sin(u * Math.PI) * (evo ? 61 : 40) * Math.sin(life * Math.PI)));
+      const p = path(28, u => this.projected(base + u * 2.25, 18 + u * (34 + life * 20), Math.sin(u * Math.PI) * (this.rank === 4 ? 54 : 40) * Math.sin(life * Math.PI)));
       ribbon(this.rear, p, (evo ? 5.8 : 4.5) * s, 0xa563e9, a * Math.sin(life * Math.PI) * .58);
       ribbon(this.rear, p, 1.25 * s, 0xdfbdff, a * Math.sin(life * Math.PI) * .62);
     }
@@ -111,20 +114,20 @@ export class VoidZoneVisual {
 
   rift() {
     const { floor: g, body: b, x, y, t, size: s, envelope: a, evolved: evo, tick } = this;
-    const height = (evo ? 118 : 87) * s, halfWidth = (evo ? 23 : 18) * s * (1 + Math.sin(t * 2.5) * .07);
+    const height = this.coreHeight * s, halfWidth = this.coreWidth * .5 * s * (1 + Math.sin(t * 2.5) * .07);
     // A free-standing organic slit, with ground roots and airborne fragments, rather than a portal ring.
     for (let i = 0; i < (evo ? 7 : 5); i++) {
       const angle = i * TAU / (evo ? 7 : 5) + .23;
       const p = path(34, u => {
         const theta = angle + Math.sin(u * 7 + t * 1.4 + i) * .10 * Math.sin(u * Math.PI);
-        return this.projected(theta, 10 + Math.pow(u, .9) * this.radius * .9, Math.sin(u * Math.PI) * 6);
+        return this.projected(theta, 10 + Math.pow(u, .9) * this.visualRadius * .9, Math.sin(u * Math.PI) * 6);
       });
       ribbon(g, p, 9 * s, 0x7134a6, a * .14);
       const f = 1 - fract(t * .48 + i * .173);
       const lo = clamp(f - .25), hi = clamp(f + .11);
       const flowing = path(24, u => {
         const v = lo + (hi - lo) * u;
-        return this.projected(angle + Math.sin(v * 7 + t * 1.4 + i) * .10 * Math.sin(v * Math.PI), 10 + Math.pow(v, .9) * this.radius * .9, Math.sin(v * Math.PI) * 6);
+        return this.projected(angle + Math.sin(v * 7 + t * 1.4 + i) * .10 * Math.sin(v * Math.PI), 10 + Math.pow(v, .9) * this.visualRadius * .9, Math.sin(v * Math.PI) * 6);
       });
       ribbon(g, flowing, 8 * s, 0xa765e5, a * Math.sin(f * Math.PI) * .45);
       ribbon(g, flowing, 2.4 * s, i % 3 ? 0xe1b8ff : 0xa8e0ee, a * Math.sin(f * Math.PI) * .90);
@@ -142,9 +145,9 @@ export class VoidZoneVisual {
     });
     ribbon(b, inner, halfWidth * 1.1, 0x080914, a * .95);
     for (const p of [left, right]) {
-      ribbon(b, p, 11 * s, 0x7a31b9, a * .48);
-      ribbon(b, p, 5 * s, 0xc185f4, a * .86);
-      ribbon(b, p, 1.5 * s, 0xf8d9ff, a * (.67 + tick * .12));
+      ribbon(b, p, 14 * s, 0x7a31b9, a * .48);
+      ribbon(b, p, 6.4 * s, 0xc185f4, a * .86);
+      ribbon(b, p, 1.8 * s, 0xf8d9ff, a * (.67 + tick * .12));
     }
     // Brief interior glints communicate activity without turning the crack into a bright column.
     for (let i = 0; i < 5; i++) {
@@ -152,30 +155,30 @@ export class VoidZoneVisual {
       const p = edge(u, 0), w = (3 + i % 2 * 2) * s * Math.sin(phase * Math.PI);
       b.fillStyle(i % 2 ? 0xba7cf6 : 0x8065d1, a * .5).fillEllipse(p.x, p.y, w, w * .65);
     }
-    for (let i = 0; i < (evo ? 8 : 5); i++) {
+    for (let i = 0; i < 11; i++) {
       const q = fract(t * .27 + i * .137), angle = i * 2.399 + t * .33;
-      const r = (26 + Math.sin(q * Math.PI) * (evo ? 48 : 34)) * s;
-      const px = x + Math.cos(angle) * r, py = y - (17 + q * (evo ? 119 : 88)) * s + Math.sin(angle) * 8 * s;
+      const r = (32 + Math.sin(q * Math.PI) * 60) * s;
+      const px = x + Math.cos(angle) * r, py = y - (17 + q * this.coreHeight) * s + Math.sin(angle) * 8 * s;
       const alpha = a * Math.pow(Math.sin(q * Math.PI), .7);
       feather(Math.sin(angle) > 0 ? this.front : this.rear, px, py, (4 + i % 3) * s, angle + t, i % 3 ? 0xb890ed : 0xd1d8ef, alpha * .9);
     }
     // Side curls curl into the tear; no closed hovering halo.
     for (let i = 0; i < 2; i++) {
       const side = i ? 1 : -1;
-      const p = path(30, u => ({ x: x + side * (Math.sin(u * Math.PI) * 37 + 5) * s,
+      const p = path(30, u => ({ x: x + side * (Math.sin(u * Math.PI) * 50 + 5) * s,
         y: y + 6 * s - u * height * .92 + Math.sin(u * 9 + t * 2 + i) * 3 * s * Math.sin(u * Math.PI) }));
       ribbon(this.rear, p, 4.5 * s, 0xb06ee6, a * (.32 + .12 * Math.sin(t * 2 + i)));
     }
   }
 
   particles() {
-    const { t, radius, envelope: a, size: s, kind, evolved: evo } = this;
+    const { t, visualRadius: radius, envelope: a, size: s, kind, evolved: evo } = this;
     this.sparks.forEach((sprite, i) => {
       const cycle = fract(t * (.30 + i % 4 * .025) + fract(Math.sin(i * 127.1 + 17) * 43758.5453));
       const progress = Math.pow(cycle, 1.5);
       const r = 12 + radius * .9 * (1 - progress);
       const angle = i * 2.399963 + (kind === 'a' ? progress * 3.8 - t * .35 : Math.sin(progress * 5 + i) * .24);
-      const height = kind === 'b' ? Math.pow(progress, 2) * (evo ? 94 : 64) : Math.sin(cycle * Math.PI) * (i % 4 === 0 ? (evo ? 43 : 27) : 3);
+      const height = kind === 'b' ? Math.pow(progress, 2) * this.coreHeight * .8 : Math.sin(cycle * Math.PI) * (i % 4 === 0 ? (this.rank === 4 ? 38 : 27) : 3);
       const pos = this.projected(angle, r, height);
       const alpha = a * Math.sin(cycle * Math.PI) * (i % 3 === 0 ? .85 : .65);
       const scale = (i % 4 === 0 ? 17 : 10) * (.65 + cycle * .5) * s;
@@ -184,7 +187,7 @@ export class VoidZoneVisual {
         const p = path(9, u => {
           const prev = clamp(cycle - .042 * (1 - u)), pp = Math.pow(prev, 1.5);
           const ar = i * 2.399963 + (kind === 'a' ? pp * 3.8 - t * .35 : Math.sin(pp * 5 + i) * .24);
-          const h = kind === 'b' ? pp * pp * (evo ? 94 : 64) : Math.sin(prev * Math.PI) * (i % 4 === 0 ? (evo ? 43 : 27) : 3);
+          const h = kind === 'b' ? pp * pp * this.coreHeight * .8 : Math.sin(prev * Math.PI) * (i % 4 === 0 ? (this.rank === 4 ? 38 : 27) : 3);
           return this.projected(ar, 12 + radius * .9 * (1 - pp), h);
         });
         ribbon(Math.sin(angle) > .1 ? this.front : this.rear, p, 1.9 * s, i % 2 ? 0xc8a0fb : 0xc8e6f4, alpha);
@@ -194,15 +197,16 @@ export class VoidZoneVisual {
   }
 
   openAndClose() {
-    const { age, remaining, envelope: a, radius, x, y, size: s } = this;
+    const { age, remaining, envelope: a, visualRadius: radius, x, y, size: s } = this;
     if (age < 580) {
       const p = age / 580;
       for (let j = 0; j < 4; j++) {
         const points = path(24, u => {
           const angle = j * TAU / 4 + u * .90 + .12;
-          return { x: x + Math.cos(angle) * radius * ease(p), y: y + Math.sin(angle) * radius * .58 * ease(p) };
+          return { x: x + Math.cos(angle) * radius * ease(p) * this.presentationScale,
+            y: y + Math.sin(angle) * radius * .58 * ease(p) * this.presentationScale };
         });
-        ribbon(this.floor, points, 4 * (1 - p), 0xd5aaff, Math.sin(p * Math.PI) * .76);
+        ribbon(this.floor, points, 4 * (1 - p) * this.presentationScale, 0xd5aaff, Math.sin(p * Math.PI) * .76);
       }
     }
     if (remaining < 700) {
@@ -220,7 +224,8 @@ export class VoidZoneVisual {
   }
 
   describe() {
-    return { kind: this.kind, evolved: this.evolved, radius: this.radius, age: this.age ?? -1, active: this.active,
+    return { kind: this.kind, evolved: this.evolved, radius: this.radius, visualRadius: this.visualRadius,
+      presentationScale: this.presentationScale, age: this.age ?? -1, active: this.active,
       opacity: this.envelope ?? 0, objects: this.objects.length,
       coreWidth: this.coreWidth, coreHeight: this.coreHeight, retiring: Boolean(this.retiring),
       particles: this.sparks.filter(s => s.visible).length,

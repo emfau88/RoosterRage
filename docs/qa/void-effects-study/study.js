@@ -5,12 +5,13 @@ import supportUrl from '../../../src/assets/enemies/animations/enemy-support-run
 import slimeUrl from '../../../src/assets/enemies/animations/enemy-slime-hop-v2.webp';
 import { VoidZone } from './current-void-zone.js';
 import { VoidConcept } from './effects.js';
+import { VoidZoneVisual } from '../../../src/systems/VoidZoneVisual.js';
 
 const q = new URLSearchParams(location.search);
-const view = ['a', 'b', 'compare', 'current'].includes(q.get('view')) ? q.get('view') : 'a';
+const view = ['a', 'b', 'compare', 'current', 'approved'].includes(q.get('view')) ? q.get('view') : 'a';
 const cycle = 8400, controls = { elapsed: 0, paused: false, speed: 1, manual: null };
 const clamp = x => Math.max(0, Math.min(1, x));
-const titles = { a: 'A · Sogwirbel', b: 'B · Void-Spalt', compare: 'Zwei Richtungen · gleicher EVO-Maßstab', current: 'Bisheriger Void-Effekt · zum Vergleich' };
+const titles = { a: 'A · Sogwirbel', b: 'B · Void-Spalt', compare: 'Zwei Richtungen · gleicher EVO-Maßstab', current: 'Bisheriger Void-Effekt · zum Vergleich', approved: 'R4 & EVO · kräftigere Kerne und höhere Effekte' };
 document.getElementById('title').textContent = titles[view];
 document.querySelector(`[data-view="${view}"]`).setAttribute('aria-current', 'page');
 if (q.has('capture')) document.body.classList.add('capture');
@@ -29,7 +30,7 @@ class Study extends Phaser.Scene {
     }).setDepth(50);
     for (let i = 0; i < 2; i++) {
       const x = i * 640, evolved = view === 'compare' || i === 1;
-      const kind = view === 'compare' ? (i ? 'b' : 'a') : view;
+      const kind = view === 'compare' || view === 'approved' ? (i ? 'b' : 'a') : view;
       const cx = x + 336, cy = 315;
       this.add.rectangle(x + 320, 282, 638, 564, 0x17211c).setDepth(0);
       this.add.tileSprite(x + 1, 70, 638, 438, 'ground').setOrigin(0).setTilePosition(65, 130).setDepth(1);
@@ -48,7 +49,9 @@ class Study extends Phaser.Scene {
         shadow: this.add.ellipse(0, 0, 28, 10, 0x312919, .22).setDepth(2),
         sprite: this.add.sprite(0, 0, 'slime', 0).setScale(.2).setDepth(12)
       }));
-      const effect = kind === 'current' ? new VoidZone(this, cx, cy, 4, evolved) : new VoidConcept(this, cx, cy, kind, evolved);
+      const effect = kind === 'current' ? new VoidZone(this, cx, cy, 4, evolved)
+        : view === 'approved' ? new VoidZoneVisual(this, cx, cy, 4, evolved, { radius: evolved ? 225 : 190, maxLife: evolved ? 7200 : 6000 })
+          : new VoidConcept(this, cx, cy, kind, evolved);
       if (kind === 'current') effect.previewObjects = [effect.outer, effect.core, effect.portal, ...effect.accentRings.map(r => r.sprite), ...effect.motes.map(m => m.sprite)];
       this.panels.push({ x, cx, cy, kind, evolved, effect, player, support, slimes, state });
     }

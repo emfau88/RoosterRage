@@ -1,0 +1,1054 @@
+{
+  "generatedAt": "2026-11-04T10:59:47.836Z",
+  "status": "passed",
+  "previewOnly": true,
+  "gameplayModified": false,
+  "trackedDiffUnchanged": true,
+  "trackedDiffScope": "tracked files outside docs/qa",
+  "trackedDiffSha256": "a570ce38d296e7580b1fc24f2dcabf7ef87130745df1f79a0d7929a67d06076d",
+  "controls": [
+    "pause",
+    "half speed",
+    "resume",
+    "scrub",
+    "view navigation"
+  ],
+  "results": [
+    {
+      "view": "approved",
+      "renderer": "webgl",
+      "objects": 158,
+      "errors": [],
+      "stableObjectCount": true,
+      "frozenInspection": true,
+      "expiredAt7900": true,
+      "samples": [
+        {
+          "time": 0,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 0,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 0,
+              "active": false,
+              "opacity": 0,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 350,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 50,
+              "active": true,
+              "opacity": 0.03029152199074074,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 50,
+              "active": true,
+              "opacity": 0.03029152199074074,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 550,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 250,
+              "active": true,
+              "opacity": 0.5312319155092593,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 250,
+              "active": true,
+              "opacity": 0.5312319155092593,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 850,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 550,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 550,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 1900,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 1600,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 1600,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 3300,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 3000,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 3000,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 5700,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5400,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 5400,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 6100,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": true,
+              "opacity": 0.8648156577150661,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 6450,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 6150,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 7000,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 6700,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 7300,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 7000,
+              "active": true,
+              "opacity": 0.8648156577150661,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 7900,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 7000,
+              "active": false,
+              "opacity": 0,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 8399,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 7000,
+              "active": false,
+              "opacity": 0,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "view": "approved",
+      "renderer": "canvas",
+      "objects": 158,
+      "errors": [],
+      "stableObjectCount": true,
+      "frozenInspection": true,
+      "expiredAt7900": true,
+      "samples": [
+        {
+          "time": 0,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 0,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 0,
+              "active": false,
+              "opacity": 0,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 350,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 50,
+              "active": true,
+              "opacity": 0.03029152199074074,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 50,
+              "active": true,
+              "opacity": 0.03029152199074074,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 550,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 250,
+              "active": true,
+              "opacity": 0.5312319155092593,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 250,
+              "active": true,
+              "opacity": 0.5312319155092593,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 850,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 550,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 550,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 1900,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 1600,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 1600,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 3300,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 3000,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 3000,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 5700,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5400,
+              "active": true,
+              "opacity": 1,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 5400,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 6100,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": true,
+              "opacity": 0.8648156577150661,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 44,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 6450,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 6150,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 7000,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 6700,
+              "active": true,
+              "opacity": 1,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 7300,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 7000,
+              "active": true,
+              "opacity": 0.8648156577150661,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 70,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 7900,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 7000,
+              "active": false,
+              "opacity": 0,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        },
+        {
+          "time": 8399,
+          "effects": [
+            {
+              "kind": "a",
+              "evolved": false,
+              "radius": 190,
+              "visualRadius": 205.20000000000002,
+              "presentationScale": 0.82,
+              "age": 5800,
+              "active": false,
+              "opacity": 0,
+              "objects": 50,
+              "coreWidth": 85,
+              "coreHeight": 40.8,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            },
+            {
+              "kind": "b",
+              "evolved": true,
+              "radius": 225,
+              "visualRadius": 252.00000000000003,
+              "presentationScale": 0.82,
+              "age": 7000,
+              "active": false,
+              "opacity": 0,
+              "objects": 76,
+              "coreWidth": 62,
+              "coreHeight": 170,
+              "retiring": false,
+              "particles": 0,
+              "finite": true,
+              "particleScalesUniform": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
