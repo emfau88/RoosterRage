@@ -1,0 +1,3406 @@
+{
+  "generatedAt": "2026-11-04T12:09:01.074Z",
+  "status": "passed",
+  "previewOnly": true,
+  "productionDiffUnchanged": true,
+  "productionDiffSHA256": "5e18940102526a2ad9a306e1999bd0bb3ab1628e8a391fb6fff1cd537021e6ae",
+  "sourceHashes": {
+    "src/entities/EnemyProjectile.js": "e2527a669624a7876a78f2b60ef5a54357eff6b630782b89014feabd06142b8f",
+    "src/entities/HazardZone.js": "9f8077142a24906da1e2c7cf527ec0dea5598df64536226750371a8f770dc4fd",
+    "src/systems/abilities/LaserCombAbility.js": "1b875b180422b56693776e26337bbbd18a9ecf5df62a8f6943fe1bc9af7291a6"
+  },
+  "visualReview": {
+    "nativeScale": true,
+    "openingHoldAndDecay": true,
+    "multiEffectOverlap": true,
+    "inspectedFilmStrips": [
+      "boss-motion-review.png",
+      "laser-motion-review.png",
+      "molotov-ignition-review.png",
+      "molotov-motion-review.png"
+    ],
+    "limits": "Isolated visual preview, no production integration or low-end mobile performance test"
+  },
+  "results": [
+    {
+      "effect": "boss",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 340,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 1300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 1780,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 2050,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 2480,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 3900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 4900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 5500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 6400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": []
+    },
+    {
+      "effect": "boss",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 340,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 1300,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 1780,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 2050,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 2480,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 36,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-0-4-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 3900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 4900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 5500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "boss",
+          "cycle": 6500,
+          "rank": "auto",
+          "elapsed": 6400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 52,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "boss-1-4-false-salvo",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": []
+    },
+    {
+      "effect": "laser",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 240,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 540,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 2420,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4550,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 35,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 6990,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 7900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "1",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "2",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "3",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "4",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "evo",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "effect": "laser",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 240,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 540,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 2420,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4550,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 35,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 6990,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 7900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "1",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "2",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "3",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "4",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "evo",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "effect": "molotov",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 340,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 1600,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 3950,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 4700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 6500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 7900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 10400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 11000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 11800,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": [
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "1",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 81,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-1-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 90,
+                  "flames": 10,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "2",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 92,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-2-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 108,
+                  "flames": 12,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "3",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "4",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 170,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-4-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 112,
+                  "flames": 16,
+                  "uniform": true
+                },
+                {
+                  "radius": 112,
+                  "flames": 16,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "evo",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "effect": "molotov",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 340,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 1600,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 3950,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 4700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 6500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 7900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 10400,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 11000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "auto",
+          "elapsed": 11800,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-1-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": [
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "1",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 81,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-1-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 90,
+                  "flames": 10,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "2",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 92,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-2-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 108,
+                  "flames": 12,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "3",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 104,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-3-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 124,
+                  "flames": 15,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "4",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 170,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-4-false-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 112,
+                  "flames": 16,
+                  "uniform": true
+                },
+                {
+                  "radius": 112,
+                  "flames": 16,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "molotov",
+          "cycle": 12000,
+          "rank": "evo",
+          "elapsed": 1750,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 210,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "molotov-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "molotov-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "effect": "overlap",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 232,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 4000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": []
+    },
+    {
+      "effect": "overlap",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 232,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 4000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": []
+    }
+  ],
+  "media": [
+    {
+      "file": "boss-before-after.mp4",
+      "bytes": 804692,
+      "sha256": "27cca8ae5fbe9bf9739a3bea1944f4760e9e29fec36a938b953bbfcaa03c2b60",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 664,
+          "r_frame_rate": "30/1",
+          "nb_frames": "195",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "6.500000"
+      }
+    },
+    {
+      "file": "boss-before-after.gif",
+      "bytes": 2763665,
+      "sha256": "14295d7b2ec01c096ea81442510acf644295a3b9646d69efeb638aa1cc358c15",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1120,
+          "height": 581,
+          "r_frame_rate": "20/1",
+          "nb_frames": "130"
+        }
+      ],
+      "format": {
+        "duration": "6.500000"
+      }
+    },
+    {
+      "file": "laser-before-after.mp4",
+      "bytes": 941039,
+      "sha256": "1848a114d7ecc5b641c550844a0d04387f28062502d041bb9c738b404e406b35",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 664,
+          "r_frame_rate": "30/1",
+          "nb_frames": "240",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "8.000000"
+      }
+    },
+    {
+      "file": "laser-before-after.gif",
+      "bytes": 3717165,
+      "sha256": "45f6829870fd71d1ce177fef7808d2b347e2bf79601f644288ab9a5b486edac4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1120,
+          "height": 581,
+          "r_frame_rate": "20/1",
+          "nb_frames": "160"
+        }
+      ],
+      "format": {
+        "duration": "8.000000"
+      }
+    },
+    {
+      "file": "molotov-before-after.mp4",
+      "bytes": 4873923,
+      "sha256": "211c198a7d132a15f97b946b02880f18e198dbf60b91e7fe4aa7e241be99be88",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 664,
+          "r_frame_rate": "30/1",
+          "nb_frames": "360",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "12.000000"
+      }
+    },
+    {
+      "file": "molotov-before-after.gif",
+      "bytes": 12314916,
+      "sha256": "be5d5236f6541830ef1130fbe303832127a5a22f40d0ac438dce9595b0bc6e99",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1120,
+          "height": 581,
+          "r_frame_rate": "20/1",
+          "nb_frames": "240"
+        }
+      ],
+      "format": {
+        "duration": "12.000000"
+      }
+    },
+    {
+      "file": "overlap-before-after.mp4",
+      "bytes": 3844177,
+      "sha256": "e88edc9c8bcf662413fddd195b32f8515776b4bafd58806d5450cd6963021691",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 664,
+          "r_frame_rate": "30/1",
+          "nb_frames": "168",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "5.600000"
+      }
+    },
+    {
+      "file": "overlap-before-after.gif",
+      "bytes": 9528495,
+      "sha256": "4f8a1abcd5d2a9422a2a156d01fdfaf2db865ac5f4b8824b8a5ab9b2da954b15",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1120,
+          "height": 581,
+          "r_frame_rate": "20/1",
+          "nb_frames": "112"
+        }
+      ],
+      "format": {
+        "duration": "5.600000"
+      }
+    }
+  ]
+}

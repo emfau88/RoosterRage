@@ -1,0 +1,847 @@
+{
+  "generatedAt": "2026-11-04T12:00:00.154Z",
+  "status": "passed",
+  "previewOnly": true,
+  "productionDiffUnchanged": true,
+  "sourceHashes": {
+    "src/entities/EnemyProjectile.js": "e2527a669624a7876a78f2b60ef5a54357eff6b630782b89014feabd06142b8f",
+    "src/entities/HazardZone.js": "9f8077142a24906da1e2c7cf527ec0dea5598df64536226750371a8f770dc4fd",
+    "src/systems/abilities/LaserCombAbility.js": "1b875b180422b56693776e26337bbbd18a9ecf5df62a8f6943fe1bc9af7291a6"
+  },
+  "controls": [
+    "pause",
+    "resume",
+    "half speed",
+    "scrub",
+    "rank selection",
+    "navigation"
+  ],
+  "results": [
+    {
+      "effect": "laser",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 240,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 540,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 2420,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4550,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 35,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 6990,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 7900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "1",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "2",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "3",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "4",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "evo",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "effect": "laser",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 240,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 32,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 540,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 2420,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-1-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4550,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 35,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 4900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-2-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 6990,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "auto",
+          "elapsed": 7900,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 31,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-3-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": [
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "1",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-1-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "2",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 34,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-2-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "3",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-3-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "4",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 37,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-false-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "laser",
+          "cycle": 8000,
+          "rank": "evo",
+          "elapsed": 410,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 42,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "laser-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

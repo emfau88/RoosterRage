@@ -1,0 +1,693 @@
+{
+  "generatedAt": "2026-11-04T12:04:47.730Z",
+  "status": "passed",
+  "previewOnly": true,
+  "productionDiffUnchanged": true,
+  "sourceHashes": {
+    "src/entities/EnemyProjectile.js": "e2527a669624a7876a78f2b60ef5a54357eff6b630782b89014feabd06142b8f",
+    "src/entities/HazardZone.js": "9f8077142a24906da1e2c7cf527ec0dea5598df64536226750371a8f770dc4fd",
+    "src/systems/abilities/LaserCombAbility.js": "1b875b180422b56693776e26337bbbd18a9ecf5df62a8f6943fe1bc9af7291a6"
+  },
+  "controls": [
+    "pause",
+    "resume",
+    "half speed",
+    "scrub",
+    "rank selection",
+    "navigation"
+  ],
+  "results": [
+    {
+      "effect": "overlap",
+      "renderer": "webgl",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 232,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 4000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "WEBGL",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": []
+    },
+    {
+      "effect": "overlap",
+      "renderer": "canvas",
+      "status": "passed",
+      "frozen": true,
+      "animated": true,
+      "seekingStable": true,
+      "errors": [],
+      "samples": [
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 0,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 380,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 1700,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 2100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 3200,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 232,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 4000,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5100,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 225,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": true,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        },
+        {
+          "effect": "overlap",
+          "cycle": 5600,
+          "rank": "auto",
+          "elapsed": 5500,
+          "paused": false,
+          "speed": 1,
+          "renderer": "CANVAS",
+          "objects": 221,
+          "productionModified": false,
+          "panels": [
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [],
+              "finite": true
+            },
+            {
+              "signature": "overlap-0-4-true-single",
+              "active": false,
+              "fields": [
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                },
+                {
+                  "radius": 136,
+                  "flames": 21,
+                  "uniform": true
+                }
+              ],
+              "finite": true
+            }
+          ]
+        }
+      ],
+      "ranks": []
+    }
+  ]
+}

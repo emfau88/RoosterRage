@@ -1,0 +1,10 @@
+{
+  "createdAt": "2026-11-04T11:35:29.665Z",
+  "head": "7732ea775f49ab52426107cad75d52accc6f99aa",
+  "sourceHashes": {
+    "src/entities/EnemyProjectile.js": "e2527a669624a7876a78f2b60ef5a54357eff6b630782b89014feabd06142b8f",
+    "src/entities/HazardZone.js": "9f8077142a24906da1e2c7cf527ec0dea5598df64536226750371a8f770dc4fd",
+    "src/systems/abilities/LaserCombAbility.js": "1b875b180422b56693776e26337bbbd18a9ecf5df62a8f6943fe1bc9af7291a6"
+  },
+  "productionDiffSHA256": "5e18940102526a2ad9a306e1999bd0bb3ab1628e8a391fb6fff1cd537021e6ae"
+}

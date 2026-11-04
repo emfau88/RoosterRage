@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rooster Rage · Feuer, Laser & Molotov</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#141e19;color:#f5efdf;font:14px Arial,sans-serif}main{max-width:1280px;margin:auto}
+header{height:80px;padding:0 25px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #445140}.eyebrow{font-size:10px;letter-spacing:2px;color:#c0ceae;margin-bottom:7px}h1{font-size:25px;margin:0}.badge{font-size:12px;border:1px solid #6b7857;border-radius:20px;padding:8px 12px;color:#d9e6bf}
+nav{padding:12px 20px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}a,button,select{background:#28382a;border:1px solid #526648;color:#eef3df;font:inherit;font-size:13px;padding:8px 12px;border-radius:6px;text-decoration:none;cursor:pointer}a[aria-current]{background:#4a633b}label{display:flex;align-items:center;gap:7px;font-size:12px}input{accent-color:#b9dd84;width:120px}
+canvas{display:block;width:100%!important;height:auto!important}footer{height:36px;padding:0 25px;display:flex;align-items:center;justify-content:space-between;color:#b9c7af;font-size:12px}.capture nav{display:none}@media(max-width:700px){.badge,.technical{display:none}h1{font-size:20px}}
+</style></head><body><main>
+<header><div><div class="eyebrow">ROOSTER RAGE · ANIMATIONSENTWÜRFE</div><h1 id="title">Feuer, Laser & Molotov</h1></div><span class="badge">Vorschau · noch nicht eingebaut</span></header>
+<nav aria-label="Vergleiche"><a href="?effect=boss" data-effect="boss">Boss-Feuerball</a><a href="?effect=laser" data-effect="laser">Laser</a><a href="?effect=molotov" data-effect="molotov">Molotov</a><a href="?effect=overlap" data-effect="overlap">Zusammenspiel</a>
+<label>Stufe <select id="rank"><option value="auto">Abfolge</option><option value="1">R1</option><option value="2">R2</option><option value="3">R3</option><option value="4">R4</option><option value="evo">EVO</option></select></label><button id="pause">Pause</button><label>Tempo <select id="speed"><option value="1">Normal</option><option value="0.5">½</option></select></label><label>Zeit <input id="scrub" type="range" min="0" max="11999" step="1" value="0"></label></nav>
+<div id="stage"></div><footer><span id="phase">Vorher links · Entwurf rechts</span><span class="technical">Identischer Spielboden · Originalmaßstab · gleiche Zeit</span></footer>
+</main><script type="module" src="./study.js"></script></body></html>
